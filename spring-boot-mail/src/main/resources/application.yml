@@ -1,0 +1,49 @@
+server:
+  port: 8083
+  servlet:
+    path: /
+
+spring:
+  application:
+    name: spring-boot-mail
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+# JavaMailSender 邮件发送的配置
+  mail:
+    host: smtp.163.com
+    username: break_a@163.com
+    password: xxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+            required: true
+    default-encoding: UTF-8
+
+
+# thymeleaf 配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/thymeleaf/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+# freemarker配置
+  freemarker:
+    template-loader-path: classpath:/templates/freemarker/
+    allow-request-override: false
+    cache: false
+    suffix: .ftl
+    charset: UTF-8
+    content-type: text/html
+    check-template-location: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+
