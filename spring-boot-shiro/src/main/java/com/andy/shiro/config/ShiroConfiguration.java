@@ -28,10 +28,13 @@ public class ShiroConfiguration {
         bean.setSuccessUrl("/index");
         bean.setUnauthorizedUrl("/unauthorized");
 
-        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/index", "authc");
-        filterChainDefinitionMap.put("/login", "anon");
-        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        LinkedHashMap<String, String> filterChain = new LinkedHashMap<>();
+        filterChain.put("/index", "authc");
+        filterChain.put("/login", "anon");
+        filterChain.put("/loginUser", "anon");
+        filterChain.put("/**", "user");
+        filterChain.put("/admin", "roles[admin]");
+        bean.setFilterChainDefinitionMap(filterChain);
         return bean;
     }
 
