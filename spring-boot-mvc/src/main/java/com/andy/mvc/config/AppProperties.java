@@ -11,6 +11,4 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "app.config")
 public class AppProperties {
 
-    private RedisConfig redis = new RedisConfig();
-
 }
