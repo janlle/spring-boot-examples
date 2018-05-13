@@ -1,13 +1,34 @@
+server:
+  port: 8086
+  servlet-path: /
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/shiro?useSSL=false
+    url: jdbc:mysql://localhost:3306/boot?useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-  mvc:
-    view:
-      prefix: /
-      suffix: .jsp
+# thymeleaf 配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    show-sql: true
+    open-in-view: false
+
 mybatis:
   mapper-locations: mybatis/mappers/*.xml
   type-aliases-package: com.andy.shiro.entity.rbac
+
+
+
+
+
