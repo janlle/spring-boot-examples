@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-//@ServletComponentScan
+//扫描servlet filter listener
+@ServletComponentScan
 @MapperScan("com.andy.mvc.dao.mapper")
 @SpringBootApplication
 @EnableScheduling       // 整合定时任务需要添加的注解
