@@ -3,8 +3,9 @@ package com.andy.shiro.config;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 /**
- * Description  : 拓展登陆验证字段
- */
+ * @author: Mr.ruoLin
+ * @createBy: 2018-04-21 16:51
+ **/
 public class CaptchaUsernamePasswordToken extends UsernamePasswordToken {
 
     private static final long serialVersionUID = 1L;
