@@ -7,24 +7,35 @@
         <id property="uid" column="uid"/>
         <result property="name" column="name"/>
         <result property="password" column="password"/>
+        <result property="username" column="username"/>
+        <result property="salt" column="salt"/>
+        <result property="state" column="state"/>
+
         <collection property="roles" ofType="com.andy.shiro.entity.rbac.Role">
             <id property="rid" column="rid"/>
-            <result property="rname" column="rname"/>
+            <result property="role" column="role"/>
+            <result property="available" column="available"/>
+            <result property="description" column="description"/>
+
             <collection property="permissions" ofType="com.andy.shiro.entity.rbac.Permission">
                 <id property="pid" column="pid"/>
                 <result property="name" column="name"/>
                 <result property="url" column="url"/>
+                <result property="available" column="available"/>
+                <result property="parentId" column="parentId"/>
+                <result property="parentIds" column="parentIds"/>
+                <result property="resourceType" column="resourceType"/>
             </collection>
         </collection>
     </resultMap>
 
     <select id="findByUsername" parameterType="String" resultMap="userMap">
         SELECT u.*, p.*, r.*
-        FROM user u
-            INNER JOIN user_role ur on u.uid = ur.uid
-            INNER JOIN role r on r.rid = ur.rid
-            INNER JOIN permission_role pr on pr.rid = r.rid
-            INNER JOIN permission p on p.pid = pr.pid
+        FROM sys_user u
+            INNER JOIN sys_user_role ur on u.uid = ur.user_id
+            INNER JOIN sys_role r on r.rid = ur.role_id
+            INNER JOIN sys_permission_role pr on pr.permission_id = r.rid
+            INNER JOIN sys_permission p on p.pid = pr.id
         WHERE u.username = #{username}
     </select>
 

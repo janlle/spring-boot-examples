@@ -31,7 +31,6 @@ public class User implements Serializable {
 
     private String state;
 
-    //对应的角色列表
-//    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
  }
