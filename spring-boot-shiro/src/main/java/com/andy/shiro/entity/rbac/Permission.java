@@ -2,7 +2,9 @@ package com.andy.shiro.entity.rbac;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.lang.annotation.Target;
 
 
 /**
@@ -11,13 +13,22 @@ import java.io.Serializable;
  * @createBy: 2018-04-19
  **/
 @Data
+//@Table(name = "sys_permission")
+//@Entity
 public class Permission implements Serializable {
 
+//    @Id
+//    @GeneratedValue
     private Integer pid;
-
     private String name;
-
     private String url;
+    private String available;
+    private Integer parentId;
+    private String parentIds;
+    private String permission;
+    private String resourceType;
+
+
 
 
  }
