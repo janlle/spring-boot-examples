@@ -46,7 +46,7 @@ public class AuthRealm extends AuthorizingRealm {
         return info;
     }
 
-    //shiro认证时掉用
+    //shiro认证时调用
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
