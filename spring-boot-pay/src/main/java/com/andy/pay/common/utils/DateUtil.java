@@ -9,9 +9,6 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 /**
  * 日期操作类
- * 创建者 科帮网
- * 创建时间	2017年7月31日
- *
  */
 public class DateUtil {
 	private final static SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");

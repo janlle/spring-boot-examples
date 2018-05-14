@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 /**
  * 根据IP地址获取详细的地域信息
- * 创建者 科帮网
- * 创建时间	2017年7月31日
- *
  */
 public class AddressUtils { 
 	/**

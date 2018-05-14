@@ -2,12 +2,7 @@ package com.andy.pay.common.model;
 import java.io.Serializable;
 /**
  * 产品订单信息
- * 创建者 科帮网
- * 创建时间	2017年7月27日
  */
-//@Data                
-//@NoArgsConstructor     
-//@AllArgsConstructor
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String productId;// 商品ID

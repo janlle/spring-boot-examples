@@ -1,9 +1,6 @@
 package com.andy.pay.common.constants;
 /**
  * 支付途径
- * 创建者 科帮网
- * 创建时间	2017年7月27日
- *
  */
 public enum PayWay {
 	PC("PC,平板",(short)1),MOBILE("手机",(short)2);
