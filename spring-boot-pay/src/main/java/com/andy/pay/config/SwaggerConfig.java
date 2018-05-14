@@ -18,7 +18,7 @@ public class SwaggerConfig {
 		        .groupName("支付后台API接口文档")  
 		        .apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.itstyle.modules.web"))
+				.apis(RequestHandlerSelectors.basePackage("com.andy.modules.web"))
 				.paths(PathSelectors.any()).build();
 	}
 	@Bean
@@ -27,7 +27,7 @@ public class SwaggerConfig {
 		        .groupName("支付宝API接口文档")  
 		        .apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.itstyle.modules.alipay"))
+				.apis(RequestHandlerSelectors.basePackage("com.andy.modules.alipay"))
 				.paths(PathSelectors.any()).build();
 	}
 	@Bean
@@ -36,7 +36,7 @@ public class SwaggerConfig {
 		        .groupName("微信API接口文档")  
 		        .apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.itstyle.modules.weixinpay"))
+				.apis(RequestHandlerSelectors.basePackage("com.andy.modules.weixinpay"))
 				.paths(PathSelectors.any()).build();
 	}
 	@Bean
@@ -45,15 +45,15 @@ public class SwaggerConfig {
 		        .groupName("银联API接口文档")  
 		        .apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.itstyle.modules.unionpay"))
+				.apis(RequestHandlerSelectors.basePackage("com.andy.modules.unionpay"))
 				.paths(PathSelectors.any()).build();
 	}
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				.title("支付系统")
 				.description("微信、支付宝、银联支付服务")
-				.termsOfServiceUrl("http://blog.52itstyle.com")
-				.contact(new Contact("科帮网 ", "http://blog.52itstyle.com", "345849402@qq.com"))
+				.termsOfServiceUrl("https://rllin.com")
+				.contact(new Contact("rl ", "https://rllin.com", "rethinkt@163.com"))
 				.version("1.0").build();
 	}
 

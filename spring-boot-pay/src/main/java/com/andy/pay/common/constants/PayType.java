@@ -1,11 +1,7 @@
 package com.andy.pay.common.constants;
-/**
- * 支付类型
- * 创建者 科帮网
- * 创建时间	2017年8月2日
- *
- */
+
 public enum PayType {
+
 	/**支付类型*/
 	ALI("支付宝",(short)1),WECHAT("微信",(short)2),UNION("银联",(short)3);
 	
