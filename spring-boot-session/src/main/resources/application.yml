@@ -1,0 +1,19 @@
+server:
+  port: 8086
+  servlet:
+    path: /
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/boot?useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+# thymeleaf 配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
