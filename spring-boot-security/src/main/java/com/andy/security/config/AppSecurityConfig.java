@@ -44,7 +44,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.inMemoryAuthentication().withUser("andy").password("andy").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("jack").password("jack").roles("USER");
         auth.userDetailsService(userDetailService).passwordEncoder(new AppPasswordEncoder());
-
         auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(new AppPasswordEncoder());
     }
 }

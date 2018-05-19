@@ -10,7 +10,7 @@
          <!-- 事务超时时间 -->
          <setting name="defaultStatementTimeout"    value="600"/>
         <!-- 打印查询语句 -->
-        <!--<setting name="logImpl"                     value="STDOUT_LOGGING" />-->
+        <setting name="logImpl"                     value="STDOUT_LOGGING" />
     </settings>
     
     <typeAliases>
