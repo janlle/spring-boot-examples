@@ -1,7 +1,3 @@
-server:
-  servlet:
-    path: /
-  port: 8080
 
 spring:
   application:
@@ -11,4 +7,29 @@ spring:
     url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
+  session:
+    store-type: redis
+  redis:
+    host: localhost
+    port: 6380
 
+security:
+  oauth2:
+    client:
+      client-id: andyid
+      client-secret: andysecret
+server:
+  session:
+    timeout: 60
+  port: 8899
+andy:
+  security:
+    oauth2:
+      storeType: jwt
+      jwtSigningKey: jwta
+      clientsa:
+        clientId: andy
+        clientSecret: andya
+      clientsb:
+        clientId: lyon
+        clientSecret: lyona
