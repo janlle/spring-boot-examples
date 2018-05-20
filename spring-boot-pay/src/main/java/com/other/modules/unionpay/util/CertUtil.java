@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.andy.pay.modules.unionpay.util.SDKUtil.isEmpty;
+import static com.other.modules.unionpay.util.SDKUtil.isEmpty;
 
 
 public class CertUtil {

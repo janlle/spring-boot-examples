@@ -1,3 +1,45 @@
 spring:
   profiles:
     active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/boot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+
+## 微信支付相关API：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
+app:
+  pay:
+    wechat:
+      appId: wx056d93262f42bd10
+      appSecret: 3rGQiBNcsuZ8Fxl9lfyQ74buvuPBtHDO
+      merchantId: 1491420092
+      notifyUrl: http://www.baidu.com
+      nonceStr: e56d93262f42bd10
+      body: 微信支付
+      # 统一下单url
+      wxPrePayUrl: https://api.mch.weixin.qq.com/pay/unifiedorder
+      # 查询订单url
+      wxOrderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery
+      # 关闭订单url
+      wxCloseOrderUrl: https://api.mch.weixin.qq.com/pay/closeorder
+      # 申请退款url
+      wxRefundUrl: https://api.mch.weixin.qq.com/secapi/pay/refund
+      # 退款查询url
+      wxRefundQueryUrl: https://api.mch.weixin.qq.com/pay/refundquery
+      # 下载对账单url
+      wxDownloadBillUrl: https://api.mch.weixin.qq.com/pay/downloadbill
+      # 小程序登录获取openid&session_key: https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html#wxloginobject
+      wxAppLoginUrl: https://api.weixin.qq.com/sns/jscode2session
+      # 小程序获取token
+      wxGetTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential
+      # 小程序发送模板消息
+      wxSendServeUrl: https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=
+    alipay:
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/config/mybatis-config.xml
