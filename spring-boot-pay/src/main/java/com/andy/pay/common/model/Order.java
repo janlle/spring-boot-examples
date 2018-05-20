@@ -18,9 +18,9 @@ public class Order implements Serializable {
 	private String buyerName;		// 卖家姓名
 	private String buyerPhone;		// 卖家电话
 	private String addressId;		// 卖家地址
-	private String totalFee;		// 总金额(单位是分)
+	private Integer totalFee;		// 总金额(单位是分)
 	private String createIp;		// 发起人IP地址
-	private String status;			// 订单状态
+	private Integer status;			// 订单状态
 	private Short payType;			// 支付类型(1:支付宝 2:微信 3:银联)
 	private Short payWay;			// 支付方式1:手机2:电脑3:平板
 	private String tradeNum;		// 订单号

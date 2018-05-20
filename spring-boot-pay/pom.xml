@@ -49,6 +49,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>1.5.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.44</version>
+        </dependency>
         <!-- 热部署 -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -110,7 +125,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.3.4</version><!--$NO-MVN-MAN-VER$-->
+            <version>4.3.4</version>
         </dependency>
         <!-- dom4j -->
         <dependency>
@@ -157,12 +172,10 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
-        <!--  JAVA奇技淫巧简化代码之lombok https://blog.52itstyle.com/archives/1418/ -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!-- swagger2 文档 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -183,13 +196,11 @@
     <build>
         <finalName>spring-boot-pay</finalName>
         <plugins>
-            <!-- 打包项目 mvn clean package -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- 指定main方法入口 -->
                 <configuration>
-                    <mainClass>com.itstyle.Application</mainClass>
+                    <mainClass>com.andy.pay.PayApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

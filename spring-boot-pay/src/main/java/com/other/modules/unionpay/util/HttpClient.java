@@ -15,7 +15,7 @@
  */
 package com.other.modules.unionpay.util;
 
-import com.andy.pay.modules.unionpay.util.BaseHttpSSLSocketFactory.TrustAnyHostnameVerifier;
+import com.other.modules.unionpay.util.BaseHttpSSLSocketFactory.TrustAnyHostnameVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
