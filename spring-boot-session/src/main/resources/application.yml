@@ -3,11 +3,22 @@ server:
   servlet:
     path: /
 spring:
+  session:
+    store-type: redis
   datasource:
     url: jdbc:mysql://localhost:3306/boot?useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    database: 0
+    host: localhost
+    pool:
+      max-active: 8
+      max-wait:  -1
+      max-idle: 8
+      min-idle: -1
+    timeout: 20
 # thymeleaf 配置
   thymeleaf:
     cache: false
@@ -17,3 +28,5 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
+
+
