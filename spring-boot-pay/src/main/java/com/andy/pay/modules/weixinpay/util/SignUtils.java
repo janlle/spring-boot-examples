@@ -1,5 +1,7 @@
 package com.andy.pay.modules.weixinpay.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.*;
 
 /**
@@ -7,6 +9,7 @@ import java.util.*;
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-20 20:59
  **/
+@Slf4j
 public class SignUtils {
 
     /**
@@ -27,8 +30,9 @@ public class SignUtils {
             }
         }
         sb.append("key=" + API_KEY);
-        String sign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase();
-        return sign;
+        log.info("生成的字符串签名为:{}", sb.toString());
+        log.info("生成的MD5签名为:{}", MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase());
+        return MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase();
     }
 
     public static void main(String[] args) {
