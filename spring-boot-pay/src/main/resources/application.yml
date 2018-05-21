@@ -10,10 +10,17 @@ spring:
 ## 微信支付相关API：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
 app:
   pay:
+#    wechat:
+#      appId: wx056d93262f42bd10
+#      appSecret: 3rGQiBNcsuZ8Fxl9lfyQ74buvuPBtHDO
+#      merchantId: 1491420092
+#      notifyUrl: http://www.baidu.com
+#      nonceStr: e56d93262f42bd10
+#      body: 微信支付
     wechat:
-      appId: wx056d93262f42bd10
-      appSecret: 3rGQiBNcsuZ8Fxl9lfyQ74buvuPBtHDO
-      merchantId: 1491420092
+      appId: wx58bb42eecd972cf5
+      appSecret: 9e1e7d8e3cfba225b501c45e4cbb3f06
+      merchantId: 1387792102
       notifyUrl: http://www.baidu.com
       nonceStr: e56d93262f42bd10
       body: 微信支付

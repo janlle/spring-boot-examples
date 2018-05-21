@@ -28,6 +28,18 @@ import static com.other.modules.weixinpay.util.XMLUtil.getChildrenText;
 @Service
 public class WeChatPayServiceImpl implements WeChatPayService {
 
+    // 统一下单
+    private static final String ORDER_PAY = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+
+    // 支付订单查询
+    private static final String ORDER_PAY_QUERY = "https://api.mch.weixin.qq.com/pay/orderquery";
+
+    // 申请退款
+    private static final String ORDER_REFUND = "https://api.mch.weixin.qq.com/secapi/pay/refund";
+
+    // 申请退款
+    private static final String ORDER_REFUND_QUERY = "https://api.mch.weixin.qq.com/pay/refundquery";
+
     @Autowired
     private OrderMapper orderMapper;
 
@@ -42,9 +54,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         if (order == null) {
             log.error("微信预下单失败，订单不存在orderId:{}", orderId);
             return;
-        }
-
-        if (order.getStatus() != OrderStatusEnum.CREATE.getStatus()) {
+        } else if (order.getStatus() != OrderStatusEnum.CREATE.getStatus()) {
             log.error("微信预下单失败，订单状态不正确orderId:{}", orderId);
             return;
         }
@@ -54,16 +64,13 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         params.put("mch_id", weChatProperty.getMerchantId());       //微信支付商户号
         params.put("nonce_str", weChatProperty.getNonceStr());      //随机字符串
         params.put("body", weChatProperty.getBody());               //商品描述
-        params.put("out_trade_no", order.getTradeNum());            //商品订单号
-        params.put("openid", "openidajdiajkfjiaajfiaf");            //现在的open_id就是用户名
+        params.put("out_trade_no", order.getTradeNum());            //商户订单号
         params.put("total_fee", order.getTotalFee().toString());    //总金额 分
-        params.put("spbill_create_ip", order.getCreateIp());        // 订单生成的机器IP，指用户浏览器端IP
+        params.put("spbill_create_ip", order.getCreateIp());        //订单生成的机器IP，指用户浏览器端IP
         params.put("notify_url", weChatProperty.getNotifyUrl());    //回调url
-        // 交易类型JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付，统一下单接口trade_type的传参可参考这里
-        params.put("trade_type", "APP");                            //支付类型
-        params.put("product_id", "123adef");                        //商品编号
-
-        String sign = SignUtils.createSign("UTF-8", params, "");
+        params.put("trade_type", "APP");                            // 交易类型JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付
+        params.put("product_id", "1002221");
+        String sign = SignUtils.createSign("UTF-8", params, "L8LrMqqeGRxST5reouB0K66CaYAWpqhAVsq7ggKkxHCOastWksvuX1uvmvQclxaHoYd3ElNBrNO2DHnnzgfVG9Qs473M3DTOZug5er46FhuGofumV8H2FVR9qkjSlC5K");
         params.put("sign", sign);
         //参数xml化
         String xmlData = mapToXml(params, sign);
