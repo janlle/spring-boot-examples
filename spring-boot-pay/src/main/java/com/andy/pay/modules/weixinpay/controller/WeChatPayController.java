@@ -2,6 +2,7 @@ package com.andy.pay.modules.weixinpay.controller;
 
 import com.andy.pay.modules.weixinpay.service.WeChatPayService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-20 19:01
  **/
+@Slf4j
 @Controller
 @RequestMapping("/pay/weChat")
 public class WeChatPayController {
@@ -28,10 +30,12 @@ public class WeChatPayController {
     @GetMapping("/pay")
     @ResponseBody
     public String prePay(String orderId, HttpServletRequest request, HttpServletResponse response) {
+        log.info("微信预支付开始.....");
         weChatPayService.payHandler(request, orderId);
         return "success";
     }
 
+    @ApiOperation(value = "微信支付回调", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @GetMapping("/notify")
     public String notify(String orderId) {
         return null;
