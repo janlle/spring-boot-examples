@@ -45,7 +45,7 @@ public class JpaController {
     public String insertList() {
         long start = System.currentTimeMillis();
         List<User> users = DataService.getUsers();
-        userRepository.saveAll(users);
+//        userRepository.saveAll(users);
         long end = System.currentTimeMillis();
         return "insertList批量插入"+ users.size() +"条数据一共用了:" + (end - start) + "豪秒！";
     }
