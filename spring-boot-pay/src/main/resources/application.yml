@@ -12,9 +12,9 @@ app:
   pay:
     weChat:
       notify_url: http://www.baidu.com
-      app_id: wx58bb42eecd972cf5
+      app_id: wxdaee460d69f8792a
       #服务号的应用密钥
-      app_secret: 9e1e7d8e3cfba225b501c45e4cbb3f06
+      app_secret: 94f235dfe82cf17865e6d6a9272127fa
       #服务号的配置token
       token: XXXXXXXXXXXXXXXX
       #商户号
@@ -25,6 +25,7 @@ app:
       sign_type: MD5
       #微信支付证书名称
       cert_path: apiclient_cert.p12
+      redirect_url: http://rllin.nat300.top/andy/auth/weChat/redirect
       weChatUrls:
         # 统一下单url
         prePayUrl: https://api.mch.weixin.qq.com/pay/unifiedorder
@@ -44,6 +45,10 @@ app:
         getTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential
         # 小程序发送模板消息
         sendServeUrl: https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=
+        auth_code_url: https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=test#wechat_redirect
+        token_url: https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code
+        user_info_url: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
+
     alipay:
 
 
