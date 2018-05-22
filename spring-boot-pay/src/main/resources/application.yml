@@ -10,38 +10,40 @@ spring:
 ## 微信支付相关API：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
 app:
   pay:
-#    wechat:
-#      appId: wx056d93262f42bd10
-#      appSecret: 3rGQiBNcsuZ8Fxl9lfyQ74buvuPBtHDO
-#      merchantId: 1491420092
-#      notifyUrl: http://www.baidu.com
-#      nonceStr: e56d93262f42bd10
-#      body: 微信支付
-    wechat:
-      appId: wx58bb42eecd972cf5
-      appSecret: 9e1e7d8e3cfba225b501c45e4cbb3f06
-      merchantId: 1387792102
-      notifyUrl: http://www.baidu.com
-      nonceStr: e56d93262f42bd10
-      body: 微信支付
-      # 统一下单url
-      wxPrePayUrl: https://api.mch.weixin.qq.com/pay/unifiedorder
-      # 查询订单url
-      wxOrderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery
-      # 关闭订单url
-      wxCloseOrderUrl: https://api.mch.weixin.qq.com/pay/closeorder
-      # 申请退款url
-      wxRefundUrl: https://api.mch.weixin.qq.com/secapi/pay/refund
-      # 退款查询url
-      wxRefundQueryUrl: https://api.mch.weixin.qq.com/pay/refundquery
-      # 下载对账单url
-      wxDownloadBillUrl: https://api.mch.weixin.qq.com/pay/downloadbill
-      # 小程序登录获取openid&session_key: https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html#wxloginobject
-      wxAppLoginUrl: https://api.weixin.qq.com/sns/jscode2session
-      # 小程序获取token
-      wxGetTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential
-      # 小程序发送模板消息
-      wxSendServeUrl: https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=
+    weChat:
+      notify_url: http://www.baidu.com
+      app_id: wx58bb42eecd972cf5
+      #服务号的应用密钥
+      app_secret: 9e1e7d8e3cfba225b501c45e4cbb3f06
+      #服务号的配置token
+      token: XXXXXXXXXXXXXXXX
+      #商户号
+      mch_id: 1387792102
+      #API密钥
+      api_key: 8908271717yangwj94716zhouqian520
+      #签名加密方式
+      sign_type: MD5
+      #微信支付证书名称
+      cert_path: apiclient_cert.p12
+      weChatUrls:
+        # 统一下单url
+        prePayUrl: https://api.mch.weixin.qq.com/pay/unifiedorder
+        # 查询订单url
+        orderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery
+        # 关闭订单url
+        closeOrderUrl: https://api.mch.weixin.qq.com/pay/closeorder
+        # 申请退款url
+        refundUrl: https://api.mch.weixin.qq.com/secapi/pay/refund
+        # 退款查询url
+        refundQueryUrl: https://api.mch.weixin.qq.com/pay/refundquery
+        # 下载对账单url
+        downloadBillUrl: https://api.mch.weixin.qq.com/pay/downloadbill
+        # 小程序登录获取openid&session_key: https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html#wxloginobject
+        appLoginUrl: https://api.weixin.qq.com/sns/jscode2session
+        # 小程序获取token
+        getTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential
+        # 小程序发送模板消息
+        sendServeUrl: https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=
     alipay:
 
 

@@ -1,49 +1,34 @@
 package com.andy.pay.modules.weixinpay.config;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.UUID;
-
+import java.io.Serializable;
 /**
  * @Description:
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-20 20:34
  **/
 @Configuration
-@ConfigurationProperties(prefix = "app.pay.wechat")
-public class WeChatProperty {
+@ConfigurationProperties(prefix = "app.pay.weChat")
+public class WeChatProperty implements Serializable {
+
+    private WeChatUrls weChatUrls = new WeChatUrls();
 
     private String appId;
 
     private String appSecret;
 
-    private String merchantId;
+    private String mchId;
 
     private String notifyUrl;
 
-    private String nonceStr;
+    private String apiKey;
 
-    private String body;
+    private String signType;
 
-    private String wxPrePayUrl;
+    private String token;
 
-    private String wxOrderQueryUrl;
-
-    private String wxCloseOrderUrl;
-
-    private String wxRefundUrl;
-
-    private String wxRefundQueryUrl;
-
-    private String wxDownloadBillUrl;
-
-    private String wxAppLoginUrl;
-
-    private String wxGetTokenUrl;
-
-    private String wxSendServeUrl;
+    private String certPath;
 
 
     public String getAppId() {
@@ -62,12 +47,12 @@ public class WeChatProperty {
         this.appSecret = appSecret;
     }
 
-    public String getMerchantId() {
-        return merchantId;
+    public String getMchId() {
+        return mchId;
     }
 
-    public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
+    public void setMchId(String mchId) {
+        this.mchId = mchId;
     }
 
     public String getNotifyUrl() {
@@ -78,91 +63,39 @@ public class WeChatProperty {
         this.notifyUrl = notifyUrl;
     }
 
-    public String getNonceStr() {
-        return UUID.randomUUID().toString().replace("-", "").substring(24);
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public void setNonceStr(String nonceStr) {
-        this.nonceStr = nonceStr;
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
-    public String getBody() {
-        return body;
+    public String getSignType() {
+        return signType;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setSignType(String signType) {
+        this.signType = signType;
     }
 
-    public String getWxPrePayUrl() {
-        return wxPrePayUrl;
+    public String getToken() {
+        return token;
     }
 
-    public void setWxPrePayUrl(String wxPrePayUrl) {
-        this.wxPrePayUrl = wxPrePayUrl;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public String getWxOrderQueryUrl() {
-        return wxOrderQueryUrl;
+    public String getCertPath() {
+        return certPath;
     }
 
-    public void setWxOrderQueryUrl(String wxOrderQueryUrl) {
-        this.wxOrderQueryUrl = wxOrderQueryUrl;
+    public void setCertPath(String certPath) {
+        this.certPath = certPath;
     }
 
-    public String getWxCloseOrderUrl() {
-        return wxCloseOrderUrl;
-    }
-
-    public void setWxCloseOrderUrl(String wxCloseOrderUrl) {
-        this.wxCloseOrderUrl = wxCloseOrderUrl;
-    }
-
-    public String getWxRefundUrl() {
-        return wxRefundUrl;
-    }
-
-    public void setWxRefundUrl(String wxRefundUrl) {
-        this.wxRefundUrl = wxRefundUrl;
-    }
-
-    public String getWxRefundQueryUrl() {
-        return wxRefundQueryUrl;
-    }
-
-    public void setWxRefundQueryUrl(String wxRefundQueryUrl) {
-        this.wxRefundQueryUrl = wxRefundQueryUrl;
-    }
-
-    public String getWxDownloadBillUrl() {
-        return wxDownloadBillUrl;
-    }
-
-    public void setWxDownloadBillUrl(String wxDownloadBillUrl) {
-        this.wxDownloadBillUrl = wxDownloadBillUrl;
-    }
-
-    public String getWxAppLoginUrl() {
-        return wxAppLoginUrl;
-    }
-
-    public void setWxAppLoginUrl(String wxAppLoginUrl) {
-        this.wxAppLoginUrl = wxAppLoginUrl;
-    }
-
-    public String getWxGetTokenUrl() {
-        return wxGetTokenUrl;
-    }
-
-    public void setWxGetTokenUrl(String wxGetTokenUrl) {
-        this.wxGetTokenUrl = wxGetTokenUrl;
-    }
-
-    public String getWxSendServeUrl() {
-        return wxSendServeUrl;
-    }
-
-    public void setWxSendServeUrl(String wxSendServeUrl) {
-        this.wxSendServeUrl = wxSendServeUrl;
+    public WeChatUrls getWeChatUrls() {
+        return weChatUrls;
     }
 }
