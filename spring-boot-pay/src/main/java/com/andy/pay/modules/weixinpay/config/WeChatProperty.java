@@ -30,6 +30,12 @@ public class WeChatProperty implements Serializable {
 
     private String certPath;
 
+    private String redirectUrl;
+
+    private String tokenUrl;
+
+    private String userInfoUrl;
+
 
     public String getAppId() {
         return appId;
@@ -93,6 +99,30 @@ public class WeChatProperty implements Serializable {
 
     public void setCertPath(String certPath) {
         this.certPath = certPath;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
+
+    public String getTokenUrl() {
+        return tokenUrl;
+    }
+
+    public void setTokenUrl(String tokenUrl) {
+        this.tokenUrl = tokenUrl;
+    }
+
+    public String getUserInfoUrl() {
+        return userInfoUrl;
+    }
+
+    public void setUserInfoUrl(String userInfoUrl) {
+        this.userInfoUrl = userInfoUrl;
     }
 
     public WeChatUrls getWeChatUrls() {

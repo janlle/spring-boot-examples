@@ -30,4 +30,6 @@ public class WeChatUrls implements Serializable {
 
     private String sendServeUrl;
 
+    private String authCodeUrl;
+
 }
