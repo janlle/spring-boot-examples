@@ -1,5 +1,7 @@
 package com.andy.pay.modules.weixinpay.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.security.MessageDigest;
 
 /**
@@ -7,13 +9,16 @@ import java.security.MessageDigest;
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-20 21:04
  **/
+@Slf4j
 public class MD5Util {
+
+    private static final String hexDigits[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
     private static String byteArrayToHexString(byte b[]) {
         StringBuffer resultSb = new StringBuffer();
-        for (int i = 0; i < b.length; i++)
+        for (int i = 0; i < b.length; i++) {
             resultSb.append(byteToHexString(b[i]));
-
+        }
         return resultSb.toString();
     }
 
@@ -26,23 +31,20 @@ public class MD5Util {
         return hexDigits[d1] + hexDigits[d2];
     }
 
-    public static String MD5Encode(String origin, String charsetname) {
-        String resultString = null;
+    public static String MD5Encode(String origin, String charset) {
+        String result = null;
         try {
-            resultString = new String(origin);
+            result = new String(origin);
             MessageDigest md = MessageDigest.getInstance("MD5");
-            if (charsetname == null || "".equals(charsetname))
-                resultString = byteArrayToHexString(md.digest(resultString
-                        .getBytes()));
-            else
-                resultString = byteArrayToHexString(md.digest(resultString
-                        .getBytes(charsetname)));
+            if (charset == null || "".equals(charset)) {
+                result = byteArrayToHexString(md.digest(result.getBytes()));
+            } else {
+                result = byteArrayToHexString(md.digest(result.getBytes(charset)));
+            }
         } catch (Exception exception) {
+            log.info("生成MD5摘要失败！");
         }
-        return resultString;
+        return result;
     }
-
-    private static final String hexDigits[] = { "0", "1", "2", "3", "4", "5",
-            "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
 }
