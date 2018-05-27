@@ -20,13 +20,7 @@ import java.util.Map;
 @Controller(value = "LoginController")
 public class LoginController {
 
-//    //登录页(shiro配置需要两个/login 接口,一个是get用来获取登陆页面,一个用post用于登录,这是一个坑)
-//    @GetMapping(value="/login")
-//    public String login() {
-//        return "login";
-//    }
-//
-//    // 登录提交地址和配置的loginurl一致
+    // 登录提交地址和配置的loginurl一致
 //    @PostMapping(value = "/login")
 //    public String login(HttpServletRequest request, Map<String, Object> map) {
 //
@@ -49,21 +43,5 @@ public class LoginController {
 //        //如果已经登录，直接跳转主页面
 //        return "index";
 //    }
-//
-//
-//    //hello页面需要权限
-//    @RequestMapping(value = "/hello")
-//    @RequiresPermissions(value = {"permission:view"})
-//    public String hello(HttpServletRequest request,Model model){
-//        return "hello";
-//    }
-//
-//    //aix页面需要权限
-//    @RequestMapping(value = "/aix")
-//    @RequiresPermissions(value = {"permission:aix"})
-//    public String aix(HttpServletRequest request,Model model){
-//        return "aix";
-//    }
-//
 
 }
