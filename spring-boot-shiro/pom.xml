@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>1.5.7.RELEASE</version>
+            <version>1.5.9.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
@@ -44,7 +44,11 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>1.4.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.16</version>
+        </dependency>
         <!--google的验证码框架-->
         <dependency>
             <groupId>com.google.code.kaptcha</groupId>
@@ -65,7 +69,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>1.5.8.RELEASE</version>
+            <version>1.5.9.RELEASE</version>
         </dependency>
     </dependencies>
 
@@ -77,7 +81,6 @@
             </plugin>
         </plugins>
     </build>
-
     <!--添加另一个maven仓库的分支,因为kaptcha框架在这个仓库里面-->
     <repositories>
         <repository>
@@ -87,5 +90,4 @@
             <layout>default</layout>
         </repository>
     </repositories>
-
 </project>
