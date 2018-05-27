@@ -49,7 +49,7 @@ public class MailService {
     private static final String FREEMARKER_TEMPLATE_PATH = "templates/freemarker/ftlMail.ftl";
 
 
-    public void sendFromFramemarker(String to, String subject) throws Exception {
+    public void sendFromFreemarker(String to, String subject) throws Exception {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
@@ -78,7 +78,6 @@ public class MailService {
             map.put("token", token);
             map.put("to", to);
             IContext context = new Context(Locale.CHINESE, map);
-
             String process = templateEngine.process(THYMELEAF_TEMPLATE_PATH, context);
             messageHelper.setFrom(from);
             messageHelper.setTo(to);
