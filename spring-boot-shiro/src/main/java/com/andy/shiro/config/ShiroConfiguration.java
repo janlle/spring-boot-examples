@@ -1,6 +1,7 @@
 package com.andy.shiro.config;
 
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -32,13 +33,23 @@ public class ShiroConfiguration {
 
         LinkedHashMap<String, String> filterChain = new LinkedHashMap<>();
         filterChain.put("/index", "authc");
+        filterChain.put("/static/**", "anon");
         filterChain.put("/login", "anon");
-        filterChain.put("/loginUser", "anon");
         filterChain.put("/image", "anon");
         filterChain.put("/**", "user");
         filterChain.put("/admin", "roles[admin]");
         bean.setFilterChainDefinitionMap(filterChain);
         return bean;
+    }
+
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        //散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        //散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(2);
+        return hashedCredentialsMatcher;
     }
 
     //权限管理，配置主要是Realm的管理认证

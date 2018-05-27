@@ -44,11 +44,11 @@ public class AuthRealm extends AuthorizingRealm {
         log.info("进入shiro的AuthorizingRealm授权方法...");
         User user = (User) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
         List<String> permissionList = new ArrayList<>();
-        List<String> roleNameList = new ArrayList<>();
+        List<String> roleList = new ArrayList<>();
         Set<Role> roleSet = user.getRoles();
         if (CollectionUtils.isNotEmpty(roleSet)) {
             for (Role role : roleSet) {
-                roleNameList.add(role.getRole());
+                roleList.add(role.getName());
                 Set<Permission> permissionSet = role.getPermissions();
                 if (CollectionUtils.isNotEmpty(permissionSet)) {
                     for (Permission permission : permissionSet) {
@@ -59,7 +59,9 @@ public class AuthRealm extends AuthorizingRealm {
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addStringPermissions(permissionList);
-        info.addRoles(permissionList);
+        info.addRoles(roleList);
+        log.info("permissionList:{}", permissionList);
+        log.info("roleList:{}", roleList);
         return info;
     }
 
