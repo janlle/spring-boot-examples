@@ -10,7 +10,9 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +26,8 @@ import java.io.ByteArrayOutputStream;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
+@RequestMapping
 public class UserController {
-
 
     @Autowired
     private DefaultKaptcha defaultKaptcha;
@@ -34,37 +35,37 @@ public class UserController {
     /**
      * 查询用户
      */
-    @RequestMapping("/userList")
-    @RequiresPermissions("userInfo:view")
+    @RequestMapping("/user/list")
+    @RequiresPermissions("user:view")
     public String userInfo(){
-        return "userInfo";
+        return "user";
     }
 
     /**
      * 添加用户
      */
-    @RequestMapping("/userAdd")
-    @RequiresPermissions("userInfo:add")
+    @RequestMapping("/user/add")
+    @RequiresPermissions("user:add")
     public String userInfoAdd(){
-        return "userInfoAdd";
+        return "userAdd";
     }
 
     /**
      * 删除用户
      */
-    @RequestMapping("/userDel")
-    @RequiresPermissions("userInfo:del")
+    @RequestMapping("/user/delete")
+    @RequiresPermissions("user:delete")
     public String userDel(){
-        return "userInfoDel";
+        return "userDel";
     }
 
     /**
      * 修改用户
      */
-    @RequestMapping("/userUpdate")
-    @RequiresPermissions("userInfo:update")
+    @RequestMapping("/user/update")
+    @RequiresPermissions("user:update")
     public String userUpdate(){
-        return "userInfoDel";
+        return "userUpdate";
     }
 
     @ResponseBody
@@ -80,26 +81,16 @@ public class UserController {
         modelMap.put("user", user);
         return "index";
     }
-
+    //登录页(shiro配置需要两个/login 接口,一个是get用来获取登陆页面,一个用post用于登录,这是一个坑)
     @GetMapping("/login")
     public String login() {
-        log.info("跳转到login页面");
+        log.info("跳转到login页面控制器！");
         return "login";
     }
 
-    @RequestMapping("/logout")
-    public String logout() {
-        Subject subject = SecurityUtils.getSubject();
-        if (subject != null) {
-            subject.logout();
-        }
-        return "login";
-    }
-
-    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-    public String loginUser(@RequestParam("username") String username,
-                            @RequestParam("password")String password,
-                            HttpSession session, ModelMap modelMap){
+//    @ResponseStatus(HttpStatus.GONE)
+    @PostMapping(value = "/login")
+    public String loginUser(String username, String password, HttpSession session, ModelMap modelMap){
         log.info("用户的登录的控制器！");
         UsernamePasswordToken loginToken = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
@@ -114,6 +105,30 @@ public class UserController {
             return "login";
         }
     }
+
+    @RequestMapping("/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject != null) {
+            subject.logout();
+        }
+        return "login";
+    }
+
+    //hello页面需要权限
+    @RequestMapping(value = "/hello")
+    @RequiresPermissions(value = {"permission:view"})
+    public String hello(HttpServletRequest request,Model model){
+        return "hello";
+    }
+
+    //aix页面需要权限
+    @RequestMapping(value = "/aix")
+    @RequiresPermissions(value = {"permission:aix"})
+    public String aix(HttpServletRequest request,Model model){
+        return "aix";
+    }
+
 
     @RequestMapping("/imageCode")
     public void imageCode(HttpServletRequest request, HttpServletResponse response) throws Exception{

@@ -1,5 +1,7 @@
 package com.andy.shiro.entity.rbac;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,20 +14,25 @@ import java.util.Set;
  * @createBy: 2018-04-19
  **/
 @Data
+@ApiModel("角色实体")
 public class Role {
 
+    @ApiModelProperty("角色id")
     private Integer     roleId;
 
+    @ApiModelProperty("角色名称")
     private String      name;
 
-    private String      available;
+    @ApiModelProperty("是否可用")
+    private Boolean     available;
 
+    @ApiModelProperty("角色的详情")
     private String      description;
 
-    //对应的权限集合
+    @ApiModelProperty("对应的权限集合")
     private Set<Permission> permissions = new HashSet<>();
 
-    //对应的角色集合
+    @ApiModelProperty("对应的角色集合")
     private Set<User> users = new HashSet<>();
 
 

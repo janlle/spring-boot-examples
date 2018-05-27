@@ -7,7 +7,7 @@
 <body>
 
 <div class="alert alert-success" th:if="${msg}" th:utext="${msg}"></div>
-<form th:action="@{/loginUser}" method="post">
+<form th:action="@{/login}" method="POST">
     <div><label> 账  号 : <input type="text" name="username" placeholder="用户名"/> </label></div>
     <div><label> 密  码 : <input type="password" name="password" placeholder="密码"/> </label></div>
     <div>

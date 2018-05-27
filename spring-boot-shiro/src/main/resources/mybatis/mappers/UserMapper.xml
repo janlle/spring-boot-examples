@@ -23,6 +23,7 @@
                 <result property="available" column="available"/>
                 <result property="parentId" column="parentId"/>
                 <result property="resourceType" column="resourceType"/>
+                <result property="permission" column="permission"/>
             </collection>
         </collection>
     </resultMap>
