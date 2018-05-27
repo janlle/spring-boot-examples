@@ -21,7 +21,7 @@ public class Role {
     private Integer     roleId;
 
     @ApiModelProperty("角色名称")
-    private String      name;
+    private String      role;
 
     @ApiModelProperty("是否可用")
     private Boolean     available;

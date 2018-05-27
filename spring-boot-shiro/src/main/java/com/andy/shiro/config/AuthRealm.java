@@ -48,11 +48,11 @@ public class AuthRealm extends AuthorizingRealm {
         Set<Role> roleSet = user.getRoles();
         if (CollectionUtils.isNotEmpty(roleSet)) {
             for (Role role : roleSet) {
-                roleList.add(role.getName());
+                roleList.add(role.getRole());
                 Set<Permission> permissionSet = role.getPermissions();
                 if (CollectionUtils.isNotEmpty(permissionSet)) {
                     for (Permission permission : permissionSet) {
-                        permissionList.add(permission.getName());
+                        permissionList.add(permission.getPermission());
                     }
                 }
             }

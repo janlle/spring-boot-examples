@@ -4,10 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>index.html</h1>
-    <p th:text="${session.user.username}">default你好</p>
-    <p>点击 <a th:href="@{/hello}">进入有权限控制的helle页面</a></p>
-    <p>点击 <a th:href="@{/aix}">进入有权限控制的aix页面</a></p>
+    <h2><p th:text="${session.user.username} + '你好,欢迎来到index页面!'"></p></h2>
+    <p>点击 <a th:href="@{/user/list}">查询用户</a></p>
+    <p>点击 <a th:href="@{/user/add}">添加用户</a></p>
+    <p>点击 <a th:href="@{/user/update}">修改用户</a></p>
+    <p>点击 <a th:href="@{/user/delete}">删除用户</a></p>
+    <p>=====================</p>
+    <p>点击 <a th:href="@{/admin/list}">查询用户</a></p>
+    <p>点击 <a th:href="@{/admin/add}">添加用户</a></p>
+    <p>点击 <a th:href="@{/admin/update}">修改用户</a></p>
+    <p>点击 <a th:href="@{/admin/delete}">删除用户</a></p>
     <p>点击 <a th:href="@{/logout}">退出登录</a></p>
 </body>
 </html>
