@@ -1,5 +1,6 @@
 package com.andy.shiro.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author: Mr.ruoLin
  * @createBy: 2018-04-21 16:51
  **/
+@Slf4j
 @Component
 public class AppExceptionResolver implements HandlerExceptionResolver {
 
@@ -23,8 +25,10 @@ public class AppExceptionResolver implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         //如果是shiro无权操作转发到未授权页面
         if (ex instanceof UnauthorizedException) {
+            log.error("message:{}", ex.getMessage());
             return unAuth;
         } else {
+            log.error("message:{}", ex.getMessage());
             return error;
         }
     }
