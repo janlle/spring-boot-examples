@@ -8,9 +8,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -70,8 +68,9 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
+        log.info("跳转到login页面");
         return "login";
     }
 
@@ -84,13 +83,15 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping("/loginUser")
-    public String loginUser(@RequestParam("username") String username, @RequestParam("password")String password,
+    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
+    public String loginUser(@RequestParam("username") String username,
+                            @RequestParam("password")String password,
                             HttpSession session, ModelMap modelMap){
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        log.info("用户的登录的控制器！");
+        UsernamePasswordToken loginToken = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
         try {
-            subject.login(token);
+            subject.login(loginToken);
             User user = (User) subject.getPrincipal();
             log.info("user:{}", user);
             session.setAttribute("user", user);

@@ -19,6 +19,8 @@ import java.util.LinkedHashMap;
 @Configuration
 public class ShiroConfiguration {
 
+
+    //Filter工厂，设置对应的过滤条件和跳转条件
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
@@ -38,7 +40,7 @@ public class ShiroConfiguration {
         return bean;
     }
 
-
+    //权限管理，配置主要是Realm的管理认证
     @Bean("securityManager")
     public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
@@ -46,6 +48,7 @@ public class ShiroConfiguration {
         return manager;
     }
 
+    //将自己的验证方式加入容器
     @Bean("authRealm")
     public AuthRealm authRealm(@Qualifier("credentialMatcher") CredentialMatcher matcher) {
         AuthRealm authRealm = new AuthRealm();

@@ -16,15 +16,16 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-logging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.2</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-logging</artifactId>-->
+			<!--<version>2.0.0.M3</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>commons-logging</groupId>-->
+			<!--<artifactId>commons-logging</artifactId>-->
+			<!--<version>1.2</version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -46,7 +47,8 @@
         <module>spring-boot-data</module>
         <module>spring-boot-starter</module>
         <module>spring-boot-session</module>
-    </modules>
+		<module>spring-boot-task</module>
+	</modules>
 
 	<build>
 		<plugins>
@@ -58,6 +60,7 @@
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
+				<version>3.7.0</version>
 			</plugin>
 		</plugins>
 	</build>
