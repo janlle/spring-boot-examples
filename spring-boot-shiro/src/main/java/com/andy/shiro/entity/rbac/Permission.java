@@ -19,16 +19,16 @@ public class Permission implements Serializable {
 
 //    @Id
 //    @GeneratedValue
-    private Integer pid;
-    private String name;
-    private String url;
-    private String available;
-    private Integer parentId;
-    private String parentIds;
-    private String permission;
-    private String resourceType;
+    private Integer     permissionId;
 
+    private String      name;
 
+    private String      url;
 
+    private String      available;
+
+    private Integer     parentId;
+
+    private String      resourceType;
 
  }

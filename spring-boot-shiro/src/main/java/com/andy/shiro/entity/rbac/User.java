@@ -13,24 +13,20 @@ import java.util.Set;
  * @createBy: 2018-04-19
  **/
 @Data
-//@Table(name = "sys_user")
-//@Entity
 public class User implements Serializable {
 
-//    @Id
-//    @GeneratedValue
-    private Integer uid;
+    private Integer     userId;
 
-    private String username;
+    private String      username;
 
-    private String password;
+    private String      password;
 
-    private String name;
+    private String      nickname;
 
-    private String salt;
+    private String      salt;
 
-    private String state;
+    private String      state;
 
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role>   roles = new HashSet<>();
 
  }

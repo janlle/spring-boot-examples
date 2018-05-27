@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.andy.shiro.mapper.UserMapper">
 
     <resultMap id="userMap" type="com.andy.shiro.entity.rbac.User">
-        <id property="uid" column="uid"/>
-        <result property="name" column="name"/>
+        <id property="userId" column="user_id"/>
+        <result property="nickname" column="nickname"/>
         <result property="password" column="password"/>
         <result property="username" column="username"/>
         <result property="salt" column="salt"/>
         <result property="state" column="state"/>
 
         <collection property="roles" ofType="com.andy.shiro.entity.rbac.Role">
-            <id property="rid" column="rid"/>
-            <result property="role" column="role"/>
+            <id property="roleId" column="role_id"/>
+            <result property="name" column="name"/>
             <result property="available" column="available"/>
             <result property="description" column="description"/>
 
             <collection property="permissions" ofType="com.andy.shiro.entity.rbac.Permission">
-                <id property="pid" column="pid"/>
+                <id property="permissionId" column="permission_id"/>
                 <result property="name" column="name"/>
                 <result property="url" column="url"/>
                 <result property="available" column="available"/>
                 <result property="parentId" column="parentId"/>
-                <result property="parentIds" column="parentIds"/>
                 <result property="resourceType" column="resourceType"/>
             </collection>
         </collection>
@@ -32,10 +30,10 @@
     <select id="findByUsername" parameterType="String" resultMap="userMap">
         SELECT u.*, p.*, r.*
         FROM sys_user u
-            INNER JOIN sys_user_role ur on u.uid = ur.user_id
-            INNER JOIN sys_role r on r.rid = ur.role_id
-            INNER JOIN sys_permission_role pr on pr.permission_id = r.rid
-            INNER JOIN sys_permission p on p.pid = pr.id
+            INNER JOIN sys_user_role ur on u.user_id = ur.user_id
+            INNER JOIN sys_role r on r.role_id = ur.role_id
+            INNER JOIN sys_permission_role pr on pr.permission_id = r.role_id
+            INNER JOIN sys_permission p on p.permission_id = pr.id
         WHERE u.username = #{username}
     </select>
 
