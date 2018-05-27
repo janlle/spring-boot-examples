@@ -12,7 +12,7 @@
 
         <collection property="roles" ofType="com.andy.shiro.entity.rbac.Role">
             <id property="roleId" column="role_id"/>
-            <result property="name" column="name"/>
+            <result property="role" column="role"/>
             <result property="available" column="available"/>
             <result property="description" column="description"/>
 
@@ -33,8 +33,8 @@
         FROM sys_user u
             INNER JOIN sys_user_role ur on u.user_id = ur.user_id
             INNER JOIN sys_role r on r.role_id = ur.role_id
-            INNER JOIN sys_permission_role pr on pr.permission_id = r.role_id
-            INNER JOIN sys_permission p on p.permission_id = pr.id
+            INNER JOIN sys_permission_role pr on pr.role_id = r.role_id
+            INNER JOIN sys_permission p on p.permission_id = pr.permission_id
         WHERE u.username = #{username}
     </select>
 
