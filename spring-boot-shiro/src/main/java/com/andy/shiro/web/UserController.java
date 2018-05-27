@@ -6,7 +6,10 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +38,19 @@ public class UserController {
     /**
      * 查询用户
      */
-    @RequestMapping("/user/list")
-    @RequiresPermissions("user:view")
-    public String userInfo(){
+
+    @RequestMapping("/user/list")//符合user:view或user:add权限要求即可
+    @RequiresPermissions(value={"user:add","user:select"},logical= Logical.OR)
+    public String user(){
         return "user";
     }
 
     /**
      * 添加用户
      */
-    @RequestMapping("/user/add")
-    @RequiresPermissions("user:add")
-    public String userInfoAdd(){
+    @RequestMapping("/user/add")//符合user:view和user:add权限要求
+    @RequiresPermissions(value={"user:select","user:add"},logical= Logical.AND)
+    public String userAdd(){
         return "userAdd";
     }
 
@@ -76,9 +80,6 @@ public class UserController {
 
     @RequestMapping("/index")
     public String index(ModelMap modelMap){
-        User user = new User();
-        user.setUsername("james");
-        modelMap.put("user", user);
         return "index";
     }
     //登录页(shiro配置需要两个/login 接口,一个是get用来获取登陆页面,一个用post用于登录,这是一个坑)
@@ -115,18 +116,18 @@ public class UserController {
         return "login";
     }
 
-    //hello页面需要权限
-    @RequestMapping(value = "/hello")
-    @RequiresPermissions(value = {"permission:view"})
-    public String hello(HttpServletRequest request,Model model){
-        return "hello";
+    @ResponseBody
+    @RequiresUser
+    @RequestMapping("/guest")
+    public String guest() {
+        return "guest请求";
     }
 
-    //aix页面需要权限
-    @RequestMapping(value = "/aix")
-    @RequiresPermissions(value = {"permission:aix"})
-    public String aix(HttpServletRequest request,Model model){
-        return "aix";
+    @ResponseBody
+    @RequiresGuest
+    @RequestMapping("/user")
+    public String reqUser() {
+        return "user请求";
     }
 
 
