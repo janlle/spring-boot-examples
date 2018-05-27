@@ -34,6 +34,7 @@ public class ShiroConfiguration {
         filterChain.put("/index", "authc");
         filterChain.put("/login", "anon");
         filterChain.put("/loginUser", "anon");
+        filterChain.put("/image", "anon");
         filterChain.put("/**", "user");
         filterChain.put("/admin", "roles[admin]");
         bean.setFilterChainDefinitionMap(filterChain);

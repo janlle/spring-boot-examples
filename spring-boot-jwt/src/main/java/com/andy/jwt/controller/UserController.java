@@ -40,13 +40,13 @@ public class UserController {
         user.setToken(token);
         log.info("token={}", token);
         renewToken(token, user.getEmail());
-        return BaseResponse.success("登录成功！", user);
+        return BaseResponse.success(user);
     }
 
 
     //鉴权
     @GetMapping("/auth")
-    public BaseResponse<User> valid(String token) {
+    public BaseResponse<Object> valid(String token) {
         Map<String, String> map = null;
         try {
             map = JwtToken.verifyToken(token);
@@ -61,22 +61,22 @@ public class UserController {
             renewToken(token, email);
             User user = userRepository.findUserByEmail(email);
             user.setToken(token);
-            return BaseResponse.success("用户验证成功",null);
+            return BaseResponse.success("用户验证成功");
         } else {
-            return BaseResponse.error("用户验证失败",null);
+            return BaseResponse.error("用户验证失败");
         }
     }
 
     @GetMapping("/user/{id}")
     public BaseResponse<User> user(@PathVariable Long id) {
         User user = userRepository.findUserById(id);
-        return BaseResponse.success("处理成功！", user);
+        return BaseResponse.success(user);
     }
 
     @PostMapping("/logout")
     public BaseResponse<String> logout(String email) {
         redisTemplate.delete(email);
-        return BaseResponse.success("登出成功",null);
+        return BaseResponse.success("登出成功");
     }
 
 
