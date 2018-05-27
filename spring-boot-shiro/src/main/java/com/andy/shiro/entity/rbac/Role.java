@@ -12,18 +12,15 @@ import java.util.Set;
  * @createBy: 2018-04-19
  **/
 @Data
-//@Entity
-//@Table(name = "sys_role")
 public class Role {
-//    @Id
-//    @GeneratedValue
-    private Integer rid;
 
-    private String role;
+    private Integer     roleId;
 
-    private String available;
+    private String      name;
 
-    private String description;
+    private String      available;
+
+    private String      description;
 
     //对应的权限集合
     private Set<Permission> permissions = new HashSet<>();

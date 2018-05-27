@@ -1,7 +1,5 @@
 package com.andy.shiro.config;
 
-import org.apache.shiro.web.session.HttpServletSession;
-
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
