@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.1.0/vue.js"></script>
+</head>
+<body>
+<h2>自定义登录页面</h2>
+<h3>表单登录</h3>
+<table id="table1">
+    <form action="/authentication/form" method="POST">
+        <tr>
+            <td>账  号:</td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>密  码:</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>验证码</td>
+            <td><input type="text" name="imageCode"><img src="/code/image" onclick="this.src='/code/image?time='+Math.random()"></td>
+        </tr>
+        <tr>
+            <td>记住我</td>
+            <td><input type="checkbox" name="remember-me" value="true"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="登录"></td>
+        </tr>
+    </form>
+</table>
+
+<h2>短信登录</h2>
+<table id="table">
+    <form action="/authentication/mobile" method="POST">
+        <tr>
+            <td>手机号:</td>
+            <td><input type="text" name="username" value="13923458907" id="phone"></td>
+        </tr>
+        <tr>
+            <td>验证码:</td>
+            <td><input type="text" name="smsCode"><a href="javascript:void(0);" onclick="sendSms()">发送验证码</a></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="登录"></td>
+        </tr>
+    </form>
+</table>
+<h3>社交登录</h3>
+<a href="/qqLogin/callback.do">QQ登录</a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/weixinLogin">微信登录</a>
+<script type="text/javascript">
+    function sendSms() {
+        var mobile = $("#phone").value;
+        alert("进入发送短信方法,手机号:"+mobile)
+        $.ajax({
+            type: "GET",
+            async: true,
+            data: {"mobile":mobile},
+            url: "http://localhost:8088/code/sms",
+            success: function(data){alert("发送成功")},
+            error: function(data){alert("发送失败")}
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h2><p th:text="${session.user.username} + '你好,欢迎来到系统首页index页面!'">index</p></h2>
+<p>点击 <a th:href="@{/user/list}">查询用户</a></p>
+<p>点击 <a th:href="@{/user/add}">添加用户</a></p>
+<p>点击 <a th:href="@{/user/update}">修改用户</a></p>
+<p>点击 <a th:href="@{/user/delete}">删除用户</a></p>
+<p>=====================</p>
+<p>点击 <a th:href="@{/admin/list}">查询用户</a></p>
+<p>点击 <a th:href="@{/admin/add}">添加用户</a></p>
+<p>点击 <a th:href="@{/admin/update}">修改用户</a></p>
+<p>点击 <a th:href="@{/admin/delete}">删除用户</a></p>
+<p>点击 <a th:href="@{/logout}">退出登录</a></p>
+</body>
+</html>
+
+
+
+
+
+

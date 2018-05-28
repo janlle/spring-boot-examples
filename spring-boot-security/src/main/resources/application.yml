@@ -1,4 +1,8 @@
-
+server:
+  session:
+    timeout: 60
+  port: 8080
+  servlet-path: /
 spring:
   application:
     name: spring-seurity
@@ -12,24 +16,18 @@ spring:
   redis:
     host: localhost
     port: 6380
-
+# thymeleaf 配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
 security:
   oauth2:
     client:
       client-id: andyid
       client-secret: andysecret
-server:
-  session:
-    timeout: 60
-  port: 8899
-andy:
-  security:
-    oauth2:
-      storeType: jwt
-      jwtSigningKey: jwta
-      clientsa:
-        clientId: andy
-        clientSecret: andya
-      clientsb:
-        clientId: lyon
-        clientSecret: lyona
+
