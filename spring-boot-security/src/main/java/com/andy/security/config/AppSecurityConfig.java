@@ -28,9 +28,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().permitAll()
                 .and()
-                .formLogin();
+                .authorizeRequests()
+                .antMatchers("/user").hasRole("ADMIN")
+                .and()
+                .formLogin()
+                .and()
+                .csrf().disable();
 
-        http.csrf().disable();
     }
 
     @Override
