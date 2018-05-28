@@ -8,16 +8,15 @@ import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import com.andy.security.entity.User;
 
-@RestController()
+@Controller
 public class UserController {
-	
+
+	@ResponseBody
 	@GetMapping("/users")
 	public List<User> query() {
 		List<User> users = new ArrayList<User>();
@@ -29,19 +28,10 @@ public class UserController {
 	}
 
 	@PostMapping("/authentication/form")
-	public void login() {
-
+	public String login() {
+		return "login";
 	}
 
-	@GetMapping("/")
-	public String home() {
-		return "home";
-	}
-
-	@GetMapping("/hello")
-	public String hello() {
-		return "hello world";
-	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 //	@PostAuthorize("hasRole('ROLE_ADMIN')")
