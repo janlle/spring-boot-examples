@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author: Mr.ruoLin
  * @createBy: 2018-04-21 14:17
  **/
-@Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -34,19 +33,18 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .and()
                 .csrf().disable();
-
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/js/**", "/css/**", "/images/**");
+        web.ignoring().antMatchers("/static/**");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("andy").password("andy").roles("ADMIN");
-//        auth.inMemoryAuthentication().withUser("jack").password("jack").roles("USER");
+        auth.inMemoryAuthentication().withUser("jack").password("jack").roles("USER");
         auth.userDetailsService(userDetailService).passwordEncoder(new AppPasswordEncoder());
         auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(new AppPasswordEncoder());
     }
