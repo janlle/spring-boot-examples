@@ -16,7 +16,7 @@
             <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
-                <version>Brussels-SR7</version>
+                <version>Cairo-SR1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -67,7 +67,6 @@
             <version>1.1.4</version>
         </dependency>
 
-
         <!--gson解析工具依赖-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -96,8 +95,6 @@
             <version>2.4</version>
         </dependency>
 
-
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -108,7 +105,6 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.33</version>
         </dependency>
-
     </dependencies>
 
     <build>
