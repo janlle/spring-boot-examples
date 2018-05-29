@@ -1,5 +1,13 @@
 server:
-  port: 8080
+  port: 8761
   servlet:
     path: /
-  
+spring:
+  application:
+    name: spring-eureka-docker
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
