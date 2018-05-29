@@ -8,7 +8,7 @@ public class WebController {
 	
     @GetMapping("/hello_world")
     public String sayHelloWorld() {
-        return "success";
+        return "success-docker!";
     }
 
 }
