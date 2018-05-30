@@ -58,7 +58,8 @@
         <module>spring-boot-starter</module>
         <module>spring-boot-session</module>
 		<module>spring-boot-task</module>
-	</modules>
+        <module>spring-boot-document</module>
+    </modules>
 
 	<build>
 		<plugins>
