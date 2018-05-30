@@ -29,6 +29,8 @@ spring:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
     show-sql: true
     open-in-view: true
+  aop:
+    proxy-target-class: true    #使用代理的方式为cglib
 
 #mybatis:
 #  mapper-locations: classpath:mybatis/mapper/*.xml
@@ -36,3 +38,4 @@ spring:
 
 customer:
   msg: jack
+
