@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-document
+
+swagger:
+  butler:
+    resources[0]:
+      name: service-a
+      url: /service-a/v2/api-docs
+      swagger-version: 2.0
+    resources[1]:
+      name: service-b
+      url: /service-b/v2/api-docs
+      swagger-version: 2.0
