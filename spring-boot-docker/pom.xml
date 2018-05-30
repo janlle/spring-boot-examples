@@ -30,10 +30,10 @@
 	</dependencyManagement>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<docker.image.prefix>andy</docker.image.prefix>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -54,14 +54,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!--加入maven插件“docker-maven-plugin” -->
+
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>1.0.0</version>
 				<configuration>
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
 					<dockerDirectory>src/main/docker</dockerDirectory>
+					<baseImage>java</baseImage>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
@@ -71,6 +73,7 @@
 					</resources>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -85,5 +88,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
