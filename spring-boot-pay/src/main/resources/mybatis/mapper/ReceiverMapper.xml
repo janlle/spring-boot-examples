@@ -12,7 +12,7 @@
     <result column="receiver_district" property="receiverDistrict" jdbcType="VARCHAR" />
     <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="default" property="default" jdbcType="INTEGER" />
+    <result column="is_default" property="isDefault" jdbcType="INTEGER" />
     <result column="receiver_zip" property="receiverZip" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
