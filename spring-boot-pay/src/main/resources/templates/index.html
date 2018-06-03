@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-<!-- 哈哈哈 我是个天才 -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 <meta charset="UTF-8" />
@@ -8,10 +7,14 @@
 <body>
 	<div style="text-align: center">
 		<a th:href="@{/alipay/index}">阿里支付</a> 
-		<a th:href="@{/weixin/index}">微信支付</a>
+		<a th:href="@{/wechat/index}">微信支付</a>
 		<a th:href="@{/unionpay/index}">银联支付</a>
 		<a th:href="@{/pay/index}">支付账单</a>
 		<a th:href="@{/swagger-ui.html}">API文档</a>
 	</div>
+<hr>
+<div>
+	<a th:href="@{/wechat/code}">获取code</a>
+</div>
 </body>
 </html>

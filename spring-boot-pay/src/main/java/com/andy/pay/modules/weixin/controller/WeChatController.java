@@ -1,7 +1,6 @@
 package com.andy.pay.modules.weixin.controller;
 
 import com.andy.pay.modules.weixin.config.AppProperty;
-import com.andy.pay.modules.weixin.entity.WeChatUserInfo;
 import com.andy.pay.modules.weixin.service.WeChatService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,17 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Description:
+ * 微信授权
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-22 20:46
  **/
 @Slf4j
 @Api(tags = "微信相关接口")
 @RestController
-@RequestMapping("/auth/weChat")
+@RequestMapping("/wechat")
 public class WeChatController {
 
     @Autowired
@@ -36,27 +34,24 @@ public class WeChatController {
     @Autowired
     private WeChatService weChatService;
 
-    @ApiOperation(value = "微信获取用户信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @GetMapping("/user")
-    public WeChatUserInfo getUserInfo(String code, HttpServletRequest request, HttpServletResponse response) {
-        log.info("获取微信授权码.....");
-        return weChatService.getUserInfo();
-    }
-
-    @ApiOperation(value = "回信回调url", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @GetMapping("/redirect")
-    public WeChatUserInfo weChatRedirect(String state , HttpServletRequest request, String code) {
-        log.info("公众号授权回调  code : {} state : {}", code, state);
-        return weChatService.getUserInfo();
+    @ApiOperation(value = "微信授权回调地址", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping("/auth")
+    public String getUserInfo(String state, String code, HttpServletRequest request) {
+        log.info("微信授权回调方法,code:{},state:{}", code, state);
+        String url = String.format(appProperty.getWeChat().getUrl().getTokenUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getAppSecret(), code);
+        log.info("url:{}", url);
+        String result = restTemplate.getForObject(url, String.class);
+        log.info("result:{}", result);
+        return result;
     }
 
     @ApiOperation(value = "获取code", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @GetMapping("/authUrl")
-    public String authUrl() {
-        String tokenUrl = String.format(appProperty.getWeChat().getUrl().getTokenUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getAppSecret());
-        log.info("微信获取授权码的url:{}", tokenUrl);
-        return tokenUrl;
+    @GetMapping("/code")
+    public void code(String state, String code, HttpServletRequest request) {
+        log.info("获取code.....");
+        String url = String.format(appProperty.getWeChat().getUrl().getAuthCodeUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getRedirectUrl());
+        log.info("url:{}", url);
+        restTemplate.getForObject(url, String.class);
     }
-
 
 }
