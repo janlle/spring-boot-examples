@@ -45,13 +45,6 @@ public final class JsonUtils {
 
     /**
      * jsonString转化为java对象
-     * <p/>
-     * 如果JSON字符串为Null或"null"字符串,返回Null.
-     * 如果JSON字符串为"[]",返回空集合.
-     * <p/>
-     * 如需读取集合如List/Map,且不是List<String>这种简单类型时使用如下语句:
-     * List<MyBean> beanList = MAPPER.readValue(listString, new TypeReference<List<MyBean>>() {});
-     *
      * @param jsonString 原始json字符串数据
      * @param clazz      要转换的JavaBean类型
      * @return JavaBean对象
@@ -60,11 +53,9 @@ public final class JsonUtils {
         if (Strings.isNullOrEmpty(jsonString)) {
             return null;
         }
-
         try {
             return MAPPER.readValue(jsonString, clazz);
         } catch (IOException e) {
-//            throw new IllegalStateException();
             e.printStackTrace();
             return null;
         }

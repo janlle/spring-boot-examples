@@ -23,4 +23,6 @@ public class WeChatProperty {
 
     private String notifyUrl;
 
+    private String redirectUrl;
+
 }

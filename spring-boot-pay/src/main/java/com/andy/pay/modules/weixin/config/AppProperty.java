@@ -4,16 +4,15 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.Serializable;
 /**
  * @Description:
  * @Author: Mr.lyon
- * @CreateBy: 2018-05-20 20:34
+ * @CreateBy: 2018-05-20
  **/
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "app.pay")
-public class AppProperty implements Serializable {
+public class AppProperty  {
 
     private AliProperty ali = new AliProperty();
 
