@@ -1,4 +1,4 @@
-package com.andy.pay.util;
+package com.andy.pay.common.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

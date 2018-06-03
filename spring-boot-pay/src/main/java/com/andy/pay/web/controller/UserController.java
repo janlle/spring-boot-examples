@@ -1,11 +1,9 @@
 package com.andy.pay.web.controller;
 
 import com.andy.pay.common.Result;
-import com.andy.pay.enums.ResultEnum;
-import com.andy.pay.exception.AppException;
+import com.andy.pay.common.enums.ResultEnum;
 import com.andy.pay.object.entity.User;
 import com.andy.pay.service.UserService;
-import com.sun.deploy.association.utility.AppConstants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -14,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
