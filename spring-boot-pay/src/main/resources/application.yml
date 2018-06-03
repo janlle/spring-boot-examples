@@ -1,26 +1,28 @@
+server:
+  port: 8888
 spring:
   profiles:
     active: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
-
+# thymeleaf 配置
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
 app:
   pay:
     weChat:
-      notify_url: http://www.baidu.com
-      app_id: wxdaee460d69f8792a
-      app_secret: 94f235dfe82cf17865e6d6a9272127fa
-      token: XXXXXXXXXXXXXXXX
-      mch_id: 1387792102
-      api_key: 8908271717yangwj94716zhouqian520
-      sign_type: MD5
-      cert_path: apiclient_cert.p12
-      notifyUrl: http://rllin.nat300.top/andy/auth/weChat/redirect
+
       url:
-        payUrl: https://api.mch.weixin.qq.com/pay/unifiedorder           # 统一下单url
+        payUrl: https://api.mch.weixin.qq.com/pay/unifiedorder              # 统一下单url
         orderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery         # 查询订单url
         closeOrderUrl: https://api.mch.weixin.qq.com/pay/closeorder         # 关闭订单url
         refundUrl: https://api.mch.weixin.qq.com/secapi/pay/refund          # 申请退款url
@@ -29,11 +31,12 @@ app:
         tokenUrl: https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code
         userInfoUrl: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
     alipay:
-      open_api: https://openapi.alipay.com/gateway.do
       appid:
       private_key:
       public_key:
       alipay_public_key:
+      url:
+        openApi: https://openapi.alipay.com/gateway.do
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
