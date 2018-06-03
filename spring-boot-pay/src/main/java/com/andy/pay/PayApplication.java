@@ -1,5 +1,6 @@
 package com.andy.pay;
 
+import com.didispace.swagger.butler.EnableSwaggerButler;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Slf4j
 @Controller
+//@EnableSwaggerButler
 @SpringBootApplication
 @MapperScan(basePackages = "com.andy.pay.common.model")
 public class PayApplication extends WebMvcConfigurerAdapter {
