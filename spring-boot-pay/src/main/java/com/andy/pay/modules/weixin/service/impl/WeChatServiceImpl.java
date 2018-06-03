@@ -1,6 +1,6 @@
 package com.andy.pay.modules.weixin.service.impl;
 
-import com.andy.pay.modules.weixin.config.WeChatProperty;
+import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.entity.WeChatUserInfo;
 import com.andy.pay.modules.weixin.service.WeChatService;
 import com.andy.pay.util.JsonUtils;
@@ -22,7 +22,7 @@ public class WeChatServiceImpl implements WeChatService {
 
 
     @Autowired
-    private WeChatProperty weChatProperty;
+    private AppProperty appProperty;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -37,7 +37,7 @@ public class WeChatServiceImpl implements WeChatService {
         String access_token = jsonMap.get("access_token");
         String openId = jsonMap.get("openid");
 
-        String userInfoUrl = String.format(weChatProperty.getUserInfoUrl(), access_token, openId);
+        String userInfoUrl = String.format(appProperty.getWeChat().getUrl().getUserInfoUrl(), access_token, openId);
         WeChatUserInfo userInfo = restTemplate.getForObject(userInfoUrl, WeChatUserInfo.class);
         log.info("微信获取用户信息的url:{}---->获取的user:{}", userInfoUrl, userInfo);
         return userInfo;
@@ -45,7 +45,8 @@ public class WeChatServiceImpl implements WeChatService {
 
     @Override
     public String getCode() {
-        String authUrl = String.format(weChatProperty.getWeChatUrls().getAuthCodeUrl(), weChatProperty.getAppId(), weChatProperty.getRedirectUrl());
+        String authUrl = String.format(appProperty.getWeChat().getUrl().getAuthCodeUrl(),
+                appProperty.getWeChat().getAppid(), appProperty.getWeChat().getNotifyUrl());
         String code = restTemplate.getForObject(authUrl, String.class);
         log.info("微信获取授权码的url:{}---->获取的code:{}", authUrl, code);
         return code;
@@ -54,7 +55,7 @@ public class WeChatServiceImpl implements WeChatService {
 
     @Override
     public String getToken(String code) {
-        String tokenUrl = String.format(weChatProperty.getTokenUrl(), weChatProperty.getAppId(), weChatProperty.getAppSecret(), code);
+        String tokenUrl = String.format(appProperty.getWeChat().getUrl().getTokenUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getAppSecret(), code);
         String token = restTemplate.getForObject(tokenUrl, String.class);
         log.info("微信获取token的url:{}---->获取的token:{}", tokenUrl, token);
         return token;

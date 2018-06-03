@@ -1,5 +1,6 @@
 package com.other.modules.weixinpay.service.impl;
 
+import com.alibaba.dubbo.common.json.JSONObject;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alipay.demo.trade.utils.ZxingUtils;
 import com.other.common.constants.Constants;
@@ -7,7 +8,6 @@ import com.other.common.model.Product;
 import com.other.common.utils.CommonUtil;
 import com.other.modules.weixinpay.service.IWeixinPayService;
 import com.other.modules.weixinpay.util.*;
-import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -232,7 +232,8 @@ public class WeixinPayServiceImpl implements IWeixinPayService {
 		totalFee =  CommonUtil.subZeroAndDot(totalFee);
 		String redirect_uri = server_url+"weixinMobile/dopay?outTradeNo="+product.getOutTradeNo()+"&totalFee="+totalFee;
 		//也可以通过state传递参数 redirect_uri 后面加参数未经过验证
-		return SnsAPI.connectOauth2Authorize(ConfigUtil.APP_ID, redirect_uri, true,null);
+//		return SnsAPI.connectOauth2Authorize(ConfigUtil.APP_ID, redirect_uri, true,null);
+		return null;
 	}
 	@SuppressWarnings("rawtypes")
 	@Override
