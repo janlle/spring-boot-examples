@@ -20,7 +20,13 @@ spring:
 app:
   pay:
     weChat:
-
+      notify_url: http://rllin.nat300.top/wechat/auth/notify
+      redirect_url: http://rllin.nat300.top/wechat/auth
+      app_id: wxac5528ca26f1218b
+      app_secret: 3WD8NBDtbfsOp_fILJc-U8r3XkgJt3njDOFlFAJa
+      mch_id: 1387792102
+      api_key: 8908271717yangwj94716zhouqian520
+      cert_path: apiclient_cert.p12
       url:
         payUrl: https://api.mch.weixin.qq.com/pay/unifiedorder              # 统一下单url
         orderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery         # 查询订单url
