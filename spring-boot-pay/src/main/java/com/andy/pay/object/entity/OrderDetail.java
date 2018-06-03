@@ -1,4 +1,4 @@
-package com.andy.pay.entity;
+package com.andy.pay.object.entity;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
