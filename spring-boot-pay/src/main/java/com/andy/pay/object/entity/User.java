@@ -1,15 +1,18 @@
-package com.andy.pay.entity;
+package com.andy.pay.object.entity;
 
+import com.andy.pay.common.IdEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @author: Mr.lyon
+ * @createBy: 2018/6/3 20:09
+ **/
 @Data
-@ApiModel("")
-public class User {
-
-    private Long id;
+@ApiModel("用户实体")
+public class User extends IdEntity {
 
     private String userId;
 
@@ -39,9 +42,6 @@ public class User {
 
     private Byte status;
 
-    private Date createTime;
-
     private Date updateTime;
-
 
 }

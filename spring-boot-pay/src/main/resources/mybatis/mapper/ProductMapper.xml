@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.andy.pay.mapper.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com.andy.pay.entity.Product" >
+  <resultMap id="BaseResultMap" type="com.andy.pay.object.entity.Product" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="product_id" property="productId" jdbcType="VARCHAR" />
     <result column="category_id" property="categoryId" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="BIGINT" />
     <result column="barcode" property="barcode" jdbcType="VARCHAR" />
-    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="count" property="count" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
@@ -30,7 +30,7 @@
     delete from t_product
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.andy.pay.entity.Product" >
+  <insert id="insert" parameterType="com.andy.pay.object.entity.Product" >
     insert into t_product (id, product_id, category_id, 
       name, price, barcode, 
       number, description, image_url, 
@@ -42,7 +42,7 @@
       #{icon,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.andy.pay.entity.Product" >
+  <insert id="insertSelective" parameterType="com.andy.pay.object.entity.Product" >
     insert into t_product
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -127,7 +127,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.andy.pay.entity.Product" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.andy.pay.object.entity.Product" >
     update t_product
     <set >
       <if test="productId != null" >
@@ -169,7 +169,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.andy.pay.entity.Product" >
+  <update id="updateByPrimaryKey" parameterType="com.andy.pay.object.entity.Product" >
     update t_product
     set product_id = #{productId,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=INTEGER},

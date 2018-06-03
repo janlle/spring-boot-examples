@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.andy.pay.mapper.OrderMapper" >
-  <resultMap id="BaseResultMap" type="com.andy.pay.entity.Order" >
+  <resultMap id="BaseResultMap" type="com.andy.pay.object.entity.Order" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="order_id" property="orderId" jdbcType="VARCHAR" />
     <result column="receive_id" property="receiveId" jdbcType="VARCHAR" />
@@ -35,7 +35,7 @@
     delete from t_order
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.andy.pay.entity.Order" >
+  <insert id="insert" parameterType="com.andy.pay.object.entity.Order" >
     insert into t_order (id, order_id, receive_id, 
       buyer_nick, post_fee, total_fee, 
       buyer_rate, status, remark, 
@@ -49,7 +49,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{closeTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.andy.pay.entity.Order" >
+  <insert id="insertSelective" parameterType="com.andy.pay.object.entity.Order" >
     insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.andy.pay.entity.Order" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.andy.pay.object.entity.Order" >
     update t_order
     <set >
       <if test="orderId != null" >
@@ -212,7 +212,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.andy.pay.entity.Order" >
+  <update id="updateByPrimaryKey" parameterType="com.andy.pay.object.entity.Order" >
     update t_order
     set order_id = #{orderId,jdbcType=VARCHAR},
       receive_id = #{receiveId,jdbcType=VARCHAR},
