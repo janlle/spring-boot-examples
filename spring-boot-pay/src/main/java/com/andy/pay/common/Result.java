@@ -1,7 +1,7 @@
 package com.andy.pay.common;
 
 
-import com.andy.pay.enums.ResultEnum;
+import com.andy.pay.common.enums.ResultEnum;
 
 /**
  * 基本返回结果集

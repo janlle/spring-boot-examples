@@ -1,6 +1,6 @@
-package com.andy.pay.exception;
+package com.andy.pay.common.exception;
 
-import com.andy.pay.enums.ResultEnum;
+import com.andy.pay.common.enums.ResultEnum;
 
 /**
  * @author: Mr.ruoLin

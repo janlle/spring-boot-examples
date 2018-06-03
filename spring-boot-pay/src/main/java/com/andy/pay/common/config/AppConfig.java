@@ -1,4 +1,4 @@
-package com.andy.pay.config;
+package com.andy.pay.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

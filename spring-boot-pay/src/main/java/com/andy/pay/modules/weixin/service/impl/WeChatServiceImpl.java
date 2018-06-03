@@ -3,7 +3,7 @@ package com.andy.pay.modules.weixin.service.impl;
 import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.entity.WeChatUserInfo;
 import com.andy.pay.modules.weixin.service.WeChatService;
-import com.andy.pay.util.JsonUtils;
+import com.andy.pay.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
