@@ -1,193 +1,235 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.andy.pay.common.model.OrderMapper" >
-
-  <resultMap id="BaseResultMap" type="com.andy.pay.common.model.Order" >
-    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
-    <result column="buyer_bame" property="buyerName" jdbcType="VARCHAR" />
-    <result column="buyer_phone" property="buyerPhone" jdbcType="TIMESTAMP" />
-    <result column="address_id" property="addressId" jdbcType="TIMESTAMP" />
-    <result column="total_fee" property="totalFee" jdbcType="TIMESTAMP" />
-    <result column="create_ip" property="createIp" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="TIMESTAMP" />
-    <result column="pay_type" property="payType" jdbcType="TIMESTAMP" />
-    <result column="pay_way" property="payWay" jdbcType="TIMESTAMP" />
-    <result column="trade_num" property="tradeNum" jdbcType="TIMESTAMP" />
-    <result column="description" property="description" jdbcType="DOUBLE" />
-    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+<mapper namespace="com.andy.pay.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.andy.pay.entity.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="receive_id" property="receiveId" jdbcType="VARCHAR" />
+    <result column="buyer_nick" property="buyerNick" jdbcType="VARCHAR" />
+    <result column="post_fee" property="postFee" jdbcType="INTEGER" />
+    <result column="total_fee" property="totalFee" jdbcType="INTEGER" />
+    <result column="buyer_rate" property="buyerRate" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="out_trade_num" property="outTradeNum" jdbcType="VARCHAR" />
+    <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="consign_time" property="consignTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="close_time" property="closeTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
   </resultMap>
-
-  <sql id="Base_Column" >
-    order_id, buyer_bame, buyer_phone, address_id, total_fee, create_ip, status,
-    pay_type, pay_way, trade_num, description, create_time, update_time
+  <sql id="Base_Column_List" >
+    id, order_id, receive_id, buyer_nick, post_fee, total_fee, buyer_rate, status, remark, 
+    out_trade_num, create_ip, description, create_time, consign_time, end_time, close_time, 
+    pay_time
   </sql>
-
-  <!--<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
-    <!--select <include refid="Base_Column" /> from t_user where id = #{id,jdbcType=BIGINT}-->
-  <!--</select>-->
-
-  <!--<delete id="deleteById" parameterType="java.lang.Long" >-->
-    <!--delete from t_users where id = #{id}-->
-  <!--</delete>-->
-
-  <!--<insert id="insert" parameterType="User" >-->
-    <!--insert into t_user (email, username, password, token, salary, birthday )-->
-    <!--values (-->
-            <!--#{email,jdbcType=VARCHAR},-->
-            <!--#{username,jdbcType=VARCHAR},-->
-            <!--#{password,jdbcType=VARCHAR},-->
-            <!--#{token,jdbcType=TIMESTAMP},-->
-            <!--#{salary,jdbcType=DOUBLE},-->
-            <!--#{birthday,jdbcType=TIMESTAMP}-->
-    <!--)-->
-  <!--</insert>-->
-
-
-  <!--<insert id="insertSelective" parameterType="User" >-->
-    <!--insert into t_user-->
-    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
-      <!--<if test="email != null">-->
-        <!--email,-->
-      <!--</if>-->
-      <!--<if test="username != null">-->
-        <!--username,-->
-      <!--</if>-->
-      <!--<if test="password != null">-->
-        <!--password,-->
-      <!--</if>-->
-      <!--<if test="token != null">-->
-        <!--token,-->
-      <!--</if>-->
-      <!--<if test="salary != null">-->
-        <!--salary,-->
-      <!--</if>-->
-      <!--<if test="birthday != null">-->
-        <!--birthday,-->
-      <!--</if>-->
-    <!--</trim>-->
-  <!--VALUES-->
-    <!--<trim prefix="(" suffixOverrides="," suffix=")">-->
-      <!--<if test="email != null">-->
-        <!--email = #{email,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="username != null">-->
-        <!--username = #{username,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="password != null">-->
-        <!--password = #{password,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="token != null">-->
-        <!--token = #{token,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="salary != null">-->
-        <!--salary = #{salary,jdbcType=DOUBLE},-->
-      <!--</if>-->
-      <!--<if test="birthday != null">-->
-        <!--birthday = #{birthday,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-    <!--</trim>-->
-  <!--</insert>-->
-
-
-  <!--<update id="updateByIdSelective" parameterType="User" >-->
-    <!--update t_user-->
-    <!--<set>-->
-      <!--<if test="email != null">-->
-        <!--email = #{email,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="username != null">-->
-        <!--username = #{username,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="password != null">-->
-        <!--password = #{password,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="token != null">-->
-        <!--token = #{token,jdbcType=VARCHAR},-->
-      <!--</if>-->
-      <!--<if test="salary != null">-->
-        <!--salary = #{salary,jdbcType=DOUBLE},-->
-      <!--</if>-->
-      <!--<if test="birthday != null">-->
-        <!--birthday = #{birthday,jdbcType=TIMESTAMP},-->
-      <!--</if>-->
-    <!--</set>-->
-    <!--where id = #{id,jdbcType=BIGINT}-->
-  <!--</update>-->
-
-
-
-  <!--<update id="updateById" parameterType="User" >-->
-    <!--update t_user set-->
-      <!--email = #{email,jdbcType=VARCHAR},-->
-      <!--username = #{username,jdbcType=VARCHAR},-->
-      <!--password = #{password,jdbcType=VARCHAR},-->
-      <!--token = #{token,jdbcType=VARCHAR},-->
-      <!--salary = #{salary,jdbcType=DOUBLE},-->
-      <!--birthday = #{birthday,jdbcType=TIMESTAMP},-->
-    <!--where id = #{id,jdbcType=BIGINT}-->
-  <!--</update>-->
-
-  <!--<insert id="insertList" parameterType="java.util.List">-->
-    <!--INSERT INTO t_user (email, username, password, token, salary, birthday) VALUES-->
-    <!--<foreach collection="users" item="user" index="inx" separator=",">-->
-          <!--<trim prefix="(" suffixOverrides="," suffix=")">-->
-            <!--<choose>-->
-              <!--<when test="user.email != null">-->
-                <!--#{user.email,jdbcType=VARCHAR},-->
-              <!--</when>-->
-              <!--<otherwise>-->
-                <!--'user@163.com',-->
-              <!--</otherwise>-->
-            <!--</choose>-->
-
-            <!--<choose>-->
-              <!--<when test="user.username != null">-->
-                <!--#{user.username,jdbcType=VARCHAR},-->
-              <!--</when>-->
-              <!--<otherwise>-->
-                <!--'def-andy',-->
-              <!--</otherwise>-->
-            <!--</choose>-->
-
-            <!--<choose>-->
-              <!--<when test="user.password != null">-->
-                <!--#{user.password,jdbcType=VARCHAR},-->
-              <!--</when>-->
-              <!--<otherwise>-->
-                <!--'def-password',-->
-              <!--</otherwise>-->
-            <!--</choose>-->
-
-            <!--<choose>-->
-              <!--<when test="user.token != null">-->
-                <!--#{user.token,jdbcType=VARCHAR},-->
-              <!--</when>-->
-              <!--<otherwise>-->
-                <!--'def-token',-->
-              <!--</otherwise>-->
-            <!--</choose>-->
-
-            <!--<choose>-->
-              <!--<when test="user.salary != null">-->
-                <!--#{user.salary,jdbcType=DOUBLE},-->
-              <!--</when>-->
-              <!--<otherwise>-->
-                <!--salary = 0.00,-->
-              <!--</otherwise>-->
-            <!--</choose>-->
-
-            <!--<choose>-->
-              <!--<when test="user.birthday != null">-->
-                <!--#{user.birthday,jdbcType=TIMESTAMP}-->
-              <!--</when>-->
-              <!--<otherwise>-->
-                <!--'2001-1-1',-->
-              <!--</otherwise>-->
-            <!--</choose>-->
-
-          <!--</trim>-->
-        <!--</foreach>-->
-  <!--</insert>-->
-
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.andy.pay.entity.Order" >
+    insert into t_order (id, order_id, receive_id, 
+      buyer_nick, post_fee, total_fee, 
+      buyer_rate, status, remark, 
+      out_trade_num, create_ip, description, 
+      create_time, consign_time, end_time, 
+      close_time, pay_time)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{receiveId,jdbcType=VARCHAR}, 
+      #{buyerNick,jdbcType=VARCHAR}, #{postFee,jdbcType=INTEGER}, #{totalFee,jdbcType=INTEGER}, 
+      #{buyerRate,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, 
+      #{outTradeNum,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{closeTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.andy.pay.entity.Order" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="receiveId != null" >
+        receive_id,
+      </if>
+      <if test="buyerNick != null" >
+        buyer_nick,
+      </if>
+      <if test="postFee != null" >
+        post_fee,
+      </if>
+      <if test="totalFee != null" >
+        total_fee,
+      </if>
+      <if test="buyerRate != null" >
+        buyer_rate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="outTradeNum != null" >
+        out_trade_num,
+      </if>
+      <if test="createIp != null" >
+        create_ip,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="consignTime != null" >
+        consign_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="closeTime != null" >
+        close_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveId != null" >
+        #{receiveId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerNick != null" >
+        #{buyerNick,jdbcType=VARCHAR},
+      </if>
+      <if test="postFee != null" >
+        #{postFee,jdbcType=INTEGER},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="buyerRate != null" >
+        #{buyerRate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNum != null" >
+        #{outTradeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consignTime != null" >
+        #{consignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null" >
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.andy.pay.entity.Order" >
+    update t_order
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveId != null" >
+        receive_id = #{receiveId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerNick != null" >
+        buyer_nick = #{buyerNick,jdbcType=VARCHAR},
+      </if>
+      <if test="postFee != null" >
+        post_fee = #{postFee,jdbcType=INTEGER},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="buyerRate != null" >
+        buyer_rate = #{buyerRate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNum != null" >
+        out_trade_num = #{outTradeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consignTime != null" >
+        consign_time = #{consignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeTime != null" >
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.andy.pay.entity.Order" >
+    update t_order
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      receive_id = #{receiveId,jdbcType=VARCHAR},
+      buyer_nick = #{buyerNick,jdbcType=VARCHAR},
+      post_fee = #{postFee,jdbcType=INTEGER},
+      total_fee = #{totalFee,jdbcType=INTEGER},
+      buyer_rate = #{buyerRate,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      out_trade_num = #{outTradeNum,jdbcType=VARCHAR},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      consign_time = #{consignTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      close_time = #{closeTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>
