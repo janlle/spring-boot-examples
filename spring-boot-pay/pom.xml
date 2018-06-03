@@ -34,16 +34,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,21 +81,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.6</version>
         </dependency>
-        <!-- json-lib -->
-        <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <!-- 部分jdk版本报错的问题 -->
-            <classifier>jdk15</classifier>
-        </dependency>
-        <!-- commons-configuration -->
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.10</version>
         </dependency>
-        <!--gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -135,21 +116,12 @@
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>1.6.1</version><!--$NO-MVN-MAN-VER$-->
-        </dependency>
-        <!-- bcprov-jdk16 -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-            <version>1.46</version>
+            <version>1.6.1</version>
         </dependency>
         <!-- DubboX相关 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
-            <!-- 这里使用最新的2.8.4版本，中央仓库不存在，请自行打入本地仓库 -->
-            <!-- 百度网盘：http://pan.baidu.com/s/1gfxiuYZ -->
-            <!-- 或者使用最新版本 http://mvnrepository.com/artifact/com.alibaba/dubbo-->
             <version>2.6.1</version>
             <exclusions>
                 <exclusion>
@@ -158,37 +130,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- zookeeper 第三方操作工具类 -->
-        <!-- zookeeper 教程: https://blog.52itstyle.com/tag/zookeeper/ -->
         <dependency>
-            <groupId>com.101tec</groupId>
-            <artifactId>zkclient</artifactId>
-            <version>0.6</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- javassist 字节码类库 -->
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
+            <groupId>com.didispace</groupId>
+            <artifactId>swagger-butler-core</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <!-- 微信开发工具  -->
         <dependency>
@@ -214,20 +159,8 @@
                     </execution>
                 </executions>
                 <dependencies>
-                    <!-- mvn spring-boot:run 热部署启动 -->
-                    <!--<dependency>-->
-                        <!--<groupId>org.springframework</groupId>-->
-                        <!--<artifactId>springloaded</artifactId>-->
-                        <!--<version>1.2.7.RELEASE</version>-->
-                    <!--</dependency>-->
                 </dependencies>
             </plugin>
         </plugins>
-
-
     </build>
-
-
-
-
 </project>

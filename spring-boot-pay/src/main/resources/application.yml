@@ -18,16 +18,16 @@ app:
       api_key: 8908271717yangwj94716zhouqian520
       sign_type: MD5
       cert_path: apiclient_cert.p12
-      redirect_url: http://rllin.nat300.top/andy/auth/weChat/redirect
-      weChatUrls:
-        prePayUrl: https://api.mch.weixin.qq.com/pay/unifiedorder           # 统一下单url
+      notifyUrl: http://rllin.nat300.top/andy/auth/weChat/redirect
+      url:
+        payUrl: https://api.mch.weixin.qq.com/pay/unifiedorder           # 统一下单url
         orderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery         # 查询订单url
         closeOrderUrl: https://api.mch.weixin.qq.com/pay/closeorder         # 关闭订单url
         refundUrl: https://api.mch.weixin.qq.com/secapi/pay/refund          # 申请退款url
         refundQueryUrl: https://api.mch.weixin.qq.com/pay/refundquery       # 退款查询url
-        auth_code_url: https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=test#wechat_redirect
-        token_url: https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code
-        user_info_url: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
+        authCodeUrl: https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=test#wechat_redirect
+        tokenUrl: https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code
+        userInfoUrl: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
     alipay:
       open_api: https://openapi.alipay.com/gateway.do
       appid:
@@ -38,3 +38,18 @@ app:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   config-location: classpath:mybatis/config/mybatis-config.xml
+
+swagger:
+  butler:
+    resources[0]:
+      name: service-weChat
+      url: /service-weChat/v1/api-docs
+      swagger-version: 1.0
+    resources[1]:
+      name: service-ali
+      url: /service-ali/v1/api-docs
+      swagger-version: 1.0
+    resources[2]:
+      name: service-union
+      url: /service-union/v1/api-docs
+      swagger-version: 1.0

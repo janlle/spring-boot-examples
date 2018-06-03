@@ -1,5 +1,6 @@
 package com.other.modules.alipay.service.impl;
 
+import com.alibaba.dubbo.common.json.JSONObject;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
@@ -22,7 +23,6 @@ import com.other.common.model.Product;
 import com.other.common.utils.CommonUtil;
 import com.other.modules.alipay.service.IAliPayService;
 import com.other.modules.alipay.util.AliPayConfig;
-import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

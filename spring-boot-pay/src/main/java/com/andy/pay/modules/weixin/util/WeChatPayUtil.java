@@ -1,25 +1,15 @@
 package com.andy.pay.modules.weixin.util;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
-import org.apache.http.util.EntityUtils;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.net.ssl.SSLContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
-import java.security.KeyStore;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -29,257 +19,139 @@ import java.util.*;
 @Slf4j
 public class WeChatPayUtil {
 
-    //获取一个随机的24位字符串
-    public static String randomStr() {
-        return UUID.randomUUID().toString().replace("-", "").substring(24);
-    }
+    private static final String REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 
-    public static String PostRequest(String url, String data) throws IOException {
-        HttpClient client = new HttpClient();
-        PostMethod post=new PostMethod(url);
-        String result = "";
-        post.addRequestHeader("Content-Type", "text/html; charset=utf-8");
-        post.addRequestHeader("content", "text/html; charset=utf-8");
-        post.setRequestBody(data);
+    /**微信退参数拼装
+     * @author: Mr.lyon
+     * @createBy: 2018/6/3 15:04
+     * @params: [wxOrderId, outTradeNum, totalFee]
+     * @return: java.lang.String
+     **/
+    public static String getWxRefundParam(String wxOrderId, String outTradeNum,String totalFee) {
+        String data;
         try {
-            int status=client.executeMethod(post);
-            result = post.getResponseBodyAsString();
-            result = new String(result.getBytes(post.getResponseCharSet()), "utf-8");
-        } catch (IOException e){
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-
-    /**
-     * @Description:微信支付 统一下单
-     * @param out_trade_no
-     * @param body
-     * @param detail
-     * @param total_fee
-     * @param ip_address
-     * @Date: 2017-9-11 14:35
-     * @return:
-     */
-    public static String unifiedOrder(String out_trade_no, String body, String detail, int total_fee,String ip_address) {
-        StringBuffer xml = new StringBuffer();
-        String data = null;
-        try{
-            xml.append("</xml>");
-            if (body.length() > 32) {
-                body = body.substring(0, 32);
-            }
-            SortedMap<String, String> parameters = new TreeMap();
-            parameters.put("appid", WXPayConstants.APP_ID);
-            parameters.put("body", body);
-            parameters.put("detail", detail);
-            parameters.put("mch_id", WXPayConstants.MCH_ID);
-            parameters.put("nonce_str", genNonceStr());
-            parameters.put("notify_url", "http://www.aidongsports.com/wx");
-            parameters.put("out_trade_no", out_trade_no);
-            parameters.put("fee_type", "CNY");
-            parameters.put("spbill_create_ip", ip_address);
-            parameters.put("total_fee", String.valueOf(total_fee));
-            parameters.put("trade_type", "APP");
-            parameters.put("sign", WeChatUtil.createSign(parameters, WXPayConstants.API_KEY));
-            data = PostRequest("https://api.mch.weixin.qq.com/pay/unifiedorder",SortedMaptoXml(parameters));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return data;
-    }
-    /**
-     * @Description:微信退款
-     * @param out_trade_no
-     * @param total_fee
-     * @return:
-     */
-    public static String wxPayRefund(String out_trade_no, String transaction_id,String total_fee) {
-        StringBuffer xml = new StringBuffer();
-        String data = null;
-        try {
-            String nonceStr = genNonceStr();
-            xml.append("</xml>");
-            SortedMap<String,String> parameters = new TreeMap<String,String>();
-            parameters.put("appid", WXPayConstants.APP_ID);
-            parameters.put("mch_id", WXPayConstants.MCH_ID);
-            parameters.put("nonce_str", nonceStr);
-            parameters.put("out_trade_no", out_trade_no);
-            parameters.put("transaction_id", transaction_id);
-            parameters.put("out_refund_no", nonceStr);
-            parameters.put("fee_type", "CNY");
-            parameters.put("total_fee", total_fee);
-            parameters.put("refund_fee", total_fee);
-            parameters.put("op_user_id", WXPayConstants.MCH_ID);
-            parameters.put("sign", WeChatUtil.createSign(parameters, WXPayConstants.API_KEY));
-            data =SortedMaptoXml(parameters);
+            String nonceStr = WeChatUtil.genNonceStr();
+            SortedMap<String, String> params = new TreeMap<>();
+            params.put("appid", WeChatConstants.APP_ID);
+            params.put("mch_id", WeChatConstants.MCH_ID);
+            params.put("nonce_str", nonceStr);
+            params.put("transaction_id", wxOrderId);
+            params.put("out_trade_no", outTradeNum);
+            params.put("total_fee", totalFee);
+            params.put("refund_fee", totalFee);
+            params.put("sign", WeChatUtil.createSign("UTF-8", params, WeChatConstants.API_KEY));
+            data = WeChatUtil.mapToXml(params);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            log.error("微信退款参数封装异常！");
             return null;
         }
         return data;
     }
-    /**
-     * 证书使用
-     * 微信退款
-     */
-    public static String wxPayBack(String url, String data) throws Exception {
-        KeyStore keyStore  = KeyStore.getInstance("PKCS12");
-        FileInputStream inputStream = new FileInputStream(new File("D:\\微信商户平台支付证书\\apiclient_cert.p12"));
-        String result="";
-        try {
-            keyStore.load(inputStream, WXPayConstants.MCH_ID.toCharArray());
-        } finally {
-            inputStream.close();
-        }
-
-        // Trust own CA and all self-signed certs
-        SSLContext sslcontext = SSLContexts.custom()
-                .loadKeyMaterial(keyStore, WXPayConstants.MCH_ID.toCharArray())
-                .build();
-        // Allow TLSv1 protocol only
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-                sslcontext,
-                new String[] { "TLSv1" },
-                null,
-                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-        CloseableHttpClient httpclient = HttpClients.custom()
-                .setSSLSocketFactory(sslsf)
-                .build();
-        try {
-            HttpPost httppost = new HttpPost("https://api.mch.weixin.qq.com/secapi/pay/refund");
-            StringEntity entitys = new StringEntity(data);
-            httppost.setEntity((HttpEntity) entitys);
-            CloseableHttpResponse response = httpclient.execute(httppost);
-            try {
-                HttpEntity entity = response.getEntity();
-
-                if (entity != null) {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent()));
-                    String text="";
-                    String t="";
-                    while ((text=bufferedReader.readLine()) != null) {
-                        t+=text;
-                    }
-                    byte[] temp=t.getBytes("gbk");//这里写原编码方式
-                    String newStr=new String(temp,"utf-8");//这里写转换后的编码方式
-                    result=newStr;
-                }
-                EntityUtils.consume(entity);
-            } finally {
-                response.close();
-            }
-        } finally {
-            httpclient.close();
-        }
-        return result;
-    }
-
-    /**
-     * XML格式字符串转换为Map
-     * 微信支付 解析xml xml转map  获取prepay_id
-     * @param strXML XML字符串
-     * @return XML数据转换后的Map
-     */
-    public static Map<String, String> xmlToMap(String strXML) throws Exception {
-        try {
-            Map<String, String> data = new HashMap<>();
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            InputStream stream = new ByteArrayInputStream(strXML.getBytes("UTF-8"));
-            org.w3c.dom.Document doc = documentBuilder.parse(stream);
-            doc.getDocumentElement().normalize();
-            NodeList nodeList = doc.getDocumentElement().getChildNodes();
-            for (int idx = 0; idx < nodeList.getLength(); ++idx) {
-                Node node = nodeList.item(idx);
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
-                    data.put(element.getNodeName(), element.getTextContent());
-                }
-            }
-            try {
-                stream.close();
-            } catch (Exception ex) {
-                // do nothing
-            }
-            return data;
-        } catch (Exception ex) {
-            log.warn("Invalid XML, can not convert to map. Error message: {}. XML content: {}", ex.getMessage(), strXML);
-            throw ex;
-        }
-
-    }
-
-    /**
-     * 获取随机字符串 Nonce Str
-     * @return String 随机字符串
-     */
-    public static String generateNonceStr() {
-        return UUID.randomUUID().toString().replaceAll("-", "").substring(0, 32);
-    }
 
 
-
-    /**
-     * @Description:通过prepay_id 生成微信支付参数
-     * @param prepay_id
-     * @Date: 2017-9-8 10:17
-     */
-    public static  SortedMap<Object,Object> genPayRequest(String prepay_id) {
-        SortedMap<Object,Object> parameters = new TreeMap<Object,Object>();
-        parameters.put("appid", WXPayConstants.APP_ID);
-        parameters.put("noncestr", genNonceStr());
-        parameters.put("package", "Sign=WXPay");
-        parameters.put("partnerid", WXPayConstants.MCH_ID);
-        parameters.put("prepayid", prepay_id);
-        parameters.put("timestamp",getCurrentTimestamp());
-        parameters.put("sign", WeChatUtil.createSign(parameters).toUpperCase());
-        return parameters;
-    }
-    /**
-     * @Author: HONGLINCHEN
-     * @Description:请求值转换为xml格式 SortedMap转xml
-     * @param params
-     * @Date: 2017-9-7 17:18
-     */
-    private static String SortedMaptoXml(SortedMap<String,String> params) {
-        StringBuilder sb = new StringBuilder();
-        Set es = params.entrySet();
-        Iterator it = es.iterator();
-        sb.append("<xml>\n");
-        while(it.hasNext()) {
-            Map.Entry entry = (Map.Entry)it.next();
-            String k = (String)entry.getKey();
-            Object v = entry.getValue();
-            sb.append("<"+k+">");
-            sb.append(v);
-            sb.append("</"+k+">\n");
-        }
-        sb.append("</xml>");
-        return sb.toString();
-    }
-
-    /**
-     * 生成32位随机数字
-     */
-//    public static String genNonceStr() {
-//        Random random = new Random();
-//        return WeChatUtil.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
+//    public static String getWxRefundParam() {
+//        String data;
+//        try {
+//            String nonceStr = WeChatUtil.genNonceStr();
+//            SortedMap<String, String> params = new TreeMap<>();
+//            params.put("appid", WeChatConstants.APP_ID);
+//            params.put("mch_id", WeChatConstants.MCH_ID);
+//            params.put("nonce_str", nonceStr);
+//            params.put("transaction_id", wxOrderId);
+//            params.put("out_trade_no", outTradeNum);
+//            params.put("total_fee", totalFee);
+//            params.put("refund_fee", totalFee);
+//            params.put("sign", WeChatUtil.createSign("UTF-8", params, WeChatConstants.API_KEY));
+//            data = WeChatUtil.mapToXml(params);
+//        } catch (Exception e) {
+//            log.error("微信退款参数封装异常！");
+//            return null;
+//        }
+//        return data;
 //    }
-    /**
-     * 获取当前时间戳，单位秒
-     */
-    public static long getCurrentTimestamp() {
-        return System.currentTimeMillis()/1000;
+
+    /**微信退款
+     * @author: Mr.lyon
+     * @createBy: 2018/6/3 15:05
+     * @params: [xmlData]
+     * @return: void
+     **/
+    public static void sendRefundRequest(String xmlData) throws Exception {
+        log.info("****************微信退款开始****************");
+        CloseableHttpClient httpClient = WeChatUtil.getHttpsClient(WeChatConstants.CERT_PATH, WeChatConstants.MCH_ID);
+        HttpPost httpPost = new HttpPost(REFUND_URL);
+        StringEntity stringEntity = new StringEntity(xmlData.toString(), "UTF-8");
+        httpPost.setEntity(stringEntity);
+        CloseableHttpResponse response = httpClient.execute(httpPost);
+        HttpEntity httpEntity = response.getEntity();
+        StringBuffer sb = new StringBuffer();
+        String xmlStr;
+        if (httpEntity != null) {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
+            while ((xmlStr = bufferedReader.readLine()) != null) {
+                sb.append(xmlStr);
+            }
+            bufferedReader.close();
+        }
+        log.info("responseXmlData:{}", sb);
+        Map<String, String> mapData = WeChatUtil.xmlToMap(sb.toString());
+        log.info("responseMapData:{}", mapData);
+        //return_code为微信返回的状态码，SUCCESS表示申请退款成功，return_msg 如非空，为错误原因 签名失败 参数格式校验错误
+        if (mapData.get("return_code").toString().equalsIgnoreCase("SUCCESS")) {
+            log.info("****************退款申请成功**********************");
+            //修改订单状态为退款
+        } else {
+            log.info("*****************退款申请失败*********************");
+        }
     }
 
-    /**
-     * 生成 uuid， 即用来标识一笔单，也用做 nonce_str
-     */
-    public static String generateUUID() {
-        return UUID.randomUUID().toString().replaceAll("-", "").substring(0, 32);
+    /**向微信发起支付请求
+     * @author: Mr.lyon
+     * @createBy: 2018/6/3 15:28
+     * @params: [requestUrl, xmlData]
+     * @return: java.lang.String
+     **/
+    public static String sendPayRequest(String requestUrl, String xmlData) {
+        log.info("****************微信支付开始****************");
+        InputStreamReader inputStreamReader = null;
+        BufferedReader bufferedReader = null;
+        OutputStream outputstream;
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(requestUrl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setUseCaches(false);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("content-type", "application/x-www-form-urlencoded");
+            if (null != xmlData) {
+                outputstream = connection.getOutputStream();
+                outputstream.write(xmlData.getBytes("UTF-8"));
+                outputstream.close();
+            }
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+            String string;
+            StringBuffer sb = new StringBuffer();
+            while ((string = bufferedReader.readLine()) != null) {
+                sb.append(string);
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            log.info("http请求异常：{}" + e.getMessage());
+        } finally {
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            } catch (IOException e) {
+                log.error("关闭资源异常:{}", e.getMessage());
+            }
+        }
+        return null;
     }
 
 
