@@ -7,52 +7,33 @@ spring:
     username: root
     password: root
 
-## 微信支付相关API：https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
 app:
   pay:
     weChat:
       notify_url: http://www.baidu.com
       app_id: wxdaee460d69f8792a
-      #服务号的应用密钥
       app_secret: 94f235dfe82cf17865e6d6a9272127fa
-      #服务号的配置token
       token: XXXXXXXXXXXXXXXX
-      #商户号
       mch_id: 1387792102
-      #API密钥
       api_key: 8908271717yangwj94716zhouqian520
-      #签名加密方式
       sign_type: MD5
-      #微信支付证书名称
       cert_path: apiclient_cert.p12
       redirect_url: http://rllin.nat300.top/andy/auth/weChat/redirect
       weChatUrls:
-        # 统一下单url
-        prePayUrl: https://api.mch.weixin.qq.com/pay/unifiedorder
-        # 查询订单url
-        orderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery
-        # 关闭订单url
-        closeOrderUrl: https://api.mch.weixin.qq.com/pay/closeorder
-        # 申请退款url
-        refundUrl: https://api.mch.weixin.qq.com/secapi/pay/refund
-        # 退款查询url
-        refundQueryUrl: https://api.mch.weixin.qq.com/pay/refundquery
-        # 下载对账单url
-        downloadBillUrl: https://api.mch.weixin.qq.com/pay/downloadbill
-        # 小程序登录获取openid&session_key: https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html#wxloginobject
-        appLoginUrl: https://api.weixin.qq.com/sns/jscode2session
-        # 小程序获取token
-        getTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential
-        # 小程序发送模板消息
-        sendServeUrl: https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=
+        prePayUrl: https://api.mch.weixin.qq.com/pay/unifiedorder           # 统一下单url
+        orderQueryUrl: https://api.mch.weixin.qq.com/pay/orderquery         # 查询订单url
+        closeOrderUrl: https://api.mch.weixin.qq.com/pay/closeorder         # 关闭订单url
+        refundUrl: https://api.mch.weixin.qq.com/secapi/pay/refund          # 申请退款url
+        refundQueryUrl: https://api.mch.weixin.qq.com/pay/refundquery       # 退款查询url
         auth_code_url: https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=test#wechat_redirect
         token_url: https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code
         user_info_url: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
-
     alipay:
-
-
-
+      open_api: https://openapi.alipay.com/gateway.do
+      appid:
+      private_key:
+      public_key:
+      alipay_public_key:
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
