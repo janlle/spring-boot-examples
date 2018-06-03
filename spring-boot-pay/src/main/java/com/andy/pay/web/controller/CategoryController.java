@@ -11,16 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @Api(tags ="订单操作接口")
-@RequestMapping(value = "/order")
+@RequestMapping(value = "/category")
 public class CategoryController {
 
-
-    @ApiOperation("")
-    @ApiImplicitParam(name = "", value = "", dataType = "", required = true, paramType = "")
-    @RequestMapping("/")
-    public String index() {
-        return "index";
-    }
 
 
 }

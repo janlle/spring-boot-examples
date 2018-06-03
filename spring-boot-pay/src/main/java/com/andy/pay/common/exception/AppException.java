@@ -12,7 +12,7 @@ public class AppException extends RuntimeException {
 
     private Integer code;
 
-    public AppException(String message) {
+    public AppException(Integer code, String message) {
         super(message);
     }
 

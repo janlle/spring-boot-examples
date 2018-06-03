@@ -1,14 +1,16 @@
 package com.andy.pay.test;
 
 import com.andy.pay.PayApplication;
-import com.andy.pay.common.model.Order;
-import com.andy.pay.common.model.OrderMapper;
+import com.andy.pay.mapper.OrderMapper;
+import com.andy.pay.object.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -27,7 +29,7 @@ public class OrderMapperTest {
 
     @Test
     public void test() {
-        Order order = orderMapper.selectByOrderId(orderId);
+        List<Order> order = orderMapper.selectByOrderId(orderId);
         log.info("order:{}", order);
     }
 

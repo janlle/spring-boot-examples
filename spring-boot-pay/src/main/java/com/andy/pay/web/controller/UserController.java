@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Controller
 @Api(tags ="订单操作接口")
-@RequestMapping(value = "/order")
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired

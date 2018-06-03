@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Controller
 //@EnableSwaggerButler
 @SpringBootApplication
-@MapperScan(basePackages = "com.andy.pay.common.model")
+@MapperScan(basePackages = "com.andy.pay.mapper")
 public class PayApplication extends WebMvcConfigurerAdapter {
 
 	@RequestMapping("/")
