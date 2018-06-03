@@ -1,5 +1,6 @@
-package com.andy.pay.entity;
+package com.andy.pay.object.entity;
 
+import com.andy.pay.common.IdEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -7,9 +8,7 @@ import java.util.Date;
 
 @Data
 @ApiModel("")
-public class Payment {
-
-    private Long id;
+public class Payment extends IdEntity {
 
     private String paymentId;
 
@@ -27,9 +26,6 @@ public class Payment {
 
     private Long totalFee;
 
-    private Date createTime;
-
     private Date updateTime;
-
 
 }
