@@ -1,6 +1,6 @@
 package com.andy.pay.modules.weixin.controller;
 
-import com.andy.pay.modules.weixin.config.WeChatProperty;
+import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.entity.WeChatUserInfo;
 import com.andy.pay.modules.weixin.service.WeChatService;
 import io.swagger.annotations.Api;
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class WeChatController {
 
     @Autowired
-    private WeChatProperty weChatProperty;
+    private AppProperty appProperty;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -53,9 +53,9 @@ public class WeChatController {
     @ApiOperation(value = "获取code", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @GetMapping("/authUrl")
     public String authUrl() {
-        String authUrl = String.format(weChatProperty.getWeChatUrls().getAuthCodeUrl(), weChatProperty.getAppId(), weChatProperty.getRedirectUrl());
-        log.info("微信获取授权码的url:{}", authUrl);
-        return authUrl;
+        String tokenUrl = String.format(appProperty.getWeChat().getUrl().getTokenUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getAppSecret());
+        log.info("微信获取授权码的url:{}", tokenUrl);
+        return tokenUrl;
     }
 
 
