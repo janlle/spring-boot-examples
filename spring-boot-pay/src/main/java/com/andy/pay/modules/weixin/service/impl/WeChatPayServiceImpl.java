@@ -1,25 +1,18 @@
 package com.andy.pay.modules.weixin.service.impl;
 
-import com.andy.pay.common.model.Order;
-import com.andy.pay.common.model.OrderMapper;
-import com.andy.pay.common.model.OrderStatusEnum;
+import com.andy.pay.common.enums.OrderStatusEnum;
+import com.andy.pay.mapper.OrderMapper;
 import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.service.WeChatPayService;
 import com.andy.pay.modules.weixin.util.WeChatPayUtil;
 import com.andy.pay.modules.weixin.util.WeChatUtil;
+import com.andy.pay.object.entity.Order;
 import lombok.extern.slf4j.Slf4j;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
 import java.util.*;
-
-import static com.other.modules.weixinpay.util.XMLUtil.getChildrenText;
 
 /**
  * @author: Mr.lyon
@@ -37,7 +30,8 @@ public class WeChatPayServiceImpl implements WeChatPayService {
 
     @Override
     public void payHandler(HttpServletRequest request, String orderId) {
-        Order order = orderMapper.selectByOrderId(orderId);
+        List<Order> orderList = orderMapper.selectByOrderId(orderId);
+        Order order = orderList.get(0);
         if (order == null) {
             log.error("微信预下单失败，订单不存在orderId:{}", orderId);
             return;
@@ -51,7 +45,7 @@ public class WeChatPayServiceImpl implements WeChatPayService {
         params.put("mch_id", appProperty.getWeChat().getMchId());            //微信支付商户号
         params.put("nonce_str", WeChatUtil.genNonceStr());                   //随机字符串
         params.put("body", "App weChat pay!");                               //商品描述
-        params.put("out_trade_no", order.getTradeNum());                     //商户订单号
+        params.put("out_trade_no", order.getOutTradeNum());                  //商户订单号
         params.put("total_fee", order.getTotalFee().toString());             //总金额(分)
         params.put("spbill_create_ip", order.getCreateIp());                 //订单生成的机器IP，指用户浏览器端IP
         params.put("notify_url", appProperty.getWeChat().getNotifyUrl());    //回调url

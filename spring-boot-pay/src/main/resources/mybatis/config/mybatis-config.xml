@@ -14,7 +14,7 @@
     </settings>
     
     <typeAliases>
-       <typeAlias type="com.andy.pay.common.model.Order"  alias="Order" />
+       <!--<typeAlias type="com.andy.pay.common.model.Order"  alias="Order" />-->
     </typeAliases>
     
     <mappers>
