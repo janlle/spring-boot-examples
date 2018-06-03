@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-dubbo
+  dubbo:
+    application:
+#      name: provider
+      name: consumer
+    registry:
+      address: zookeeper://39.108.125.41:2181
+    protocol:
+      name: dubbo
+      port: 20880
+    scan: com.andy.dubbo.consumer
+#    scan: com.andy.dubbo.provider
+
+
