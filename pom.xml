@@ -59,6 +59,7 @@
         <module>spring-boot-session</module>
 		<module>spring-boot-task</module>
         <module>spring-boot-document</module>
+        <module>spring-boot-dubbo</module>
     </modules>
 
 	<build>
