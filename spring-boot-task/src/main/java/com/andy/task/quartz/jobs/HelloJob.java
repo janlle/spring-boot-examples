@@ -22,7 +22,7 @@ public class HelloJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        log.info("Welcome to Spring-Quartz World!"+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) );
+        log.info("Welcome to Spring-Quartz now:"+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) );
     }
 
 }
