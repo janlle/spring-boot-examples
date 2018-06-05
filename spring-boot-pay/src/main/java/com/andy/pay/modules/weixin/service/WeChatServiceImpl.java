@@ -1,8 +1,7 @@
-package com.andy.pay.modules.weixin.service.impl;
+package com.andy.pay.modules.weixin.service;
 
 import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.entity.WeChatUserInfo;
-import com.andy.pay.modules.weixin.service.WeChatService;
 import com.andy.pay.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import java.util.Map;
  **/
 @Slf4j
 @Service
-public class WeChatServiceImpl implements WeChatService {
+public class WeChatServiceImpl {
 
 
     @Autowired
@@ -27,7 +26,6 @@ public class WeChatServiceImpl implements WeChatService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Override
     public WeChatUserInfo getUserInfo() {
         String code = getCode();
         String token = getToken(code);
@@ -43,7 +41,6 @@ public class WeChatServiceImpl implements WeChatService {
         return userInfo;
     }
 
-    @Override
     public String getCode() {
         String authUrl = String.format(appProperty.getWeChat().getUrl().getAuthCodeUrl(),
                 appProperty.getWeChat().getAppid(), appProperty.getWeChat().getNotifyUrl());
@@ -53,7 +50,6 @@ public class WeChatServiceImpl implements WeChatService {
     }
 
 
-    @Override
     public String getToken(String code) {
         String tokenUrl = String.format(appProperty.getWeChat().getUrl().getTokenUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getAppSecret(), code);
         String token = restTemplate.getForObject(tokenUrl, String.class);
