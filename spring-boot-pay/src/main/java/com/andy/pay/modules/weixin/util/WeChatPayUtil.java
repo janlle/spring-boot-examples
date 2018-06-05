@@ -48,28 +48,6 @@ public class WeChatPayUtil {
         return data;
     }
 
-
-//    public static String getWxRefundParam() {
-//        String data;
-//        try {
-//            String nonceStr = WeChatUtil.genNonceStr();
-//            SortedMap<String, String> params = new TreeMap<>();
-//            params.put("appid", WeChatConstants.APP_ID);
-//            params.put("mch_id", WeChatConstants.MCH_ID);
-//            params.put("nonce_str", nonceStr);
-//            params.put("transaction_id", wxOrderId);
-//            params.put("out_trade_no", outTradeNum);
-//            params.put("total_fee", totalFee);
-//            params.put("refund_fee", totalFee);
-//            params.put("sign", WeChatUtil.createSign("UTF-8", params, WeChatConstants.API_KEY));
-//            data = WeChatUtil.mapToXml(params);
-//        } catch (Exception e) {
-//            log.error("微信退款参数封装异常！");
-//            return null;
-//        }
-//        return data;
-//    }
-
     /**微信退款
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:05
