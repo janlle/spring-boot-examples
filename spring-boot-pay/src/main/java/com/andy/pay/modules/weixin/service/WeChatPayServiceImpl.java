@@ -1,9 +1,8 @@
-package com.andy.pay.modules.weixin.service.impl;
+package com.andy.pay.modules.weixin.service;
 
 import com.andy.pay.common.enums.OrderStatusEnum;
 import com.andy.pay.mapper.OrderMapper;
 import com.andy.pay.modules.weixin.config.AppProperty;
-import com.andy.pay.modules.weixin.service.WeChatPayService;
 import com.andy.pay.modules.weixin.util.WeChatPayUtil;
 import com.andy.pay.modules.weixin.util.WeChatUtil;
 import com.andy.pay.object.entity.Order;
@@ -20,7 +19,7 @@ import java.util.*;
  **/
 @Slf4j
 @Service
-public class WeChatPayServiceImpl implements WeChatPayService {
+public class WeChatPayServiceImpl {
 
     @Autowired
     private OrderMapper orderMapper;
@@ -28,7 +27,6 @@ public class WeChatPayServiceImpl implements WeChatPayService {
     @Autowired
     private AppProperty appProperty;
 
-    @Override
     public void payHandler(HttpServletRequest request, String orderId) {
         List<Order> orderList = orderMapper.selectByOrderId(orderId);
         Order order = orderList.get(0);

@@ -50,8 +50,7 @@ public class WeChatUtil {
         }
         sb.append("key=" + apiKey);
         log.info("生成的字符串签名为:{}-------生成的MD5签名为:{}", sb.toString(), MD5Encode(sb.toString(), charset).toUpperCase());
-        String sign = MD5Encode(sb.toString(), charset).toUpperCase();
-        return sign;
+        return MD5Encode(sb.toString(), charset).toUpperCase();
     }
 
     /**
@@ -110,14 +109,13 @@ public class WeChatUtil {
     }
 
     /**
-     * 生成 HMACSHA256
+     * 生成 HMAC_SHA256
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:01
      * @params: [data, key]
      * @return: java.lang.String
      **/
     public static String HMAC_SHA256(String data, String key) throws Exception {
-
         Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
         SecretKeySpec secret_key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
         sha256_HMAC.init(secret_key);
@@ -138,7 +136,6 @@ public class WeChatUtil {
      * @return: java.util.Map
      **/
     public static Map xmlToMap(String xmlStr)  {
-
         try (InputStream inputStream = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"))) {
             Map<String, String> data = new HashMap<>();
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -177,9 +174,7 @@ public class WeChatUtil {
             Map.Entry entry = (Map.Entry) it.next();
             String k = (String) entry.getKey();
             Object v = entry.getValue();
-            sb.append("<" + k + ">");
-            sb.append(v);
-            sb.append("</" + k + ">\n");
+            sb.append("<" + k + ">").append(v).append("</" + k + ">\n");
         }
         sb.append("</xml>");
         return sb.toString();
