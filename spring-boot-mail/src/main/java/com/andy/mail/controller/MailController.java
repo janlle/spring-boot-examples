@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -52,6 +53,12 @@ public class MailController {
         map.put("hello", "freemarker渲染");
         map.put("code", "admin");
         return "ftlMail";
+    }
+
+    @RequestMapping("/getCode")
+    public String get(String code, HttpServletResponse response, HttpServletRequest request){
+
+        return "SUCCESS";
     }
 
 
