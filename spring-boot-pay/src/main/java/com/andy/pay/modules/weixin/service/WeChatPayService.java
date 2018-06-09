@@ -2,10 +2,13 @@ package com.andy.pay.modules.weixin.service;
 
 import com.andy.pay.common.enums.OrderStatusEnum;
 import com.andy.pay.mapper.OrderMapper;
+import com.andy.pay.mapper.UserMapper;
 import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.util.WeChatPayUtil;
 import com.andy.pay.modules.weixin.util.WeChatUtil;
 import com.andy.pay.object.entity.Order;
+import com.andy.pay.object.entity.User;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +22,14 @@ import java.util.*;
  **/
 @Slf4j
 @Service
-public class WeChatPayServiceImpl {
+public class WeChatPayService {
 
     @Autowired
     private OrderMapper orderMapper;
+
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private AppProperty appProperty;
@@ -57,5 +64,39 @@ public class WeChatPayServiceImpl {
         Map<String, String> retData = WeChatUtil.xmlToMap(wxRetXmlData);
         log.info("微信返回信息:{}", retData);
     }
+
+    /**微信退款
+     * @author: Mr.lyon
+     * @createBy: 2018/6/1 10:20
+     * @params: [orderId, userId]
+     * @return: java.lang.String
+     **/
+    public void wxPayRefund(@NonNull String orderId, @NonNull Integer userId) {
+
+        List<Order> order = orderMapper.selectByOrderId(orderId);
+        if (order == null) {
+            throw new RuntimeException("订单不存在！");
+        }
+
+        String refundNo = WeChatUtil.genNonceStr();
+        String param = WeChatPayUtil.getWxRefundParam("", "", "");
+        if (param == null) {
+            throw new RuntimeException("参数封装错误！");
+        }
+        try {
+            if (WeChatPayUtil.wxRefund(param)) {
+                //TODO退款成功
+            } else {
+                //退款失败
+                throw new RuntimeException("微信退款失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("微信退款异常:{}", e.getMessage());
+        }
+    }
+
+
+
 
 }
