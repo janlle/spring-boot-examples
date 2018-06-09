@@ -49,7 +49,6 @@ public class WeChatUtil {
             }
         }
         sb.append("key=" + apiKey);
-        log.info("生成的字符串签名为:{}-------生成的MD5签名为:{}", sb.toString(), MD5Encode(sb.toString(), charset).toUpperCase());
         return MD5Encode(sb.toString(), charset).toUpperCase();
     }
 

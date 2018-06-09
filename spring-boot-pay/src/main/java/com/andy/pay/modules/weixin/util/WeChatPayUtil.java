@@ -54,7 +54,7 @@ public class WeChatPayUtil {
      * @params: [xmlData]
      * @return: void
      **/
-    public static void sendRefundRequest(String xmlData) throws Exception {
+    public static boolean wxRefund(String xmlData) throws Exception {
         log.info("****************微信退款开始****************");
         CloseableHttpClient httpClient = WeChatUtil.getHttpsClient(WeChatConstants.CERT_PATH, WeChatConstants.MCH_ID);
         HttpPost httpPost = new HttpPost(REFUND_URL);
@@ -78,8 +78,10 @@ public class WeChatPayUtil {
         if (mapData.get("return_code").toString().equalsIgnoreCase("SUCCESS")) {
             log.info("****************退款申请成功**********************");
             //修改订单状态为退款
+            return true;
         } else {
             log.info("*****************退款申请失败*********************");
+            return false;
         }
     }
 
