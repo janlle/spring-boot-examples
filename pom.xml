@@ -60,6 +60,7 @@
 		<module>spring-boot-task</module>
         <module>spring-boot-document</module>
         <module>spring-boot-dubbo</module>
+        <module>spring-boot-log</module>
     </modules>
 
 	<build>
