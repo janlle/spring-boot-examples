@@ -53,8 +53,14 @@ public class LogTask {
         logger.info(new Date().getTime()+"-"+RandomValue.getName()+"-登陆了-"+RandomValue.getEmail(5,8)+"-邮箱，发送了-"+RANDOM.nextInt(4) + "条邮件！");
     }
 
-    public static void main(String[] args) {
-        System.out.println(localDateTime.toLocalDate());
+
+    // 每8分钟执行一次
+    @Scheduled(cron = "0 0/8 * * * ?")
+    public void works() {
+        for (int i = 0; i < 256; i++) {
+            logger.info(new Date().getTime()+"-"+RandomValue.getName()+"-登陆了-"+RandomValue.getEmail(5,8)+"-邮箱，发送了-"+RANDOM.nextInt(4) + "条邮件！");
+        }
     }
+
 
 }
