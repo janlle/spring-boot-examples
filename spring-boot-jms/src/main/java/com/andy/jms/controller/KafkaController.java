@@ -19,9 +19,16 @@ public class KafkaController {
 
     @ApiOperation("发送消息的接口")
     @GetMapping("/send/kafka/{msg}")
-    public String send(@PathVariable("msg")String msg) {
-
-        return "发送消息成功！";
+    public String send(@PathVariable("msg")String message) {
+        try {
+            log.info("kafka的消息={}", message);
+            kafkaTemplate.send("test", "key", message);
+            log.info("发送kafka成功.");
+            return "发送kafka成功";
+        } catch (Exception e) {
+            log.error("发送kafka失败", e);
+            return "发送kafka失败";
+        }
     }
 
 }
