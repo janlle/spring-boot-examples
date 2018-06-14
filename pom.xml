@@ -48,7 +48,7 @@
 		<module>spring-boot-webflux</module>
 		<module>spring-boot-mvc</module>
 		<module>spring-boot-security</module>
-		<module>spring-boot-amqp</module>
+		<module>spring-boot-jms</module>
 		<module>spring-boot-shiro</module>
 		<module>spring-boot-jwt</module>
 		<module>spring-boot-concurrency</module>

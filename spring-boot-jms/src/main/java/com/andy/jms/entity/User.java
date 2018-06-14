@@ -1,4 +1,4 @@
-package com.andy.amqp.entity;
+package com.andy.jms.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

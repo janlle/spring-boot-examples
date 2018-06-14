@@ -1,7 +1,6 @@
-package com.andy.amqp.listener;
+package com.andy.jms.rabbitmq.listener;
 
-import com.andy.amqp.config.AMQPConstant;
-import com.andy.amqp.entity.User;
+import com.andy.jms.rabbitmq.config.AMQPConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;

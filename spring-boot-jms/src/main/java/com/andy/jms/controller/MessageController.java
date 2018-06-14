@@ -1,8 +1,8 @@
-package com.andy.amqp.controller;
+package com.andy.jms.controller;
 
-import com.andy.amqp.config.AMQPConstant;
-import com.andy.amqp.sender.MessageSender;
-import com.andy.amqp.entity.User;
+import com.andy.jms.rabbitmq.config.AMQPConstant;
+import com.andy.jms.rabbitmq.sender.MessageSender;
+import com.andy.jms.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

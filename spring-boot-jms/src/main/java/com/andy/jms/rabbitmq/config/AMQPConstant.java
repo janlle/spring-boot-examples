@@ -1,4 +1,4 @@
-package com.andy.amqp.config;
+package com.andy.jms.rabbitmq.config;
 
 /**
  * @author: Mr.ruoLin
