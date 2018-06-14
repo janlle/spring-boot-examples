@@ -17,18 +17,6 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
-# 邮件发送的配置
-  mail:
-    host: smtp.163.com
-    username: break_a@163.com
-    password: asfjeia
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enabled: true
-            required: true
 app:
   pay:
     weChat:
