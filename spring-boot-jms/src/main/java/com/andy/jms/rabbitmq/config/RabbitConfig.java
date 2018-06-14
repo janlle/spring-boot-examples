@@ -1,12 +1,11 @@
-package com.andy.amqp.config;
+package com.andy.jms.rabbitmq.config;
 
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 //@Configuration
-public class AmqpConfig {  
+public class RabbitConfig {
   
     public static final String EXCHANGE   = "spring-boot-exchange";  
     public static final String ROUTINGKEY = "spring-boot-routingKey";  
