@@ -1,6 +1,6 @@
-package com.andy.amqp.sender;
+package com.andy.jms.rabbitmq.sender;
 
-import com.andy.amqp.config.AMQPConstant;
+import com.andy.jms.rabbitmq.config.AMQPConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;

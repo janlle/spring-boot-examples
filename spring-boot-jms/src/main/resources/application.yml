@@ -1,0 +1,41 @@
+server:
+  servlet:
+    path: /
+  port: 8080
+spring:
+  application:
+    name: spring-amqp
+  rabbitmq:
+    port: 5672
+    username: cloud
+    password: cloud
+    host: 127.0.0.1
+    publisher-confirms: true
+    virtual-host: /cloud
+  kafka:
+    bootstrap-servers: 120.76.77.230:9092
+    consumer:
+      group-id: test
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+info:
+   app:
+      name: spring-boot-actuator
+      version: 1.0.0
+kafka:
+  consumer:
+    zookeeper.connect: 120.78.231.235:2181
+    servers: 120.76.77.230:9092
+    enable.auto.commit: true
+    session.timeout: 6000
+    auto.commit.interval: 100
+    auto.offset.reset: latest
+    topic: test
+    group.id: test
+    concurrency: 10
+  PRODUCER:
+    servers: 120.76.77.230:9092
+    retries: 0
+    batch.size: 4096
+    linger: 1
+    buffer.memory: 40960
