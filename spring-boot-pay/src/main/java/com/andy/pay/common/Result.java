@@ -2,11 +2,13 @@ package com.andy.pay.common;
 
 
 import com.andy.pay.common.enums.ResultEnum;
+import lombok.Data;
 
 /**
  * 基本返回结果集
  * @param <T>
  */
+@Data
 public class Result<T> {
 	
 	private int retCode;
