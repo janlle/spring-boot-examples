@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-@Api("rabbiemq测试的所有接口")
+@Api("rabbitMQ测试接口")
 @Slf4j
 @RestController
-public class MessageController {
+public class RabbitMQController {
 
     @Autowired
     private MessageSender messageSender;
