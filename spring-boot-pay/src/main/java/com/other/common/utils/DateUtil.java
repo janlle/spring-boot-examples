@@ -62,11 +62,6 @@ public class DateUtil {
 	/**
 	* @Title: compareDate
 	* @Description:(日期比较，如果s>=e 返回true 否则返回false)
-	* @param s
-	* @param e
-	* @return boolean
-	* @throws
-	* @author luguosui
 	 */
 	public static boolean compareDate(String s, String e) {
 		if (fomatDate(s) == null || fomatDate(e) == null) {
@@ -119,11 +114,6 @@ public class DateUtil {
 
 	/**
 	* <li>功能描述：时间相减得到天数
-	* @param beginDateStr
-	* @param endDateStr
-	* @return
-	* long
-	* @author Administrator
 	*/
 	public static long getDaySub(String beginDateStr, String endDateStr) {
 		long day = 0;

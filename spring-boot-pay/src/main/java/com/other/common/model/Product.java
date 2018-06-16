@@ -1,9 +1,12 @@
 package com.other.common.model;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
  * 产品订单信息
  */
+@Data
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String productId;// 商品ID
@@ -33,66 +36,6 @@ public class Product implements Serializable {
 		this.attach = attach;
 		this.payType = payType;
 		this.payWay = payWay;
-		this.frontUrl = frontUrl;
-	}
-	public String getProductId() {
-		return productId;
-	}
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	public String getBody() {
-		return body;
-	}
-	public void setBody(String body) {
-		this.body = body;
-	}
-	public String getTotalFee() {
-		return totalFee;
-	}
-	public void setTotalFee(String totalFee) {
-		this.totalFee = totalFee;
-	}
-	public String getOutTradeNo() {
-		return outTradeNo;
-	}
-	public void setOutTradeNo(String outTradeNo) {
-		this.outTradeNo = outTradeNo;
-	}
-	public String getSpbillCreateIp() {
-		return spbillCreateIp;
-	}
-	public void setSpbillCreateIp(String spbillCreateIp) {
-		this.spbillCreateIp = spbillCreateIp;
-	}
-	public String getAttach() {
-		return attach;
-	}
-	public void setAttach(String attach) {
-		this.attach = attach;
-	}
-	public Short getPayType() {
-		return payType;
-	}
-	public void setPayType(Short payType) {
-		this.payType = payType;
-	}
-	public Short getPayWay() {
-		return payWay;
-	}
-	public void setPayWay(Short payWay) {
-		this.payWay = payWay;
-	}
-	public String getFrontUrl() {
-		return frontUrl;
-	}
-	public void setFrontUrl(String frontUrl) {
 		this.frontUrl = frontUrl;
 	}
 }

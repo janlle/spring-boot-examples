@@ -27,9 +27,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * 微信支付
- * 创建时间	2017年7月31日
- */
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-06-16 21:45
+ **/
 @Api(tags ="微信支付")
 @Controller
 @RequestMapping(value = "weixin")
