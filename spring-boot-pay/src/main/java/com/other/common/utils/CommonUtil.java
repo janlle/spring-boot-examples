@@ -88,15 +88,15 @@ public class CommonUtil {
 		return big3.toString();
 	}
 
-	/**
-	 * 四舍五入保留N位小数 先四舍五入在使用double值自动去零
-	 * 
-	 * @param arg
-	 * @param scare
-	 *            保留位数
-	 * @return
-	 */
+
+	/**四舍五入保留N位小数 先四舍五入在使用double值自动去零
+	 * @author: Mr.lyon
+	 * @createBy: 2018-06-16 21:43
+	 * @params: [arg, scare]
+	 * @return: java.lang.String
+	 **/
 	public static String setScare(BigDecimal arg, int scare) {
+
 		BigDecimal bl = arg.setScale(scare, BigDecimal.ROUND_HALF_UP);
 		return String.valueOf(bl.doubleValue());
 	}
@@ -133,7 +133,6 @@ public class CommonUtil {
 
 	/**
 	 * 转化成百分数 先四舍五入在使用double值自动去零
-	 * 
 	 * @param arg
 	 * @return
 	 */
@@ -146,7 +145,6 @@ public class CommonUtil {
 
 	/**
 	 * 使用java正则表达式去掉多余的.与0
-	 * 
 	 * @param s
 	 * @return
 	 */
