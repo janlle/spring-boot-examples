@@ -24,10 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 支付宝支付
- * 创建者 科帮网
- * 创建时间	2017年7月30日
- */
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-06-16 21:44
+ **/
 @Api(tags ="支付宝支付")
 @Controller
 @RequestMapping(value = "alipay")
@@ -78,15 +77,9 @@ public class AliPayController {
 		map.addAttribute("orderString", orderString);
 		return "alipay/pay";
     }
+
     /**
      * 支付宝支付回调(二维码、H5、网站)
-     * @Author  科帮网
-     * @param request
-     * @param response
-     * @throws Exception  void
-     * @Date	2017年7月30日
-     * 更新日志
-     * 2017年7月30日  科帮网 首次创建
      */
 	@ApiOperation(value="支付宝支付回调(二维码、H5、网站)")
 	@RequestMapping(value="pay",method=RequestMethod.POST)

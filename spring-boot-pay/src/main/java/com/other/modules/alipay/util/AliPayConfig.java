@@ -6,10 +6,9 @@ import com.alipay.demo.trade.service.AlipayTradeService;
 import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 
 /**
- * 配置公共参数
- * 创建者 科帮网
- * 创建时间	2017年7月27日
- */
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-06-16 21:44
+ **/
 public final class AliPayConfig {
 	
 	 /**
@@ -39,27 +38,11 @@ public final class AliPayConfig {
 		
 		private  static AlipayTradeService tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
     }
-    /**
-     * 支付宝APP请求客户端实例
-     * @Author  科帮网
-     * @return  AlipayClient
-     * @Date	2017年7月27日
-     * 更新日志
-     * 2017年7月27日  科帮网 首次创建
-     *
-     */
+
     public static AlipayClient getAlipayClient(){
         return SingletonHolder.alipayClient;
     }
-    /**
-     * 电脑端预下单
-     * @Author  科帮网
-     * @return  AlipayTradeService
-     * @Date	2017年7月27日
-     * 更新日志
-     * 2017年7月27日  科帮网 首次创建
-     *
-     */
+
     public static AlipayTradeService getAlipayTradeService(){
         return SingletonHolder.tradeService;
     }

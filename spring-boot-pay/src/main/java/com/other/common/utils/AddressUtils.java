@@ -13,14 +13,12 @@ import java.net.URL;
 public class AddressUtils { 
 	/**
 	 *
-	 * @param content
-	 *            请求的参数 格式为：name=xxx&pwd=xxx
-	 * @param encoding
-	 *            服务器端请求编码。如GBK,UTF-8等
+	 * 请求的参数 格式为：name=xxx&pwd=xxx
+	 * 服务器端请求编码。如GBK,UTF-8等
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public static String getAddresses(String ip) throws UnsupportedEncodingException {
+	public static String getAddresses(String ip) throws Exception {
 		String urlStr ="http://ip.taobao.com/service/getIpInfo.php";
 		String returnStr = getResult(urlStr, ip);
 		if (returnStr != null) {
@@ -75,15 +73,6 @@ public class AddressUtils {
 		return null;
 	}
 
-	/**
-	 * @param urlStr
-	 *            请求的地址
-	 * @param content
-	 *            请求的参数 格式为：name=xxx&pwd=xxx
-	 * @param encoding
-	 *            服务器端请求编码。如GBK,UTF-8等
-	 * @return
-	 */
 	private static String getResult(String urlStr, String ip) {
 		URL url = null;
 		HttpURLConnection connection = null;
@@ -192,16 +181,7 @@ public class AddressUtils {
 		}
 		return outBuffer.toString();
 	}
-	/**
-	 * 获取IP地址
-	 * @Author  科帮网
-	 * @param request
-	 * @return  String
-	 * @Date	2017年7月31日
-	 * 更新日志
-	 * 2017年7月31日  科帮网 首次创建
-	 *
-	 */
+
     public static String getIpAddr(HttpServletRequest request)
     {
         String ip = request.getHeader("X-Real-IP");

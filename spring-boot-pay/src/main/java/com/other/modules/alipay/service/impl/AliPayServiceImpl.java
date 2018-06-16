@@ -31,11 +31,9 @@ import org.springframework.beans.factory.annotation.Value;
 import java.io.File;
 
 /**
- * TODO
- * 创建者 科帮网
- * 创建时间	2018年1月15日
- *
- */
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-06-16 21:44
+ **/
 @Service
 public class AliPayServiceImpl implements IAliPayService {
 	private static final Logger logger = LoggerFactory.getLogger(AliPayServiceImpl.class);
