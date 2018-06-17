@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class WeChatPayResponse implements Serializable {
+public class WXPayResponseDto implements Serializable {
 
     private static final long serialVersionUID = -254573418180168786L;
 
