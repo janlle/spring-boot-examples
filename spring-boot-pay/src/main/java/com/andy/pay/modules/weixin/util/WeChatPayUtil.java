@@ -1,11 +1,13 @@
 package com.andy.pay.modules.weixin.util;
 
+import com.andy.pay.common.property.AppProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -18,6 +20,15 @@ import java.util.*;
  **/
 @Slf4j
 public class WeChatPayUtil {
+
+
+    private static AppProperty appProperty;
+
+    @Autowired
+    public WeChatPayUtil(AppProperty appProperty) {
+        WeChatPayUtil.appProperty = appProperty;
+    }
+
 
     private static final String REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 
@@ -32,14 +43,14 @@ public class WeChatPayUtil {
         try {
             String nonceStr = WeChatUtil.genNonceStr();
             SortedMap<String, String> params = new TreeMap<>();
-            params.put("appid", WeChatConstants.APP_ID);
-            params.put("mch_id", WeChatConstants.MCH_ID);
+            params.put("appid", appProperty.getWeChat().getAppid());
+            params.put("mch_id", appProperty.getWeChat().getMchId());
             params.put("nonce_str", nonceStr);
             params.put("transaction_id", wxOrderId);
             params.put("out_trade_no", outTradeNum);
             params.put("total_fee", totalFee);
             params.put("refund_fee", totalFee);
-            params.put("sign", WeChatUtil.createSign("UTF-8", params, WeChatConstants.API_KEY));
+            params.put("sign", WeChatUtil.createSign("UTF-8", params, appProperty.getWeChat().getApiKey()));
             data = WeChatUtil.mapToXml(params);
         } catch (Exception e) {
             log.error("微信退款参数封装异常！");
@@ -56,7 +67,7 @@ public class WeChatPayUtil {
      **/
     public static boolean wxRefund(String xmlData) throws Exception {
         log.info("****************微信退款开始****************");
-        CloseableHttpClient httpClient = WeChatUtil.getHttpsClient(WeChatConstants.CERT_PATH, WeChatConstants.MCH_ID);
+        CloseableHttpClient httpClient = WeChatUtil.getHttpsClient(appProperty.getWeChat().getCertPath(), appProperty.getWeChat().getMchId());
         HttpPost httpPost = new HttpPost(REFUND_URL);
         StringEntity stringEntity = new StringEntity(xmlData.toString(), "UTF-8");
         httpPost.setEntity(stringEntity);

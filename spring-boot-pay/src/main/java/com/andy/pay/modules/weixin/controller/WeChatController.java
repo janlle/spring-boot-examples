@@ -1,7 +1,7 @@
 package com.andy.pay.modules.weixin.controller;
 
+import com.andy.pay.common.property.AppProperty;
 import com.andy.pay.common.utils.AppUtils;
-import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.service.WeChatService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

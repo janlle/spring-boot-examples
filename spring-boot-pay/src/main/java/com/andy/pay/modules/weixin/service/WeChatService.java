@@ -1,8 +1,8 @@
 package com.andy.pay.modules.weixin.service;
 
-import com.andy.pay.modules.weixin.config.AppProperty;
-import com.andy.pay.modules.weixin.entity.WeChatUserInfo;
+import com.andy.pay.common.property.AppProperty;
 import com.andy.pay.common.utils.JsonUtils;
+import com.andy.pay.modules.weixin.entity.WeChatUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

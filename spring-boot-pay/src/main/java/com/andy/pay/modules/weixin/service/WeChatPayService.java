@@ -1,13 +1,12 @@
 package com.andy.pay.modules.weixin.service;
 
 import com.andy.pay.common.enums.OrderStatusEnum;
+import com.andy.pay.common.property.AppProperty;
 import com.andy.pay.mapper.OrderMapper;
 import com.andy.pay.mapper.UserMapper;
-import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.util.WeChatPayUtil;
 import com.andy.pay.modules.weixin.util.WeChatUtil;
 import com.andy.pay.object.entity.Order;
-import com.andy.pay.object.entity.User;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
