@@ -32,9 +32,9 @@ public class HttpController {
 
     @ApiOperation(value="get请求")
     @RequestMapping(value="/get",method= RequestMethod.GET)
-    public String get(HttpServletRequest request, HttpServletResponse response) {
+    public Object get(HttpServletRequest request, HttpServletResponse response, String return_msg, String return_code) {
         log.info("get请求");
-        return "success";
+        return new RequestDto(return_code, return_msg);
     }
 
 
