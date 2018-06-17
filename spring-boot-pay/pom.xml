@@ -72,19 +72,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.44</version>
         </dependency>
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-        </dependency>
+
         <!-- 热部署 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>springloaded</artifactId>
             <version>1.2.8.RELEASE</version>
-<<<<<<< HEAD
-            <scope>provided</scope>
-=======
->>>>>>> dev
         </dependency>
         <!-- 支付宝 SDK(项目中的支付宝SDk需要自行去官网下载打入本地仓库或者私服)-->
         <!-- 项目中的支付宝SDk需要自行去官网下载打入本地仓库或者私服，提供下载地址：http://pan.baidu.com/s/1mi5LfhI -->
@@ -112,11 +105,11 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-        <!-- zxing -->
+        <!-- zxing谷歌生成二维码工具 -->
         <dependency>
             <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>3.2.1</version>
+            <artifactId>javase</artifactId>
+            <version>3.3.3</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
@@ -128,17 +121,17 @@
             <artifactId>jdom</artifactId>
             <version>1.1</version>
         </dependency>
-        <!--httpclient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.4</version>
-        </dependency>
         <!-- dom4j -->
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
+        </dependency>
+        <!--httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
         </dependency>
         <!-- DubboX相关 -->
         <dependency>
@@ -163,12 +156,9 @@
             <artifactId>weixin-popular</artifactId>
             <version>2.8.16</version>
         </dependency>
-        <dependency>
-            <groupId>com.andy</groupId>
-            <artifactId>spring-boot-jwt</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
+
+
     <build>
         <finalName>spring-boot-pay</finalName>
         <plugins>
@@ -185,8 +175,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
