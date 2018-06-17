@@ -1,12 +1,15 @@
 package com.andy.pay.modules.weixin.util;
 
 import com.andy.pay.common.property.AppProperty;
+import com.andy.pay.common.utils.HttpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
@@ -28,7 +31,6 @@ public class WeChatPayUtil {
     public WeChatPayUtil(AppProperty appProperty) {
         WeChatPayUtil.appProperty = appProperty;
     }
-
 
     private static final String REFUND_URL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 
@@ -69,22 +71,15 @@ public class WeChatPayUtil {
         log.info("****************微信退款开始****************");
         CloseableHttpClient httpClient = WeChatUtil.getHttpsClient(appProperty.getWeChat().getCertPath(), appProperty.getWeChat().getMchId());
         HttpPost httpPost = new HttpPost(REFUND_URL);
-        StringEntity stringEntity = new StringEntity(xmlData.toString(), "UTF-8");
-        httpPost.setEntity(stringEntity);
-        CloseableHttpResponse response = httpClient.execute(httpPost);
-        HttpEntity httpEntity = response.getEntity();
-        StringBuffer sb = new StringBuffer();
-        String xmlStr;
-        if (httpEntity != null) {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpEntity.getContent(), "UTF-8"));
-            while ((xmlStr = bufferedReader.readLine()) != null) {
-                sb.append(xmlStr);
-            }
-            bufferedReader.close();
-        }
-        log.info("responseXmlData:{}", sb);
-        Map<String, String> mapData = WeChatUtil.xmlToMap(sb.toString());
-        log.info("responseMapData:{}", mapData);
+        StringEntity entity = new StringEntity(xmlData.toString(), "UTF-8");
+        httpPost.setEntity(entity);
+        HttpResponse response = httpClient.execute(httpPost);
+        HttpEntity responseData = response.getEntity();
+        String result = EntityUtils.toString(responseData, "UTF-8");
+
+        log.info("responseXml:{}", result);
+        Map<String, String> mapData = WeChatUtil.xmlToMap(result);
+        log.info("responseMap:{}", mapData);
         //return_code为微信返回的状态码，SUCCESS表示申请退款成功，return_msg 如非空，为错误原因 签名失败 参数格式校验错误
         if (mapData.get("return_code").toString().equalsIgnoreCase("SUCCESS")) {
             log.info("****************退款申请成功**********************");
@@ -104,46 +99,7 @@ public class WeChatPayUtil {
      **/
     public static String sendPayRequest(String requestUrl, String xmlData) {
         log.info("****************微信支付开始****************");
-        InputStreamReader inputStreamReader = null;
-        BufferedReader bufferedReader = null;
-        OutputStream outputstream;
-        HttpURLConnection connection = null;
-        try {
-            URL url = new URL(requestUrl);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setDoOutput(true);
-            connection.setDoInput(true);
-            connection.setUseCaches(false);
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("content-type", "application/x-www-form-urlencoded");
-            if (null != xmlData) {
-                outputstream = connection.getOutputStream();
-                outputstream.write(xmlData.getBytes("UTF-8"));
-                outputstream.close();
-            }
-            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-            String string;
-            StringBuffer sb = new StringBuffer();
-            while ((string = bufferedReader.readLine()) != null) {
-                sb.append(string);
-            }
-            return sb.toString();
-        } catch (Exception e) {
-            log.info("http请求异常：{}" + e.getMessage());
-        } finally {
-            try {
-                if (bufferedReader != null) {
-                    bufferedReader.close();
-                }
-                if (connection != null) {
-                    connection.disconnect();
-                }
-            } catch (IOException e) {
-                log.error("关闭资源异常:{}", e.getMessage());
-            }
-        }
-        return null;
+        return HttpUtils.sendPostXml(requestUrl, xmlData);
     }
-
 
 }

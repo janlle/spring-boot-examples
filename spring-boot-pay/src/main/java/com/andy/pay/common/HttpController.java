@@ -8,6 +8,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,12 +55,25 @@ public class HttpController {
         return map;
     }
 
+    @ApiOperation(value="post请求")
+    @RequestMapping(value="/post1",method= RequestMethod.POST)
+    public Object pust1(HttpServletRequest request, HttpServletResponse response, @RequestBody RequestDto dto) {
+        log.info("put请求");
+        return dto;
+    }
+
+    @ApiOperation(value="post请求")
+    @RequestMapping(value="/post2",method= RequestMethod.POST)
+    public Object post2(HttpServletRequest request, HttpServletResponse response, String return_msg, String return_code) {
+        log.info("put请求");
+        return new RequestDto(return_code, return_msg);
+    }
 
     @ApiOperation(value="put请求")
     @RequestMapping(value="/put",method= RequestMethod.PUT)
-    public String put(HttpServletRequest request, HttpServletResponse response) {
+    public Object put(HttpServletRequest request, HttpServletResponse response, @RequestBody RequestDto dto) {
         log.info("put请求");
-        return "success";
+        return dto;
     }
 
 

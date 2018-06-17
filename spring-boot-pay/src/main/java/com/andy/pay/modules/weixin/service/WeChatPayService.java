@@ -72,7 +72,7 @@ public class WeChatPayService {
         params.put("sign", "sign");
         String xmlData = WeChatUtil.mapToXml(params);
         log.info("xmlData:{}", xmlData);
-        String wxRetXmlData = WeChatPayUtil.sendPayRequest(appProperty.getWeChat().getUrl().getPayUrl(), xmlData);
+        String wxRetXmlData = HttpUtils.sendPostXml(appProperty.getWeChat().getUrl().getPayUrl(), xmlData);
         log.info("微信返回数据:{}", wxRetXmlData);
         Map<String, String> retData = WeChatUtil.xmlToMap(wxRetXmlData);
         log.info("微信返回信息:{}", retData);
