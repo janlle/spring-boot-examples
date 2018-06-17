@@ -1,40 +1,30 @@
 package com.andy.pay.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.*;
+import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.config.Registry;
-import org.apache.http.config.RegistryBuilder;
-import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
-import javax.validation.constraints.Size;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.security.KeyStore;
 import java.util.ArrayList;
@@ -50,56 +40,34 @@ import java.util.Map;
 @Slf4j
 public class HttpUtils {
 
+    private final static String UTF8 = "UTF-8";
+
     public static final String XML = "text/xml", JSON = "application/json", FORM = "text/plain", PARAM = "PARAM", HTML = "text/html";
 
-    // 请求器的配置
-    private static RequestConfig requestConfig;
-    // 连接超时时间，默认10秒
-    private static int socketTimeout = 10000;
-    // 传输超时时间，默认30秒
-    private static int connectTimeout = 30000;
+    public static CloseableHttpClient httpClient;
 
-    private static PoolingHttpClientConnectionManager clientConnectionManager;
-    private static CloseableHttpClient httpClient= null;
-    private static RequestConfig config = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
-    private final static Object lock = new Object();
+    // 初始化线程池
     static {
-        Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-                .register("https", SSLConnectionSocketFactory.getSocketFactory())
-                .register("http", PlainConnectionSocketFactory.getSocketFactory())
-                .build();
-        clientConnectionManager =new PoolingHttpClientConnectionManager(socketFactoryRegistry);
-        clientConnectionManager.setMaxTotal(50);
-        clientConnectionManager.setDefaultMaxPerRoute(25);
-
-        try {
-            SSLContext sslcontext = org.apache.http.conn.ssl.SSLContexts.custom().build();
-            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-                    sslcontext, new String[] { "TLSv1" }, null,
-                    SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-            httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-            // 根据默认超时限制初始化requestConfig
-            requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).setConnectTimeout(connectTimeout).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static CloseableHttpClient getHttpClient(){
-        if(httpClient == null){
-            synchronized (lock){
-                if(httpClient == null){
-                    BasicCookieStore cookieStore = new BasicCookieStore();
-                    BasicClientCookie cookie = new BasicClientCookie("sessionID", "######");
-                    cookie.setDomain("api");
-                    cookie.setPath("/");
-                    cookieStore.addCookie(cookie);
-                    httpClient =HttpClients.custom().setConnectionManager(clientConnectionManager).setDefaultCookieStore(cookieStore).setDefaultRequestConfig(config).build();
-                }
+        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(3000).setConnectionRequestTimeout(1000).setSocketTimeout(4000).setExpectContinueEnabled(true).build();
+        PoolingHttpClientConnectionManager pccm = new PoolingHttpClientConnectionManager();
+        pccm.setMaxTotal(300);                  // 连接池最大并发连接数
+        pccm.setDefaultMaxPerRoute(50);         // 单路由最大并发数
+        HttpRequestRetryHandler retryHandler = (IOException exception, int executionCount, HttpContext context) -> {
+            // 重试1次,从1开始
+            if (executionCount > 1) {
+                return false;
             }
-        }
-        return httpClient;
+            if (exception instanceof NoHttpResponseException) {
+                log.info("[NoHttpResponseException has retry request:" + context.toString() + "][executionCount:" + executionCount + "]");
+                return true;
+            }
+            else if (exception instanceof SocketException) {
+                log.info("[SocketException has retry request:" + context.toString() + "][executionCount:" + executionCount + "]");
+                return true;
+            }
+            return false;
+        };
+        httpClient = HttpClients.custom().setConnectionManager(pccm).setDefaultRequestConfig(requestConfig).setRetryHandler(retryHandler).build();
     }
 
     /**
@@ -109,7 +77,7 @@ public class HttpUtils {
      * @params: [certPath, password]
      * @return: org.apache.http.impl.client.CloseableHttpClient
      **/
-    public static CloseableHttpClient getHttpsClient(String certPath, String password) throws Exception {
+    public static CloseableHttpClient sslHttpsClient(String certPath, String password) throws Exception {
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
         try (InputStream inputStream = new FileInputStream(new File(certPath))) {
             keyStore.load(inputStream, password.toCharArray());
@@ -148,7 +116,6 @@ public class HttpUtils {
             StringEntity entity = new StringEntity(xml, "UTF-8");
             httpPost.addHeader("Content-Type", "text/xml");
             httpPost.setEntity(entity);
-//            httpPost.setConfig(requestConfig);
             HttpResponse response = httpClient.execute(httpPost);
             HttpEntity responseData = response.getEntity();
             result = EntityUtils.toString(responseData, "UTF-8");
@@ -172,7 +139,6 @@ public class HttpUtils {
             stringEntity.setContentEncoding("UTF-8");
             stringEntity.setContentType("application/json");
             httpPost.setEntity(stringEntity);
-//            httpPost.setConfig(requestConfig);
             HttpResponse response = httpClient.execute(httpPost);
             HttpEntity responseData = response.getEntity();
             result = EntityUtils.toString(responseData, "UTF-8");
@@ -182,13 +148,13 @@ public class HttpUtils {
         return result;
     }
 
-    public static String sendPostMap(String url, Map<String, Object> params) {
+    public static String sendPostMap(String url, Map<String, String> params) {
         String result = null;
         try {
             HttpPost httpPost = new HttpPost(url);
             List<NameValuePair> list = new ArrayList<>(params.size());
-            for (Map.Entry<String, Object> entry : params.entrySet()) {
-                NameValuePair pair = new BasicNameValuePair(entry.getKey(), entry.getValue().toString());
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                NameValuePair pair = new BasicNameValuePair(entry.getKey(), entry.getValue());
                 list.add(pair);
             }
             httpPost.setEntity(new UrlEncodedFormEntity(list, Charset.forName("UTF-8")));
@@ -202,7 +168,7 @@ public class HttpUtils {
     }
 
 
-    public static String sendGet(String url) {
+    public static String sendGetNone(String url) {
         String result = null;
         try {
             HttpGet httpGet = new HttpGet(url);
@@ -214,16 +180,21 @@ public class HttpUtils {
         return result;
     }
 
-    public static String sendGet(String url, Map<String, String> params) {
+    public static String sendGetMap(String url, Map<String, String> params) {
         String result = null;
+        List<NameValuePair> pairs = new ArrayList();
         if (params != null && params.size() > 0) {
-
+            for(Map.Entry<String,String> entry : params.entrySet()) {
+                pairs.add(new BasicNameValuePair(entry.getKey(),entry.getValue()));
+            }
         }
         try {
-            HttpGet httpGet = new HttpGet(url);
+            URIBuilder builder = new URIBuilder(url);
+            builder.setParameters(pairs);
+            HttpGet httpGet = new HttpGet(builder.build());
             HttpResponse response = httpClient.execute(httpGet);
             result = EntityUtils.toString(response.getEntity(), "UTF-8");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;
@@ -233,43 +204,21 @@ public class HttpUtils {
     public static void main(String[] args) {
         String xml = "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
         String json = "{\"return_msg\": \"OK\",\"return_code\": \"SUCCESS\"}";
-        Map<String, Object> map = new HashMap();
+        Map<String, String> map = new HashMap();
         map.put("return_msg", "OK");
         map.put("return_code", "SUCCESS");
         try {
-//            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-//            InputStream inputStream = new FileInputStream("D:/a.keystore");
-//            keyStore.load(inputStream, "123456".toCharArray());
-//            inputStream.close();
-//            SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(keyStore, new TrustSelfSignedStrategy()).build();
-//            SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
-//            CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-//        /*  List<NameValuePair> formParams = new ArrayList<NameValuePair>();
-//            formParams.add(new BasicNameValuePair("username", "test"));
-//            HttpPost post = new HttpPost("https://localhost:8443/servlet/servlet/LoginServlet");
-//            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams);
-//            post.setEntity(entity);
-//            CloseableHttpResponse respones = httpClient.execute(post);
-//            EntityUtils.toString(respones.getEntity());*/
-//            HttpPost request = new HttpPost("https://localhost:8443/servlet/servlet/LoginServlet");
-//            List<BasicNameValuePair> formParams = new ArrayList();
-//            formParams.add(new BasicNameValuePair("username", "中国"));
-//            HttpEntity entity = new UrlEncodedFormEntity(formParams, "UTF-8");
-//            request.setEntity(entity);
-//            HttpResponse response = httpClient.execute(request);
-//            // 打印请求信息
-//            System.out.println(request.getRequestLine());
-//            // 打印响应信息
-//            System.out.println(response.getStatusLine());
-//            response.getEntity().writeTo(System.out);
             String xmlResult = sendPostXml("http://localhost:8888/http/post", xml);
-            log.info("请求xml响应的结果为:{}", xmlResult);
+            log.info("post请求xml响应的结果为:{}", xmlResult);
 
             String jsonResult = sendPostJson("http://localhost:8888/http/post1", json);
-            log.info("请求json响应的结果为:{}", jsonResult);
+            log.info("post请求json响应的结果为:{}", jsonResult);
 
             String mapResult = sendPostMap("http://localhost:8888/http/post2", map);
-            log.info("请求map响应的结果为:{}", mapResult);
+            log.info("post请求map响应的结果为:{}", mapResult);
+
+            String getResult = sendGetMap("http://localhost:8888/http/get", map);
+            log.info("get请求map响应的结果为:{}", getResult);
 
         } catch (Exception e) {
             e.printStackTrace();
