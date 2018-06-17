@@ -1,5 +1,6 @@
 package com.andy.pay.modules.weixin.controller;
 
+import com.andy.pay.common.utils.AppUtils;
 import com.andy.pay.modules.weixin.config.AppProperty;
 import com.andy.pay.modules.weixin.service.WeChatService;
 import io.swagger.annotations.Api;
@@ -53,5 +54,13 @@ public class WeChatController {
         log.info("url:{}", url);
         restTemplate.getForObject(url, String.class);
     }
+
+    @ApiOperation(value = "获取ip", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping("/ip")
+    public void getIp(HttpServletRequest request) {
+        String ip = AppUtils.getIp(request);
+        log.info("获取ip:{}", ip);
+    }
+
 
 }

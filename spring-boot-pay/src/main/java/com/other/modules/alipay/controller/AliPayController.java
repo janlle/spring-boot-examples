@@ -56,6 +56,8 @@ public class AliPayController {
 		map.addAttribute("form", form);
 		return "alipay/pay";
     }
+
+
 	@ApiOperation(value="二维码支付")
 	@RequestMapping(value="qcPay",method=RequestMethod.POST)
     public String  qcPay(Product product, ModelMap map) {
@@ -69,6 +71,8 @@ public class AliPayController {
 		}
 		return "alipay/qcpay";
     }
+
+
 	@ApiOperation(value="app支付服务端")
 	@RequestMapping(value="appPay",method=RequestMethod.POST)
     public String  appPay(Product product, ModelMap map) {
