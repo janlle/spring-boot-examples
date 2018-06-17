@@ -1,4 +1,4 @@
-package com.andy.pay.modules.weixin.config;
+package com.andy.pay.common.property;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
