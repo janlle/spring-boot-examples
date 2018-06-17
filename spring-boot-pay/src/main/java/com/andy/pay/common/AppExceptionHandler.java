@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class AppExceptionHandler {
 
-    private String url = "http://localhost:8080/";
+    private String url = "http://localhost:8888/";
 
     //拦截登录异常
     @ExceptionHandler(value = AppException.class)
