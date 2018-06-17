@@ -78,7 +78,6 @@ public class WeChatUtil {
      * @return: java.lang.String
      **/
     public static String MD5Encode(String message, String charset) {
-
         String result = null;
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -197,10 +196,9 @@ public class WeChatUtil {
      * @params: []
      * @return: java.lang.String
      **/
-    public static long getCurrentTimestamp() {
+    public static long getTimestamp() {
         return System.currentTimeMillis() / 1000;
     }
-
 
     /**
      * 生成32位字符串
@@ -209,15 +207,23 @@ public class WeChatUtil {
      * @params: []
      * @return: java.lang.String
      **/
-    public static String generateNum() {
-        String salt = String.valueOf((int)(Math.random() * 9 + 1) * 100);
-        return System.currentTimeMillis() + salt;
+    public static String generateNum(int length) {
+        StringBuffer result = new StringBuffer();
+        final String sources = "0123456789";
+        if (length < 0 && length > 512) {
+            return null;
+        }
+        Random rand = new Random();
+        for (int i = 0; i < length; i++) {
+            result.append(sources.charAt(rand.nextInt(9)) + "");
+        }
+        return result.toString();
     }
 
     public static void main(String[] args) throws Exception {
         System.out.println(genNonceStr());
-        System.out.println(getCurrentTimestamp());
-        System.out.println(generateNum());
+        System.out.println(getTimestamp());
+        System.out.println(generateNum(6));
         System.out.println(MD5Encode("hello", "UTF-8"));
     }
 
