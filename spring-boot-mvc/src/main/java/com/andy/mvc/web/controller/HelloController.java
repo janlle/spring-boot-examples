@@ -1,4 +1,4 @@
-package com.andy.mvc.controller;
+package com.andy.mvc.web.controller;
 
 import com.andy.mvc.service.UserService;
 import com.andy.starter.config.HelloService;
@@ -62,5 +62,10 @@ public class HelloController {
     }
 
 
+    @GetMapping("/new/{num}")
+    public String newUser(@PathVariable("num")Integer num) {
+        userService.newUser(num);
+        return "jvm测试，新建了"+num+"个user对象！";
+    }
 	
 }

@@ -83,6 +83,7 @@ public class QRCodeUtil {
             BufferedImage img = MatrixToImageWriter.toBufferedImage(bitMatrix);
             ImageIO.write(img, format, response.getOutputStream());
         } catch (Exception e) {
+            e.printStackTrace();
             log.info("createQRCode error");
         }
     }
