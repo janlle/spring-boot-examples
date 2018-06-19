@@ -23,6 +23,5 @@ public class MainTask {
         scheduler.scheduleJob(jobDetail, trigger);
 
 
-
     }
 }
