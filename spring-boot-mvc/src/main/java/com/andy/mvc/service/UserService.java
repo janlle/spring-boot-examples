@@ -59,5 +59,13 @@ public class UserService {
 	}
 
 
+	public void newUser(long userNum) {
+		log.info("开始新建对象，当前时间：{}", LocalDateTime.now());
+		for (long i = 0; i < userNum; i++) {
+			User user = new User(i*100,"张三"+i,"test"+i+"@126.com", 2300.23, new Date());
+		}
+		log.info("结束新建对象，当前时间：{},一共新建了:{}个user对象！", LocalDateTime.now(), userNum);
+	}
+
 
 }
