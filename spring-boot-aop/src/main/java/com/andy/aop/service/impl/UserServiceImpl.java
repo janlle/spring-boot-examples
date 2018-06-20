@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * @Author: Mr.lyon
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User user(Long id) {
         log.info("目标类的user()方法");
+        if (new Random().nextBoolean()) {
+            throw new RuntimeException("UserService发生异常");
+        }
         return new User(id, "username", "user@126.com", 12000.0, new Date());
     }
 }
