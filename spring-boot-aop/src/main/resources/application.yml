@@ -1,0 +1,14 @@
+server:
+  port: 8086
+  servlet:
+    path: /
+
+spring:
+  application:
+    name: spring-boot-aop
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+
