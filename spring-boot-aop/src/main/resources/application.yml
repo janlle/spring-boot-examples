@@ -10,5 +10,7 @@ spring:
     encoding:
       charset: UTF-8
       enabled: true
-
+  aop:
+    auto: true
+    proxy-target-class: true
 

@@ -6,11 +6,12 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
+ * 描述一个切面类
  * @Author: Mr.lyon
  * @CreateBy: 2018-06-21 00:16
  **/
 @Slf4j
-@Aspect//描述一个切面类，定义切面类的时候需要打上这个注解
+@Aspect
 @Component
 public class SpringAopConfig {
 
