@@ -30,7 +30,7 @@ public class SpringAopConfig {
         try {
             log.info("环绕通知开始,方法名:" + methodName + ",参数:" + Arrays.asList(point.getArgs()));
             result = point.proceed();
-            log.info("环绕通知结束,方法名:" + methodName + ",参数:" + result);
+            log.info("环绕通知结束,方法名:" + methodName + ",参数:" + Arrays.asList(point.getArgs()));
         } catch (Throwable e) {
             log.info("发生异常...");
             e.printStackTrace();
