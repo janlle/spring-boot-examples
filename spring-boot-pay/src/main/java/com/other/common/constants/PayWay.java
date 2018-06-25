@@ -1,14 +1,18 @@
 package com.other.common.constants;
+
+
 /**
  * 支付途径
- */
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-06-25 23:09
+ **/
 public enum PayWay {
 	PC("PC,平板",(short)1),MOBILE("手机",(short)2);
 	
 	private Short code;
 	private String name;
 	
-	private PayWay(String name, Short code) {
+	PayWay(String name, Short code) {
 		this.name = name;
 		this.code = code;
 	}

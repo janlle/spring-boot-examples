@@ -8,7 +8,7 @@ public enum PayType {
 	private Short code;
 	private String name;
 	
-	private PayType(String name, Short code) {
+	PayType(String name, Short code) {
 		this.name = name;
 		this.code = code;
 	}
