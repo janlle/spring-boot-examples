@@ -31,6 +31,6 @@ public class ConcurrencyApplication extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new HttpInterceptor()).addPathPatterns("/**");
+//        registry.addInterceptor(new HttpInterceptor()).addPathPatterns("/**");
     }
 }
