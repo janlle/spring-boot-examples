@@ -1,10 +1,9 @@
-package com.andy.pay.modules.union.service.impl;
+package com.andy.pay.modules.union.service;
 
-import com.andy.pay.modules.union.service.IUnionPayService;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class UnionPayServiceImpl implements IUnionPayService{
+public class UnionPayServiceImpl {
 
 }

@@ -109,7 +109,7 @@ public class AliPayService {
             log.info("body:" + response.getBody());
         }
     }
-    @Override
+
     public String aliRefund(Product product) {
         log.info("订单号："+product.getOutTradeNo()+"支付宝退款");
         String  message = Constants.SUCCESS;
@@ -161,7 +161,7 @@ public class AliPayService {
      * 当用户扫码后订单才会创建，用户扫码之前二维码有效期2小时，扫码之后有效期根据timeout_express时间指定。
      * =====只有支付成功后 调用此订单才可以=====
      */
-    @Override
+
     public String aliCloseorder(Product product) {
         log.info("订单号："+product.getOutTradeNo()+"支付宝关闭订单");
         String  message = Constants.SUCCESS;
@@ -196,7 +196,7 @@ public class AliPayService {
         }
         return message;
     }
-    @Override
+
     public String downloadBillUrl(String billDate,String billType) {
         log.info("获取支付宝订单地址:"+billDate);
         String downloadBillUrl = "";
@@ -219,7 +219,7 @@ public class AliPayService {
         }
         return downloadBillUrl;
     }
-    @Override
+
     public String aliPayMobile(Product product) {
         log.info("支付宝手机支付下单");
         AlipayTradeWapPayRequest alipayRequest = new AlipayTradeWapPayRequest();
@@ -244,7 +244,7 @@ public class AliPayService {
         }
         return form;
     }
-    @Override
+
     public String aliPayPc(Product product) {
         log.info("支付宝PC支付下单");
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
