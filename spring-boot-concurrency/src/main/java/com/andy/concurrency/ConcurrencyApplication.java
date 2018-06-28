@@ -1,5 +1,7 @@
 package com.andy.concurrency;
 
+import com.andy.concurrency.test.HttpFilter;
+import com.andy.concurrency.test.HttpInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -21,15 +23,10 @@ public class ConcurrencyApplication extends WebMvcConfigurerAdapter {
 
     @Bean
     public FilterRegistrationBean httpFilter() {
-
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-
         registrationBean.setFilter(new HttpFilter());
         registrationBean.addUrlPatterns("/threadLocal/*");
-
-
         return registrationBean;
-
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.andy.concurrency;
+package com.andy.concurrency.test;
 
 import lombok.extern.slf4j.Slf4j;
 
