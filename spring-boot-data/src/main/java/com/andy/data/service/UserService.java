@@ -58,6 +58,9 @@ public class UserService {
 		log.info("结束插入操作，当前时间：{}", LocalDateTime.now());
 	}
 
+	public User findOne(long userId) {
+		return userMapper.findByUserId(userId);
+	}
 
 
 }

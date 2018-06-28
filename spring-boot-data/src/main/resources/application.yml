@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8080
   servlet:
     path: /
 app:
@@ -18,7 +18,7 @@ spring:
     timeout: 20000
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://39.108.125.41:3306/boot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
