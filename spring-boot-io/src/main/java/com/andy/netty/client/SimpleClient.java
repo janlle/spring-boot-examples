@@ -57,7 +57,7 @@ public class SimpleClient {
     }
 
     public static void main(String[] args) throws Exception {
-        new SimpleClient("localhost", 9999).start();
+        new SimpleClient("localhost", 8888).start();
     }
 
 
