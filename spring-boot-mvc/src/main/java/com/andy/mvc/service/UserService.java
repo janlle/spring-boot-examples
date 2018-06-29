@@ -19,6 +19,7 @@ import com.andy.mvc.entity.User;
 @Slf4j
 @Service
 public class UserService {
+
 	private final Map<String, User> data = new ConcurrentHashMap<>();
 
 	@Autowired
