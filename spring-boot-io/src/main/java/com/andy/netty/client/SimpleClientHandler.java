@@ -32,7 +32,6 @@ public class SimpleClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
         buf.readBytes(req);
         String body = new String(req, "UTF-8");
         log.info("服务端数据为 :" + body);
-
     }
 
     @Override
