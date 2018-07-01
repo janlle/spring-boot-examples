@@ -14,12 +14,12 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
+ * 对称加密
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-01 13:56
  **/
 public class AES {
     /*
-     * 加密
      * 1.构造密钥生成器
      * 2.根据ecnodeRules规则初始化密钥生成器
      * 3.产生密钥
@@ -102,18 +102,13 @@ public class AES {
     public static void main(String[] args) {
         AES se = new AES();
         Scanner scanner = new Scanner(System.in);
-        /*
-         * 加密
-         */
+
         System.out.println("使用AES对称加密，请输入加密的规则");
         String encodeRules = scanner.next();
         System.out.println("请输入要加密的内容:");
         String content = scanner.next();
         System.out.println("根据输入的规则" + encodeRules + "加密后的密文是:" + se.AESEncode(encodeRules, content));
 
-        /*
-         * 解密
-         */
         System.out.println("使用AES对称解密，请输入加密的规则：(须与加密相同)");
         encodeRules = scanner.next();
         System.out.println("请输入要解密的内容（密文）:");
