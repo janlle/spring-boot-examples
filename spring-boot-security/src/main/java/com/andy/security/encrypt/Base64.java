@@ -5,20 +5,20 @@ import java.io.IOException;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-public class Base64Demo {
+public class Base64 {
 
     private static String src = "aced";
 
     public static void main(String[] args) {
-        Base64Demo.jdkBase64();
-        Base64Demo.commonsCodecBase64();
-        Base64Demo.bouncyCastleBase64();
+        Base64.jdkBase64();
+        Base64.commonsCodecBase64();
+        Base64.bouncyCastleBase64();
     }
 
     //使用JDK的base64实现，
     public static void jdkBase64() {
         BASE64Encoder encoder = new BASE64Encoder();
-        String encode = encoder.encode(Base64Demo.src.getBytes());
+        String encode = encoder.encode(Base64.src.getBytes());
         System.out.println("encode:  " + encode);
 
         BASE64Decoder decoder = new BASE64Decoder();
@@ -33,7 +33,7 @@ public class Base64Demo {
 
     //使用apache的commonsCodec实现
     public static void commonsCodecBase64() {
-        byte[] encodeBytes = org.apache.commons.codec.binary.Base64.encodeBase64(Base64Demo.src.getBytes());
+        byte[] encodeBytes = org.apache.commons.codec.binary.Base64.encodeBase64(Base64.src.getBytes());
         String encode = new String(encodeBytes);
         System.out.println("encode:  " + encode);
 
@@ -45,7 +45,7 @@ public class Base64Demo {
 
     //使用bouncyCastlede实现
     public static void bouncyCastleBase64() {
-        byte[] encodeBytes = org.bouncycastle.util.encoders.Base64.encode(Base64Demo.src.getBytes());
+        byte[] encodeBytes = org.bouncycastle.util.encoders.Base64.encode(Base64.src.getBytes());
         String encode = new String(encodeBytes);
         System.out.println("encode:  " + encode);
 

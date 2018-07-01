@@ -1,20 +1,15 @@
 package com.andy.security.encrypt;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.util.Scanner;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.util.encoders.Hex;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -22,7 +17,7 @@ import sun.misc.BASE64Encoder;
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-01 13:56
  **/
-public class AESEncode {
+public class AES {
     /*
      * 加密
      * 1.构造密钥生成器
@@ -35,12 +30,12 @@ public class AESEncode {
     public static String AESEncode(String encodeRules, String content) {
         try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
-            KeyGenerator keygen = KeyGenerator.getInstance("AES");
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
             //2.根据ecnodeRules规则初始化密钥生成器
             //生成一个128位的随机源,根据传入的字节数组
-            keygen.init(128, new SecureRandom(encodeRules.getBytes()));
+            keyGen.init(128, new SecureRandom(encodeRules.getBytes()));
             //3.产生原始对称密钥
-            SecretKey original_key = keygen.generateKey();
+            SecretKey original_key = keyGen.generateKey();
             //4.获得原始对称密钥的字节数组
             byte[] raw = original_key.getEncoded();
             //5.根据字节数组生成AES密钥
@@ -98,24 +93,14 @@ public class AESEncode {
             byte[] byte_decode = cipher.doFinal(byte_content);
             String AES_decode = new String(byte_decode, "utf-8");
             return AES_decode;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
     public static void main(String[] args) {
-        AESEncode se = new AESEncode();
+        AES se = new AES();
         Scanner scanner = new Scanner(System.in);
         /*
          * 加密
@@ -135,5 +120,76 @@ public class AESEncode {
         content = scanner.next();
         System.out.println("根据输入的规则" + encodeRules + "解密后的明文是:" + se.AESDncode(encodeRules, content));
     }
+
+
+
+    private static String src = "TestAES";
+
+    public static void jdkAES() {
+        try {
+            //生成Key
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+            keyGenerator.init(128);
+            //keyGenerator.init(128, new SecureRandom("seedseedseed".getBytes()));
+            //使用上面这种初始化方法可以特定种子来生成密钥，这样加密后的密文是唯一固定的。
+            SecretKey secretKey = keyGenerator.generateKey();
+            byte[] keyBytes = secretKey.getEncoded();
+
+            //Key转换
+            Key key = new SecretKeySpec(keyBytes, "AES");
+
+            //加密
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] encodeResult = cipher.doFinal(src.getBytes());
+            System.out.println("AESencode : " + Hex.toHexString(encodeResult));
+
+            //解密
+            cipher.init(Cipher.DECRYPT_MODE, key);
+            byte[] decodeResult = cipher.doFinal(encodeResult);
+            System.out.println("AESdecode : " + new String(decodeResult));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public static void bcAES() {
+        try {
+            //使用BouncyCastle 的DES加密
+            Security.addProvider(new BouncyCastleProvider());
+            //生成Key
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", "BC");
+            keyGenerator.getProvider();
+            keyGenerator.init(128);
+            SecretKey secretKey = keyGenerator.generateKey();
+            byte[] keyBytes = secretKey.getEncoded();
+
+            //Key转换
+            Key key = new SecretKeySpec(keyBytes, "AES");
+            //加密
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] encodeResult = cipher.doFinal(src.getBytes());
+            System.out.println("AESencode : " + Hex.toHexString(encodeResult));
+
+            //解密
+            cipher.init(Cipher.DECRYPT_MODE, key);
+            byte[] decodeResult = cipher.doFinal(encodeResult);
+            System.out.println("AESdecode : " + new String(decodeResult));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+//    public static void main(String[] args) {
+//        jdkAES();
+//        bcAES();
+//    }
 
 }
