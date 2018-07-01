@@ -10,19 +10,18 @@ public class Base64 {
     private static String src = "aced";
 
     public static void main(String[] args) {
-        Base64.jdkBase64();
-        Base64.commonsCodecBase64();
-        Base64.bouncyCastleBase64();
+        Base64.jdkBase64(src);
+        Base64.commonsCodecBase64(src);
+        Base64.bouncyCastleBase64(src);
     }
 
     //使用JDK的base64实现，
-    public static void jdkBase64() {
+    public static void jdkBase64(String content) {
         BASE64Encoder encoder = new BASE64Encoder();
-        String encode = encoder.encode(Base64.src.getBytes());
-        System.out.println("encode:  " + encode);
-
         BASE64Decoder decoder = new BASE64Decoder();
         try {
+            String encode = encoder.encode(content.getBytes());
+            System.out.println("encode:  " + encode);
             String decode = new String(decoder.decodeBuffer(encode));
             System.out.println("decode:  " + decode);
         } catch (IOException e) {
@@ -32,8 +31,8 @@ public class Base64 {
 
 
     //使用apache的commonsCodec实现
-    public static void commonsCodecBase64() {
-        byte[] encodeBytes = org.apache.commons.codec.binary.Base64.encodeBase64(Base64.src.getBytes());
+    public static void commonsCodecBase64(String content) {
+        byte[] encodeBytes = org.apache.commons.codec.binary.Base64.encodeBase64(content.getBytes());
         String encode = new String(encodeBytes);
         System.out.println("encode:  " + encode);
 
@@ -44,15 +43,13 @@ public class Base64 {
     }
 
     //使用bouncyCastlede实现
-    public static void bouncyCastleBase64() {
-        byte[] encodeBytes = org.bouncycastle.util.encoders.Base64.encode(Base64.src.getBytes());
+    public static void bouncyCastleBase64(String content) {
+        byte[] encodeBytes = org.bouncycastle.util.encoders.Base64.encode(content.getBytes());
         String encode = new String(encodeBytes);
         System.out.println("encode:  " + encode);
-
         byte[] decodeBytes = org.bouncycastle.util.encoders.Base64.decode(encode);
         String decode = new String(decodeBytes);
         System.out.println("decode:  " + decode);
-
     }
 
 }

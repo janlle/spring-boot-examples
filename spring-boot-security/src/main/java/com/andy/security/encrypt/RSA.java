@@ -16,6 +16,12 @@ import java.security.interfaces.RSAPublicKey;
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 
+
+/**
+ * 非堆成加密
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-05-01 14:32
+ **/
 public class RSA {
 
     public static void makekeyfile(String pubKeyFile, String privateKeyFile) throws Exception {
@@ -33,8 +39,7 @@ public class RSA {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
 
         // 生成私钥  
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(
-                privateKeyFile));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(privateKeyFile));
         oos.writeObject(privateKey);
         oos.flush();
         oos.close();
@@ -46,14 +51,7 @@ public class RSA {
         System.out.println("make file ok!");
     }
 
-    /**
-     * @param k
-     * @param data
-     * @param encrypt 1 加密 0解密
-     * @return
-     * @throws NoSuchPaddingException
-     * @throws Exception
-     */
+
     public static byte[] handleData(Key k, byte[] data, int encrypt)
             throws Exception {
 
