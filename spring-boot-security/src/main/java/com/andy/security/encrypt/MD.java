@@ -84,6 +84,10 @@ public class MD {
                 sb.append(Character.forDigit(b >> 4 & 0xf, 16));
                 sb.append(Character.forDigit(b & 0xf, 16));
             }
+//            MessageDigest messageDigest = MessageDigest.getInstance("MD2");
+//            byte[] hashCode = messageDigest.digest(content.getBytes());
+//            HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
+//            marshal = hexBinaryAdapter.marshal(hashCode);
         } catch (Exception e) {
             e.printStackTrace();
         }
