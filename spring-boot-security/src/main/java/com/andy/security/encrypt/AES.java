@@ -14,7 +14,7 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
- * 对称加密
+ * 对称加密算法--AES
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-01 13:56
  **/

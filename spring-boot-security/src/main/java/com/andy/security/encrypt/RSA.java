@@ -18,7 +18,7 @@ import javax.crypto.NoSuchPaddingException;
 
 
 /**
- * 非堆成加密
+ * 非对称加密算法——RSA
  * @Author: Mr.lyon
  * @CreateBy: 2018-05-01 14:32
  **/
