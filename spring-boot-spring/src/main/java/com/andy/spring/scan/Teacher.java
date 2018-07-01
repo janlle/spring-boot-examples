@@ -1,21 +1,21 @@
-package com.andy.spring.beans;
+package com.andy.spring.scan;
 
 /**
  * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 23:21
+ * @CreateBy: 2018-07-01 11:17
  **/
-public class Person {
+public class Teacher {
 
-    public Person() {
-        System.out.println("constructor-person");
+    public Teacher() {
+        System.out.println("constructor-Teacher");
     }
 
     public void init(String name) {
-        System.out.println("init-person");
+        System.out.println("init-Teacher");
     }
 
     public void destroy(String name) {
-        System.out.println("destroy-person");
+        System.out.println("destroy-Teacher");
     }
 
     public void hello(String name) {
@@ -26,6 +26,5 @@ public class Person {
         System.out.println("hi: " + name);
         return name;
     }
-
 
 }
