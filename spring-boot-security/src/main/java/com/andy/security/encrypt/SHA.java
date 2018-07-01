@@ -37,6 +37,7 @@ public class SHA {
         return null;
     }
 
+    //非jdk实现
     public static String SHA224(String content) {
         try {
             Digest digest = new SHA224Digest();

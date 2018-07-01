@@ -14,6 +14,10 @@ import org.apache.commons.codec.binary.Base64;
  **/
 public class PBE {
 
+    /**
+     * PBE算法结合了消息摘要算法和对称加密算法的优点，是一种特殊的对称加密算法。Password Based Encryption，基于口令的加密。因为口令是比较好记的，就容易通过穷举、猜测的方式获得口令——针对这种情况，我们采用的方式是加盐（Salt），通过加入一些额外的内容（通常是随机字符）去扰乱。实现的方式有2种：JDK和BC。
+     */
+
     private static String src="Hello PBE";
     public static void jdkPBE(){
         try {

@@ -19,6 +19,11 @@ import javax.crypto.spec.DESKeySpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
+/**
+ * 对称加密算法--DES
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-07-01 15:37
+ **/
 public class DES {
     
     private static String src = "TestDES";
