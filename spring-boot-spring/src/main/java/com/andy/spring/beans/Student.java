@@ -2,20 +2,20 @@ package com.andy.spring.beans;
 
 /**
  * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 23:21
+ * @CreateBy: 2018-07-01 11:12
  **/
-public class Person {
+public class Student {
 
-    public Person() {
-        System.out.println("constructor-person");
+    public Student() {
+        System.out.println("constructor-Student");
     }
 
     public void init(String name) {
-        System.out.println("init-person");
+        System.out.println("init-Student");
     }
 
     public void destroy(String name) {
-        System.out.println("destroy-person");
+        System.out.println("destroy-Student");
     }
 
     public void hello(String name) {
@@ -26,6 +26,5 @@ public class Person {
         System.out.println("hi: " + name);
         return name;
     }
-
 
 }
