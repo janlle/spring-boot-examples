@@ -12,7 +12,7 @@ import org.apache.commons.codec.binary.Base64;
  * @author: Mr.ruoLin
  * @createBy: 2018-04-04 09:58
  **/
-public class PBEDemo {
+public class PBE {
 
     private static String src="Hello PBE";
     public static void jdkPBE(){

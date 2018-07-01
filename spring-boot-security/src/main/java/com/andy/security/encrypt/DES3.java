@@ -17,7 +17,7 @@ import javax.crypto.SecretKey;
 设Ek()和Dk()代表DES算法的加密和解密过程，K代表DES算法使用的密钥，P代表明文，C代表密文，这样， 　　
 3DES加密过程为：C=Ek3(Dk2(Ek1(P)))
 3DES解密过程为：P=Dk1((EK2(Dk3(C)))*/
-public class DES3Encode {
+public class DES3 {
   
     // KeyGenerator 提供对称密钥生成器的功能，支持各种算法  
     private KeyGenerator keygen;  
@@ -28,7 +28,7 @@ public class DES3Encode {
     // 该字节数组负责保存加密的结果  
     private byte[] cipherByte;  
   
-    public DES3Encode() throws NoSuchAlgorithmException, NoSuchPaddingException {
+    public DES3() throws NoSuchAlgorithmException, NoSuchPaddingException {
         Security.addProvider(new com.sun.crypto.provider.SunJCE());  
         // 实例化支持DES算法的密钥生成器(算法名称命名需按规定，否则抛出异常)  
         keygen = KeyGenerator.getInstance("DESede");  
@@ -72,7 +72,7 @@ public class DES3Encode {
      * @param args
      */  
     public static void main(String[] args) throws Exception {  
-        DES3Encode des = new DES3Encode();
+        DES3 des = new DES3();
         String msg ="james";
         byte[] encontent = des.Encrytor(msg);  
         byte[] decontent = des.Decryptor(encontent);  
