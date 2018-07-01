@@ -14,131 +14,108 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
-
-import javax.crypto.spec.DESedeKeySpec;
+import javax.crypto.spec.DESKeySpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Hex;
 
-public class TripleDESDemo {
+public class DES {
     
-    private static String src = "TestTripleDES";
+    private static String src = "TestDES";
     
-    public static void jdkTripleDES () {
+    public static void jdkDES () {
         
         try {
             //生成密钥Key
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede");
-            keyGenerator.init(168);
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
+            keyGenerator.init(56);
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] bytesKey = secretKey.getEncoded();
-        
-            
+
             //KEY转换
-            DESedeKeySpec deSedeKeySpec = new DESedeKeySpec(bytesKey);
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("DESede");
+            DESKeySpec deSedeKeySpec = new DESKeySpec(bytesKey);
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("DES");
             Key convertSecretKey = factory.generateSecret(deSedeKeySpec);
             
             //加密
-            Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, convertSecretKey);
-            byte[] encodeResult = cipher.doFinal(TripleDESDemo.src.getBytes());
-            System.out.println("TripleDESEncode :" + Hex.toHexString(encodeResult));
-            
-            
+            byte[] encodeResult = cipher.doFinal(DES.src.getBytes());
+            System.out.println("DESEncode :" + Hex.toHexString(encodeResult));
+
             //解密
             cipher.init(Cipher.DECRYPT_MODE,convertSecretKey);
             byte[] DecodeResult = cipher.doFinal(encodeResult);
-            System.out.println("TripleDESDncode :" + new String (DecodeResult));
-            
-            
-            
+            System.out.println("DESDncode :" + new String (DecodeResult));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (InvalidKeyException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (BadPaddingException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
     
     }
-
     
     
     
-public static void bcTripleDES () {
-        
+    public static void bcDES (){
         try {
             
+            //使用BouncyCastle 的DES加密
             Security.addProvider(new BouncyCastleProvider());
+
             //生成密钥Key
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("DESede","BC");
-            keyGenerator.getProvider();
-            keyGenerator.init(168);
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("DES","BC");
+            keyGenerator.init(56);
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] bytesKey = secretKey.getEncoded();
         
-            
             //KEY转换
-            DESedeKeySpec deSedeKeySpec = new DESedeKeySpec(bytesKey);
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("DESede");
+            DESKeySpec deSedeKeySpec = new DESKeySpec(bytesKey);
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("DES");
             Key convertSecretKey = factory.generateSecret(deSedeKeySpec);
             
             //加密
-            Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, convertSecretKey);
-            byte[] encodeResult = cipher.doFinal(TripleDESDemo.src.getBytes());
-            System.out.println("TripleDESEncode :" + Hex.toHexString(encodeResult));
+            byte[] encodeResult = cipher.doFinal(DES.src.getBytes());
+            System.out.println("DESEncode :" + Hex.toHexString(encodeResult));
             
             
             //解密
             cipher.init(Cipher.DECRYPT_MODE,convertSecretKey);
             byte[] DecodeResult = cipher.doFinal(encodeResult);
-            System.out.println("TripleDESDncode :" + new String (DecodeResult));
+            System.out.println("DESDncode :" + new String (DecodeResult));
             
             
             
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (InvalidKeyException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (BadPaddingException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         } catch (NoSuchProviderException e) {
-            // TODO 自动生成的 catch 块
             e.printStackTrace();
         }
-    
     }
-    
-    
-    
-    public static void main(String[] args) {
-        jdkTripleDES ();
-        bcTripleDES ();
 
+    public static void main(String[] args) {
+        DES.jdkDES ();
+        DES.bcDES();
     }
 
 }
