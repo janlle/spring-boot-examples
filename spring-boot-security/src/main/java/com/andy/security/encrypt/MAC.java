@@ -29,7 +29,7 @@ public class MAC {
         Scanner scanner = new Scanner(System.in);
         System.out.println("请输入要加密的内容:");
         String input = scanner.nextLine();
-        String result = MAC.HmacMD2(input);
+        String result = MAC.HmacSHA384(input);
         System.out.println(result);
     }
 
@@ -126,9 +126,8 @@ public class MAC {
             SecretKey secretKey = generator.generateKey();
             // 获得密钥
             byte[] key = secretKey.getEncoded();
-            System.out.println();
             // 还原密钥
-//            SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
+            //SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
             SecretKey secretKeySpec = new SecretKeySpec(FINAL_KEY.getBytes(), "HmacSHA1");
             // 实例化Mac
             Mac mac = Mac.getInstance(secretKeySpec.getAlgorithm());
@@ -181,9 +180,8 @@ public class MAC {
             SecretKey secretKey = generator.generateKey();
             // 获得密钥
             byte[] key = secretKey.getEncoded();
-            System.out.println();
             // 还原密钥
-//            SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
+            //SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
             SecretKey secretKeySpec = new SecretKeySpec(FINAL_KEY.getBytes(), "HmacSHA256");
             // 实例化Mac
             Mac mac = Mac.getInstance(secretKeySpec.getAlgorithm());
@@ -206,9 +204,8 @@ public class MAC {
             SecretKey secretKey = generator.generateKey();
             // 获得密钥
             byte[] key = secretKey.getEncoded();
-            System.out.println();
             // 还原密钥
-//            SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
+            //SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
             SecretKey secretKeySpec = new SecretKeySpec(FINAL_KEY.getBytes(), "HmacSHA384");
             // 实例化Mac
             Mac mac = Mac.getInstance(secretKeySpec.getAlgorithm());
@@ -232,9 +229,8 @@ public class MAC {
             SecretKey secretKey = generator.generateKey();
             // 获得密钥
             byte[] key = secretKey.getEncoded();
-            System.out.println();
             // 还原密钥
-//            SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
+            //SecretKey secretKeySpec = new SecretKeySpec(key, "HmacSHA1");
             SecretKey secretKeySpec = new SecretKeySpec(FINAL_KEY.getBytes(), "HmacSHA512");
             // 实例化Mac
             Mac mac = Mac.getInstance(secretKeySpec.getAlgorithm());

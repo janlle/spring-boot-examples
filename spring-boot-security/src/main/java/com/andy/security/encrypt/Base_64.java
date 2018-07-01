@@ -5,14 +5,14 @@ import java.io.IOException;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-public class Base64 {
+public class Base_64 {
 
     private static String src = "aced";
 
     public static void main(String[] args) {
-        Base64.jdkBase64(src);
-        Base64.commonsCodecBase64(src);
-        Base64.bouncyCastleBase64(src);
+        Base_64.jdkBase64(src);
+        Base_64.commonsCodecBase64(src);
+        Base_64.bouncyCastleBase64(src);
     }
 
     //使用JDK的base64实现，
