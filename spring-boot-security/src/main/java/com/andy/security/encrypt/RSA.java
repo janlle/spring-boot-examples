@@ -60,16 +60,16 @@ public class RSA {
 
     public static void main(String[] args) throws Exception {
 
-        String pubfile = "d:/pub.key";
-        String prifile = "d:/pri.key";
+        String pubFile = "d:/pub.key";
+        String priFile = "d:/pri.key";
 
-        makekeyfile(pubfile, prifile);
+        makekeyfile(pubFile, priFile);
 
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pubfile));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pubFile));
         RSAPublicKey pubkey = (RSAPublicKey) ois.readObject();
         ois.close();
 
-        ois = new ObjectInputStream(new FileInputStream(prifile));
+        ois = new ObjectInputStream(new FileInputStream(priFile));
         RSAPrivateKey prikey = (RSAPrivateKey) ois.readObject();
         ois.close();
 
@@ -109,11 +109,11 @@ public class RSA {
         // 构造PKCS8EncodedKeySpec对象
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
         // KEY_ALGORITHM 指定的加密算法
-        KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         // 取私钥匙对象
         PrivateKey priKey = keyFactory.generatePrivate(pkcs8KeySpec);
         // 用私钥对信息生成数字签名
-        Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
+        Signature signature = Signature.getInstance("MD5withRSA");
         signature.initSign(priKey);
         signature.update(content.getBytes());
         return encoder.encode(signature.sign()).toString();
