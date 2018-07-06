@@ -1,8 +1,8 @@
 package com.andy.websocket.controller;
 
 import com.andy.websocket.config.Constant;
-import com.andy.websocket.config.WiselyMessage;
-import com.andy.websocket.config.WiselyResponse;
+import com.andy.websocket.config.WSMessage;
+import com.andy.websocket.config.WSResponse;
 import com.andy.websocket.service.WebSocketService;
 import com.google.common.collect.Lists;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -34,12 +34,12 @@ public class WebController {
     //@MessageMapping和@RequestMapping功能类似，用于设置URL映射地址，浏览器向服务器发起请求，需要通过该地址。
     @MessageMapping(Constant.FORE_TO_SERVER_PATH)
     @SendTo(Constant.PRODUCER_PATH)//如果服务器接受到了消息，就会对订阅了@SendTo括号中的地址传送消息。
-    public WiselyResponse say(WiselyMessage message) {
+    public WSResponse say(WSMessage message) {
         List<String> users = Lists.newArrayList();
         //此处写死只是为了方便测试,此值需要对应页面中订阅个人消息的userId
         users.add("d892bf12bf7d11e793b69c5c8e6f60fb");
-        webSocketService.send2Users(users, new WiselyResponse("admin hello"));
-        return new WiselyResponse("Welcome, " + message.getName() + "!");
+        webSocketService.send2Users(users, new WSResponse("admin hello"));
+        return new WSResponse("Welcome, " + message.getName() + "!");
     }
 
 }

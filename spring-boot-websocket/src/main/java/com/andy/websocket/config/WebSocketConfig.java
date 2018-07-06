@@ -33,7 +33,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         //定义一对一推送的时候前缀
         registry.setUserDestinationPrefix(Constant.P2P_PUSH_PATH);
         //定义websoket前缀
-        registry.setApplicationDestinationPrefixes(Constant.WEB_SOCKET_PATH_PREFIX);
+        registry.setApplicationDestinationPrefixes(Constant.WEB_SOCKET_PATH);
     }
 
 
