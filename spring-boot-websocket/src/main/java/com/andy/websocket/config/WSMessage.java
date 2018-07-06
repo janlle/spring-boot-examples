@@ -1,6 +1,6 @@
 package com.andy.websocket.config;
 
-public class WiselyMessage {
+public class WSMessage {
 
     private String name;
 
