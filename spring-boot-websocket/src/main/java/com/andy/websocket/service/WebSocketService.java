@@ -1,7 +1,7 @@
 package com.andy.websocket.service;
 
 import com.andy.websocket.config.Constant;
-import com.andy.websocket.config.WiselyResponse;
+import com.andy.websocket.config.WSResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -26,7 +26,7 @@ public class WebSocketService {
      *
      * @param msg
      */
-    public void sendMsg(WiselyResponse msg) {
+    public void sendMsg(WSResponse msg) {
         template.convertAndSend(Constant.PRODUCER_PATH, msg);
     }
 
@@ -36,10 +36,8 @@ public class WebSocketService {
      * @param users
      * @param msg
      */
-    public void send2Users(List<String> users, WiselyResponse msg) {
-        users.forEach(userName -> {
-            template.convertAndSendToUser(userName, Constant.P2P_PUSH_PATH, msg);
-        });
+    public void send2Users(List<String> users, WSResponse msg) {
+        users.forEach(userName -> template.convertAndSendToUser(userName, Constant.P2P_PUSH_PATH, msg));
     }
 
 }
