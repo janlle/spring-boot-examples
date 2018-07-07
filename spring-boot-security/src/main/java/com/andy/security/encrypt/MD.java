@@ -24,9 +24,9 @@ public class MD {
     private static final String SRC = "hello";
 
     public static void main(String[] args) throws Exception {
-        String result = MD.MD2(SRC);
+        String result = MD.MD5(SRC);
         System.out.println(result);
-        test(SRC);
+//        test(SRC);
     }
 
     public static void test(String content) throws Exception {

@@ -16,21 +16,23 @@ import java.util.Scanner;
  **/
 public class SHA {
 
+    private static final String SRC = "hello";
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入要加密的内容:");
-        String input = scanner.nextLine();
-        String result = SHA.SHA224(input);
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("请输入要加密的内容:");
+//        String input = scanner.nextLine();
+        String result = SHA.SHA384(SRC);
         System.out.println(result);
     }
 
+    //jdk实现
     public static String SHA1(String content) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA");
             byte[] hashCode = messageDigest.digest(content.getBytes());
-            HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
-            return hexBinaryAdapter.marshal(hashCode).toLowerCase();
+            HexBinaryAdapter adapter = new HexBinaryAdapter();
+            return adapter.marshal(hashCode).toLowerCase();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,8 +46,8 @@ public class SHA {
             digest.update(content.getBytes(), 0, content.getBytes().length);
             byte[] hashCode = new byte[digest.getDigestSize()];
             digest.doFinal(hashCode, 0);
-            HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
-            return hexBinaryAdapter.marshal(hashCode).toLowerCase();
+            HexBinaryAdapter adapter = new HexBinaryAdapter();
+            return adapter.marshal(hashCode).toLowerCase();
         } catch (Exception e) {
             e.printStackTrace();
         }
