@@ -22,9 +22,29 @@ import org.bouncycastle.util.encoders.Hex;
  **/
 public class AES {
 
-    //Base64 编码/解码器 JDK1.8
-    private static Base64.Decoder decoder = Base64.getDecoder();
-    private static Base64.Encoder encoder = Base64.getEncoder();
+    private static String encodeRules = "lyon";
+
+    private static String content = "hello";
+
+    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("使用AES对称加密，请输入加密的规则");
+//        String encodeRules = scanner.nextLine();
+//        System.out.println("请输入要加密的内容:");
+//        String content = scanner.nextLine();
+
+        String result = AESEncode(encodeRules, content);
+        System.out.println("根据输入的规则" + encodeRules + "加密后的密文是:" + result);
+
+//        System.out.println("使用AES对称解密，请输入加密的规则：(须与加密相同)");
+//        encodeRules = scanner.next();
+//        System.out.println("请输入要解密的内容（密文）:");
+//        content = scanner.next();
+        System.out.println("根据输入的规则" + encodeRules + "解密后的明文是:" + AESDecode(encodeRules, result));
+
+        jdkAES();
+        bcAES();
+    }
 
     /*
      * 1.构造密钥生成器
@@ -34,13 +54,13 @@ public class AES {
      * 5.内容加密
      * 6.返回字符串
      */
-    public static String Encode(String encodeRules, String content) {
+    public static String AESEncode(String encodeRules, String content) {
         try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            //2.根据ecnodeRules规则初始化密钥生成器生成一个128位的随机源,根据传入的字节数组
-//            keyGenerator.init(128, new SecureRandom(encodeRules.getBytes()));
-            keyGenerator.init(128);
+            //2.根据encodeRules规则初始化密钥生成器生成一个128位的随机源,根据传入的字节数组
+            keyGenerator.init(128, new SecureRandom(encodeRules.getBytes()));
+//            keyGenerator.init(128);
             //3.产生原始对称密钥
             SecretKey secretKey = keyGenerator.generateKey();
             //4.获得原始对称密钥的字节数组
@@ -54,8 +74,8 @@ public class AES {
             //8.获取加密内容的字节数组(这里要设置为utf-8)不然内容中如果有中文和英文混合中文就会解密为乱码
             //9.根据密码器的初始化方式--加密：将数据加密
             byte[] encodeResult = cipher.doFinal(content.getBytes());
-            return DatatypeConverter.printHexBinary(encodeResult);
-//            return Hex.toHexString(encodeResult);
+//            return DatatypeConverter.printHexBinary(encodeResult);
+            return new HexBinaryAdapter().marshal(encodeResult);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,13 +88,13 @@ public class AES {
      * 2.将加密后的字符串反纺成byte[]数组
      * 3.将加密内容解密
      */
-    public static String Decode(String encodeRules, String content) {
+    public static String AESDecode(String encodeRules, String content) {
         try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            //2.根据ecnodeRules规则初始化密钥生成器生成一个128位的随机源,根据传入的字节数组
-//            keyGenerator.init(128, new SecureRandom(encodeRules.getBytes()));
-            keyGenerator.init(128);
+            //2.根据encodeRules规则初始化密钥生成器生成一个128位的随机源,根据传入的字节数组
+            keyGenerator.init(128, new SecureRandom(encodeRules.getBytes()));
+//            keyGenerator.init(128);
             //3.产生原始对称密钥
             SecretKey secretKey = keyGenerator.generateKey();
             //4.获得原始对称密钥的字节数组
@@ -94,39 +114,12 @@ public class AES {
         return null;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-//        System.out.println("使用AES对称加密，请输入加密的规则");
-//        String encodeRules = scanner.nextLine();
-        System.out.println("请输入要加密的内容:");
-        String content = scanner.nextLine();
-        System.out.println("根据输入的规则" + encodeRules + "加密后的密文是:" + Encode(encodeRules, content));
-
-//        System.out.println("使用AES对称解密，请输入加密的规则：(须与加密相同)");
-//        encodeRules = scanner.next();
-        System.out.println("请输入要解密的内容（密文）:");
-        content = scanner.next();
-        System.out.println("根据输入的规则" + encodeRules + "解密后的明文是:" + Decode(encodeRules, content));
-
-        jdkAES();
-        bcAES();
-    }
-
-
-    private static String encodeRules = "hello";
-
-    private static String content = "hello";
-
     public static void jdkAES() {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             keyGenerator.init(128);
-//            keyGenerator.init(128, new SecureRandom("hello".getBytes()));
-            //使用上面这种初始化方法可以特定种子来生成密钥，这样加密后的密文是唯一固定的。
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] keyBytes = secretKey.getEncoded();
-
-            //Key转换
             Key key = new SecretKeySpec(keyBytes, "AES");
 
             //加密
@@ -150,7 +143,6 @@ public class AES {
         try {
             //使用BouncyCastle 的DES加密
             Security.addProvider(new BouncyCastleProvider());
-            //生成Key
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", "BC");
             keyGenerator.getProvider();
             keyGenerator.init(128);
@@ -160,19 +152,18 @@ public class AES {
             //Key转换
             Key key = new SecretKeySpec(keyBytes, "AES");
             //加密
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] encodeResult = cipher.doFinal(content.getBytes());
-            System.out.println("AESencode : " + Hex.toHexString(encodeResult));
+            System.out.println("AESEncode : " + Hex.toHexString(encodeResult));
 
             //解密
             cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] decodeResult = cipher.doFinal(encodeResult);
-            System.out.println("AESdecode : " + new String(decodeResult));
+            System.out.println("AESDecode : " + new String(decodeResult));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 
