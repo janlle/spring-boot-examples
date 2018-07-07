@@ -14,6 +14,11 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 security:
   oauth2:
     client:
@@ -22,9 +27,3 @@ security:
   user:
     name: andy
     password: andy
-  jpa:
-    hibernate:
-      ddl-auto: update
-      naming:
-        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-    show-sql: true

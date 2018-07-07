@@ -19,6 +19,7 @@ import java.util.Set;
  * @createBy: 2018-04-19
  **/
 @Data
+@Entity
 @ApiModel("用户实体")
 @Table(name = "t_user")
 public class User implements Serializable {
@@ -54,6 +55,10 @@ public class User implements Serializable {
     private Boolean deleted;
 
     @ApiModelProperty("角色集合")
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "t_user_role",
+//            joinColumns = {@JoinColumn(name = "uId", referencedColumnName = "userId")},
+//            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
     private Set<Role> roles = new HashSet<>();
 
 }
