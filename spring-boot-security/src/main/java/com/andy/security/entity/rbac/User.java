@@ -21,7 +21,7 @@ import java.util.Set;
 @Data
 @Entity
 @ApiModel("用户实体")
-@Table(name = "t_user")
+@Table(name = "sys_user")
 public class User implements Serializable {
 
     @Id
@@ -54,11 +54,11 @@ public class User implements Serializable {
     @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
     private Boolean deleted;
 
-    @ApiModelProperty("角色集合")
+//    @ApiModelProperty("角色集合")
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "t_user_role",
 //            joinColumns = {@JoinColumn(name = "uId", referencedColumnName = "userId")},
 //            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
-    private Set<Role> roles = new HashSet<>();
+//    private Set<Role> roles = new HashSet<>();
 
 }

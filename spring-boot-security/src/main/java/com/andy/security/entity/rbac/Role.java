@@ -20,7 +20,7 @@ import java.util.Set;
 @Data
 @Entity
 @ApiModel("角色实体")
-@Table(name = "t_role")
+@Table(name = "sys_role")
 public class Role {
 
     @Id
@@ -47,12 +47,12 @@ public class Role {
     @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
     private Boolean deleted;
 
-    @ApiModelProperty("对应的权限集合")
+//    @ApiModelProperty("对应的权限集合")
 //    @ManyToMany(mappedBy = "roles")
-    private Set<Permission> permissions = new HashSet<>();
+//    private Set<Permission> permissions = new HashSet<>();
 
-    @ApiModelProperty("对应的角色集合")
+//    @ApiModelProperty("对应的角色集合")
 //    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
+//    private Set<User> users = new HashSet<>();
 
 }

@@ -23,7 +23,7 @@ import java.util.Set;
 @Data
 @Entity
 @ApiModel("权限实体")
-@Table(name = "t_permission")
+@Table(name = "sys_permission")
 public class Permission implements Serializable {
 
     @Id
@@ -57,12 +57,12 @@ public class Permission implements Serializable {
     @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
     private Boolean deleted;
 
-    @ApiModelProperty("对应角色")
+//    @ApiModelProperty("对应角色")
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "t_permission_role",
 //            joinColumns = {@JoinColumn(name = "pid", referencedColumnName = "permissionId")},
 //            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
-    private Set<Role> roles = new HashSet<>();
+//    private Set<Role> roles = new HashSet<>();
 
     private enum ResourceType {
         MENU, BUTTON
