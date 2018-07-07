@@ -37,24 +37,18 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER").and()
-                .withUser("admin").password("password").roles("USER", "ADMIN");
-    }
-
-    @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/static/**");
     }
 
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-////        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-////        auth.inMemoryAuthentication().withUser("andy").password("andy").roles("ADMIN");
-//        auth.inMemoryAuthentication().withUser("jack").password("jack").roles("USER");
-//        auth.userDetailsService(userDetailService).passwordEncoder(new AppPasswordEncoder());
-//        auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(new AppPasswordEncoder());
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+        .withUser("admin").password("admin").roles("ADMIN").and()
+        .withUser("andy").password("andy").roles("ADMIN").and()
+        .withUser("jack").password("jack").roles("USER");
+        auth.userDetailsService(userDetailService).passwordEncoder(new AppPasswordEncoder());
+        auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(new AppPasswordEncoder());
+    }
 }
