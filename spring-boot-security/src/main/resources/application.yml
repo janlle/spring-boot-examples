@@ -1,22 +1,11 @@
-server:
-  session:
-    timeout: 60
-  port: 8080
-  servlet-path: /
 spring:
   application:
-    name: spring-seurity
+    name: seurity
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
-  session:
-    store-type: redis
-  redis:
-    host: localhost
-    port: 6380
-# thymeleaf 配置
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -30,4 +19,6 @@ security:
     client:
       client-id: andyid
       client-secret: andysecret
-
+  user:
+    name: andy
+    password: andy

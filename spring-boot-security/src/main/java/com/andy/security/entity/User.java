@@ -8,9 +8,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "t_user")
 public class User {
 
