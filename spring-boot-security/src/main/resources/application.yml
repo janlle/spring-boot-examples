@@ -27,3 +27,4 @@ security:
   user:
     name: andy
     password: andy
+    role: user

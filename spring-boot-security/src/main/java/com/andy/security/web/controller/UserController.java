@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.andy.security.entity.User;
 
-@Controller
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
-    @ResponseBody
-    @GetMapping("/users")
-    public List<User> query() {
-        List<User> users = new ArrayList<User>();
+    @GetMapping("/list")
+    public List<User> list() {
+        List<User> users = new ArrayList<>();
         users.add(new User(1001, "andy", "12345", 23200.0, new Date()));
         users.add(new User(1001, "andy", "12345", 23200.2, new Date()));
         users.add(new User(1001, "andy", "12345", 23200.0, new Date()));
