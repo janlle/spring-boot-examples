@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+         <!-- 配置关闭缓存  -->
+         <setting name="cacheEnabled"               value="false"/>
+         <setting name="mapUnderscoreToCamelCase"   value="true"/>
+         <setting name="useGeneratedKeys"           value="true"/>
+         <setting name="defaultExecutorType"        value="REUSE"/>
+         <!-- 事务超时时间 -->
+         <setting name="defaultStatementTimeout"    value="600"/>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl"                     value="STDOUT_LOGGING" />
+    </settings>
+    
+    <typeAliases>
+       <!--<typeAlias type="com.andy.data.entity.User"       alias="User" />-->
+    </typeAliases>
+    
+    <mappers>
+       <!--<mapper resource="mapper/userMapper.xml" />-->
+    </mappers>
+</configuration>
