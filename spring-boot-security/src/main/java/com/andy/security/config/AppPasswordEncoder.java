@@ -16,7 +16,6 @@ public class AppPasswordEncoder implements PasswordEncoder {
 
     @Override
     public String encode(CharSequence charSequence) {
-
         return encoder.encodePassword(charSequence.toString(), SALT);
     }
 
