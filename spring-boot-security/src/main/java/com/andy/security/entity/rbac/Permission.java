@@ -10,6 +10,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -19,6 +21,7 @@ import java.util.Date;
  * @createBy: 2018-04-19
  **/
 @Data
+@Entity
 @ApiModel("权限实体")
 @Table(name = "t_permission")
 public class Permission implements Serializable {
@@ -53,6 +56,13 @@ public class Permission implements Serializable {
 
     @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
     private Boolean deleted;
+
+    @ApiModelProperty("对应角色")
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "t_permission_role",
+//            joinColumns = {@JoinColumn(name = "pid", referencedColumnName = "permissionId")},
+//            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
+    private Set<Role> roles = new HashSet<>();
 
     private enum ResourceType {
         MENU, BUTTON
