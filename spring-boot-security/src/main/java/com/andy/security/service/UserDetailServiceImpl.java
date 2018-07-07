@@ -22,14 +22,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String password = passwordEncoder.encode("aaaa");
+        String password = passwordEncoder.encode("andy");
         log.info("登录用户是:{}数据库的密码是:{}", username, password);
 
-        return new SocialUser(username, password, true, true, true ,true,
+        return new SocialUser(username, password, true, true, true, true,
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
-
-
 
 
 }

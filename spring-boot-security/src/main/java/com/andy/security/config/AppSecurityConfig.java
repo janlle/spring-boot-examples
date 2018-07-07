@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * @author: Mr.ruoLin
+ * @author: Mr.lyon
  * @createBy: 2018-04-21 14:17
  **/
 @EnableWebSecurity
@@ -35,16 +35,21 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
+    }
+
+    @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/static/**");
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-//        auth.inMemoryAuthentication().withUser("andy").password("andy").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("jack").password("jack").roles("USER");
-        auth.userDetailsService(userDetailService).passwordEncoder(new AppPasswordEncoder());
-        auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(new AppPasswordEncoder());
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+////        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+////        auth.inMemoryAuthentication().withUser("andy").password("andy").roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("jack").password("jack").roles("USER");
+//        auth.userDetailsService(userDetailService).passwordEncoder(new AppPasswordEncoder());
+//        auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(new AppPasswordEncoder());
+//    }
 }
