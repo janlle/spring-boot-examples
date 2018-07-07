@@ -4,9 +4,9 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * @Desc: 密码的加密和匹配
- * @author: Mr.ruoLin
- * @createBy: 2018-04-21 14:46
+ * 密码的加密和匹配
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-04-21 14:46
  **/
 public class AppPasswordEncoder implements PasswordEncoder {
 

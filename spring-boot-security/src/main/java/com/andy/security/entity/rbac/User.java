@@ -3,39 +3,57 @@ package com.andy.security.entity.rbac;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * 用户信息
+ *
  * @author: Mr.ruoLin
  * @createBy: 2018-04-19
  **/
 @Data
 @ApiModel("用户实体")
+@Table(name = "t_user")
 public class User implements Serializable {
 
-    @ApiModelProperty("用户id")
-    private Integer     userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
 
-    @ApiModelProperty("用户姓名")
-    private String      username;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '账号'")
+    private String account;
 
-    @ApiModelProperty("用户密码")
-    private String      password;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
+    private String password;
 
-    @ApiModelProperty("昵称")
-    private String      nickname;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '邮箱'")
+    private String email;
 
-    @ApiModelProperty("盐")
-    private String      salt;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '盐'")
+    private String salt;
 
-    @ApiModelProperty("用户状态")
-    private String      state;
+    @CreatedDate
+    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
+    private Date createTime;
+
+    @LastModifiedDate
+    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'")
+    private Date updateTime;
+
+    @Column(columnDefinition = "bit NOT NULL COMMENT '是否可用'")
+    private Boolean disable;
+
+    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
+    private Boolean deleted;
 
     @ApiModelProperty("角色集合")
-    private Set<Role>   roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
- }
+}
