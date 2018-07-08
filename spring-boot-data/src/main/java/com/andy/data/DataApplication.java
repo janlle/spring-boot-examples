@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Date;
 
@@ -29,6 +30,9 @@ public class DataApplication {
         };
         return timestampConvert;
     }
+
+
+
 
 
 }

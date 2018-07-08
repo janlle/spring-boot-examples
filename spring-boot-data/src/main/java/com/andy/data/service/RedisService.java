@@ -3,10 +3,12 @@ package com.andy.data.service;
 import com.andy.data.config.RedisPrefix;
 import com.andy.data.entity.User;
 import com.andy.data.util.RandomUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +19,8 @@ import java.util.concurrent.TimeUnit;
  * @author: Mr.lyon
  * @createBy: 2018-05-11 19:41
  **/
+@Slf4j
+@Service
 public class RedisService {
 
     @Autowired
@@ -24,9 +28,6 @@ public class RedisService {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-
-    @Autowired
-    private RedisOperations redisOperations;
 
 
     public long insertList(Integer count) {

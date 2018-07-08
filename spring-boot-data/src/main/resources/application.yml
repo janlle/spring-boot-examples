@@ -1,12 +1,25 @@
 spring:
+  cache:
+    type: redis
   redis:
     port: 6379
     host: 127.0.0.1
+    database: 2
+    password: admin
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        min-idle: 0
+        max-idle: 8
+
+
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/boot?useSSL=false
     username: root
     password: root
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,6 +27,7 @@ spring:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
     show-sql: true
     open-in-view: false
+
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
