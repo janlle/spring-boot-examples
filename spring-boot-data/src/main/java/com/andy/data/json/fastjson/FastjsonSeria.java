@@ -3,7 +3,7 @@ package com.andy.data.json.fastjson;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.andy.data.entity.User;
-import com.andy.data.service.DataService;
+import com.andy.data.service.RedisService;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +27,7 @@ public class FastjsonSeria {
         //User user = JSON.parseObject(json, User.class);
         //System.out.println(user);
 
-        String json = JSON.toJSONString(DataService.getUsers());
+        String json = JSON.toJSONString(RedisService.getUsers());
         List<User> userList = JSON.parseObject(json, new TypeReference<List<User>>(){}.getType());
 
         long end = System.currentTimeMillis();

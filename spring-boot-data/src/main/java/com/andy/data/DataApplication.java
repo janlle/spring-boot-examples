@@ -4,9 +4,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.convert.JodaTimeConverters;
+import org.springframework.core.convert.converter.Converter;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,15 +20,15 @@ public class DataApplication {
     }
 
     @Bean
-    public Date dateConvert(String source) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = (simpleDateFormat.parse(source));
-            return date;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Converter<String, Date> timestampConvertToDate() {
+        Converter<String, Date> timestampConvert = new Converter<String, Date>() {
+            @Override
+            public Date convert(String source) {
+                return new Date(new Long(source));
+            }
+        };
+        return timestampConvert;
     }
+
 
 }
