@@ -17,19 +17,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select * from t_user where id = ?1", nativeQuery = true)
     User findUserByUserId(@Param("userId") long userId);
 
-//    User addUser(User user);
 
 //    @Modifying
 //    @Query("update User set username = :user.username")
 //    int updateUser(@Param("user") User user);
-
 
     @Transactional
     @Modifying
 //    @Query("delete from User where id = ?1")
     @Query("delete from User where id = :userId")
     int deleteUser(@Param("userId")Long userId);
-
-
 
 }
