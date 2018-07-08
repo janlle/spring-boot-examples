@@ -14,13 +14,9 @@
     id, email, username, salary, birthday
   </sql>
 
-  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select <include refid="Base_Column" /> from t_user where id = #{id,jdbcType=BIGINT}
-  </select>
-
-  <delete id="deleteById" parameterType="java.lang.Long" >
-    delete from t_users where id = #{id}
-  </delete>
+  <!--<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
+    <!--select <include refid="Base_Column" /> from t_user where id = #{id,jdbcType=BIGINT}-->
+  <!--</select>-->
 
   <insert id="insert" parameterType="User" >
     insert into t_user (email, username, password, salary, birthday )

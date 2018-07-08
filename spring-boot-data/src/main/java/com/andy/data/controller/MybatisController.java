@@ -39,7 +39,7 @@ public class MybatisController {
     public String insertOne(@RequestBody User user) {
         log.info("user:{}", user);
         long start = System.currentTimeMillis();
-        int result = userMapper.insert(new User(12L, "james", "admin", new Date(), "andy@gmail.com", 10000 + 0.1, "token:84dsajf823djsi"));
+        int result = userMapper.insert(new User(1L, "james" + 1L, "admin", new Date(), 10000 + 0.1, new Date(), false));
         long end = System.currentTimeMillis();
         return "insertOne一共用了:" + (end - start) + "豪秒！返回的结果是:" + result;
     }
@@ -57,7 +57,7 @@ public class MybatisController {
     public String insertForeach() {
         long start = System.currentTimeMillis();
         for (long i = 0; i < 10000; i++) {
-            userMapper.insert(new User(i, "james" + i, "admin" + i, new Date(), "andy@gmail.com", 10000 + 0.1, "token:84dsajf823djsi"));
+            userMapper.insert(new User(i, "james" + i, "admin" + i, new Date(), 10000 + 0.1, new Date(), false));
         }
         long end = System.currentTimeMillis();
         return "insertForeach循环插入10000条数据一共用了:" + (end - start) + "豪秒!";

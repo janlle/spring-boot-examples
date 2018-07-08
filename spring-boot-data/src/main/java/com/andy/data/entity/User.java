@@ -1,6 +1,7 @@
 package com.andy.data.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,32 +12,41 @@ import java.util.Date;
 @Table(name = "t_user")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 7818773956573496180L;
+    public User() {
+    }
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+    public User(long userId, String account, String password, Date birthday, Double salary, Date createTime, Boolean deleted) {
+        this.userId = userId;
+        this.account = account;
+        this.password = password;
+        this.birthday = birthday;
+        this.salary = salary;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
 
-	private String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
 
-	private String password;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '账号'")
+    private String account;
 
-	private Date birthday;
-	
-	private String email;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
+    private String password;
 
-	private Double salary;
+    @Column(columnDefinition = "datetime NOT NULL COMMENT '生日'")
+    private Date birthday;
 
-	public User() {
-	}
+    @Column(columnDefinition = "double NOT NULL COMMENT '工资'")
+    private Double salary;
 
-	public User(Long id, String username, String password, Date birthday, String email, Double salary, String token) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.birthday = birthday;
-		this.email = email;
-		this.salary = salary;
-	}
+    @CreatedDate
+    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
+    private Date createTime;
+
+    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
+    private Boolean deleted;
+
 
 }

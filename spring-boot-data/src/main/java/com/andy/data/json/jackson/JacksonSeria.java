@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public class JacksonSeria {
 
-    private static User user = new User(1033L, "james", "admin", new Date(), "andy@gmail.com", 10000.00, "token");
+    private static User user = new User(1, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
 
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();

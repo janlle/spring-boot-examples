@@ -36,7 +36,7 @@ public class UserService {
 	public void insertUser(long userNum) {
 		log.info("开始插入操作，当前时间：{}", LocalDateTime.now());
 		for (long i = 0; i < userNum; i++) {
-			redisTemplate.opsForValue().set("user"+i,new User(i, "james"+i, "admin"+i, new Date(), "andy@gmail.com", 10000 + 0.1, "token:84dsajf823djsi"), 60, TimeUnit.SECONDS);
+			redisTemplate.opsForValue().set("user"+i,new User(i, "james" + i, "admin" + i, new Date(), 10000 + 0.1, new Date(), false), 60, TimeUnit.SECONDS);
 		}
 		log.info("结束插入操作，当前时间：{}", LocalDateTime.now());
 	}
@@ -45,7 +45,7 @@ public class UserService {
 	public void insertUserJpa(long userNum) {
 		log.info("开始插入操作，当前时间：{}", LocalDateTime.now());
 		for (long i = 0; i < userNum; i++) {
-			userRepository.save(new User(i, "james"+i, "admin"+i, new Date(), "andy@gmail.com", 10000 + 0.1, "token:84dsajf823djsi"));
+			userRepository.save(new User(i, "james" + i, "admin" + i, new Date(), 10000 + 0.1, new Date(), false));
 		}
 		log.info("结束插入操作，当前时间：{}", LocalDateTime.now());
 	}
@@ -53,7 +53,7 @@ public class UserService {
 	public void insertUserMybaits(long userNum) {
 		log.info("开始执入操作，当前时间：{}", LocalDateTime.now());
 		for (long i = 0; i < userNum; i++) {
-			userMapper.insert(new User(i, "james"+i, "admin"+i, new Date(), "andy@gmail.com", 10000 + 0.1, "token:84dsajf823djsi"));
+			userMapper.insert(new User(i, "james" + i, "admin" + i, new Date(), 10000 + 0.1, new Date(), false));
 		}
 		log.info("结束插入操作，当前时间：{}", LocalDateTime.now());
 	}
