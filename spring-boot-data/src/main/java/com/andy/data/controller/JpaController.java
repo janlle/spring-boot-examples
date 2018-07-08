@@ -47,14 +47,14 @@ public class JpaController {
         List<User> users = DataService.getUsers();
 //        userRepository.saveAll(users);
         long end = System.currentTimeMillis();
-        return "insertList批量插入"+ users.size() +"条数据一共用了:" + (end - start) + "豪秒！";
+        return "insertList批量插入" + users.size() + "条数据一共用了:" + (end - start) + "豪秒！";
     }
 
     @GetMapping("/insertForeach")
     public String insertForeach() {
         long start = System.currentTimeMillis();
         for (long i = 0; i < 10000; i++) {
-            userRepository.save(new User(i, "james" + i, "admin" + i, new Date(), "andy@gmail.com", 10000 + 0.1, "token:84dsajf823djsi"));
+            userRepository.save(new User(i, "james" + i, "admin" + i, new Date(), 10000 + 0.1, new Date(), false));
         }
         long end = System.currentTimeMillis();
         return "insertForeach循环插入10000条数据一共用了:" + (end - start) + "豪秒!";
@@ -75,7 +75,6 @@ public class JpaController {
         long end = System.currentTimeMillis();
         return "insertUserMybaits循环插入10000条数据一共用了:" + (end - start) + "豪秒!";
     }
-
 
 
 }
