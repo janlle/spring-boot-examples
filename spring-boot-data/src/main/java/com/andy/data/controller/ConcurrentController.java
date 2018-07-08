@@ -1,6 +1,6 @@
 package com.andy.data.controller;
 
-import com.andy.data.service.UserService;
+import com.andy.data.service.JpaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ public class ConcurrentController {
 
 
     @Autowired
-    private UserService userService;
+    private JpaService userService;
 
     private static Map<Integer, Boolean> data = new HashMap<>();
 

@@ -1,9 +1,8 @@
 package com.andy.data.json.jsonlib;
 
 import com.andy.data.entity.User;
-import com.andy.data.service.DataService;
+import com.andy.data.service.RedisService;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +26,7 @@ public class JsonlibSeria {
         //System.out.println(user);
 
 
-        JSONArray json = JSONArray.fromObject(DataService.getUsers());
+        JSONArray json = JSONArray.fromObject(RedisService.getUsers());
 
         List<User> users = JSONArray.toList(json, User.class);
 

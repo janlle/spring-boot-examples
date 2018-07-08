@@ -1,20 +1,20 @@
 package com.andy.data.serializ;
 
 import com.andy.data.entity.User;
-import com.andy.data.service.DataService;
+import com.andy.data.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * java serializable 序列化对象到磁盘，反序列化磁盘文件
+ *
  * @author: Mr.ruoLin
  * @createBy: 2018-05-11 22:32
  **/
 @Slf4j
-public class SerializEntity {
+public class SerializableEntity {
 
     private static User user = new User(1, "james" + 1, "admin" + 1, new Date(), 10000 + 0.1, new Date(), false);
 
@@ -39,7 +39,7 @@ public class SerializEntity {
         File obj = new File("D:\\tmp\\user.obj");
         OutputStream outputStream = new FileOutputStream(obj);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-        objectOutputStream.writeObject(DataService.getUsers());
+        objectOutputStream.writeObject(RedisService.getUsers());
         objectOutputStream.close();
     }
 

@@ -6,7 +6,7 @@
         <id column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="account" property="account" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
         <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="salary" property="salary" jdbcType="DOUBLE"/>
         <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
@@ -105,7 +105,7 @@
     </update>
 
     <insert id="insertList" parameterType="java.util.List">
-        INSERT INTO t_user (email, username, password, token, salary, birthday) VALUES
+        INSERT INTO t_user (account, password, salary, create_time, deleted, birthday) VALUES
         <foreach collection="users" item="user" index="inx" separator=",">
             <trim prefix="(" suffixOverrides="," suffix=")">
                 <choose>
@@ -137,7 +137,7 @@
 
                 <choose>
                     <when test="user.createTime != null">
-                        #{user.createTime,jdbcType=TIMESTAMP}
+                        #{user.createTime,jdbcType=TIMESTAMP},
                     </when>
                     <otherwise>
                         '2001-1-1',
@@ -146,7 +146,7 @@
 
                 <choose>
                     <when test="user.deleted != null">
-                        #{user.deleted,jdbcType=BOOLEAN}
+                        #{user.deleted,jdbcType=BOOLEAN},
                     </when>
                     <otherwise>
                         0,
@@ -158,7 +158,7 @@
                         #{user.birthday,jdbcType=TIMESTAMP}
                     </when>
                     <otherwise>
-                        '2001-1-1',
+                        '2001-1-1'
                     </otherwise>
                 </choose>
 

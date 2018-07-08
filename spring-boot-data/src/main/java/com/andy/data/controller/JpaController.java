@@ -2,18 +2,11 @@ package com.andy.data.controller;
 
 import com.andy.data.entity.User;
 import com.andy.data.jpa.repository.UserRepository;
-import com.andy.data.mybatis.mapper.UserMapper;
-import com.andy.data.service.DataService;
-import com.andy.data.service.UserService;
+import com.andy.data.service.JpaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +21,7 @@ import java.util.List;
 public class JpaController {
 
     @Autowired
-    private UserService userService;
+    private JpaService userService;
 
     @Autowired
     private UserRepository userRepository;

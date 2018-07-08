@@ -10,7 +10,7 @@ import java.util.List;
  * @author: Mr.ruoLin
  * @createBy: 2018-05-11 19:41
  **/
-public class DataService {
+public class JsonService {
 
     private static List<User> users = new ArrayList<>();
 

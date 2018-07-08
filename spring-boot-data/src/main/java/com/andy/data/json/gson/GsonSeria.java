@@ -1,8 +1,7 @@
 package com.andy.data.json.gson;
 
-import com.alibaba.fastjson.JSON;
 import com.andy.data.entity.User;
-import com.andy.data.service.DataService;
+import com.andy.data.service.RedisService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -33,7 +32,7 @@ public class GsonSeria {
 
 
 
-        String json = gson.toJson(DataService.getUsers());
+        String json = gson.toJson(RedisService.getUsers());
         List<User> users = gson.fromJson(json, new TypeToken<List<User>>(){}.getType());
 
         long end = System.currentTimeMillis();
