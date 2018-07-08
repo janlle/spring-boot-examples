@@ -26,8 +26,8 @@ public class UserDaoTest {
     @Test
     public void testAdd() {
         User user = new User();
-        user.setEmail("andy@163.com");
-        user.setUsername("andy");
+        user.setAccount("andy@163.com");
+        user.setPassword("andyPassword");
         User result = userRepository.save(user);
         log.info("user:", result);
 
