@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,56 +33,23 @@ public class MybatisController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @PostMapping("/insertOne")
-    public String insertOne(@RequestBody User user) {
-        log.info("user:{}", user);
-        long start = System.currentTimeMillis();
-        int result = userMapper.insert(new User(1L, "james" + 1L, "admin", new Date(), 10000 + 0.1, new Date(), false));
-        long end = System.currentTimeMillis();
-        return "insertOne一共用了:" + (end - start) + "豪秒！返回的结果是:" + result;
-    }
-
-    @GetMapping("/insertList")
-    public String insertList() {
-        long start = System.currentTimeMillis();
-        List<User> users = DataService.getUsers();
-        int result = userMapper.insertList(users);
-        long end = System.currentTimeMillis();
-        return "insertList批量插入"+ users.size() +"条数据一共用了:" + (end - start) + "豪秒！返回的结果是:" + result;
-    }
-
-    @GetMapping("/insertForeach")
-    public String insertForeach() {
-        long start = System.currentTimeMillis();
-        for (long i = 0; i < 10000; i++) {
-            userMapper.insert(new User(i, "james" + i, "admin" + i, new Date(), 10000 + 0.1, new Date(), false));
-        }
-        long end = System.currentTimeMillis();
-        return "insertForeach循环插入10000条数据一共用了:" + (end - start) + "豪秒!";
-    }
-
-
     @PostMapping("/update")
     public String update(@RequestBody User user) {
         long start = System.currentTimeMillis();
         int result = userMapper.updateById(user);
         long end = System.currentTimeMillis();
-        return "update1条数据一共用了:" + (end - start) + "豪秒!返回的结果是:" + result;
+        return "修改1条数据一共用了:" + (end - start) + "豪秒!返回的结果是:" + result;
     }
 
-
-    @GetMapping("/deleteById")
+    @GetMapping("/delete")
     public String deleteById(Long id) {
         long start = System.currentTimeMillis();
         int result = userMapper.deleteById(id);
         long end = System.currentTimeMillis();
-        return "deleteById1条数据一共用了:" + (end - start) + "豪秒!返回的结果是:" + result;
+        return "删除1条数据一共用了:" + (end - start) + "豪秒!返回的结果是:" + result;
     }
 
-    @GetMapping("/selectList")
+    @GetMapping("/list")
     public String selectList() {
         long start = System.currentTimeMillis();
         List<User> result = userMapper.selectAll();
@@ -89,27 +57,31 @@ public class MybatisController {
         return "selectList查询了:"+result.size()+"条数据一共用了:" + (end - start) + "豪秒!";
     }
 
-
-    @GetMapping("/selectById")
+    @GetMapping("/user")
     public User selectById(Long id) {
         return userMapper.selectById(id);
     }
 
-    @InitBinder
-    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        CustomDateEditor dateEditor = new CustomDateEditor(fmt, true);
-        binder.registerCustomEditor(Date.class, dateEditor);
-    }
-
-    @GetMapping("/insertUserMybaits")
-    public String insertUserMybaits() {
+    @GetMapping("/batchInsert")
+    public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
+        List<User> list = new ArrayList<>();
+        for (long i = 0; i < count; i++) {
+            list.add(new User("james" + i, "james" + i, new Date(), 1000.0 + i, new Date(), false));
+        }
         long start = System.currentTimeMillis();
-        userService.insertUserMybaits(10000);
+        userMapper.insertList(list);
         long end = System.currentTimeMillis();
-        return "insertUserMybaits循环插入10000条数据一共用了:" + (end - start) + "豪秒!";
+        return "批量插入" + count + "条数据一共用了:" + (end - start) + "豪秒！";
     }
 
-
+    @GetMapping("/foreachInsert")
+    public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
+        long start = System.currentTimeMillis();
+        for (long i = 0; i < count; i++) {
+            userMapper.insert(new User("james" + i, "james" + i, new Date(), 1000.0 + i, new Date(), false));
+        }
+        long end = System.currentTimeMillis();
+        return "循环插入" + count + "条数据一共用了:" + (end - start) + "豪秒!";
+    }
 
 }

@@ -24,6 +24,14 @@ public class User implements Serializable {
         this.createTime = createTime;
         this.deleted = deleted;
     }
+    public User(String account, String password, Date birthday, Double salary, Date createTime, Boolean deleted) {
+        this.account = account;
+        this.password = password;
+        this.birthday = birthday;
+        this.salary = salary;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
