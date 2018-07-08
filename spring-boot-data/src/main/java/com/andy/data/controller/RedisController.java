@@ -22,13 +22,13 @@ public class RedisController {
 
     @GetMapping("/batchInsert")
     public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = redisService.insertList(count);
+        long time = redisService.batchInsert(count);
         return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
     }
 
     @GetMapping("/foreachInsert")
     public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = redisService.insertForeach(count);
+        long time = redisService.foreachInsert(count);
         return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
     }
 
