@@ -1,6 +1,7 @@
 package com.andy.data.json.jackson;
 
 import com.andy.data.entity.User;
+import com.andy.data.service.JsonService;
 import com.andy.data.service.RedisService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +30,7 @@ public class JacksonSeria {
 
 
 
-        String json = mapper.writeValueAsString(RedisService.getUsers());
+        String json = mapper.writeValueAsString(JsonService.getUsers());
         List<User> users = mapper.readValue(json, new TypeReference<List<User>>() {});
 
         long end = System.currentTimeMillis();

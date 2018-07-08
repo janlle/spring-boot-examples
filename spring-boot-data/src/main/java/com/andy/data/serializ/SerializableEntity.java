@@ -1,6 +1,7 @@
 package com.andy.data.serializ;
 
 import com.andy.data.entity.User;
+import com.andy.data.service.JsonService;
 import com.andy.data.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,7 +40,7 @@ public class SerializableEntity {
         File obj = new File("D:\\tmp\\user.obj");
         OutputStream outputStream = new FileOutputStream(obj);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-        objectOutputStream.writeObject(RedisService.getUsers());
+        objectOutputStream.writeObject(JsonService.getUsers());
         objectOutputStream.close();
     }
 
