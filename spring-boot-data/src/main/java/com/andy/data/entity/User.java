@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "tb_user")
+@Table(name = "t_user")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 7818773956573496180L;
@@ -27,8 +27,6 @@ public class User implements Serializable {
 
 	private Double salary;
 
-	private String token;
-
 	public User() {
 	}
 
@@ -39,7 +37,6 @@ public class User implements Serializable {
 		this.birthday = birthday;
 		this.email = email;
 		this.salary = salary;
-		this.token = token;
 	}
 
 }

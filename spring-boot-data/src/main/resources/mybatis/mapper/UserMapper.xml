@@ -8,11 +8,10 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
     <result column="salary" property="salary" jdbcType="DOUBLE" />
-    <result column="token" property="token" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column" >
-    id, email, username, password, token, salary, birthday
+    id, email, username, salary, birthday
   </sql>
 
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -24,12 +23,10 @@
   </delete>
 
   <insert id="insert" parameterType="User" >
-    insert into t_user (email, username, password, token, salary, birthday )
+    insert into t_user (email, username, password, salary, birthday )
     values (
             #{email,jdbcType=VARCHAR},
             #{username,jdbcType=VARCHAR},
-            #{password,jdbcType=VARCHAR},
-            #{token,jdbcType=TIMESTAMP},
             #{salary,jdbcType=DOUBLE},
             #{birthday,jdbcType=TIMESTAMP}
     )
@@ -45,12 +42,6 @@
       <if test="username != null">
         username,
       </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="token != null">
-        token,
-      </if>
       <if test="salary != null">
         salary,
       </if>
@@ -65,12 +56,6 @@
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
       </if>
       <if test="salary != null">
         salary = #{salary,jdbcType=DOUBLE},
@@ -96,12 +81,6 @@
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
-      </if>
       <if test="salary != null">
         salary = #{salary,jdbcType=DOUBLE},
       </if>
@@ -118,8 +97,6 @@
     update t_user set
       email = #{email,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      token = #{token,jdbcType=VARCHAR},
       salary = #{salary,jdbcType=DOUBLE},
       birthday = #{birthday,jdbcType=TIMESTAMP},
     where id = #{id,jdbcType=BIGINT}
@@ -144,24 +121,6 @@
               </when>
               <otherwise>
                 'def-andy',
-              </otherwise>
-            </choose>
-
-            <choose>
-              <when test="user.password != null">
-                #{user.password,jdbcType=VARCHAR},
-              </when>
-              <otherwise>
-                'def-password',
-              </otherwise>
-            </choose>
-
-            <choose>
-              <when test="user.token != null">
-                #{user.token,jdbcType=VARCHAR},
-              </when>
-              <otherwise>
-                'def-token',
               </otherwise>
             </choose>
 
