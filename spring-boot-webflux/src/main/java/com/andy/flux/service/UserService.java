@@ -28,7 +28,7 @@ public class UserService {
 
     public Mono<User> getUserById(String id) {
         return Mono.justOrEmpty(users.stream().filter(user ->
-            user.getId().equals(id)
+                user.getId().equals(id)
         ).findFirst().orElse(null));
     }
 
@@ -65,8 +65,6 @@ public class UserService {
     Mono<User> delete(final String id) {
         return Mono.justOrEmpty(this.data.remove(id));
     }
-
-
 
 
     /**

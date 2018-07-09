@@ -35,6 +35,7 @@ public class UserHandler {
         return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
                 .body(Mono.just("Now is " + new SimpleDateFormat("HH:mm:ss").format(new Date())), String.class);
     }
+
     public Mono<ServerResponse> getDate(ServerRequest request) {
         return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
                 .body(Mono.just("Today is " + new SimpleDateFormat("yyyy-MM-dd").format(new Date())), String.class);
@@ -57,12 +58,12 @@ public class UserHandler {
         }).flatMap(aBoolean -> {
             Map<String, String> result = new HashMap<>();
             ServerResponse serverResponse = null;
-            if (aBoolean){
+            if (aBoolean) {
                 result.put("message", "successful");
                 return ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .body(BodyInserters.fromObject(result));
-            }else {
+            } else {
                 result.put("message", "failed");
                 return ServerResponse.status(HttpStatus.BAD_REQUEST)
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
