@@ -1,185 +1,188 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.andy.data.mybatis.mapper.UserMapper" >
+<mapper namespace="com.andy.data.mybatis.mapper.UserMapper">
 
-  <resultMap id="BaseResultMap" type="com.andy.data.entity.User" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
-    <result column="salary" property="salary" jdbcType="DOUBLE" />
-    <result column="token" property="token" jdbcType="VARCHAR" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.andy.data.entity.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="salary" property="salary" jdbcType="DOUBLE"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <sql id="Base_Column" >
-    id, email, username, password, token, salary, birthday
-  </sql>
+    <sql id="Base_Column">
+        id, email, username, password, token, salary, birthday
+    </sql>
 
-  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select <include refid="Base_Column" /> from t_user where id = #{id,jdbcType=BIGINT}
-  </select>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column"/>
+        from t_user where id = #{id,jdbcType=BIGINT}
+    </select>
 
-  <delete id="deleteById" parameterType="java.lang.Long" >
-    delete from t_users where id = #{id}
-  </delete>
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from t_users
+        where id = #{id}
+    </delete>
 
-  <insert id="insert" parameterType="User" >
-    insert into t_user (email, username, password, token, salary, birthday )
-    values (
+    <insert id="insert" parameterType="User">
+        insert into t_user (email, username, password, token, salary, birthday)
+        values (
             #{email,jdbcType=VARCHAR},
             #{username,jdbcType=VARCHAR},
             #{password,jdbcType=VARCHAR},
             #{token,jdbcType=TIMESTAMP},
             #{salary,jdbcType=DOUBLE},
             #{birthday,jdbcType=TIMESTAMP}
-    )
-  </insert>
+        )
+    </insert>
 
 
-  <insert id="insertSelective" parameterType="User" >
-    insert into t_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="email != null">
-        email,
-      </if>
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="token != null">
-        token,
-      </if>
-      <if test="salary != null">
-        salary,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-    </trim>
-  VALUES
-    <trim prefix="(" suffixOverrides="," suffix=")">
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
-      </if>
-      <if test="salary != null">
-        salary = #{salary,jdbcType=DOUBLE},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+    <insert id="insertSelective" parameterType="User">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="email != null">
+                email,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="token != null">
+                token,
+            </if>
+            <if test="salary != null">
+                salary,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                token = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="salary != null">
+                salary = #{salary,jdbcType=DOUBLE},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
 
-  <update id="updateByIdSelective" parameterType="User" >
-    update t_user
-    <set>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="token != null">
-        token = #{token,jdbcType=VARCHAR},
-      </if>
-      <if test="salary != null">
-        salary = #{salary,jdbcType=DOUBLE},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <update id="updateByIdSelective" parameterType="User">
+        update t_user
+        <set>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                token = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="salary != null">
+                salary = #{salary,jdbcType=DOUBLE},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
 
+    <update id="updateById" parameterType="User">
+        update t_user
+        set
+            email    = #{email,jdbcType=VARCHAR},
+            username = #{username,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            token    = #{token,jdbcType=VARCHAR},
+            salary   = #{salary,jdbcType=DOUBLE},
+            birthday = #{birthday,jdbcType=TIMESTAMP},
+            where id = #{id,jdbcType=BIGINT}
+    </update>
 
-  <update id="updateById" parameterType="User" >
-    update t_user set
-      email = #{email,jdbcType=VARCHAR},
-      username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      token = #{token,jdbcType=VARCHAR},
-      salary = #{salary,jdbcType=DOUBLE},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <insert id="insertList" parameterType="java.util.List">
+        INSERT INTO t_user (email, username, password, token, salary, birthday) VALUES
+        <foreach collection="users" item="user" index="inx" separator=",">
+            <trim prefix="(" suffixOverrides="," suffix=")">
+                <choose>
+                    <when test="user.email != null">
+                        #{user.email,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        'user@163.com',
+                    </otherwise>
+                </choose>
 
-  <insert id="insertList" parameterType="java.util.List">
-    INSERT INTO t_user (email, username, password, token, salary, birthday) VALUES
-    <foreach collection="users" item="user" index="inx" separator=",">
-          <trim prefix="(" suffixOverrides="," suffix=")">
-            <choose>
-              <when test="user.email != null">
-                #{user.email,jdbcType=VARCHAR},
-              </when>
-              <otherwise>
-                'user@163.com',
-              </otherwise>
-            </choose>
+                <choose>
+                    <when test="user.username != null">
+                        #{user.username,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        'def-andy',
+                    </otherwise>
+                </choose>
 
-            <choose>
-              <when test="user.username != null">
-                #{user.username,jdbcType=VARCHAR},
-              </when>
-              <otherwise>
-                'def-andy',
-              </otherwise>
-            </choose>
+                <choose>
+                    <when test="user.password != null">
+                        #{user.password,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        'def-password',
+                    </otherwise>
+                </choose>
 
-            <choose>
-              <when test="user.password != null">
-                #{user.password,jdbcType=VARCHAR},
-              </when>
-              <otherwise>
-                'def-password',
-              </otherwise>
-            </choose>
+                <choose>
+                    <when test="user.token != null">
+                        #{user.token,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        'def-token',
+                    </otherwise>
+                </choose>
 
-            <choose>
-              <when test="user.token != null">
-                #{user.token,jdbcType=VARCHAR},
-              </when>
-              <otherwise>
-                'def-token',
-              </otherwise>
-            </choose>
+                <choose>
+                    <when test="user.salary != null">
+                        #{user.salary,jdbcType=DOUBLE},
+                    </when>
+                    <otherwise>
+                        salary = 0.00,
+                    </otherwise>
+                </choose>
 
-            <choose>
-              <when test="user.salary != null">
-                #{user.salary,jdbcType=DOUBLE},
-              </when>
-              <otherwise>
-                salary = 0.00,
-              </otherwise>
-            </choose>
+                <choose>
+                    <when test="user.birthday != null">
+                        #{user.birthday,jdbcType=TIMESTAMP}
+                    </when>
+                    <otherwise>
+                        '2001-1-1',
+                    </otherwise>
+                </choose>
 
-            <choose>
-              <when test="user.birthday != null">
-                #{user.birthday,jdbcType=TIMESTAMP}
-              </when>
-              <otherwise>
-                '2001-1-1',
-              </otherwise>
-            </choose>
-
-          </trim>
+            </trim>
         </foreach>
-  </insert>
+    </insert>
 
 </mapper>
