@@ -18,16 +18,19 @@ import javax.annotation.PreDestroy;
 public class RedisConfig {
     @Autowired
     private RedisConnectionFactory factory;
+
     @Bean
-    public ReactiveRedisTemplate<String, String> reactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory){
+    public ReactiveRedisTemplate<String, String> reactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
         return new ReactiveRedisTemplate<String, String>(connectionFactory, RedisSerializationContext.string());
     }
+
     @Bean
-    public ReactiveRedisConnection connection(ReactiveRedisConnectionFactory connectionFactory){
+    public ReactiveRedisConnection connection(ReactiveRedisConnectionFactory connectionFactory) {
         return connectionFactory.getReactiveConnection();
     }
 
-    public @PreDestroy void flushDb(){
+    public @PreDestroy
+    void flushDb() {
         factory.getConnection().flushDb();
     }
 }
