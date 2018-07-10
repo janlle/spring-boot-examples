@@ -15,18 +15,18 @@ import java.io.Serializable;
 @Entity
 @Table(name = "t_user")
 public class User implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String id;
+    private static final long serialVersionUID = 1L;
 
-	@Column
-	private String username;
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
 
-	@Column
-	private String email;
-	
+    @Column
+    private String username;
+
+    @Column
+    private String email;
+
 }
