@@ -1,7 +1,3 @@
-server:
-  port: 8086
-  servlet:
-    path: /
 spring:
   session:
     store-type: redis
