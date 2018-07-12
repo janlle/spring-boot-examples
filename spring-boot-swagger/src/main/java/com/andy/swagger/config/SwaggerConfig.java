@@ -2,6 +2,7 @@ package com.andy.swagger.config;
 
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.schema.ModelRef;
@@ -20,7 +21,7 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
  * @Author: Mr.lyon
  * @CreateBy: 2018-07-12 20:12
  **/
-@EnableSwagger2
+@Component
 public class SwaggerConfig {
 
     @Bean
@@ -46,8 +47,8 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("API")
-                .description("接口")
-                .version("1.0")
+                .description("web接口文档")
+                .version("v1.0.0")
                 .termsOfServiceUrl("http://www.baidu.com")
                 .contact(new Contact("aa", "bb", "cc"))
                 .license("Apache2.0")

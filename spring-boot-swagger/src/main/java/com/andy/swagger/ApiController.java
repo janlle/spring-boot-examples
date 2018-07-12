@@ -3,6 +3,7 @@ package com.andy.swagger;
 import com.andy.swagger.entity.UserForm;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -14,25 +15,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/web/user")
 public class ApiController {
 
-    @ApiImplicitParam(value = "查询用户列表")
+    @ApiOperation(value = "查询用户列表")
     @GetMapping("/list")
     public String list() {
         return "list";
     }
 
-    @ApiImplicitParam(value = "保存用户")
+    @ApiOperation(value = "保存用户")
     @PostMapping
     public String save(@RequestBody UserForm userForm) {
         return "save";
     }
 
-    @ApiImplicitParam(value = "删除用户")
+    @ApiOperation(value = "删除用户")
     @DeleteMapping
     public String delete() {
         return "delete";
     }
 
-    @ApiImplicitParam(value = "修改用户")
+    @ApiOperation(value = "修改用户")
     @PutMapping
     public String update() {
         return "update";
