@@ -1,4 +1,4 @@
-package com.andy.document;
+package com.andy.swagger;
 
 import com.didispace.swagger.butler.EnableSwaggerButler;
 import org.springframework.boot.SpringApplication;
