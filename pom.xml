@@ -5,7 +5,7 @@
 
     <groupId>com.andy</groupId>
     <artifactId>spring-boot-examples</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1.RELEASE</version>
 
     <packaging>pom</packaging>
 
@@ -52,7 +52,7 @@
         <module>spring-boot-starter</module>
         <module>spring-boot-session</module>
         <module>spring-boot-task</module>
-        <module>spring-boot-document</module>
+        <module>spring-boot-swagger</module>
         <module>spring-boot-dubbo</module>
         <module>spring-boot-log</module>
         <module>spring-boot-aop</module>
@@ -74,6 +74,26 @@
                 </configuration>
                 <version>3.7.0</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.2</version>
+                <!--<executions>-->
+                <!--<execution>-->
+                <!--<id>set-new-version</id>-->
+                <!--<goals>-->
+                <!--<goal>set</goal>-->
+                <!--</goals>-->
+                <!--<phase>validate</phase>-->
+                <!--<configuration>-->
+                <!--<generateBackupPoms>false</generateBackupPoms>-->
+                <!--<newVersion>${new-user-version}</newVersion>-->
+                <!--</configuration>-->
+                <!--</execution>-->
+                <!--</executions>-->
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
