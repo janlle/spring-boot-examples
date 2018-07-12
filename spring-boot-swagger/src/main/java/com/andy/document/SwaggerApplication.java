@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 @EnableSwaggerButler
 @SpringBootApplication
-public class StaticApplication {
+public class SwaggerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(StaticApplication.class);
+        SpringApplication.run(SwaggerApplication.class);
     }
 }
