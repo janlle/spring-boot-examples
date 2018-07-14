@@ -20,8 +20,8 @@ public class DataService {
             if (flag) {
                 Thread.sleep(200);
                 byte[][] bytes = new byte[1024][1024];
-                break;
             }
+            System.out.println(i);
         }
     }
 
