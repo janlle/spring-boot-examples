@@ -46,11 +46,11 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.didispace</groupId>
-            <artifactId>swagger-butler-core</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.didispace</groupId>-->
+            <!--<artifactId>swagger-butler-core</artifactId>-->
+            <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>io.springfox</groupId>
