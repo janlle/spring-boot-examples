@@ -1,6 +1,6 @@
 package com.andy.swagger;
 
-import com.didispace.swagger.butler.EnableSwaggerButler;
+//import com.didispace.swagger.butler.EnableSwaggerButler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
