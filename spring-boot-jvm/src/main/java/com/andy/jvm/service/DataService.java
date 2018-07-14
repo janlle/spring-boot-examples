@@ -2,13 +2,14 @@ package com.andy.jvm.service;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author: Mr.lyon
  * @CreateBy: 2018-07-14 14:09
  **/
 @Slf4j
-@Data
+@Service
 public class DataService {
 
     private Boolean flag = true;
