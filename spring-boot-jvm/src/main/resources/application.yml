@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-jvm
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    show-sql: true
+    open-in-view: false
