@@ -22,6 +22,6 @@ public class UserServiceImpl implements UserService {
         if (new Random().nextBoolean()) {
             throw new RuntimeException("UserService发生异常");
         }
-        return new User(id, "username", "user@126.com", 12000.0, new Date());
+        return new User(1L, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
     }
 }
