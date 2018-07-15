@@ -26,7 +26,7 @@ public class RabbitMQController {
         User user = new User(1L, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
 
         if (target.equals("topic")) {
-            messageSender.sendTopic(RabbitMQConstant.TOPIC_EXCHANGE, RabbitMQConstant.KEY_A, "topic类型交换机发送的内容！");
+            messageSender.sendTopic(RabbitMQConstant.TOPIC_EXCHANGE, RabbitMQConstant.KEY_A, message);
         } else if (target.equals("fanout")) {
             messageSender.sendFanout(RabbitMQConstant.FANOUT_EXCHANGE, "fanout类型交换机发送的内容！");
         } else if (target.equals("direct")) {
