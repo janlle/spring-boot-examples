@@ -30,7 +30,7 @@ public class RabbitMQController {
         } else if (target.equals("fanout")) {
             messageSender.sendFanout(RabbitMQConstant.FANOUT_EXCHANGE, "fanout类型交换机发送的内容！");
         } else if (target.equals("direct")) {
-            messageSender.sendTopic(RabbitMQConstant.DIRECT_EXCHANGE, RabbitMQConstant.KEY_A, "direct类型交换机发送的内容！");
+            messageSender.sendDirect(RabbitMQConstant.DIRECT_EXCHANGE, "direct类型交换机发送的内容！");
         } else if (target.equals("headers")) {
             messageSender.sendHeaders(RabbitMQConstant.HEADERS_EXCHANGE, "header类型交换机发送的内容！");
         } else {

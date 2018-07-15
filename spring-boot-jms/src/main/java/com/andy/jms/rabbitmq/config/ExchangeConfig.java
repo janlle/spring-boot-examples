@@ -55,7 +55,7 @@ public class ExchangeConfig {
     }
 
 
-    // ----------------------扇形交换机(广播):Fanout exchangeFanout----------------------
+    // ----------------------扇形交换机(广播):Fanout ----------------------
     @Bean
     public FanoutExchange fanoutExchange() {
         return new FanoutExchange(RabbitMQConstant.FANOUT_EXCHANGE);
@@ -75,11 +75,6 @@ public class ExchangeConfig {
 
     // ----------------------首部交换机:Headers exchange----------------------
     @Bean
-    public Queue headersQueue() {
-        return new Queue(RabbitMQConstant.QUEUE_A);
-    }
-
-    @Bean
     public HeadersExchange headersExchange() {
         return new HeadersExchange(RabbitMQConstant.HEADERS_EXCHANGE);
     }
@@ -88,12 +83,26 @@ public class ExchangeConfig {
     @Bean
     public Binding headersBinding() {
         Map<String, Object> map = new HashMap<>();
-        map.put("headera", "valuea");
-        map.put("headerb", "valueb");
-        return BindingBuilder.bind(headersQueue()).to(headersExchange()).whereAll(map).match();
+        map.put("header-a", "value-a");
+        map.put("header-b", "value-b");
+        return BindingBuilder.bind(queueF).to(headersExchange()).whereAll(map).match();
     }
 
 
     // ----------------------直连交换机:Direct exchange----------------------
+    @Bean
+    public DirectExchange directExchange() {
+        return new DirectExchange(RabbitMQConstant.DIRECT_EXCHANGE);
+    }
+
+    @Bean
+    public Binding directBindingA() {
+        return BindingBuilder.bind(queueD).to(directExchange()).with(RabbitMQConstant.KEY_C);
+    }
+
+    @Bean
+    public Binding directBindingB() {
+        return BindingBuilder.bind(queueE).to(directExchange()).with(RabbitMQConstant.KEY_D);
+    }
 
 }
