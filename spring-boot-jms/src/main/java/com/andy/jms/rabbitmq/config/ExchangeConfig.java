@@ -37,31 +37,31 @@ public class ExchangeConfig {
     private Queue queueF;
 
 
-    //----------------------主题交换机:Topic exchange----------------------
+    // ----------------------主题交换机:Topic exchange----------------------
     @Bean
     public TopicExchange topicExchange() {
         return new TopicExchange(RabbitMQConstant.TOPIC_EXCHANGE);
     }
 
-    //把队列和交换机绑定 *表示一个词,#表示零个或多个词
+    // 把队列和交换机绑定 *表示一个词,#表示任意数量（零个或多个）单词。
     @Bean
     public Binding topicBindingA() {
-        return BindingBuilder.bind(queueA).to(topicExchange()).with("topic.message");
+        return BindingBuilder.bind(queueB).to(topicExchange()).with(RabbitMQConstant.KEY_A);
     }
 
     @Bean
     public Binding topicBindingB() {
-        return BindingBuilder.bind(queueB).to(topicExchange()).with("topic.#");
+        return BindingBuilder.bind(queueC).to(topicExchange()).with(RabbitMQConstant.KEY_B);
     }
 
 
-
-    //----------------------扇形交换机(广播):Fanout exchangeFanout----------------------
+    // ----------------------扇形交换机(广播):Fanout exchangeFanout----------------------
     @Bean
     public FanoutExchange fanoutExchange() {
         return new FanoutExchange(RabbitMQConstant.FANOUT_EXCHANGE);
     }
-    //把队列和交换机绑定
+
+    // 把队列和交换机绑定
     @Bean
     public Binding fanoutBindingA() {
         return BindingBuilder.bind(queueC).to(fanoutExchange());
@@ -73,8 +73,7 @@ public class ExchangeConfig {
     }
 
 
-
-    //----------------------首部交换机:Headers exchange----------------------
+    // ----------------------首部交换机:Headers exchange----------------------
     @Bean
     public Queue headersQueue() {
         return new Queue(RabbitMQConstant.QUEUE_A);
@@ -84,7 +83,8 @@ public class ExchangeConfig {
     public HeadersExchange headersExchange() {
         return new HeadersExchange(RabbitMQConstant.HEADERS_EXCHANGE);
     }
-    //把队列和交换机绑定
+
+    // 把队列和交换机绑定
     @Bean
     public Binding headersBinding() {
         Map<String, Object> map = new HashMap<>();
@@ -94,6 +94,6 @@ public class ExchangeConfig {
     }
 
 
-    //----------------------直连交换机:Direct exchange----------------------
+    // ----------------------直连交换机:Direct exchange----------------------
 
 }
