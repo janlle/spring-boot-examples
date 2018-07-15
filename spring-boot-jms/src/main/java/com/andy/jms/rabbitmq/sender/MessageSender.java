@@ -17,14 +17,16 @@ public class MessageSender {
 
     //-------------------------普通队列模式-------------------------------
     public void sendQueue(String queue, Object msg) {
-        log.info("发送到{}队列的消息是:{}", queue, msg);
+        log.info("发到:{},队列的消息是:{}", queue, msg);
         template.convertAndSend(queue, msg);
     }
+
+
 
     //-------------------------direct类型的交换机(直连模式)------------------------
     public void sendDirect(String exchange, Object msg) {
         template.convertAndSend(exchange, "", msg);
-        log.info("发送到{}交换机,发送的消息是:{}", exchange, msg);
+        log.info("发到:{},交换机,发送的消息是:{}", exchange, msg);
     }
 
 
@@ -32,14 +34,14 @@ public class MessageSender {
     public void sendTopic(String exchange, String key, Object msg) {
         template.convertAndSend(exchange, RabbitMQConstant.KEY_A, msg + "a");
         template.convertAndSend(exchange, RabbitMQConstant.KEY_B, msg + "b");
-        log.info("发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_A, msg);
-        log.info("发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_B, msg);
+        log.info("发到:{},交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_A, msg);
+        log.info("发到:{},交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_B, msg);
     }
 
     //------------------------- fanout类型的交换机(广播模式)-----------------------
     public void sendFanout(String exchange, Object msg) {
         template.convertAndSend(exchange, "", msg);
-        log.info("发送到{}交换机,发送的消息是:{}", exchange, msg);
+        log.info("发到:{},交换机,发送的消息是:{}", exchange, msg);
     }
 
     //-------------------------headers类型的交换机(首部模式)------------------------
@@ -50,7 +52,7 @@ public class MessageSender {
 
         Message object = new Message(msg.getBytes(), properties);
         template.convertAndSend(exchange, "", object);
-        log.info("发送到{}交换机,发送的消息是:{}", exchange, msg);
+        log.info("发到:{},交换机,发送的消息是:{}", exchange, msg);
     }
 
 }
