@@ -1,6 +1,6 @@
 package com.other.common.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 
