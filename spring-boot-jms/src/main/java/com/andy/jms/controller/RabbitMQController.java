@@ -23,15 +23,15 @@ public class RabbitMQController {
 
     @ApiOperation("发送消息的接口")
     @GetMapping("/send/{msg}")
-    public String send(@PathVariable("msg")String msg) {
+    public String send(@PathVariable("msg") String msg) {
         if (msg.equals("user")) {
-            messageSender.queueSend(AMQPConstant.QUEUE_A, new User(1222,"james","james@126.com",2300.0,new Date()));
+            messageSender.queueSend(AMQPConstant.QUEUE_A, new User(1L, "james", "admin", new Date(), 10000 + 0.1, new Date(), false));
         } else if (msg.equals("topic")) {
-            messageSender.sendTopic(AMQPConstant.TOPIC_EXCHANGE,AMQPConstant.KEY_A, "topic类型交换机发送的内容！");
+            messageSender.sendTopic(AMQPConstant.TOPIC_EXCHANGE, AMQPConstant.KEY_A, "topic类型交换机发送的内容！");
         } else if (msg.equals("fanout")) {
             messageSender.sendFanout(AMQPConstant.FANOUT_EXCHANGE, "fanout类型交换机发送的内容！");
         } else if (msg.equals("direct")) {
-            messageSender.sendTopic(AMQPConstant.TOPIC_EXCHANGE,AMQPConstant.KEY_A, "direct类型交换机发送的内容！");
+            messageSender.sendTopic(AMQPConstant.TOPIC_EXCHANGE, AMQPConstant.KEY_A, "direct类型交换机发送的内容！");
         } else if (msg.equals("headers")) {
             messageSender.sendHeaders(AMQPConstant.HEADERS_EXCHANGE, "header类型交换机发送的内容！");
         } else {

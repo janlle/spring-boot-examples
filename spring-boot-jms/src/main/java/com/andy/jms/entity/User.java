@@ -8,18 +8,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+@AllArgsConstructor
+public class User {
 
-	private long id;
+    private Long userId;
 
-	private String username;
-	
-	private String email;
+    private String account;
 
-	private Double salary;
+    private String password;
 
-	private Date birthday;
+    private Date birthday;
+
+    private Double salary;
+
+    private Date createTime;
+
+    private Boolean deleted;
 
 }
