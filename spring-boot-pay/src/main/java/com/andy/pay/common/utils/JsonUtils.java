@@ -18,6 +18,7 @@ public final class JsonUtils {
 
     /**
      * 根据对象生成json,支持map，list，bean对象
+     *
      * @param object JavaBean对象
      * @return json字符串
      * @throws RuntimeException
@@ -45,6 +46,7 @@ public final class JsonUtils {
 
     /**
      * jsonString转化为java对象
+     *
      * @param jsonString 原始json字符串数据
      * @param clazz      要转换的JavaBean类型
      * @return JavaBean对象
