@@ -1,6 +1,5 @@
 package com.andy.jvm.service;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ public class DataService {
         log.info("count:{}", count);
         for (int i = 0; i < count; i++) {
             if (flag) {
-                Thread.sleep(200);
+                Thread.sleep(100);
                 byte[][] bytes = new byte[1024][1024];
             }
             System.out.println(i);
