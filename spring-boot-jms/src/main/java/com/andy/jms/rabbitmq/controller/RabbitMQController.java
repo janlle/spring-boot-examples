@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
+/**
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-05-15 21:41
+ **/
 @Slf4j
 @RestController
 public class RabbitMQController {
