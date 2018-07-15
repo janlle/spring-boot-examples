@@ -5,9 +5,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
@@ -19,7 +22,8 @@ import java.security.MessageDigest;
 import java.util.*;
 
 /**
- * 工程中常用工具
+ * 项目常用工具
+ *
  * @author: Mr.ruoLin
  * @createBy: 2018-05-10
  **/
@@ -46,6 +50,7 @@ public class AppUtils {
 
     /**
      * 生成md5签名的方法
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 14:59
      * @params: [charset, params, apiKey]
@@ -53,8 +58,8 @@ public class AppUtils {
      **/
     public static String createSign(String charset, Map params, String apiKey) {
         StringBuffer sb = new StringBuffer();
-        Set es = params.entrySet();
-        Iterator it = es.iterator();
+        Set set = params.entrySet();
+        Iterator it = set.iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
             String k = (String) entry.getKey();
@@ -64,73 +69,73 @@ public class AppUtils {
             }
         }
         sb.append("key=" + apiKey);
-        return MD5Encode(sb.toString(), charset).toUpperCase();
+        return MD5(sb.toString()).toUpperCase();
     }
 
     /**
      * 生成MD5摘要算法
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:00
      * @params: [message, charset]
      * @return: java.lang.String
      **/
-    public static String MD5Encode(String message, String charset) {
-        String result = null;
+    public static String MD5(String content) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            byte[] buff;
-            if (charset == null || "".equals(charset)) {
-                buff = messageDigest.digest(message.getBytes());
-            } else {
-                buff = messageDigest.digest(message.getBytes(charset));
-            }
-            StringBuffer sb = new StringBuffer();
-            int digital;
-            for (int i = 0; i < buff.length; i++) {
-                digital = buff[i];
-                if(digital < 0) {
-                    digital += 256;
-                }
-                if(digital < 16){
-                    sb.append("0");
-                }
-                sb.append(Integer.toHexString(digital));
-            }
-            result = sb.toString().toUpperCase();
+            byte[] hashCode = messageDigest.digest(content.getBytes("UTF-8"));
+            HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
+            return hexBinaryAdapter.marshal(hashCode).toLowerCase();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return null;
     }
 
     /**
      * 生成 HMAC_SHA256
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:01
      * @params: [data, key]
      * @return: java.lang.String
      **/
-    public static String HMAC_SHA256(String data, String key) throws Exception {
-        Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
-        SecretKeySpec secret_key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
-        sha256_HMAC.init(secret_key);
-        byte[] array = sha256_HMAC.doFinal(data.getBytes("UTF-8"));
-        StringBuilder sb = new StringBuilder();
-        for (byte item : array) {
-            sb.append(Integer.toHexString((item & 0xFF) | 0x100).substring(1, 3));
+    public static String HMAC_SHA256(String content, String api_key) throws Exception {
+//        Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
+//        SecretKeySpec secret_key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
+//        sha256_HMAC.init(secret_key);
+//        byte[] array = sha256_HMAC.doFinal(content.getBytes("UTF-8"));
+//        StringBuilder sb = new StringBuilder();
+//        for (byte item : array) {
+//            sb.append(Integer.toHexString((item & 0xFF) | 0x100).substring(1, 3));
+//        }
+//        return sb.toString().toUpperCase();
+        try {
+            KeyGenerator generator = KeyGenerator.getInstance("HmacSHA256");
+            SecretKey secretKey = generator.generateKey();
+            byte[] key = secretKey.getEncoded();
+            SecretKey secretKeySpec = new SecretKeySpec(api_key.getBytes(), "HmacSHA256");
+            Mac mac = Mac.getInstance(secretKeySpec.getAlgorithm());
+            mac.init(secretKeySpec);
+            byte[] digest = mac.doFinal(content.getBytes());
+            return new HexBinaryAdapter().marshal(digest).toLowerCase();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return sb.toString().toUpperCase();
+        return null;
+
     }
 
 
     /**
      * XML格式字符串转换为Map
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:02
      * @params: [xmlStr]
      * @return: java.util.Map
      **/
-    public static Map xmlToMap(String xmlStr)  {
+    public static Map xmlToMap(String xmlStr) {
         try (InputStream inputStream = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"))) {
             Map<String, String> data = new HashMap<>();
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -155,6 +160,7 @@ public class AppUtils {
 
     /**
      * map转换为xml字符串
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:02
      * @params: [params]
@@ -177,6 +183,7 @@ public class AppUtils {
 
     /**
      * 生成32位随机数字
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:02
      * @params: []
@@ -188,6 +195,7 @@ public class AppUtils {
 
     /**
      * 获取当前时间戳，单位秒(10位)
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:02
      * @params: []
@@ -199,6 +207,7 @@ public class AppUtils {
 
     /**
      * 生成32位字符串
+     *
      * @author: Mr.lyon
      * @createBy: 2018/6/3 15:02
      * @params: []
@@ -221,7 +230,7 @@ public class AppUtils {
         System.out.println(genNonceStr());
         System.out.println(getTimestamp());
         System.out.println(generateNum(6));
-        System.out.println(MD5Encode("hello", "UTF-8"));
+        System.out.println(MD5("hello"));
     }
 
     public static String getIp(HttpServletRequest request) {
