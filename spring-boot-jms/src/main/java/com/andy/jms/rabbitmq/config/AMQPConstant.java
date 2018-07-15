@@ -9,6 +9,10 @@ public interface AMQPConstant {
     // 普通消息队列
     String QUEUE_A = "queue-a";
     String QUEUE_B = "queue-b";
+    String QUEUE_C = "queue-c";
+    String QUEUE_D = "queue-d";
+    String QUEUE_E = "queue-e";
+    String QUEUE_F = "queue-f";
 
     // headers 消息队列
     String HEADERS_QUEUE = "headers-queue";
