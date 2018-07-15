@@ -18,14 +18,14 @@ public class MessageSender {
     //-------------------------普通队列模式-------------------------------
     public void queueSend(String queue, Object msg) {
         log.info("send message发送到queue-a队列的消息是:{}", msg);
-        template.convertAndSend(queue,msg);
+        template.convertAndSend(queue, msg);
     }
 
     //-------------------------direct类型的交换机()-------------------------------
     //-------------------------topic类型的交换机()-------------------------------
     public void sendTopic(String exchange, String key, Object msg) {
-        template.convertAndSend(exchange, AMQPConstant.KEY_A, msg+"a");
-        template.convertAndSend(exchange, AMQPConstant.KEY_B, msg+"b");
+        template.convertAndSend(exchange, AMQPConstant.KEY_A, msg + "a");
+        template.convertAndSend(exchange, AMQPConstant.KEY_B, msg + "b");
         log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, AMQPConstant.KEY_A, msg);
         log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, AMQPConstant.KEY_B, msg);
     }

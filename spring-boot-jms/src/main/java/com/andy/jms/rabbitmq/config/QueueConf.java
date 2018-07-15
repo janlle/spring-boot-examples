@@ -15,6 +15,8 @@ public class QueueConf {
      public Queue queue() {
           return new Queue(AMQPConstant.QUEUE_A);
      }
+
+
      //----------------------topic模式 交换机----------------------
      @Bean
      public Queue topicQueueA() {
