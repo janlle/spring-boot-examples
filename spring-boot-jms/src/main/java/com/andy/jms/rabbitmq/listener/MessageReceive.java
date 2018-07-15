@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageReceive {
 
+
     //-------------------------普通队列模式`-------------------------------
     @RabbitListener(queues = RabbitMQConstant.QUEUE_A)
     public void receiveQueue(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("收到:{}队列的消息是:{}", RabbitMQConstant.QUEUE_A, msg);
+        log.info("收到:{}队列的消息是:{},receiveQueue", RabbitMQConstant.QUEUE_A, msg);
     }
 
 
@@ -21,13 +22,13 @@ public class MessageReceive {
     @RabbitListener(queues = RabbitMQConstant.QUEUE_B)
     public void receiveTopicA(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("收到:{}交换机的消息是:{}", RabbitMQConstant.TOPIC_EXCHANGE, msg);
+        log.info("收到:{}交换机的消息是:{},receiveTopicA", RabbitMQConstant.TOPIC_EXCHANGE, msg);
     }
 
     @RabbitListener(queues = RabbitMQConstant.QUEUE_C)
     public void receiveTopicB(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("收到:{}交换机的消息是:{}", RabbitMQConstant.TOPIC_EXCHANGE, msg);
+        log.info("收到:{}交换机的消息是:{},receiveTopicB", RabbitMQConstant.TOPIC_EXCHANGE, msg);
     }
 
 
@@ -35,7 +36,7 @@ public class MessageReceive {
     @RabbitListener(queues = RabbitMQConstant.QUEUE_F)
     public void receiveHeaders(byte[] msg) throws Exception {
         Thread.sleep(3000);
-        log.info("收到:{}交换机的消息是:{}", RabbitMQConstant.HEADERS_EXCHANGE, new String(msg));
+        log.info("收到:{}交换机的消息是:{},receiveHeaders", RabbitMQConstant.HEADERS_EXCHANGE, new String(msg));
     }
 
 
@@ -43,14 +44,28 @@ public class MessageReceive {
     @RabbitListener(queues = RabbitMQConstant.QUEUE_D)
     public void receiveDirectA(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("收到:{}交换机的消息是:{}", RabbitMQConstant.DIRECT_EXCHANGE, msg);
+        log.info("收到:{}交换机的消息是:{},receiveDirectA", RabbitMQConstant.DIRECT_EXCHANGE, msg);
     }
 
     @RabbitListener(queues = RabbitMQConstant.QUEUE_E)
     public void receiveDirectB(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("收到:{}交换机的消息是:{}", RabbitMQConstant.DIRECT_EXCHANGE, msg);
+        log.info("收到:{}交换机的消息是:{},receiveDirectB", RabbitMQConstant.DIRECT_EXCHANGE, msg);
     }
 
+
     //------------------------- fanout类型的交换机(广播模式)-----------------------
+    @RabbitListener(queues = RabbitMQConstant.QUEUE_G)
+    public void receiveFanoutA(Object msg) throws Exception {
+        Thread.sleep(3000);
+        log.info("收到:{}交换机的消息是:{},receiveFanoutA", RabbitMQConstant.FANOUT_EXCHANGE, msg);
+    }
+
+    @RabbitListener(queues = RabbitMQConstant.QUEUE_H)
+    public void receiveFanoutB(Object msg) throws Exception {
+        Thread.sleep(3000);
+        log.info("收到:{}交换机的消息是:{},receiveFanoutB", RabbitMQConstant.FANOUT_EXCHANGE, msg);
+    }
+
+
 }

@@ -68,7 +68,7 @@ public class MessageSender {
      * @param msg
      */
     public void sendFanout(String exchange, Object msg) {
-        template.convertAndSend(exchange, "", msg);
+        template.convertAndSend(exchange, "some thing", msg);
         log.info("发到:{},交换机,发送的消息是:{}", exchange, msg);
     }
 
