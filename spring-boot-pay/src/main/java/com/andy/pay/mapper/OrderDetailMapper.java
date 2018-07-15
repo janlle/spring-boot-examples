@@ -1,6 +1,6 @@
 package com.andy.pay.mapper;
 
-import com.andy.pay.object.entity.OrderDetail;
+import com.andy.pay.pojos.entity.OrderDetail;
 
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(String id);

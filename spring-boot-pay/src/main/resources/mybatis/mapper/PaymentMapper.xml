@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.andy.pay.mapper.PaymentMapper" >
-  <resultMap id="BaseResultMap" type="com.andy.pay.object.entity.Payment" >
+  <resultMap id="BaseResultMap" type="com.andy.pay.pojos.entity.Payment" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="payment_id" property="paymentId" jdbcType="VARCHAR" />
     <result column="order_id" property="orderId" jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
     delete from t_payment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.andy.pay.object.entity.Payment" >
+  <insert id="insert" parameterType="com.andy.pay.pojos.entity.Payment" >
     insert into t_payment (id, payment_id, order_id, 
       pay_type, user_id, trade_no, 
       out_trade_no, receiver_id, total_fee, 
@@ -38,7 +38,7 @@
       #{outTradeNo,jdbcType=VARCHAR}, #{receiverId,jdbcType=VARCHAR}, #{totalFee,jdbcType=BIGINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.andy.pay.object.entity.Payment" >
+  <insert id="insertSelective" parameterType="com.andy.pay.pojos.entity.Payment" >
     insert into t_payment
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -111,7 +111,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.andy.pay.object.entity.Payment" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.andy.pay.pojos.entity.Payment" >
     update t_payment
     <set >
       <if test="paymentId != null" >
@@ -147,7 +147,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.andy.pay.object.entity.Payment" >
+  <update id="updateByPrimaryKey" parameterType="com.andy.pay.pojos.entity.Payment" >
     update t_payment
     set payment_id = #{paymentId,jdbcType=VARCHAR},
       order_id = #{orderId,jdbcType=VARCHAR},

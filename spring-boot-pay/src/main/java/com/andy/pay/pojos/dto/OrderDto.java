@@ -1,4 +1,4 @@
-package com.andy.pay.object.dto;
+package com.andy.pay.pojos.dto;
 
 /**
  * @Author: Mr.lyon
