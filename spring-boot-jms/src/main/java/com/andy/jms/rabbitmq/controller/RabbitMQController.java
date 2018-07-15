@@ -18,22 +18,26 @@ public class RabbitMQController {
     @Autowired
     private MessageSender messageSender;
 
-    @GetMapping("/send/{msg}")
-    public String send(@PathVariable("msg") String msg) {
-        if (msg.equals("user")) {
-            messageSender.queueSend(RabbitMQConstant.QUEUE_A, new User(1L, "james", "admin", new Date(), 10000 + 0.1, new Date(), false));
-        } else if (msg.equals("topic")) {
+    @GetMapping("/send/{target}")
+    public String send(@PathVariable(value = "target", required = true) String target) {
+
+        String message = "hello james how are you!";
+
+        User user = new User(1L, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
+
+        if (target.equals("topic")) {
             messageSender.sendTopic(RabbitMQConstant.TOPIC_EXCHANGE, RabbitMQConstant.KEY_A, "topic类型交换机发送的内容！");
-        } else if (msg.equals("fanout")) {
+        } else if (target.equals("fanout")) {
             messageSender.sendFanout(RabbitMQConstant.FANOUT_EXCHANGE, "fanout类型交换机发送的内容！");
-        } else if (msg.equals("direct")) {
-            messageSender.sendTopic(RabbitMQConstant.TOPIC_EXCHANGE, RabbitMQConstant.KEY_A, "direct类型交换机发送的内容！");
-        } else if (msg.equals("headers")) {
+        } else if (target.equals("direct")) {
+            messageSender.sendTopic(RabbitMQConstant.DIRECT_EXCHANGE, RabbitMQConstant.KEY_A, "direct类型交换机发送的内容！");
+        } else if (target.equals("headers")) {
             messageSender.sendHeaders(RabbitMQConstant.HEADERS_EXCHANGE, "header类型交换机发送的内容！");
         } else {
-            messageSender.queueSend(RabbitMQConstant.QUEUE_A, msg);
+            messageSender.sendQueue(RabbitMQConstant.QUEUE_A, message);
         }
-        return "发送消息成功！";
+
+        return "发送" + target + "消息SUCCESS!";
     }
 
 }

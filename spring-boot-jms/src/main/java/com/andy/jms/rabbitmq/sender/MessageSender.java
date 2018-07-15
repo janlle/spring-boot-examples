@@ -16,27 +16,33 @@ public class MessageSender {
     private AmqpTemplate template;
 
     //-------------------------普通队列模式-------------------------------
-    public void queueSend(String queue, Object msg) {
-        log.info("send message发送到queue-a队列的消息是:{}", msg);
+    public void sendQueue(String queue, Object msg) {
+        log.info("发送到{}队列的消息是:{}", queue, msg);
         template.convertAndSend(queue, msg);
     }
 
-    //-------------------------direct类型的交换机()-------------------------------
-    //-------------------------topic类型的交换机()-------------------------------
+    //-------------------------direct类型的交换机(直连模式)------------------------
+    public void sendDirect(String exchange, Object msg) {
+        template.convertAndSend(exchange, "", msg);
+        log.info("发送到{}交换机,发送的消息是:{}", exchange, msg);
+    }
+
+
+    //-------------------------topic类型的交换机(主题模式)-------------------------
     public void sendTopic(String exchange, String key, Object msg) {
         template.convertAndSend(exchange, RabbitMQConstant.KEY_A, msg + "a");
         template.convertAndSend(exchange, RabbitMQConstant.KEY_B, msg + "b");
-        log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_A, msg);
-        log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_B, msg);
+        log.info("发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_A, msg);
+        log.info("发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_B, msg);
     }
 
-    //------------------------- fanout类型的交换机(广播模式)-------------------------------
+    //------------------------- fanout类型的交换机(广播模式)-----------------------
     public void sendFanout(String exchange, Object msg) {
         template.convertAndSend(exchange, "", msg);
-        log.info("send fanout message发送到{}交换机,发送的消息是:{}", exchange, msg);
+        log.info("发送到{}交换机,发送的消息是:{}", exchange, msg);
     }
 
-    //-------------------------headers类型的交换机()-------------------------------
+    //-------------------------headers类型的交换机(首部模式)------------------------
     public void sendHeaders(String exchange, String msg) {
         MessageProperties properties = new MessageProperties();
         properties.setHeader("headera", "valuea");
@@ -44,7 +50,7 @@ public class MessageSender {
 
         Message object = new Message(msg.getBytes(), properties);
         template.convertAndSend(exchange, "", object);
-        log.info("send fanout message发送到{}交换机,发送的消息是:{}", exchange, msg);
+        log.info("发送到{}交换机,发送的消息是:{}", exchange, msg);
     }
 
 }
