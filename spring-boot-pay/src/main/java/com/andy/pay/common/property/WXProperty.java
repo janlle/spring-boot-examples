@@ -7,9 +7,9 @@ import lombok.Data;
  * @CreateBy: 2018-06-03
  **/
 @Data
-public class WeChatProperty {
+public class WXProperty {
 
-    private WeChatUrlProperty url = new WeChatUrlProperty();
+    private WXUrlProperty url = new WXUrlProperty();
 
     private String appid;
 
