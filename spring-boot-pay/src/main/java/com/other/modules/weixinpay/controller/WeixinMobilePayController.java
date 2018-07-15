@@ -12,7 +12,7 @@ import com.other.modules.weixinpay.util.mobile.MobileUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -59,7 +59,7 @@ public class WeixinMobilePayController {
 		log.info("纯H5支付(不建议在APP端使用)");
 		//mweb_url为拉起微信支付收银台的中间页面，可通过访问该url来拉起微信客户端，完成支付,mweb_url的有效期为5分钟。
 		String mweb_url =  weixinPayService.weixinPayH5(product);
-		if(StringUtils.isNotBlank(mweb_url)){
+		if(StringUtils.isEmpty(mweb_url)){
 			return "redirect:"+mweb_url;
 		}else{
 			return "redirect:https://blog.52itstyle.com";//自定义错误页面
