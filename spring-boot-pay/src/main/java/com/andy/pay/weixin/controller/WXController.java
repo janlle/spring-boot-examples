@@ -39,7 +39,7 @@ public class WXController {
     @GetMapping("/auth")
     public String getUserInfo(String state, String code, HttpServletRequest request) {
         log.info("微信授权回调方法,code:{},state:{}", code, state);
-        String url = String.format(appProperty.getWeChat().getUrl().getTokenUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getAppSecret(), code);
+        String url = String.format(appProperty.getWx().getUrl().getTokenUrl(), appProperty.getWx().getAppid(), appProperty.getWx().getAppSecret(), code);
         log.info("url:{}", url);
         String result = restTemplate.getForObject(url, String.class);
         log.info("result:{}", result);
@@ -50,7 +50,7 @@ public class WXController {
     @GetMapping("/code")
     public void code(String state, String code, HttpServletRequest request) {
         log.info("获取code.....");
-        String url = String.format(appProperty.getWeChat().getUrl().getAuthCodeUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getRedirectUrl());
+        String url = String.format(appProperty.getWx().getUrl().getAuthCodeUrl(), appProperty.getWx().getAppid(), appProperty.getWx().getRedirectUrl());
         log.info("url:{}", url);
         restTemplate.getForObject(url, String.class);
     }

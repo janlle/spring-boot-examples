@@ -15,7 +15,7 @@ public class AliProperty {
     public static final String APP_ID = "";
 
     //应用私钥
-    public static final String APP_PRIVATE_KEY = "";
+    public static final String ALIPAY_PRIVATE_KEY = "";
 
     //支付宝公钥
     public static final String ALIPAY_PUBLIC_KEY = "";
