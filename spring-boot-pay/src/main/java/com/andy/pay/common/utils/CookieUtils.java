@@ -27,7 +27,7 @@ public class CookieUtils {
         return null;
     }
 
-    private static Map<String, Cookie> read(HttpServletRequest request){
+    private static Map<String, Cookie> read(HttpServletRequest request) {
         Cookie cookies[] = request.getCookies();
         Map<String, Cookie> map = new HashMap<>();
         if (cookies != null) {
