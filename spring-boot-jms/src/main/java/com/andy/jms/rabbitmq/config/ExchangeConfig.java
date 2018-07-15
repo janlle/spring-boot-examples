@@ -36,6 +36,12 @@ public class ExchangeConfig {
     @Resource(name = "queueF")
     private Queue queueF;
 
+    @Resource(name = "queueG")
+    private Queue queueG;
+
+    @Resource(name = "queueH")
+    private Queue queueH;
+
 
     // ----------------------主题交换机:Topic exchange----------------------
     @Bean
@@ -64,12 +70,12 @@ public class ExchangeConfig {
     // 把队列和交换机绑定
     @Bean
     public Binding fanoutBindingA() {
-        return BindingBuilder.bind(queueC).to(fanoutExchange());
+        return BindingBuilder.bind(queueG).to(fanoutExchange());
     }
 
     @Bean
     public Binding fanoutBindingB() {
-        return BindingBuilder.bind(queueD).to(fanoutExchange());
+        return BindingBuilder.bind(queueH).to(fanoutExchange());
     }
 
 
