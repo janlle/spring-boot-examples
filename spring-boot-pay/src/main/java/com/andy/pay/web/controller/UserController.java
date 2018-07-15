@@ -2,7 +2,7 @@ package com.andy.pay.web.controller;
 
 import com.andy.pay.common.Result;
 import com.andy.pay.common.enums.ResultEnum;
-import com.andy.pay.object.entity.User;
+import com.andy.pay.pojos.entity.User;
 import com.andy.pay.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

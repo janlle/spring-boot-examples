@@ -1,4 +1,4 @@
-package com.andy.pay.object.entity;
+package com.andy.pay.pojos.entity;
 
 import com.andy.pay.common.IdEntity;
 import io.swagger.annotations.ApiModel;

@@ -1,14 +1,9 @@
-server:
-  port: 8888
 spring:
-  profiles:
-    active: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
-# thymeleaf 配置
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -19,7 +14,7 @@ spring:
       content-type: text/html
 app:
   pay:
-    weChat:
+    wx:
       notify_url: http://rllin.nat300.top/wechat/auth/notify
       redirect_url: http://rllin.nat300.top/wechat/auth
       app_id: wxac5528ca26f1218b
@@ -36,7 +31,7 @@ app:
         authCodeUrl: https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=test#wechat_redirect
         tokenUrl: https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code
         userInfoUrl: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
-    alipay:
+    ali:
       appid:
       private_key:
       public_key:

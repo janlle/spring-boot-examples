@@ -1,6 +1,6 @@
 package com.andy.pay.mapper;
 
-import com.andy.pay.object.entity.Receiver;
+import com.andy.pay.pojos.entity.Receiver;
 
 public interface ReceiverMapper {
     int deleteByPrimaryKey(Long id);

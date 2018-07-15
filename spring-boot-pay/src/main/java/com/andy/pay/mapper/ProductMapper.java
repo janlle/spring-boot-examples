@@ -1,6 +1,6 @@
 package com.andy.pay.mapper;
 
-import com.andy.pay.object.entity.Product;
+import com.andy.pay.pojos.entity.Product;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Long id);

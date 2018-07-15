@@ -7,7 +7,7 @@ import lombok.Data;
  * @CreateBy: 2018-06-03 15:38
  **/
 @Data
-public class WeChatUrlProperty {
+public class WXUrlProperty {
 
     private String payUrl;
 

@@ -2,7 +2,7 @@ package com.andy.pay.test;
 
 import com.andy.pay.PayApplication;
 import com.andy.pay.mapper.OrderMapper;
-import com.andy.pay.object.entity.Order;
+import com.andy.pay.pojos.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

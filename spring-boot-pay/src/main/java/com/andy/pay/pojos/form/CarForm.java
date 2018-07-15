@@ -1,4 +1,4 @@
-package com.andy.pay.object.form;
+package com.andy.pay.pojos.form;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;

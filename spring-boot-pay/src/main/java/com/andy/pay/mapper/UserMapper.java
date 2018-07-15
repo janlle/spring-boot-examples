@@ -1,6 +1,6 @@
 package com.andy.pay.mapper;
 
-import com.andy.pay.object.entity.User;
+import com.andy.pay.pojos.entity.User;
 
 public interface UserMapper {
 

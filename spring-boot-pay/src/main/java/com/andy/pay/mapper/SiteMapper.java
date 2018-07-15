@@ -1,6 +1,6 @@
 package com.andy.pay.mapper;
 
-import com.andy.pay.object.entity.Site;
+import com.andy.pay.pojos.entity.Site;
 
 public interface SiteMapper {
     int deleteByPrimaryKey(Integer id);

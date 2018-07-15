@@ -16,6 +16,6 @@ public class AppProperty  {
 
     private AliProperty ali = new AliProperty();
 
-    private WeChatProperty weChat = new WeChatProperty();
+    private WXProperty wx = new WXProperty();
 
 }
