@@ -1,8 +1,8 @@
 package com.andy.jms.rabbitmq.config;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-01 15:30
+ * @Author: Mr.lyon
+ * @CreateBy: 2018-05-01 21:24
  **/
 public interface RabbitMQConstant {
 
@@ -13,6 +13,8 @@ public interface RabbitMQConstant {
     String QUEUE_D = "queue-d";
     String QUEUE_E = "queue-e";
     String QUEUE_F = "queue-f";
+    String QUEUE_G = "queue-g";
+    String QUEUE_H = "queue-h";
 
 
     // rabbitMQ有四种类型的交换机fanout、direct、topic、headers
