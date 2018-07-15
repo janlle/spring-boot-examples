@@ -1,10 +1,8 @@
-package com.andy.jms.controller;
+package com.andy.jms.rabbitmq.controller;
 
+import com.andy.jms.entity.User;
 import com.andy.jms.rabbitmq.config.RabbitMQConstant;
 import com.andy.jms.rabbitmq.sender.MessageSender;
-import com.andy.jms.entity.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-@Api("rabbitMQ测试接口")
 @Slf4j
 @RestController
 public class RabbitMQController {
@@ -21,7 +18,6 @@ public class RabbitMQController {
     @Autowired
     private MessageSender messageSender;
 
-    @ApiOperation("发送消息的接口")
     @GetMapping("/send/{msg}")
     public String send(@PathVariable("msg") String msg) {
         if (msg.equals("user")) {
