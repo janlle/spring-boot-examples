@@ -22,7 +22,7 @@ public class PayController {
     @ApiOperation(value = "微信回调接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @GetMapping("/weChatNotify")
     public Result<String> weChatNotify() {
-        return Result.success("收到微信支付回调！");
+        return Result.success(20000);
     }
 
 

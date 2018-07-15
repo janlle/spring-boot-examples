@@ -35,15 +35,15 @@ public class WXService {
         String access_token = jsonMap.get("access_token");
         String openId = jsonMap.get("openid");
 
-        String userInfoUrl = String.format(appProperty.getWeChat().getUrl().getUserInfoUrl(), access_token, openId);
+        String userInfoUrl = String.format(appProperty.getWx().getUrl().getUserInfoUrl(), access_token, openId);
         WXUser userInfo = restTemplate.getForObject(userInfoUrl, WXUser.class);
         log.info("微信获取用户信息的url:{}---->获取的user:{}", userInfoUrl, userInfo);
         return userInfo;
     }
 
     public String getCode() {
-        String authUrl = String.format(appProperty.getWeChat().getUrl().getAuthCodeUrl(),
-                appProperty.getWeChat().getAppid(), appProperty.getWeChat().getNotifyUrl());
+        String authUrl = String.format(appProperty.getWx().getUrl().getAuthCodeUrl(),
+                appProperty.getWx().getAppid(), appProperty.getWx().getNotifyUrl());
         String code = restTemplate.getForObject(authUrl, String.class);
         log.info("微信获取授权码的url:{}---->获取的code:{}", authUrl, code);
         return code;
@@ -51,7 +51,7 @@ public class WXService {
 
 
     public String getToken(String code) {
-        String tokenUrl = String.format(appProperty.getWeChat().getUrl().getTokenUrl(), appProperty.getWeChat().getAppid(), appProperty.getWeChat().getAppSecret(), code);
+        String tokenUrl = String.format(appProperty.getWx().getUrl().getTokenUrl(), appProperty.getWx().getAppid(), appProperty.getWx().getAppSecret(), code);
         String token = restTemplate.getForObject(tokenUrl, String.class);
         log.info("微信获取token的url:{}---->获取的token:{}", tokenUrl, token);
         return token;

@@ -23,7 +23,6 @@ import com.other.common.model.Product;
 import com.other.common.utils.CommonUtil;
 import com.other.modules.alipay.service.IAliPayService;
 import com.other.modules.alipay.util.AliPayConfig;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -105,7 +104,7 @@ public class AliPayServiceImpl implements IAliPayService {
     private void dumpResponse(AlipayResponse response) {
         if (response != null) {
         	logger.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));
-            if (StringUtils.isNotEmpty(response.getSubCode())) {
+            if (org.springframework.util.StringUtils.isEmpty(response.getSubCode())) {
             	logger.info(String.format("subCode:%s, subMsg:%s", response.getSubCode(), response.getSubMsg()));
             }
             logger.info("body:" + response.getBody());

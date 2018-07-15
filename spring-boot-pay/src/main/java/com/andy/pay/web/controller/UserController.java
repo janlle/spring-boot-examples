@@ -55,7 +55,7 @@ public class UserController {
     @GetMapping("/logout")
     public Result<String> logout(String token, Integer userId) {
         log.info("logout [删除token成功]->{}", token);
-        return Result.success("用户退出成功");
+        return Result.success(20000);
     }
 
     @ApiOperation(value = "用户注册接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -63,7 +63,7 @@ public class UserController {
     @PostMapping("/register")
     public Result<String> register(@RequestBody User user) {
 
-        return Result.error("注册失败");
+        return Result.error(50000);
     }
 
     @ApiOperation(value = "根据用户id获取用户信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -81,7 +81,7 @@ public class UserController {
     @GetMapping("/authentication")
     public Result<String> verifyToken(String token, Integer userId, HttpServletRequest request, HttpServletResponse response) {
 
-        return Result.error("用户身份校验失败！");
+        return Result.error(50000);
     }
 
 

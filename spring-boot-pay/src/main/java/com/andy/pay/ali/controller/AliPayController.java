@@ -3,7 +3,7 @@ package com.andy.pay.ali.controller;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.demo.trade.config.Configs;
-import com.andy.pay.modules.ali.service.AliPayService;
+import com.andy.pay.ali.service.AliPayService;
 import com.other.common.constants.Constants;
 import com.other.common.model.Product;
 import io.swagger.annotations.Api;
