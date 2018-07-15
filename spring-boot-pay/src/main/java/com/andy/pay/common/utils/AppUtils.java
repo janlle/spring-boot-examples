@@ -56,7 +56,7 @@ public class AppUtils {
      * @params: [charset, params, apiKey]
      * @return: java.lang.String
      **/
-    public static String createSign(String charset, Map params, String apiKey) {
+    public static String createSign(Map params, String apiKey) {
         StringBuffer sb = new StringBuffer();
         Set set = params.entrySet();
         Iterator it = set.iterator();
