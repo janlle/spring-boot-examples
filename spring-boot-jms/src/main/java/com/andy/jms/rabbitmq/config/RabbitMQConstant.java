@@ -25,5 +25,7 @@ public interface RabbitMQConstant {
     // 绑定匹配规则*表示一个词,#表示任意数量（零个或多个）单词。
     String KEY_A = "topic.#";
     String KEY_B = "topic.msg";
+    String KEY_C = "direct-a";
+    String KEY_D = "direct-b";
 
 }
