@@ -1,6 +1,6 @@
 package com.andy.jms.rabbitmq.sender;
 
-import com.andy.jms.rabbitmq.config.AMQPConstant;
+import com.andy.jms.rabbitmq.config.RabbitMQConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
@@ -24,10 +24,10 @@ public class MessageSender {
     //-------------------------direct类型的交换机()-------------------------------
     //-------------------------topic类型的交换机()-------------------------------
     public void sendTopic(String exchange, String key, Object msg) {
-        template.convertAndSend(exchange, AMQPConstant.KEY_A, msg + "a");
-        template.convertAndSend(exchange, AMQPConstant.KEY_B, msg + "b");
-        log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, AMQPConstant.KEY_A, msg);
-        log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, AMQPConstant.KEY_B, msg);
+        template.convertAndSend(exchange, RabbitMQConstant.KEY_A, msg + "a");
+        template.convertAndSend(exchange, RabbitMQConstant.KEY_B, msg + "b");
+        log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_A, msg);
+        log.info("send topic message发送到{}交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_B, msg);
     }
 
     //------------------------- fanout类型的交换机(广播模式)-------------------------------

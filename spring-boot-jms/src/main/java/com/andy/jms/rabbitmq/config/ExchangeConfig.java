@@ -1,7 +1,6 @@
 package com.andy.jms.rabbitmq.config;
 
 import org.springframework.amqp.core.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,7 +40,7 @@ public class ExchangeConfig {
     //----------------------主题交换机:Topic exchange----------------------
     @Bean
     public TopicExchange topicExchange() {
-        return new TopicExchange(AMQPConstant.TOPIC_EXCHANGE);
+        return new TopicExchange(RabbitMQConstant.TOPIC_EXCHANGE);
     }
 
     //把队列和交换机绑定 *表示一个词,#表示零个或多个词
@@ -60,7 +59,7 @@ public class ExchangeConfig {
     //----------------------扇形交换机(广播):Fanout exchangeFanout----------------------
     @Bean
     public FanoutExchange fanoutExchange() {
-        return new FanoutExchange(AMQPConstant.FANOUT_EXCHANGE);
+        return new FanoutExchange(RabbitMQConstant.FANOUT_EXCHANGE);
     }
     //把队列和交换机绑定
     @Bean
@@ -78,12 +77,12 @@ public class ExchangeConfig {
     //----------------------首部交换机:Headers exchange----------------------
     @Bean
     public Queue headersQueue() {
-        return new Queue(AMQPConstant.HEADERS_QUEUE);
+        return new Queue(RabbitMQConstant.QUEUE_A);
     }
 
     @Bean
     public HeadersExchange headersExchange() {
-        return new HeadersExchange(AMQPConstant.HEADERS_EXCHANGE);
+        return new HeadersExchange(RabbitMQConstant.HEADERS_EXCHANGE);
     }
     //把队列和交换机绑定
     @Bean
