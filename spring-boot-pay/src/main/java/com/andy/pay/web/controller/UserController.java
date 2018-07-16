@@ -59,10 +59,9 @@ public class UserController {
     }
 
     @ApiOperation(value = "用户注册接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParam(name = "user",value ="用户信息模型",required = true, dataType = "User")
+    @ApiImplicitParams({@ApiImplicitParam(name = "user",value ="用户信息模型",required = true, dataType = "User")})
     @PostMapping("/register")
     public Result<String> register(@RequestBody User user) {
-
         return Result.error(50000);
     }
 
