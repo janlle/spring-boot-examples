@@ -1,5 +1,6 @@
 package com.andy.pay.shiro;
 
+import com.andy.pay.shiro.config.ShiroProperty;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -20,7 +21,7 @@ public class TokenRealm extends AuthorizingRealm {
 
 
     @Autowired
-    private ShiroProperties shiroProperties;
+    private ShiroProperty shiroProperty;
 
 
     @Resource(name = "stringRedisTemplate")
@@ -37,14 +38,14 @@ public class TokenRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         Token Token = (Token) authenticationToken;
         String tokenString = Token.getToken();
-        String userId = this.redis.get(this.shiroProperties.getPrefix() + "auth.token.id:" + tokenString);
+        String userId = this.redis.get(this.shiroProperty.getPrefix() + "auth.token.id:" + tokenString);
         return !StringUtils.isEmpty(userId) ? new SimpleAuthenticationInfo(userId, tokenString, this.getName()) : null;
     }
 
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String userId = (String) principals.getPrimaryPrincipal();
         if (!StringUtils.isEmpty(userId)) {
-            String role = this.redis.get(this.shiroProperties.getPrefix() + "auth.id.role:" + userId);
+            String role = this.redis.get(this.shiroProperty.getPrefix() + "auth.id.role:" + userId);
             if (StringUtils.isEmpty(role)) {
                 return null;
             } else {
