@@ -5,9 +5,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * spring-boot 支付demo
@@ -15,25 +15,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Slf4j
 @Controller
-//@EnableSwaggerButler
+@EnableSwagger2
 @SpringBootApplication
 @MapperScan(basePackages = "com.andy.pay.mapper")
 public class PayApplication extends WebMvcConfigurerAdapter {
 
-	@RequestMapping("/")
-	public String index() {
-		return "index";
-	}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/cert/**").addResourceLocations("classpath:/cert/");
+        super.addResourceHandlers(registry);
+    }
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/cert/**").addResourceLocations("classpath:/cert/");
-		super.addResourceHandlers(registry);
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(PayApplication.class, args);
-		log.info("支付项目启动...");
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PayApplication.class, args);
+    }
 
 }
