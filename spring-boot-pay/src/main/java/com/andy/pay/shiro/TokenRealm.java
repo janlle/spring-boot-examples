@@ -26,9 +26,6 @@ public class TokenRealm extends AuthorizingRealm {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<String, String> redis;
 
-    public TokenRealm() {
-    }
-
     public String getName() {
         return "redisRealm";
     }
