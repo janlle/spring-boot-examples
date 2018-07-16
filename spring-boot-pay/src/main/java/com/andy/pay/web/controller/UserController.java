@@ -89,8 +89,8 @@ public class UserController {
 
     @ApiOperation(value = "测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @GetMapping("/property")
-    public Result<ShiroProperty> shiroProperty() {
-        return Result.build(20000, "SUCCESS", shiroProperty);
+    public Result<Object> shiroProperty() {
+        return Result.build(20000, "SUCCESS", shiroProperty.getPrefix());
     }
 
 }
