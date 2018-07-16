@@ -1,5 +1,7 @@
 package com.andy.pay.shiro;
 
+import com.andy.pay.shiro.filter.CoreFilter;
+import com.andy.pay.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -22,9 +24,6 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
-
-    public ShiroConfig() {
-    }
 
     @Bean(name = {"shiroFilter"})
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroFilterUrlProperties urlProperties) {
