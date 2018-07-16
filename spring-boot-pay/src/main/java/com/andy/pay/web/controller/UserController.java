@@ -90,7 +90,21 @@ public class UserController {
     @ApiOperation(value = "测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @GetMapping("/property")
     public Result<Object> shiroProperty() {
-        return Result.build(20000, "SUCCESS", shiroProperty.getPrefix());
+
+        ShiroProperty shiro = new ShiroProperty();
+
+        shiro.setUserIdToken(shiroProperty.getUserIdToken());
+        shiro.setTokenUserId(shiroProperty.getTokenUserId());
+        shiro.setAnonUrls(shiroProperty.getAnonUrls());
+        shiro.setCacheDays(shiroProperty.getCacheDays());
+        shiro.setCoreUrls(shiroProperty.getCoreUrls());
+        shiro.setMultiLogin(shiroProperty.isMultiLogin());
+        shiro.setPrefix(shiroProperty.getPrefix());
+        shiro.setUserIdRole(shiroProperty.getUserIdRole());
+        shiro.setUserIdToken(shiroProperty.getUserIdToken());
+        shiro.setAnonUrls(shiroProperty.getAnonUrls());
+        shiro.setAuthUrls(shiroProperty.getAuthUrls());
+        return Result.build(20000, "SUCCESS", shiro);
     }
 
 }

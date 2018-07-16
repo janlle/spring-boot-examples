@@ -3,11 +3,17 @@ package com.andy.pay.common.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+
+import java.util.Collections;
 
 /**
  * @Author: Mr.lyon
@@ -18,7 +24,7 @@ public class SwaggerConfig {
     @Bean
     public Docket webApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("支付服务API接口文档")
+                .groupName("服务API接口文档")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.andy.pay.web"))
@@ -39,8 +45,18 @@ public class SwaggerConfig {
 
     @Bean
     public Docket weixinpayApi() {
+        Parameter parameter = new ParameterBuilder()
+                .name("Authorization")
+                .description("token")
+                .modelRef(new ModelRef("string"))
+                .parameterType("header")
+                .required(false)
+                .defaultValue("token ")
+                .build();
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("微信API接口文档")
+                .globalOperationParameters(Collections.singletonList(parameter))
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.andy.pay.weixin"))
@@ -63,10 +79,12 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("支付系统")
                 .description("微信、支付宝、银联支付服务")
-                .termsOfServiceUrl("https://xxx.xxx.com")
+                .termsOfServiceUrl("https://lyon.com")
                 .version("v1.0.1")
+                .license("Apache2.0")
+                .contact(new Contact("lyon", "https://lyon.com", "lyon@gmail.com"))
+                .licenseUrl("http://www.apache.org")
                 .build();
-//				.contact(new Contact("andy", "https://andy.com", "andy@163.com"));
     }
 
 }

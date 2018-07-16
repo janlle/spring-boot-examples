@@ -25,7 +25,7 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
 public class SwaggerConfig {
 
     @Bean
-    public Docket swaggerSpringMvcPlugin() {
+    public Docket swaggerApi() {
         Parameter parameter = new ParameterBuilder()
                 .name("Authorization")
                 .description("token")
@@ -50,7 +50,7 @@ public class SwaggerConfig {
                 .description("web接口文档")
                 .version("v1.0.0")
                 .termsOfServiceUrl("http://www.baidu.com")
-                .contact(new Contact("aa", "bb", "cc"))
+                .contact(new Contact("lyon", "https://lyon.com", "lyon@gmail.com"))
                 .license("Apache2.0")
                 .licenseUrl("http://www.apache.org")
                 .build();
