@@ -3,6 +3,8 @@ package com.andy.pay.shiro;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 
+import com.andy.pay.shiro.config.ShiroProperties;
+import com.andy.pay.shiro.config.ShiroProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -18,8 +20,8 @@ public class ShiroTokenService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-    @Autowired
-    private ShiroProperties shiroProperties;
+    @Resource
+    private ShiroProperty shiroProperty;
 
     public void afterLogin(Integer userId, String token) {
         this.updateToken(userId, token, null);
@@ -30,12 +32,12 @@ public class ShiroTokenService {
     }
 
     private void updateToken(Integer userId, String token, String role) {
-        String prefix = this.shiroProperties.getPrefix();
+        String prefix = this.shiroProperty.getPrefix();
 
-        int cacheDays = this.shiroProperties.getCacheDays();
+        int cacheDays = this.shiroProperty.getCacheDays();
 
         this.redis.set(prefix + "auth.token.id:" + token, "" + userId, (long) cacheDays, TimeUnit.DAYS);
-        if (!this.shiroProperties.isMultiLogin()) {
+        if (!this.shiroProperty.isMultiLogin()) {
             this.redis.set(prefix + "auth.id.token:" + userId, token, (long) cacheDays, TimeUnit.DAYS);
         }
 
@@ -47,8 +49,8 @@ public class ShiroTokenService {
 
     public void afterLogout(Integer userId) {
 
-        if (!this.shiroProperties.isMultiLogin()) {
-            String prefix = this.shiroProperties.getPrefix();
+        if (!this.shiroProperty.isMultiLogin()) {
+            String prefix = this.shiroProperty.getPrefix();
             String token = this.redis.get(prefix + "auth.id.token:" + userId);
             this.stringRedisTemplate.delete(prefix + "auth.token.id:" + token);
             this.stringRedisTemplate.delete(prefix + "auth.id.token:" + userId);
