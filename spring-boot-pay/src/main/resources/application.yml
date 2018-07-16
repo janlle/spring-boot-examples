@@ -62,10 +62,10 @@ model:
   shiro:
     mulitLogin: false
     cacheDays: 7
-    prefix: prefix
-    annoUrls: -http://www.bai.com
-    coreUrls: -http://www.bai.com
-    authUrls: -http://www.bai.com
+    prefix: ${server.port}
+    anonUrls: http://www.bai.com
+    coreUrls: http://www.bai.com
+    authUrls: http://www.bai.com
     tokenUserId: auth.token.id
     userIdToken: auth.id.token
     userIdRole: auth.id.role

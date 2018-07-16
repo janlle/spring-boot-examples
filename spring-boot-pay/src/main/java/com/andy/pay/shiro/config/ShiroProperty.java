@@ -17,13 +17,13 @@ public class ShiroProperty {
 
     private int cacheDays = 30;
 
-    private String prefix;
+    private String prefix = "default.prefix:";
 
-    private String tokenUserId = "auth.token.id:";
+    private String tokenUserId = "default.auth.token.id:";
 
-    private String userIdToken = "auth.id.token:";
+    private String userIdToken = "default.auth.id.token:";
 
-    private String userIdRole = "auth.id.role:";
+    private String userIdRole = "default.auth.id.role:";
 
     private List<String> anonUrls;
 
@@ -60,7 +60,7 @@ public class ShiroProperty {
     }
 
     public void setTokenUserId(String tokenUserId) {
-        this.tokenUserId = tokenUserId;
+        this.tokenUserId = tokenUserId + ":";
     }
 
     public String getUserIdToken() {
@@ -68,7 +68,7 @@ public class ShiroProperty {
     }
 
     public void setUserIdToken(String userIdToken) {
-        this.userIdToken = userIdToken;
+        this.userIdToken = userIdToken + ":";
     }
 
     public String getUserIdRole() {
@@ -76,7 +76,7 @@ public class ShiroProperty {
     }
 
     public void setUserIdRole(String userIdRole) {
-        this.userIdRole = userIdRole;
+        this.userIdRole = userIdRole + ":";
     }
 
     public List<String> getAnonUrls() {
