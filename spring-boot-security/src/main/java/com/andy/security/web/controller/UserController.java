@@ -20,10 +20,10 @@ public class UserController {
     @GetMapping("/list")
     public List<User> list() {
         List<User> users = new ArrayList<>();
-        users.add(new User(1001, "andy", "12345", 23200.0, new Date()));
-        users.add(new User(1001, "andy", "12345", 23200.2, new Date()));
-        users.add(new User(1001, "andy", "12345", 23200.0, new Date()));
-        users.add(new User(1001, "andy", "12345", 23200.0, new Date()));
+        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
+        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
+        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
+        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
         return users;
     }
 
