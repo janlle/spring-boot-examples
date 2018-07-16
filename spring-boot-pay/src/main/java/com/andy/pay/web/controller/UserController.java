@@ -4,6 +4,7 @@ import com.andy.pay.common.Result;
 import com.andy.pay.common.enums.ResultEnum;
 import com.andy.pay.pojos.entity.User;
 import com.andy.pay.service.UserService;
+import com.andy.pay.shiro.config.ShiroProperty;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -19,13 +20,16 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @Slf4j
-@Controller
-@Api(tags ="订单操作接口")
+@RestController
+@Api(tags ="用户api接口文档")
 @RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ShiroProperty shiroProperty;
 
     private String emailReg = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
     private String phoneReg = "^[1][3456789]\\d{9}$";
@@ -59,7 +63,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "用户注册接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParams({@ApiImplicitParam(name = "user",value ="用户信息模型",required = true, dataType = "User")})
+//    @ApiImplicitParams({@ApiImplicitParam(name = "user",value ="用户信息模型",required = true, dataType = "User")})
     @PostMapping("/register")
     public Result<String> register(@RequestBody User user) {
         return Result.error(50000);
@@ -83,6 +87,10 @@ public class UserController {
         return Result.error(50000);
     }
 
-
+    @ApiOperation(value = "测试", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping("/property")
+    public Result<ShiroProperty> shiroProperty() {
+        return Result.build(20000, "SUCCESS", shiroProperty);
+    }
 
 }
