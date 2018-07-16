@@ -1,15 +1,13 @@
 package com.andy.pay.shiro;
 
-import java.util.concurrent.TimeUnit;
-import javax.annotation.Resource;
-
-import com.andy.pay.shiro.config.ShiroProperties;
 import com.andy.pay.shiro.config.ShiroProperty;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ShiroTokenService {
