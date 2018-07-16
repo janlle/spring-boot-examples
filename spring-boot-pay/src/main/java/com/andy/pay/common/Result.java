@@ -2,12 +2,16 @@ package com.andy.pay.common;
 
 
 import com.andy.pay.common.enums.ResultEnum;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 基本返回结果集
  * @param <T>
  */
-public class Result<T> {
+@Data
+public class Result<T> implements Serializable {
 
     private int code;
 
