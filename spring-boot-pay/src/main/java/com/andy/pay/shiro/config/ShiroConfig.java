@@ -1,5 +1,7 @@
-package com.andy.pay.shiro;
+package com.andy.pay.shiro.config;
 
+import com.andy.pay.shiro.StatelessDefaultSubjectFactory;
+import com.andy.pay.shiro.TokenRealm;
 import com.andy.pay.shiro.filter.CoreFilter;
 import com.andy.pay.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
@@ -26,13 +28,13 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean(name = {"shiroFilter"})
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroFilterUrlProperties urlProperties) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
         swaggerFilterChain(filterChainDefinitionMapping);
-        this.setUrl(filterChainDefinitionMapping, "anon", urlProperties.getAnonUrls());
-        this.setUrl(filterChainDefinitionMapping, "core,anon", urlProperties.getCoreUrls());
-        this.setUrl(filterChainDefinitionMapping, "core,auth", urlProperties.getAuthUrls());
+        this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
+        this.setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
+        this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         shiroFilter.setSecurityManager(securityManager);
         Map<String, Filter> filters = new HashMap();

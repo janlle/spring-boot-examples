@@ -19,10 +19,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 
 public class TokenFilter extends AuthenticationFilter {
-    private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
 
-    public TokenFilter() {
-    }
+
+    private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
 
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         String token = this.getToken(request);
@@ -34,7 +33,6 @@ public class TokenFilter extends AuthenticationFilter {
             if (!loginSuccess) {
                 this.printUnauthorized("auth.token.wrong", WebUtils.toHttp(response));
             }
-
             return loginSuccess;
         }
     }
@@ -56,8 +54,7 @@ public class TokenFilter extends AuthenticationFilter {
         response.setContentLength(content.length());
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
-        try {
-            PrintWriter writer = response.getWriter();
+        try (PrintWriter writer = response.getWriter()){
             writer.write(content);
         } catch (IOException var5) {
             logger.warn("", var5);
