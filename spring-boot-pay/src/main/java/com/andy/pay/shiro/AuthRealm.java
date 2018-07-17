@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 
 @Component
-public class TokenRealm extends AuthorizingRealm {
+public class AuthRealm extends AuthorizingRealm {
 
 
     @Autowired
