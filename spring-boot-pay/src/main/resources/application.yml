@@ -63,9 +63,9 @@ model:
     mulitLogin: false
     cacheDays: 7
     prefix: ${server.port}
-    anonUrls: http://www.bai.com
-    coreUrls: http://www.bai.com
-    authUrls: /**
+    anonUrls: /api/user/property
+    coreUrls: /user/aa
+    authUrls: /api/**
     tokenUserId: auth.token.id
     userIdToken: auth.id.token
     userIdRole: auth.id.role

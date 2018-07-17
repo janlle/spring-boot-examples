@@ -25,7 +25,7 @@ import java.util.Map;
 @Slf4j
 @Api(tags = "Http测试控制器")
 @RestController
-@RequestMapping(value = "/http")
+@RequestMapping(value = "/api/http")
 public class HttpController {
 
     @ApiOperation(value = "get请求")

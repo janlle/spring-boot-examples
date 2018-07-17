@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @Api(tags ="订单操作接口")
-@RequestMapping(value = "/product")
+@RequestMapping(value = "/api/product")
 public class ProductController {
 
 
