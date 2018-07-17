@@ -68,11 +68,13 @@ public class ShiroConfig {
         }
     }
 
-    public static void swaggerFilterChain(Map<String, String> filterChainDefinitionMapping) {
-        filterChainDefinitionMapping.put("/v2/api-docs", "anon");
-        filterChainDefinitionMapping.put("/configuration/**", "anon");
-        filterChainDefinitionMapping.put("/webjars/**", "anon");
-        filterChainDefinitionMapping.put("/swagger**", "anon");
+    public void swaggerFilterChain(Map filterMapping) {
+        logger.info("swagger");
+        filterMapping.put("/v2/api-docs", "anon");
+        filterMapping.put("/configuration/**", "anon");
+        filterMapping.put("/webjars/**", "anon");
+        filterMapping.put("/swagger**", "anon");
+        filterMapping.put("/swagger-ui.html/**", "anon");
     }
 
     @Bean(name = {"securityManager"})
@@ -115,16 +117,6 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
-    @Bean
-    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
-        hashedCredentialsMatcher.setHashIterations(2);
-        return hashedCredentialsMatcher;
-    }
-
-
-    //将自己的验证方式加入容器
     @Bean
     public AuthRealm authRealm() {
         AuthRealm authRealm = new AuthRealm();
