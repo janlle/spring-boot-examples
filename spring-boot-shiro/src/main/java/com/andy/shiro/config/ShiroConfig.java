@@ -1,6 +1,8 @@
 package com.andy.shiro.config;
 
 
+import com.andy.shiro.filter.CoreFilter;
+import com.andy.shiro.filter.TokenFilter;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -11,19 +13,22 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author: Mr.ruoLin
  * @createBy: 2018-04-21 17:22
  **/
 @Configuration
-public class ShiroConfiguration {
+public class ShiroConfig {
 
 
     //Filter工厂，设置对应的过滤条件和跳转条件
     @Bean("shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager, CoreFilter coreFilter, TokenFilter tokenFilter) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager);
 
@@ -39,6 +44,14 @@ public class ShiroConfiguration {
         filterChain.put("/**", "user");
         filterChain.put("/admin", "roles[admin]");
         bean.setFilterChainDefinitionMap(filterChain);
+
+
+        Map<String, Filter> filters = new HashMap();
+        filters.put("core", coreFilter);
+        filters.put("auth", tokenFilter);
+
+        bean.setFilters(filters);
+
         return bean;
     }
 
