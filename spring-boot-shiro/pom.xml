@@ -7,11 +7,13 @@
         <groupId>com.andy</groupId>
         <version>1.0.1.RELEASE</version>
     </parent>
+
     <packaging>jar</packaging>
 
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spring-boot-shiro</artifactId>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -39,6 +41,7 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.4.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
