@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @Api(tags ="订单操作接口")
-@RequestMapping(value = "/order")
+@RequestMapping(value = "/api/order")
 public class OrderController {
 
 

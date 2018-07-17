@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 public class ShiroConfig {
@@ -36,10 +37,13 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
 
-        Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
+//        Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
+        Map<String, String> filterChainDefinitionMapping = new ConcurrentHashMap<>();
 
         swaggerFilterChain(filterChainDefinitionMapping);
         this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
+//        this.setUrl(filterChainDefinitionMapping, "authc", shiroProperty.getCoreUrls());
+//        this.setUrl(filterChainDefinitionMapping, "authc", shiroProperty.getAuthUrls());
         this.setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
         this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
 
@@ -56,7 +60,7 @@ public class ShiroConfig {
     }
 
     private void setUrl(Map<String, String> filterChainDefinitionMapping, String filterName, List<String> urls) {
-        if (urls != null) {
+        if (urls != null && urls.size() > 0) {
             Iterator var4 = urls.iterator();
             while (var4.hasNext()) {
                 String url = (String) var4.next();
@@ -74,7 +78,7 @@ public class ShiroConfig {
         filterMapping.put("/configuration/**", "anon");
         filterMapping.put("/webjars/**", "anon");
         filterMapping.put("/swagger**", "anon");
-        filterMapping.put("/swagger-ui.html/**", "anon");
+        filterMapping.put("/swagger-ui.html", "anon");
     }
 
     @Bean(name = {"securityManager"})

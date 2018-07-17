@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @RestController
 @Api(tags ="支付回调接口")
-@RequestMapping(value = "/pay/notify")
+@RequestMapping(value = "/api/pay/notify")
 public class PayController {
 
     @Autowired
