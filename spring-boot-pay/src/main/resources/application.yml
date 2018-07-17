@@ -63,8 +63,8 @@ model:
     mulitLogin: false
     cacheDays: 7
     prefix: ${server.port}
-    anonUrls: /api/user/property
-    coreUrls: /user/aa
+    anonUrls: /
+    coreUrls: /api/user/property
     authUrls: /api/**
     tokenUserId: auth.token.id
     userIdToken: auth.id.token

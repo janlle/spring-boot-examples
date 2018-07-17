@@ -2,10 +2,13 @@ package com.andy.pay.shiro.config;
 
 
 import com.andy.pay.shiro.AuthRealm;
+import com.andy.pay.shiro.StatelessDefaultSubjectFactory;
 import com.andy.pay.shiro.filter.CoreFilter;
 import com.andy.pay.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -41,12 +44,10 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMapping = new ConcurrentHashMap<>();
 
         swaggerFilterChain(filterChainDefinitionMapping);
-        this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
-//        this.setUrl(filterChainDefinitionMapping, "authc", shiroProperty.getCoreUrls());
-//        this.setUrl(filterChainDefinitionMapping, "authc", shiroProperty.getAuthUrls());
+
         this.setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
         this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
-
+        this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
 
         Map<String, Filter> filters = new HashMap();
@@ -83,17 +84,15 @@ public class ShiroConfig {
 
     @Bean(name = {"securityManager"})
     public SecurityManager securityManager(AuthRealm authRealm) {
-
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
 
-//        DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
-//        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
-//        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-//        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
-//
-//
-//        manager.setSubjectFactory(statelessDefaultSubjectFactory);
-//        manager.setSessionManager(this.defaultSessionManager());
+        DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
+        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
+
+        manager.setSubjectFactory(statelessDefaultSubjectFactory);
+        manager.setSessionManager(this.defaultSessionManager());
         manager.setRealm(authRealm);
         SecurityUtils.setSecurityManager(manager);
 
