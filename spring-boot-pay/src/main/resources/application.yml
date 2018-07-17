@@ -65,7 +65,7 @@ model:
     prefix: ${server.port}
     anonUrls: http://www.bai.com
     coreUrls: http://www.bai.com
-    authUrls: http://www.bai.com
+    authUrls: /**
     tokenUserId: auth.token.id
     userIdToken: auth.id.token
     userIdRole: auth.id.role

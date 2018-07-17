@@ -31,6 +31,7 @@ public class TokenFilter extends AuthenticationFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        logger.info("onAccessDenied...");
         String token = this.getToken(request);
         if (StringUtils.isEmpty(token)) {
             this.printUnauthorized("auth.token.empty", WebUtils.toHttp(response));
