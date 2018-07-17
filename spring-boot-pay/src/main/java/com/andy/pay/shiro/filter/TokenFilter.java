@@ -45,10 +45,27 @@ public class TokenFilter extends AuthenticationFilter {
         }
     }
 
+//    @Override
+//    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+//        return true;
+//    }
+
+
+//    @Override
+//    public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+//        return super.onPreHandle(request, response, mappedValue);
+//    }
+
+
+//    @Override
+//    protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
+//        super.postHandle(request, response);
+//    }
 
     private String getToken(ServletRequest request) {
 
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
+
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
 
         if (!StringUtils.isEmpty(authorizationHeader) && authorizationHeader.startsWith("token")) {
