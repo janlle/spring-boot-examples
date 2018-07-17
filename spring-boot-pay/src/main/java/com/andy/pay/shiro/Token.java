@@ -1,8 +1,8 @@
 package com.andy.pay.shiro;
 
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
 
-public class Token implements AuthenticationToken {
+public class Token extends UsernamePasswordToken {
 
     private String token;
 
@@ -13,6 +13,7 @@ public class Token implements AuthenticationToken {
     public String getToken() {
         return this.token;
     }
+
 
     public Object getPrincipal() {
         return this.getToken();
