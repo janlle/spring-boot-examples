@@ -36,8 +36,8 @@ public class TokenRealm extends AuthorizingRealm {
     }
 
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        Token Token = (Token) authenticationToken;
-        String tokenString = Token.getToken();
+        Token token = (Token) authenticationToken;
+        String tokenString = token.getToken();
         String userId = this.redis.get(this.shiroProperty.getPrefix() + "auth.token.id:" + tokenString);
         return !StringUtils.isEmpty(userId) ? new SimpleAuthenticationInfo(userId, tokenString, this.getName()) : null;
     }
@@ -57,4 +57,6 @@ public class TokenRealm extends AuthorizingRealm {
             return null;
         }
     }
+
+
 }
