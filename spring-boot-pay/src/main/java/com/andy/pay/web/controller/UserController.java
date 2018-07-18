@@ -72,8 +72,8 @@ public class UserController {
     @ApiOperation(value = "根据用户id获取用户信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParam(name = "userId",value ="用户ID",required = true, dataType = "String")
     @GetMapping("/{userId}")
-    public Result<User> user(@PathVariable("userId") String userId) {
-        return Result.success(null);
+    public Result<Object> user(@PathVariable("userId") String userId) {
+        return Result.success(20000);
     }
 
     @ApiOperation(value = "用户认证授权接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
