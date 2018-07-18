@@ -4,12 +4,12 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.web.mgt.DefaultWebSubjectFactory;
 
-public class StatelessDefaultSubjectFactory extends DefaultWebSubjectFactory {
-    public StatelessDefaultSubjectFactory() {
-    }
-
-    public Subject createSubject(SubjectContext context) {
-        context.setSessionCreationEnabled(false);
-        return super.createSubject(context);
-    }
-}
+//public class StatelessDefaultSubjectFactory extends DefaultWebSubjectFactory {
+//    public StatelessDefaultSubjectFactory() {
+//    }
+//
+//    public Subject createSubject(SubjectContext context) {
+//        context.setSessionCreationEnabled(false);
+//        return super.createSubject(context);
+//    }
+//}
