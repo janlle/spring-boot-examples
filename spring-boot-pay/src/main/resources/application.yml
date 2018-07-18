@@ -4,14 +4,14 @@ spring:
     url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
-#  thymeleaf:
-#    cache: false
-#    prefix: classpath:/templates/
-#    suffix: .html
-#    mode: HTML5
-#    encoding: UTF-8
-#    servlet:
-#      content-type: text/html
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
 app:
   pay:
     wx:
@@ -63,8 +63,8 @@ model:
     mulitLogin: false
     cacheDays: 7
     prefix: ${server.port}
-    anonUrls: /
-    coreUrls: /api/user/property
+    anonUrls: /api/user/property
+    coreUrls: /**
     authUrls: /api/**
     tokenUserId: auth.token.id
     userIdToken: auth.id.token
