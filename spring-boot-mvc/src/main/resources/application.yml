@@ -1,7 +1,5 @@
 server:
   port: 8081
-  servlet:
-    path: /mvc
 
 app:
   config:
@@ -52,3 +50,9 @@ spring:
 customer:
   msg: jack
 
+luwei:
+  module:
+    shiro:
+      anno-url: /
+      cors-url: /hello
+      auth-url: /**
