@@ -67,5 +67,10 @@ public class HelloController {
         userService.newUser(num);
         return "jvm测试，新建了"+num+"个user对象！";
     }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello world";
+    }
 	
 }
