@@ -15,15 +15,11 @@ public class ShiroProperty {
 
     private boolean multiLogin = false;
 
-    private int cacheDays = 30;
+    private int cacheDays = 14;
 
-    private String prefix = "default.prefix:";
+    private String redisPrefix = "default.prefix:";
 
-    private String tokenUserId = "default.auth.token.id:";
-
-    private String userIdToken = "default.auth.id.token:";
-
-    private String userIdRole = "default.auth.id.role:";
+    private String tokenPrefix = "default.auth.token:";
 
     private List<String> anonUrls;
 
@@ -47,36 +43,20 @@ public class ShiroProperty {
         this.cacheDays = cacheDays;
     }
 
-    public String getPrefix() {
-        return prefix;
+    public String getRedisPrefix() {
+        return redisPrefix;
     }
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix + ":";
+    public void setRedisPrefix(String redisPrefix) {
+        this.redisPrefix = redisPrefix;
     }
 
-    public String getTokenUserId() {
-        return tokenUserId;
+    public String getTokenPrefix() {
+        return tokenPrefix;
     }
 
-    public void setTokenUserId(String tokenUserId) {
-        this.tokenUserId = tokenUserId + ":";
-    }
-
-    public String getUserIdToken() {
-        return userIdToken;
-    }
-
-    public void setUserIdToken(String userIdToken) {
-        this.userIdToken = userIdToken + ":";
-    }
-
-    public String getUserIdRole() {
-        return userIdRole;
-    }
-
-    public void setUserIdRole(String userIdRole) {
-        this.userIdRole = userIdRole + ":";
+    public void setTokenPrefix(String tokenPrefix) {
+        this.tokenPrefix = tokenPrefix;
     }
 
     public List<String> getAnonUrls() {

@@ -2,14 +2,17 @@ package com.andy.pay.web.controller;
 
 import com.andy.pay.common.Result;
 import com.andy.pay.common.enums.ResultEnum;
+import com.andy.pay.common.utils.RandomUtil;
 import com.andy.pay.pojos.entity.User;
 import com.andy.pay.service.UserService;
+import com.andy.pay.shiro.ShiroTokenService;
 import com.andy.pay.shiro.config.ShiroProperty;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ShiroTokenService shiroTokenService;
 
     @Autowired
     private ShiroProperty shiroProperty;
@@ -47,7 +53,7 @@ public class UserController {
     })
     @PostMapping("/login")
     public Result<Object> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
-
+        shiroTokenService.afterLogin(RandomUtil.getStr(6));
         return Result.build(ResultEnum.USERNAME_PASSWORD_FAIL, null);
     }
 
@@ -93,15 +99,12 @@ public class UserController {
 
         ShiroProperty shiro = new ShiroProperty();
 
-        shiro.setUserIdToken(shiroProperty.getUserIdToken());
-        shiro.setTokenUserId(shiroProperty.getTokenUserId());
         shiro.setAnonUrls(shiroProperty.getAnonUrls());
         shiro.setCacheDays(shiroProperty.getCacheDays());
         shiro.setCoreUrls(shiroProperty.getCoreUrls());
         shiro.setMultiLogin(shiroProperty.isMultiLogin());
-        shiro.setPrefix(shiroProperty.getPrefix());
-        shiro.setUserIdRole(shiroProperty.getUserIdRole());
-        shiro.setUserIdToken(shiroProperty.getUserIdToken());
+        shiro.setRedisPrefix(shiroProperty.getRedisPrefix());
+        shiro.setTokenPrefix(shiroProperty.getTokenPrefix());
         shiro.setAnonUrls(shiroProperty.getAnonUrls());
         shiro.setAuthUrls(shiroProperty.getAuthUrls());
         return Result.build(20000, "SUCCESS", shiro);
