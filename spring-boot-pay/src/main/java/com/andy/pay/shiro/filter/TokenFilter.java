@@ -1,7 +1,6 @@
 package com.andy.pay.shiro.filter;
 
 import com.andy.pay.shiro.Token;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
@@ -10,7 +9,6 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletRequest;
@@ -62,16 +60,13 @@ public class TokenFilter extends AuthenticationFilter {
 //    }
 
     private String getToken(ServletRequest request) {
-
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
-
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
 
         if (!StringUtils.isEmpty(authorizationHeader) && authorizationHeader.startsWith("token")) {
             String[] authTokens = authorizationHeader.split(" ");
             return authTokens.length < 2 ? null : authTokens[1];
         }
-
         return null;
     }
 
