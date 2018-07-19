@@ -31,12 +31,12 @@ public class TokenFilter extends AuthenticationFilter {
         logger.info("onAccessDenied...");
         String token = this.getToken(request);
         if (StringUtils.isEmpty(token)) {
-            this.printUnauthorized("auth.token.empty", WebUtils.toHttp(response));
+            this.writeError("auth.token.empty", WebUtils.toHttp(response));
             return false;
         } else {
             boolean loginSuccess = this.login(new Token(token));
             if (!loginSuccess) {
-                this.printUnauthorized("auth.token.wrong", WebUtils.toHttp(response));
+                this.writeError("auth.token.wrong", WebUtils.toHttp(response));
             }
             return loginSuccess;
         }
@@ -71,25 +71,21 @@ public class TokenFilter extends AuthenticationFilter {
     }
 
 
-    private void printUnauthorized(String message, HttpServletResponse response) {
+    private void writeError(String message, HttpServletResponse response) {
         String content = String.format("{\"code\":\"%s\",\"message\":\"%s\"}", HttpStatus.UNAUTHORIZED, message);
-
         response.setContentType("application/json;charset=UTF-8");
         response.setContentLength(content.length());
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-
         try (PrintWriter writer = response.getWriter()) {
             writer.write(content);
         } catch (IOException e) {
             logger.warn("输出异常信息失败!", e);
         }
-
     }
 
     private boolean login(Token token) {
         try {
-            Subject subject = SecurityUtils.getSubject();
-            subject.login(token);
+            SecurityUtils.getSubject().login(token);
             return true;
         } catch (AuthenticationException e) {
             return false;

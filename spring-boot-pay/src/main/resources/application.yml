@@ -62,10 +62,8 @@ model:
   shiro:
     mulitLogin: false
     cacheDays: 7
-    prefix: ${server.port}
+    redisPrefix: ${server.port}
     anonUrls: /*
     coreUrls: /api/user/property
     authUrls: /api/**
-    tokenUserId: auth.token.id
-    userIdToken: auth.id.token
-    userIdRole: auth.id.role
+    tokenPrefix: auth.token.id
