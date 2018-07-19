@@ -51,7 +51,7 @@ public class UserController {
             @ApiImplicitParam(name = "account",value ="用户账号",required = true, dataType = "String"),
             @ApiImplicitParam(name = "password",value ="用户密码",required = true, dataType = "String")
     })
-    @PostMapping("/login")
+    @GetMapping("/login")
     public Result<Object> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
         shiroTokenService.afterLogin(RandomUtil.getStr(6));
         return Result.build(ResultEnum.USERNAME_PASSWORD_FAIL, null);
