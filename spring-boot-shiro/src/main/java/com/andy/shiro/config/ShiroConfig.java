@@ -10,8 +10,10 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -32,31 +34,29 @@ public class ShiroConfig {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager);
 
-        bean.setLoginUrl("/login");
-        bean.setSuccessUrl("/index");
-        bean.setUnauthorizedUrl("/unauthorized");
-
-        LinkedHashMap<String, String> filterChain = new LinkedHashMap<>();
-        filterChain.put("/index", "authc");
-        filterChain.put("/static/**", "anon");
-        filterChain.put("/login", "anon");
-        filterChain.put("/image", "anon");
-        filterChain.put("/**", "user");
-        filterChain.put("/admin", "roles[admin]");
-        bean.setFilterChainDefinitionMap(filterChain);
-
-
         Map<String, Filter> filters = new HashMap();
         filters.put("core", coreFilter);
         filters.put("auth", tokenFilter);
 
         bean.setFilters(filters);
 
+//        bean.setLoginUrl("/login");
+//        bean.setSuccessUrl("/index");
+//        bean.setUnauthorizedUrl("/unauthorized");
+
+        LinkedHashMap<String, String> filterChain = new LinkedHashMap<>();
+        filterChain.put("/index", "authc");
+        filterChain.put("/static/**", "anon");
+        filterChain.put("/login", "anon");
+        filterChain.put("/image", "anon");
+        filterChain.put("/**", "auth");
+        filterChain.put("/admin", "roles[admin]");
+        bean.setFilterChainDefinitionMap(filterChain);
         return bean;
     }
 
     @Bean
-    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         //散列算法:这里使用MD5算法;
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
@@ -66,7 +66,7 @@ public class ShiroConfig {
     }
 
     //权限管理，配置主要是Realm的管理认证
-    @Bean("securityManager")
+    @Bean
     public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
@@ -74,7 +74,7 @@ public class ShiroConfig {
     }
 
     //将自己的验证方式加入容器
-    @Bean("authRealm")
+    @Bean
     public AuthRealm authRealm(@Qualifier("credentialMatcher") CredentialMatcher matcher) {
         AuthRealm authRealm = new AuthRealm();
         authRealm.setCredentialsMatcher(matcher);
@@ -87,7 +87,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager")SecurityManager securityManager) {
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
         return advisor;
@@ -99,5 +99,17 @@ public class ShiroConfig {
         creator.setProxyTargetClass(true);
         return creator;
     }
+
+    // UnavailableSecurityManagerException
+    @Bean
+    public FilterRegistrationBean delegatingFilterProxy(){
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
+        proxy.setTargetFilterLifecycle(true);
+        proxy.setTargetBeanName("shiroFilter");
+        filterRegistrationBean.setFilter(proxy);
+        return filterRegistrationBean;
+    }
+
 
 }
