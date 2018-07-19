@@ -14,10 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
+@Component
 public class AuthRealm extends AuthorizingRealm {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthRealm.class);

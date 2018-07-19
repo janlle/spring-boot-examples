@@ -1,6 +1,3 @@
-server:
-  port: 8086
-  servlet-path: /
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/boot?useSSL=false

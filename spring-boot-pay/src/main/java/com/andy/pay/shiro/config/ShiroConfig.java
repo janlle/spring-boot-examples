@@ -2,6 +2,7 @@ package com.andy.pay.shiro.config;
 
 
 import com.andy.pay.shiro.AuthRealm;
+import com.andy.pay.shiro.StatelessDefaultSubjectFactory;
 import com.andy.pay.shiro.filter.CoreFilter;
 import com.andy.pay.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
@@ -33,96 +34,97 @@ public class ShiroConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
-    @Bean("shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty, CoreFilter coreFilter, TokenFilter tokenFilter) {
-
-        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
-        shiroFilter.setSecurityManager(securityManager);
-        Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
-
-        Map<String, Filter> filters = new HashMap();
-        filters.put("core", coreFilter);
-        filters.put("auth", tokenFilter);
-
-        shiroFilter.setFilters(filters);
-
-//        this.setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
-//        this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
-//        this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
-        this.setUrl(filterChainDefinitionMapping, "core,auth", Arrays.asList("/api/**"));
-        this.setUrl(filterChainDefinitionMapping, "core,anon", Arrays.asList("/**"));
-        this.setUrl(filterChainDefinitionMapping, "anon", Arrays.asList("/api/user/property"));
-        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
-        swaggerFilterChain(filterChainDefinitionMapping);
-        logger.info("shiro filter init success");
-        return shiroFilter;
-    }
-
-    private void setUrl(Map<String, String> filterChainDefinitionMapping, String filterName, List<String> urls) {
-        if (urls != null && urls.size() > 0) {
-            Iterator var4 = urls.iterator();
-            while (var4.hasNext()) {
-                String url = (String) var4.next();
-                if (!StringUtils.isEmpty(url)) {
-                    filterChainDefinitionMapping.put(url, filterName);
-                }
-            }
-
-        }
-    }
-
-    public void swaggerFilterChain(Map filterMapping) {
-        logger.info("swagger");
-        filterMapping.put("/v2/api-docs", "anon");
-        filterMapping.put("/configuration/**", "anon");
-        filterMapping.put("/webjars/**", "anon");
-        filterMapping.put("/swagger**", "anon");
-        filterMapping.put("/swagger-ui.html", "anon");
-    }
-
-    @Bean(name = {"securityManager"})
-    public SecurityManager securityManager(AuthRealm authRealm) {
-        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-
-        DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
-        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
-        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-//        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
+//    @Bean("shiroFilter")
+//    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty, CoreFilter coreFilter, TokenFilter tokenFilter) {
 //
-//        manager.setSubjectFactory(statelessDefaultSubjectFactory);
-        manager.setSessionManager(this.defaultSessionManager());
-        manager.setRealm(authRealm);
-        SecurityUtils.setSecurityManager(manager);
-
-
-        return manager;
-    }
-
-    @Bean
-    public DefaultSessionManager defaultSessionManager() {
-        DefaultSessionManager manager = new DefaultSessionManager();
-        manager.setSessionValidationSchedulerEnabled(false);
-        return manager;
-    }
-
-    @Bean
-    @DependsOn({"lifecycleBeanPostProcessor"})
-    public AuthorizationAttributeSourceAdvisor advisor(SecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
-    }
-
-    @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
-    }
-
-    @Bean
-    public AuthRealm authRealm() {
-        AuthRealm authRealm = new AuthRealm();
-        return authRealm;
-    }
+//        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+//        shiroFilter.setSecurityManager(securityManager);
+//        Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
+//
+//        Map<String, Filter> filters = new HashMap();
+//        filters.put("core", coreFilter);
+//        filters.put("auth", tokenFilter);
+//
+//        shiroFilter.setFilters(filters);
+//
+////        this.setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
+////        this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
+////        this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
+//        this.setUrl(filterChainDefinitionMapping, "anon", Arrays.asList("/"));
+//        this.setUrl(filterChainDefinitionMapping, "core,anon", Arrays.asList("/api/user/property"));
+//        this.setUrl(filterChainDefinitionMapping, "core,auth", Arrays.asList("/**"));
+//
+//        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
+//        swaggerFilterChain(filterChainDefinitionMapping);
+//        logger.info("shiro filter init success");
+//        return shiroFilter;
+//    }
+//
+//    private void setUrl(Map<String, String> filterChainDefinitionMapping, String filterName, List<String> urls) {
+//        if (urls != null && urls.size() > 0) {
+//            Iterator var4 = urls.iterator();
+//            while (var4.hasNext()) {
+//                String url = (String) var4.next();
+//                if (!StringUtils.isEmpty(url)) {
+//                    filterChainDefinitionMapping.put(url, filterName);
+//                }
+//            }
+//
+//        }
+//    }
+//
+//    public void swaggerFilterChain(Map filterMapping) {
+//        logger.info("swagger");
+//        filterMapping.put("/v2/api-docs", "anon");
+//        filterMapping.put("/configuration/**", "anon");
+//        filterMapping.put("/webjars/**", "anon");
+//        filterMapping.put("/swagger**", "anon");
+//        filterMapping.put("/swagger-ui.html", "anon");
+//    }
+//
+//    @Bean(name = {"securityManager"})
+//    public SecurityManager securityManager(AuthRealm authRealm) {
+//        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+//
+//        DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
+//        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
+//        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+////        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
+////
+////        manager.setSubjectFactory(statelessDefaultSubjectFactory);
+//        manager.setSessionManager(this.defaultSessionManager());
+//        manager.setRealm(authRealm);
+//        SecurityUtils.setSecurityManager(manager);
+//
+//
+//        return manager;
+//    }
+//
+//    @Bean
+//    public DefaultSessionManager defaultSessionManager() {
+//        DefaultSessionManager manager = new DefaultSessionManager();
+//        manager.setSessionValidationSchedulerEnabled(false);
+//        return manager;
+//    }
+//
+//    @Bean
+//    @DependsOn({"lifecycleBeanPostProcessor"})
+//    public AuthorizationAttributeSourceAdvisor advisor(SecurityManager securityManager) {
+//        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+//        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+//        return authorizationAttributeSourceAdvisor;
+//    }
+//
+//    @Bean
+//    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+//        return new LifecycleBeanPostProcessor();
+//    }
+//
+//    @Bean
+//    public AuthRealm authRealm() {
+//        AuthRealm authRealm = new AuthRealm();
+//        return authRealm;
+//    }
 //
 //    @Bean
 //    public FilterRegistrationBean delegatingFilterProxy(){
@@ -171,22 +173,100 @@ public class ShiroConfig {
 //        return advisor;
 //    }
 
-    @Bean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
-        creator.setProxyTargetClass(true);
-        return creator;
+//    @Bean
+//    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+//        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
+//        creator.setProxyTargetClass(true);
+//        return creator;
+//    }
+//
+//    // UnavailableSecurityManagerException
+//    @Bean
+//    public FilterRegistrationBean delegatingFilterProxy() {
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+//        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
+//        proxy.setTargetFilterLifecycle(true);
+//        proxy.setTargetBeanName("shiroFilter");
+//        filterRegistrationBean.setFilter(proxy);
+//        return filterRegistrationBean;
+//    }
+
+
+
+    public ShiroConfig() {
+        logger.info("shiro config init");
     }
 
-    // UnavailableSecurityManagerException
     @Bean
-    public FilterRegistrationBean delegatingFilterProxy() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
-        proxy.setTargetFilterLifecycle(true);
-        proxy.setTargetBeanName("shiroFilter");
-        filterRegistrationBean.setFilter(proxy);
-        return filterRegistrationBean;
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty) {
+        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+        Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
+        swaggerFilterChain(filterChainDefinitionMapping);
+        this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
+        this.setUrl(filterChainDefinitionMapping, "cors,anon", shiroProperty.getCoreUrls());
+        this.setUrl(filterChainDefinitionMapping, "cors,auth", shiroProperty.getAuthUrls());
+        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
+        shiroFilter.setSecurityManager(securityManager);
+        Map<String, Filter> filters = new HashMap();
+        filters.put("cors", new CoreFilter());
+        filters.put("auth", new TokenFilter());
+        shiroFilter.setFilters(filters);
+        return shiroFilter;
+    }
+
+    private void setUrl(Map<String, String> filterChainDefinitionMapping, String filterName, List<String> urls) {
+        if (urls != null) {
+            Iterator var4 = urls.iterator();
+
+            while (var4.hasNext()) {
+                String url = (String) var4.next();
+                if (!StringUtils.isEmpty(url)) {
+                    filterChainDefinitionMapping.put(url, filterName);
+                }
+            }
+
+        }
+    }
+
+    public static void swaggerFilterChain(Map<String, String> filterChainDefinitionMapping) {
+        filterChainDefinitionMapping.put("/v2/api-docs", "anon");
+        filterChainDefinitionMapping.put("/configuration/**", "anon");
+        filterChainDefinitionMapping.put("/webjars/**", "anon");
+        filterChainDefinitionMapping.put("/swagger**", "anon");
+    }
+
+    @Bean
+    public SecurityManager securityManager(AuthRealm realm) {
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+        DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
+        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
+        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+        manager.setRealm(realm);
+        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
+        manager.setSubjectFactory(statelessDefaultSubjectFactory);
+        manager.setSessionManager(this.defaultSessionManager());
+        SecurityUtils.setSecurityManager(manager);
+        return manager;
+    }
+
+    @Bean
+    public DefaultSessionManager defaultSessionManager() {
+        DefaultSessionManager manager = new DefaultSessionManager();
+        manager.setSessionValidationSchedulerEnabled(false);
+        return manager;
+    }
+
+    @Bean
+    @DependsOn({"lifecycleBeanPostProcessor"})
+    public AuthorizationAttributeSourceAdvisor advisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
+
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
     }
 
 
