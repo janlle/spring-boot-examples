@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Component
 public class CoreFilter extends AbstractFilter {
 
     public CoreFilter() {
@@ -37,7 +36,7 @@ public class CoreFilter extends AbstractFilter {
         if (request.getMethod().equals(RequestMethod.OPTIONS.name())) {
             response.setStatus(HttpStatus.OK.value());
         } else {
-            logger.info("coreFilter.doFilter");
+            logger.info("core filter doFilter");
             filterChain.doFilter(servletRequest, servletResponse);
         }
 

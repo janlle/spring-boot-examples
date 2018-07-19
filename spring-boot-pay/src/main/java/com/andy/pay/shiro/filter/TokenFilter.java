@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@Component
 public class TokenFilter extends AuthenticationFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
