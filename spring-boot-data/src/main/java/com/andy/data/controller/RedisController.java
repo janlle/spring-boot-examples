@@ -32,4 +32,10 @@ public class RedisController {
         return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
     }
 
+    @GetMapping("/setValue")
+    public String setValue(@RequestParam(required = false, defaultValue = "1") Integer count) {
+        long time = redisService.setValue(count);
+        return "set" + count + "条数据一共用了:" + time + "豪秒！";
+    }
+
 }

@@ -53,6 +53,6 @@ customer:
 luwei:
   module:
     shiro:
-      anno-url: /
-      cors-url: /hello
+      anno-url: /*
+      cors-url: /mvc/hello
       auth-url: /**
