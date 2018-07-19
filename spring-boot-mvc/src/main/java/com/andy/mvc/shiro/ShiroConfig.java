@@ -22,23 +22,22 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
+
     public ShiroConfig() {
     }
 
-    @Bean(
-            name = {"shiroFilter"}
-    )
+    @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroFilterUrlProperties urlProperties) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
         swaggerFilterChain(filterChainDefinitionMapping);
         this.setUrl(filterChainDefinitionMapping, "anon", urlProperties.getAnonUrl());
-        this.setUrl(filterChainDefinitionMapping, "cors,anon", urlProperties.getCorsUrl());
-        this.setUrl(filterChainDefinitionMapping, "cors,auth", urlProperties.getAuthUrl());
+        this.setUrl(filterChainDefinitionMapping, "core,anon", urlProperties.getCorsUrl());
+        this.setUrl(filterChainDefinitionMapping, "core,auth", urlProperties.getAuthUrl());
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         shiroFilter.setSecurityManager(securityManager);
         Map<String, Filter> filters = new HashMap();
-        filters.put("cors", new CorsFilter());
+        filters.put("core", new CoreFilter());
         filters.put("auth", new TokenFilter());
         shiroFilter.setFilters(filters);
         return shiroFilter;
@@ -65,39 +64,37 @@ public class ShiroConfig {
         filterChainDefinitionMapping.put("/swagger**", "anon");
     }
 
-    @Bean(
-            name = {"securityManager"}
-    )
+    @Bean
     public SecurityManager securityManager(TokenRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
-        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
-        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+//        DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
+//        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
+//        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
         manager.setRealm(realm);
-        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
-        manager.setSubjectFactory(statelessDefaultSubjectFactory);
-        manager.setSessionManager(this.defaultSessionManager());
+//        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
+//        manager.setSubjectFactory(statelessDefaultSubjectFactory);
+//        manager.setSessionManager(this.defaultSessionManager());
         SecurityUtils.setSecurityManager(manager);
         return manager;
     }
 
-    @Bean
-    public DefaultSessionManager defaultSessionManager() {
-        DefaultSessionManager manager = new DefaultSessionManager();
-        manager.setSessionValidationSchedulerEnabled(false);
-        return manager;
-    }
+//    @Bean
+//    public DefaultSessionManager defaultSessionManager() {
+//        DefaultSessionManager manager = new DefaultSessionManager();
+//        manager.setSessionValidationSchedulerEnabled(false);
+//        return manager;
+//    }
 
-    @Bean
-    @DependsOn({"lifecycleBeanPostProcessor"})
-    public AuthorizationAttributeSourceAdvisor advisor(SecurityManager securityManager) {
-        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-        return authorizationAttributeSourceAdvisor;
-    }
-
-    @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
-    }
+//    @Bean
+//    @DependsOn({"lifecycleBeanPostProcessor"})
+//    public AuthorizationAttributeSourceAdvisor advisor(SecurityManager securityManager) {
+//        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+//        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+//        return authorizationAttributeSourceAdvisor;
+//    }
+//
+//    @Bean
+//    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+//        return new LifecycleBeanPostProcessor();
+//    }
 }
