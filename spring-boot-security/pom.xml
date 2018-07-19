@@ -5,7 +5,7 @@
     <parent>
         <artifactId>spring-boot-examples</artifactId>
         <groupId>com.andy</groupId>
-        <version>1.0.1.RELEASE</version>
+        <version>1.0.3.RELEASE</version>
     </parent>
     <artifactId>spring-boot-security</artifactId>
 
