@@ -5,7 +5,6 @@ import com.andy.data.entity.User;
 import com.andy.data.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -34,7 +33,6 @@ public class RedisService {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<String, String> operations;
 
-    //RedisPrefix.cmsUserCatch(RandomUtil.getNum(6))
     public long batchInsert(Integer count) {
         List<User> list = new ArrayList<>();
         for (long i = 0; i < count; i++) {
@@ -50,10 +48,25 @@ public class RedisService {
         long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
             User user = new User("james" + i, "james" + i, new Date(), 1000.0 + i, new Date(), false);
-            redisTemplate.opsForValue().set(RedisPrefix.cmsUserCatch(RandomUtil.getNum(6)), user, 3, TimeUnit.SECONDS);
+//            redisTemplate.opsForValue().set(RedisPrefix.cmsUserCatch(RandomUtil.getNum(6)), user, 3, TimeUnit.SECONDS);
         }
         long end = System.currentTimeMillis();
         return (end - start);
     }
+
+
+    public long setValue(Integer count) {
+        log.info("setValue,count:{}", count);
+//        User user = new User("james", "james", new Date(), 1000.0, new Date(), false);
+        long start = System.currentTimeMillis();
+        for (long i = 0; i < count; i++) {
+            User user = new User("james" + i, "james" + i, new Date(), 1000.0 + i, new Date(), false);
+            redisTemplate.opsForValue().set(RedisPrefix.webUserCatch(RandomUtil.getNum(6)), user, 3, TimeUnit.SECONDS);
+            stringRedisTemplate.opsForValue().set(RedisPrefix.webUserCatch(RandomUtil.getNum(6)), "world");
+        }
+        long end = System.currentTimeMillis();
+        return (end - start);
+    }
+
 
 }

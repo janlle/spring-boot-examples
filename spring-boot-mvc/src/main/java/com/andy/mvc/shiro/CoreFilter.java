@@ -14,9 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Slf4j
-public class CorsFilter extends AbstractFilter {
+public class CoreFilter extends AbstractFilter {
 
-    public CorsFilter() {
+    public CoreFilter() {
         log.info("cors filter init...");
     }
 

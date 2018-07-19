@@ -88,10 +88,7 @@ public class MD {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             messageDigest.update(content.getBytes("UTF-8"));
             byte[] hashCode = messageDigest.digest();
-            for (byte b : hashCode) {
-                sb.append(Character.forDigit(b >> 4 & 0xf, 16));
-                sb.append(Character.forDigit(b & 0xf, 16));
-            }
+            return new HexBinaryAdapter().marshal(hashCode).toLowerCase();
         } catch (Exception e) {
             e.printStackTrace();
         }

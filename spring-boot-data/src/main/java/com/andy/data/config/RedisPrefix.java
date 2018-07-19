@@ -7,11 +7,11 @@ package com.andy.data.config;
 public class RedisPrefix {
 
     public static String webUserCatch(String uuid) {
-        return "app.user.web:" + uuid;
+        return "app.web.token:" + uuid;
     }
 
     public static String cmsUserCatch(String uuid) {
-        return "app.user.cms:" + uuid;
+        return "app.cms.token:" + uuid;
     }
 
 }
