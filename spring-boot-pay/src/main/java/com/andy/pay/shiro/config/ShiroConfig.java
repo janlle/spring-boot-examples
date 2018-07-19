@@ -2,11 +2,9 @@ package com.andy.pay.shiro.config;
 
 
 import com.andy.pay.shiro.AuthRealm;
-import com.andy.pay.shiro.StatelessDefaultSubjectFactory;
 import com.andy.pay.shiro.filter.CoreFilter;
 import com.andy.pay.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
@@ -17,17 +15,16 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.util.StringUtils;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.Filter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
@@ -81,9 +78,6 @@ public class ShiroConfig {
         DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = (DefaultSessionStorageEvaluator) de.getSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-//        StatelessDefaultSubjectFactory statelessDefaultSubjectFactory = new StatelessDefaultSubjectFactory();
-//
-//        manager.setSubjectFactory(statelessDefaultSubjectFactory);
         manager.setSessionManager(this.defaultSessionManager());
         manager.setRealm(authRealm);
         SecurityUtils.setSecurityManager(manager);

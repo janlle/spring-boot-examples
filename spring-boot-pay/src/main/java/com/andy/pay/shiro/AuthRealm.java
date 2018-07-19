@@ -13,6 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -24,18 +25,18 @@ public class AuthRealm extends AuthorizingRealm {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthRealm.class);
 
-    @Autowired
+    @Resource
     private ShiroProperty shiroProperty;
 
-    @Resource(name = "stringRedisTemplate")
-    private ValueOperations<String, String> redis;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
 
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         logger.info("doGetAuthenticationInfo...");
         Token token = (Token) authenticationToken;
         String tokenString = token.getToken();
-        String userId = this.redis.get(this.shiroProperty.getPrefix() + "auth.token.id:" + tokenString);
+        String userId = this.stringRedisTemplate.opsForValue().get(this.shiroProperty.getRedisPrefix() + "auth.token.id:" + tokenString);
         return !StringUtils.isEmpty(userId) ? new SimpleAuthenticationInfo(userId, tokenString, this.getName()) : null;
     }
 
@@ -43,7 +44,7 @@ public class AuthRealm extends AuthorizingRealm {
         logger.info("doGetAuthorizationInfo...");
         String userId = (String) principals.getPrimaryPrincipal();
         if (!StringUtils.isEmpty(userId)) {
-            String role = this.redis.get(this.shiroProperty.getPrefix() + "auth.id.role:" + userId);
+            String role = this.stringRedisTemplate.opsForValue().get(this.shiroProperty.getRedisPrefix() + "auth.id.role:" + userId);
             if (StringUtils.isEmpty(role)) {
                 return null;
             } else {
