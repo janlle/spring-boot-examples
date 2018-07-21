@@ -75,13 +75,12 @@ public class ShiroConfig {
 
     //将自己的验证方式加入容器
     @Bean
-    public AuthRealm authRealm(@Qualifier("credentialMatcher") CredentialMatcher matcher) {
+    public AuthRealm authRealm(CredentialMatcher credentialMatcher) {
         AuthRealm authRealm = new AuthRealm();
-        authRealm.setCredentialsMatcher(matcher);
+        authRealm.setCredentialsMatcher(credentialMatcher);
         return authRealm;
     }
 
-    @Bean("credentialMatcher")
     public CredentialMatcher credentialMatcher() {
         return new CredentialMatcher();
     }
@@ -102,7 +101,7 @@ public class ShiroConfig {
 
     // UnavailableSecurityManagerException
     @Bean
-    public FilterRegistrationBean delegatingFilterProxy(){
+    public FilterRegistrationBean delegatingFilterProxy() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         DelegatingFilterProxy proxy = new DelegatingFilterProxy();
         proxy.setTargetFilterLifecycle(true);
