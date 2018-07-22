@@ -8,6 +8,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 用户信息
@@ -51,11 +53,6 @@ public class User implements Serializable {
     @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'")
     private Date updateTime;
 
-//    @ApiModelProperty("角色集合")
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "t_user_role",
-//            joinColumns = {@JoinColumn(name = "uId", referencedColumnName = "userId")},
-//            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
-//    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
 }

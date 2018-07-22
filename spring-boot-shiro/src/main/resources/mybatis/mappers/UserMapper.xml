@@ -4,38 +4,50 @@
 
     <resultMap id="userMap" type="com.andy.shiro.entity.rbac.User">
         <id property="userId" column="user_id"/>
-        <result property="nickname" column="nickname"/>
+        <result property="account" column="account"/>
         <result property="password" column="password"/>
-        <result property="username" column="username"/>
+        <result property="email" column="email"/>
         <result property="salt" column="salt"/>
-        <result property="state" column="state"/>
+        <result property="disable" column="disable"/>
+        <result property="deleted" column="deleted"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
 
         <collection property="roles" ofType="com.andy.shiro.entity.rbac.Role">
             <id property="roleId" column="role_id"/>
-            <result property="role" column="role"/>
-            <result property="available" column="available"/>
+            <result property="roleName" column="role_name"/>
             <result property="description" column="description"/>
+            <result property="disable" column="disable"/>
+            <result property="deleted" column="deleted"/>
+            <result property="createTime" column="create_time"/>
+            <result property="createTime" column="update_time"/>
 
             <collection property="permissions" ofType="com.andy.shiro.entity.rbac.Permission">
                 <id property="permissionId" column="permission_id"/>
-                <result property="name" column="name"/>
+                <result property="permissionName" column="permission_name"/>
                 <result property="url" column="url"/>
-                <result property="available" column="available"/>
-                <result property="parentId" column="parentId"/>
-                <result property="resourceType" column="resourceType"/>
-                <result property="permission" column="permission"/>
+                <result property="parentId" column="parent_id"/>
+                <result property="description" column="description"/>
+                <result property="resourceType" column="resource_type"/>
+                <result property="disable" column="disable"/>
+                <result property="deleted" column="deleted"/>
+                <result property="createTime" column="create_time"/>
+                <result property="createTime" column="update_time"/>
             </collection>
         </collection>
     </resultMap>
 
-    <select id="findByUsername" parameterType="String" resultMap="userMap">
-        SELECT u.*, p.*, r.*
+    <select id="findByAccount" parameterType="String" resultMap="userMap">
+        SELECT
+            u.*,
+            p.*,
+            r.*
         FROM sys_user u
-            INNER JOIN sys_user_role ur on u.user_id = ur.user_id
-            INNER JOIN sys_role r on r.role_id = ur.role_id
-            INNER JOIN sys_permission_role pr on pr.role_id = r.role_id
-            INNER JOIN sys_permission p on p.permission_id = pr.permission_id
-        WHERE u.username = #{username}
+            INNER JOIN sys_user_role ur on u.user_id = ur.u_id
+            INNER JOIN sys_role r on r.role_id = ur.r_id
+            INNER JOIN sys_permission_role pr on pr.r_id = r.role_id
+            INNER JOIN sys_permission p on p.permission_id = pr.p_id
+        WHERE u.account = #{account}
     </select>
 
 </mapper>
