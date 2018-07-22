@@ -1,5 +1,6 @@
 package com.andy.shiro.entity.rbac;
 
+import com.andy.shiro.common.enums.ResourceType;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -35,6 +36,9 @@ public class Permission implements Serializable {
     @Column(columnDefinition = "integer NOT NULL COMMENT '父编号'")
     private Long parentId;
 
+    @Column(columnDefinition = "varchar(255) NOT NULL COMMENT '描述'")
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "integer NOT NULL COMMENT '资源类型，[menu|button]'")
     private ResourceType type;
@@ -52,16 +56,5 @@ public class Permission implements Serializable {
 
     @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
     private Boolean deleted;
-
-//    @ApiModelProperty("对应角色")
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "t_permission_role",
-//            joinColumns = {@JoinColumn(name = "pid", referencedColumnName = "permissionId")},
-//            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
-//    private Set<Role> roles = new HashSet<>();
-
-    private enum ResourceType {
-        MENU, BUTTON
-    }
 
 }
