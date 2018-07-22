@@ -43,6 +43,9 @@ public class Permission implements Serializable {
     @Column(columnDefinition = "integer NOT NULL COMMENT '资源类型，[menu|button]'")
     private ResourceType type;
 
+    @Column(columnDefinition = "varchar(255) NOT NULL COMMENT '描述'")
+    private String description;
+
     @CreatedDate
     @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private Date createTime;
