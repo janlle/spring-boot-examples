@@ -39,6 +39,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ResponseBody
     @RequestMapping("/user/one")
     public User getUser(@RequestParam String account) {
         return userService.getByAccount(account);

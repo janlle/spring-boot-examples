@@ -16,8 +16,9 @@ public class UniversalEnumHandler<E extends BaseEnum> extends BaseTypeHandler<E>
     private E[] enums;
 
     public UniversalEnumHandler(Class<E> type) {
-        if (type == null)
+        if (type == null) {
             throw new IllegalArgumentException("Type argument cannot be null");
+        }
         this.type = type;
         this.enums = type.getEnumConstants();
         if (this.enums == null) {
@@ -27,7 +28,6 @@ public class UniversalEnumHandler<E extends BaseEnum> extends BaseTypeHandler<E>
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, E parameter, JdbcType jdbcType) throws SQLException {
-        //BaseTypeHandler已经帮我们做了parameter的null判断
         ps.setObject(i, parameter.code(), jdbcType.TYPE_CODE);
     }
 

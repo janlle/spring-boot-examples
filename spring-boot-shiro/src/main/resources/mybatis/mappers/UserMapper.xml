@@ -20,7 +20,7 @@
             <result property="disable" column="disable"/>
             <result property="deleted" column="deleted"/>
             <result property="createTime" column="create_time"/>
-            <result property="createTime" column="update_time"/>
+            <result property="updateTime" column="update_time"/>
 
             <collection property="permissions" ofType="com.andy.shiro.entity.rbac.Permission">
                 <id property="permissionId" column="permission_id"/>
@@ -28,16 +28,16 @@
                 <result property="url" column="url"/>
                 <result property="parentId" column="parent_id"/>
                 <result property="description" column="description"/>
-                <result property="resourceType" column="resource_type"/>
+                <result property="resourceType" column="resource_type" typeHandler="com.andy.shiro.common.enums.UniversalEnumHandler"/>
                 <result property="disable" column="disable"/>
                 <result property="deleted" column="deleted"/>
                 <result property="createTime" column="create_time"/>
-                <result property="createTime" column="update_time"/>
+                <result property="updateTime" column="update_time"/>
             </collection>
         </collection>
     </resultMap>
 
-    <select id="findByAccount" parameterType="String" resultMap="userMap">
+    <select id="getByAccount" parameterType="String" resultMap="userMap">
         SELECT
             u.*,
             p.*,
@@ -47,7 +47,7 @@
             INNER JOIN sys_role r on r.role_id = ur.r_id
             INNER JOIN sys_permission_role pr on pr.r_id = r.role_id
             INNER JOIN sys_permission p on p.permission_id = pr.p_id
-        WHERE u.account = #{account}
+        WHERE u.account = #{account} limit 1
     </select>
 
 </mapper>
