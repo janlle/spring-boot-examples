@@ -5,13 +5,11 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
- * @author: Mr.ruoLin
+ * @author: Mr.lyon
  * @createBy: 2018-04-21 15:58
  **/
 public interface UserMapper {
 
-//    @Select("select * from sys_user where username = #{username}")
-    User findByUsername(@Param("username") String username);
-
+    User getByAccount(@Param("username") String username);
 
 }
