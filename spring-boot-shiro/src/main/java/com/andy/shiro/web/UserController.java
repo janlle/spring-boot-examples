@@ -2,6 +2,7 @@ package com.andy.shiro.web;
 
 import com.andy.shiro.config.ImageCodeUtil;
 import com.andy.shiro.entity.rbac.User;
+import com.andy.shiro.service.UserService;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -34,6 +35,15 @@ public class UserController {
 
     @Autowired
     private DefaultKaptcha defaultKaptcha;
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/user/one")
+    public User getUser(@RequestParam String account) {
+        return userService.getByAccount(account);
+    }
+
 
     /**
      * 查询用户
