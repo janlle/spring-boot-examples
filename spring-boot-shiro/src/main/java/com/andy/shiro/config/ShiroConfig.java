@@ -8,17 +8,18 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.Filter;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: Mr.ruoLin
@@ -27,47 +28,61 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
-    //Filter工厂，设置对应的过滤条件和跳转条件
-    @Bean("shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(@Qualifier("securityManager") SecurityManager securityManager, CoreFilter coreFilter, TokenFilter tokenFilter) {
-        ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
-        bean.setSecurityManager(securityManager);
+    @Bean
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty) {
+        ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+        Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
+        swaggerFilterChain(filterChainDefinitionMapping);
+        this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
+        this.setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
+        this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
 
+        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
+        shiroFilter.setSecurityManager(securityManager);
         Map<String, Filter> filters = new HashMap();
-        filters.put("core", coreFilter);
-        filters.put("auth", tokenFilter);
+        filters.put("core", new CoreFilter());
+        filters.put("auth", new TokenFilter());
+        shiroFilter.setFilters(filters);
 
-        bean.setFilters(filters);
+        shiroFilter.setLoginUrl("/api/login");
 
-//        bean.setLoginUrl("/login");
-//        bean.setSuccessUrl("/index");
-//        bean.setUnauthorizedUrl("/unauthorized");
+        logger.info("shiro filter init success");
+        return shiroFilter;
+    }
 
-        LinkedHashMap<String, String> filterChain = new LinkedHashMap<>();
-        filterChain.put("/index", "authc");
-        filterChain.put("/static/**", "anon");
-        filterChain.put("/login", "anon");
-        filterChain.put("/image", "anon");
-        filterChain.put("/**", "auth");
-        filterChain.put("/admin", "roles[admin]");
-        bean.setFilterChainDefinitionMap(filterChain);
-        return bean;
+    private void setUrl(Map<String, String> filterChainDefinitionMapping, String filterName, List<String> urls) {
+        if (urls != null && urls.size() > 0) {
+            Iterator var4 = urls.iterator();
+            while (var4.hasNext()) {
+                String url = (String) var4.next();
+                if (!StringUtils.isEmpty(url)) {
+                    filterChainDefinitionMapping.put(url, filterName);
+                }
+            }
+
+        }
+    }
+
+    public void swaggerFilterChain(Map filterMapping) {
+        filterMapping.put("/v2/api-docs", "anon");
+        filterMapping.put("/configuration/**", "anon");
+        filterMapping.put("/webjars/**", "anon");
+        filterMapping.put("/swagger**", "anon");
     }
 
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        //散列算法:这里使用MD5算法;
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
         //散列的次数，比如散列两次，相当于 md5(md5(""));
         hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
     }
 
-    //权限管理，配置主要是Realm的管理认证
     @Bean
-    public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
+    public SecurityManager securityManager(AuthRealm authRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
         return manager;
@@ -81,12 +96,13 @@ public class ShiroConfig {
         return authRealm;
     }
 
+    @Bean
     public CredentialMatcher credentialMatcher() {
         return new CredentialMatcher();
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Qualifier("securityManager") SecurityManager securityManager) {
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
         return advisor;
@@ -100,15 +116,15 @@ public class ShiroConfig {
     }
 
     // UnavailableSecurityManagerException
-    @Bean
-    public FilterRegistrationBean delegatingFilterProxy() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
-        proxy.setTargetFilterLifecycle(true);
-        proxy.setTargetBeanName("shiroFilter");
-        filterRegistrationBean.setFilter(proxy);
-        return filterRegistrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean delegatingFilterProxy() {
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+//        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
+//        proxy.setTargetFilterLifecycle(true);
+//        proxy.setTargetBeanName("shiroFilter");
+//        filterRegistrationBean.setFilter(proxy);
+//        return filterRegistrationBean;
+//    }
 
 
 }

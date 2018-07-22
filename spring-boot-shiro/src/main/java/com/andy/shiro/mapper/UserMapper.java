@@ -1,6 +1,7 @@
 package com.andy.shiro.mapper;
 
 import com.andy.shiro.entity.rbac.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -8,8 +9,9 @@ import org.apache.ibatis.annotations.Select;
  * @author: Mr.lyon
  * @createBy: 2018-04-21 15:58
  **/
+@Mapper
 public interface UserMapper {
 
-    User getByAccount(@Param("username") String username);
+    User getByAccount(@Param("account") String account);
 
 }

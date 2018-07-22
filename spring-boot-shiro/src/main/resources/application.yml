@@ -22,9 +22,19 @@ spring:
 
 mybatis:
   type-aliases-package: com.andy.shiro.entity.rbac
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  mapper-locations: classpath:mybatis/mappers/*.xml
   config-location: classpath:mybatis/config/mybatis-config.xml
 
-
+model:
+  shiro:
+    mulitLogin: false
+    cacheDays: 7
+    redisPrefix: ${server.port}
+    anonUrls: /*
+    coreUrls:
+    - /api/user/property
+    - /api/user/login
+    authUrls: /api/**
+    tokenPrefix: auth.token.id
 
 
