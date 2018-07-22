@@ -25,13 +25,6 @@ public class AuthRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
-    Map<String, String> map = new HashMap<>();
-
-    {
-        map.put("james", "james");
-        map.put("kobe", "kobe");
-    }
-
     // 认证时调用
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
@@ -43,10 +36,8 @@ public class AuthRealm extends AuthorizingRealm {
         String username = usernamePasswordToken.getUsername();
         String password = usernamePasswordToken.getPassword().toString();
         // 查询数据库
-//        User user = userService.findByUsername(username);
-        String pwd = getPassword(username);
-        return new SimpleAuthenticationInfo(username, pwd, this.getClass().getName());
-//        return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
+        User user = userService.getByAccount(username);
+        return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 
     // 授权时调用
@@ -54,50 +45,27 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.info("进入AuthorizingRealm授权方法...");
 
-//        User user = (User) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
-//        List<String> permissionList = new ArrayList<>();
-//        List<String> roleList = new ArrayList<>();
-//        Set<Role> roleSet = user.getRoles();
-//        if (CollectionUtils.isNotEmpty(roleSet)) {
-//            for (Role role : roleSet) {
-//                roleList.add(role.getRole());
-//                Set<Permission> permissionSet = role.getPermissions();
-//                if (CollectionUtils.isNotEmpty(permissionSet)) {
-//                    for (Permission permission : permissionSet) {
-//                        permissionList.add(permission.getPermission());
-//                    }
-//                }
-//            }
-//        }
+        User user = (User) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
+        List<String> permissionList = new ArrayList<>();
+        List<String> roleList = new ArrayList<>();
+        Set<Role> roleSet = user.getRoles();
+        if (CollectionUtils.isNotEmpty(roleSet)) {
+            for (Role role : roleSet) {
+                roleList.add(role.getRoleName());
+                Set<Permission> permissionSet = role.getPermissions();
+                if (CollectionUtils.isNotEmpty(permissionSet)) {
+                    for (Permission permission : permissionSet) {
+                        permissionList.add(permission.getPermissionName());
+                    }
+                }
+            }
+        }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-//        info.addStringPermissions(permissionList);
-//        info.addRoles(roleList);
-        info.setRoles(getRole());
-        info.setStringPermissions(getPermission());
-//        log.info("permissionList:{}", permissionList);
-//        log.info("roleList:{}", roleList);
+        info.addStringPermissions(permissionList);
+        info.addRoles(roleList);
+        log.info("permissionList:{}", permissionList);
+        log.info("roleList:{}", roleList);
         return info;
     }
-
-    private Set<String> getPermission() {
-        Set<String> set = new HashSet<>();
-        set.add("user:update");
-        set.add("user:delete");
-        return set;
-    }
-
-
-    private String getPassword(String username) {
-
-        return map.get(username);
-    }
-
-    private Set<String> getRole() {
-        Set<String> set = new HashSet<>();
-        set.add("admin");
-        set.add("user");
-        return set;
-    }
-
 
 }
