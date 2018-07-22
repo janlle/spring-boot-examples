@@ -1,4 +1,4 @@
-package com.andy.shiro.config;
+package com.andy.shiro.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.UnauthorizedException;
