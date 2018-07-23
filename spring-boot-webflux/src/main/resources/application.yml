@@ -15,3 +15,7 @@ spring:
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
     show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://39.108.125.41:8080/webflux
+

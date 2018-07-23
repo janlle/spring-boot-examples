@@ -1,19 +1,25 @@
-package com.andy.flux.controller;//package com.andy.webflux.controller;
-//
-//import com.andy.webflux.entity.User;
-//import com.andy.webflux.service.UserService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.*;
-//import reactor.core.publisher.Flux;
-//import reactor.core.publisher.Mono;
-//
-//@RestController
-//@RequestMapping("/user")
-//public class UserController {
-//
-//    @Autowired
-//    private UserService userService;
-//
+package com.andy.flux.controller;
+
+import com.andy.flux.entity.User;
+import com.andy.flux.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+
+@Slf4j
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
 //    @PostMapping()
 //    public Mono<User> save(User user) {
 //        return this.userService.save(user);
@@ -28,9 +34,16 @@ package com.andy.flux.controller;//package com.andy.webflux.controller;
 //    public Mono<User> findByUsername(@PathVariable String username) {
 //        return this.userService.findByUsername(username);
 //    }
-//
-//    @GetMapping()
-//    public Flux<User> findAll() {
-//        return this.userService.findAll();
-//    }
-//}
+
+    @GetMapping("/all")
+    public Flux<User> findAll() {
+        return this.userRepository.findAll();
+    }
+
+    @GetMapping(value = "/stream/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<User> streamFindAll() {
+        return this.userRepository.findAll();
+    }
+
+
+}

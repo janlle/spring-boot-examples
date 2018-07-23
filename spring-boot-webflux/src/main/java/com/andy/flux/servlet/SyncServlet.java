@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @CreateBy: 2018-07-22 22:19
  **/
 @Slf4j
-@WebServlet(name = "syncServlet", urlPatterns = {"/syncServlet"})
+@WebServlet(name = "syncServlet", urlPatterns = {"/sync"})
 public class SyncServlet extends HttpServlet {
 
     @Override

@@ -9,15 +9,15 @@
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 <script>
     if (typeof(EventSource) !== "undefined") {
-        var source = new EventSource("http://localhost:9032/api/cms/qrcode/wxPush");
-        source.onmessage = function (event) {
+        var sse = new EventSource("/sse");
+        sse.onmessage = function (event) {
             console.log("event.data=" + event.data);
             $("#test").innerHTML += event.data + "<br />";
         };
-        source.onerror = function (event) {
+        sse.onerror = function (event) {
             console.log("error" + event.data);
         };
-        source.onopen = function (event) {
+        sse.onopen = function (event) {
             console.log("open" + event.data);
         };
     } else {
