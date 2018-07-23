@@ -1,5 +1,6 @@
 package com.andy.flux.config;
 
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.DateFormatter;
@@ -37,4 +38,7 @@ public class WebConfig implements WebFluxConfigurer {
         registry.addResourceHandler("/resources/**").addResourceLocations("/public", "classpath:/static/");
 
     }
+
+
+
 }
