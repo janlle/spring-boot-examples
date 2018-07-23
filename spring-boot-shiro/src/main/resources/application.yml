@@ -30,11 +30,11 @@ model:
     mulitLogin: false
     cacheDays: 7
     redisPrefix: ${server.port}
-    anonUrls: /*
-    coreUrls:
+    anonUrls:
     - /api/user/property
     - /api/user/login
-    authUrls: /api/**
+    coreUrls: /a
+    authUrls: /**
     tokenPrefix: auth.token.id
 
 

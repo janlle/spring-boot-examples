@@ -1,7 +1,3 @@
-server:
-  port: 8080
-  servlet:
-    path: /webflux
 spring:
   application:
     name: webflux
@@ -10,7 +6,7 @@ spring:
     port: 6379
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/boot?&useSSL=false
     username: root
     password: root
   jpa:
