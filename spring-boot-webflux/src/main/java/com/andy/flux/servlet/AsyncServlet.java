@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @CreateBy: 2018-07-22 22:19
  **/
 @Slf4j
-@WebServlet(name = "asyncServlet", urlPatterns = {"/asyncServlet"}, asyncSupported = true)
+@WebServlet(name = "asyncServlet", urlPatterns = {"/async"}, asyncSupported = true)
 public class AsyncServlet extends HttpServlet {
 
     @Override

@@ -1,32 +1,29 @@
 package com.andy.flux.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 import java.io.Serializable;
 
-
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "t_user")
+@Document(collection = "user")
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
 
-    @Column
-    private String username;
-
-    @Column
     private String email;
+
+    private String password;
+
+    private Integer age;
+
+
+    public User(String id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
 
 }
