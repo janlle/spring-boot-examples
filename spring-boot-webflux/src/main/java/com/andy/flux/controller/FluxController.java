@@ -57,7 +57,7 @@ public class FluxController {
         return userService.getUsers();
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("/flux/user/{id}")
     public Mono<User> user(@PathVariable("id") String id) {
         return userService.getUserById(id);
     }
