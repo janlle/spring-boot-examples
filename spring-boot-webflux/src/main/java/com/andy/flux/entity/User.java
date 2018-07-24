@@ -20,10 +20,14 @@ public class User implements Serializable {
     private Integer age;
 
 
+    public User() {
+    }
+
     public User(String id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
     }
+
 
 }
