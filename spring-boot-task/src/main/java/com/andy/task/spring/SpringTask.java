@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @Description:
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-27 09:28
+ * @author: Mr.lyon
+ * @createBy: 2018-05-27 09:28
  **/
 @Slf4j
 //@Component

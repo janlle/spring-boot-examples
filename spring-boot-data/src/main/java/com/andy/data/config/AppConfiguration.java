@@ -20,8 +20,8 @@ import java.lang.reflect.Method;
 import java.time.Duration;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-08 16:09
+ * @author: Mr.lyon
+ * @createBy: 2018-07-08 16:09
  **/
 //开启注解
 @EnableCaching

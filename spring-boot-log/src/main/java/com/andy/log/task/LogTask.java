@@ -13,8 +13,8 @@ import java.util.Random;
 
 /**
  * 模拟用户产生日志
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-12 09:12
+ * @author: Mr.lyon
+ * @createBy: 2018-06-12 09:12
  **/
 @Component
 public class LogTask {

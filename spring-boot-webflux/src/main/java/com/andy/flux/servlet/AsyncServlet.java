@@ -15,8 +15,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-22 22:19
+ * @author: Mr.lyon
+ * @createBy: 2018-07-22 22:19
  **/
 @Slf4j
 @WebServlet(name = "asyncServlet", urlPatterns = {"/async"}, asyncSupported = true)

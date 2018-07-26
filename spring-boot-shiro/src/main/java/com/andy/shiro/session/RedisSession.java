@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-21 15:27
+ * @author: Mr.lyon
+ * @createBy: 2018-07-21 15:27
  **/
 public class RedisSession extends AbstractSessionDAO {
 

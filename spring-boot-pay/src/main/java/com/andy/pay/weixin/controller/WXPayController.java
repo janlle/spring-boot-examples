@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Description: 微信支付
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-20 19:01
+ * @author: Mr.lyon
+ * @createBy: 2018-05-20 19:01
  **/
 
 @Slf4j

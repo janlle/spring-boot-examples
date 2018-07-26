@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-08 15:52
+ * @author: Mr.lyon
+ * @createBy: 2018-07-08 15:52
  **/
 @Slf4j
 @RestController

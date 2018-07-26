@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-17 13:23
+ * @author: Mr.lyon
+ * @createBy: 2018-06-17 13:23
  **/
 @Slf4j
 @Api(tags = "Http测试控制器")

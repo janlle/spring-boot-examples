@@ -4,8 +4,8 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-03 20:12
+ * @author: Mr.lyon
+ * @createBy: 2018-06-03 20:12
  **/
 @Data
 @ApiModel("购物车表单模型")

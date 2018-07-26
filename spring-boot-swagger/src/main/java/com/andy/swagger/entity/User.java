@@ -9,8 +9,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-12 22:41
+ * @author: Mr.lyon
+ * @createBy: 2018-07-12 22:41
  **/
 @Data
 @Entity

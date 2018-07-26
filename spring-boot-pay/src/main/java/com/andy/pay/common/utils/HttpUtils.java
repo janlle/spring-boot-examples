@@ -34,8 +34,8 @@ import java.util.Map;
 
 /**
  * http请求工具类
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-17 12:43
+ * @author: Mr.lyon
+ * @createBy: 2018-06-17 12:43
  **/
 @Slf4j
 public class HttpUtils {

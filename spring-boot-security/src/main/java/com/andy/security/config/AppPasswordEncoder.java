@@ -5,8 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * 密码的加密和匹配
- * @Author: Mr.lyon
- * @CreateBy: 2018-04-21 14:46
+ * @author: Mr.lyon
+ * @createBy: 2018-04-21 14:46
  **/
 public class AppPasswordEncoder implements PasswordEncoder {
 

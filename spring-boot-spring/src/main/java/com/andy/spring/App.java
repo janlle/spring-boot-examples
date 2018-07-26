@@ -11,8 +11,8 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 23:18
+ * @author: Mr.lyon
+ * @createBy: 2018-06-29 23:18
  **/
 public class App {
 

@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-22 22:19
+ * @author: Mr.lyon
+ * @createBy: 2018-07-22 22:19
  **/
 @Slf4j
 @WebServlet(name = "syncServlet", urlPatterns = {"/sync"})

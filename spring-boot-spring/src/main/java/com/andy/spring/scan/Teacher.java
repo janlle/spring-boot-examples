@@ -3,8 +3,8 @@ package com.andy.spring.scan;
 import org.springframework.stereotype.Service;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-01 11:17
+ * @author: Mr.lyon
+ * @createBy: 2018-07-01 11:17
  **/
 @Service("teach")
 public class Teacher {

@@ -1,8 +1,8 @@
 package com.andy.jms.rabbitmq.config;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-01 21:24
+ * @author: Mr.lyon
+ * @createBy: 2018-05-01 21:24
  **/
 public interface RabbitMQConstant {
 

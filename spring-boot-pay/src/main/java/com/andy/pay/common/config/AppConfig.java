@@ -6,8 +6,8 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * @Description:
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-22 21:47
+ * @author: Mr.lyon
+ * @createBy: 2018-05-22 21:47
  **/
 @Configuration
 public class AppConfig {

@@ -8,8 +8,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-12 22:40
+ * @author: Mr.lyon
+ * @createBy: 2018-07-12 22:40
  **/
 @RestController
 @Api(value = "文档接口:crud测试")

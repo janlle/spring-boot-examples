@@ -20,8 +20,8 @@ import javax.crypto.Cipher;
 /**
  * 非对称加密算法——RSA
  *
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-01 14:32
+ * @author: Mr.lyon
+ * @createBy: 2018-05-01 14:32
  **/
 @Slf4j
 public class RSA {
