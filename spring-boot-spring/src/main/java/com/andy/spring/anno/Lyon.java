@@ -3,8 +3,8 @@ package com.andy.spring.anno;
 import java.lang.annotation.*;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-01 11:10
+ * @author: Mr.lyon
+ * @createBy: 2018-07-01 11:10
  **/
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

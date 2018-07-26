@@ -3,8 +3,8 @@ package com.andy.mvc.annocation;
 import java.lang.annotation.*;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 22:34
+ * @author: Mr.lyon
+ * @createBy: 2018-06-29 22:34
  **/
 
 @Documented

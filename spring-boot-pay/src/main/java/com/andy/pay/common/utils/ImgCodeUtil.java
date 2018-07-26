@@ -21,8 +21,8 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-25 14:05
+ * @author: Mr.lyon
+ * @createBy: 2018-06-25 14:05
  **/
 @Slf4j
 public class ImgCodeUtil {

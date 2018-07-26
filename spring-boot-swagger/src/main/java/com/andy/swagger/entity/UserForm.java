@@ -7,8 +7,8 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-12 22:42
+ * @author: Mr.lyon
+ * @createBy: 2018-07-12 22:42
  **/
 @Data
 @ApiModel

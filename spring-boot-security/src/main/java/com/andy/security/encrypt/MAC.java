@@ -13,8 +13,8 @@ import java.util.Scanner;
 /**
  * 消息摘要算法--MAC
  *
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-01 14:34
+ * @author: Mr.lyon
+ * @createBy: 2018-07-01 14:34
  **/
 public class MAC {
 

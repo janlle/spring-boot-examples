@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 消息队列配置
  *
- * @Author: Mr.lyon
- * @CreateBy: 2018-04-15 18:03
+ * @author: Mr.lyon
+ * @createBy: 2018-04-15 18:03
  **/
 @Configuration
 public class QueueConfig {

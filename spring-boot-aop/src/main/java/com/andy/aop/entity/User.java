@@ -12,8 +12,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-21 00:15
+ * @author: Mr.lyon
+ * @createBy: 2018-06-21 00:15
  **/
 @Data
 @AllArgsConstructor

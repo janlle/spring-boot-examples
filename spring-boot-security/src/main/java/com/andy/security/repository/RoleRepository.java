@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-07 14:39
+ * @author: Mr.lyon
+ * @createBy: 2018-07-07 14:39
  **/
 public interface RoleRepository extends JpaRepository<Role, Long>,JpaSpecificationExecutor<Role> {
 }

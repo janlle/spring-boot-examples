@@ -16,8 +16,8 @@ import java.util.Scanner;
  * 3.计算信息摘要
  * 4.将byte[] 转换为找度为32位的16进制字符串
  *
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-01 14:36
+ * @author: Mr.lyon
+ * @createBy: 2018-07-01 14:36
  **/
 public class MD {
 

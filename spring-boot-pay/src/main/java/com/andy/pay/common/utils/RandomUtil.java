@@ -4,8 +4,8 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-04 16:50
+ * @author: Mr.lyon
+ * @createBy: 2018-07-04 16:50
  **/
 public class RandomUtil {
 

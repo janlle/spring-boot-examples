@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-06 21:17
+ * @author: Mr.lyon
+ * @createBy: 2018-07-06 21:17
  **/
 @RestController
 @RequestMapping("/ws")

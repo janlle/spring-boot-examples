@@ -12,8 +12,8 @@ import java.util.Random;
 import java.util.Stack;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-28 22:49
+ * @author: Mr.lyon
+ * @createBy: 2018-06-28 22:49
  **/
 @Slf4j
 @RestController("/concurrent")

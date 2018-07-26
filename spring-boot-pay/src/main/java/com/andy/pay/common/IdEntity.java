@@ -13,8 +13,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-03 20:06
+ * @author: Mr.lyon
+ * @createBy: 2018-06-03 20:06
  **/
 @Data
 @MappedSuperclass

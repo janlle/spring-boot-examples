@@ -11,8 +11,8 @@ import java.util.Map;
 /**
  * rabbitMQ交换机配置
  *
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-15 18:00
+ * @author: Mr.lyon
+ * @createBy: 2018-05-15 18:00
  **/
 
 @Configuration

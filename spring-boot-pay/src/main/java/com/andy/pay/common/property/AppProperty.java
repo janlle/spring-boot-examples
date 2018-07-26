@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @Description:
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-20
+ * @author: Mr.lyon
+ * @createBy: 2018-05-20
  **/
 @Data
 @Configuration

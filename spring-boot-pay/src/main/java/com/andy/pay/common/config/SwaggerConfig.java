@@ -16,8 +16,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.util.Collections;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-4-15 23:16
+ * @author: Mr.lyon
+ * @createBy: 2018-4-15 23:16
  **/
 @Configuration
 public class SwaggerConfig {

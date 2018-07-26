@@ -4,8 +4,8 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-05 00:07
+ * @author: Mr.lyon
+ * @createBy: 2018-06-05 00:07
  **/
 public class MainTask {
     public static void main(String[] args) throws Exception {

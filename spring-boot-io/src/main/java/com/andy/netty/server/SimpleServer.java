@@ -10,8 +10,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 21:10
+ * @author: Mr.lyon
+ * @createBy: 2018-06-29 21:10
  **/
 @Slf4j
 public class SimpleServer {

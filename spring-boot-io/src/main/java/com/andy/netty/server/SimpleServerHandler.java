@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Date;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 21:25
+ * @author: Mr.lyon
+ * @createBy: 2018-06-29 21:25
  **/
 @Slf4j
 public class SimpleServerHandler extends ChannelInboundHandlerAdapter {

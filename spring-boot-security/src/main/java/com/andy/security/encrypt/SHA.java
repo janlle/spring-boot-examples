@@ -11,8 +11,8 @@ import java.util.Scanner;
 /**
  * 消息摘要算法--SHA
  *
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-01 14:10
+ * @author: Mr.lyon
+ * @createBy: 2018-07-01 14:10
  **/
 public class SHA {
 
