@@ -3,8 +3,8 @@ package com.andy.pay.common.property;
 import lombok.Data;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-03
+ * @author: Mr.lyon
+ * @createBy: 2018-06-03
  **/
 @Data
 public class WXProperty {

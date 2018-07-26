@@ -12,8 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.net.InetSocketAddress;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 21:10
+ * @author: Mr.lyon
+ * @createBy: 2018-06-29 21:10
  **/
 @Slf4j
 public class SimpleClient {

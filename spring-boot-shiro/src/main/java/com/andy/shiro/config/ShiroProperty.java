@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-16 11:59
+ * @author: Mr.lyon
+ * @createBy: 2018-07-16 11:59
  **/
 @Configuration
 @ConfigurationProperties(prefix = "model.shiro")

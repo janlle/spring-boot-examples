@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-01 11:17
+ * @author: Mr.lyon
+ * @createBy: 2018-07-01 11:17
  **/
 @Configuration
 public class SpringConfig implements ApplicationContextAware {

@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * 描述一个切面类
  *
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-21 00:16
+ * @author: Mr.lyon
+ * @createBy: 2018-06-21 00:16
  **/
 @Slf4j
 @Aspect

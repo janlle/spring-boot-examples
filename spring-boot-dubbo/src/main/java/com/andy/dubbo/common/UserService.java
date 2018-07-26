@@ -1,8 +1,8 @@
 package com.andy.dubbo.common;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-03
+ * @author: Mr.lyon
+ * @createBy: 2018-06-03
  **/
 public interface UserService {
 

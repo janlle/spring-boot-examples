@@ -18,8 +18,8 @@ import java.util.Collections;
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-12 20:12
+ * @author: Mr.lyon
+ * @createBy: 2018-07-12 20:12
  **/
 @Component
 public class SwaggerConfig {

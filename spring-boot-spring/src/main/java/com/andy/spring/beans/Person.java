@@ -1,8 +1,8 @@
 package com.andy.spring.beans;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 23:21
+ * @author: Mr.lyon
+ * @createBy: 2018-06-29 23:21
  **/
 public class Person {
 

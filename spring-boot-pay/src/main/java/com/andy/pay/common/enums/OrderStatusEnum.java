@@ -2,8 +2,8 @@ package com.andy.pay.common.enums;
 
 /**
  * @Description:
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-20 20:14
+ * @author: Mr.lyon
+ * @createBy: 2018-05-20 20:14
  **/
 public enum OrderStatusEnum {
 

@@ -1,8 +1,8 @@
 package com.andy.security.mapper;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-07 15:38
+ * @author: Mr.lyon
+ * @createBy: 2018-07-07 15:38
  **/
 public interface RoleMapper {
 }

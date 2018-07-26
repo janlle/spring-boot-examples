@@ -16,8 +16,8 @@
 ///**
 // * redis配置
 // *
-// * @Author: Mr.lyon
-// * @CreateBy: 2018-07-19 22:36
+// * @author: Mr.lyon
+// * @createBy: 2018-07-19 22:36
 // **/
 //@Configuration
 //@EnableCaching

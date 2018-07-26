@@ -7,8 +7,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-29 21:56
+ * @author: Mr.lyon
+ * @createBy: 2018-06-29 21:56
  **/
 @Slf4j
 public class SimpleClientHandler extends SimpleChannelInboundHandler<ByteBuf> {

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Description:
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-27 21:31
+ * @author: Mr.lyon
+ * @createBy: 2018-05-27 21:31
  **/
 @Slf4j
 @Controller

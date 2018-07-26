@@ -30,8 +30,8 @@ import org.springframework.beans.factory.annotation.Value;
 import java.io.File;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-16 21:44
+ * @author: Mr.lyon
+ * @createBy: 2018-06-16 21:44
  **/
 @Service
 public class AliPayServiceImpl implements IAliPayService {

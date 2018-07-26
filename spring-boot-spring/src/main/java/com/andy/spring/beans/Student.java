@@ -5,8 +5,8 @@ import com.andy.spring.scan.Teacher;
 import javax.annotation.Resource;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-01 11:12
+ * @author: Mr.lyon
+ * @createBy: 2018-07-01 11:12
  **/
 public class Student {
 

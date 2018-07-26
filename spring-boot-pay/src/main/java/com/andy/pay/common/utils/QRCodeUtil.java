@@ -20,8 +20,8 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * 二维码生成及导出工具类
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-17 12:34
+ * @author: Mr.lyon
+ * @createBy: 2018-06-17 12:34
  **/
 @Slf4j
 public class QRCodeUtil {

@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-21 13:06
+ * @author: Mr.lyon
+ * @createBy: 2018-07-21 13:06
  **/
 
 public class IniRealmTest {

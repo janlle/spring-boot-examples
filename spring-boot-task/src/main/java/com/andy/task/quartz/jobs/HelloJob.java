@@ -12,8 +12,8 @@ import java.util.Date;
 
 /**
  * @Description:
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-27
+ * @author: Mr.lyon
+ * @createBy: 2018-05-27
  **/
 @Slf4j
 @Configuration

@@ -8,8 +8,8 @@ import org.apache.shiro.subject.Subject;
 import org.junit.Test;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-21 14:03
+ * @author: Mr.lyon
+ * @createBy: 2018-07-21 14:03
  **/
 public class CustomerRealmTest {
 

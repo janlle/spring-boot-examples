@@ -8,8 +8,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-06-12 23:13
+ * @author: Mr.lyon
+ * @createBy: 2018-06-12 23:13
  **/
 @EnableAsync
 @Configuration

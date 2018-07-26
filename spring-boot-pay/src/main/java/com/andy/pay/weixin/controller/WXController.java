@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 微信授权
- * @Author: Mr.lyon
- * @CreateBy: 2018-05-22 20:46
+ * @author: Mr.lyon
+ * @createBy: 2018-05-22 20:46
  **/
 @Slf4j
 @Api(tags = "微信相关接口")

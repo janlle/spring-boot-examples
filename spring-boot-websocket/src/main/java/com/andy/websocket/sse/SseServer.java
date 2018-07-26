@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-23 21:50
+ * @author: Mr.lyon
+ * @createBy: 2018-07-23 21:50
  **/
 @WebServlet(name = "/sseServlet", urlPatterns = "/sse")
 public class SseServer extends HttpServlet {

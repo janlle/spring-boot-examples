@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 /**
- * @Author: Mr.lyon
- * @CreateBy: 2018-07-06 19:27
+ * @author: Mr.lyon
+ * @createBy: 2018-07-06 19:27
  **/
 @ServletComponentScan
 @SpringBootApplication
