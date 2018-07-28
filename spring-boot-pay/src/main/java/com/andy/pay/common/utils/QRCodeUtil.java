@@ -20,7 +20,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * 二维码生成及导出工具类
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-06-17 12:34
  **/
 @Slf4j
@@ -28,7 +28,7 @@ public class QRCodeUtil {
 
     /**
      * 生成二维码
-     * @author: Mr.lyon
+     * @author: lyon
      * @createBy: 2018-06-17 12:40
      * @params: [qrCodePath, content, filename]
      * @return: void
@@ -62,7 +62,7 @@ public class QRCodeUtil {
 
     /**
      * 生成二维码并响应到浏览器
-     * @author: Mr.lyon
+     * @author: lyon
      * @createBy: 2018-06-17 12:40
      * @params: [content, response]
      * @return: void

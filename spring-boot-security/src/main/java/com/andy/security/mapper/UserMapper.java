@@ -1,7 +1,7 @@
 package com.andy.security.mapper;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-07-07 15:38
  **/
 public interface UserMapper {

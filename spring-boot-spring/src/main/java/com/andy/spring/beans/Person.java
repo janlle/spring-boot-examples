@@ -1,7 +1,7 @@
 package com.andy.spring.beans;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-06-29 23:21
  **/
 public class Person {

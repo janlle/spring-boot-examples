@@ -31,7 +31,8 @@ public class ShiroConfig {
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty, TokenFilter tokenFilter,CoreFilter coreFilter) {
+        logger.info("init shiro filter");
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
         swaggerFilterChain(filterChainDefinitionMapping);
@@ -42,8 +43,11 @@ public class ShiroConfig {
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         shiroFilter.setSecurityManager(securityManager);
         Map<String, Filter> filters = new HashMap();
-        filters.put("core", new CoreFilter());
-        filters.put("auth", new TokenFilter());
+//        filters.put("core", new CoreFilter());
+//        filters.put("auth", new TokenFilter());
+
+        filters.put("core", tokenFilter);
+        filters.put("auth", coreFilter);
         shiroFilter.setFilters(filters);
 
         shiroFilter.setLoginUrl("/api/login");

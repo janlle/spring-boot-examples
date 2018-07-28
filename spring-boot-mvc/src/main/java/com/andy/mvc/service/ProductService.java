@@ -3,7 +3,7 @@ package com.andy.mvc.service;
 import com.andy.mvc.annocation.CustomerAnno;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-06-29 22:37
  **/
 //@CustomerAnno(value = "product")

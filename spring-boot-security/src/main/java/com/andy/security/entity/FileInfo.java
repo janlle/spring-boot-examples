@@ -1,7 +1,7 @@
 package com.andy.security.entity;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-01-07 13:18
  **/
 public class FileInfo {
