@@ -1,4 +1,4 @@
-package com.andy.design.creation.factorymethod;
+package com.andy.design.creation.abstractfactory;
 
 /**
  * @author: lyon
