@@ -13,7 +13,7 @@ import java.util.Random;
 
 /**
  * 模拟用户产生日志
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-06-12 09:12
  **/
 @Component

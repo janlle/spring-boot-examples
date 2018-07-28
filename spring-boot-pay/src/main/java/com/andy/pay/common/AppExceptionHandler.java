@@ -21,7 +21,7 @@ import java.util.Locale;
 /**
  * 全局异常处理器
  *
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-05-05 22:08
  **/
 @Slf4j

@@ -3,7 +3,7 @@ package com.other.modules.alipay.service;
 import com.other.common.model.Product;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-06-17 10:31
  **/
 public interface IAliPayService {

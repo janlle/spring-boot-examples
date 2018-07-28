@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-07-22 22:19
  **/
 @Slf4j

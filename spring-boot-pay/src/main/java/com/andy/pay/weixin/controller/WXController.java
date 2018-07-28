@@ -17,13 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 微信授权
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-05-22 20:46
  **/
 @Slf4j
 @Api(tags = "微信相关接口")
 @RestController
-@RequestMapping("/wechat")
+@RequestMapping("/wx")
 public class WXController {
 
     @Autowired

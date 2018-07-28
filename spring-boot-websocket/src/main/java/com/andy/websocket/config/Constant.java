@@ -3,7 +3,7 @@ package com.andy.websocket.config;
 /**
  * webSocket相关配置
  *
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-07-06 22:08
  **/
 public class Constant {

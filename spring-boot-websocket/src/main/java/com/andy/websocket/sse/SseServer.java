@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-07-23 21:50
  **/
 @WebServlet(name = "/sseServlet", urlPatterns = "/sse")

@@ -3,7 +3,7 @@ package com.andy.spring.anno;
 import java.lang.annotation.*;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-07-01 11:10
  **/
 @Documented

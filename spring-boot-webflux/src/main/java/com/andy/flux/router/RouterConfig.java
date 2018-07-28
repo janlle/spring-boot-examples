@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-06-26 9:39
  **/
 @Configuration

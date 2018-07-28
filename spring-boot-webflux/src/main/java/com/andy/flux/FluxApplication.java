@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-05-23 21:32
  **/
 @EnableScheduling

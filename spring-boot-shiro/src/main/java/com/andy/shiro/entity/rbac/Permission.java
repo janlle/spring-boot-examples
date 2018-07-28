@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * 权限信息
  *
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-04-19
  **/
 @Data

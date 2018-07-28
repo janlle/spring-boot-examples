@@ -1,7 +1,7 @@
 package com.andy.websocket.config;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-07-06 22:10
  **/
 public class WSResponse {
