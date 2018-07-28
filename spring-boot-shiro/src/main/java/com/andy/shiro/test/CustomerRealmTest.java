@@ -8,7 +8,7 @@ import org.apache.shiro.subject.Subject;
 import org.junit.Test;
 
 /**
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-07-21 14:03
  **/
 public class CustomerRealmTest {

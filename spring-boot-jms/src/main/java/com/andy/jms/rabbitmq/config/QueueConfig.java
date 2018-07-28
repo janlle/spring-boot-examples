@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 消息队列配置
  *
- * @author: Mr.lyon
+ * @author: lyon
  * @createBy: 2018-04-15 18:03
  **/
 @Configuration

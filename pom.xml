@@ -60,6 +60,7 @@
         <module>spring-boot-spring</module>
         <module>spring-boot-websocket</module>
         <module>spring-boot-jvm</module>
+        <module>spring-boot-design</module>
     </modules>
 
     <build>
