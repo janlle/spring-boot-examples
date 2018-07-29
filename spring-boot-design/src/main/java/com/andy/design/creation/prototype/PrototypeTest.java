@@ -15,7 +15,6 @@ public class PrototypeTest {
         user.setName("james");
         user.setSchool(new School());
 
-
         System.out.println(user.hashCode());
         System.out.println(user.toString());
         System.out.println(user.getSchool().hashCode());
