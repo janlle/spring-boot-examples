@@ -1,26 +1,36 @@
 package com.andy.design.creation.builder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 /**
  * @author: lyon
- * @cerateBy: 2018-07-28
+ * @cerateBy: 2018-07-29
  **/
-public class Builder {
+public class Builder implements IBuilder {
 
-    private List<Sender> list = new ArrayList<>();
+    User user;
 
-    public void produceMailSender(int count) {
-        for (int i = 0; i < count; i++) {
-            list.add(new MailSender());
-        }
+    public Builder() {
+        user = new User();
     }
 
-    public void produceSmsSender(int count) {
-        for (int i = 0; i < count; i++) {
-            list.add(new SmsSender());
-        }
+    @Override
+    public void buildName() {
+        user.setName("james");
     }
 
+    @Override
+    public void buildAge() {
+        user.setAge(23);
+    }
+
+    @Override
+    public void buildBirthday() {
+        user.setBirthday(new Date());
+    }
+
+    @Override
+    public User build() {
+        return this.user;
+    }
 }
