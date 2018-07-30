@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <div style="width: 600px; text-align: left; margin: 0 auto;">
-    <h1 style="color: #005da7;">YGOTH</h1>
+    <h1 style="color: #005da7;">QTM</h1>
     <div style="border-bottom: 5px solid #005da7; height: 2px; width: 100%;"></div>
     <div style="border: 1px solid #005da7; font-size: 16px; line-height: 50px; padding: 20px;">
-        <p th:text="${to}+' ,您好！'"></p>
+        <p th:text="${to}+' ,您好!'"></p>
         <div>
-            泰国自由行，没玩够怎么行！
+            欢迎加入千图美!
         </div>
         <div style="border-bottom: 2px solid #005da7; height: 2px; width: 100%;"></div>
-        <div>欢迎注册“玩够泰国”，请点击下面的链接激活账号：</div>
+        <div>欢迎注册“千图美”，下面是您的管理后台账号和密码!</div>
         <div>
-            <span><a th:href="@{'http://localhost:9901/msg/activateMail?mail='+${to}+'&token='+${token}}">点我激活</a></span>
+            <span th:text="'账号:'${account}'密码:'${password}"></span>
         </div>
         <div>
-            <img src="https://www.ygoworld.com/img/玩够泰国logo.png" alt="YGOTH" />
+            <img src="http://qtm6.com/public/images/home/app_icon.png" alt="QTM"/>
         </div>
         <div>
             想了解更多信息，请访问 <a href="https://www.ygoworld.com/">https://www.ygoworld.com/</a>
