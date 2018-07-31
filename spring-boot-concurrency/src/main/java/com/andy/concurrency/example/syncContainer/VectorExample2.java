@@ -9,8 +9,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-06 16:31
+ * @author: lyon
+ * @since: 2018-05-06 16:31
  **/
 @Slf4j
 public class VectorExample2 {

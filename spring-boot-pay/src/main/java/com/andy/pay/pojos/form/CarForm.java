@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @author: lyon
- * @createBy: 2018-06-03 20:12
+ * @since: 2018-06-03 20:12
  **/
 @Data
 @ApiModel("购物车表单模型")

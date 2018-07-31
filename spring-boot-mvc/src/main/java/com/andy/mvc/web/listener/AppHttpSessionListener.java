@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-13 10:48
+ * @author: lyon
+ * @since: 2018-05-13 10:48
  **/
 @Slf4j
 @WebListener()

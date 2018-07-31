@@ -11,8 +11,8 @@ import java.util.Date;
 /**
  * java serializable 序列化对象到磁盘，反序列化磁盘文件
  *
- * @author: Mr.ruoLin
- * @createBy: 2018-05-11 22:32
+ * @author: lyon
+ * @since: 2018-05-11 22:32
  **/
 @Slf4j
 public class SerializableEntity {

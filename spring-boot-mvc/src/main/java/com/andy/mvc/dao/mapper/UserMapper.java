@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-10 11:07
+ * @since: 2018-04-10 11:07
  **/
 // @Mapper 这里可以使用@Mapper注解，但是每个mapper都加注解比较麻烦，所以统一配置@MapperScan在扫描路径在application类中
 public interface UserMapper {

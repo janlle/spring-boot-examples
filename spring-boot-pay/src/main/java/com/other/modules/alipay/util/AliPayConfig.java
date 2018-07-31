@@ -7,7 +7,7 @@ import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 
 /**
  * @author: lyon
- * @createBy: 2018-06-16 21:44
+ * @since: 2018-06-16 21:44
  **/
 public final class AliPayConfig {
 	

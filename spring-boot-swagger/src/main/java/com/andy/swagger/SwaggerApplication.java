@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-05-29 22:29
+ * @since: 2018-05-29 22:29
  **/
 //@EnableSwaggerButler
 @EnableSwagger2

@@ -3,7 +3,7 @@ package com.andy.jwt.common;
 import java.io.Serializable;
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-19 20:19
+ * @since: 2018-04-19 20:19
  **/
 public class BaseResponse<T> implements Serializable {
 

@@ -6,8 +6,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-08 21:13
+ * @author: lyon
+ * @since: 2018-05-08 21:13
  **/
 @Slf4j
 public class ThreadPoolExample2 {

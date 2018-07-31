@@ -23,7 +23,7 @@ import java.util.*;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-21 17:22
+ * @since: 2018-04-21 17:22
  **/
 @Configuration
 public class ShiroConfig {

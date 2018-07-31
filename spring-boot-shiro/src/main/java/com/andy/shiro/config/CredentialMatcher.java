@@ -7,7 +7,7 @@ import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-21 17:18
+ * @since: 2018-04-21 17:18
  **/
 public class CredentialMatcher extends SimpleCredentialsMatcher {
 

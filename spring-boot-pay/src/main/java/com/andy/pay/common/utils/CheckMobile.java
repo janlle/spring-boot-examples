@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 /**
  * 检测是否为移动端设备访问
  *
- * @author: Mr.ruoLin
- * @createBy: 2018-05-09
+ * @author: lyon
+ * @since: 2018-05-09
  **/
 public class CheckMobile {
 

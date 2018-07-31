@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-07 09:19
+ * @since: 2018-04-07 09:19
  **/
 public class ImageCodeUtil {
 

@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * @author: lyon
- * @createBy: 2018-05-14 13:46
+ * @since: 2018-05-14 13:46
  **/
 public class DateToLongSerializer extends JsonSerializer<Date> {
     @Override

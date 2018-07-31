@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author: lyon
- * @createBy: 2018-07-22 22:19
+ * @since: 2018-07-22 22:19
  **/
 @Slf4j
 @WebServlet(name = "syncServlet", urlPatterns = {"/sync"})

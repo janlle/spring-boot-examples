@@ -2,7 +2,7 @@ package com.andy.jwt.common;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-19 20:31
+ * @since: 2018-04-19 20:31
  **/
 public enum ResultEnum {
     SUCCESS("success！", 10000),
