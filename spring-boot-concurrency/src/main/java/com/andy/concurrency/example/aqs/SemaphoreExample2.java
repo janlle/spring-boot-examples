@@ -8,7 +8,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-05-06 18:36
+ * @since: 2018-05-06 18:36
  **/
 @Slf4j
 public class SemaphoreExample2 {
