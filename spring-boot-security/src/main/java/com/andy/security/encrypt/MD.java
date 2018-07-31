@@ -17,7 +17,7 @@ import java.util.Scanner;
  * 4.将byte[] 转换为找度为32位的16进制字符串
  *
  * @author: lyon
- * @createBy: 2018-07-01 14:36
+ * @since: 2018-07-01 14:36
  **/
 public class MD {
 
@@ -38,7 +38,7 @@ public class MD {
 
     /**
      * @author: lyon
-     * @createBy: 2018-07-01 14:52
+     * @since: 2018-07-01 14:52
      * @params: [content]
      * @return: java.lang.String
      **/
@@ -77,7 +77,7 @@ public class MD {
 
     /**
      * @author: lyon
-     * @createBy: 2018-07-01 14:02
+     * @since: 2018-07-01 14:02
      * @params: [input]
      * @return: java.lang.String
      **/

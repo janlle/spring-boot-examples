@@ -18,7 +18,7 @@ import java.util.Set;
  * 权限信息
  *
  * @author: Mr.ruoLin
- * @createBy: 2018-04-19
+ * @since: 2018-04-19
  **/
 @Data
 @Entity

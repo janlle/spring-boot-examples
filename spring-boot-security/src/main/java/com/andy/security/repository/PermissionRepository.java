@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  * @author: lyon
- * @createBy: 2018-07-07 14:39
+ * @since: 2018-07-07 14:39
  **/
 public interface PermissionRepository extends JpaRepository<Permission, Long>,JpaSpecificationExecutor<Permission> {
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-05-11 18:42
+ * @since: 2018-05-11 18:42
  **/
 @MapperScan("com.andy.data.mybatis.mapper")
 @SpringBootApplication

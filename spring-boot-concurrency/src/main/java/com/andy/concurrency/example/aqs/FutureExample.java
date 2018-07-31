@@ -6,7 +6,7 @@ import java.util.concurrent.*;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-05-08 20:30
+ * @since: 2018-05-08 20:30
  **/
 @Slf4j
 public class FutureExample {

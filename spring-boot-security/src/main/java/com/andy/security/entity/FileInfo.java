@@ -2,7 +2,7 @@ package com.andy.security.entity;
 
 /**
  * @author: lyon
- * @createBy: 2018-01-07 13:18
+ * @since: 2018-01-07 13:18
  **/
 public class FileInfo {
 
