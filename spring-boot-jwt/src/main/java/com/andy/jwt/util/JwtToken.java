@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-04-16 09:28
+ * @author: lyon
+ * @since: 2018-04-16 09:28
  **/
 @Slf4j
 public class JwtToken {

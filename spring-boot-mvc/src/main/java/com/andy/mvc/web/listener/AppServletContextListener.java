@@ -10,8 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-13 10:45
+ * @author: lyon
+ * @since: 2018-05-13 10:45
  **/
 @Slf4j
 @WebListener()

@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author: lyon
- * @createBy: 2018-07-16 11:59
+ * @since: 2018-07-16 11:59
  **/
 @Configuration
 @ConfigurationProperties(prefix = "model.shiro")

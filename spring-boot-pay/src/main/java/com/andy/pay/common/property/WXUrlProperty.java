@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author: lyon
- * @createBy: 2018-06-03 15:38
+ * @since: 2018-06-03 15:38
  **/
 @Data
 public class WXUrlProperty {

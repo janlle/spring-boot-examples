@@ -9,8 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-11 23:17
+ * @author: lyon
+ * @since: 2018-05-11 23:17
  **/
 public class JsonlibSeria {
 

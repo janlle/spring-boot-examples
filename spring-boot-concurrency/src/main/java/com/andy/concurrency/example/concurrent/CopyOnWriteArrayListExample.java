@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-06 16:31
+ * @author: lyon
+ * @since: 2018-05-06 16:31
  **/
 @Slf4j
 public class CopyOnWriteArrayListExample {

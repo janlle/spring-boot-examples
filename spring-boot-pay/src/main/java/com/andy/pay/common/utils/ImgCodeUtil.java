@@ -22,7 +22,7 @@ import java.util.Random;
 
 /**
  * @author: lyon
- * @createBy: 2018-06-25 14:05
+ * @since: 2018-06-25 14:05
  **/
 @Slf4j
 public class ImgCodeUtil {
@@ -31,7 +31,7 @@ public class ImgCodeUtil {
      * 生成二维码
      *
      * @author: lyon
-     * @createBy: 2018-06-17 12:40
+     * @since: 2018-06-17 12:40
      * @params: [qrCodePath, content, filename]
      * @return: void
      **/
@@ -66,7 +66,7 @@ public class ImgCodeUtil {
      * 生成二维码并响应到浏览器
      *
      * @author: lyon
-     * @createBy: 2018-06-17 12:40
+     * @since: 2018-06-17 12:40
      * @params: [content, response]
      * @return: void
      **/
@@ -95,7 +95,7 @@ public class ImgCodeUtil {
 
     /**
      * @author: lyon
-     * @createBy: 2018-06-25 16:51
+     * @since: 2018-06-25 16:51
      * @params: [request, response, session]
      * @return: void
      **/

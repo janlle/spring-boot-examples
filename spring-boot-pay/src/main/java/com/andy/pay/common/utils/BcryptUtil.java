@@ -5,8 +5,8 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  * 用户密码加解密
  *
- * @author: Mr.ruoLin
- * @createBy: 2018-05-08 15:24
+ * @author: lyon
+ * @since: 2018-05-08 15:24
  **/
 public class BcryptUtil {
 

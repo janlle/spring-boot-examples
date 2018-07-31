@@ -15,7 +15,7 @@ import java.util.Date;
  * 权限信息
  *
  * @author: lyon
- * @createBy: 2018-04-19
+ * @since: 2018-04-19
  **/
 @Data
 @ApiModel("权限实体")

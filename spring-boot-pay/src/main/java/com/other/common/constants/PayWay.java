@@ -4,7 +4,7 @@ package com.other.common.constants;
 /**
  * 支付途径
  * @author: lyon
- * @createBy: 2018-06-25 23:09
+ * @since: 2018-06-25 23:09
  **/
 public enum PayWay {
 	PC("PC,平板",(short)1),MOBILE("手机",(short)2);

@@ -15,7 +15,7 @@ import java.util.Set;
  * 用户信息
  *
  * @author: Mr.ruoLin
- * @createBy: 2018-04-19
+ * @since: 2018-04-19
  **/
 @Data
 @ApiModel("用户实体")

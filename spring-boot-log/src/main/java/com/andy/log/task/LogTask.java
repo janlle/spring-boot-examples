@@ -14,7 +14,7 @@ import java.util.Random;
 /**
  * 模拟用户产生日志
  * @author: lyon
- * @createBy: 2018-06-12 09:12
+ * @since: 2018-06-12 09:12
  **/
 @Component
 public class LogTask {
