@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 /**
  * @author: lyon
- * @createBy: 2018-04-21 15:58
+ * @since: 2018-04-21 15:58
  **/
 @Mapper
 public interface UserMapper {

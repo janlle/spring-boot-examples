@@ -12,7 +12,7 @@ import java.util.Scanner;
  * 消息摘要算法--SHA
  *
  * @author: lyon
- * @createBy: 2018-07-01 14:10
+ * @since: 2018-07-01 14:10
  **/
 public class SHA {
 

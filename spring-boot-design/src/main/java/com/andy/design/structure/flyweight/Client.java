@@ -1,5 +1,9 @@
 package com.andy.design.structure.flyweight;
 
+/**
+ * @author: lyon
+ * @since: 2018-07-31
+ **/
 public class Client {
 
     public static void main(String[] args) {

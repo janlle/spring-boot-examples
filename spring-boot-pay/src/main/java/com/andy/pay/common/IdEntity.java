@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  * @author: lyon
- * @createBy: 2018-06-03 20:06
+ * @since: 2018-06-03 20:06
  **/
 @Data
 @MappedSuperclass

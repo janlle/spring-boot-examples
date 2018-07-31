@@ -9,7 +9,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-05-06 19:49
+ * @since: 2018-05-06 19:49
  **/
 @Slf4j
 public class LockExample1 {
