@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 标记线程不安全的类
- * @author: Mr.ruoLin
+ * @author: lyon
  * @since: 2018-04-22 15:08
  **/
 @Target(ElementType.TYPE)
