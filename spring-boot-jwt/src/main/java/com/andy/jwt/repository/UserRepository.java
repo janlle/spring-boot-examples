@@ -4,7 +4,7 @@ import com.andy.jwt.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author: Mr.ruoLin
+ * @author: lyon
  * @since: 2018-04-15 09:50
  **/
 public interface UserRepository extends JpaRepository<User, Long> {

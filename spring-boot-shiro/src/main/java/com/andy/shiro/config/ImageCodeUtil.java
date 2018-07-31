@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * @author: Mr.ruoLin
+ * @author: lyon
  * @since: 2018-04-07 09:19
  **/
 public class ImageCodeUtil {
