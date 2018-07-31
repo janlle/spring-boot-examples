@@ -5,8 +5,8 @@ import com.andy.concurrency.annotations.NotThreadSafe;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-06 13:11
+ * @author: lyon
+ * @since: 2018-05-06 13:11
  **/
 @Slf4j
 @NotThreadSafe

@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-03 18:58
+ * @since: 2018-04-03 18:58
  **/
 @Configuration
 public class AppConfig {

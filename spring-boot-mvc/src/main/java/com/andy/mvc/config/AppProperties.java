@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: Mr.ruoLin
- * @createBy: 2018-04-10 09:42
+ * @since: 2018-04-10 09:42
  **/
 @Component
 @ConfigurationProperties(prefix = "app.config")

@@ -19,7 +19,7 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
 
 /**
  * @author: lyon
- * @createBy: 2018-07-12 20:12
+ * @since: 2018-07-12 20:12
  **/
 @Component
 public class SwaggerConfig {

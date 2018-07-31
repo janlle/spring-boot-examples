@@ -2,7 +2,7 @@ package com.andy.data.config;
 
 /**
  * @author: lyon
- * @createBy: 2018-07-08 15:44
+ * @since: 2018-07-08 15:44
  **/
 public class RedisPrefix {
 

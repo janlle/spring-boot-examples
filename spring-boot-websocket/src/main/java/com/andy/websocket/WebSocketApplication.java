@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 /**
  * @author: lyon
- * @createBy: 2018-07-06 19:27
+ * @since: 2018-07-06
  **/
 @ServletComponentScan
 @SpringBootApplication

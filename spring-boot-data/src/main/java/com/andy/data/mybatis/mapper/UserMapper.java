@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-11 18:43
+ * @author: lyon
+ * @since: 2018-05-11 18:43
  **/
 @Mapper
 public interface UserMapper {

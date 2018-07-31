@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-11 22:56
+ * @author: lyon
+ * @since: 2018-05-11 22:56
  **/
 public class FastjsonSeria {
 

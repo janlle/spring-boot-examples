@@ -4,8 +4,8 @@ import com.andy.concurrency.annotations.ThreadSafe;
 
 /**
  * 双重单例锁模式，线程不安全
- * @author: Mr.ruoLin
- * @createBy: 2018-05-06 13:19
+ * @author: lyon
+ * @since: 2018-05-06 13:19
  **/
 @ThreadSafe
 public class SingletonExample5 {

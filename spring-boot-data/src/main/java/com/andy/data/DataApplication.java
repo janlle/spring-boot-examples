@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.Date;
 
 /**
- * @author: Mr.ruoLin
+ * @author: lyon
  * @since: 2018-05-11 18:42
  **/
 @MapperScan("com.andy.data.mybatis.mapper")

@@ -3,8 +3,8 @@ package com.andy.concurrency.example.deadLock;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author: Mr.ruoLin
- * @createBy: 2018-05-08 21:30
+ * @author: lyon
+ * @since: 2018-05-08 21:30
  **/
 @Slf4j
 public class DeadLock implements Runnable {
