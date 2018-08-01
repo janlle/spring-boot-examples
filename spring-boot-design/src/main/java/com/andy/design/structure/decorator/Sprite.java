@@ -5,13 +5,14 @@ package com.andy.design.structure.decorator;
  * @since: 2018-08-01
  **/
 public class Sprite extends Drinks {
+
+    public Sprite() {
+        name = "雪碧";
+    }
+
     @Override
     public int price() {
         return 0;
     }
 
-    @Override
-    public String getName() {
-        return super.getName();
-    }
 }
