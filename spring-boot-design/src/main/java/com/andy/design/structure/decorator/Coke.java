@@ -6,13 +6,13 @@ package com.andy.design.structure.decorator;
  **/
 public class Coke extends Drinks {
 
-    @Override
-    public int price() {
-        return 0;
+    public Coke() {
+        name = "可乐";
     }
 
     @Override
-    public String getName() {
-        return super.getName();
+    public int price() {
+        return 30;
     }
+
 }
