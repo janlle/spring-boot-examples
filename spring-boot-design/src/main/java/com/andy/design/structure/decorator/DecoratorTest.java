@@ -9,6 +9,7 @@ public class DecoratorTest {
     public static void main(String[] args) {
 
         Drinks drinks = new Coke();
+        System.out.println(drinks.name + drinks.price());
 
         drinks = new IceDecorator(drinks);
 
