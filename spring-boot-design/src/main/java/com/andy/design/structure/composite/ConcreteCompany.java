@@ -43,4 +43,6 @@ public class ConcreteCompany extends Component {
             c.display(depth + 2);
         }
     }
+
+
 }
