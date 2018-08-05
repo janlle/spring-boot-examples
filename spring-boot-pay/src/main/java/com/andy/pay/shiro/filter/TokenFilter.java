@@ -3,7 +3,6 @@ package com.andy.pay.shiro.filter;
 import com.andy.pay.shiro.Token;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.AuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
@@ -18,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author: lyon
+ * @since: 2018-08-05
+ **/
 public class TokenFilter extends AuthenticationFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
