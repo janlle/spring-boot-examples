@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @RestController
-@Api(tags ="用户api接口文档")
+@Api(tags = "用户api接口文档")
 @RequestMapping(value = "/api/user")
 public class UserController {
 
@@ -30,7 +30,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private TokenService shiroTokenService;
+    private TokenService tokenService;
 
     @Autowired
     private ShiroProperty shiroProperty;
@@ -46,23 +46,24 @@ public class UserController {
 
     @ApiOperation(value = "用户登录接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "account",value ="用户账号",required = true, dataType = "String"),
-            @ApiImplicitParam(name = "password",value ="用户密码",required = true, dataType = "String")
+            @ApiImplicitParam(name = "account", value = "用户账号", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "password", value = "用户密码", required = true, dataType = "String")
     })
     @GetMapping("/login")
     public Result<Object> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
-        shiroTokenService.afterLogin(RandomUtil.getStr(6));
+        tokenService.login(RandomUtil.getStr(6));
         return Result.build(ResultEnum.USERNAME_PASSWORD_FAIL, null);
     }
 
     @ApiOperation(value = "用户退出接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId",value ="用户ID",required = true, dataType = "String"),
-            @ApiImplicitParam(name = "token",value ="token",required = true, dataType = "String")
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "String")
     })
     @GetMapping("/logout")
     public Result<String> logout(String token, Integer userId) {
         log.info("logout [删除token成功]->{}", token);
+        tokenService.logout(userId.toString());
         return Result.success(20000);
     }
 
@@ -74,7 +75,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "根据用户id获取用户信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParam(name = "userId",value ="用户ID",required = true, dataType = "String")
+    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "String")
     @GetMapping("/{userId}")
     public Result<Object> user(@PathVariable("userId") String userId) {
         return Result.success(20000);
@@ -82,8 +83,8 @@ public class UserController {
 
     @ApiOperation(value = "用户认证授权接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId",value ="用户ID",required = true, dataType = "Integer"),
-            @ApiImplicitParam(name = "token",value ="token",required = true, dataType = "String")
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "String")
     })
     @GetMapping("/authentication")
     public Result<String> verifyToken(String token, Integer userId, HttpServletRequest request, HttpServletResponse response) {
