@@ -4,9 +4,7 @@ import com.andy.pay.shiro.config.ShiroProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.crypto.Cipher;
@@ -20,10 +18,14 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author: lyon
+ * @since: 2018-08-05
+ **/
 @Service
-public class ShiroTokenService {
+public class TokenService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthRealm.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenService.class);
 
     private static final HexBinaryAdapter HEX_BINARY_ADAPTER = new HexBinaryAdapter();
 
@@ -33,12 +35,19 @@ public class ShiroTokenService {
     @Resource
     private ShiroProperty shiroProperty;
 
-    public void afterLogin(String userId) {
+    public void login(String userId) {
         this.updateToken(userId, null);
     }
 
-    public void afterLogin(String userId, String role) {
+    public void login(String userId, String role) {
         this.updateToken(userId, role);
+    }
+
+    public void logout(String userId) {
+        if (!this.shiroProperty.isMultiLogin()) {
+            String prefix = this.shiroProperty.getRedisPrefix();
+            this.stringRedisTemplate.delete(prefix + "auth.token:" + userId);
+        }
     }
 
     private void updateToken(String userId, String role) {
@@ -49,24 +58,15 @@ public class ShiroTokenService {
         }
         String token;
         if (null != role && "".equals(role)) {
-            token = AESEncode(userId, userId + "." + role);
+            token = decode(userId, userId + "." + role);
         } else {
-            token = AESEncode(userId, userId + "." + "token");
+            token = encode(userId, userId + "." + "token");
         }
         // key -- value   == userId.role
         LOGGER.info("setToken,Key:{}==Value:{}", userId, token);
         this.stringRedisTemplate.opsForValue().set(prefix + "auth.token:" + userId, token, cacheDays, TimeUnit.DAYS);
-        System.out.println("---------");
         String value = this.stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
-        System.out.println(AESDecode(userId, value));
-    }
-
-    public void afterLogout(Integer userId) {
-        if (!this.shiroProperty.isMultiLogin()) {
-            String prefix = this.shiroProperty.getRedisPrefix();
-            String token = this.stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
-            this.stringRedisTemplate.delete(prefix + "auth.token:" + userId);
-        }
+        System.out.println(encode(userId, value));
     }
 
     public static String MD5(String content) {
@@ -82,10 +82,10 @@ public class ShiroTokenService {
         return sb.toString();
     }
 
-    public static String AESEncode(String encodeRules, String content) {
+    public static String encode(String rule, String content) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128, new SecureRandom(encodeRules.getBytes()));
+            keyGenerator.init(128, new SecureRandom(rule.getBytes()));
 //            keyGenerator.init(128);
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] keyBytes = secretKey.getEncoded();
@@ -100,10 +100,10 @@ public class ShiroTokenService {
         return null;
     }
 
-    public static String AESDecode(String encodeRules, String content) {
+    public static String decode(String rule, String content) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128, new SecureRandom(encodeRules.getBytes()));
+            keyGenerator.init(128, new SecureRandom(rule.getBytes()));
 //            keyGenerator.init(128);
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] keyBytes = secretKey.getEncoded();
