@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author: lyon
- * @since: 2018-05-15 21:44
+ * @since: 2018-05-15
  **/
 @Slf4j
 @Component
