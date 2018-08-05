@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author: lyon
+ * @since: 2018-07-05
+ **/
 @Component
 public class TokenFilter extends AuthenticationFilter {
 

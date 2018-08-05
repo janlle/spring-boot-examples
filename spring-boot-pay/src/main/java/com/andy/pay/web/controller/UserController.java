@@ -5,17 +5,15 @@ import com.andy.pay.common.enums.ResultEnum;
 import com.andy.pay.common.utils.RandomUtil;
 import com.andy.pay.pojos.entity.User;
 import com.andy.pay.service.UserService;
-import com.andy.pay.shiro.ShiroTokenService;
+import com.andy.pay.shiro.TokenService;
 import com.andy.pay.shiro.config.ShiroProperty;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +30,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private ShiroTokenService shiroTokenService;
+    private TokenService shiroTokenService;
 
     @Autowired
     private ShiroProperty shiroProperty;
