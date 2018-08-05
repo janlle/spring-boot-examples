@@ -23,7 +23,7 @@ public class RabbitMQController {
     private MessageSender messageSender;
 
     @GetMapping("/send/{target}")
-    public String send(@PathVariable(value = "target", required = true) String target) {
+    public String send(@PathVariable(value = "target") String target) {
 
         String message = "hello james how are you!";
 

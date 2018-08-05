@@ -1,6 +1,6 @@
 package com.andy.jms.rabbitmq.config;
 
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * 消息队列配置
  *
  * @author: lyon
- * @since: 2018-04-15 18:03
+ * @since: 2018-04-15
  **/
 @Configuration
 public class QueueConfig {
