@@ -14,7 +14,8 @@ spring:
   redis:
     port: 6379
     host: 127.0.0.1
-    timeout: 20000
+    timeout: 20000ms
+    database: 2
   datasource:
     url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
@@ -50,9 +51,9 @@ spring:
 customer:
   msg: jack
 
-luwei:
-  module:
-    shiro:
-      anno-url: /*
-      cors-url: /mvc/hello
-      auth-url: /**
+module:
+  shiro:
+    anno-url: /login
+    cors-url: /login
+    auth-url: /**
+    prefix: ${server.port}

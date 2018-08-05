@@ -45,10 +45,6 @@ public class UserController {
     }
 
     @ApiOperation(value = "用户登录接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "account", value = "用户账号", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "password", value = "用户密码", required = true, dataType = "String")
-    })
     @GetMapping("/login")
     public Result<Object> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
         tokenService.login(RandomUtil.getNum(4));
@@ -56,36 +52,27 @@ public class UserController {
     }
 
     @ApiOperation(value = "用户退出接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "String")
-    })
     @GetMapping("/logout")
-    public Result<String> logout(String token, Integer userId) {
-        log.info("logout [删除token成功]->{}", token);
+    public Result<String> logout(Integer userId) {
+        log.info("logout");
         tokenService.logout(userId.toString());
+        log.info("logout [删除用户token成功]->{}", userId);
         return Result.success(20000);
     }
 
     @ApiOperation(value = "用户注册接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    @ApiImplicitParams({@ApiImplicitParam(name = "user",value ="用户信息模型",required = true, dataType = "User")})
     @PostMapping("/register")
     public Result<String> register(@RequestBody User user) {
         return Result.error(50000);
     }
 
     @ApiOperation(value = "根据用户id获取用户信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "String")
     @GetMapping("/{userId}")
     public Result<Object> user(@PathVariable("userId") String userId) {
         return Result.success(20000);
     }
 
     @ApiOperation(value = "用户认证授权接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer"),
-            @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "String")
-    })
     @GetMapping("/authentication")
     public Result<String> verifyToken(String token, Integer userId, HttpServletRequest request, HttpServletResponse response) {
 
