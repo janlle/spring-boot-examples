@@ -52,7 +52,6 @@ public class TokenService {
         } else {
             token = TokenUtil.encode(userId + "." + "token");
         }
-        // key -- value   == userId.role
         LOGGER.info("setToken,Key:{}==Value:{}", userId, token);
         this.stringRedisTemplate.opsForValue().set(prefix + "auth.token:" + userId, token, cacheDays, TimeUnit.DAYS);
         String value = this.stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
