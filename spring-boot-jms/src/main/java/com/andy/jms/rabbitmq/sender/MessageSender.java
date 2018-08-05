@@ -8,6 +8,10 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author: lyon
+ * @since: 2018-06-05
+ **/
 @Slf4j
 @Component
 public class MessageSender {

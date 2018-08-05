@@ -12,7 +12,7 @@ import java.util.Map;
  * rabbitMQ交换机配置
  *
  * @author: lyon
- * @since: 2018-05-15 18:00
+ * @since: 2018-05-5
  **/
 
 @Configuration
