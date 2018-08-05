@@ -23,9 +23,18 @@ import java.util.Collections;
 public class SwaggerConfig {
     @Bean
     public Docket webApi() {
+        Parameter parameter = new ParameterBuilder()
+                .name("Authorization")
+                .description("token")
+                .modelRef(new ModelRef("string"))
+                .parameterType("header")
+                .required(false)
+                .defaultValue("token ")
+                .build();
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("服务API接口文档")
                 .apiInfo(apiInfo())
+                .globalOperationParameters(Collections.singletonList(parameter))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.andy.pay.web"))
                 .paths(PathSelectors.any())

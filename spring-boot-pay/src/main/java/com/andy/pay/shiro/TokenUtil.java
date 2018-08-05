@@ -8,6 +8,7 @@ import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.security.Key;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 /**
  * @author: lyon
@@ -20,6 +21,7 @@ public class TokenUtil {
 
     private static final HexBinaryAdapter HEX_BINARY_ADAPTER = new HexBinaryAdapter();
 
+    private static final String rule = "$#@*^";
 
     public static String MD5(String content) {
         StringBuffer sb = new StringBuffer();
@@ -37,7 +39,7 @@ public class TokenUtil {
     public static String encode(String content) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128);
+            keyGenerator.init(128, new SecureRandom(rule.getBytes()));
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] keyBytes = secretKey.getEncoded();
             Key key = new SecretKeySpec(keyBytes, "AES");
@@ -54,7 +56,7 @@ public class TokenUtil {
     public static String decode(String content) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128);
+            keyGenerator.init(128, new SecureRandom(rule.getBytes()));
             SecretKey secretKey = keyGenerator.generateKey();
             byte[] keyBytes = secretKey.getEncoded();
             Key key = new SecretKeySpec(keyBytes, "AES");
@@ -66,6 +68,12 @@ public class TokenUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(encode("he.llo"));
+        System.out.println(decode("E34D28E5A0133C86C8E869E68779FD25"));
+        System.out.println("6166.token".split("\\.").length);
     }
 
 }

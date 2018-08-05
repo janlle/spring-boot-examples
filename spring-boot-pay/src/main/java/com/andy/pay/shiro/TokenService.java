@@ -47,15 +47,15 @@ public class TokenService {
             return;
         }
         String token;
-        if (null != role && "".equals(role)) {
-            token = TokenUtil.decode(userId + "." + role);
+        if (null != role || "".equals(role)) {
+            token = TokenUtil.encode(userId + "." + role);
         } else {
             token = TokenUtil.encode(userId + "." + "token");
         }
-        LOGGER.info("setToken,Key:{}==Value:{}", userId, token);
-        this.stringRedisTemplate.opsForValue().set(prefix + "auth.token:" + userId, token, cacheDays, TimeUnit.DAYS);
-        String value = this.stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
-        System.out.println(TokenUtil.encode(value));
+        LOGGER.info("setToken:{}={}", userId, token);
+        this.stringRedisTemplate.opsForValue().set(prefix + ".auth.token:" + userId, token, cacheDays, TimeUnit.DAYS);
+        String value = this.stringRedisTemplate.opsForValue().get(prefix + ".auth.token:" + userId);
+//        LOGGER.info("getToken:{}", value);
     }
 
 
