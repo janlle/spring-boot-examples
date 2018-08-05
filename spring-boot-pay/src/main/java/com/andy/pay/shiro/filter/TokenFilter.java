@@ -38,6 +38,7 @@ public class TokenFilter extends AuthenticationFilter {
             return false;
         } else {
             boolean loginSuccess = this.login(new Token(token));
+            System.out.println();
             if (!loginSuccess) {
                 this.writeError("auth.token.wrong", WebUtils.toHttp(response));
             }
