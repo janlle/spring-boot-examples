@@ -40,7 +40,7 @@ public class AuthRealm extends AuthorizingRealm {
         if (StringUtils.isEmpty(tokenString)) {
             return null;
         }
-        String userId = tokenString.split(".")[0];
+        String userId = tokenString.split("\\.")[0];
         String dbToken = this.stringRedisTemplate.opsForValue().get(this.shiroProperty.getRedisPrefix() + "auth.token:" + userId);
         return !StringUtils.isEmpty(dbToken) ? new SimpleAuthenticationInfo(userId, tokenString, this.getName()) : null;
     }
@@ -54,7 +54,7 @@ public class AuthRealm extends AuthorizingRealm {
                 return null;
             } else {
                 SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-                String role = TokenUtil.decode(token).split(".")[1];
+                String role = TokenUtil.decode(token).split("\\.")[1];
                 info.addRole(role);
                 return info;
             }
