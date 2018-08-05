@@ -51,8 +51,8 @@ public class UserController {
     })
     @GetMapping("/login")
     public Result<Object> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
-        tokenService.login(RandomUtil.getStr(6));
-        return Result.build(ResultEnum.USERNAME_PASSWORD_FAIL, null);
+        tokenService.login(RandomUtil.getNum(4));
+        return Result.build(ResultEnum.SUCCESS, null);
     }
 
     @ApiOperation(value = "用户退出接口", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
