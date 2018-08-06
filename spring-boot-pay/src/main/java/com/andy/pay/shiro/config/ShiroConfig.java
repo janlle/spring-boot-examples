@@ -104,10 +104,4 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
-    @Bean
-    public AuthRealm authRealm() {
-        AuthRealm authRealm = new AuthRealm();
-        return authRealm;
-    }
-
 }

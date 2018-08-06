@@ -37,8 +37,8 @@ public class TokenFilter extends AuthenticationFilter {
             this.writeError("auth.token.empty", WebUtils.toHttp(response));
             return false;
         } else {
-            boolean loginSuccess = this.login(new Token(token));
-            System.out.println();
+            boolean loginSuccess = login(new Token(token));
+            System.out.println(loginSuccess);
             if (!loginSuccess) {
                 this.writeError("auth.token.wrong", WebUtils.toHttp(response));
             }
@@ -86,12 +86,12 @@ public class TokenFilter extends AuthenticationFilter {
             logger.warn("输出异常信息失败!", e);
         }
     }
-
     private boolean login(Token token) {
         try {
             SecurityUtils.getSubject().login(token);
             return true;
         } catch (AuthenticationException e) {
+            e.printStackTrace();
             return false;
         }
     }

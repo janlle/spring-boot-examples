@@ -86,8 +86,8 @@ public class HelloController {
 
     @GetMapping("/logout")
     public String logout() {
-        shiroTokenService.afterLogout(1234);
-        return "success";
+//        shiroTokenService.afterLogout(1234);
+        return "logout success";
     }
 
 }
