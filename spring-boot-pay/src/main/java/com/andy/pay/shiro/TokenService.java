@@ -18,7 +18,6 @@ public class TokenService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenService.class);
 
-
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 

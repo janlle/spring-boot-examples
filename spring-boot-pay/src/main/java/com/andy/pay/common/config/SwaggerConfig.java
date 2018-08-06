@@ -42,7 +42,7 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public Docket alipayApi() {
+    public Docket aliApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("支付宝API接口文档")
                 .apiInfo(apiInfo())
@@ -53,7 +53,7 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public Docket weixinpayApi() {
+    public Docket weiXinApi() {
         Parameter parameter = new ParameterBuilder()
                 .name("Authorization")
                 .description("token")
@@ -74,7 +74,7 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public Docket unionpayApi() {
+    public Docket unionApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("银联API接口文档")
                 .apiInfo(apiInfo())

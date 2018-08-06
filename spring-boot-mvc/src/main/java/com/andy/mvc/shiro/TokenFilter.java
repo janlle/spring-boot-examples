@@ -75,6 +75,7 @@ public class TokenFilter extends AuthenticationFilter {
             subject.login(token);
             return true;
         } catch (AuthenticationException var3) {
+            var3.printStackTrace();
             return false;
         }
     }

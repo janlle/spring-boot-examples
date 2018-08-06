@@ -14,7 +14,6 @@ public class Token implements AuthenticationToken {
         return this.token;
     }
 
-
     public Object getPrincipal() {
         return this.getToken();
     }

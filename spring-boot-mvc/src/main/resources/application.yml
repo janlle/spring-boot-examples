@@ -57,3 +57,15 @@ module:
     cors-url: /login
     auth-url: /**
     prefix: ${server.port}
+
+model:
+  shiro:
+    mulitLogin: false
+    cacheDays: 7
+    redisPrefix: ${server.port}
+    anonUrls: /*
+    coreUrls:
+    - /api/user/property
+    - /api/user/login
+    authUrls: /api/**
+    tokenPrefix: ${server.port}
