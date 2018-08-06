@@ -42,7 +42,7 @@ public class AuthRealm extends AuthorizingRealm {
         }
         String userId = tokenString.split("\\.")[0];
         String dbToken = this.stringRedisTemplate.opsForValue().get(this.shiroProperty.getRedisPrefix() + ".auth.token:" + userId);
-        System.out.println(!StringUtils.isEmpty(dbToken) ? new SimpleAuthenticationInfo(userId, tokenString, this.getName()) : null);
+        System.out.println(!StringUtils.isEmpty(dbToken) ? new SimpleAuthenticationInfo(userId, tokenString, this.getName()).toString() : null);
         return !StringUtils.isEmpty(dbToken) ? new SimpleAuthenticationInfo(userId, tokenString, this.getName()) : null;
     }
 
@@ -50,7 +50,7 @@ public class AuthRealm extends AuthorizingRealm {
         logger.info("doGetAuthorizationInfo...");
         String userId = (String) principals.getPrimaryPrincipal();
         if (!StringUtils.isEmpty(userId)) {
-            String token = this.stringRedisTemplate.opsForValue().get(this.shiroProperty.getRedisPrefix() + "auth.token:" + userId);
+            String token = this.stringRedisTemplate.opsForValue().get(this.shiroProperty.getRedisPrefix() + ".auth.token:" + userId);
             if (StringUtils.isEmpty(token)) {
                 return null;
             } else {
@@ -66,6 +66,6 @@ public class AuthRealm extends AuthorizingRealm {
 
     @Override
     public boolean supports(AuthenticationToken token) {
-        return true;
+        return token != null && Token.class.isAssignableFrom(token.getClass());
     }
 }
