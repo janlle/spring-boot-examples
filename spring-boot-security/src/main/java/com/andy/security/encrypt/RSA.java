@@ -1,32 +1,32 @@
 package com.andy.security.encrypt;
 
 import lombok.extern.slf4j.Slf4j;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import javax.crypto.Cipher;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
-
-import javax.crypto.Cipher;
-
+import java.util.HashMap;
 
 /**
- * 非对称加密算法——RSA
+ * 非对称加密算法--RSA
  *
  * @author: lyon
- * @since: 2018-05-01 14:32
+ * @since: 2018-05-01
  **/
 @Slf4j
 public class RSA {
 
     private static String src = "上帝，god gave to something！@#*5";
+
+    public static final String PUBLIC_KEY = "publicKey";
+    public static final String PRIVATE_KEY = "privateKey";
 
     private static Base64.Encoder encoder = Base64.getEncoder();
     private static Base64.Decoder decoder = Base64.getDecoder();
@@ -80,6 +80,117 @@ public class RSA {
         System.out.println("JDK RSA私钥解密：" + new String(result));
     }
 
+
+    public static String pri_key_encode(String content, String key) {
+
+        // 私钥加密，公钥解密
+
+        return null;
+    }
+
+
+    public static String pub_key_encode(String content, String key) {
+
+        return null;
+    }
+
+    public static String pub_key_decode(String content, String key) {
+
+        return null;
+    }
+
+    public static String pri_key_decode(String content, String key) {
+
+        return null;
+    }
+
+
+    public static HashMap<String, Object> getKeys() throws NoSuchAlgorithmException {
+        HashMap<String, Object> map = new HashMap<>();
+        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
+        keyPairGen.initialize(1024);
+        KeyPair keyPair = keyPairGen.generateKeyPair();
+        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        map.put("public", publicKey);
+        map.put("private", privateKey);
+        return map;
+    }
+
+
+    /// 生成秘钥对
+    public static KeyPair getKeyPair() throws Exception {
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(1024);
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
+        return keyPair;
+    }
+
+    //获取公钥(Base64编码)
+    public static String getPublicKey(KeyPair keyPair){
+        PublicKey publicKey = keyPair.getPublic();
+        byte[] bytes = publicKey.getEncoded();
+        return byte2Base64(bytes);
+    }
+
+    //获取私钥(Base64编码)
+    public static String getPrivateKey(KeyPair keyPair){
+        PrivateKey privateKey = keyPair.getPrivate();
+        byte[] bytes = privateKey.getEncoded();
+        return byte2Base64(bytes);
+    }
+
+    //将Base64编码后的公钥转换成PublicKey对象
+    public static PublicKey string2PublicKey(String pubStr) throws Exception{
+        byte[] keyBytes = base642Byte(pubStr);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey publicKey = keyFactory.generatePublic(keySpec);
+        return publicKey;
+    }
+
+    //将Base64编码后的私钥转换成PrivateKey对象
+    public static PrivateKey string2PrivateKey(String priStr) throws Exception{
+        byte[] keyBytes = base642Byte(priStr);
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
+        return privateKey;
+    }
+
+    //公钥加密
+    public static byte[] publicEncrypt(byte[] content, PublicKey publicKey) throws Exception{
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+        byte[] bytes = cipher.doFinal(content);
+        return bytes;
+    }
+
+    //私钥解密
+    public static byte[] privateDecrypt(byte[] content, PrivateKey privateKey) throws Exception{
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        byte[] bytes = cipher.doFinal(content);
+        return bytes;
+    }
+
+
+
+
+    // ---------------------------------------------------------------
+    //字节数组转Base64编码
+    public static String byte2Base64(byte[] bytes){
+        BASE64Encoder encoder = new BASE64Encoder();
+        return encoder.encode(bytes);
+
+
+    }
+
+    //Base64编码转字节数组
+    public static byte[] base642Byte(String base64Key) throws IOException {
+        BASE64Decoder decoder = new BASE64Decoder();
+        return decoder.decodeBuffer(base64Key);
+    }
 
 
 
