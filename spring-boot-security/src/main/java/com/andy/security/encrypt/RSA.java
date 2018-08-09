@@ -105,8 +105,6 @@ public class RSA {
                 sb.append(line);
             }
             String key = sb.toString();
-//            key = key.replace("-----BEGIN RSA PRIVATE KEY-----\n", "");
-//            key = key.replace("\n-----END RSA PRIVATE KEY-----", "");
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decoder.decode(key));
             return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
         } catch (Exception e) {
@@ -241,20 +239,13 @@ public class RSA {
      * @param path
      */
     public static void generatorKeys(String path) {
-        // 初始化密钥对生成器，密钥大小为96-1024位
         keyPairGenerator.initialize(1024, new SecureRandom());
-        // 生成一个密钥对，保存在keyPair中
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
-        // 得到私钥
         PrivateKey privateKey = keyPair.getPrivate();
-        // 得到公钥
         PublicKey publicKey = keyPair.getPublic();
         try {
-            // 得到公钥字符串
             String pubKey = new String(encoder.encodeToString(publicKey.getEncoded()));
-            // 得到私钥字符串
             String priKey = new String(encoder.encodeToString(privateKey.getEncoded()));
-            // 将密钥对写入到文件
             BufferedWriter pubFileWriter = new BufferedWriter(new FileWriter(path + "/pub_key.pen"));
             BufferedWriter priFileWriter = new BufferedWriter(new FileWriter(path + "/pri_key.pen"));
             pubFileWriter.write(pubKey);
