@@ -6,7 +6,6 @@ import javax.crypto.Cipher;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
@@ -33,15 +32,17 @@ public class RSA {
 //        System.out.println("原始字符串：" + src);
 //        jdkRSA();
 
-        RSAPublicKey rsaPublicKey = loadPublicKeyByStr("MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIHYbPbc6s4npAtQXbdEHgklvvof2FawskooYIvnUaO+m2VS9NMsJr/SUVAKcEMHZ/1588Lm0PybZps8IMQlbHkCAwEAAQ==");
-        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr("MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAgdhs9tzqziekC1Bdt0QeCSW++h/YVrCySihgi+dRo76bZVL00ywmv9JRUApwQwdn/XnzwubQ/JtmmzwgxCVseQIDAQABAkBof0waVGqn5OExtcjmP+zIQddzpwNNqUCjS+F/Vneuhgcu1R5Yi0i5CNTAbkOBq1rXqWmopTejnICU+dV9/y0xAiEAuuqLpSFtMIliCANHFPYARItMqr8x+3TLoifdDcWJDJ0CIQCx1gM3EXLZZj7AEHrSqL6aFyJkU3uY/Gl0bMwj1T1CjQIhAJcS/6+GJuS2BcAINimg83JzTJItWs6tBfGYWrjI0g6ZAiBZ+DAAOC+mlPfCK5Q3528mffXEVAf/yhN/91r/9e3cMQIgOLjLOpFe2ais64CiXGeYDe/ut6z3Ce8SZbOgiGgh1pk=");
+        RSAPublicKey rsaPublicKey = loadPublicKeyByStr("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC4/F9yRVp1xUlb2Os23lkkFjfda9nb0xxUjHlVM5n/N7kug1Mqt0W6+T3S6276sPgXFJSoTYIHLdZ1v5tizMEWX7akutEH/+otopcl7j2+Z/OKT4QR+JAYgQN2Pq3g33azraqMFm8k+m7D9lB0tTnm53TInORIPjHX/qj4PJ4HpQIDAQAB");
+        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr("MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALj8X3JFWnXFSVvY6zbeWSQWN91r2dvTHFSMeVUzmf83uS6DUyq3Rbr5PdLrbvqw+BcUlKhNggct1nW/m2LMwRZftqS60Qf/6i2ilyXuPb5n84pPhBH4kBiBA3Y+reDfdrOtqowWbyT6bsP2UHS1OebndMic5Eg+Mdf+qPg8ngelAgMBAAECgYEAoLvhb1gltulayazdDIr856dKmWGqJiD0n96DWu4AZEuV432GmTowI7uH5apefwOgPeXLGcZnMje4/g0kRh/lsT/A+l3XrLYosaOifaBBohgcNyysp8d39RtkmasWz3sn2y3ctLSqlt2uPPDUFBgh9v1p2Y3CZYwBOKpJnxfd8GECQQDytbGMXimuPVS+oUQR5J7i+XDccwI/eo5qtWSaNqu7NA9FXqI5VZDlVshfslMIAtLhIEEzWBH4SNbcnxParOCpAkEAwx2BVidCb6CX3XkI5HKu7wMxUkkmirtGXB9WVOMyj7PsqnjG128mLr2ME1aNsfQFlVEfGC2dbAroL03Ds75AnQJAKTnrmqgz9EC+sFK8OT3YLz2nigqPCzFKF54QJJG8weOp5GKas5pxLkN7baXgrK+uGkdcS9hd1QqqVHdA7BgJYQJAHw+WZGGxmNWm93HqMXv0T0Zh1qiggxtXExlGBBN7HBdXiLfbZ7ZhDLXOE9IGkpq3PNMCMTYpxmZiGg22JuoVnQJAbyszLjSEXY8ko/VjsxiYmXWbIrJJ1U/l2mPisLF0RzXAIGGnm8zjibtRtmIGQhUG4Ln+fy7cyZOznc0Cn1jLnA==");
 
         byte[] hello = pri_key_encode("世界", rsaPrivateKey);
 
         String s = pub_key_decode(hello, rsaPublicKey);
         System.out.println(s);
 
-
+        HashMap<String, Object> keys = getKeys(1023);
+        System.out.println("public_key:" + keys.get("public"));
+        System.out.println("private_key:" + keys.get("private"));
     }
 
     public static void jdkRSA() throws Exception {
@@ -96,9 +97,7 @@ public class RSA {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoder.decode(publicKey));
             return (RSAPublicKey) keyFactory.generatePublic(keySpec);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -112,9 +111,7 @@ public class RSA {
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decoder.decode(privateKey));
             return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -196,14 +193,22 @@ public class RSA {
     }
 
 
-    public static HashMap<String, Object> getKeys() throws NoSuchAlgorithmException {
+    /**
+     * 获取公钥私钥
+     *
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
+    public static HashMap<String, Object> getKeys(Integer length) throws NoSuchAlgorithmException {
+        if (length % 1024 != 0) {
+            throw new RuntimeException("模值长度必须是1024的倍数");
+        }
         HashMap<String, Object> map = new HashMap<>();
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");
         keyPairGen.initialize(1024);
         KeyPair keyPair = keyPairGen.generateKeyPair();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-
+        PublicKey publicKey = keyPair.getPublic();
+        PrivateKey privateKey = keyPair.getPrivate();
         map.put("public", encoder.encodeToString(publicKey.getEncoded()));
         map.put("private", encoder.encodeToString(privateKey.getEncoded()));
         return map;
@@ -231,24 +236,5 @@ public class RSA {
         byte[] bytes = privateKey.getEncoded();
         return encoder.encodeToString(bytes);
     }
-
-    //将Base64编码后的公钥转换成PublicKey对象
-    public static PublicKey string2PublicKey(String pubStr) throws Exception {
-        byte[] keyBytes = decoder.decode(pubStr);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PublicKey publicKey = keyFactory.generatePublic(keySpec);
-        return publicKey;
-    }
-
-    //将Base64编码后的私钥转换成PrivateKey对象
-    public static PrivateKey string2PrivateKey(String priStr) throws Exception {
-        byte[] keyBytes = decoder.decode(priStr);
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
-        return privateKey;
-    }
-
 
 }
