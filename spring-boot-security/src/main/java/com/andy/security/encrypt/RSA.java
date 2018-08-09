@@ -93,9 +93,8 @@ public class RSA {
      */
     public static RSAPublicKey loadPublicKeyByStr(String publicKey) {
         try {
-            byte[] bytes = decoder.decode(publicKey);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(bytes);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoder.decode(publicKey));
             return (RSAPublicKey) keyFactory.generatePublic(keySpec);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -110,9 +109,8 @@ public class RSA {
      */
     public static RSAPrivateKey loadPrivateKeyByStr(String privateKey) {
         try {
-            byte[] bytes = decoder.decode(privateKey);
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(bytes);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decoder.decode(privateKey));
             return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -205,8 +203,9 @@ public class RSA {
         KeyPair keyPair = keyPairGen.generateKeyPair();
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        map.put("public", publicKey);
-        map.put("private", privateKey);
+
+        map.put("public", encoder.encodeToString(publicKey.getEncoded()));
+        map.put("private", encoder.encodeToString(privateKey.getEncoded()));
         return map;
     }
 
@@ -249,22 +248,6 @@ public class RSA {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
         return privateKey;
-    }
-
-    //公钥加密
-    public static byte[] publicEncrypt(byte[] content, PublicKey publicKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-        byte[] bytes = cipher.doFinal(content);
-        return bytes;
-    }
-
-    //私钥解密
-    public static byte[] privateDecrypt(byte[] content, PrivateKey privateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        byte[] bytes = cipher.doFinal(content);
-        return bytes;
     }
 
 
