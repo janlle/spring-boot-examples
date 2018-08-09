@@ -36,6 +36,11 @@ public class RSA {
         RSAPublicKey rsaPublicKey = loadPublicKeyByStr("MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIHYbPbc6s4npAtQXbdEHgklvvof2FawskooYIvnUaO+m2VS9NMsJr/SUVAKcEMHZ/1588Lm0PybZps8IMQlbHkCAwEAAQ==");
         RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr("MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAgdhs9tzqziekC1Bdt0QeCSW++h/YVrCySihgi+dRo76bZVL00ywmv9JRUApwQwdn/XnzwubQ/JtmmzwgxCVseQIDAQABAkBof0waVGqn5OExtcjmP+zIQddzpwNNqUCjS+F/Vneuhgcu1R5Yi0i5CNTAbkOBq1rXqWmopTejnICU+dV9/y0xAiEAuuqLpSFtMIliCANHFPYARItMqr8x+3TLoifdDcWJDJ0CIQCx1gM3EXLZZj7AEHrSqL6aFyJkU3uY/Gl0bMwj1T1CjQIhAJcS/6+GJuS2BcAINimg83JzTJItWs6tBfGYWrjI0g6ZAiBZ+DAAOC+mlPfCK5Q3528mffXEVAf/yhN/91r/9e3cMQIgOLjLOpFe2ais64CiXGeYDe/ut6z3Ce8SZbOgiGgh1pk=");
 
+        byte[] hello = pri_key_encode("世界", rsaPrivateKey);
+
+        String s = pub_key_decode(hello, rsaPublicKey);
+        System.out.println(s);
+
 
     }
 
@@ -125,12 +130,11 @@ public class RSA {
      * @param pri_key
      * @return
      */
-    public static String pri_key_encode(String content, RSAPrivateKey pri_key) {
-        Cipher cipher;
+    public static byte[] pri_key_encode(String content, RSAPrivateKey pri_key) {
         try {
-            cipher = Cipher.getInstance("RSA");
+            Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.ENCRYPT_MODE, pri_key);
-            return new String(cipher.doFinal(content.getBytes("UTF-8")), "UTF-8");
+            return cipher.doFinal(content.getBytes("UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,12 +148,11 @@ public class RSA {
      * @param pub_key
      * @return
      */
-    public static String pub_key_encode(String content, RSAPublicKey pub_key) {
-        Cipher cipher;
+    public static byte[] pub_key_encode(String content, RSAPublicKey pub_key) {
         try {
-            cipher = Cipher.getInstance("RSA");
+            Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.ENCRYPT_MODE, pub_key);
-            return new String(cipher.doFinal(content.getBytes("UTF-8")), "UTF-8");
+            return cipher.doFinal(content.getBytes("UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,8 +167,14 @@ public class RSA {
      * @param pri_key
      * @return
      */
-    public static String pri_key_decode(String content, RSAPrivateKey pri_key) {
-
+    public static String pri_key_decode(byte[] content, RSAPrivateKey pri_key) {
+        try {
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.DECRYPT_MODE, pri_key);
+            return new String(cipher.doFinal(content), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -177,8 +186,14 @@ public class RSA {
      * @param pub_key
      * @return
      */
-    public static String pub_key_decode(String content, RSAPublicKey pub_key) {
-
+    public static String pub_key_decode(byte[] content, RSAPublicKey pub_key) {
+        try {
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.DECRYPT_MODE, pub_key);
+            return new String(cipher.doFinal(content), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
