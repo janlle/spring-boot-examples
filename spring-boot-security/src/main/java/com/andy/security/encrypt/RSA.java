@@ -1,14 +1,12 @@
 package com.andy.security.encrypt;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
-import java.io.IOException;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
@@ -32,8 +30,13 @@ public class RSA {
     private static Base64.Decoder decoder = Base64.getDecoder();
 
     public static void main(String[] args) throws Exception {
-        System.out.println("原始字符串：" + src);
-        jdkRSA();
+//        System.out.println("原始字符串：" + src);
+//        jdkRSA();
+
+        RSAPublicKey rsaPublicKey = loadPublicKeyByStr("MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIHYbPbc6s4npAtQXbdEHgklvvof2FawskooYIvnUaO+m2VS9NMsJr/SUVAKcEMHZ/1588Lm0PybZps8IMQlbHkCAwEAAQ==");
+        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr("MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAgdhs9tzqziekC1Bdt0QeCSW++h/YVrCySihgi+dRo76bZVL00ywmv9JRUApwQwdn/XnzwubQ/JtmmzwgxCVseQIDAQABAkBof0waVGqn5OExtcjmP+zIQddzpwNNqUCjS+F/Vneuhgcu1R5Yi0i5CNTAbkOBq1rXqWmopTejnICU+dV9/y0xAiEAuuqLpSFtMIliCANHFPYARItMqr8x+3TLoifdDcWJDJ0CIQCx1gM3EXLZZj7AEHrSqL6aFyJkU3uY/Gl0bMwj1T1CjQIhAJcS/6+GJuS2BcAINimg83JzTJItWs6tBfGYWrjI0g6ZAiBZ+DAAOC+mlPfCK5Q3528mffXEVAf/yhN/91r/9e3cMQIgOLjLOpFe2ais64CiXGeYDe/ut6z3Ce8SZbOgiGgh1pk=");
+
+
     }
 
     public static void jdkRSA() throws Exception {
@@ -80,26 +83,101 @@ public class RSA {
         System.out.println("JDK RSA私钥解密：" + new String(result));
     }
 
+    /**
+     * 从字符串中加载公钥对象
+     */
+    public static RSAPublicKey loadPublicKeyByStr(String publicKey) {
+        try {
+            byte[] bytes = decoder.decode(publicKey);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(bytes);
+            return (RSAPublicKey) keyFactory.generatePublic(keySpec);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-    public static String pri_key_encode(String content, String key) {
+    /**
+     * 从字符串中加载私钥对象
+     */
+    public static RSAPrivateKey loadPrivateKeyByStr(String privateKey) {
+        try {
+            byte[] bytes = decoder.decode(privateKey);
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(bytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-        // 私钥加密，公钥解密
+
+    /**
+     * 私钥加密
+     *
+     * @param content
+     * @param pri_key
+     * @return
+     */
+    public static String pri_key_encode(String content, RSAPrivateKey pri_key) {
+        Cipher cipher;
+        try {
+            cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.ENCRYPT_MODE, pri_key);
+            return new String(cipher.doFinal(content.getBytes("UTF-8")), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 公钥加密
+     *
+     * @param content
+     * @param pub_key
+     * @return
+     */
+    public static String pub_key_encode(String content, RSAPublicKey pub_key) {
+        Cipher cipher;
+        try {
+            cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.ENCRYPT_MODE, pub_key);
+            return new String(cipher.doFinal(content.getBytes("UTF-8")), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 私钥解密
+     *
+     * @param content
+     * @param pri_key
+     * @return
+     */
+    public static String pri_key_decode(String content, RSAPrivateKey pri_key) {
 
         return null;
     }
 
 
-    public static String pub_key_encode(String content, String key) {
-
-        return null;
-    }
-
-    public static String pub_key_decode(String content, String key) {
-
-        return null;
-    }
-
-    public static String pri_key_decode(String content, String key) {
+    /**
+     * 公钥解密
+     *
+     * @param content
+     * @param pub_key
+     * @return
+     */
+    public static String pub_key_decode(String content, RSAPublicKey pub_key) {
 
         return null;
     }
