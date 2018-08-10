@@ -12,14 +12,17 @@ import java.util.Base64;
  **/
 public class Base_64 {
 
-    private static String src = "hello world";
+    private Base_64() {
+    }
+
+    private static final String src = "hello world";
 
     public static void main(String[] args) {
         Base_64.jdkBase64(src);
         Base_64.jdk8Base64(src);
     }
 
-    //使用JDK的base64实现，
+    // JDK base64实现
     public static void jdkBase64(String content) {
         BASE64Encoder encoder = new BASE64Encoder();
         BASE64Decoder decoder = new BASE64Decoder();
@@ -33,7 +36,7 @@ public class Base_64 {
         }
     }
 
-    //使用JDK8的base64实现，
+    // JDK8 base64实现
     public static void jdk8Base64(String content) {
         Base64.Encoder encoder = Base64.getEncoder();
         Base64.Decoder decoder = Base64.getDecoder();
