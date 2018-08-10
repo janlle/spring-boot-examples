@@ -35,9 +35,9 @@ public class RSA {
     private static Base64.Encoder encoder = Base64.getEncoder();
     private static Base64.Decoder decoder = Base64.getDecoder();
 
-    private static KeyFactory keyFactory;
-
     private static Cipher cipher;
+
+    private static KeyFactory keyFactory;
 
     private static KeyPairGenerator keyPairGenerator;
 
@@ -60,16 +60,19 @@ public class RSA {
         RSAPublicKey rsaPublicKey = loadPublicKeyByFile("D:\\pub_key.pen");
         RSAPrivateKey rsaPrivateKey = loadPrivateKeyByFile("D:\\pri_key.pen");
 
-        byte[] hello = pri_key_encode("世界", rsaPrivateKey);
+        byte[] hello = pri_key_encode(src, rsaPrivateKey);
 
-        String s = pub_key_decode(hello, rsaPublicKey);
-        System.out.println(s);
+        System.out.println(encoder.encodeToString(hello));
 
-        HashMap<String, Object> keys = getKeys(1024);
-        System.out.println("public_key:" + keys.get("public"));
-        System.out.println("private_key:" + keys.get("private"));
+        String result = pub_key_decode(hello, rsaPublicKey);
 
-        generatorKeys("D:\\");
+        System.out.println(result);
+
+//        HashMap<String, Object> keys = getKeys(1024);
+//        System.out.println("public_key:" + keys.get("public"));
+//        System.out.println("private_key:" + keys.get("private"));
+
+//        generatorKeys("D:\\");
 
     }
 
