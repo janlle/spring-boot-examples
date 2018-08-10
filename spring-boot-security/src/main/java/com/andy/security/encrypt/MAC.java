@@ -11,6 +11,7 @@ import java.security.Security;
 import java.util.Scanner;
 
 /**
+ * <p>
  * 消息摘要算法--MAC
  *
  * @author: lyon
