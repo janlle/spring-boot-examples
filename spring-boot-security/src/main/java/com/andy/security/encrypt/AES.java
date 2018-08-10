@@ -18,7 +18,7 @@ import org.bouncycastle.util.encoders.Hex;
  * 对称加密算法--AES
  *
  * @author: lyon
- * @since: 2018-05-01 13:56
+ * @since: 2018-05-01
  **/
 public class AES {
 
