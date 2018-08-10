@@ -32,6 +32,26 @@ public class RSA {
     private static final String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC4/F9yRVp1xUlb2Os23lkkFjfda9nb0xxUjHlVM5n/N7kug1Mqt0W6+T3S6276sPgXFJSoTYIHLdZ1v5tizMEWX7akutEH/+otopcl7j2+Z/OKT4QR+JAYgQN2Pq3g33azraqMFm8k+m7D9lB0tTnm53TInORIPjHX/qj4PJ4HpQIDAQAB";
     private static final String PRIVATE_KEY = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALj8X3JFWnXFSVvY6zbeWSQWN91r2dvTHFSMeVUzmf83uS6DUyq3Rbr5PdLrbvqw+BcUlKhNggct1nW/m2LMwRZftqS60Qf/6i2ilyXuPb5n84pPhBH4kBiBA3Y+reDfdrOtqowWbyT6bsP2UHS1OebndMic5Eg+Mdf+qPg8ngelAgMBAAECgYEAoLvhb1gltulayazdDIr856dKmWGqJiD0n96DWu4AZEuV432GmTowI7uH5apefwOgPeXLGcZnMje4/g0kRh/lsT/A+l3XrLYosaOifaBBohgcNyysp8d39RtkmasWz3sn2y3ctLSqlt2uPPDUFBgh9v1p2Y3CZYwBOKpJnxfd8GECQQDytbGMXimuPVS+oUQR5J7i+XDccwI/eo5qtWSaNqu7NA9FXqI5VZDlVshfslMIAtLhIEEzWBH4SNbcnxParOCpAkEAwx2BVidCb6CX3XkI5HKu7wMxUkkmirtGXB9WVOMyj7PsqnjG128mLr2ME1aNsfQFlVEfGC2dbAroL03Ds75AnQJAKTnrmqgz9EC+sFK8OT3YLz2nigqPCzFKF54QJJG8weOp5GKas5pxLkN7baXgrK+uGkdcS9hd1QqqVHdA7BgJYQJAHw+WZGGxmNWm93HqMXv0T0Zh1qiggxtXExlGBBN7HBdXiLfbZ7ZhDLXOE9IGkpq3PNMCMTYpxmZiGg22JuoVnQJAbyszLjSEXY8ko/VjsxiYmXWbIrJJ1U/l2mPisLF0RzXAIGGnm8zjibtRtmIGQhUG4Ln+fy7cyZOznc0Cn1jLnA==";
 
+    private static final String PUBLIC_KEY_A = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDA8eBDqcVeRHWFBohuX3o1ejR5" +
+            "aRCnQ8jXuOTkZmyPFuNdmaCFTt3nE9niXoBGaVxLOq2KT+DCfjh9f1jMzeQEGL5l" +
+            "Kiztpu+h7dBjsqzR6rJQNXQxc2Aa7EHeLGmWZWdeKJeQ/1iGvkY0WmtelOOkPQq7" +
+            "Fh0B5/uMClK1pmSlQwIDAQAB";
+
+    private static final String PRIVATE_KEY_A = "MIICWwIBAAKBgQDA8eBDqcVeRHWFBohuX3o1ejR5aRCnQ8jXuOTkZmyPFuNdmaCF" +
+        "Tt3nE9niXoBGaVxLOq2KT+DCfjh9f1jMzeQEGL5lKiztpu+h7dBjsqzR6rJQNXQx" +
+        "c2Aa7EHeLGmWZWdeKJeQ/1iGvkY0WmtelOOkPQq7Fh0B5/uMClK1pmSlQwIDAQAB" +
+        "AoGASzD3uOa8Z9Q+CC1XlcvXkGejc30iZEziRE9lxCy2Ob0tthhcmhb2G0t9Kd6y" +
+        "Fr6QnTCs2K3wZVtTIHU0YfwK03Bzj61ZCJrRBI3sBX9vNUwXSO3zWvdlsALQIFHV" +
+        "zr8dr0/1FnhjBNpIIeD4O8q+pwOHN9qiyWBr2zovDTOiJ4ECQQDpThKuGKHEgqGG" +
+        "LqSZ9pfmj9kt1inkOurIv5A7zJmHiNdcOGq+b58Oqzm2iBZGDxBLhJ3JJkq2mMII" +
+        "ZVzfG53zAkEA07a51nvrdcE+zTljPyelJ33edbZlwJ1bCMPTojVMhi3tqbn6YD+T" +
+        "ZTigf3YZU/peb61fZaKZK6PdeQYCv/6fcQJALeMXNXrOxnHTBytBYK7prYV5d9R5" +
+        "pNQZvaY/3iMdx1SY1yCZjh8yL5Zp4YbeqqTn1ZKd3iRT6Zod/7zACXnLFQJAausH" +
+        "1QrF8bUDC09lELrrzBLj6tyPbIPLOpTy5yM1nznIoYN7r2nL/T1oyJYS2ndBg/Kx" +
+        "j7la01AxA/KGJwHm8QJARDrE0ZcTJoUHR9+JWaogAqDZ1zjomZKc78mlmt4aZw4l" +
+        "TjMDpj90BGvdZmKvg9KQM7TeWVLTo5bzIsgOsxeRIw==";
+
+
     private static Base64.Encoder encoder = Base64.getEncoder();
     private static Base64.Decoder decoder = Base64.getDecoder();
 
@@ -54,17 +74,18 @@ public class RSA {
 
     public static void main(String[] args) throws Exception {
 
-//        RSAPublicKey rsaPublicKey = loadPublicKeyByStr(PUBLIC_KEY);
-//        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr(PRIVATE_KEY);
+        RSAPublicKey rsaPublicKey = loadPublicKeyByStr(PUBLIC_KEY_A);
+        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr(PRIVATE_KEY_A);
 
-        RSAPublicKey rsaPublicKey = loadPublicKeyByFile("D:\\pub_key.pen");
-        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByFile("D:\\pri_key.pen");
+//        RSAPublicKey rsaPublicKey = loadPublicKeyByFile("D:\\rsa_public_key.pem");
+//        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByFile("D:\\rsa_private_key.pem");
 
         byte[] hello = pri_key_encode(src, rsaPrivateKey);
 
         System.out.println(encoder.encodeToString(hello));
 
         String result = pub_key_decode(hello, rsaPublicKey);
+//        String result = pri_key_decode(decoder.decode("FOEt17uyYmFIrYnxsU1HigaEJxHflkl6p2uXiHWjDOhg4wY4xgCxiEgBk5SZJ+j8IkRT38h0B/Hk2NEyZdDbeEEgJ3w60xmROzKB72jj7xDwk5ceAJv/svfhTyY4IxoaKaVxuBKzGaOhH056gW55QRwR3+B14qWC0rLHL64OXHg="), rsaPrivateKey);
 
         System.out.println(result);
 
