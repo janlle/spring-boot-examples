@@ -1,18 +1,16 @@
 package com.andy.security.encrypt;
 
-import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.digests.SHA224Digest;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.security.MessageDigest;
-import java.util.Scanner;
 
 /**
- * 消息摘要算法--SHA
+ * <p>消息摘要算法--SHA
  *
  * @author: lyon
- * @since: 2018-07-01 14:10
+ * @since: 2018-07-01
  **/
 public class SHA {
 

@@ -4,9 +4,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.Security;
-import java.util.Scanner;
 
 /**
  * 消息摘要算法--MD
@@ -17,7 +15,7 @@ import java.util.Scanner;
  * 4.将byte[] 转换为找度为32位的16进制字符串
  *
  * @author: lyon
- * @since: 2018-07-01 14:36
+ * @since: 2018-07-01
  **/
 public class MD {
 
@@ -37,11 +35,11 @@ public class MD {
     }
 
     /**
-     * @author: lyon
-     * @since: 2018-07-01 14:52
-     * @params: [content]
-     * @return: java.lang.String
-     **/
+     * MD2加密
+     *
+     * @param content
+     * @return
+     */
     public static String MD2(String content) {
         StringBuffer sb = new StringBuffer();
         try {
@@ -58,7 +56,12 @@ public class MD {
     }
 
 
-    //Bouncy Castle实现MD4加密
+    /**
+     * Bouncy Castle实现MD4加密
+     *
+     * @param content
+     * @return
+     */
     public static String MD4(String content) {
         String result = null;
         //通过这种方式给JDK动态添加一个provider,就可以通过这种方式获得JDK本身不支持的MD4了
@@ -76,13 +79,12 @@ public class MD {
 
 
     /**
-     * @author: lyon
-     * @since: 2018-07-01 14:02
-     * @params: [input]
-     * @return: java.lang.String
-     **/
+     * MD5加密
+     *
+     * @param content
+     * @return
+     */
     public static String MD5(String content) {
-        //声明StringBuffer对象来存放最后的值
         StringBuffer sb = new StringBuffer();
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
