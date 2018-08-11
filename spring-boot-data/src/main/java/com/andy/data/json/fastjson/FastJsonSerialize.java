@@ -5,8 +5,6 @@ import com.alibaba.fastjson.TypeReference;
 import com.andy.data.entity.User;
 import com.andy.data.json.EntityFactory;
 
-
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,15 +17,16 @@ public class FastJsonSerialize {
         long start = System.currentTimeMillis();
 
         // 将Java对象序列化为Json字符串
-        //String json = JSON.toJSONString(user);
-        //System.out.println(json);
+        String userJson = JSON.toJSONString(EntityFactory.getUsers(1).get(0));
+        System.out.println(userJson);
 
         // 将Json字符串反序列化为Java对象
-        //User user = JSON.parseObject(json, User.class);
-        //System.out.println(user);
+        User user = JSON.parseObject(userJson, User.class);
+        System.out.println(user);
 
-        String json = JSON.toJSONString(EntityFactory.getUsers(1000));
-        List<User> userList = JSON.parseObject(json, new TypeReference<List<User>>() {
+
+        String listJson = JSON.toJSONString(EntityFactory.getUsers(1000));
+        List<User> userList = JSON.parseObject(listJson, new TypeReference<List<User>>() {
         }.getType());
 
         long end = System.currentTimeMillis();
