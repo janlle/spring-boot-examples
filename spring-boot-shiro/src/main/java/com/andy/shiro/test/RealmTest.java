@@ -40,8 +40,6 @@ public class RealmTest {
         subject.checkRoles("admin", "user");
 //        subject.logout();
 //        System.out.println("is login:" + subject.isAuthenticated());
-
-
     }
 
 
