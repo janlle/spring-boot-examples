@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author: lyon
- * @since: 2018-05-11 23:17
+ * @since: 2018-05-11
  **/
 public class GsonSeria {
 
