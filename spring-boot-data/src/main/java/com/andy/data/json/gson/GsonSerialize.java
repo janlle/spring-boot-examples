@@ -13,7 +13,7 @@ import java.util.List;
  * @author: lyon
  * @since: 2018-05-11
  **/
-public class GsonSeria {
+public class GsonSerialize {
 
     private static User user = new User(1, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
 
