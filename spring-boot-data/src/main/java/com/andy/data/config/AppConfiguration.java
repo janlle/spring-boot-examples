@@ -17,12 +17,22 @@ import java.util.Date;
 @Configuration
 public class AppConfiguration {
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
     @Bean
     public Converter<String, Date> timestampConvert() {
-        Converter<String, Date> timestampConvert = (String source) -> new Date(new Long(source));
-        return timestampConvert;
+//        Converter<String, Date> timestampConvert = (String source) -> {
+//            return new Date(Long.parseLong(source));
+//        };
+        Converter<String, Date> converter = new Converter<String, Date>() {
+            @Override
+            public Date convert(String source) {
+                return new Date(Long.parseLong(source));
+            }
+        };
+        return converter;
     }
-
 
     @Bean
     public KeyGenerator keyGenerator() {
@@ -83,8 +93,7 @@ public class AppConfiguration {
 //    }
 
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+
 
     /**
      * 实例化 HashOperations 对象,可以使用 Hash 类型操作

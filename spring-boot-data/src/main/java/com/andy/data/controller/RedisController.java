@@ -1,6 +1,7 @@
 package com.andy.data.controller;
 
-import com.andy.data.service.RedisService;
+import com.andy.data.redis.RedisCacheService;
+import com.andy.data.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,9 @@ public class RedisController {
     @Autowired
     private RedisService redisService;
 
+    @Autowired
+    private RedisCacheService redisCacheService;
+
     @GetMapping("/batchInsert")
     public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = redisService.batchInsert(count);
@@ -37,5 +41,19 @@ public class RedisController {
         long time = redisService.setValue(count);
         return "set" + count + "条数据一共用了:" + time + "豪秒！";
     }
+
+
+    @GetMapping("/insert")
+    public String insert(@RequestParam(required = false, defaultValue = "1") Integer count) {
+        long time = redisService.insert(count);
+        return "set" + count + "条数据一共用了:" + time + "豪秒！";
+    }
+
+
+    @GetMapping("/catch")
+    public void userCatch() {
+        redisCacheService.userCatch();
+    }
+
 
 }
