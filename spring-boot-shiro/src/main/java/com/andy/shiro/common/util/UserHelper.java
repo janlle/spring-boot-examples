@@ -1,5 +1,7 @@
 package com.andy.shiro.common.util;
 
+import com.andy.shiro.config.Token;
+import com.andy.shiro.entity.rbac.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -34,5 +36,16 @@ public class UserHelper {
         }
         return true;
     }
+
+    public static void login(Token token) {
+        try {
+            subject.login(token);
+            User user = (User) subject.getPrincipal();
+            log.info("user:{}", user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
