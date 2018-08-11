@@ -79,7 +79,7 @@ public class RedisService {
         log.info("insert:{}", count);
         long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
-            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUser(), 3, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
         }
         long end = System.currentTimeMillis();
         return (end - start);

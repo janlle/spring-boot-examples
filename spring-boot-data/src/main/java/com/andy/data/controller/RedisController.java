@@ -51,9 +51,8 @@ public class RedisController {
 
 
     @GetMapping("/catch")
-    public void userCatch() {
-        redisCacheService.userCatch();
+    public String userCatch() {
+        return redisCacheService.userCatch();
     }
-
 
 }
