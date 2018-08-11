@@ -1,12 +1,11 @@
 package com.andy.data.serializ;
 
 import com.andy.data.entity.User;
-import com.andy.data.service.JsonService;
-import com.andy.data.service.RedisService;
+import com.andy.data.json.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.util.Date;
+import java.util.List;
 
 /**
  * <p> java serializable 序列化对象到磁盘，反序列化磁盘文件
@@ -17,20 +16,18 @@ import java.util.Date;
 @Slf4j
 public class SerializableEntity {
 
-    private static User user = new User(1, "james" + 1, "admin" + 1, new Date(), 10000 + 0.1, new Date(), false);
-
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
         writeObject();
-//        User user = (User)readObject();
-//        List<User> users = (List<User>)readObject();
-//        log.info("user:{}", users.size());
+        User user = (User) readObject();
+        List<User> users = (List<User>) readObject();
+        log.info("user:{}", users.size());
 
-//        for (int i = 0; i < 10000; i++) {
-//            if (i % 1000 == 0) {
-//                System.out.println(users.get(i));
-//            }
-//        }
+        for (int i = 0; i < 10000; i++) {
+            if (i % 1000 == 0) {
+                System.out.println(users.get(i));
+            }
+        }
         long end = System.currentTimeMillis();
         System.out.println("一共用了:" + (end - start) + "豪秒！");
     }
@@ -40,7 +37,7 @@ public class SerializableEntity {
         File obj = new File("D:\\tmp\\user.obj");
         OutputStream outputStream = new FileOutputStream(obj);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-        objectOutputStream.writeObject(JsonService.getUsers());
+        objectOutputStream.writeObject(EntityFactory.getUsers(1000));
         objectOutputStream.close();
     }
 

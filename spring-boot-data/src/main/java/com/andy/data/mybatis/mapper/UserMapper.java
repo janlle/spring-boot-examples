@@ -17,20 +17,21 @@ public interface UserMapper {
 
     int insertSelective(User user);
 
+    int insertList(@Param("users") List<User> users);
+
     @Delete("delete from t_user where userId = #{userId}")
     int deleteById(@Param("userId") long userId);
+
 
     int updateByIdSelective(User user);
 
     int updateById(User user);
 
-    @Select("select * from t_user where id = #{userId}")
-    User selectById(@Param("userId") long userId);
 
-    int insertList(@Param("users") List<User> users);
+    @Select("select * from t_user where id = #{userId}")
+    User findByUserId(@Param("userId") long userId);
 
     @Select("select * from t_user")
-    List<User> selectAll();
+    List<User> findAll();
 
-    User findByUserId(@Param("userId") long userId);
 }

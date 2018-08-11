@@ -15,23 +15,26 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(long userId, String account, String password, Date birthday, Double salary, Date createTime, Boolean deleted) {
+    public User(String account, String password, String email, Integer sex, Date createTime, Boolean deleted) {
+        this.account = account;
+        this.password = password;
+        this.email = email;
+        this.sex = sex;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
+
+    public User(Long userId, String account, String password, String email, Integer sex, Date createTime, Boolean deleted) {
         this.userId = userId;
         this.account = account;
         this.password = password;
-        this.birthday = birthday;
-        this.salary = salary;
+        this.email = email;
+        this.sex = sex;
         this.createTime = createTime;
         this.deleted = deleted;
     }
-    public User(String account, String password, Date birthday, Double salary, Date createTime, Boolean deleted) {
-        this.account = account;
-        this.password = password;
-        this.birthday = birthday;
-        this.salary = salary;
-        this.createTime = createTime;
-        this.deleted = deleted;
-    }
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,11 +46,11 @@ public class User implements Serializable {
     @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
     private String password;
 
-    @Column(columnDefinition = "datetime NOT NULL COMMENT '生日'")
-    private Date birthday;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '邮箱'")
+    private String email;
 
-    @Column(columnDefinition = "double NOT NULL COMMENT '工资'")
-    private Double salary;
+    @Column(columnDefinition = "int(11) NOT NULL COMMENT '工资'")
+    private Integer sex;
 
     @CreatedDate
     @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
