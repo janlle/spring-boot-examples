@@ -6,19 +6,15 @@
         <id column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="account" property="account" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
-        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="salary" property="salary" jdbcType="DOUBLE"/>
-        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
     </resultMap>
 
-    <sql id="Base_Column">
-        user_id, account, create_time, deleted, password, age, email, sex
+    <sql id="base_column">
+        user_id, account, create_time, deleted, password, age, email, age
     </sql>
-
-    <!--<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
-    <!--select <include refid="Base_Column" /> from t_user where id = #{id,jdbcType=BIGINT}-->
-    <!--</select>-->
 
     <insert id="insertSelective" parameterType="User">
         insert into t_user
@@ -29,11 +25,17 @@
             <if test="username != null">
                 username,
             </if>
-            <if test="salary != null">
-                salary,
+            <if test="age != null">
+                age,
             </if>
-            <if test="birthday != null">
-                birthday,
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="deleted != null">
+                deleted,
             </if>
         </trim>
         VALUES
@@ -44,11 +46,17 @@
             <if test="username != null">
                 username = #{username,jdbcType=VARCHAR},
             </if>
-            <if test="salary != null">
-                salary = #{salary,jdbcType=DOUBLE},
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
             </if>
-            <if test="birthday != null">
-                birthday = #{birthday,jdbcType=TIMESTAMP},
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="deleted != null">
+                deleted= #{deleted,jdbcType=BIT}
             </if>
         </trim>
     </insert>
@@ -63,11 +71,17 @@
             <if test="username != null">
                 username = #{username,jdbcType=VARCHAR},
             </if>
-            <if test="salary != null">
-                salary = #{salary,jdbcType=DOUBLE},
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
             </if>
-            <if test="birthday != null">
-                birthday = #{birthday,jdbcType=TIMESTAMP},
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="deleted != null">
+                deleted= #{deleted,jdbcType=BIT}
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
@@ -79,13 +93,16 @@
         set
             email    = #{email,jdbcType=VARCHAR},
             username = #{username,jdbcType=VARCHAR},
-            salary   = #{salary,jdbcType=DOUBLE},
-            birthday = #{birthday,jdbcType=TIMESTAMP},
-            where id = #{id,jdbcType=BIGINT}
+            age   = #{age,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            account   = #{account,jdbcType=VARCHAR},
+            deleted = #{deleted,jdbcType=BIT}
+        where
+          user_id = #{userId,jdbcType=BIGINT}
     </update>
 
     <insert id="insertList" parameterType="java.util.List">
-        INSERT INTO t_user (account, password, salary, create_time, deleted, birthday) VALUES
+        INSERT INTO t_user (account, create_time, deleted, password, email, age) VALUES
         <foreach collection="users" item="user" index="inx" separator=",">
             <trim prefix="(" suffixOverrides="," suffix=")">
                 <choose>
@@ -93,25 +110,7 @@
                         #{user.account,jdbcType=VARCHAR},
                     </when>
                     <otherwise>
-                        'user@163.com-def',
-                    </otherwise>
-                </choose>
-
-                <choose>
-                    <when test="user.password != null">
-                        #{user.password,jdbcType=VARCHAR},
-                    </when>
-                    <otherwise>
-                        'password-def',
-                    </otherwise>
-                </choose>
-
-                <choose>
-                    <when test="user.salary != null">
-                        #{user.salary,jdbcType=DOUBLE},
-                    </when>
-                    <otherwise>
-                        salary = 0.00,
+                        'defaultAccount',
                     </otherwise>
                 </choose>
 
@@ -120,25 +119,43 @@
                         #{user.createTime,jdbcType=TIMESTAMP},
                     </when>
                     <otherwise>
-                        '2001-1-1',
+                        '2018-6-9',
                     </otherwise>
                 </choose>
 
                 <choose>
                     <when test="user.deleted != null">
-                        #{user.deleted,jdbcType=BOOLEAN},
+                        #{user.deleted,jdbcType=BIT},
                     </when>
                     <otherwise>
-                        0,
+                       0,
                     </otherwise>
                 </choose>
 
                 <choose>
-                    <when test="user.birthday != null">
-                        #{user.birthday,jdbcType=TIMESTAMP}
+                    <when test="user.password != null">
+                        #{user.password,jdbcType=VARCHAR},
                     </when>
                     <otherwise>
-                        '2001-1-1'
+                        'defPassword',
+                    </otherwise>
+                </choose>
+
+                <choose>
+                    <when test="user.email != null">
+                        #{user.email,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        'default@gmail.com',
+                    </otherwise>
+                </choose>
+
+                <choose>
+                    <when test="user.age != null">
+                        #{user.age,jdbcType=INTEGER}
+                    </when>
+                    <otherwise>
+                        0
                     </otherwise>
                 </choose>
 
