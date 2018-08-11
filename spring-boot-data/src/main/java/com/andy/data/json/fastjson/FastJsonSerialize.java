@@ -4,16 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.andy.data.entity.User;
 import com.andy.data.service.JsonService;
-import com.andy.data.service.RedisService;
 
 import java.util.Date;
 import java.util.List;
 
 /**
  * @author: lyon
- * @since: 2018-05-11 22:56
+ * @since: 2018-05-11
  **/
-public class FastjsonSeria {
+public class FastJsonSerialize {
 
     private static User user = new User(1, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
 
@@ -29,7 +28,8 @@ public class FastjsonSeria {
         //System.out.println(user);
 
         String json = JSON.toJSONString(JsonService.getUsers());
-        List<User> userList = JSON.parseObject(json, new TypeReference<List<User>>(){}.getType());
+        List<User> userList = JSON.parseObject(json, new TypeReference<List<User>>() {
+        }.getType());
 
         long end = System.currentTimeMillis();
         System.out.println("一共用了:" + (end - start) + "豪秒！");

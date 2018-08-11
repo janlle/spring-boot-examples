@@ -1,37 +1,40 @@
 package com.andy.data.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.redis.core.*;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * @author: lyon
- * @since: 2018-07-08 16:09
+ * @since: 2018-07-08
  **/
-//开启注解
-@EnableCaching
 @Configuration
 public class AppConfiguration {
 
     @Bean
-    public KeyGenerator KeyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(target.getClass().getName());
-                sb.append(method.getName());
-                for (Object obj : params) {
-                    sb.append(obj.toString());
-                }
-                return sb.toString();
+    public Converter<String, Date> timestampConvert() {
+        Converter<String, Date> timestampConvert = (String source) -> new Date(new Long(source));
+        return timestampConvert;
+    }
+
+
+    @Bean
+    public KeyGenerator keyGenerator() {
+        KeyGenerator keyGenerator = (Object target, Method method, Object... params) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append(target.getClass().getName()).append(method.getName());
+            for (Object obj : params) {
+                sb.append(obj.toString());
             }
+            return sb.toString();
         };
+        return keyGenerator;
     }
 
    /* @Bean
