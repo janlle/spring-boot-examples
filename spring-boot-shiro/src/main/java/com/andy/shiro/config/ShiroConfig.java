@@ -11,19 +11,20 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.Filter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: lyon
- * @since: 2018-04-21 17:22
+ * @since: 2018-04-21
+ * @see org.apache.shiro.web.filter.mgt.DefaultFilter
  **/
 @Configuration
 public class ShiroConfig {
@@ -31,7 +32,7 @@ public class ShiroConfig {
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty, TokenFilter tokenFilter,CoreFilter coreFilter) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty, TokenFilter tokenFilter, CoreFilter coreFilter) {
         logger.info("init shiro filter");
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
@@ -100,6 +101,11 @@ public class ShiroConfig {
         return authRealm;
     }
 
+    /**
+     * 密码匹配器
+     *
+     * @return
+     */
     @Bean
     public CredentialMatcher credentialMatcher() {
         return new CredentialMatcher();

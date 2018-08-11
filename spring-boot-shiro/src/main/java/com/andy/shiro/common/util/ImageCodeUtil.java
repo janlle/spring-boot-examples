@@ -1,4 +1,4 @@
-package com.andy.shiro.config;
+package com.andy.shiro.common.util;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  * @author: lyon
- * @since: 2018-04-07 09:19
+ * @since: 2018-04-07
  **/
 public class ImageCodeUtil {
 

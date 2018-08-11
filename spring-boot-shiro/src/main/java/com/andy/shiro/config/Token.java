@@ -1,8 +1,8 @@
 package com.andy.shiro.config;
 
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.AuthenticationToken;
 
-public class Token extends UsernamePasswordToken {
+public class Token implements AuthenticationToken {
 
     private String token;
 
