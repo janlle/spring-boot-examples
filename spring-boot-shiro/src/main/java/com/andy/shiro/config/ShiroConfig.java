@@ -51,7 +51,7 @@ public class ShiroConfig {
         filters.put("auth", coreFilter);
         shiroFilter.setFilters(filters);
 
-        shiroFilter.setLoginUrl("/api/login");
+//        shiroFilter.setLoginUrl("/api/login");
 
         logger.info("shiro filter init success");
         return shiroFilter;

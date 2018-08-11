@@ -4,7 +4,6 @@ import com.andy.shiro.common.util.ImageCodeUtil;
 import com.andy.shiro.config.Token;
 import com.andy.shiro.entity.rbac.User;
 import com.andy.shiro.service.UserService;
-import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
@@ -14,23 +13,17 @@ import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 
 @Slf4j
 @RestController
 @RequestMapping("")
 public class UserController {
-
-    @Autowired
-    private DefaultKaptcha defaultKaptcha;
 
     @Autowired
     private UserService userService;
@@ -96,10 +89,14 @@ public class UserController {
 //        return "login";
 //    }
 
+    @Autowired
+    private SecurityManager securityManager;
+
     //    @ResponseStatus(HttpStatus.GONE)
     @PostMapping(value = "/login")
     public void loginUser(@RequestParam String token, HttpSession session) {
         Token loginToken = new Token(token);
+        SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(loginToken);
@@ -132,31 +129,6 @@ public class UserController {
     @RequestMapping("/user")
     public String reqUser() {
         return "user请求";
-    }
-
-
-    @RequestMapping("/imageCode")
-    public void imageCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        byte[] captchaChallengeAsJpeg;
-        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
-        try {
-            String code = defaultKaptcha.createText();
-            request.getSession().setAttribute("imageCode", code);
-            BufferedImage challenge = defaultKaptcha.createImage(code);
-            ImageIO.write(challenge, "jpg", jpegOutputStream);
-        } catch (IllegalArgumentException e) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
-        response.setHeader("Cache-Control", "no-store");
-        response.setHeader("Pragma", "no-cache");
-        response.setDateHeader("Expires", 0);
-        response.setContentType("image/jpeg");
-        ServletOutputStream outputStream = response.getOutputStream();
-        outputStream.write(captchaChallengeAsJpeg);
-        outputStream.flush();
-        outputStream.close();
     }
 
     @RequestMapping("/image")
