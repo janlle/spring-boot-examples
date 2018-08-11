@@ -1,22 +1,18 @@
 package com.andy.shiro.web;
 
-import com.andy.shiro.config.ImageCodeUtil;
+import com.andy.shiro.common.util.ImageCodeUtil;
+import com.andy.shiro.config.Token;
 import com.andy.shiro.entity.rbac.User;
 import com.andy.shiro.service.UserService;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +25,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
 @Slf4j
-@Controller
-@RequestMapping
+@RestController
+@RequestMapping("")
 public class UserController {
 
     @Autowired
@@ -51,8 +47,8 @@ public class UserController {
      */
 
     @RequestMapping("/user/list")//符合user:view或user:add权限要求即可
-    @RequiresPermissions(value={"user:add","user:select"},logical= Logical.OR)
-    public String user(){
+    @RequiresPermissions(value = {"user:add", "user:select"}, logical = Logical.OR)
+    public String user() {
         return "user";
     }
 
@@ -60,8 +56,8 @@ public class UserController {
      * 添加用户
      */
     @RequestMapping("/user/add")//符合user:view和user:add权限要求
-    @RequiresPermissions(value={"user:select","user:add"},logical= Logical.AND)
-    public String userAdd(){
+    @RequiresPermissions(value = {"user:select", "user:add"}, logical = Logical.AND)
+    public String userAdd() {
         return "userAdd";
     }
 
@@ -70,7 +66,7 @@ public class UserController {
      */
     @RequestMapping("/user/delete")
     @RequiresPermissions("user:delete")
-    public String userDel(){
+    public String userDel() {
         return "userDel";
     }
 
@@ -79,42 +75,39 @@ public class UserController {
      */
     @RequestMapping("/user/update")
     @RequiresPermissions("user:update")
-    public String userUpdate(){
+    public String userUpdate() {
         return "userUpdate";
     }
 
     @ResponseBody
     @RequestMapping("/admin")
-    public String admin(){
+    public String admin() {
         return "home";
     }
 
     @RequestMapping("/index")
-    public String index(ModelMap modelMap){
+    public String index(ModelMap modelMap) {
         return "index";
     }
     //登录页(shiro配置需要两个/login 接口,一个是get用来获取登陆页面,一个用post用于登录,这是一个坑)
-    @GetMapping("/login")
-    public String login() {
-        log.info("跳转到login页面控制器！");
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String login() {
+//        log.info("跳转到login页面控制器！");
+//        return "login";
+//    }
 
-//    @ResponseStatus(HttpStatus.GONE)
+    //    @ResponseStatus(HttpStatus.GONE)
     @PostMapping(value = "/login")
-    public String loginUser(String username, String password, HttpSession session, ModelMap modelMap){
-        log.info("用户的登录的控制器！");
-        UsernamePasswordToken loginToken = new UsernamePasswordToken(username, password);
+    public void loginUser(@RequestParam String token, HttpSession session) {
+        Token loginToken = new Token(token);
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(loginToken);
             User user = (User) subject.getPrincipal();
             log.info("user:{}", user);
             session.setAttribute("user", user);
-            modelMap.put("user", user);
-            return "index";
         } catch (Exception e) {
-            return "login";
+            e.printStackTrace();
         }
     }
 
@@ -143,7 +136,7 @@ public class UserController {
 
 
     @RequestMapping("/imageCode")
-    public void imageCode(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public void imageCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
         byte[] captchaChallengeAsJpeg;
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
         try {
@@ -167,7 +160,7 @@ public class UserController {
     }
 
     @RequestMapping("/image")
-    public void validCode(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+    public void validCode(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
         ImageCodeUtil.generate(request, response, session);
         String code = (String) session.getAttribute("imageCode");
         log.info("imageCode:{}", code);
