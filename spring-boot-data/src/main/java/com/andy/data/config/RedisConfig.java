@@ -1,17 +1,7 @@
 package com.andy.data.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.listener.PatternTopic;
-import org.springframework.data.redis.listener.RedisMessageListenerContainer;
-import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
-
-import java.util.concurrent.CountDownLatch;
 
 /**
  * <p> redis配置
@@ -20,7 +10,6 @@ import java.util.concurrent.CountDownLatch;
  * @since: 2018-07-19
  **/
 @Configuration
-@EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
 //    @Bean

@@ -14,8 +14,6 @@ import java.util.List;
  **/
 public class FastJsonSerialize {
 
-    private static User user = new User(1, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
-
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
 
