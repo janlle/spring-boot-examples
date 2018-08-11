@@ -9,10 +9,10 @@ import java.io.*;
 import java.util.Date;
 
 /**
- * java serializable 序列化对象到磁盘，反序列化磁盘文件
+ * <p> java serializable 序列化对象到磁盘，反序列化磁盘文件
  *
  * @author: lyon
- * @since: 2018-05-11 22:32
+ * @since: 2018-05-11
  **/
 @Slf4j
 public class SerializableEntity {

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author: lyon
- * @since: 2018-05-11 18:47
+ * @since: 2018-05-11
  **/
 public interface UserRepository extends JpaRepository<User, Long> {
 

@@ -22,8 +22,10 @@ spring:
       ddl-auto: update
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
     show-sql: true
     open-in-view: false
+
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
