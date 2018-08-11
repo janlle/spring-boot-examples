@@ -13,25 +13,12 @@
     </resultMap>
 
     <sql id="Base_Column">
-        user_id, account, password, salary, birthday, create_time, deleted
+        user_id, account, create_time, deleted, password, age, email, sex
     </sql>
 
     <!--<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >-->
     <!--select <include refid="Base_Column" /> from t_user where id = #{id,jdbcType=BIGINT}-->
     <!--</select>-->
-
-    <insert id="insert" parameterType="User">
-        insert into t_user (account, password, salary, birthday, create_time, deleted)
-        values (
-            #{account,jdbcType=VARCHAR},
-            #{password,jdbcType=VARCHAR},
-            #{salary,jdbcType=DOUBLE},
-            #{birthday,jdbcType=TIMESTAMP},
-            #{createTime,jdbcType=TIMESTAMP},
-            #{deleted,jdbcType=BOOLEAN}
-        )
-    </insert>
-
 
     <insert id="insertSelective" parameterType="User">
         insert into t_user
@@ -65,13 +52,6 @@
             </if>
         </trim>
     </insert>
-
-
-    <select id="findByUserId" parameterType="java.lang.Long" resultType="com.andy.data.entity.User">
-        select *
-        from tb_user
-        where id = #{userId}
-    </select>
 
 
     <update id="updateByIdSelective" parameterType="User">

@@ -5,7 +5,6 @@ import com.andy.data.json.EntityFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,19 +14,21 @@ import java.util.List;
 public class JacksonSerialize {
 
     public static void main(String[] args) throws Exception {
-        long start = System.currentTimeMillis();
-
         ObjectMapper mapper = new ObjectMapper();
 
-        //String json = mapper.writeValueAsString(user);
-        //System.out.println(json);
+        long start = System.currentTimeMillis();
 
-        //User user = mapper.readValue(json, User.class);
-        //System.out.println(user);
+        // simple pojo
+        String userJson = mapper.writeValueAsString(EntityFactory.getUsers(1).get(0));
+        System.out.println(userJson);
+
+        User user = mapper.readValue(userJson, User.class);
+        System.out.println(user);
 
 
-        String json = mapper.writeValueAsString(EntityFactory.getUsers(1000));
-        List<User> users = mapper.readValue(json, new TypeReference<List<User>>() {
+        // list
+        String listJson = mapper.writeValueAsString(EntityFactory.getUsers(1000));
+        List<User> users = mapper.readValue(listJson, new TypeReference<List<User>>() {
         });
 
         long end = System.currentTimeMillis();
