@@ -5,7 +5,6 @@ import com.andy.data.json.EntityFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,18 +17,17 @@ public class GsonSerialize {
         long start = System.currentTimeMillis();
 
         Gson gson = new Gson();
-        // 将Java对象序列化为Json字符串
-        //String json = gson.toJson(user);
-        //System.out.println(json);
+
+        // serialize simple pojo
+        String userJson = gson.toJson(EntityFactory.getUsers(1).get(0));
+        System.out.println(userJson);
+
+        User user = gson.fromJson(userJson, User.class);
+        System.out.println(user);
 
 
-        // 将Json字符串反序列化为Java对象
-        //gson.fromJson(json, User.class);
-        //System.out.println(user);
-
-
-        String json = gson.toJson(EntityFactory.getUsers(1000));
-        List<User> users = gson.fromJson(json, new TypeToken<List<User>>() {
+        String listJson = gson.toJson(EntityFactory.getUsers(1000));
+        List<User> users = gson.fromJson(listJson, new TypeToken<List<User>>() {
         }.getType());
 
         long end = System.currentTimeMillis();

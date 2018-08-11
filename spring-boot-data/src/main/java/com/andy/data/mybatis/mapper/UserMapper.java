@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-//    @Insert("insert into t_user(birthday,email,password,salary,token,username) values(#{birthday},#{email},#{password},#{salary},#{token},#{username})")
+    @Insert("insert into t_user(`user_id`, `account`, `create_time`, `deleted`, `password`, `age`, `email`, `sex`) values(#{userId},#{account},#{createTime},#{deleted},#{password},#{age},#{email}，#{sex})")
     int insert(User user);
 
     int insertSelective(User user);
@@ -20,7 +20,7 @@ public interface UserMapper {
     int insertList(@Param("users") List<User> users);
 
     @Delete("delete from t_user where userId = #{userId}")
-    int deleteById(@Param("userId") long userId);
+    int deleteById(@Param("userId") Long userId);
 
 
     int updateByIdSelective(User user);
@@ -29,7 +29,7 @@ public interface UserMapper {
 
 
     @Select("select * from t_user where id = #{userId}")
-    User findByUserId(@Param("userId") long userId);
+    User findByUserId(@Param("userId") Long userId);
 
     @Select("select * from t_user")
     List<User> findAll();
