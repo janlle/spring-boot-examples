@@ -6,8 +6,10 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 
 /**
+ * <p>匹配器</p>
+ *
  * @author: lyon
- * @since: 2018-04-21 17:18
+ * @since: 2018-04-21
  **/
 public class CredentialMatcher extends SimpleCredentialsMatcher {
 
@@ -15,7 +17,7 @@ public class CredentialMatcher extends SimpleCredentialsMatcher {
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         String password = new String(usernamePasswordToken.getPassword());
-        String dbPassword = (String)info.getCredentials();
+        String dbPassword = (String) info.getCredentials();
         return this.equals(password, dbPassword);
     }
 
