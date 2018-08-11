@@ -3,7 +3,8 @@ package com.andy.data.json.fastjson;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.andy.data.entity.User;
-import com.andy.data.service.JsonService;
+import com.andy.data.json.EntityFactory;
+
 
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,7 @@ public class FastJsonSerialize {
         //User user = JSON.parseObject(json, User.class);
         //System.out.println(user);
 
-        String json = JSON.toJSONString(JsonService.getUsers());
+        String json = JSON.toJSONString(EntityFactory.getUsers(1000));
         List<User> userList = JSON.parseObject(json, new TypeReference<List<User>>() {
         }.getType());
 

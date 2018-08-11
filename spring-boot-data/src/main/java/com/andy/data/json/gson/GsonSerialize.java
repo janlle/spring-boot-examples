@@ -1,8 +1,7 @@
 package com.andy.data.json.gson;
 
 import com.andy.data.entity.User;
-import com.andy.data.service.JsonService;
-import com.andy.data.service.RedisService;
+import com.andy.data.json.EntityFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,9 +13,6 @@ import java.util.List;
  * @since: 2018-05-11
  **/
 public class GsonSerialize {
-
-    private static User user = new User(1, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
-
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
@@ -32,9 +28,9 @@ public class GsonSerialize {
         //System.out.println(user);
 
 
-
-        String json = gson.toJson(JsonService.getUsers());
-        List<User> users = gson.fromJson(json, new TypeToken<List<User>>(){}.getType());
+        String json = gson.toJson(EntityFactory.getUsers(1000));
+        List<User> users = gson.fromJson(json, new TypeToken<List<User>>() {
+        }.getType());
 
         long end = System.currentTimeMillis();
         System.out.println("一共用了:" + (end - start) + "豪秒！");

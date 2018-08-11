@@ -2,19 +2,16 @@ package com.andy.data.controller;
 
 import com.andy.data.entity.User;
 import com.andy.data.mybatis.mapper.UserMapper;
-import com.andy.data.service.JpaService;
 import com.andy.data.service.MyBatisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author: lyon
- * @since: 2018-05-11 19:30
+ * @since: 2018-05-11
  **/
 @Slf4j
 @RestController
@@ -46,14 +43,14 @@ public class MybatisController {
     @GetMapping("/list")
     public String selectList() {
         long start = System.currentTimeMillis();
-        List<User> result = userMapper.selectAll();
+        List<User> result = userMapper.findAll();
         long end = System.currentTimeMillis();
-        return "selectList查询了:"+result.size()+"条数据一共用了:" + (end - start) + "豪秒!";
+        return "selectList查询了:" + result.size() + "条数据一共用了:" + (end - start) + "豪秒!";
     }
 
     @GetMapping("/user")
     public User selectById(Long id) {
-        return userMapper.selectById(id);
+        return userMapper.findByUserId(id);
     }
 
     @GetMapping("/batchInsert")

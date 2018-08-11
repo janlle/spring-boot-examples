@@ -2,6 +2,7 @@ package com.andy.data.service;
 
 import com.andy.data.entity.User;
 import com.andy.data.jpa.repository.UserRepository;
+import com.andy.data.json.EntityFactory;
 import com.andy.data.mybatis.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class MyBatisService {
     public long insertList(Integer count) {
         List<User> list = new ArrayList<>();
         for (long i = 0; i < count; i++) {
-            list.add(new User("james" + i, "james" + i, new Date(), 1000.0 + i, new Date(), false));
+            list.add(EntityFactory.getUsers(1).get(0));
         }
         long start = System.currentTimeMillis();
         userMapper.insertList(list);
@@ -41,7 +42,7 @@ public class MyBatisService {
     public long insertForeach(Integer count) {
         long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
-            userMapper.insert(new User("james" + i, "james" + i, new Date(), 1000.0 + i, new Date(), false));
+            userMapper.insert(EntityFactory.getUsers(1).get(0));
         }
         long end = System.currentTimeMillis();
         return (end - start);

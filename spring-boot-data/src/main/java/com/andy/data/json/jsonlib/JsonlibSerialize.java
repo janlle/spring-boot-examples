@@ -1,9 +1,9 @@
 package com.andy.data.json.jsonlib;
 
 import com.andy.data.entity.User;
-import com.andy.data.service.JsonService;
-import com.andy.data.service.RedisService;
+import com.andy.data.json.EntityFactory;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import java.util.Date;
 import java.util.List;
@@ -12,22 +12,20 @@ import java.util.List;
  * @author: lyon
  * @since: 2018-05-11 23:17
  **/
-public class JsonlibSeria {
-
-    private static User user = new User(1, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
+public class JsonlibSerialize {
 
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
 
-        //JSONObject json = JSONObject.fromObject(user);
-        //System.out.println(json.toString());
+//        JSONObject json = JSONObject.fromObject(EntityFactory.getUsers(1).get(0));
+//        System.out.println(json.toString());
+//
+//
+//        User user = (User)JSONObject.toBean(json, User.class);
+//        System.out.println(user);
 
 
-        //User user = (User)JSONObject.toBean(json, User.class);
-        //System.out.println(user);
-
-
-        JSONArray json = JSONArray.fromObject(JsonService.getUsers());
+        JSONArray json = JSONArray.fromObject(EntityFactory.getUsers(10));
 
         List<User> users = JSONArray.toList(json, User.class);
 
