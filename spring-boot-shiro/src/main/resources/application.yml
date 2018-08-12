@@ -4,14 +4,14 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: HTML5
-    encoding: UTF-8
-    servlet:
-      content-type: text/html
+#  thymeleaf:
+#    cache: false
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    mode: HTML5
+#    encoding: UTF-8
+#    servlet:
+#      content-type: text/html
   jpa:
     hibernate:
       ddl-auto: update
