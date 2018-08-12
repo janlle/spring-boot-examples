@@ -20,3 +20,7 @@ Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来�
 
 3.spring boot 要解决的问题, 精简配置是一方面, 另外一方面是如何方便的让spring生态圈和其他工具链整合(比如redis, email, elasticsearch)
 
+```
+
+
+```
