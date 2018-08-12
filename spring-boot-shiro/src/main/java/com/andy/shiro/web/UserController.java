@@ -1,11 +1,12 @@
 package com.andy.shiro.web;
 
 import com.andy.shiro.common.util.ImageCodeUtil;
-import com.andy.shiro.config.Token;
+import com.andy.shiro.common.util.UserHelper;
 import com.andy.shiro.entity.rbac.User;
 import com.andy.shiro.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,8 +14,10 @@ import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
-import org.apache.shiro.mgt.SecurityManager;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +31,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ResponseBody
     @RequestMapping("/user/one")
     public User getUser(@RequestParam String account) {
         return userService.getByAccount(account);
@@ -72,7 +74,6 @@ public class UserController {
         return "userUpdate";
     }
 
-    @ResponseBody
     @RequestMapping("/admin")
     public String admin() {
         return "home";
@@ -89,14 +90,11 @@ public class UserController {
 //        return "login";
 //    }
 
-    @Autowired
-    private SecurityManager securityManager;
 
     //    @ResponseStatus(HttpStatus.GONE)
-    @PostMapping(value = "/login")
+    @GetMapping(value = "/login")
     public void loginUser(@RequestParam String token, HttpSession session) {
-        Token loginToken = new Token(token);
-        SecurityUtils.setSecurityManager(securityManager);
+        UsernamePasswordToken loginToken = new UsernamePasswordToken("jack", "jack");
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(loginToken);
@@ -117,18 +115,17 @@ public class UserController {
         return "login";
     }
 
-    @ResponseBody
     @RequiresUser
     @RequestMapping("/guest")
     public String guest() {
         return "guest请求";
     }
 
-    @ResponseBody
-    @RequiresGuest
+//    @RequiresGuest
     @RequestMapping("/user")
-    public String reqUser() {
-        return "user请求";
+    public void reqUser() {
+        Integer user = UserHelper.userId();
+        System.out.println(user);
     }
 
     @RequestMapping("/image")

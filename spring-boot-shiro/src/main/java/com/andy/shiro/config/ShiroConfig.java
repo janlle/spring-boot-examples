@@ -32,24 +32,25 @@ public class ShiroConfig {
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty, TokenFilter tokenFilter, CoreFilter coreFilter) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty/*, TokenFilter tokenFilter, CoreFilter coreFilter*/) {
         logger.info("init shiro filter");
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
-        swaggerFilterChain(filterChainDefinitionMapping);
+        /*swaggerFilterChain(filterChainDefinitionMapping);
         this.setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
         this.setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
-        this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
+        this.setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());*/
 
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         shiroFilter.setSecurityManager(securityManager);
-        Map<String, Filter> filters = new HashMap();
+//        Map<String, Filter> filters = new HashMap();
 //        filters.put("core", new CoreFilter());
 //        filters.put("auth", new TokenFilter());
 
-        filters.put("core", tokenFilter);
-        filters.put("auth", coreFilter);
-        shiroFilter.setFilters(filters);
+//        filters.put("core", tokenFilter);
+//        filters.put("auth", coreFilter);
+//        shiroFilter.setFilters(filters);
 
 //        shiroFilter.setLoginUrl("/api/login");
 
@@ -57,7 +58,24 @@ public class ShiroConfig {
         return shiroFilter;
     }
 
-    private void setUrl(Map<String, String> filterChainDefinitionMapping, String filterName, List<String> urls) {
+    @Bean
+    public SecurityManager securityManager(AuthRealm authRealm) {
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+        manager.setRealm(authRealm);
+        return manager;
+    }
+
+    //将自己的验证方式加入容器
+    @Bean
+    public AuthRealm authRealm(/*CredentialMatcher credentialMatcher*/) {
+        AuthRealm authRealm = new AuthRealm();
+//        authRealm.setCredentialsMatcher(credentialMatcher);
+        return authRealm;
+    }
+
+
+
+    /*private void setUrl(Map<String, String> filterChainDefinitionMapping, String filterName, List<String> urls) {
         if (urls != null && urls.size() > 0) {
             Iterator var4 = urls.iterator();
             while (var4.hasNext()) {
@@ -75,43 +93,30 @@ public class ShiroConfig {
         filterMapping.put("/configuration/**", "anon");
         filterMapping.put("/webjars/**", "anon");
         filterMapping.put("/swagger**", "anon");
-    }
+    }*/
 
-    @Bean
+/*    @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
         //散列的次数，比如散列两次，相当于 md5(md5(""));
         hashedCredentialsMatcher.setHashIterations(2);
         return hashedCredentialsMatcher;
-    }
+    }*/
 
-    @Bean
-    public SecurityManager securityManager(AuthRealm authRealm) {
-        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(authRealm);
-        return manager;
-    }
 
-    //将自己的验证方式加入容器
-    @Bean
-    public AuthRealm authRealm(CredentialMatcher credentialMatcher) {
-        AuthRealm authRealm = new AuthRealm();
-        authRealm.setCredentialsMatcher(credentialMatcher);
-        return authRealm;
-    }
 
     /**
      * 密码匹配器
      *
      * @return
      */
-    @Bean
+    /*@Bean
     public CredentialMatcher credentialMatcher() {
         return new CredentialMatcher();
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
@@ -123,7 +128,7 @@ public class ShiroConfig {
         DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
         creator.setProxyTargetClass(true);
         return creator;
-    }
+    }*/
 
     // UnavailableSecurityManagerException
 //    @Bean
