@@ -18,7 +18,6 @@ import java.util.Set;
  * @since: 2018-04-19
  **/
 @Data
-@ApiModel("用户实体")
 public class User implements Serializable {
 
     private Long userId;
