@@ -17,6 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class RoleController {
 
+    /**
+     * 添加用户
+     */
+    @RequestMapping("/admin/add")//符合admin:view和admin:add权限要求
+    @RequiresRoles(value={"admin","manager"},logical=Logical.AND)
+    public String userInfoAdd(){
+        return "userAdd";
+    }
 
     /**
      * 查询用户
@@ -25,15 +33,6 @@ public class RoleController {
     @RequiresRoles(value={"leader","admin","manager"},logical=Logical.OR)
     public String user(){
         return "user";
-    }
-
-    /**
-     * 添加用户
-     */
-    @RequestMapping("/admin/add")//符合admin:view和admin:add权限要求
-    @RequiresRoles(value={"admin","manager"},logical=Logical.AND)
-    public String userInfoAdd(){
-        return "userAdd";
     }
 
     /**
