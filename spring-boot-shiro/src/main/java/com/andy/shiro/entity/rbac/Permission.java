@@ -18,7 +18,6 @@ import java.util.Date;
  * @since: 2018-04-19
  **/
 @Data
-@ApiModel("权限实体")
 public class Permission implements Serializable {
 
     private Long permissionId;
