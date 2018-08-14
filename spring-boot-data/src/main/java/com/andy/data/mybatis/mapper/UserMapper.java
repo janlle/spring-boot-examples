@@ -19,7 +19,7 @@ public interface UserMapper {
 
     int insertList(@Param("users") List<User> users);
 
-    @Delete("delete from t_user where userId = #{userId}")
+    @Delete("delete from t_user where user_id = #{userId}")
     int deleteById(@Param("userId") Long userId);
 
 
@@ -28,7 +28,7 @@ public interface UserMapper {
     int updateById(User user);
 
 
-    @Select("select * from t_user where id = #{userId}")
+    @Select("select * from t_user where user_id = #{userId}")
     User findByUserId(@Param("userId") Long userId);
 
     @Select("select * from t_user")
