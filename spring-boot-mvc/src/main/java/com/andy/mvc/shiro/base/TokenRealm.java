@@ -16,9 +16,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
-/**
- * @author luwei
- */
+
 @Component
 public class TokenRealm extends AuthorizingRealm {
 
