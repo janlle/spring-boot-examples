@@ -1,6 +1,6 @@
 package com.andy.mvc.shiro.filter;
 
-import com.luwei.module.shiro.base.Token;
+import com.andy.mvc.shiro.base.Token;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author: lyon
+ * @since: 2018-05-17
+ **/
 public class TokenFilter extends AuthenticationFilter {
 
     private final Logger logger = LoggerFactory.getLogger(TokenFilter.class);

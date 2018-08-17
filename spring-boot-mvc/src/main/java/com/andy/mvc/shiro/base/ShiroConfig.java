@@ -1,7 +1,7 @@
 package com.andy.mvc.shiro.base;
 
-import com.luwei.module.shiro.filter.CorsFilter;
-import com.luwei.module.shiro.filter.TokenFilter;
+import com.andy.mvc.shiro.filter.CorsFilter;
+import com.andy.mvc.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -23,7 +23,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @author: lyon
+ * @since: 2018-05-17
+ **/
 @Configuration
 public class ShiroConfig {
 
