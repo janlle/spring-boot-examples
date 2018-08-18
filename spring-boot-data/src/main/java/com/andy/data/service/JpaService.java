@@ -4,8 +4,10 @@ import com.andy.data.entity.User;
 import com.andy.data.jpa.repository.UserRepository;
 import com.andy.data.util.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +38,14 @@ public class JpaService {
         }
         long end = System.currentTimeMillis();
         return (end - start);
+    }
+
+
+    @Transactional
+    public int update(User user) {
+        User entity = userRepository.findById(user.getUserId()).orElse(null);
+        BeanUtils.copyProperties(user, entity);
+        userRepository.save(user);
+        throw new RuntimeException("发生异常");
     }
 }

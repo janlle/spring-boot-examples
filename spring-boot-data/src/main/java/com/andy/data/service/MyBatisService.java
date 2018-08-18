@@ -1,14 +1,18 @@
 package com.andy.data.service;
 
-import com.andy.data.util.EntityFactory;
+import com.andy.data.entity.User;
 import com.andy.data.mybatis.mapper.UserMapper;
+import com.andy.data.util.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 
 @Slf4j
 @Service
+//@Transactional
 public class MyBatisService {
 
     @Autowired
@@ -29,5 +33,12 @@ public class MyBatisService {
         long end = System.currentTimeMillis();
         return (end - start);
     }
+
+    @Transactional
+    public int update(User user) {
+        Integer result = userMapper.updateById(user);
+        throw new RuntimeException("发生异常");
+    }
+
 
 }

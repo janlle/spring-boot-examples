@@ -24,10 +24,10 @@ public class MybatisController {
     @Autowired
     private MyBatisService myBatisService;
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public String update(@RequestBody User user) {
         long start = System.currentTimeMillis();
-        int result = userMapper.updateById(user);
+        int result = myBatisService.update(user);
         long end = System.currentTimeMillis();
         return "修改1条数据一共用了:" + (end - start) + "豪秒!返回的结果是:" + result;
     }
