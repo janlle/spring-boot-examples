@@ -43,7 +43,8 @@ public class ShiroTokenService {
 //            stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getUser_id_to_role() + userId, role, cacheDays, TimeUnit.DAYS);
 //        }
 
-        String prefix = this.shiroModuleProperties.getTokenPrefix();
+        String tokenPrefix = this.shiroModuleProperties.getTokenPrefix();
+        String tokenName = this.shiroModuleProperties.getTokenName();
         int cacheDays = this.shiroModuleProperties.getCacheDays();
         if (null == userId || "".equals(userId)) {
             return null;
@@ -55,14 +56,14 @@ public class ShiroTokenService {
             token = TokenUtil.encode(userId + "." + "1");
         }
         logger.info("setToken userId:{}=token:{}", userId, token);
-        System.out.println(shiroModuleProperties.getTokenPrefix());
-        this.stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getTokenName() + userId, token, cacheDays, TimeUnit.DAYS);
-        String value = this.stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
+        this.stringRedisTemplate.opsForValue().set(tokenPrefix + tokenName + userId, token, cacheDays, TimeUnit.DAYS);
+        String value = this.stringRedisTemplate.opsForValue().get(tokenPrefix + tokenName + userId);
         System.out.println(value);
         return token;
     }
 
     public void logout(String userId) {
+
 //        if (!shiroModuleProperties.isMultiLogin()) {
 //            String prefix = shiroModuleProperties.getPrefix();
 //            String token = stringRedisTemplate.opsForValue().get(prefix + shiroModuleProperties.getUser_id_to_token() + userId);
@@ -71,20 +72,22 @@ public class ShiroTokenService {
 //            stringRedisTemplate.delete(prefix + shiroModuleProperties.getUser_id_to_role() + userId);
 //        }
         if (!shiroModuleProperties.isMultiLogin()) {
-            String prefix = shiroModuleProperties.getTokenPrefix();
-            String token = stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
-            stringRedisTemplate.delete(prefix + "auth.token:" + userId);
+            String tokenPrefix = shiroModuleProperties.getTokenPrefix();
+            String tokenName = shiroModuleProperties.getTokenName();
+            String token = stringRedisTemplate.opsForValue().get(tokenPrefix + tokenName + userId);
+            stringRedisTemplate.delete(tokenPrefix + tokenName + userId);
         }
 
     }
 
     public void updateRole(String userId, String role) {
-        String prefix = shiroModuleProperties.getTokenPrefix();
+        String tokenPrefix = shiroModuleProperties.getTokenPrefix();
+        String tokenName = shiroModuleProperties.getTokenName();
         Integer cacheDays = shiroModuleProperties.getCacheDays();
         if (!StringUtils.isEmpty(role)) {
-            stringRedisTemplate.delete(prefix + "auth.token:" + userId);
+            stringRedisTemplate.delete(tokenPrefix + tokenName + userId);
             String token = TokenUtil.encode(userId + "." + role);
-            stringRedisTemplate.opsForValue().set(prefix + "auth.token:" + userId, token, cacheDays, TimeUnit.DAYS);
+            stringRedisTemplate.opsForValue().set(tokenPrefix + tokenName + userId, token, cacheDays, TimeUnit.DAYS);
         }
     }
 
