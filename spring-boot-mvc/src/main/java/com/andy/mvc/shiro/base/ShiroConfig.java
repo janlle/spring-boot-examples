@@ -37,9 +37,9 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
         swaggerFilterChain(filterChainDefinitionMapping);
-        setUrl(filterChainDefinitionMapping, "anon", properties.getAnonUrl());
-        setUrl(filterChainDefinitionMapping, "cors,anon", properties.getCorsUrl());
-        setUrl(filterChainDefinitionMapping, "cors,auth", properties.getAuthUrl());
+        setUrl(filterChainDefinitionMapping, "anon", properties.getAnonUrls());
+        setUrl(filterChainDefinitionMapping, "cors,anon", properties.getCorsUrls());
+        setUrl(filterChainDefinitionMapping, "cors,auth", properties.getAuthUrls());
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         shiroFilter.setSecurityManager(securityManager);
         Map<String, Filter> filters = new HashMap<>(2);

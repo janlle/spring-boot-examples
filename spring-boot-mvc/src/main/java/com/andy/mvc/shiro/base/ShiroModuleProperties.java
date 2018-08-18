@@ -28,14 +28,14 @@ public class ShiroModuleProperties {
 
     private List<String> authUrls = new ArrayList<>();
 
-    public List<String> getAnonUrl() {
+    public List<String> getAnonUrls() {
         if (anonUrls.isEmpty()) {
             anonUrls.add("/");
         }
         return anonUrls;
     }
 
-    public void setAnonUrl(List<String> anonUrls) {
+    public void setAnonUrls(List<String> anonUrls) {
         this.anonUrls = anonUrls;
     }
 
@@ -43,18 +43,18 @@ public class ShiroModuleProperties {
         return corsUrls;
     }
 
-    public void setCorsUrl(List<String> corsUrls) {
+    public void setCorsUrls(List<String> corsUrls) {
         this.corsUrls = corsUrls;
     }
 
-    public List<String> getAuthUrl() {
+    public List<String> getAuthUrls() {
         if (authUrls.isEmpty()) {
             authUrls.add("/api/**");
         }
         return authUrls;
     }
 
-    public void setAuthUrl(List<String> authUrls) {
+    public void setAuthUrls(List<String> authUrls) {
         this.authUrls = authUrls;
     }
 
