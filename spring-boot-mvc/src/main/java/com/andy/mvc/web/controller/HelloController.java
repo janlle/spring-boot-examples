@@ -2,7 +2,7 @@ package com.andy.mvc.web.controller;
 
 import com.andy.mvc.service.UserService;
 import com.andy.mvc.shiro.service.ShiroTokenService;
-import com.andy.starter.config.HelloService;
+import com.andy.mvc.shiro.service.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +25,6 @@ public class HelloController {
 
     @Autowired
     private ShiroTokenService shiroTokenService;
-
 
 //    public HelloController() {
 //        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
@@ -80,14 +79,21 @@ public class HelloController {
 
     @GetMapping("/login")
     public String login() {
-        shiroTokenService.login("12331", "E34D28E5A0133C86C8E869E68779FD25");
+        shiroTokenService.login("12331", "2");
         return "success";
     }
 
     @GetMapping("/logout")
     public String logout() {
 //        shiroTokenService.afterLogout(1234);
+        shiroTokenService.logout("12331");
         return "logout success";
+    }
+
+    @GetMapping("/lyon")
+    public String lyon() {
+        Integer userId = UserHelper.getId();
+        return userId.toString();
     }
 
 }

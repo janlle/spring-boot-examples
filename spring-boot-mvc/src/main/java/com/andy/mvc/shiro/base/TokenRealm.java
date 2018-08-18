@@ -76,7 +76,7 @@ public class TokenRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String userId = (String) principals.getPrimaryPrincipal();
         if (!StringUtils.isEmpty(userId)) {
-            String token = redis.get(shiroModuleProperties.getPrefix() + "auth.token:" + userId);
+            String token = redis.get(shiroModuleProperties.getTokenPrefix() + "auth.token:" + userId);
             String userRole;
             try {
                 userRole = token.split("\\.")[1];
