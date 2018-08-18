@@ -3,7 +3,7 @@ package com.andy.data.json.fastjson;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.andy.data.entity.User;
-import com.andy.data.json.EntityFactory;
+import com.andy.data.util.EntityFactory;
 
 import java.util.List;
 

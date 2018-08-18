@@ -1,11 +1,10 @@
 package com.andy.data.json.jsonlib;
 
 import com.andy.data.entity.User;
-import com.andy.data.json.EntityFactory;
+import com.andy.data.util.EntityFactory;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import java.util.Date;
 import java.util.List;
 
 /**

@@ -1,7 +1,7 @@
 package com.andy.data.serializ;
 
 import com.andy.data.entity.User;
-import com.andy.data.json.EntityFactory;
+import com.andy.data.util.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;

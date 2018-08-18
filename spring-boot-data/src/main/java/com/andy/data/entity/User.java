@@ -12,6 +12,29 @@ import java.util.Date;
 @Table(name = "t_user")
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
+
+    @Column(columnDefinition = "varchar(128) not null comment '账号'")
+    private String account;
+
+    @Column(columnDefinition = "varchar(128) not null comment '密码'")
+    private String password;
+
+    @Column(columnDefinition = "varchar(128) not null comment '邮箱'")
+    private String email;
+
+    @Column(columnDefinition = "int(11) not null comment '年龄'")
+    private Integer age;
+
+    @CreatedDate
+    @Column(columnDefinition = "timestamp not null default current_timestamp comment '创建时间'")
+    private Date createTime;
+
+    @Column(columnDefinition = "bit not null comment '是否删除'")
+    private boolean deleted;
+
     public User() {
     }
 
@@ -33,31 +56,5 @@ public class User implements Serializable {
         this.createTime = createTime;
         this.deleted = deleted;
     }
-
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
-
-    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '账号'")
-    private String account;
-
-    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
-    private String password;
-
-    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '邮箱'")
-    private String email;
-
-    @Column(columnDefinition = "int(11) NOT NULL COMMENT '年龄'")
-    private Integer age;
-
-    @CreatedDate
-    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
-    private Date createTime;
-
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
-    private Boolean deleted;
-
 
 }
