@@ -11,20 +11,16 @@ import java.util.List;
  * @since: 2018-05-17
  **/
 @Configuration
-@ConfigurationProperties(prefix = "luwei.module.shiro")
+@ConfigurationProperties(prefix = "module.shiro")
 public class ShiroModuleProperties {
 
-    private String token_to_user_id = "auth.token.id:";
+    private String tokenName = "auth.token:";
 
-    private String user_id_to_token = "auth.id.token:";
-
-    private String user_id_to_role = "auth.id.role:";
+    private String tokenPrefix;
 
     private boolean multiLogin = false;
 
     private int cacheDays = 30;
-
-    private String prefix;
 
     private List<String> anonUrl = new ArrayList<>();
 
@@ -78,35 +74,19 @@ public class ShiroModuleProperties {
         this.cacheDays = cacheDays;
     }
 
-    public String getPrefix() {
-        return prefix;
+    public String getTokenPrefix() {
+        return tokenPrefix;
     }
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix+":";
+    public void setTokenPrefix(String tokenPrefix) {
+        this.tokenPrefix = tokenPrefix + ":";
     }
 
-    public String getToken_to_user_id() {
-        return token_to_user_id;
+    public String getTokenName() {
+        return tokenName;
     }
 
-    public void setToken_to_user_id(String token_to_user_id) {
-        this.token_to_user_id = token_to_user_id;
-    }
-
-    public String getUser_id_to_token() {
-        return user_id_to_token;
-    }
-
-    public void setUser_id_to_token(String user_id_to_token) {
-        this.user_id_to_token = user_id_to_token;
-    }
-
-    public String getUser_id_to_role() {
-        return user_id_to_role;
-    }
-
-    public void setUser_id_to_role(String user_id_to_role) {
-        this.user_id_to_role = user_id_to_role;
+    public void setTokenName(String tokenName) {
+        this.tokenName = tokenName;
     }
 }

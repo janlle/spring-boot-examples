@@ -43,7 +43,7 @@ public class ShiroTokenService {
 //            stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getUser_id_to_role() + userId, role, cacheDays, TimeUnit.DAYS);
 //        }
 
-        String prefix = this.shiroModuleProperties.getPrefix();
+        String prefix = this.shiroModuleProperties.getTokenPrefix();
         int cacheDays = this.shiroModuleProperties.getCacheDays();
         if (null == userId || "".equals(userId)) {
             return null;
@@ -55,8 +55,8 @@ public class ShiroTokenService {
             token = TokenUtil.encode(userId + "." + "1");
         }
         logger.info("setToken userId:{}=token:{}", userId, token);
-        System.out.println(shiroModuleProperties.getPrefix());
-        this.stringRedisTemplate.opsForValue().set(prefix + "auth.token:" + userId, token, cacheDays, TimeUnit.DAYS);
+        System.out.println(shiroModuleProperties.getTokenPrefix());
+        this.stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getTokenName() + userId, token, cacheDays, TimeUnit.DAYS);
         String value = this.stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
         System.out.println(value);
         return token;
@@ -71,7 +71,7 @@ public class ShiroTokenService {
 //            stringRedisTemplate.delete(prefix + shiroModuleProperties.getUser_id_to_role() + userId);
 //        }
         if (!shiroModuleProperties.isMultiLogin()) {
-            String prefix = shiroModuleProperties.getPrefix();
+            String prefix = shiroModuleProperties.getTokenPrefix();
             String token = stringRedisTemplate.opsForValue().get(prefix + "auth.token:" + userId);
             stringRedisTemplate.delete(prefix + "auth.token:" + userId);
         }
@@ -79,7 +79,7 @@ public class ShiroTokenService {
     }
 
     public void updateRole(String userId, String role) {
-        String prefix = shiroModuleProperties.getPrefix();
+        String prefix = shiroModuleProperties.getTokenPrefix();
         Integer cacheDays = shiroModuleProperties.getCacheDays();
         if (!StringUtils.isEmpty(role)) {
             stringRedisTemplate.delete(prefix + "auth.token:" + userId);

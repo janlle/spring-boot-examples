@@ -53,13 +53,6 @@ customer:
 
 module:
   shiro:
-    anno-url: /login
-    cors-url: /login
-    auth-url: /**
-    prefix: ${server.port}
-
-model:
-  shiro:
     mulitLogin: false
     cacheDays: 7
     redisPrefix: ${server.port}
@@ -69,3 +62,4 @@ model:
     - /api/user/login
     authUrls: /api/**
     tokenPrefix: ${server.port}
+    tokenName: auth:token
