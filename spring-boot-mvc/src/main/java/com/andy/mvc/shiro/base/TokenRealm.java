@@ -50,6 +50,8 @@ public class TokenRealm extends AuthorizingRealm {
         Token token = (Token) authenticationToken;
         String tokenString = token.getToken();
         String userRole = TokenUtil.decode(tokenString);
+        System.out.printf(tokenString);
+        System.out.println(userRole);
         if (StringUtils.isEmpty(tokenString)) {
             return null;
         }

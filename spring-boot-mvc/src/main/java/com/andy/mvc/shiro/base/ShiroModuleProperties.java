@@ -22,40 +22,40 @@ public class ShiroModuleProperties {
 
     private int cacheDays = 30;
 
-    private List<String> anonUrl = new ArrayList<>();
+    private List<String> anonUrls = new ArrayList<>();
 
-    private List<String> corsUrl = new ArrayList<>();
+    private List<String> corsUrls = new ArrayList<>();
 
-    private List<String> authUrl = new ArrayList<>();
+    private List<String> authUrls = new ArrayList<>();
 
     public List<String> getAnonUrl() {
-        if (anonUrl.isEmpty()) {
-            anonUrl.add("/");
+        if (anonUrls.isEmpty()) {
+            anonUrls.add("/");
         }
-        return anonUrl;
+        return anonUrls;
     }
 
-    public void setAnonUrl(List<String> anonUrl) {
-        this.anonUrl = anonUrl;
+    public void setAnonUrl(List<String> anonUrls) {
+        this.anonUrls = anonUrls;
     }
 
-    public List<String> getCorsUrl() {
-        return corsUrl;
+    public List<String> getCorsUrls() {
+        return corsUrls;
     }
 
-    public void setCorsUrl(List<String> corsUrl) {
-        this.corsUrl = corsUrl;
+    public void setCorsUrl(List<String> corsUrls) {
+        this.corsUrls = corsUrls;
     }
 
     public List<String> getAuthUrl() {
-        if (authUrl.isEmpty()) {
-            authUrl.add("/api/**");
+        if (authUrls.isEmpty()) {
+            authUrls.add("/api/**");
         }
-        return authUrl;
+        return authUrls;
     }
 
-    public void setAuthUrl(List<String> authUrl) {
-        this.authUrl = authUrl;
+    public void setAuthUrl(List<String> authUrls) {
+        this.authUrls = authUrls;
     }
 
     public boolean isMultiLogin() {
