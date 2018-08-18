@@ -6,21 +6,21 @@
         <id column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="account" property="account" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
         <result column="deleted" property="deleted" jdbcType="BIT"/>
     </resultMap>
 
     <sql id="base_column">
-        user_id, account, create_time, deleted, password, age, email, age
+        user_id, account, create_time, deleted, password, age, description, age
     </sql>
 
     <insert id="insertSelective" parameterType="User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="email != null">
-                email,
+            <if test="description != null">
+                description,
             </if>
             <if test="username != null">
                 username,
@@ -40,8 +40,8 @@
         </trim>
         VALUES
         <trim prefix="(" suffixOverrides="," suffix=")">
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
             </if>
             <if test="username != null">
                 username = #{username,jdbcType=VARCHAR},
@@ -65,11 +65,11 @@
     <update id="updateByIdSelective" parameterType="User">
         update t_user
         <set>
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
             </if>
-            <if test="username != null">
-                username = #{username,jdbcType=VARCHAR},
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="age != null">
                 age = #{age,jdbcType=INTEGER},
@@ -84,15 +84,15 @@
                 deleted= #{deleted,jdbcType=BIT}
             </if>
         </set>
-        where id = #{id,jdbcType=BIGINT}
+        where user_id = #{userId,jdbcType=BIGINT}
     </update>
 
 
     <update id="updateById" parameterType="User">
         update t_user
         set
-            email    = #{email,jdbcType=VARCHAR},
-            username = #{username,jdbcType=VARCHAR},
+            description    = #{description,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
             age   = #{age,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             account   = #{account,jdbcType=VARCHAR},
@@ -102,7 +102,7 @@
     </update>
 
     <insert id="insertList" parameterType="java.util.List">
-        INSERT INTO t_user (account, create_time, deleted, password, email, age) VALUES
+        INSERT INTO t_user (account, create_time, deleted, password, description, age) VALUES
         <foreach collection="users" item="user" index="inx" separator=",">
             <trim prefix="(" suffixOverrides="," suffix=")">
                 <choose>
@@ -142,8 +142,8 @@
                 </choose>
 
                 <choose>
-                    <when test="user.email != null">
-                        #{user.email,jdbcType=VARCHAR},
+                    <when test="user.description != null">
+                        #{user.description,jdbcType=VARCHAR},
                     </when>
                     <otherwise>
                         'default@gmail.com',
