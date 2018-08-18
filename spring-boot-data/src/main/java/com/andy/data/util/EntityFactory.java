@@ -23,7 +23,7 @@ public class EntityFactory {
     public static List<User> getUsers(Integer count) {
         List<User> userList = new ArrayList<>();
         for (long i = 0; i < count; i++) {
-            User user = new User(i, "jack", RandomUtil.getStr(12), RandomUtil.getNum(6) + "@qq.com", 18, new Date(), false);
+            User user = new User(i, "jack", RandomUtil.getStr(12), "hello my friend i am a boy " + RandomUtil.getStr(6), 18, new Date(), false);
             userList.add(user);
         }
         return userList;
