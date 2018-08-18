@@ -1,9 +1,12 @@
 package com.andy.starter.config;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author: lyon
- * @since: 2018-05-12 09:29
+ * @since: 2018-05-12
  **/
+@Component
 public class HelloService {
 
     private String msg;
@@ -17,7 +20,7 @@ public class HelloService {
     }
 
 
-    public String sayHello(){
+    public String sayHello() {
         return "customer-property " + msg;
     }
 
