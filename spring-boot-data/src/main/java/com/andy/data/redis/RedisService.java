@@ -1,7 +1,7 @@
 package com.andy.data.redis;
 
 import com.andy.data.config.RedisPrefix;
-import com.andy.data.json.EntityFactory;
+import com.andy.data.util.EntityFactory;
 import com.andy.data.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

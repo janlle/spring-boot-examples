@@ -1,7 +1,7 @@
 package com.andy.data.json.gson;
 
 import com.andy.data.entity.User;
-import com.andy.data.json.EntityFactory;
+import com.andy.data.util.EntityFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
