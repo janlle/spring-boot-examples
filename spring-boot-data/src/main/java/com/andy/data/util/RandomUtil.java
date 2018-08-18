@@ -5,7 +5,7 @@ import java.util.UUID;
 
 /**
  * @author: lyon
- * @since: 2018-07-04 16:50
+ * @since: 2018-07-04
  **/
 public class RandomUtil {
 

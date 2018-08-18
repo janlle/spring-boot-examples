@@ -1,7 +1,7 @@
 package com.andy.data.json.jackson;
 
 import com.andy.data.entity.User;
-import com.andy.data.json.EntityFactory;
+import com.andy.data.util.EntityFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
