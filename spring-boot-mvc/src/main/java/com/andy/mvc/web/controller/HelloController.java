@@ -1,7 +1,7 @@
 package com.andy.mvc.web.controller;
 
 import com.andy.mvc.service.UserService;
-import com.andy.mvc.shiro.ShiroTokenService;
+import com.andy.mvc.shiro.service.ShiroTokenService;
 import com.andy.starter.config.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +20,8 @@ public class HelloController {
     private UserService userService;
 
 
-    @Autowired
-    private HelloService helloService;
+//    @Autowired
+//    private HelloService helloService;
 
     @Autowired
     private ShiroTokenService shiroTokenService;
@@ -60,10 +60,10 @@ public class HelloController {
         return "使用jpa插入" + num + "条数据到mysql一共用了" + time + "秒！";
     }
 
-    @GetMapping("/customerStarter")
-    public String customerStarter() {
-        return helloService.sayHello();
-    }
+//    @GetMapping("/customerStarter")
+//    public String customerStarter() {
+//        return helloService.sayHello();
+//    }
 
 
     @GetMapping("/new/{num}")
@@ -80,7 +80,7 @@ public class HelloController {
 
     @GetMapping("/login")
     public String login() {
-        shiroTokenService.afterLogin(1234, "E34D28E5A0133C86C8E869E68779FD25");
+        shiroTokenService.login("12331", "E34D28E5A0133C86C8E869E68779FD25");
         return "success";
     }
 
