@@ -10,6 +10,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -25,8 +26,8 @@ public class TokenRealm extends AuthorizingRealm {
     @Resource
     private ShiroModuleProperties shiroModuleProperties;
 
-    @Resource(name = "stringRedisTemplate")
-    private ValueOperations<String, String> redis;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public String getName() {
@@ -78,7 +79,7 @@ public class TokenRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String userId = (String) principals.getPrimaryPrincipal();
         if (!StringUtils.isEmpty(userId)) {
-            String token = redis.get(shiroModuleProperties.getTokenPrefix() + "auth.token:" + userId);
+            String token = stringRedisTemplate.opsForValue().get(shiroModuleProperties.getTokenPrefix() + shiroModuleProperties.getTokenName() + userId);
             String userRole;
             try {
                 userRole = token.split("\\.")[1];

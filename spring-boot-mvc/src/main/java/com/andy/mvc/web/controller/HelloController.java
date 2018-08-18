@@ -90,7 +90,7 @@ public class HelloController {
         return "logout success";
     }
 
-    @GetMapping("/lyon")
+    @GetMapping("/api/lyon")
     public String lyon() {
         Integer userId = UserHelper.getId();
         return userId.toString();
