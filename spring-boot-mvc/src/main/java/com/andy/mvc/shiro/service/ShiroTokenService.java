@@ -1,6 +1,5 @@
 package com.andy.mvc.shiro.service;
 
-import com.andy.mvc.shiro.base.ShiroConfig;
 import com.andy.mvc.shiro.base.ShiroModuleProperties;
 import com.andy.mvc.shiro.base.TokenUtil;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class ShiroTokenService {
 
-    private final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
+    private final Logger logger = LoggerFactory.getLogger(ShiroTokenService.class);
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -43,6 +42,8 @@ public class ShiroTokenService {
 //            stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getUser_id_to_role() + userId, role, cacheDays, TimeUnit.DAYS);
 //        }
 
+        String salt = (int) (Math.random() * 10000) + "";
+
         String tokenPrefix = this.shiroModuleProperties.getTokenPrefix();
         String tokenName = this.shiroModuleProperties.getTokenName();
         int cacheDays = this.shiroModuleProperties.getCacheDays();
@@ -51,9 +52,9 @@ public class ShiroTokenService {
         }
         String token;
         if (null != role && !"".equals(role)) {
-            token = TokenUtil.encode(userId + "." + role);
+            token = TokenUtil.encode(userId + "." + role + "." + salt);
         } else {
-            token = TokenUtil.encode(userId + "." + "1");
+            token = TokenUtil.encode(userId + "." + "-1" + "." + salt);
         }
         logger.info("setToken userId:{}=token:{}", userId, token);
         this.stringRedisTemplate.opsForValue().set(tokenPrefix + tokenName + userId, token, cacheDays, TimeUnit.DAYS);
