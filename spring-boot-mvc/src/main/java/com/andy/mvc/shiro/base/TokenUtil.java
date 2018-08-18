@@ -67,7 +67,7 @@ public class TokenUtil {
 
     public static void main(String[] args) throws Exception {
 //        System.out.println(encode("he.llo"));
-//        System.out.println(decode("E34D28E5A0133C86C8E869E68779FD25"));
+        System.out.println(decode("DDDB836FC368EA1DD32034FE187617A0"));
 //        System.out.println("6166.token".split("\\.").length);
     }
 

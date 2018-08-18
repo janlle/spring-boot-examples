@@ -62,7 +62,7 @@ public class TokenRealm extends AuthorizingRealm {
         } catch (Exception e) {
             return null;
         }
-        logger.info("--------------userId:{}-----token:{}--------------", userId, tokenString);
+        logger.info("----userId:{}----token:{}----", userId, tokenString);
         if (!StringUtils.isEmpty(userId)) {
             return new SimpleAuthenticationInfo(userId, tokenString, getName());
         }
@@ -86,7 +86,7 @@ public class TokenRealm extends AuthorizingRealm {
             } catch (Exception e) {
                 return null;
             }
-            logger.info("--------------userId:{}-----role:{}--------------", userId, userRole);
+            logger.info("----userId:{}----role:{}----", userId, userRole);
             if (!StringUtils.isEmpty(userRole)) {
                 SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
                 info.addRole(userRole);
