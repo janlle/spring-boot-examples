@@ -34,7 +34,7 @@ import java.util.Map;
 
 /**
  * http请求工具类
- * @author: lyon
+ * @author: Leone
  * @since: 2018-06-17 12:43
  **/
 @Slf4j
@@ -72,7 +72,7 @@ public class HttpUtils {
 
     /**
      * 获取sslHttpClient
-     * @author: lyon
+     * @author: Leone
      * @since: 2018/6/3 15:06
      * @params: [certPath, password]
      * @return: org.apache.http.impl.client.CloseableHttpClient
@@ -126,7 +126,7 @@ public class HttpUtils {
     }
 
     /**
-     * @author: lyon
+     * @author: Leone
      * @since: 2018-06-17 14:24
      * @params: [url, json]
      * @return: java.lang.String

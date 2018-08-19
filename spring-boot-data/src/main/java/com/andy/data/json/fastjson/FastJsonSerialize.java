@@ -8,7 +8,7 @@ import com.andy.data.util.EntityFactory;
 import java.util.List;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-11
  **/
 public class FastJsonSerialize {

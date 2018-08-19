@@ -3,7 +3,7 @@ package com.andy.design.structure.composite;
 /**
  * 组合模式
  *
- * @author: lyon
+ * @author: Leone
  * @since: 2018-08-01
  **/
 public class Client {
