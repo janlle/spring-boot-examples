@@ -8,6 +8,7 @@ import org.quartz.impl.StdSchedulerFactory;
  * @since: 2018-06-05
  **/
 public class MainTask {
+
     public static void main(String[] args) throws Exception {
         //创建jobDetail实例
         JobDetail jobDetail = JobBuilder.newJob(HelloJob.class).withIdentity("job-a", "group-a").build();
@@ -21,7 +22,6 @@ public class MainTask {
         Scheduler scheduler = schedulerFactory.getScheduler();
         scheduler.start();
         scheduler.scheduleJob(jobDetail, trigger);
-
-
     }
+
 }
