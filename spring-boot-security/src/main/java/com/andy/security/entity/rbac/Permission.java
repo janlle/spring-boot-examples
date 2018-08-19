@@ -27,7 +27,7 @@ import java.util.Set;
 public class Permission implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long permissionId;
 
     @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '权限名称'")

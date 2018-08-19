@@ -11,7 +11,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-08-05
  **/
 public class TokenUtil {
