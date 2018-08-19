@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-11
  **/
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {

@@ -1,7 +1,7 @@
 package com.andy.design.creation.singleton;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @cerateBy: 2018-07-28
  **/
 public class Singleton {

@@ -50,7 +50,11 @@ spring:
 
 customer:
   msg: jack
-
+  property:
+  - first-name: wang
+    last-name: lao
+  - first-name: li
+    last-name: sheng
 module:
   shiro:
     mulitLogin: false
@@ -63,3 +67,4 @@ module:
     authUrls: /api/**
     tokenPrefix: ${server.port}
     tokenName: auth.token
+

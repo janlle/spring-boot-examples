@@ -1,7 +1,7 @@
 package com.andy.design.creation.abstractfactory;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @cerateBy: 2018-07-28
  **/
 public class MailSenderFactory implements Provider {

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-07-21 15:27
  **/
 public class RedisSession extends AbstractSessionDAO {

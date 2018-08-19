@@ -3,7 +3,7 @@ package com.andy.design.structure.composite;
 /**
  * 叶子节点
  *
- * @author: lyon
+ * @author: Leone
  * @since: 2018-08-01
  **/
 public class Leaf extends Component {
