@@ -19,7 +19,7 @@ public class QuartzConfig {
      * 配置定时任务
      * ScheduleTask为需要执行的任务
      */
-    @Bean(name = "detailFactoryBean")
+    @Bean(name = "jobDetail")
     public MethodInvokingJobDetailFactoryBean detailFactoryBean(HelloJob task) {
         MethodInvokingJobDetailFactoryBean detailFactory = new MethodInvokingJobDetailFactoryBean();
         // 是否并发执行
@@ -54,7 +54,7 @@ public class QuartzConfig {
     /**
      * 定义quartz调度工厂
      */
-    @Bean(name = "scheduler")
+    @Bean(name = "jobSchedule")
     public SchedulerFactoryBean schedulerFactory(Trigger cronJobTrigger) {
         SchedulerFactoryBean bean = new SchedulerFactoryBean();
         // 用于quartz集群,QuartzScheduler 启动时更新己存在的Job
