@@ -1,9 +1,7 @@
 package com.andy.task.quartz.config;
 
 import com.andy.task.quartz.jobs.HelloJob;
-import com.andy.task.quartz.jobs.SpringJobFactory;
 import org.quartz.Trigger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
@@ -16,9 +14,6 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
  **/
 @Configuration
 public class QuartzConfig {
-
-    @Autowired
-    private SpringJobFactory springJobFactory;
 
     /**
      * 配置定时任务
