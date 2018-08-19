@@ -1,7 +1,8 @@
 package com.andy.data.controller;
 
 import com.andy.data.service.UserService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +16,11 @@ import java.util.Stack;
  * @author: lyon
  * @since: 2018-06-28
  **/
-@Slf4j
-@RestController("/concurrent")
+@RestController
+@RequestMapping("/concurrent")
 public class ConcurrentController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ConcurrentController.class);
 
 
     @Autowired
@@ -34,14 +37,15 @@ public class ConcurrentController {
             data.put(i, true);
             stack.push(i);
         }
-        log.info("初始化map...");
+        logger.info("初始化map...");
     }
 
     @RequestMapping("/test")
     public void test() {
 //        log.info("test method...a={}", stack.pop());
         Random random = new Random();
-        log.info("user: {}", userService.getUser(random.nextInt(20) + 1));
+        logger.info("user");
+//        logger.info("user: {}", userService.getUser(random.nextInt(20) + 1));
     }
 
 }
