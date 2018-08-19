@@ -9,6 +9,10 @@ import org.quartz.Scheduler;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
+/**
+ * @author: lyon
+ * @since: 2018-05-19
+ **/
 public class QuartzTest {
 
     public static void main(String[] args) {
