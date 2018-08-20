@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-12
  **/
 @Configuration

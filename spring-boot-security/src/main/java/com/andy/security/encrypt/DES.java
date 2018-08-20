@@ -18,7 +18,7 @@ import java.security.Security;
 /**
  * 对称加密算法--DES
  *
- * @author: lyon
+ * @author: Leone
  * @since: 2018-07-01
  **/
 public class DES {

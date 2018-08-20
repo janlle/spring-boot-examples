@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 /**
  * <p>消息摘要算法--SHA
  *
- * @author: lyon
+ * @author: Leone
  * @since: 2018-07-01
  **/
 public class SHA {

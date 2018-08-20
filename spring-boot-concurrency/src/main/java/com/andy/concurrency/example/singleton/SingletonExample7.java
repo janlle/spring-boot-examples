@@ -5,7 +5,7 @@ import com.andy.concurrency.annotations.ThreadSafe;
 
 /**
  * 枚举模式
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-06 13:19
  **/
 @ThreadSafe

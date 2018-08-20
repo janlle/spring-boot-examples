@@ -91,7 +91,7 @@ public class HelloController {
     }
 
     @GetMapping("/api/lyon")
-    public String lyon() {
+    public String Leone() {
         Integer userId = UserHelper.getId();
         return userId.toString();
     }

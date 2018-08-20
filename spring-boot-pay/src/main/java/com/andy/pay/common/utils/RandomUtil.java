@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-07-04 16:50
  **/
 public class RandomUtil {
@@ -12,7 +12,7 @@ public class RandomUtil {
     /**
      * 生成随机字符串
      *
-     * @author: lyon
+     * @author: Leone
      * @since: 2018/6/25
      * @params: []
      * @return: java.lang.String
@@ -33,7 +33,7 @@ public class RandomUtil {
     /**
      * 生成32位随机数字
      *
-     * @author: lyon
+     * @author: Leone
      * @since: 2018/6/25
      * @params: []
      * @return: java.lang.String
@@ -49,7 +49,7 @@ public class RandomUtil {
     /**
      * 获取当前时间戳，单位秒(10位)
      *
-     * @author: lyon
+     * @author: Leone
      * @since: 2018/6/25
      * @params: []
      * @return: java.lang.String

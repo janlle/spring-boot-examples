@@ -11,7 +11,7 @@ import java.util.Base64;
 /**
  * <p>RSA签名验签类</p>
  *
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-10
  **/
 public class Sign {
