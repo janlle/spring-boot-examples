@@ -3,7 +3,7 @@ package com.andy.starter.config;
 import org.springframework.stereotype.Component;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-12
  **/
 @Component

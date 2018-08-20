@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-13 11:34
  **/
 public class AppInterceptor extends HandlerInterceptorAdapter {
