@@ -3,7 +3,7 @@ package com.andy.pay.common.exception;
 import com.andy.pay.common.enums.ResultEnum;
 
 /**
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-08
  **/
 public class AppException extends RuntimeException {

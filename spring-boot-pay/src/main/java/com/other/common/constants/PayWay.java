@@ -3,7 +3,7 @@ package com.other.common.constants;
 
 /**
  * 支付途径
- * @author: lyon
+ * @author: Leone
  * @since: 2018-06-25 23:09
  **/
 public enum PayWay {

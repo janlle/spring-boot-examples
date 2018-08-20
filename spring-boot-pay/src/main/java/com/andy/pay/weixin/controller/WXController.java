@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 微信授权
- * @author: lyon
+ * @author: Leone
  * @since: 2018-05-22 20:46
  **/
 @Slf4j
