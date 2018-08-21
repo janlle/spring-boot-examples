@@ -1,6 +1,6 @@
 package com.andy.flux.router;
 
-import com.andy.flux.handler.HelloWorldHandler;
+import com.andy.flux.handler.HelloHandler;
 import com.andy.flux.handler.UserHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,21 +12,22 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 /**
  * @author: Leone
- * @since: 2018-06-26 9:39
+ * @since: 2018-05-26
  **/
 @Configuration
 public class RouterConfig {
 
     @Autowired
-    private HelloWorldHandler helloWorldHandler;
-
-    @Bean
-    public RouterFunction<?> helloRouter() {
-        return RouterFunctions.route(RequestPredicates.GET("/hello"), helloWorldHandler::helloWorld);
-    }
+    private HelloHandler helloHandler;
 
     @Autowired
     private UserHandler userHandler;
+
+    @Bean
+    public RouterFunction<?> helloRouter() {
+        return RouterFunctions.route(RequestPredicates.GET("/hello"), helloHandler::helloMono);
+    }
+
 
     @Bean
     public RouterFunction<ServerResponse> timerRouter() {
@@ -36,7 +37,7 @@ public class RouterConfig {
 
     @Bean
     public RouterFunction<?> routerFunction() {
-        return RouterFunctions.route(RequestPredicates.GET("/hello"), helloWorldHandler::helloWorld)
+        return RouterFunctions.route(RequestPredicates.GET("/hello"), helloHandler::helloMono)
                 .andRoute(RequestPredicates.POST("/register"), userHandler::register)
                 .andRoute(RequestPredicates.POST("/login"), userHandler::login)
                 .andRoute(RequestPredicates.GET("/times"), userHandler::sendTimePerSec);
