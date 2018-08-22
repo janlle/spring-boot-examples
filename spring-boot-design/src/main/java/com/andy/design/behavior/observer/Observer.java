@@ -1,4 +1,4 @@
-package com.andy.design.creation.observer;
+package com.andy.design.behavior.observer;
 
 /***
  * 抽象观察者
