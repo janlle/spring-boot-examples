@@ -19,6 +19,7 @@ public class ObserverTest {
         server.registerObserver(jack);
         server.registerObserver(andy);
         server.registerObserver(jerry);
+
         server.setInfomation("PHP是世界上最好用的语言！");
 
         System.out.println("------------------------");
