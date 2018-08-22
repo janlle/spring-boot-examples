@@ -1,4 +1,4 @@
-package com.andy.design.creation.observer;
+package com.andy.design.behavior.observer;
 
 /**
  * <p> 观察者 实现了update方法
