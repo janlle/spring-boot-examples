@@ -8,8 +8,10 @@ package com.andy.design.behavior.command;
  **/
 public class FunctionButton {
 
-    private String name; //功能键名称
-    private Command command; //维持一个抽象命令对象的引用
+    //功能键名称
+    private String name;
+    //维持一个抽象命令对象的引用
+    private Command command;
 
     public FunctionButton(String name) {
         this.name = name;
