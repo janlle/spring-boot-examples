@@ -34,6 +34,5 @@ public class App {
 
         person1.hello("james");
 
-
     }
 }
