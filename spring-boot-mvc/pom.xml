@@ -84,6 +84,28 @@
             <artifactId>shiro-spring</artifactId>
         </dependency>
 
+        <!--极光推送-->
+        <dependency>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jpush-client</artifactId>
+            <version>3.3.7</version>
+        </dependency>
+
+        <!--七牛云-->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.2.6</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--阿里短信-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>3.2.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
