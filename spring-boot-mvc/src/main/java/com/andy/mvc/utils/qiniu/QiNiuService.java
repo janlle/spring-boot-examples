@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +36,6 @@ public class QiNiuService {
 
     @Autowired
     private QiNiuProperties properties;
-
 
     /**
      * 获取token
@@ -57,7 +58,6 @@ public class QiNiuService {
         String token = auth.uploadToken(properties.getBucket(), key);
         return new QiNiuToken(token);
     }
-
 
     /**
      * 上传单个文件
@@ -84,7 +84,6 @@ public class QiNiuService {
      * @return
      */
     public FileVO uploadBatch(MultipartFile[] files) {
-
         if (null == files || files.length < 1) {
             throw new RuntimeException("file array is empty");
         }
@@ -110,8 +109,14 @@ public class QiNiuService {
      * @return
      */
     public FileVO uploadStream(InputStream inputStream) {
-        try {
-            byte[] byteData = IOUtils.toByteArray(inputStream);
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()){
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, len);
+            }
+            inputStream.close();
+            byte[] byteData = outputStream.toByteArray();
             Response res = uploadManager.put(byteData, null, getToken());
             QiNiu qiniu = res.jsonToObject(QiNiu.class);
             return new FileVO(Arrays.asList(properties.getLinkAddress() + qiniu.getHash()));
