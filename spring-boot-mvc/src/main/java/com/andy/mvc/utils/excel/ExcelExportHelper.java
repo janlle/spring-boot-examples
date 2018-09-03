@@ -114,9 +114,6 @@ public class ExcelExportHelper {
      *                   属性的数据类型有基本数据类型及String,Date,byte[](图片数据)
      * @param sheetTitle 表格标题名
      * @return 生成的HSSFWorkBook
-     * @author chenssy
-     * @date 2014年6月15日 下午9:18:37
-     * @version 1.0
      */
     public HSSFWorkbook exportExcel(String[] header, List<Object> excelList, String sheetTitle) {
         //生成一个Excel
@@ -128,7 +125,7 @@ public class ExcelExportHelper {
         //设置Excel里面数据
         setExcelContentData(book, sheet, header, excelList);
 
-        System.out.println("——————————————————ExcelExportHelper:Excel生成成功...");
+        logger.info("——————————————————ExcelExportHelper:Excel生成成功...");
 
         return book;
     }
@@ -145,9 +142,6 @@ public class ExcelExportHelper {
      *                   javabean属性的数据类型有基本数据类型及String,Date,byte[](图片数据)
      * @param sheetTitle 表格标题名
      * @return 生成的HSSFWorkbook
-     * @author chenssy
-     * @date 2014年6月19日 下午6:02:02
-     * @version 1.0
      */
     public HSSFWorkbook exportExcel(String[] header, String[] properties, List<Object> excelList,
                                     String sheetTitle) {
@@ -160,7 +154,7 @@ public class ExcelExportHelper {
         // 设置Excel里面数据
         setExcelContentData(book, sheet, header, properties, excelList);
 
-        System.out.println("——————————————————ExcelExportHelper:Excel生成成功...");
+        logger.info("——————————————————ExcelExportHelper:Excel生成成功...");
 
         return book;
     }
@@ -180,9 +174,6 @@ public class ExcelExportHelper {
      * @param filePath   Excel文件保存位置
      * @param fileName   Excel文件名
      * @return
-     * @author chenssy
-     * @date 2014年6月17日 下午2:24:38
-     * @version 1.0
      */
     public void exportExcelAndSave(String[] header, List<Object> excelList, String sheetTitle,
                                    String filePath, String fileName) {
@@ -207,9 +198,6 @@ public class ExcelExportHelper {
      * @param sheetTitle 表格标题名
      * @param filePath   Excel文件保存位置
      * @param fileName   Excel文件名
-     * @author chenssy
-     * @date 2014年6月19日 下午6:24:56
-     * @version 1.0
      */
     public void exportExcelAndSave(String[] header, String[] properties, List<Object> excelList, String sheetTitle,
                                    String filePath, String fileName) {
@@ -234,9 +222,6 @@ public class ExcelExportHelper {
      * @param filePath   zip文件保存位置
      * @param excelName  Excel名称
      * @param zipName    zip名称
-     * @author chenssy
-     * @date 2014年6月18日 下午12:36:01
-     * @version 1.0
      */
     public void exportExcelAndZip(String[] header, List<Object> excelList, String sheetTitle,
                                   String filePath, String excelName, String zipName) {
@@ -264,9 +249,6 @@ public class ExcelExportHelper {
      * @param filePath   zip文件保存位置
      * @param excelName  Excel名称
      * @param zipName    zip名称
-     * @author chenssy
-     * @date 2014年6月19日 下午6:33:04
-     * @version 1.0
      */
     public void exportExcelAndZip(String[] header, String[] properties, List<Object> excelList, String sheetTitle,
                                   String filePath, String excelName, String zipName) {
@@ -293,9 +275,6 @@ public class ExcelExportHelper {
      * @param sheetTitle 表格标题名
      * @param flag       分页标识为。flag == 0001：生成多个Excel,flag == 0002：生成多个sheet
      * @return List<HSSFWorkbook>
-     * @author chenssy
-     * @date 2014年6月17日 下午9:53:15
-     * @version 1.0
      */
     public List<HSSFWorkbook> exportExcelForBigData(String[] header, List<Object> excelList, String sheetTitle,
                                                     String flag) {
@@ -343,9 +322,6 @@ public class ExcelExportHelper {
      * @param sheetTitle 表格标题名
      * @param flag       分页标识为。flag == 0001：生成多个Excel,flag == 0002：生成多个sheet
      * @return List<HSSFWorkbook>
-     * @author chenssy
-     * @date 2014年6月19日 下午6:41:23
-     * @version 1.0
      */
     public List<HSSFWorkbook> exportExcelForBigData(String[] header, String[] properties,
                                                     List<Object> excelList, String sheetTitle, String flag) {
@@ -395,9 +371,6 @@ public class ExcelExportHelper {
      * @param filePath   文件保存路径
      * @param fileName   保存文件名
      * @return
-     * @author chenssy
-     * @date 2014年6月17日 下午10:39:15
-     * @version 1.0
      */
     public void exportExcelForBigDataAndSave(String[] header, List<Object> excelList, String sheetTitle,
                                              String flag, String filePath, String fileName) {
@@ -428,9 +401,6 @@ public class ExcelExportHelper {
      * @param flag       分页标识为。flag == 0001：生成多个Excel,flag == 0002：生成多个sheet
      * @param filePath   文件保存路径
      * @param fileName   保存文件名
-     * @author chenssy
-     * @date 2014年6月19日 下午8:22:25
-     * @version 1.0
      */
     public void exportExcelForBigDataAndSave(String[] header, String[] properties, List<Object> excelList, String sheetTitle,
                                              String flag, String filePath, String fileName) {
@@ -465,9 +435,6 @@ public class ExcelExportHelper {
      * @param excelName  Excel文件名
      * @param zipName    zip文件名
      * @return
-     * @author chenssy
-     * @date 2014年6月19日 下午10:39:15
-     * @version 1.0
      */
     public void exportExcelForBigDataAndZipAndSave(String[] header, List<Object> excelList, String sheetTitle,
                                                    String flag, String filePath, String excelName, String zipName) {
@@ -495,9 +462,6 @@ public class ExcelExportHelper {
      * @param filePath   文件保存路径
      * @param excelName  Excel文件名
      * @param zipName    ZIP文件名
-     * @author chenssy
-     * @date 2014年6月19日 下午8:24:21
-     * @version 1.0
      */
     public void exportExcelForBigDataAndZipAndSave(String[] header, String[] properties, List<Object> excelList, String sheetTitle,
                                                    String flag, String filePath, String excelName, String zipName) {
@@ -515,9 +479,6 @@ public class ExcelExportHelper {
      * @param sheet     sheet
      * @param header    Excel头部title
      * @param excelList Excel数据列
-     * @author chenssy
-     * @date 2014年6月17日 下午10:32:34
-     * @version 1.0
      */
     @SuppressWarnings({"rawtypes", "unchecked", "deprecation"})
     private void setExcelContentData(HSSFWorkbook book, HSSFSheet sheet, String[] header, List<Object> excelList) {
@@ -570,24 +531,24 @@ public class ExcelExportHelper {
                     setCellData(row, index, i, value, cell, sheet, patriarch, book);
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (SecurityException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 }
             }
         }
 
-        System.out.println("-------------------------填充Excel数据成功..........");
+        logger.info("-------------------------填充Excel数据成功..........");
     }
 
     /**
@@ -649,21 +610,21 @@ public class ExcelExportHelper {
                     setCellData(row, index, i, o, cell, sheet, patriarch, book);
                 } catch (IntrospectionException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
-                    System.out.println("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 }
             }
         }
 
-        System.out.println("——————————————————填充Excel数据成功..........");
+        logger.info("——————————————————填充Excel数据成功..........");
     }
 
     /**
@@ -671,9 +632,6 @@ public class ExcelExportHelper {
      *
      * @param sheetTitle
      * @return
-     * @author chenssy
-     * @date 2014年6月16日 下午1:46:06
-     * @version 1.0
      */
     private String getSheetTitle(String sheetTitle) {
         String title = null;
@@ -692,7 +650,6 @@ public class ExcelExportHelper {
      *
      * @param headerStyle 头部样式
      * @param book        生产的excel book 	 HSSFWorkbook对象
-     * @author chenssy
      */
     private void setHeaderStyle(HSSFCellStyle headerStyle, HSSFWorkbook book) {
         //水平居中
@@ -714,9 +671,6 @@ public class ExcelExportHelper {
      *
      * @param cellStyle 单元格样式
      * @param book      book HSSFWorkbook对象
-     * @author chenssy
-     * @date 2014年6月17日 上午11:00:53
-     * @version 1.0
      */
     private void setCellStyle(HSSFCellStyle cellStyle, HSSFWorkbook book) {
         cellStyle.setAlignment(HorizontalAlignment.CENTER);   //水平居中
@@ -735,9 +689,6 @@ public class ExcelExportHelper {
      * @param headerStyle 头部样式
      * @param header      头部数据
      * @return 设置完成的头部Row
-     * @author chenssy
-     * @date 2014年6月17日 上午11:37:28
-     * @version 1.0
      */
     private HSSFRow createHeader(HSSFSheet sheet, HSSFCellStyle headerStyle,
                                  String[] header) {
@@ -766,9 +717,6 @@ public class ExcelExportHelper {
      * @param sheet     sheet HSSFSheet对象
      * @param patriarch 顶级画板 用于实现突破
      * @param book      Excel HSSFWorkbook对象
-     * @author chenssy
-     * @date 2014年6月17日 上午11:48:14
-     * @version 1.0
      */
     private void setCellData(HSSFRow row, int index, int i, Object value, HSSFCell cell, HSSFSheet sheet, HSSFPatriarch patriarch, HSSFWorkbook book) {
         String textValue = null;
@@ -802,7 +750,7 @@ public class ExcelExportHelper {
             //设置单元格宽度，是文字能够全部显示
             setCellMaxWidth(textValue, i);
             sheet.setColumnWidth(i, maxWidth[i]);    //设置单元格宽度
-            row.setHeightInPoints((short) (20));   //设置单元格高度
+            row.setHeightInPoints((short) (20));     //设置单元格高度
             if (matcher.matches()) {
                 // 是数字当作double处理
                 cell.setCellValue(Double.parseDouble(textValue));
@@ -817,9 +765,6 @@ public class ExcelExportHelper {
      *
      * @param fileName 文件名
      * @return
-     * @author chenssy
-     * @date 2014年6月17日 下午5:44:27
-     * @version 1.0
      */
     private String getFileName(String fileName) {
         if (fileName == null || "".equals(fileName)) {
@@ -859,26 +804,14 @@ public class ExcelExportHelper {
      * @version 1.0
      */
     private void saveExcel(HSSFWorkbook book, String filePath, String fileName) {
-        //检测保存路劲是否存在，不存在则新建
         checkFilePathIsExist(filePath);
-        //将Excel保存至指定目录下
         fileName = getFileName(fileName);
-        FileOutputStream out = null;
-        try {
-            out = new FileOutputStream(filePath + "\\" + fileName + ".xls");
+        try (FileOutputStream out = new FileOutputStream(filePath + "\\" + fileName + ".xls")) {
             book.write(out);
-            System.out.println("——————————————————保存Excel文件成功，保存路径：" + filePath + "\\" + fileName + ".xls");
+            logger.info("save excel successful path:" + filePath + "\\" + fileName + ".xls");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("——————————————————保存Excel文件失败。exportExcelForListAndSave,message：" + e.getMessage());
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            logger.info("save excel failed:" + e.getMessage());
         }
     }
 
@@ -915,13 +848,13 @@ public class ExcelExportHelper {
                 zip.putNextEntry(entry);
                 book.write(zip);
             }
-            System.out.println("——————————————————保存Excel文件成功，保存路径：" + filePath + "\\" + zipName + ".xls");
+            logger.info("——————————————————保存Excel文件成功，保存路径：" + filePath + "\\" + zipName + ".xls");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("——————————————————保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
+            logger.info("——————————————————保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("——————————————————保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
+            logger.info("——————————————————保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
         } finally {
             if (zip != null) {
                 try {
@@ -947,13 +880,9 @@ public class ExcelExportHelper {
      * 检测保存路径是否存在，不存在则新建
      *
      * @param filePath 文件路径
-     * @author chenssy
-     * @date 2014年6月18日 下午1:05:17
-     * @version 1.0
      */
     private void checkFilePathIsExist(String filePath) {
         File file = new File(filePath);
-
         if (!file.exists()) {
             file.mkdirs();
         }
