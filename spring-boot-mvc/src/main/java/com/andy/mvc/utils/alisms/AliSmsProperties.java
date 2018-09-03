@@ -3,6 +3,11 @@ package com.andy.mvc.utils.alisms;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * <p>
+ *
+ * @author: Leone
+ **/
 @Component
 @ConfigurationProperties(prefix = "module.sms")
 public class AliSmsProperties {
