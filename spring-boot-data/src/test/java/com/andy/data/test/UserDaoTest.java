@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @Description:
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-21 21:20
  **/
 @Slf4j

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: lyon
+ * @author lyon
  * @since: 2018-05-21
  **/
 @Component

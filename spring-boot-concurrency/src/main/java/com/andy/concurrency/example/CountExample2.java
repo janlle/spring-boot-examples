@@ -9,7 +9,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-22 16:28
  **/
 @Slf4j

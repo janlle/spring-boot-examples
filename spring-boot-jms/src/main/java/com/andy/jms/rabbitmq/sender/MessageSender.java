@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-05
  **/
 @Slf4j

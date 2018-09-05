@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.*;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-06 16:31
  **/
 @Slf4j

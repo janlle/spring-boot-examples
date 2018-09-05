@@ -27,7 +27,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * <p> Excel 生成通用类，为了兼容，所有 Excel 统一生成 Excel2003 即：xx.xls
  *
- * @author: Leone
+ * @author Leone
  **/
 public class ExcelExportHelper {
 

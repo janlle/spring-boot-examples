@@ -73,6 +73,7 @@
         <module>spring-boot-websocket</module>
         <module>spring-boot-jvm</module>
         <module>spring-boot-design</module>
+        <module>spring-boot-cache</module>
         <module>spring-boot-batch</module>
     </modules>
 
