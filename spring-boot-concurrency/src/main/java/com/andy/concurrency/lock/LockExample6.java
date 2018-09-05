@@ -9,7 +9,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.StampedLock;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-06 20:15
  **/
 @Slf4j

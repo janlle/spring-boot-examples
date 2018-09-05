@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-21
  **/
 @Slf4j

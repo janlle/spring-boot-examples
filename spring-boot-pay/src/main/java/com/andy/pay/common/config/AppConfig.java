@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * @Description:
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-22 21:47
  **/
 @Configuration

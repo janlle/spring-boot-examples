@@ -1,7 +1,7 @@
 package com.andy.concurrency.threadLocal;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-06
  **/
 public class RequestHolder {

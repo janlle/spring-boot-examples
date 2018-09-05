@@ -3,7 +3,7 @@ package com.andy.pay.common.property;
 import lombok.Data;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-03 15:33
  **/
 @Data

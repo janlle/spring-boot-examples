@@ -3,7 +3,7 @@ package com.andy.mvc.event;
 import org.springframework.context.ApplicationEvent;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-10 14:35
  **/
 

@@ -1,7 +1,7 @@
 package com.andy.pay.common;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-09
  **/
 public interface AppConstants {

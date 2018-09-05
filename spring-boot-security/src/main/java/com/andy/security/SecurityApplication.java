@@ -6,12 +6,14 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 /**
- * @author: Leone
- * @since: 2018-4-12 13:58
+ * @author Leone
+ * @since: 2018-4-12
  **/
 @SpringBootApplication
 public class SecurityApplication {
+
 	public static void main(String[] args) {
 		SpringApplication.run(SecurityApplication.class, args);
 	}
+
 }

@@ -3,7 +3,7 @@ package com.andy.concurrency.example.deadLock;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-08 21:30
  **/
 @Slf4j

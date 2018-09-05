@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-03 10:45
  **/
 @Slf4j

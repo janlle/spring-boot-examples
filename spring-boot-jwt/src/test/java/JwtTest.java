@@ -4,7 +4,7 @@ import com.auth0.jwt.interfaces.Claim;
 import java.util.Map;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-16 09:43
  **/
 public class JwtTest {

@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-03 20:06
  **/
 @Data

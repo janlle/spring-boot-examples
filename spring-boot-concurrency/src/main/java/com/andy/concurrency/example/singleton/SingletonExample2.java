@@ -4,7 +4,7 @@ import com.andy.concurrency.annotations.ThreadSafe;
 
 /**
  * 单例饿汉模式
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-06 13:19
  **/
 @ThreadSafe

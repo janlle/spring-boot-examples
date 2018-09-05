@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.Date;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-11
  **/
 @EnableCaching
