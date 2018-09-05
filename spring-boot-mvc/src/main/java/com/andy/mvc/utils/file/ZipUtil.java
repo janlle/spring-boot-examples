@@ -7,7 +7,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * <p> 文件压缩、解压工具类。文件压缩格式为zip
  *
- * @author: Leone
+ * @author Leone
  **/
 public class ZipUtil {
 

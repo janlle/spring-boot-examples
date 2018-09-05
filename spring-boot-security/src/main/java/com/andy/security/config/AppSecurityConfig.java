@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-21 14:17
  **/
 @EnableWebSecurity

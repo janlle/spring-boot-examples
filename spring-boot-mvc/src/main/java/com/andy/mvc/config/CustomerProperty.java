@@ -3,7 +3,7 @@ package com.andy.mvc.config;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-19
  **/
 public class CustomerProperty {

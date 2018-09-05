@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-22 15:13
  **/
 @Configuration

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Arrays;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-06 13:06
  **/
 @Slf4j

@@ -2,7 +2,7 @@ package com.andy.pay.common.enums;
 
 /**
  * @Description:
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-20 20:14
  **/
 public enum OrderStatusEnum {

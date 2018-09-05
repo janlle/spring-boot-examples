@@ -1,7 +1,7 @@
 package com.andy.pay.common.enums;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-03
  **/
 public enum ResultEnum {

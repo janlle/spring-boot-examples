@@ -16,7 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.util.Collections;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-4-15 23:16
  **/
 @Configuration

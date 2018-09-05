@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Random;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-21 00:14
  **/
 @Slf4j

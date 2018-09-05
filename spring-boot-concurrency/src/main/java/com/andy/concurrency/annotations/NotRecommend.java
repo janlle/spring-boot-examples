@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 不推荐的写法
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-22 15:12
  **/
 

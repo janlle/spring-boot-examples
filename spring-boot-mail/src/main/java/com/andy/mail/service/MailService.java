@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-09
  **/
 @Slf4j

@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.Stack;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-28
  **/
 @RestController
