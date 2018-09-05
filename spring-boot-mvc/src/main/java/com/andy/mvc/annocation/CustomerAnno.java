@@ -3,7 +3,7 @@ package com.andy.mvc.annocation;
 import java.lang.annotation.*;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-29
  **/
 

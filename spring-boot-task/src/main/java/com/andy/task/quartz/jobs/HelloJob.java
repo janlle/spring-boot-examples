@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-27
  **/
 @Slf4j

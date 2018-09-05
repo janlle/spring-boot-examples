@@ -16,7 +16,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-05
  **/
 public class TokenUtil {

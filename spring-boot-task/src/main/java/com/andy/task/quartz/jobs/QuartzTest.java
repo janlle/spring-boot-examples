@@ -10,7 +10,7 @@ import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-19
  **/
 public class QuartzTest {

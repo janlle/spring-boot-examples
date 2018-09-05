@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  **/
 @Component
 public class AliSmsService {

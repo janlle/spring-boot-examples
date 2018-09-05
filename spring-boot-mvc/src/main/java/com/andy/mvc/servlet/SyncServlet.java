@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-07-22 22:19
  **/
 @Slf4j

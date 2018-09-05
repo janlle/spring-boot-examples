@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-17 13:23
  **/
 @Slf4j

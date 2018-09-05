@@ -1,7 +1,7 @@
 package com.andy.design.structure.facade;
 
 /**
- * @author: Leone
+ * @author Leone
  * @cerateBy: 2018-07-29
  **/
 public class FacadeTest {

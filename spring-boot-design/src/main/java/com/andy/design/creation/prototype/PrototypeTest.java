@@ -3,7 +3,7 @@ package com.andy.design.creation.prototype;
 import java.util.Date;
 
 /**
- * @author: Leone
+ * @author Leone
  * @cerateBy: 2018-07-28
  **/
 public class PrototypeTest {

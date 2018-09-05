@@ -1,7 +1,7 @@
 package com.andy.design.structure.flyweight;
 
 /**
- * @author: Leone
+ * @author Leone
  * @cerateBy: 2018-07-30
  **/
 public class FlyweightTest {

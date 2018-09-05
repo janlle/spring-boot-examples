@@ -3,7 +3,7 @@ package com.andy.design.behavior.observer;
 /**
  * <p> 观察者 实现了update方法
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-22
  **/
 public class User implements Observer {

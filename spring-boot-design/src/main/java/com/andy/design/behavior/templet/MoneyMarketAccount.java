@@ -1,6 +1,6 @@
 package com.andy.design.behavior.templet;
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-03
  **/
 public class MoneyMarketAccount extends Account {

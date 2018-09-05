@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 /**
  * <p> 提供精确的加减乘除运算
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-09-03
  **/
 public class BigDecimalUtils {

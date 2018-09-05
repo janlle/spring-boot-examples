@@ -3,7 +3,7 @@ package com.andy.design.behavior.command;
 /**
  * <p> FunctionButton：功能键类，请求发送者
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-23
  **/
 public class FunctionButton {

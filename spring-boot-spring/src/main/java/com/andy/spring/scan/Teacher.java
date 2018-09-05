@@ -3,7 +3,7 @@ package com.andy.spring.scan;
 import org.springframework.stereotype.Service;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-07-01 11:17
  **/
 @Service("teach")

@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * <p> 转换工具类
  *
- * @author: Leone
+ * @author Leone
  **/
 public class ConvertUtils {
 

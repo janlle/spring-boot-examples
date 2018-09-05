@@ -3,7 +3,7 @@ package com.andy.mvc.utils.qiniu;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  **/
 public class QiNiu {
 

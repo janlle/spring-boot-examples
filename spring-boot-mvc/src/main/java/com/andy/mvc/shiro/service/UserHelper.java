@@ -5,7 +5,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-13
  **/
 public class UserHelper {

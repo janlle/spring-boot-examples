@@ -7,7 +7,7 @@ import java.util.List;
  * <p> 被观察者，也就是微信公众号服务
  * 实现了BeObserver接口，对BeObserver接口的三个方法进行了具体实现
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-22
  **/
 public class WeChatServer implements BeObserver {
