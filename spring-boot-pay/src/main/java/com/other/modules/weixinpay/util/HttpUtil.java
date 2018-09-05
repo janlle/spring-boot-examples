@@ -9,9 +9,6 @@ import java.net.URLConnection;
 
 /**
  * http请求(这里用户获取订单url生成二维码)
- * 创建者 科帮网
- * 创建时间	2017年7月31日
- *
  */
 public class HttpUtil {
 	private final static int CONNECT_TIMEOUT = 5000; // in milliseconds
