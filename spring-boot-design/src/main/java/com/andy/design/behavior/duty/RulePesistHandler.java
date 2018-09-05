@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 /**
  * <p> 告警规则持久化
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-22
  **/
 public class RulePesistHandler extends AbstractRuleHandler {

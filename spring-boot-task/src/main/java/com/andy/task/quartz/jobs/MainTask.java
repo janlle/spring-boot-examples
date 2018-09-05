@@ -4,7 +4,7 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-05
  **/
 public class MainTask {

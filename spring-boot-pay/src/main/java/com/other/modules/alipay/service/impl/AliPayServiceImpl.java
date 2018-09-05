@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.io.File;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-16 21:44
  **/
 @Service

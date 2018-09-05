@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Date;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-29 21:25
  **/
 @Slf4j

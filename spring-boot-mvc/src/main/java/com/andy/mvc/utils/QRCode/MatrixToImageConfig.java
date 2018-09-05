@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  **/
 public final class MatrixToImageConfig {
 

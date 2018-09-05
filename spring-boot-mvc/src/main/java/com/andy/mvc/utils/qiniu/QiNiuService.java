@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  **/
 @Service
 public class QiNiuService {

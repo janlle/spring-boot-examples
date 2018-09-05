@@ -18,7 +18,7 @@ import java.util.Hashtable;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  **/
 public class MatrixToImageWriterEx {
 
@@ -113,7 +113,7 @@ public class MatrixToImageWriterEx {
      * @param logoPath   要写入照片的路径
      * @param logoConfig logo配置对象  可以为null，为 null 默认 DEFAULT_CONFIG
      * @throws IOException
-     * @author:chenming
+     * @authorchenming
      * @date:2014年12月31日
      */
     public static void overlapImage(BitMatrix matrix, String formate, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
@@ -135,7 +135,7 @@ public class MatrixToImageWriterEx {
      * @param logoPath   要写入照片的路径
      * @param logoConfig logo配置对象  可以为null，为 null 默认 DEFAULT_CONFIG
      * @throws IOException
-     * @author:chenming
+     * @authorchenming
      * @date:2014年12月31日
      */
     public static void overlapImage(BufferedImage image, String format, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
@@ -153,7 +153,7 @@ public class MatrixToImageWriterEx {
      * @param image      需要绘制的二维码图片
      * @param logoConfig 配置参数
      * @throws IOException
-     * @author:chenming
+     * @authorchenming
      * @date:2014年12月31日
      */
     private static void drawImage(String logoPath, BufferedImage image, MatrixToLogoImageConfig logoConfig) throws IOException {

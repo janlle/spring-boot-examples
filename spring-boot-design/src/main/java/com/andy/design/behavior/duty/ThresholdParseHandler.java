@@ -6,7 +6,7 @@ import org.springframework.util.StringUtils;
 /**
  * <p> 阈值解析
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-22
  **/
 public class ThresholdParseHandler extends AbstractRuleHandler {

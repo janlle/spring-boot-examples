@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Base64;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-10
  **/
 public class Base_64 {

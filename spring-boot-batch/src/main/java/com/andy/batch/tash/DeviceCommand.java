@@ -3,7 +3,7 @@ package com.andy.batch.tash;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-25
  **/
 public class DeviceCommand {

@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-07-08
  **/
 @Configuration

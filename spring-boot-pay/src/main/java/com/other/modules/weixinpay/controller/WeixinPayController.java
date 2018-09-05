@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-06-16 21:45
  **/
 @Api(tags ="微信支付")

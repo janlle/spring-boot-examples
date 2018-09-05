@@ -1,7 +1,7 @@
 package com.andy.design.behavior.strategy;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-02
  **/
 public class Price {

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <p> redis配置
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-07-19
  **/
 @Configuration
