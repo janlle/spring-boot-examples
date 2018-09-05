@@ -1,7 +1,7 @@
 package com.andy.design.structure.proxy;
 
 /**
- * @author: Leone
+ * @author Leone
  * @cerateBy: 2018-07-29
  **/
 public class Proxy implements Source {

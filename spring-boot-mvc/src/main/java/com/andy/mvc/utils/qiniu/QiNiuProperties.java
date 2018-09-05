@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  **/
 @Component
 @ConfigurationProperties(prefix = "module.qiniu")

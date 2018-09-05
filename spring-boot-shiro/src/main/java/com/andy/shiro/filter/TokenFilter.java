@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-07-05
  **/
 @Component

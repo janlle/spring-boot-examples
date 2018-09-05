@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-11
  **/
 public class JacksonSerialize {

@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * 微信用户信息
- * @author: Leone
+ * @author Leone
  * @since: 2018-05-19 22:18
  **/
 @Data

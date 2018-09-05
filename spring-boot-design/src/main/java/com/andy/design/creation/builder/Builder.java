@@ -3,7 +3,7 @@ package com.andy.design.creation.builder;
 import java.util.Date;
 
 /**
- * @author: Leone
+ * @author Leone
  * @cerateBy: 2018-07-29
  **/
 public class Builder implements IBuilder {

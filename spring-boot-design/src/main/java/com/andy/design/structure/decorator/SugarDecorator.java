@@ -1,7 +1,7 @@
 package com.andy.design.structure.decorator;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-01
  **/
 public class SugarDecorator extends Decorator {

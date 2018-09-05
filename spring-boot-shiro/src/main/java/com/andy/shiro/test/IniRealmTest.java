@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-07-21 13:06
  **/
 

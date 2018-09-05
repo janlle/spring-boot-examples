@@ -13,7 +13,7 @@ import java.io.InputStream;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  **/
 @RestController
 @Api(tags = "七牛云上传图片")

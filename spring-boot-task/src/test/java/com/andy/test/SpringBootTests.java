@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 /**
  * <p>
  *
- * @author: lyon
+ * @author lyon
  * @since: 2018-08-21
  **/
 @SpringBootTest(classes = TaskApplication.class)

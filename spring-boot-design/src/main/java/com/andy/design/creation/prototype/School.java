@@ -3,7 +3,7 @@ package com.andy.design.creation.prototype;
 import java.io.Serializable;
 
 /**
- * @author: Leone
+ * @author Leone
  * @cerateBy: 2018-07-29
  **/
 public class School implements Serializable {

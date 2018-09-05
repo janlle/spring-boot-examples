@@ -17,7 +17,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 /**
  * <p>
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-26
  **/
 public class Main {

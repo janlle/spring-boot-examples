@@ -4,7 +4,7 @@ package com.andy.design.behavior.duty;
 /**
  * <p> 告警规则
  *
- * @author: Leone
+ * @author Leone
  * @since: 2018-08-22
  **/
 public class AlarmRule {

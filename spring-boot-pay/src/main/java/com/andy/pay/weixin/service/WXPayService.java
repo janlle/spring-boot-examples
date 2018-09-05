@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018/6/3 16:00
  **/
 @Slf4j
@@ -46,7 +46,7 @@ public class WXPayService {
     /**
      * App支付
      *
-     * @author: Leone
+     * @author Leone
      * @since: 2018-06-17 12:29
      * @params: [request, orderId]
      * @return: void
@@ -86,7 +86,7 @@ public class WXPayService {
     /**
      * 微信退款
      *
-     * @author: Leone
+     * @author Leone
      * @since: 2018/6/1 10:20
      * @params: [orderId, userId]
      * @return: java.lang.String
@@ -120,7 +120,7 @@ public class WXPayService {
     /**
      * 微信扫码支付传入的价格为--元
      *
-     * @author: Leone
+     * @author Leone
      * @since: 2018-06-15 11:46
      * @params: [price, userId]
      * @return: void
@@ -177,7 +177,7 @@ public class WXPayService {
     /**
      * 微信退参数拼装
      *
-     * @author: Leone
+     * @author Leone
      * @since: 2018/6/3 15:04
      * @params: [wxOrderId, outTradeNum, totalFee]
      * @return: java.lang.String
@@ -206,7 +206,7 @@ public class WXPayService {
     /**
      * 微信退款
      *
-     * @author: Leone
+     * @author Leone
      * @since: 2018/6/3 15:05
      * @params: [xmlData]
      * @return: void

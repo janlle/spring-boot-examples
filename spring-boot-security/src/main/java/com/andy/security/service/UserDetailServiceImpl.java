@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * @author: Leone
+ * @author Leone
  * @since: 2018-04-10 17:07
  **/
 @Slf4j
