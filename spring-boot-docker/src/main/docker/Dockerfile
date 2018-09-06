@@ -3,7 +3,7 @@ FROM java:8
 # 将本地文件夹挂载到当前容器
 VOLUME /tmp
 # 维护者信息
-MAINTAINER lyon "janlle@126.com"
+MAINTAINER leone "janlle@126.com"
 
 RUN mkdir -p /usr/local/app
 
