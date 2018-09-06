@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Leone
- * @since: 2018-08-05
+ * @since 2018-08-05
  **/
 @Service
 public class TokenService {

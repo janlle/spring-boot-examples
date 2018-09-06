@@ -2,7 +2,7 @@ package com.andy.design.behavior.templet;
 
 /**
  * @author Leone
- * @since: 2018-08-02
+ * @since 2018-08-02
  **/
 public class TemplateTest {
 

@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * @author Leone
- * @since: 2018-05-06 14:09
+ * @since 2018-05-06 14:09
  **/
 @Slf4j
 public class ImmutableExample1 {

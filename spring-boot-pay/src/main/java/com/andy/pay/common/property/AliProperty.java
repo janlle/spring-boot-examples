@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author Leone
- * @since: 2018-06-03 15:33
+ * @since 2018-06-03 15:33
  **/
 @Data
 public class AliProperty {

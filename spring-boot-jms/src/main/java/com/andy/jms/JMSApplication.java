@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Leone
- * @since: 2018-04-10
+ * @since 2018-04-10
  **/
 @SpringBootApplication
 public class JMSApplication {

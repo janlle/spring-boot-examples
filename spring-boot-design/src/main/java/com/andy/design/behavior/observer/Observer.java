@@ -5,7 +5,7 @@ package com.andy.design.behavior.observer;
  * <p> 定义了一个update()方法，当被观察者调用notifyObservers()方法时，观察者的update()方法会被回调。
  *
  * @author Leone
- * @since: 2018-08-22
+ * @since 2018-08-22
  **/
 public interface Observer {
 

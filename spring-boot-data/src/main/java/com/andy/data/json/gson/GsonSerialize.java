@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author Leone
- * @since: 2018-05-11
+ * @since 2018-05-11
  **/
 public class GsonSerialize {
 

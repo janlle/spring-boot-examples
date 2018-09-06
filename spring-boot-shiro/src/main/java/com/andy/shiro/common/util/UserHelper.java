@@ -11,7 +11,7 @@ import org.apache.shiro.subject.Subject;
  * <p>
  *
  * @author Leone
- * @since: 2018-06-11
+ * @since 2018-06-11
  **/
 @Slf4j
 public class UserHelper {

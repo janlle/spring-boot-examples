@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * @author Leone
- * @since: 2018-04-22 15:13
+ * @since 2018-04-22 15:13
  **/
 @Configuration
 @SpringBootApplication

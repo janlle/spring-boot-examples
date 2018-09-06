@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Leone
- * @since: 2018-07-08
+ * @since 2018-07-08
  **/
 @Slf4j
 @RestController

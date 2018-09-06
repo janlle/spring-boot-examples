@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Leone
- * @since: 2018-06-29 21:56
+ * @since 2018-06-29 21:56
  **/
 @Slf4j
 public class SimpleClientHandler extends SimpleChannelInboundHandler<ByteBuf> {

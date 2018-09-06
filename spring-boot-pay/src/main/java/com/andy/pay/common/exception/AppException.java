@@ -4,7 +4,7 @@ import com.andy.pay.common.enums.ResultEnum;
 
 /**
  * @author Leone
- * @since: 2018-05-08
+ * @since 2018-05-08
  **/
 public class AppException extends RuntimeException {
 

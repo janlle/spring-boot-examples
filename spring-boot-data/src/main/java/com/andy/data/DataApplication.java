@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @author Leone
- * @since: 2018-05-11
+ * @since 2018-05-11
  **/
 @EnableCaching
 @SpringBootApplication
@@ -21,6 +21,5 @@ public class DataApplication {
     public static void main(String[] args) {
         SpringApplication.run(DataApplication.class, args);
     }
-
 
 }

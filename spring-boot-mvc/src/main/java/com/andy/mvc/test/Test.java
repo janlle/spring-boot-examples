@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * @author Leone
- * @since: 2018-04-10 10:03
+ * @since 2018-04-10 10:03
  **/
 public class Test {
     public static void main(String[] args) throws Exception {

@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 /**
  * @author Leone
- * @since: 2018-07-01 11:12
+ * @since 2018-07-01 11:12
  **/
 public class Student {
 

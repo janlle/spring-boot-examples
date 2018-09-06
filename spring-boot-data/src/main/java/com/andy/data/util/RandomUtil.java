@@ -5,7 +5,7 @@ import java.util.UUID;
 
 /**
  * @author Leone
- * @since: 2018-07-04
+ * @since 2018-07-04
  **/
 public class RandomUtil {
 
@@ -13,7 +13,7 @@ public class RandomUtil {
      * 生成随机字符串
      *
      * @author Leone
-     * @since: 2018/6/25
+     * @since 2018/6/25
      * @params: []
      * @return: java.lang.String
      **/
@@ -34,7 +34,7 @@ public class RandomUtil {
      * 生成32位随机数字
      *
      * @author Leone
-     * @since: 2018/6/25
+     * @since 2018/6/25
      * @params: []
      * @return: java.lang.String
      **/
@@ -50,7 +50,7 @@ public class RandomUtil {
      * 获取当前时间戳，单位秒(10位)
      *
      * @author Leone
-     * @since: 2018/6/25
+     * @since 2018/6/25
      * @params: []
      * @return: java.lang.String
      **/

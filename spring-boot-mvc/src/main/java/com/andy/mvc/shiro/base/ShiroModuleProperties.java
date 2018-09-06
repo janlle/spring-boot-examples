@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author Leone
- * @since: 2018-05-17
+ * @since 2018-05-17
  **/
 @Configuration
 @ConfigurationProperties(prefix = "module.shiro")

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Leone
- * @since: 2018-06-03 11:17
+ * @since 2018-06-03 11:17
  **/
 @RestController
 public class UserController {

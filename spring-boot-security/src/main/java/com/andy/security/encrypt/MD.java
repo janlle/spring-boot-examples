@@ -15,7 +15,7 @@ import java.security.Security;
  * 4.将byte[] 转换为找度为32位的16进制字符串
  *
  * @author Leone
- * @since: 2018-07-01
+ * @since 2018-07-01
  **/
 public class MD {
 

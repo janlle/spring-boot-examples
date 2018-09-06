@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Leone
- * @since: 2018-05-06
+ * @since 2018-05-06
  **/
 @Slf4j
 @Controller

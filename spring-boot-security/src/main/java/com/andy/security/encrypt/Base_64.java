@@ -8,7 +8,7 @@ import java.util.Base64;
 
 /**
  * @author Leone
- * @since: 2018-05-10
+ * @since 2018-05-10
  **/
 public class Base_64 {
 

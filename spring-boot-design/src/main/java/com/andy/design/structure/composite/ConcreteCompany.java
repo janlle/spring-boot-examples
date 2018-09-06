@@ -7,7 +7,7 @@ import java.util.List;
  * 枝节点类
  *
  * @author Leone
- * @since: 2018-08-01
+ * @since 2018-08-01
  */
 public class ConcreteCompany extends Component {
 

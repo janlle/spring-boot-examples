@@ -2,7 +2,7 @@ package com.andy.design.structure.flyweight;
 
 /**
  * @author Leone
- * @since: 2018-07-31
+ * @since 2018-07-31
  **/
 public class Client {
 

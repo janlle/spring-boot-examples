@@ -17,7 +17,7 @@ import java.util.Collections;
 
 /**
  * @author Leone
- * @since: 2018-4-15 23:16
+ * @since 2018-4-15 23:16
  **/
 @Configuration
 public class SwaggerConfig {

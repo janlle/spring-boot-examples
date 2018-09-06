@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * @author Leone
- * @since: 2018-04-16 09:43
+ * @since 2018-04-16 09:43
  **/
 public class JwtTest {
 

@@ -6,7 +6,7 @@ import org.apache.shiro.subject.Subject;
 
 /**
  * @author Leone
- * @since: 2018-08-13
+ * @since 2018-08-13
  **/
 public class UserHelper {
 

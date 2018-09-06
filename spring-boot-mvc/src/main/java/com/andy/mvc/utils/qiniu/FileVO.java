@@ -6,7 +6,7 @@ import java.util.List;
  * <p>
  *
  * @author Leone
- * @since: 2018-09-02
+ * @since 2018-09-02
  **/
 public class FileVO {
 

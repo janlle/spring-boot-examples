@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * <p> 功能键设置窗口类
  *
  * @author Leone
- * @since: 2018-08-23
+ * @since 2018-08-23
  **/
 public class FBSettingWindow {
 

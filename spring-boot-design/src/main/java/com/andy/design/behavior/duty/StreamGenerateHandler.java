@@ -5,7 +5,7 @@ package com.andy.design.behavior.duty;
  * <p> 告警流规则生成
  *
  * @author Leone
- * @since: 2018-08-22
+ * @since 2018-08-22
  **/
 public class StreamGenerateHandler extends AbstractRuleHandler {
 

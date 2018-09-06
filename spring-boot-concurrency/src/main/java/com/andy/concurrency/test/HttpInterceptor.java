@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Leone
- * @since: 2018-05-06 14:38
+ * @since 2018-05-06 14:38
  **/
 @Slf4j
 public class HttpInterceptor extends HandlerInterceptorAdapter {

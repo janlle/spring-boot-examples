@@ -4,7 +4,7 @@ package com.andy.design.structure.composite;
  * 组合模式
  *
  * @author Leone
- * @since: 2018-08-01
+ * @since 2018-08-01
  **/
 public class Client {
 

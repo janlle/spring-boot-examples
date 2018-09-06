@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Leone
- * @since: 2018-06-29 20:58
+ * @since 2018-06-29 20:58
  **/
 @SpringBootApplication
 public class IOApplication {

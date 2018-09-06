@@ -25,7 +25,7 @@ import java.util.Map;
 
 /**
  * @author Leone
- * @since: 2018-05-17
+ * @since 2018-05-17
  **/
 @Configuration
 public class ShiroConfig {

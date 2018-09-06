@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * @author Leone
- * @since: 2018-04-21
+ * @since 2018-04-21
  * @see org.apache.shiro.web.filter.mgt.DefaultFilter
  **/
 @Configuration

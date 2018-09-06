@@ -2,7 +2,7 @@ package com.andy.design.behavior.strategy;
 
 /**
  * @author Leone
- * @since: 2018-08-03
+ * @since 2018-08-03
  **/
 public class PrimaryMemberStrategy implements MemberStrategy {
 

@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Leone
- * @since: 2018-04-22 17:17
+ * @since 2018-04-22 17:17
  **/
 @Slf4j
 public class AtomicExample1 {

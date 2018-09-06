@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author Leone
- * @since: 2018-05-11 18:43
+ * @since 2018-05-11 18:43
  **/
 @Mapper
 public interface UserMapper {

@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @author Leone
- * @since: 2018-06-03
+ * @since 2018-06-03
  **/
 @Data
 public class WXProperty {

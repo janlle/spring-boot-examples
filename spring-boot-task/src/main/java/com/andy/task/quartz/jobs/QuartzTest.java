@@ -11,7 +11,7 @@ import org.quartz.impl.StdSchedulerFactory;
 
 /**
  * @author Leone
- * @since: 2018-05-19
+ * @since 2018-05-19
  **/
 public class QuartzTest {
 

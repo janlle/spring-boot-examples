@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
  * <p> redis配置
  *
  * @author Leone
- * @since: 2018-07-19
+ * @since 2018-07-19
  **/
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {

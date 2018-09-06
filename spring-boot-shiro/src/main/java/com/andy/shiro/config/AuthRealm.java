@@ -17,7 +17,7 @@ import java.util.*;
 
 /**
  * @author Leone
- * @since: 2018-04-21
+ * @since 2018-04-21
  **/
 @Slf4j
 public class AuthRealm extends AuthorizingRealm {

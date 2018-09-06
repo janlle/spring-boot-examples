@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Leone
- * @since: 2018-05-06 13:11
+ * @since 2018-05-06 13:11
  **/
 @Slf4j
 @NotThreadSafe

@@ -17,7 +17,7 @@ import java.util.Base64;
 
 /**
  * @author Leone
- * @since: 2018-08-05
+ * @since 2018-08-05
  **/
 public class TokenUtil {
 

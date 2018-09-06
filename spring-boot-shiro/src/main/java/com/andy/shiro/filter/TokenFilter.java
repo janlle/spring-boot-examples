@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 
 /**
  * @author Leone
- * @since: 2018-07-05
+ * @since 2018-07-05
  **/
 @Component
 public class TokenFilter extends AuthenticationFilter {

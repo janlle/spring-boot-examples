@@ -7,7 +7,7 @@ import java.util.Vector;
 
 /**
  * @author Leone
- * @since: 2018-05-06 16:31
+ * @since 2018-05-06 16:31
  **/
 @Slf4j
 public class VectorExample3 {

@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @author Leone
- * @since: 2018-04-21 14:17
+ * @since 2018-04-21 14:17
  **/
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)//允许进入页面方法前检验

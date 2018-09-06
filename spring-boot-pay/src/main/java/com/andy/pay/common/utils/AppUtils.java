@@ -25,7 +25,7 @@ import java.util.*;
  * 项目常用工具
  *
  * @author Leone
- * @since: 2018-05-10
+ * @since 2018-05-10
  **/
 @Slf4j
 public class AppUtils {
@@ -52,7 +52,7 @@ public class AppUtils {
      * 生成md5签名的方法
      *
      * @author Leone
-     * @since: 2018/6/3 14:59
+     * @since 2018/6/3 14:59
      * @params: [charset, params, apiKey]
      * @return: java.lang.String
      **/
@@ -76,7 +76,7 @@ public class AppUtils {
      * 生成MD5摘要算法
      *
      * @author Leone
-     * @since: 2018/6/3 15:00
+     * @since 2018/6/3 15:00
      * @params: [message, charset]
      * @return: java.lang.String
      **/
@@ -96,7 +96,7 @@ public class AppUtils {
      * 生成 HMAC_SHA256
      *
      * @author Leone
-     * @since: 2018/6/3 15:01
+     * @since 2018/6/3 15:01
      * @params: [data, key]
      * @return: java.lang.String
      **/
@@ -131,7 +131,7 @@ public class AppUtils {
      * XML格式字符串转换为Map
      *
      * @author Leone
-     * @since: 2018/6/3 15:02
+     * @since 2018/6/3 15:02
      * @params: [xmlStr]
      * @return: java.util.Map
      **/
@@ -162,7 +162,7 @@ public class AppUtils {
      * map转换为xml字符串
      *
      * @author Leone
-     * @since: 2018/6/3 15:02
+     * @since 2018/6/3 15:02
      * @params: [params]
      * @return: java.lang.String
      **/
@@ -185,7 +185,7 @@ public class AppUtils {
      * 生成32位随机数字
      *
      * @author Leone
-     * @since: 2018/6/3 15:02
+     * @since 2018/6/3 15:02
      * @params: []
      * @return: java.lang.String
      **/
@@ -197,7 +197,7 @@ public class AppUtils {
      * 获取当前时间戳，单位秒(10位)
      *
      * @author Leone
-     * @since: 2018/6/3 15:02
+     * @since 2018/6/3 15:02
      * @params: []
      * @return: java.lang.String
      **/
@@ -209,7 +209,7 @@ public class AppUtils {
      * 生成32位字符串
      *
      * @author Leone
-     * @since: 2018/6/3 15:02
+     * @since 2018/6/3 15:02
      * @params: []
      * @return: java.lang.String
      **/

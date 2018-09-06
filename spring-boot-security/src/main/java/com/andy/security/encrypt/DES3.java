@@ -16,7 +16,7 @@ import javax.crypto.spec.DESedeKeySpec;
  * 3重DES
  *
  * @author Leone
- * @since: 2018-07-01
+ * @since 2018-07-01
  **/
 public class DES3 {
 

@@ -11,7 +11,7 @@ import java.util.Set;
  * 用户信息
  *
  * @author Leone
- * @since: 2018-04-19
+ * @since 2018-04-19
  **/
 @Data
 public class User implements Serializable {

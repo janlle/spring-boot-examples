@@ -4,7 +4,7 @@ package com.andy.design.behavior.duty;
  * <p> 告警规则责任链处理节点抽象类
  *
  * @author Leone
- * @since: 2018-08-22
+ * @since 2018-08-22
  **/
 public abstract class AbstractRuleHandler {
     // 上一个处理器

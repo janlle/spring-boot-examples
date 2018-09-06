@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 /**
  * @author Leone
- * @since: 2018-05-26
+ * @since 2018-05-26
  **/
 @Configuration
 public class RouterConfig {

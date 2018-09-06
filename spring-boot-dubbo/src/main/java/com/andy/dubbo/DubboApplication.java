@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Leone
- * @since: 2018-06-03 09:29
+ * @since 2018-06-03 09:29
  **/
 @SpringBootApplication
 public class DubboApplication {

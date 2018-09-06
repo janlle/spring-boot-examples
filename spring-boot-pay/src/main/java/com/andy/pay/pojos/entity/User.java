@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * @author Leone
- * @since: 2018/6/3 20:09
+ * @since 2018/6/3 20:09
  **/
 @Data
 @ApiModel("用户实体")

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Leone
- * @since: 2018-05-12
+ * @since 2018-05-12
  **/
 @Component
 public class HelloService {

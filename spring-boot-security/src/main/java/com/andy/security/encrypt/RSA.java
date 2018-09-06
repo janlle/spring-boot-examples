@@ -19,7 +19,7 @@ import java.util.HashMap;
  * 非对称加密算法--RSA
  *
  * @author Leone
- * @since: 2018-05-01
+ * @since 2018-05-01
  **/
 @Slf4j
 public class RSA {
