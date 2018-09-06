@@ -125,7 +125,7 @@ public class ExcelExportHelper {
         //设置Excel里面数据
         setExcelContentData(book, sheet, header, excelList);
 
-        logger.info("——————————————————ExcelExportHelper:Excel生成成功...");
+        logger.info("formatExcelExportHelper:Excel生成成功...");
 
         return book;
     }
@@ -154,7 +154,7 @@ public class ExcelExportHelper {
         // 设置Excel里面数据
         setExcelContentData(book, sheet, header, properties, excelList);
 
-        logger.info("——————————————————ExcelExportHelper:Excel生成成功...");
+        logger.info("formatExcelExportHelper:Excel生成成功...");
 
         return book;
     }
@@ -531,19 +531,19 @@ public class ExcelExportHelper {
                     setCellData(row, index, i, value, cell, sheet, patriarch, book);
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (SecurityException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 }
             }
         }
@@ -610,21 +610,21 @@ public class ExcelExportHelper {
                     setCellData(row, index, i, o, cell, sheet, patriarch, book);
                 } catch (IntrospectionException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();
-                    logger.info("——————————————————创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
+                    logger.info("format创建Excel数据列表时出错。method:setDataRow,message：" + e.getMessage());
                 }
             }
         }
 
-        logger.info("——————————————————填充Excel数据成功..........");
+        logger.info("format填充Excel数据成功..........");
     }
 
     /**
@@ -848,13 +848,13 @@ public class ExcelExportHelper {
                 zip.putNextEntry(entry);
                 book.write(zip);
             }
-            logger.info("——————————————————保存Excel文件成功，保存路径：" + filePath + "\\" + zipName + ".xls");
+            logger.info("format保存Excel文件成功，保存路径：" + filePath + "\\" + zipName + ".xls");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            logger.info("——————————————————保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
+            logger.info("format保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
-            logger.info("——————————————————保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
+            logger.info("format保存Excel文件失败。method:exportExcelForBigDataAndSave,message：" + e.getMessage());
         } finally {
             if (zip != null) {
                 try {
