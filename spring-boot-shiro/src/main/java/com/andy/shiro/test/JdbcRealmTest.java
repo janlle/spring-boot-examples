@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Leone
- * @since: 2018-07-21 13:06
+ * @since 2018-07-21 13:06
  **/
 
 public class JdbcRealmTest {

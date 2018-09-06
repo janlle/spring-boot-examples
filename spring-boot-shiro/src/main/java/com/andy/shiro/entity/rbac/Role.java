@@ -10,7 +10,7 @@ import java.util.Set;
  * 角色信息
  *
  * @author Leone
- * @since: 2018-04-19
+ * @since 2018-04-19
  **/
 @Data
 public class Role {

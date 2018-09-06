@@ -15,7 +15,7 @@ import java.util.Date;
  * 权限信息
  *
  * @author Leone
- * @since: 2018-04-19
+ * @since 2018-04-19
  **/
 @Data
 public class Permission implements Serializable {

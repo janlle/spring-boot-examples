@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Leone
- * @since: 2018-04-13 10:23
+ * @since 2018-04-13 10:23
  **/
 @Slf4j
 public class AppInterceptor implements HandlerInterceptor {

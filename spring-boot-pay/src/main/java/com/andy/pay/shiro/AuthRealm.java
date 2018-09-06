@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 
 /**
  * @author Leone
- * @since: JDK8.0
+ * @since JDK8.0
  **/
 @Component
 public class AuthRealm extends AuthorizingRealm {

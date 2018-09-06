@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Leone
- * @since: 2018-05-08 21:30
+ * @since 2018-05-08 21:30
  **/
 @Slf4j
 public class DeadLock implements Runnable {

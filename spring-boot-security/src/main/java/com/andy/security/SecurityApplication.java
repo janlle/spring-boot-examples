@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 /**
  * @author Leone
- * @since: 2018-4-12
+ * @since 2018-4-12
  **/
 @SpringBootApplication
 public class SecurityApplication {

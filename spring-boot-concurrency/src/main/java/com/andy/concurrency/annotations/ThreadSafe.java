@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 用来标记线程安全的类或写法
  * @author Leone
- * @since: 2018-04-22 15:05
+ * @since 2018-04-22 15:05
  **/
 
 @Target(ElementType.TYPE)

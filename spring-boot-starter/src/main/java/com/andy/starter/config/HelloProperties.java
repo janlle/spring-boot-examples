@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author Leone
- * @since: 2018-05-12 09:28
+ * @since 2018-05-12 09:28
  **/
 @ConfigurationProperties(prefix = "customer")
 public class HelloProperties {

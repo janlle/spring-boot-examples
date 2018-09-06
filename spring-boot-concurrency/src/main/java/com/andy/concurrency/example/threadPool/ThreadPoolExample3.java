@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Leone
- * @since: 2018-05-08 21:13
+ * @since 2018-05-08 21:13
  **/
 @Slf4j
 public class ThreadPoolExample3 {

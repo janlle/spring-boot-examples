@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Leone
- * @since: 2018-06-21 0:38
+ * @since 2018-06-21 0:38
  **/
 @Slf4j
 @RestController

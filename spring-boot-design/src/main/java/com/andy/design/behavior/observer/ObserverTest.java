@@ -4,7 +4,7 @@ package com.andy.design.behavior.observer;
  * <p> 观察者模式测试
  *
  * @author Leone
- * @since: 2018-08-22
+ * @since 2018-08-22
  **/
 public class ObserverTest {
 

@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * 检测是否为移动端设备访问
  *
  * @author Leone
- * @since: 2018-05-09
+ * @since 2018-05-09
  **/
 public class CheckMobile {
 

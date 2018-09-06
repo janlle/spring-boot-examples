@@ -5,7 +5,7 @@ package com.andy.design.behavior.command;
  * <p>
  *
  * @author Leone
- * @since: 2018-08-24
+ * @since 2018-08-24
  **/
 public class Receiver {
 

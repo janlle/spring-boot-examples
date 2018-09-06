@@ -93,7 +93,7 @@ public class CommonUtil {
      * 四舍五入保留N位小数 先四舍五入在使用double值自动去零
      *
      * @author Leone
-     * @since: 2018-06-16 21:43
+     * @since 2018-06-16 21:43
      * @params: [arg, scare]
      * @return: java.lang.String
      **/

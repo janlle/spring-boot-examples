@@ -10,7 +10,7 @@ import javax.crypto.spec.PBEParameterSpec;
 import org.apache.commons.codec.binary.Base64;
 /**
  * @author Leone
- * @since: 2018-04-04
+ * @since 2018-04-04
  **/
 public class PBE {
 

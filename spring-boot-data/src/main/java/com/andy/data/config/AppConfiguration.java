@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @author Leone
- * @since: 2018-07-08
+ * @since 2018-07-08
  **/
 @Configuration
 public class AppConfiguration {

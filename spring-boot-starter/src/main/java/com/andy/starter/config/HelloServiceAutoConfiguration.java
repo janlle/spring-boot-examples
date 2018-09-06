@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Leone
- * @since: 2018-05-12
+ * @since 2018-05-12
  **/
 @Configuration
 @EnableConfigurationProperties(HelloProperties.class)

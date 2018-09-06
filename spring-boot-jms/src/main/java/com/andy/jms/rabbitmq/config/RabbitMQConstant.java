@@ -2,7 +2,7 @@ package com.andy.jms.rabbitmq.config;
 
 /**
  * @author Leone
- * @since: 2018-05-01
+ * @since 2018-05-01
  **/
 public interface RabbitMQConstant {
 

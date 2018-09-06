@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  * @author Leone
- * @since: 2018-05-27
+ * @since 2018-05-27
  **/
 @Slf4j
 @Configuration

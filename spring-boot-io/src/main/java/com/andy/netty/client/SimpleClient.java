@@ -13,7 +13,7 @@ import java.net.InetSocketAddress;
 
 /**
  * @author Leone
- * @since: 2018-06-29 21:10
+ * @since 2018-06-29 21:10
  **/
 @Slf4j
 public class SimpleClient {

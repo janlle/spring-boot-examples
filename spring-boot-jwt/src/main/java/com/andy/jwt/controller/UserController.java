@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Leone
- * @since: 2018-04-19 19:32
+ * @since 2018-04-19 19:32
  **/
 @Slf4j
 @RestController

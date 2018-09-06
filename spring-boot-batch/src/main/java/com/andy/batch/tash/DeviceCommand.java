@@ -4,7 +4,7 @@ package com.andy.batch.tash;
  * <p>
  *
  * @author Leone
- * @since: 2018-08-25
+ * @since 2018-08-25
  **/
 public class DeviceCommand {
 

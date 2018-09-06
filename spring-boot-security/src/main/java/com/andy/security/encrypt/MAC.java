@@ -15,7 +15,7 @@ import java.util.Scanner;
  * 消息摘要算法--MAC
  *
  * @author Leone
- * @since: 2018-07-01 14:34
+ * @since 2018-07-01 14:34
  **/
 public class MAC {
 

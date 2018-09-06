@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Leone
- * @since: 2018-05-09 18:13
+ * @since 2018-05-09 18:13
  **/
 @SpringBootApplication
 public class MailApplication {

@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * @author Leone
- * @since: 2018-07-12 22:42
+ * @since 2018-07-12 22:42
  **/
 @Data
 @ApiModel

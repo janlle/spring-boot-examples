@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 /**
  * @author Leone
- * @since: 2018-05-06 13:06
+ * @since 2018-05-06 13:06
  **/
 @Slf4j
 @NotThreadSafe

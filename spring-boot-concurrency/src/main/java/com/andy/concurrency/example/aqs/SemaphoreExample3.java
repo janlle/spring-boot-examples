@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Leone
- * @since: 2018-05-06 18:36
+ * @since 2018-05-06 18:36
  **/
 @Slf4j
 public class SemaphoreExample3 {

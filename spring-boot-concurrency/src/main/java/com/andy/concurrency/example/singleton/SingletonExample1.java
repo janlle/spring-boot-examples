@@ -5,7 +5,7 @@ import com.andy.concurrency.annotations.NotThreadSafe;
 /**
  * 单例懒汉模式
  * @author Leone
- * @since: 2018-05-06 13:19
+ * @since 2018-05-06 13:19
  **/
 @NotThreadSafe
 public class SingletonExample1 {

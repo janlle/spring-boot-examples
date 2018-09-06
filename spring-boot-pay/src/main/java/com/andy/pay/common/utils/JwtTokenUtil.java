@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * @author Leone
- * @since: 2018-05-8
+ * @since 2018-05-8
  **/
 @Slf4j
 public class JwtTokenUtil {

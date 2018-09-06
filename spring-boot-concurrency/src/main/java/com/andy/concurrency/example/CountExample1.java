@@ -9,7 +9,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  * @author Leone
- * @since: 2018-04-22 16:28
+ * @since 2018-04-22 16:28
  **/
 @Slf4j
 public class CountExample1 {

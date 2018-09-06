@@ -2,7 +2,7 @@ package com.andy.design.structure.decorator;
 
 /**
  * @author Leone
- * @since: 2018-08-01
+ * @since 2018-08-01
  **/
 public class DecoratorTest {
 

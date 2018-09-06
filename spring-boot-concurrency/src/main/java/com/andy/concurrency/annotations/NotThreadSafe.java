@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 标记线程不安全的类
  * @author Leone
- * @since: 2018-04-22 15:08
+ * @since 2018-04-22 15:08
  **/
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)

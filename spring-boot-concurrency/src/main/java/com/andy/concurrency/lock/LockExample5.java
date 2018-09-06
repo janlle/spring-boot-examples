@@ -16,7 +16,7 @@ import java.util.concurrent.locks.StampedLock;
 
 /**
  * @author Leone
- * @since: 2018-05-06 19:49
+ * @since 2018-05-06 19:49
  **/
 @Slf4j
 public class LockExample5 {

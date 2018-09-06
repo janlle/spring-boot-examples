@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Leone
- * @since: 2018-07-23
+ * @since 2018-07-23
  **/
 @WebServlet(name = "/sseServlet", urlPatterns = "/sse")
 public class SseServer extends HttpServlet {

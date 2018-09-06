@@ -9,7 +9,7 @@ import java.util.concurrent.Executor;
 
 /**
  * @author Leone
- * @since: 2018-06-12 23:13
+ * @since 2018-06-12 23:13
  **/
 @EnableAsync
 @Configuration

@@ -2,7 +2,7 @@ package com.andy.spring.beans;
 
 /**
  * @author Leone
- * @since: 2018-06-29 23:21
+ * @since 2018-06-29 23:21
  **/
 public class Person {
 

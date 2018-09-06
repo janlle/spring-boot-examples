@@ -8,7 +8,7 @@ import java.util.List;
  * 实现了BeObserver接口，对BeObserver接口的三个方法进行了具体实现
  *
  * @author Leone
- * @since: 2018-08-22
+ * @since 2018-08-22
  **/
 public class WeChatServer implements BeObserver {
 

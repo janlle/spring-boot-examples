@@ -2,7 +2,7 @@ package com.andy.websocket.config;
 
 /**
  * @author Leone
- * @since: 2018-07-06 22:10
+ * @since 2018-07-06 22:10
  **/
 public class WSResponse {
 

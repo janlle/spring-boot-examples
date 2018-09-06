@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Leone
- * @since: 2018-05-06
+ * @since 2018-05-06
  **/
 @Slf4j
 public class LockExample2 {

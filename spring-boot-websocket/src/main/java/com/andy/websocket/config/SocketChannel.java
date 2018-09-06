@@ -10,7 +10,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * @author Leone
- * @since: 2018-07-06
+ * @since 2018-07-06
  **/
 @Slf4j
 @Component
