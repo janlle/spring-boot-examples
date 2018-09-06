@@ -91,15 +91,15 @@ public class MatrixToImageWriterEx {
      * @param image     生成的二维码照片对象
      * @param imagePath 照片保存路径
      * @param logoPath  logo照片路径
-     * @param formate   照片格式
+     * @param format    照片格式
      */
-    public static void overlapImage(BufferedImage image, String formate, String imagePath, String logoPath, MatrixToLogoImageConfig logoConfig) {
+    public static void overlapImage(BufferedImage image, String format, String imagePath, String logoPath, MatrixToLogoImageConfig logoConfig) {
         try {
             //将logo写入二维码中
             drawImage(logoPath, image, logoConfig);
 
             //写入logo照片到二维码
-            ImageIO.write(image, formate, new File(imagePath));
+            ImageIO.write(image, format, new File(imagePath));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,14 +109,14 @@ public class MatrixToImageWriterEx {
      * 将照片添加到二维码中间，并生成流
      *
      * @param matrix     要写入的二维码
-     * @param formate    照片格式
+     * @param format     照片格式
      * @param logoPath   要写入照片的路径
      * @param logoConfig logo配置对象  可以为null，为 null 默认 DEFAULT_CONFIG
      * @throws IOException
      * @authorchenming
      * @date:2014年12月31日
      */
-    public static void overlapImage(BitMatrix matrix, String formate, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
+    public static void overlapImage(BitMatrix matrix, String format, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
         //将matrix转换为bufferImage
         BufferedImage image = MatrixToImageWriter.toBufferedImage(matrix);
 
@@ -124,7 +124,7 @@ public class MatrixToImageWriterEx {
         drawImage(logoPath, image, logoConfig);
 
         //输出
-        ImageIO.write(image, formate, out);
+        ImageIO.write(image, format, out);
     }
 
     /**

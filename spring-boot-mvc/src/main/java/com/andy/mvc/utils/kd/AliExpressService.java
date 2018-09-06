@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import org.springframework.cglib.beans.BeanMap;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AliExpressService {
 
@@ -24,11 +26,10 @@ public class AliExpressService {
     public static TracesVO findKd(String no, String type) {
         url = String.format(url, no, type);
         String stateStr = "暂无物流信息";
-        Map<String, String> headers = new HashMap();
-        headers.put("Authorization", "APPCODE " + appCode);
+        Map<String, Object> headers = Collections.singletonMap("Authorization", "APPCODE " + appCode);
         TracesVO trace = null;
         try {
-            String result = HttpUtil.sendGetNone(url, headers);
+            String result = HttpUtil.sendGet(url, null, headers);
             trace = objectMapper.readValue(result, TracesVO.class);
             if (trace.getStatus().equals("0")) {
                 String status = trace.getResult().getDeliverystatus();
