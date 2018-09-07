@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/boot?useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
