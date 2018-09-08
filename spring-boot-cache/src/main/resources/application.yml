@@ -5,19 +5,4 @@ spring:
     port: 6379
     host: 127.0.0.1
     timeout: 20000ms
-    database: 2
-  datasource:
-    url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
-    username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      minimum-idle: 5
-      maximum-pool-size: 15
-      auto-commit: true
-      idle-timeout: 30000
-      pool-name: DatebookHikariCP
-      max-lifetime: 1800000
-      connection-timeout: 30000
-      connection-test-query: SELECT 1
+    database: 1
