@@ -7,20 +7,20 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p> 本章先基于 本地缓存来做，后续讲解 redis 方案
+ * <p> 本地缓存来做 redis 方案
  *
  * @author Leone
  * @since 2018-09-08
  **/
 @Aspect
-@Configuration
+@Component
 public class LockMethodInterceptor {
 
     private static final Cache<String, Object> CACHES = CacheBuilder.newBuilder()
@@ -53,16 +53,22 @@ public class LockMethodInterceptor {
     }
 
     /**
-     * key 的生成策略,如果想灵活可以写成接口与实现类的方式（TODO 后续讲解）
+     * key 的生成策略,如果想灵活可以写成接口与实现类的方式
      *
      * @param keyExpress 表达式
      * @param args       参数
      * @return 生成的key
      */
-    private String getKey(String keyExpress, Object[] args) {
+    private static String getKey(String keyExpress, Object[] args) {
         for (int i = 0; i < args.length; i++) {
             keyExpress = keyExpress.replace("arg[" + i + "]", args[i].toString());
         }
         return keyExpress;
+    }
+
+
+    public static void main(String[] args) {
+        String key = getKey("book:arg[0]", new Object[]{"123"});
+        System.out.println(key);
     }
 }

@@ -1,23 +1,24 @@
 package com.andy.mvc.utils.qiniu;
 
+import com.andy.mvc.utils.math.RandomUtils;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,12 +31,21 @@ public class QiNiuService {
 
     private final Logger logger = LoggerFactory.getLogger(QiNiuService.class);
 
-    private Configuration configuration = new Configuration(Zone.zone2());
+    private Configuration configuration;
 
-    private UploadManager uploadManager = new UploadManager(configuration);
+    private UploadManager uploadManager;
 
-    @Autowired
+    private Auth auth;
+
+    @Resource
     private QiNiuProperties properties;
+
+    @PostConstruct
+    public void init() {
+        configuration = new Configuration(Zone.zone2());
+        uploadManager = new UploadManager(configuration);
+        auth = Auth.create(properties.getAccessKey(), properties.getSecretKey());
+    }
 
     /**
      * 获取token
@@ -43,19 +53,17 @@ public class QiNiuService {
      * @return
      */
     public String getToken() {
-        Auth auth = Auth.create(properties.getAccessKey(), properties.getSecretKey());
         return auth.uploadToken(properties.getBucket());
     }
 
     /**
      * 获取token
      *
-     * @param key
+     * @param bucket
      * @return
      */
-    public QiNiuToken getToken(String key) {
-        Auth auth = Auth.create(properties.getAccessKey(), properties.getSecretKey());
-        String token = auth.uploadToken(properties.getBucket(), key);
+    public QiNiuToken getToken(String bucket) {
+        String token = auth.uploadToken(properties.getBucket(), bucket);
         return new QiNiuToken(token);
     }
 
@@ -64,13 +72,16 @@ public class QiNiuService {
      *
      * @param file
      * @return
+     *
      */
     public FileVO upload(MultipartFile file) {
         try {
             byte[] fileBytes = file.getBytes();
-            Response res = uploadManager.put(fileBytes, null, getToken());
+            String token = getToken();
+            System.out.println(token);
+            Response res = uploadManager.put(fileBytes, null, token);
             QiNiu qiniu = res.jsonToObject(QiNiu.class);
-            return new FileVO(Arrays.asList(properties.getLinkAddress() + qiniu.getHash()));
+            return new FileVO(Collections.singletonList(properties.getLinkAddress() + qiniu.getHash()));
         } catch (IOException e) {
             logger.error("message:{}", e);
             return null;
@@ -109,7 +120,7 @@ public class QiNiuService {
      * @return
      */
     public FileVO uploadStream(InputStream inputStream) {
-        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()){
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             byte[] buffer = new byte[1024];
             int len;
             while ((len = inputStream.read(buffer)) != -1) {
@@ -125,4 +136,12 @@ public class QiNiuService {
             return null;
         }
     }
+
+
+    public static void main(String[] args) {
+
+
+    }
+
+
 }
