@@ -1,7 +1,5 @@
 package com.andy.concurrency.controller;
 
-import com.andy.concurrency.example.commonUnsafe.HashMapExample;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +33,7 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping("/test")
-    public void test(){
+    public void test() {
         log.info("test method...a={}", stack.pop());
     }
 
