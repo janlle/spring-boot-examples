@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -35,6 +36,11 @@ public class TestController {
     @RequestMapping("/test")
     public void test() {
         log.info("test method...a={}", stack.pop());
+        System.out.println("收到请求:" + LocalDateTime.now().toLocalTime());
+    }
+
+    public static void main(String[] args) {
+        System.out.println("收到请求:" + LocalDateTime.now().toLocalTime());
     }
 
 }
