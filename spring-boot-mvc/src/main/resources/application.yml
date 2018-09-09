@@ -68,3 +68,7 @@ module:
     tokenPrefix: ${server.port}
     tokenName: auth.token
   qiniu:
+    bucket: xxx
+    access-key: xxx
+    secret-key: xxx
+    link-address: xxx

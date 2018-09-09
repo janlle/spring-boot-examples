@@ -10,20 +10,20 @@ import java.util.List;
  **/
 public class FileVO {
 
-    private List<String> urlList;
+    private List<String> urls;
 
     public FileVO() {
     }
 
-    public FileVO(List<String> urlList) {
-        this.urlList = urlList;
+    public FileVO(List<String> urls) {
+        this.urls = urls;
     }
 
-    public List<String> getUrlList() {
-        return urlList;
+    public List<String> getUrls() {
+        return urls;
     }
 
-    public void setUrlList(List<String> urlList) {
-        this.urlList = urlList;
+    public void setUrls(List<String> urls) {
+        this.urls = urls;
     }
 }
