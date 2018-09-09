@@ -6,6 +6,7 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import javassist.bytecode.ByteArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,7 +41,7 @@ public class QiNiuService {
 
     @PostConstruct
     public void init() {
-        configuration = new Configuration(Zone.zone2());
+        configuration = new Configuration(Zone.zone0());
         uploadManager = new UploadManager(configuration);
         auth = Auth.create(properties.getAccessKey(), properties.getSecretKey());
     }
@@ -136,12 +135,5 @@ public class QiNiuService {
             return null;
         }
     }
-
-
-    public static void main(String[] args) {
-
-
-    }
-
 
 }
