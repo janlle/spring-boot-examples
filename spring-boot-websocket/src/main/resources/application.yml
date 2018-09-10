@@ -1,3 +1,9 @@
 spring:
   application:
     name: websocket
+server:
+  ssl:
+    key-store: tomcat.keystore
+    key-password: 123456
+    key-store-type: PKCS12
+    key-alias: tomcat
