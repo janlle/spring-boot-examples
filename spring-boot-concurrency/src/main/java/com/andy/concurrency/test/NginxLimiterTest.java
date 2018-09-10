@@ -1,5 +1,6 @@
 package com.andy.concurrency.test;
 
+import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,4 +27,16 @@ public class NginxLimiterTest {
         }
         service.shutdown();
     }
+
+
+    @Test
+    public void test() {
+        RestTemplate restTemplate = new RestTemplate();
+        for (int i = 0; i    < 6; i++) {
+            String result = restTemplate.getForObject("http://39.108.125.41:8080/test", String.class);
+            System.out.println(result);
+        }
+    }
+
+
 }
