@@ -27,7 +27,6 @@ public class HttpsConfig {
     }
 
     @Bean
-
     public TomcatServletWebServerFactory tomcatServletWebServerFactory() {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
             @Override
