@@ -60,11 +60,15 @@ module:
     mulitLogin: false
     cacheDays: 7
     redisPrefix: ${server.port}
-    anonUrls: /*
+    anonUrls: /**
     coreUrls:
     - /api/user/property
     - /api/user/login
-    authUrls: /api/**
+    authUrls: /hello
     tokenPrefix: ${server.port}
     tokenName: auth.token
-
+  qiniu:
+    bucket: xxx
+    access-key: xxx
+    secret-key: xxx
+    link-address: xxx

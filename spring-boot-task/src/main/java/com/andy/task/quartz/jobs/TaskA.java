@@ -12,16 +12,16 @@ import java.util.Date;
 
 /**
  * @author Leone
- * @since 2018-05-19
+ * @since 2018-05-27
  **/
 @Slf4j
 @Configuration
 @EnableScheduling
-public class SchedulingTaskB implements Job {
+public class TaskA implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        log.info("spring-Quartz hello world---B! now:"+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) );
+        log.info("spring-Quartz hello world---A! now:"+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) );
     }
 
 
