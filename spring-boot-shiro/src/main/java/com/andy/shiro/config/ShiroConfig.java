@@ -1,30 +1,22 @@
 package com.andy.shiro.config;
 
 
-import com.andy.shiro.filter.CoreFilter;
-import com.andy.shiro.filter.TokenFilter;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
-import javax.servlet.Filter;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author Leone
- * @since 2018-04-21
  * @see org.apache.shiro.web.filter.mgt.DefaultFilter
+ * @since 2018-04-21
  **/
 @Configuration
 public class ShiroConfig {
@@ -105,7 +97,6 @@ public class ShiroConfig {
     }*/
 
 
-
     /**
      * 密码匹配器
      *
@@ -140,6 +131,17 @@ public class ShiroConfig {
 //        filterRegistrationBean.setFilter(proxy);
 //        return filterRegistrationBean;
 //    }
+    @Bean
+    public EhCacheManager ehCacheManager() {
+        EhCacheManager em = new EhCacheManager();
+        em.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
+        return em;
+    }
+
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
 
 
 }
