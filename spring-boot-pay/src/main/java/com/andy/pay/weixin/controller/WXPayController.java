@@ -7,56 +7,76 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Description: 微信支付
+ * 微信支付
  * @author Leone
- * @since 2018-05-20 19:01
+ * @since 2018-05-20
  **/
 
 @Slf4j
-@Controller
+@RestController
 @Api(tags = "微信支付接口")
-@RequestMapping("/wechat")
+@RequestMapping("/wx")
 public class WXPayController {
 
     @Autowired
     private WXPayService weChatPayService;
 
-    @ApiOperation(value = "微信预下单", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @GetMapping("/pay")
-    @ResponseBody
-    public String prePay(String orderId, HttpServletRequest request, HttpServletResponse response) {
-        log.info("微信预支付开始.....");
+    @GetMapping("/app/pay")
+    @ApiOperation("微信App支付预下单")
+    public void appPay(String orderId, HttpServletRequest request, HttpServletResponse response) {
         weChatPayService.payHandler(request, orderId);
-        return "success";
     }
 
-    @ApiOperation(value = "微信支付回调", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @GetMapping("/notify")
-    public String notify(String orderId) {
-        return null;
+    @ApiOperation("微信App支付回调")
+    @RequestMapping(value = "/app/notify", method = {RequestMethod.GET, RequestMethod.POST})
+    public void appNotify(String orderId) {
     }
 
-    @ApiOperation(value = "微信退款", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @GetMapping("/refund")
-    public String refund(String orderId) {
+    @ApiOperation("微信App支付退款")
+    @GetMapping("/app/refund")
+    public void appRefund(String orderId) {
         weChatPayService.wxPayRefund(orderId, 12);
-        return "success";
     }
 
 
-    @ApiOperation(value="微信支付主页")
-    @RequestMapping(value="/index",method= RequestMethod.GET)
-    public String index() {
-        return "weixinpay/index";
+    @GetMapping("/qr/code/pay")
+    @ApiOperation("微信扫码支付预下单")
+    public void qrCodePay(String orderId, HttpServletRequest request, HttpServletResponse response) {
+        weChatPayService.payHandler(request, orderId);
+    }
+
+    @ApiOperation("微信扫码支付回调")
+    @RequestMapping(value = "/qr/code/notify", method = {RequestMethod.GET, RequestMethod.POST})
+    public void qrCodeNotify(String orderId) {
+    }
+
+    @ApiOperation("微信扫码支付退款")
+    @GetMapping("/qr/code/refund")
+    public void qrCodeRefund(String orderId) {
+        weChatPayService.wxPayRefund(orderId, 12);
+    }
+
+    @GetMapping("/xcx/pay")
+    @ApiOperation("小程序扫码支付预下单")
+    public void xcxPay(String orderId, HttpServletRequest request, HttpServletResponse response) {
+        weChatPayService.payHandler(request, orderId);
+    }
+
+    @ApiOperation("小程序码支付回调")
+    @RequestMapping(value = "/xcx/notify", method = {RequestMethod.GET, RequestMethod.POST})
+    public void xcxNotify(String orderId) {
+    }
+
+    @ApiOperation("小程序扫码支付退款")
+    @GetMapping("/xcx/refund")
+    public void xcxRefund(String orderId) {
+        weChatPayService.wxPayRefund(orderId, 12);
     }
 
 }
