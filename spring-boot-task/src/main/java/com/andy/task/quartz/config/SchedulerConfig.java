@@ -15,15 +15,10 @@ import org.springframework.stereotype.Component;
  * @since 2018-09-15
  **/
 @Component
-public class SchedulerAllJob {
-
+public class SchedulerConfig {
 
     @Autowired
     private SchedulerFactoryBean schedulerFactoryBean;
-
-    /*
-     * 此处可以注入数据库操作，查询出所有的任务配置
-     */
 
     /**
      * 该方法用来启动所有的定时任务
@@ -32,19 +27,12 @@ public class SchedulerAllJob {
      */
     public void scheduleJobs() throws SchedulerException {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
-
-        /**
-         *
-         */
         scheduleJob1(scheduler);
         scheduleJob2(scheduler);
     }
 
     /**
      * 配置Job1
-     * 此处的任务可以配置可以放到properties或者是放到数据库中
-     * 如果此时需要做到动态的定时任务，请参考：http://blog.csdn.net/liuchuanhong1/article/details/60873295
-     * 博客中的ScheduleRefreshDatabase类
      *
      * @param scheduler
      * @throws SchedulerException
@@ -68,10 +56,10 @@ public class SchedulerAllJob {
      * @throws SchedulerException
      */
     private void scheduleJob2(Scheduler scheduler) throws SchedulerException {
-        JobDetail jobDetail = JobBuilder.newJob(SchedulingTaskB.class).withIdentity("job2", "group2").build();
+        JobDetail jobDetail = JobBuilder.newJob(SchedulingTaskB.class).withIdentity("job2", "group1").build();
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/10 * * * * ?");
         // 每10s执行一次
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger2", "group2").withSchedule(scheduleBuilder).build();
+        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger2", "group1").withSchedule(scheduleBuilder).build();
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 
