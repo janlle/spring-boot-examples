@@ -30,7 +30,7 @@ public class WXPayController {
     @GetMapping("/app/pay")
     @ApiOperation("微信App支付预下单")
     public void appPay(String orderId, HttpServletRequest request, HttpServletResponse response) {
-        weChatPayService.payHandler(request, orderId);
+        weChatPayService.appPay(request, orderId);
     }
 
     @ApiOperation("微信App支付回调")
@@ -41,7 +41,7 @@ public class WXPayController {
     @ApiOperation("微信App支付退款")
     @GetMapping("/app/refund")
     public void appRefund(String orderId) {
-        weChatPayService.wxPayRefund(orderId, 12);
+        weChatPayService.appPayRefund(orderId);
     }
 
 
@@ -71,6 +71,7 @@ public class WXPayController {
     @ApiOperation("小程序码支付回调")
     @RequestMapping(value = "/xcx/notify", method = {RequestMethod.GET, RequestMethod.POST})
     public void xcxNotify(String orderId) {
+        weChatPayService.xcxPay(orderId);
     }
 
     @ApiOperation("小程序扫码支付退款")

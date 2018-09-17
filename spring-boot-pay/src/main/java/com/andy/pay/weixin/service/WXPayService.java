@@ -235,4 +235,19 @@ public class WXPayService {
         }
     }
 
+    public void appPay(HttpServletRequest request, String orderId) {
+
+
+    }
+
+
+    public void appPayRefund(String orderId) {
+
+
+    }
+
+    public void xcxPay(String orderId) {
+
+
+    }
 }
