@@ -5,15 +5,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * 微信支付
+ *
  * @author Leone
  * @since 2018-05-20
  **/
@@ -70,8 +72,8 @@ public class WXPayController {
 
     @ApiOperation("小程序码支付回调")
     @RequestMapping(value = "/xcx/notify", method = {RequestMethod.GET, RequestMethod.POST})
-    public void xcxNotify(String orderId) {
-        weChatPayService.xcxPay(orderId);
+    public void xcxNotify(String orderId, HttpServletRequest request) {
+        weChatPayService.xcxPay(orderId, request);
     }
 
     @ApiOperation("小程序扫码支付退款")

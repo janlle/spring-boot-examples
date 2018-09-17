@@ -16,6 +16,6 @@ public class AppProperty  {
 
     private AliProperty ali = new AliProperty();
 
-    private WXProperty wx = new WXProperty();
+    private WxProperties wx = new WxProperties();
 
 }
