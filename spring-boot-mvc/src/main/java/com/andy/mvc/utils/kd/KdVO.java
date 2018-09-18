@@ -1,7 +1,7 @@
 package com.andy.mvc.utils.kd;
 
+import com.luwei.services.kuaidi.kd.KdStatus;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 import java.util.List;
 
@@ -11,22 +11,59 @@ import java.util.List;
  * @author Leone
  * @since 2018-09-05
  **/
-@Data
 public class KdVO {
 
-    @ApiModelProperty(value = "快递单号")
-    private String logisticCode;
-
-    @ApiModelProperty(value = "快递编号")
+    @ApiModelProperty("快递单号")
     private String shipperCode;
 
-    @ApiModelProperty(value = "快递公司")
+    @ApiModelProperty("快递公司")
     private String shipper;
 
-    @ApiModelProperty(value = "状态")
-    private String state;
+    @ApiModelProperty("收货状态状态")
+    private String status;
 
-    @ApiModelProperty(value = "详情列表")
-    private List<KdStatusInfo> traces;
+    @ApiModelProperty("详情列表")
+    private List<KdStatus> detail;
 
+    public String getShipperCode() {
+        return shipperCode;
+    }
+
+    public void setShipperCode(String shipperCode) {
+        this.shipperCode = shipperCode;
+    }
+
+    public String getShipper() {
+        return shipper;
+    }
+
+    public void setShipper(String shipper) {
+        this.shipper = shipper;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<KdStatus> getDetail() {
+        return detail;
+    }
+
+    public void setDetail(List<KdStatus> detail) {
+        this.detail = detail;
+    }
+
+    @Override
+    public String toString() {
+        return "KdVO{" +
+                "shipperCode='" + shipperCode + '\'' +
+                ", shipper='" + shipper + '\'' +
+                ", status='" + status + '\'' +
+                ", detail=" + detail +
+                '}';
+    }
 }
