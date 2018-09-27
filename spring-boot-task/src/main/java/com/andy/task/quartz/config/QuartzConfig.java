@@ -1,20 +1,15 @@
 package com.andy.task.quartz.config;
 
-<<<<<<< HEAD
-import org.springframework.beans.factory.annotation.Autowired;
-=======
 import com.andy.task.quartz.jobs.TaskA;
-import org.quartz.Trigger;
->>>>>>> c0d388505f53ae1a871fc8506c0b32e9978e4a27
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
+import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
-<<<<<<< HEAD
-=======
 import java.util.Objects;
->>>>>>> c0d388505f53ae1a871fc8506c0b32e9978e4a27
 
 /**
  * <p>
@@ -26,7 +21,6 @@ import java.util.Objects;
 @EnableScheduling
 public class QuartzConfig {
 
-<<<<<<< HEAD
     @Autowired
     private JobFactory jobFactory;
 
@@ -39,7 +33,8 @@ public class QuartzConfig {
         // 设置自定义Job Factory，用于Spring管理Job bean
         factory.setJobFactory(jobFactory);
         return factory;
-=======
+    }
+
     /**
      * 配置定时任务
      * ScheduleTask为需要执行的任务
@@ -74,7 +69,6 @@ public class QuartzConfig {
         trigger.setName("executeTask");
         return trigger;
 
->>>>>>> c0d388505f53ae1a871fc8506c0b32e9978e4a27
     }
 
 }
