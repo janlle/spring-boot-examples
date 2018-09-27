@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
@@ -18,10 +19,7 @@ import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
@@ -64,6 +62,37 @@ public class HttpUtil {
         };
         httpClient = HttpClients.custom().setConnectionManager(pool).setDefaultRequestConfig(requestConfig).setRetryHandler(retryHandler).build();
     }
+
+    /**
+     * @param closeableHttpClient
+     * @param url
+     * @param xlmBody
+     * @return
+     */
+    public static String sendPostSsl(CloseableHttpClient closeableHttpClient, String url, String xlmBody) {
+        StringBuffer sb = new StringBuffer();
+        try {
+            HttpPost httpPost = new HttpPost(url);
+            StringEntity stringEntity = new StringEntity(xlmBody, StandardCharsets.UTF_8);
+            httpPost.setEntity(stringEntity);
+            CloseableHttpResponse response = httpClient.execute(httpPost);
+            HttpEntity httpEntity = response.getEntity();
+            String line;
+            if (httpEntity != null) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpEntity.getContent(), StandardCharsets.UTF_8));
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+                bufferedReader.close();
+            }
+        } catch (Exception e) {
+            log.error("{}", e.getMessage());
+            return null;
+        }
+        return sb.toString();
+    }
+
+
 
     /**
      * @param certPath
