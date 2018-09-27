@@ -11,7 +11,6 @@ import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.stereotype.Component;
 
 //@Component
 public class RunScheduler {
@@ -28,7 +27,7 @@ public class RunScheduler {
 	}
 
 	public static void startJobA() throws SchedulerException {
-		JobDetail jobDetail = JobBuilder.newJob(SchedulingTaskA.class).withIdentity("job-a", "group-a").build();
+		JobDetail jobDetail = JobBuilder.newJob(TaskA.class).withIdentity("job-a", "group-a").build();
 		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0 0/15 * * * ?");
 		CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger-a", "group-a").withSchedule(scheduleBuilder).build();
 		scheduler.scheduleJob(jobDetail, cronTrigger);
@@ -52,7 +51,7 @@ public class RunScheduler {
 	}
 
 	private void startJobB() throws SchedulerException {
-		JobDetail jobDetail = JobBuilder.newJob(SchedulingTaskB.class).withIdentity("job2", "group1").build();
+		JobDetail jobDetail = JobBuilder.newJob(TaskB.class).withIdentity("job2", "group1").build();
 		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0 0 0/2 * * ?");
 		CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger2", "group1")
 				.withSchedule(scheduleBuilder).build();
