@@ -20,6 +20,8 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 项目常用工具
@@ -49,12 +51,25 @@ public class AppUtils {
     }
 
     /**
+     * 匹配ip是否合法
+     *
+     * @param ip
+     * @return
+     */
+    public static Boolean isIp(String ip) {
+        String re = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
+        Pattern pattern = Pattern.compile(re);
+        Matcher matcher = pattern.matcher(ip);
+        return matcher.matches();
+    }
+
+    /**
      * 生成md5签名的方法
      *
      * @author Leone
-     * @since 2018/6/3 14:59
      * @params: [charset, params, apiKey]
      * @return: java.lang.String
+     * @since 2018/6/3 14:59
      **/
     public static String createSign(Map params, String apiKey) {
         StringBuffer sb = new StringBuffer();
@@ -76,9 +91,9 @@ public class AppUtils {
      * 生成MD5摘要算法
      *
      * @author Leone
-     * @since 2018/6/3 15:00
      * @params: [message, charset]
      * @return: java.lang.String
+     * @since 2018/6/3 15:00
      **/
     public static String MD5(String content) {
         try {
@@ -96,9 +111,9 @@ public class AppUtils {
      * 生成 HMAC_SHA256
      *
      * @author Leone
-     * @since 2018/6/3 15:01
      * @params: [data, key]
      * @return: java.lang.String
+     * @since 2018/6/3 15:01
      **/
     public static String HMAC_SHA256(String content, String api_key) throws Exception {
 //        Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
@@ -131,9 +146,9 @@ public class AppUtils {
      * XML格式字符串转换为Map
      *
      * @author Leone
-     * @since 2018/6/3 15:02
      * @params: [xmlStr]
      * @return: java.util.Map
+     * @since 2018/6/3 15:02
      **/
     public static Map xmlToMap(String xmlStr) {
         try (InputStream inputStream = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"))) {
@@ -162,9 +177,9 @@ public class AppUtils {
      * map转换为xml字符串
      *
      * @author Leone
-     * @since 2018/6/3 15:02
      * @params: [params]
      * @return: java.lang.String
+     * @since 2018/6/3 15:02
      **/
     public static String mapToXml(Map params) {
         StringBuilder sb = new StringBuilder();
@@ -185,9 +200,9 @@ public class AppUtils {
      * 生成32位随机数字
      *
      * @author Leone
-     * @since 2018/6/3 15:02
      * @params: []
      * @return: java.lang.String
+     * @since 2018/6/3 15:02
      **/
     public static String genNonceStr() {
         return UUID.randomUUID().toString().replace("-", "");
@@ -197,9 +212,9 @@ public class AppUtils {
      * 获取当前时间戳，单位秒(10位)
      *
      * @author Leone
-     * @since 2018/6/3 15:02
      * @params: []
      * @return: java.lang.String
+     * @since 2018/6/3 15:02
      **/
     public static long getTimestamp() {
         return System.currentTimeMillis() / 1000;
@@ -209,9 +224,9 @@ public class AppUtils {
      * 生成32位字符串
      *
      * @author Leone
-     * @since 2018/6/3 15:02
      * @params: []
      * @return: java.lang.String
+     * @since 2018/6/3 15:02
      **/
     public static String generateNum(int length) {
         StringBuffer result = new StringBuffer();
@@ -235,52 +250,20 @@ public class AppUtils {
 
     public static String getIp(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
-        if (log.isInfoEnabled()) {
-            log.info("getIpAddress(HttpServletRequest) - X-Forwarded-For - String ip=" + ip);
-        }
-
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("Proxy-Client-IP");
-                if (log.isInfoEnabled()) {
-                    log.info("getIpAddress(HttpServletRequest) - Proxy-Client-IP - String ip=" + ip);
-                }
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("WL-Proxy-Client-IP");
-                if (log.isInfoEnabled()) {
-                    log.info("getIpAddress(HttpServletRequest) - WL-Proxy-Client-IP - String ip=" + ip);
-                }
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("HTTP_CLIENT_IP");
-                if (log.isInfoEnabled()) {
-                    log.info("getIpAddress(HttpServletRequest) - HTTP_CLIENT_IP - String ip=" + ip);
-                }
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-                if (log.isInfoEnabled()) {
-                    log.info("getIpAddress(HttpServletRequest) - HTTP_X_FORWARDED_FOR - String ip=" + ip);
-                }
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = request.getRemoteAddr();
-                if (log.isInfoEnabled()) {
-                    log.info("getIpAddress(HttpServletRequest) - getRemoteAddr - String ip=" + ip);
-                }
-            }
-        } else if (ip.length() > 15) {
-            String[] ips = ip.split(",");
-            for (int index = 0; index < ips.length; index++) {
-                String strIp = ips[index];
-                if (!("unknown".equalsIgnoreCase(strIp))) {
-                    ip = strIp;
-                    break;
-                }
+        if (null != ip && "".equals(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+            //多次反向代理后会有多个ip值，第一个ip才是真实ip
+            int index = ip.indexOf(",");
+            if (index != -1) {
+                return ip.substring(0, index);
+            } else {
+                return ip;
             }
         }
-        return ip;
+        ip = request.getHeader("X-Real-IP");
+        if (null != ip && "".equals(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+            return ip;
+        }
+        return request.getRemoteAddr();
     }
 
 

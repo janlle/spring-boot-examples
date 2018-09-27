@@ -158,7 +158,6 @@
                         0
                     </otherwise>
                 </choose>
-
             </trim>
         </foreach>
     </insert>

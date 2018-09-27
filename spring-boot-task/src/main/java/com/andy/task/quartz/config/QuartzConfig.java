@@ -1,22 +1,45 @@
 package com.andy.task.quartz.config;
 
+<<<<<<< HEAD
+import org.springframework.beans.factory.annotation.Autowired;
+=======
 import com.andy.task.quartz.jobs.TaskA;
 import org.quartz.Trigger;
+>>>>>>> c0d388505f53ae1a871fc8506c0b32e9978e4a27
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
-import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+<<<<<<< HEAD
+=======
 import java.util.Objects;
+>>>>>>> c0d388505f53ae1a871fc8506c0b32e9978e4a27
 
 /**
+ * <p>
+ *
  * @author Leone
- * @since 2018-07-19
+ * @since 2018-09-15
  **/
 @Configuration
+@EnableScheduling
 public class QuartzConfig {
 
+<<<<<<< HEAD
+    @Autowired
+    private JobFactory jobFactory;
+
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean() {
+        // Spring提供SchedulerFactoryBean为Scheduler提供配置信息,并被Spring容器管理其生命周期
+        SchedulerFactoryBean factory = new SchedulerFactoryBean();
+        factory.setOverwriteExistingJobs(true);
+        factory.setStartupDelay(20);
+        // 设置自定义Job Factory，用于Spring管理Job bean
+        factory.setJobFactory(jobFactory);
+        return factory;
+=======
     /**
      * 配置定时任务
      * ScheduleTask为需要执行的任务
@@ -51,22 +74,7 @@ public class QuartzConfig {
         trigger.setName("executeTask");
         return trigger;
 
+>>>>>>> c0d388505f53ae1a871fc8506c0b32e9978e4a27
     }
-
-    /**
-     * 定义quartz调度工厂
-     */
-    @Bean(name = "jobSchedule")
-    public SchedulerFactoryBean schedulerFactory(Trigger cronJobTrigger) {
-        SchedulerFactoryBean bean = new SchedulerFactoryBean();
-        // 用于quartz集群,QuartzScheduler 启动时更新己存在的Job
-        bean.setOverwriteExistingJobs(true);
-        // 延时启动，应用启动1秒后
-        bean.setStartupDelay(1);
-        // 注册触发器
-        bean.setTriggers(cronJobTrigger);
-        return bean;
-    }
-
 
 }

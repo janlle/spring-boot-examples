@@ -1,4 +1,4 @@
-package com.andy.mvc.utils.kd;
+package com.andy.mvc.utils.kd.dto;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @since 2018-09-05
  **/
 @Data
-public class KdInfoVO {
+public class KdDetail {
 
     private String number;
 
@@ -27,6 +27,6 @@ public class KdInfoVO {
 
     private String expPhone;
 
-    private List<KdStatusInfo> list;
+    private List<KdStatus> list;
 
 }

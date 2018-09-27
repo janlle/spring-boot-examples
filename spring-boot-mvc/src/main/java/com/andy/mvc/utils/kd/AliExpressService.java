@@ -1,36 +1,48 @@
 package com.andy.mvc.utils.kd;
 
-import com.andy.mvc.utils.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Maps;
-import org.springframework.cglib.beans.BeanMap;
+import com.luwei.common.utils.HttpUtil;
+import com.luwei.services.kuaidi.kd.Traces;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-09-18
+ **/
+@Slf4j
+@Service
 public class AliExpressService {
 
-    private static String appCode = "4111a0608c6c403bad2d492953665b77";
+    private static final String appCode = "ee2aced563ba47219e8c80b1b92efb22";
 
     private static String url = "http://wuliu.market.alicloudapi.com/kdi?no=%s&type=%s";
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+//    private static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static void main(String[] args) {
-        System.out.println(findKd("3366041775146", "STO"));
-    }
+    @Resource
+    private ObjectMapper objectMapper;
 
-    public static TracesVO findKd(String no, String type) {
-        url = String.format(url, no, type);
+//    public static void main(String[] args) throws Exception {
+//        System.out.println(objectMapper.writeValueAsString(findKd("3366041775146", "STO")));
+//    }
+
+    public KdVO findKd(String expressNumber, String type) {
+        KdVO vo = new KdVO();
+        url = String.format(url, expressNumber, type);
         String stateStr = "暂无物流信息";
         Map<String, Object> headers = Collections.singletonMap("Authorization", "APPCODE " + appCode);
-        TracesVO trace = null;
+        Traces trace;
         try {
             String result = HttpUtil.sendGet(url, null, headers);
-            trace = objectMapper.readValue(result, TracesVO.class);
+            trace = objectMapper.readValue(result, Traces.class);
+            log.info("trace:{}", trace);
             if (trace.getStatus().equals("0")) {
                 String status = trace.getResult().getDeliverystatus();
                 switch (status) {
@@ -47,35 +59,15 @@ public class AliExpressService {
                         stateStr = "派送失败";
                         break;
                 }
-                KdVO kdVO = new KdVO();
-                List<KdStatusInfo> list = trace.getResult().getList();
-                kdVO.setTraces(list);
-
-                if (list != null && list.size() != 0) {
-                    for (int i = 0; i < list.size(); i++) {
-                        Map<String, Object> map = beanToMap(list.get(i));
-                    }
-                }
-                kdVO.setLogisticCode(type);
-                kdVO.setShipper(type);
-                kdVO.setState(status);
-                kdVO.setShipperCode(no);
+                vo.setDetail(trace.getResult().getList());
+                vo.setShipper(trace.getResult().getExpName());
+                vo.setStatus(stateStr);
+                vo.setShipperCode(trace.getResult().getNumber());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return trace;
-    }
-
-    public static <T> Map<String, Object> beanToMap(T bean) {
-        Map<String, Object> map = Maps.newHashMap();
-        if (bean != null) {
-            BeanMap beanMap = BeanMap.create(bean);
-            for (Object key : beanMap.keySet()) {
-                map.put(key + "", beanMap.get(key));
-            }
-        }
-        return map;
+        return vo;
     }
 
 }
