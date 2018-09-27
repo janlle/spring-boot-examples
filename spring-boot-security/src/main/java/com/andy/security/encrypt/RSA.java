@@ -54,11 +54,11 @@ public class RSA {
 
     public static void main(String[] args) throws Exception {
 
-        RSAPublicKey rsaPublicKey = loadPublicKeyByStr(PUBLIC_KEY);
-        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr(PRIVATE_KEY);
+//        RSAPublicKey rsaPublicKey = loadPublicKeyByStr(PUBLIC_KEY);
+//        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByStr(PRIVATE_KEY);
 
-//        RSAPublicKey rsaPublicKey = loadPublicKeyByFile("D:\\rsa_public_key.pem");
-//        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByFile("D:\\rsa_private_key.pem");
+        RSAPublicKey rsaPublicKey = loadPublicKeyByFile("D:\\rsa_public_key.pem");
+        RSAPrivateKey rsaPrivateKey = loadPrivateKeyByFile("D:\\rsa_private_key.pem");
 
         byte[] hello = pri_key_encode(src, rsaPrivateKey);
 

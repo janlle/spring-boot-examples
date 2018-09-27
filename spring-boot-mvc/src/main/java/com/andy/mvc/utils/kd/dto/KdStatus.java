@@ -1,4 +1,4 @@
-package com.andy.mvc.utils.kd;
+package com.andy.mvc.utils.kd.dto;
 
 
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 2018-09-05
  **/
 @Data
-public class KdStatusInfo {
+public class KdStatus {
 
     private String time;
 

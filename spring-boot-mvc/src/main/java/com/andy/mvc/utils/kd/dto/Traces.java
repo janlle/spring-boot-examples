@@ -1,4 +1,4 @@
-package com.andy.mvc.utils.kd;
+package com.andy.mvc.utils.kd.dto;
 
 import lombok.Data;
 
@@ -8,13 +8,13 @@ import lombok.Data;
  * "status": "【石家庄市】 快件已在 【长安三部】 签收,签收人: 本人, 感谢使用中通快递,期待再次为您服务!"
  */
 @Data
-public class TracesVO {
+public class Traces {
 
     private String status;
 
     private String msg;
 
-    private KdInfoVO result;
+    private KdDetail result;
 
 }
 
