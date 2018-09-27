@@ -26,7 +26,7 @@ public class SchedulerConfig {
     public void startAllJobs() throws SchedulerException {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         scheduleJob1(scheduler);
-        scheduleJob2(scheduler);
+//        scheduleJob2(scheduler);
     }
 
     /**
@@ -48,11 +48,11 @@ public class SchedulerConfig {
      * @param scheduler
      * @throws SchedulerException
      */
-    private void scheduleJob2(Scheduler scheduler) throws SchedulerException {
-        JobDetail jobDetail = JobBuilder.newJob(CollectJob.class).withIdentity("job2", "group1").build();
-        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/10 * * * * ?");
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger2", "group1").withSchedule(scheduleBuilder).build();
-        scheduler.scheduleJob(jobDetail, cronTrigger);
-    }
+//    private void scheduleJob2(Scheduler scheduler) throws SchedulerException {
+//        JobDetail jobDetail = JobBuilder.newJob(AAA.class).withIdentity("job2", "group1").build();
+//        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0/10 * * * * ?");
+//        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger2", "group1").withSchedule(scheduleBuilder).build();
+//        scheduler.scheduleJob(jobDetail, cronTrigger);
+//    }
 
 }
