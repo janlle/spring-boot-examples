@@ -1,5 +1,6 @@
 package com.andy.aop.service.impl;
 
+import com.andy.aop.anno.SystemLog;
 import com.andy.aop.entity.User;
 import com.andy.aop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @SystemLog(description = "获取用户")
     @Override
     public User user(Long id) {
         log.info("目标类的user()方法");
