@@ -23,10 +23,16 @@ import java.util.List;
 public class SpringAopConfig {
 
     @Pointcut("execution(* com.andy.aop.service.*.*(..))")
-    public void aop() {
+    public void pointCut() {
     }
 
-    @Around("aop()")
+    /**
+     * 环绕通知在target开始和结束执行
+     *
+     * @param point
+     * @return
+     */
+    @Around(value = "pointCut()")
     public Object around(ProceedingJoinPoint point) {
         Object result = null;
         String methodName = point.getSignature().getName();
@@ -42,34 +48,54 @@ public class SpringAopConfig {
     }
 
 
-    @Before("aop()")
+    /**
+     * 前置通知在target前执行
+     *
+     * @param joinPoint
+     */
+    @Before(value = "pointCut()")
     public void beforeMethod(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         List<Object> args = Arrays.asList(joinPoint.getArgs());
         log.info("前置通知,方法名:" + methodName + ",参数:" + args);
     }
 
-
-    @After("aop()")
+    /**
+     * 后置通知在target后执行
+     *
+     * @param joinPoint
+     */
+    @After("pointCut()")
     public void afterMethod(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         List<Object> args = Arrays.asList(joinPoint.getArgs());
         log.info("后置通知,方法名:" + methodName + ",参数:" + args);
     }
 
-
-    @AfterReturning(value = "aop()", returning = "result")
+    /**
+     * 后置返回在target返回后执行
+     *
+     * @param joinPoint
+     * @param result
+     */
+    @AfterReturning(value = "pointCut()", returning = "result")
     public void afterReturning(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().getName();
         log.info("后置返回,方法名:" + methodName + ",返回值:" + result);
     }
 
-
-    @AfterThrowing(value = "aop()", throwing = "ex")
+    /**
+     * 后置异常通知在target异常后执行
+     *
+     * @param joinPoint
+     * @param ex
+     */
+    @AfterThrowing(value = "pointCut()", throwing = "ex")
     public void afterThrowing(JoinPoint joinPoint, Exception ex) {
         String methodName = joinPoint.getSignature().getName();
         log.info("后置异常通知 " + methodName + " exceptions " + ex);
     }
+
 
     @Around("@annotation(com.andy.aop.anno.SystemLog)")
     public Object customerAround(ProceedingJoinPoint joinPoint) throws Throwable {
