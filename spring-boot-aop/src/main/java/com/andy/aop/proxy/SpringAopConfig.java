@@ -15,7 +15,7 @@ import java.util.List;
  * 描述一个切面类
  *
  * @author Leone
- * @since 2018-06-21 00:16
+ * @since 2018-06-21
  **/
 @Slf4j
 @Aspect
@@ -74,7 +74,9 @@ public class SpringAopConfig {
     @Around("@annotation(com.andy.aop.anno.SystemLog)")
     public Object customerAround(ProceedingJoinPoint joinPoint) throws Throwable {
         SystemLog systemLog = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(SystemLog.class);
-        System.out.println(systemLog.description());
+        System.out.println("description" + systemLog.description());
+        System.out.println("name" + systemLog.name());
+        System.out.println("value" + systemLog.value());
         return null;
     }
 

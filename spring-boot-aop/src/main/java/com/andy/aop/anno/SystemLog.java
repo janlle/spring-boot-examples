@@ -18,4 +18,8 @@ public @interface SystemLog {
 
     String description() default "";
 
+    String value() default "";
+
+    String name() default "";
+
 }

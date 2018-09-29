@@ -17,7 +17,7 @@ import java.util.Random;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @SystemLog(description = "获取用户")
+    @SystemLog(description = "获取用户", value = "value", name = "基于自定义注解的aop")
     @Override
     public User user(Long id) {
         log.info("目标类的user()方法");
