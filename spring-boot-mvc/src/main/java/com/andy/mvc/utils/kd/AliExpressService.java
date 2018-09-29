@@ -1,8 +1,8 @@
 package com.andy.mvc.utils.kd;
 
+import com.andy.mvc.utils.HttpUtil;
+import com.andy.mvc.utils.kd.dto.Traces;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.luwei.common.utils.HttpUtil;
-import com.luwei.services.kuaidi.kd.Traces;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

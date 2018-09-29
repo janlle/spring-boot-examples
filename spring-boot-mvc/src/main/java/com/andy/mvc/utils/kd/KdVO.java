@@ -1,9 +1,10 @@
 package com.andy.mvc.utils.kd;
 
-import com.luwei.services.kuaidi.kd.KdStatus;
+import com.andy.mvc.utils.kd.dto.KdStatus;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
+
 
 /**
  * <p>

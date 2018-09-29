@@ -9,6 +9,7 @@ import com.andy.pay.common.utils.RandomUtil;
 import com.andy.pay.mapper.OrderMapper;
 import com.andy.pay.mapper.UserMapper;
 import com.andy.pay.pojos.entity.Order;
+import com.other.modules.weixinpay.util.HttpUtil;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -43,8 +44,6 @@ public class WXPayService {
     @Autowired
     private static AppProperty appProperty;
 
-    @Autowired
-    private AppProperty appProperty;
 
     /**
      * App支付
@@ -215,27 +214,28 @@ public class WXPayService {
      * @return: void
      **/
     public static boolean wxRefund(String xmlData) throws Exception {
-        log.info("****************微信退款开始****************");
-        CloseableHttpClient httpClient = HttpUtils.sslHttpsClient(appProperty.getWx().getCertPath(), appProperty.getWx().getMch_id());
-        HttpPost httpPost = new HttpPost(appProperty.getWx().getUrl().getRefundUrl());
-        StringEntity entity = new StringEntity(xmlData, "UTF-8");
-        httpPost.setEntity(entity);
-        HttpResponse response = httpClient.execute(httpPost);
-        HttpEntity responseData = response.getEntity();
-        String result = EntityUtils.toString(responseData, "UTF-8");
-
-        log.info("responseXml:{}", result);
-        Map<String, String> mapData = AppUtils.xmlToMap(result);
-        log.info("responseMap:{}", mapData);
-        //return_code为微信返回的状态码，SUCCESS表示申请退款成功，return_msg 如非空，为错误原因 签名失败 参数格式校验错误
-        if (mapData.get("return_code").equalsIgnoreCase("SUCCESS")) {
-            log.info("****************退款申请成功**********************");
-            //修改订单状态为退款
-            return true;
-        } else {
-            log.info("*****************退款申请失败*********************");
-            return false;
-        }
+//        log.info("****************微信退款开始****************");
+//        CloseableHttpClient httpClient = HttpUtils.sslHttpsClient(appProperty.getWx().getCertPath(), appProperty.getWx().getMch_id());
+//        HttpPost httpPost = new HttpPost(appProperty.getWx().getUrl().getRefundUrl());
+//        StringEntity entity = new StringEntity(xmlData, "UTF-8");
+//        httpPost.setEntity(entity);
+//        HttpResponse response = httpClient.execute(httpPost);
+//        HttpEntity responseData = response.getEntity();
+//        String result = EntityUtils.toString(responseData, "UTF-8");
+//
+//        log.info("responseXml:{}", result);
+//        Map<String, String> mapData = AppUtils.xmlToMap(result);
+//        log.info("responseMap:{}", mapData);
+//        //return_code为微信返回的状态码，SUCCESS表示申请退款成功，return_msg 如非空，为错误原因 签名失败 参数格式校验错误
+//        if (mapData.get("return_code").equalsIgnoreCase("SUCCESS")) {
+//            log.info("****************退款申请成功**********************");
+//            //修改订单状态为退款
+//            return true;
+//        } else {
+//            log.info("*****************退款申请失败*********************");
+//            return false;
+//        }
+        return false;
     }
 
     public void appPay(HttpServletRequest request, String orderId) {
@@ -250,46 +250,46 @@ public class WXPayService {
     }
 
     public void xcxPay(String orderId, HttpServletRequest request) {
-        String nonce_str = RandomUtil.getNum(24);
-        String spbill_create_ip = AppUtils.getIp(request);
-        if (!AppUtils.isIp(spbill_create_ip)) {
-            spbill_create_ip = "127.0.0.1";
-        }
-        SortedMap<String, String> reqMap = new TreeMap<>();
-        reqMap.put("appid", appProperties.getWx().getApp_id());
-        reqMap.put("mch_id", appProperties.getWx().getMch_id());
-        reqMap.put("nonce_str", nonce_str);
-        reqMap.put("body", "小程序支付");
-        reqMap.put("out_trade_no", outTradeNo);
-        reqMap.put("total_fee", total.toString());
-        reqMap.put("spbill_create_ip", spbill_create_ip);
-        reqMap.put("notify_url", appProperties.getWx().getNotify_url());
-        reqMap.put("trade_type", appProperties.getWx().getTrade_type());
-        reqMap.put("openid", openid);
-        String sign = AppUtils.createSign(reqMap, appProperties.getWx().getApi_key());
-        reqMap.put("sign", sign);
-        String xml = AppUtils.mapToXml(reqMap);
-        log.info("xml:{}", xml);
-        String result = HttpUtil.sendPostXml(appProperties.getWx().getCreate_order(), xml, null);
-        log.info(result);
-        Map<String, String> resData = AppUtils.xmlToMap(result);
-        System.out.println(resData);
-        if ("SUCCESS".equals(resData.get("return_code"))) {
-            Map<String, String> resultMap = new LinkedHashMap<>();
-            //返回的预付单信息
-            String prepay_id = resData.get("prepay_id");
-            System.out.println(prepay_id);
-            resultMap.put("appId", appProperties.getWx().getApp_id());
-            resultMap.put("nonceStr", nonce_str);
-            resultMap.put("package", "prepay_id=" + prepay_id);
-            resultMap.put("signType", "MD5");
-            resultMap.put("timeStamp", RandomUtil.getDateStr(14));
-            String paySign = AppUtils.createSign(resultMap, appProperties.getWx().getApi_key());
-            resultMap.put("paySign", paySign);
-            return resultMap;
-        } else {
-            throw new ValidateException(ExceptionMessage.WEI_XIN_PAY_FAIL);
-        }
+//        String nonce_str = RandomUtil.getNum(24);
+//        String spbill_create_ip = AppUtils.getIp(request);
+//        if (!AppUtils.isIp(spbill_create_ip)) {
+//            spbill_create_ip = "127.0.0.1";
+//        }
+//        SortedMap<String, String> reqMap = new TreeMap<>();
+//        reqMap.put("appid", appProperties.getWx().getApp_id());
+//        reqMap.put("mch_id", appProperties.getWx().getMch_id());
+//        reqMap.put("nonce_str", nonce_str);
+//        reqMap.put("body", "小程序支付");
+//        reqMap.put("out_trade_no", outTradeNo);
+//        reqMap.put("total_fee", total.toString());
+//        reqMap.put("spbill_create_ip", spbill_create_ip);
+//        reqMap.put("notify_url", appProperties.getWx().getNotify_url());
+//        reqMap.put("trade_type", appProperties.getWx().getTrade_type());
+//        reqMap.put("openid", openid);
+//        String sign = AppUtils.createSign(reqMap, appProperties.getWx().getApi_key());
+//        reqMap.put("sign", sign);
+//        String xml = AppUtils.mapToXml(reqMap);
+//        log.info("xml:{}", xml);
+//        String result = HttpUtil.sendPostXml(appProperties.getWx().getCreate_order(), xml, null);
+//        log.info(result);
+//        Map<String, String> resData = AppUtils.xmlToMap(result);
+//        System.out.println(resData);
+//        if ("SUCCESS".equals(resData.get("return_code"))) {
+//            Map<String, String> resultMap = new LinkedHashMap<>();
+//            //返回的预付单信息
+//            String prepay_id = resData.get("prepay_id");
+//            System.out.println(prepay_id);
+//            resultMap.put("appId", appProperties.getWx().getApp_id());
+//            resultMap.put("nonceStr", nonce_str);
+//            resultMap.put("package", "prepay_id=" + prepay_id);
+//            resultMap.put("signType", "MD5");
+//            resultMap.put("timeStamp", RandomUtil.getDateStr(14));
+//            String paySign = AppUtils.createSign(resultMap, appProperties.getWx().getApi_key());
+//            resultMap.put("paySign", paySign);
+//            return resultMap;
+//        } else {
+//            throw new ValidateException(ExceptionMessage.WEI_XIN_PAY_FAIL);
+//        }
 
     }
 }
