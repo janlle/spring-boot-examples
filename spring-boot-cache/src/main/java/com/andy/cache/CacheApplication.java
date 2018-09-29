@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 @EnableCaching
 @SpringBootApplication
 public class CacheApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(CacheApplication.class, args);
     }
