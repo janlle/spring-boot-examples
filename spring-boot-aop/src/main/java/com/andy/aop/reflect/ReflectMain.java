@@ -1,8 +1,11 @@
 package com.andy.aop.reflect;
 
+import com.andy.aop.anno.NameAnnotation;
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Field;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * <p>
@@ -16,6 +19,7 @@ public class ReflectMain {
     public static void main(String[] args) throws Exception {
         Class<Student> clazz = Student.class;
         Student student = clazz.newInstance();
+
 //        Class<Student> clazz = (Class<Student>) new Student().getClass();
 //        Class<Student> clazz = (Class<Student>) Class.forName("com.andy.aop.reflect.Student");
 
@@ -67,10 +71,30 @@ public class ReflectMain {
 //        fieldUserId.set(student, 22L);
 //        System.out.println(student);
 
+        Method[] methods = clazz.getDeclaredMethods();
 
+//        Method[] methods = clazz.getMethods();
 
+        Method.setAccessible(methods, true);
 
+        for (int i = 0; i < methods.length; i++) {
+            System.out.println("方法名:" + methods[i].getName() + " \t\t返回类型:" + methods[i].getReturnType().getName());
+        }
 
+        System.out.println("-------------------");
+        Method defMethod = clazz.getDeclaredMethod("defMethod", String.class);
+        // 取消安全性检查,设置后才可以调用private修饰的方法，也可以批量对所有方法进行设置
+        defMethod.setAccessible(true);
+        Object result = defMethod.invoke(student, "james");
+        System.out.println(result);
+
+        Method annotationMethod = clazz.getDeclaredMethod("priMethod");
+        annotationMethod.setAccessible(true);
+        NameAnnotation annotation = annotationMethod.getAnnotation(NameAnnotation.class);
+        Annotation[][] parameterAnnotations = annotationMethod.getParameterAnnotations();
+        System.out.println(Arrays.toString(parameterAnnotations));
+        System.out.println(annotation.name());
+        System.out.println(annotation.age());
 
     }
 
