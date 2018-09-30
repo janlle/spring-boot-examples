@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
  * @author Leone
  * @since 2018-09-30
  **/
-public class Reflect {
+public class IntrospectionMain {
 
     public static void main(String[] args) throws Exception {
         Point point = new Point(2, 5);
