@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p> 本地缓存来做 redis 方案
+ * <p> 基于aop本地缓存来方法调用限制
  *
  * @author Leone
  * @since 2018-09-08
@@ -36,6 +37,7 @@ public class LockMethodInterceptor {
         Method method = signature.getMethod();
         LocalLock localLock = method.getAnnotation(LocalLock.class);
         String key = getKey(localLock.key(), pjp.getArgs());
+
         if (!StringUtils.isEmpty(key)) {
             if (CACHES.getIfPresent(key) != null) {
                 throw new RuntimeException("请勿重复请求");
