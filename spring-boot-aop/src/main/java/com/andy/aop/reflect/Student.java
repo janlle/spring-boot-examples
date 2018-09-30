@@ -18,13 +18,33 @@ public class Student implements Serializable {
     protected Date birthday;
 
     public Student() {
+        System.out.println("无参构造方法");
     }
 
     public Student(Long userId, String account, int sex, Date birthday) {
+        System.out.println("四个参数构造方法");
         this.userId = userId;
         this.account = account;
         this.sex = sex;
         this.birthday = birthday;
+    }
+
+    Student(Long userId, String account, int sex) {
+        System.out.println("三个参数构造方法");
+        this.userId = userId;
+        this.account = account;
+        this.sex = sex;
+    }
+
+    private Student(Long userId, String account) {
+        System.out.println("二个参数构造方法");
+        this.userId = userId;
+        this.account = account;
+    }
+
+    protected Student(Long userId) {
+        System.out.println("一个参数构造方法");
+        this.userId = userId;
     }
 
     String defMethod() {
