@@ -1,45 +1,107 @@
 package com.andy.aop.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Leone
- * @since 2018-06-21 00:15
+ * @since 2018-06-21
  **/
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
-    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '账号'")
     private String account;
 
-    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
     private String password;
 
-    @Column(columnDefinition = "datetime NOT NULL COMMENT '生日'")
     private Date birthday;
 
-    @Column(columnDefinition = "double NOT NULL COMMENT '工资'")
     private Double salary;
 
-    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private Date createTime;
 
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
     private Boolean deleted;
 
+    public User() {
+    }
+
+    public User(Long userId, String account, String password, Date birthday, Double salary, Date createTime, Boolean deleted) {
+        this.userId = userId;
+        this.account = account;
+        this.password = password;
+        this.birthday = birthday;
+        this.salary = salary;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", birthday=" + birthday +
+                ", salary=" + salary +
+                ", createTime=" + createTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }
