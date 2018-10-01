@@ -11,15 +11,15 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
 
-    private AliProperty ali = new AliProperty();
+    private AliProperties ali = new AliProperties();
 
     private WxProperties wx = new WxProperties();
 
-    public AliProperty getAli() {
+    public AliProperties getAli() {
         return ali;
     }
 
-    public void setAli(AliProperty ali) {
+    public void setAli(AliProperties ali) {
         this.ali = ali;
     }
 
