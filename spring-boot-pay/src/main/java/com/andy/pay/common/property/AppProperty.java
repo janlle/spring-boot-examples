@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "app.pay")
 public class AppProperty  {
 
-    private AliProperty ali = new AliProperty();
 
-    private WxProperties wx = new WxProperties();
 
 }
