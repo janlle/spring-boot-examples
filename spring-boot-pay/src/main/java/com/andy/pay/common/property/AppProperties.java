@@ -11,10 +11,17 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
 
+    private AliProperty ali = new AliProperty();
 
     private WxProperties wx = new WxProperties();
 
-    private String authRedirectUrl;
+    public AliProperty getAli() {
+        return ali;
+    }
+
+    public void setAli(AliProperty ali) {
+        this.ali = ali;
+    }
 
     public WxProperties getWx() {
         return wx;
@@ -22,13 +29,5 @@ public class AppProperties {
 
     public void setWx(WxProperties wx) {
         this.wx = wx;
-    }
-
-    public String getAuthRedirectUrl() {
-        return authRedirectUrl;
-    }
-
-    public void setAuthRedirectUrl(String authRedirectUrl) {
-        this.authRedirectUrl = authRedirectUrl;
     }
 }
