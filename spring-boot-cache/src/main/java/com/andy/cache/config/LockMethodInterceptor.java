@@ -6,6 +6,7 @@ import com.google.common.cache.CacheBuilder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -31,7 +32,13 @@ public class LockMethodInterceptor {
             .expireAfterWrite(5, TimeUnit.SECONDS)
             .build();
 
-    @Around("execution(public * *(..)) && @annotation(com.andy.cache.anno.LocalLock)")
+    @Pointcut("execution(public * *(..)) && @annotation(com.andy.cache.anno.LocalLock)")
+    public void pointCut() {
+
+    }
+
+
+    @Around("pointCut()")
     public Object interceptor(ProceedingJoinPoint pjp) {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();
