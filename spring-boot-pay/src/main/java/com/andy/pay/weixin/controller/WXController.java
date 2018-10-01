@@ -1,6 +1,6 @@
 package com.andy.pay.weixin.controller;
 
-import com.andy.pay.common.property.AppProperty;
+import com.andy.pay.common.property.AppProperties;
 import com.andy.pay.weixin.service.WxService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 public class WXController {
 
     @Autowired
-    private AppProperty appProperty;
+    private AppProperties appProperties;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -40,7 +40,7 @@ public class WXController {
     @ApiOperation("微信授权回调地址")
     public String getUserInfo(String state, String code, HttpServletRequest request) {
         log.info("微信授权回调方法,code:{},state:{}", code, state);
-        String url = String.format(appProperty.getWx().getUrl().getTokenUrl(), appProperty.getWx().getAppid(), appProperty.getWx().getAppSecret(), code);
+        String url = String.format(appProperties.getWx().getTokenUrl(), appProperties.getWx().getApp_id(), appProperties.getWx().getApp_secret(), code);
         log.info("url:{}", url);
         String result = restTemplate.getForObject(url, String.class);
         log.info("result:{}", result);
@@ -51,7 +51,7 @@ public class WXController {
     @GetMapping("/code")
     public void code(String state, String code, HttpServletRequest request) {
         log.info("获取code.....");
-        String url = String.format(appProperty.getWx().getUrl().getAuthCodeUrl(), appProperty.getWx().getAppid(), appProperty.getWx().getRedirectUrl());
+        String url = String.format(appProperties.getWx().getAuthUrl(), appProperties.getWx().getApp_id(), appProperties.getWx().getCreate_order());
         log.info("url:{}", url);
         restTemplate.getForObject(url, String.class);
     }
