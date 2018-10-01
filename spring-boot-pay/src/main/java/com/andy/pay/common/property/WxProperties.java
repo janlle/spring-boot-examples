@@ -9,8 +9,6 @@ import lombok.Data;
 @Data
 public class WxProperties {
 
-    private WXUrlProperty url = new WXUrlProperty();
-
     private String app_id;
 
     private String mch_id;
