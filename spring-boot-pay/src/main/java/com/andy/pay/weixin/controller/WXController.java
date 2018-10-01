@@ -1,7 +1,7 @@
 package com.andy.pay.weixin.controller;
 
 import com.andy.pay.common.property.AppProperty;
-import com.andy.pay.weixin.service.WXService;
+import com.andy.pay.weixin.service.WxService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class WXController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private WXService weChatService;
+    private WxService weChatService;
 
     @RequestMapping(value = "/notify", method = {RequestMethod.GET, RequestMethod.POST})
     @ApiOperation("微信授权回调地址")

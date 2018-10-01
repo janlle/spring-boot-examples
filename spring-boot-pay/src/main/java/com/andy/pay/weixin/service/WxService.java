@@ -17,7 +17,7 @@ import java.util.Map;
  **/
 @Slf4j
 @Service
-public class WXService {
+public class WxService {
 
 
     @Autowired

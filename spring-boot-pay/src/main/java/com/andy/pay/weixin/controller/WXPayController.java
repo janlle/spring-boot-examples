@@ -1,6 +1,6 @@
 package com.andy.pay.weixin.controller;
 
-import com.andy.pay.weixin.service.WXPayService;
+import com.andy.pay.weixin.service.WxPayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 public class WXPayController {
 
     @Autowired
-    private WXPayService weChatPayService;
+    private WxPayService weChatPayService;
 
     @GetMapping("/app/pay")
     @ApiOperation("微信App支付预下单")
