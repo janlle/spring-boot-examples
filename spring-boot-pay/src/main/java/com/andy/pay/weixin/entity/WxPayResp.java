@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class WXPayResp implements Serializable {
+public class WxPayResp implements Serializable {
 
     private String orderNum;
 
