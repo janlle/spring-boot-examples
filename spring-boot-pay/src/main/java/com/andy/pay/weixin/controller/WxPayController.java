@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @Api(tags = "微信支付接口")
 @RequestMapping("/wx")
-public class WXPayController {
+public class WxPayController {
 
     @Autowired
     private WxPayService weChatPayService;
