@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @Api(tags = "微信相关接口")
 @RestController
 @RequestMapping("/wx")
-public class WXController {
+public class WxController {
 
     @Autowired
     private AppProperties appProperties;
