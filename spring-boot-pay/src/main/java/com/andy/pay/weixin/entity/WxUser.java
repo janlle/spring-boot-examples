@@ -8,7 +8,7 @@ import lombok.Data;
  * @since 2018-05-19 22:18
  **/
 @Data
-public class WXUser {
+public class WxUser {
 
     // 普通用户的标识，对当前开发者帐号唯一
     private String openid;
