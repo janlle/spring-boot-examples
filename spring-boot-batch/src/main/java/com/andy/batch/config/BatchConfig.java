@@ -4,7 +4,6 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
@@ -16,6 +15,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-10-08
+ **/
 @Configuration
 @EnableBatchProcessing
 public class BatchConfig {
@@ -28,7 +33,6 @@ public class BatchConfig {
         jobRepositoryFactoryBean.setDatabaseType("oracle");
         return jobRepositoryFactoryBean.getObject();
     }
-
 
     @Bean
     public SimpleJobLauncher jobLauncher(DataSource dataSource, PlatformTransactionManager transactionManager)
@@ -47,7 +51,6 @@ public class BatchConfig {
                 .build();
     }
 
-
 //    @Bean
 //    public Step step1(StepBuilderFactory stepBuilderFactory, ItemReader<Person> reader, ItemWriter<Person> writer,
 //                      ItemProcessor<Person, Person> processor) {
@@ -59,7 +62,7 @@ public class BatchConfig {
 //                .writer(writer)
 //                .build();
 //    }
-//
+
 //    @Bean
 //    public ItemReader<Person> reader() throws Exception {
 //        //新建ItemReader接口的实现类返回
@@ -77,4 +80,6 @@ public class BatchConfig {
 //        //新建ItemWriter接口的实现类返回
 //        return writer;
 //    }
+
+
 }
