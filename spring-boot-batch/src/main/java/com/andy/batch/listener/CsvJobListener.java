@@ -16,6 +16,7 @@ public class CsvJobListener implements JobExecutionListener {
     private long endTime;
 
     //监听器实现JobExecutionListener接口，并重写其beforeJob、afterJob方法即可。
+
     @Override
     public void beforeJob(JobExecution jobExecution) {
         startTime = System.currentTimeMillis();
