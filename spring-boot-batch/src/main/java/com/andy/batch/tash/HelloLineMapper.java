@@ -2,8 +2,7 @@ package com.andy.batch.tash;
 
 import org.springframework.batch.item.file.LineMapper;
 
-public
-class HelloLineMapper implements LineMapper<DeviceCommand> {
+public class HelloLineMapper implements LineMapper<DeviceCommand> {
 
 
     @Override

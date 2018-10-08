@@ -10,7 +10,6 @@ public class DeviceCommand {
 
     private String id;
 
-
     private String status;
 
 

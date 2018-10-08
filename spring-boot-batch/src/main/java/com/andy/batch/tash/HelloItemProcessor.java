@@ -2,8 +2,7 @@ package com.andy.batch.tash;
 
 import org.springframework.batch.item.ItemProcessor;
 
-public
-class HelloItemProcessor implements ItemProcessor<DeviceCommand, DeviceCommand> {
+public class HelloItemProcessor implements ItemProcessor<DeviceCommand, DeviceCommand> {
 
 
     @Override
