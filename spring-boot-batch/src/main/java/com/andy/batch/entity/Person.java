@@ -1,5 +1,7 @@
 package com.andy.batch.entity;
 
+import javax.validation.constraints.Size;
+
 /**
  * <p>
  *
@@ -8,6 +10,7 @@ package com.andy.batch.entity;
  **/
 public class Person {
 
+    @Size(max = 5, min = 2)
     private String name;
 
     private int age;
