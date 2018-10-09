@@ -1,21 +1,21 @@
 package com.andy.batch.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 
 /**
- * <p>
+ * <p>监听器实现JobExecutionListener接口，并重写其beforeJob、afterJob方法即可
  *
  * @author Leone
  * @since 2018-10-08
  **/
+@Slf4j
 public class CsvJobListener implements JobExecutionListener {
 
     private long startTime;
 
     private long endTime;
-
-    //监听器实现JobExecutionListener接口，并重写其beforeJob、afterJob方法即可。
 
     @Override
     public void beforeJob(JobExecution jobExecution) {
