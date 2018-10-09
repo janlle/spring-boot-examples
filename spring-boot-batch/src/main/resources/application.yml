@@ -7,8 +7,5 @@ spring:
 
   batch:
     job:
-#      names: job1,job2
       enabled: true
     initialize-schema: always
-#    #设置Spring Batch的数据库表的前缀
-#    table-prefix: tb_
