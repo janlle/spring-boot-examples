@@ -43,7 +43,7 @@ import java.io.IOException;
 public class BatchConfig {
 
     /**
-     * JobRepository：用户注册Job的容器
+     * JobRepository 用户注册Job的容器
      *
      * @param dataSource
      * @param transactionManager
@@ -132,11 +132,11 @@ public class BatchConfig {
      */
     @Bean
     public ItemReader<Person> reader() throws IOException {
-        //1使用FlatFileItemReader读取文件
+        // 使用FlatFileItemReader读取文件
         FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
-        //2使用FlatFileItemReader的setResource方法设置csv文件的路径
+        // 使用FlatFileItemReader的setResource方法设置csv文件的路径
         reader.setResource(new ClassPathResource("people.csv"));
-        //3在此处对cvs文件的数据和领域模型类做对应映射
+        // 在此处对cvs文件的数据和领域模型类做对应映射
         reader.setLineMapper(new DefaultLineMapper<Person>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setNames("name", "age", "nation", "address");
@@ -181,14 +181,25 @@ public class BatchConfig {
     }
 
 
+    /**
+     * 自定义监听器
+     *
+     * @return
+     */
     @Bean
     public CsvJobListener csvJobListener() {
         return new CsvJobListener();
     }
 
+
+    /**
+     * 自定义校验器
+     *
+     * @return
+     */
     @Bean
     public Validator<Person> csvBeanValidator() {
-        return new CsvBeanValidator<Person>();
+        return new CsvBeanValidator<>();
     }
 
 }
