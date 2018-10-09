@@ -17,8 +17,6 @@ public class User implements Serializable {
 
     private String password;
 
-    private String description;
-
     private Integer age;
 
     private Date createTime;
