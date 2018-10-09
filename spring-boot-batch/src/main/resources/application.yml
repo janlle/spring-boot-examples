@@ -4,3 +4,10 @@ spring:
     url: jdbc:mysql://localhost:3306/boot?useSSL=false
     username: root
     password: root
+
+  batch:
+    job:
+      names: job1,job2
+      enabled: true
+    #设置Spring Batch的数据库表的前缀
+    table-prefix: tb_
