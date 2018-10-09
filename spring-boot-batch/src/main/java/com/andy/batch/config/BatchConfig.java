@@ -2,8 +2,8 @@ package com.andy.batch.config;
 
 import com.andy.batch.entity.Person;
 import com.andy.batch.listener.CsvJobListener;
-import com.andy.batch.tash.CsvBeanValidator;
-import com.andy.batch.tash.CsvItemProcessor;
+import com.andy.batch.process.CsvBeanValidator;
+import com.andy.batch.process.CsvItemProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -29,6 +29,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 
 /**
@@ -91,6 +92,8 @@ public class BatchConfig {
                 // 为Job指定Step
                 .flow(step)
                 .end()
+                // 绑定监听
+                .listener(csvJobListener())
                 .build();
     }
 
@@ -128,9 +131,9 @@ public class BatchConfig {
      * @throws Exception
      */
     @Bean
-    public ItemReader<Person> reader() throws Exception {
+    public ItemReader<Person> reader() throws IOException {
         //1使用FlatFileItemReader读取文件
-        FlatFileItemReader<Person> reader = new FlatFileItemReader<Person>();
+        FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
         //2使用FlatFileItemReader的setResource方法设置csv文件的路径
         reader.setResource(new ClassPathResource("people.csv"));
         //3在此处对cvs文件的数据和领域模型类做对应映射
