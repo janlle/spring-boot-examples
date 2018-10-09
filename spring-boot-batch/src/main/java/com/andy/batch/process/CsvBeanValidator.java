@@ -22,7 +22,7 @@ public class CsvBeanValidator<T> implements Validator<T>, InitializingBean {
 
     // 使用JSR-303的Validator来校验我们的数据，在此处进行JSR-303的Validator的初始化。
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.usingContext().getValidator();
     }
