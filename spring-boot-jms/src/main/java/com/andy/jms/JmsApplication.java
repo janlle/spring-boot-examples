@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2018-04-10
  **/
 @SpringBootApplication
-public class JMSApplication {
+public class JmsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JMSApplication.class, args);
+        SpringApplication.run(JmsApplication.class, args);
     }
 
 }

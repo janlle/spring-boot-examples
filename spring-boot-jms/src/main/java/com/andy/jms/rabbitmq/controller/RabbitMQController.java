@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * @author Leone
- * @since 2018-05-15 21:44
+ * @since 2018-05-15
  **/
 @Slf4j
 @RestController
@@ -23,25 +23,30 @@ public class RabbitMQController {
     private MessageSender messageSender;
 
     @GetMapping("/send/{target}")
-    public String send(@PathVariable(value = "target") String target) {
+    public String send(@PathVariable("target") String target) {
 
         String message = "hello james how are you!";
 
         User user = new User(1L, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
 
-        if (target.equals("topic")) {
-            messageSender.sendTopic(RabbitMQConstant.TOPIC_EXCHANGE, RabbitMQConstant.KEY_A, message);
-        } else if (target.equals("fanout")) {
-            messageSender.sendFanout(RabbitMQConstant.FANOUT_EXCHANGE, "fanout类型交换机发送的内容！");
-        } else if (target.equals("direct")) {
-            messageSender.sendDirect(RabbitMQConstant.DIRECT_EXCHANGE, "direct类型交换机发送的内容！");
-        } else if (target.equals("headers")) {
-            messageSender.sendHeaders(RabbitMQConstant.HEADERS_EXCHANGE, "header类型交换机发送的内容！");
-        } else {
-            messageSender.sendQueue(RabbitMQConstant.QUEUE_A, message);
+        switch (target) {
+            case "topic":
+                messageSender.sendTopic(RabbitMQConstant.TOPIC_EXCHANGE, RabbitMQConstant.KEY_A, message);
+                break;
+            case "fanout":
+                messageSender.sendFanout(RabbitMQConstant.FANOUT_EXCHANGE, "fanout类型交换机发送的内容！");
+                break;
+            case "direct":
+                messageSender.sendDirect(RabbitMQConstant.DIRECT_EXCHANGE, "direct类型交换机发送的内容！");
+                break;
+            case "headers":
+                messageSender.sendHeaders(RabbitMQConstant.HEADERS_EXCHANGE, "header类型交换机发送的内容！");
+                break;
+            default:
+                messageSender.sendQueue(RabbitMQConstant.QUEUE_A, message);
+                break;
         }
-
-        return "发送" + target + "消息SUCCESS!";
+        return "send " + target + " success!";
     }
 
 }
