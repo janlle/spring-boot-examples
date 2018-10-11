@@ -12,9 +12,8 @@ import java.util.Map;
  * rabbitMQ交换机配置
  *
  * @author Leone
- * @since 2018-05-5
+ * @since 2018-05-05
  **/
-
 @Configuration
 public class ExchangeConfig {
 

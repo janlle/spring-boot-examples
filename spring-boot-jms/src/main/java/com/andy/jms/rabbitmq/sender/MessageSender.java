@@ -21,10 +21,9 @@ public class MessageSender {
 
     //-------------------------普通队列模式-------------------------------
     public void sendQueue(String queue, Object msg) {
-        log.info("发到:{},队列的消息是:{}", queue, msg);
+        log.info("send:{},message:{}", queue, msg);
         template.convertAndSend(queue, msg);
     }
-
 
     /**
      * direct类型的交换机(直连模式)
@@ -37,8 +36,8 @@ public class MessageSender {
     public void sendDirect(String exchange, Object msg) {
         template.convertAndSend(exchange, RabbitMQConstant.KEY_C, msg);
         template.convertAndSend(exchange, RabbitMQConstant.KEY_D, msg);
-        log.info("发到:{}交换机,routing_key:{},发送的消息是:{}", exchange, RabbitMQConstant.KEY_C, msg);
-        log.info("发到:{}交换机,routing_key:{},发送的消息是:{}", exchange, RabbitMQConstant.KEY_D, msg);
+        log.info("send:{}交换机,routing_key:{},message:{}", exchange, RabbitMQConstant.KEY_C, msg);
+        log.info("send:{}交换机,routing_key:{},message:{}", exchange, RabbitMQConstant.KEY_D, msg);
     }
 
 
@@ -57,8 +56,8 @@ public class MessageSender {
     public void sendTopic(String exchange, String key, Object msg) {
         template.convertAndSend(exchange, RabbitMQConstant.KEY_A, msg + "a");
         template.convertAndSend(exchange, RabbitMQConstant.KEY_B, msg + "b");
-        log.info("发到:{},交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_A, msg);
-        log.info("发到:{},交换机,绑定规则为{}的消息是:{}", exchange, RabbitMQConstant.KEY_B, msg);
+        log.info("send:{},交换机,绑定规则为{}message:{}", exchange, RabbitMQConstant.KEY_A, msg);
+        log.info("send:{},交换机,绑定规则为{}message:{}", exchange, RabbitMQConstant.KEY_B, msg);
     }
 
     /**
@@ -71,7 +70,7 @@ public class MessageSender {
      */
     public void sendFanout(String exchange, Object msg) {
         template.convertAndSend(exchange, "some thing", msg);
-        log.info("发到:{},交换机,发送的消息是:{}", exchange, msg);
+        log.info("send:{},交换机,message:{}", exchange, msg);
     }
 
 
@@ -91,7 +90,7 @@ public class MessageSender {
 
         Message message = new Message(msg.getBytes(), properties);
         template.convertAndSend(exchange, "", message);
-        log.info("发到:{},交换机,发送的消息是:{}", exchange, msg.getBytes());
+        log.info("send:{},交换机,message:{}", exchange, msg.getBytes());
     }
 
 }

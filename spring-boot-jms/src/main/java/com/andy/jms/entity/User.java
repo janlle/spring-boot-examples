@@ -1,15 +1,10 @@
 package com.andy.jms.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     private Long userId;
@@ -26,4 +21,16 @@ public class User {
 
     private Boolean deleted;
 
+    public User() {
+    }
+
+    public User(Long userId, String account, String password, Date birthday, Double salary, Date createTime, Boolean deleted) {
+        this.userId = userId;
+        this.account = account;
+        this.password = password;
+        this.birthday = birthday;
+        this.salary = salary;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
 }
