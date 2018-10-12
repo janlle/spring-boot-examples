@@ -174,4 +174,27 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <!--这里的id需要和settings.xml中的server的id一致-->
+            <id>releases</id>
+            <name>Nexus release Repository</name>
+            <url>http://39.108.135.41:8081/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus snapshots Repository</name>
+            <url>http://39.108.135.41:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>nexus</id>-->
+            <!--<name>Public Repository</name>-->
+            <!--<url>http://39.108.135.41:8081/nexus/content/groups/public</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
+
 </project>
