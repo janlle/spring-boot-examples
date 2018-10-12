@@ -17,11 +17,11 @@ import java.util.List;
 @ServletComponentScan
 @MapperScan("com.andy.mvc.dao.mapper")
 @SpringBootApplication
-public class MVCApplication {
+public class MvcApplication {
 
     public static void main(String[] args) {
 
-        ApplicationContext applicationContext = SpringApplication.run(MVCApplication.class, args);
+        ApplicationContext applicationContext = SpringApplication.run(MvcApplication.class, args);
 
         Binder binder = Binder.get(applicationContext.getEnvironment());
 
