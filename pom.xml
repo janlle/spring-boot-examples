@@ -167,4 +167,18 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <distributionManagement>
+        <repository>
+            <id>Nexus-releases</id>
+            <name>Nexus-releases-repositories</name>
+            <url>http://39.108.125.41:8081/nexus/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>Nexus-snapshots</id>
+            <name>Nexus-snapshots-repositories</name>
+            <url>http://39.108.125.41:8081/nexus/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
 </project>
