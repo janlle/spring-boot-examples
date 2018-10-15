@@ -1,11 +1,10 @@
 package com.andy.aop.service;
 
-import com.andy.aop.anno.SystemLog;
 import com.andy.aop.entity.User;
 
 /**
  * @author Leone
- * @since 2018-06-21 0:38
+ * @since 2018-06-21
  **/
 public interface UserService {
 
