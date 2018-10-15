@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Leone
  * @since 2018-06-21
  **/
-public class User implements Serializable {
+public class User implements Serializable, Cloneable {
 
     private Long userId;
 
@@ -103,5 +103,11 @@ public class User implements Serializable {
                 ", createTime=" + createTime +
                 ", deleted=" + deleted +
                 '}';
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        User user = (User) super.clone();
+        return super.clone();
     }
 }

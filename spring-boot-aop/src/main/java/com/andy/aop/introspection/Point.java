@@ -41,4 +41,9 @@ public class Point {
                 ", y=" + y +
                 '}';
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

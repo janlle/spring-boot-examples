@@ -29,5 +29,8 @@ public class User implements Serializable {
         this.password = password;
     }
 
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
