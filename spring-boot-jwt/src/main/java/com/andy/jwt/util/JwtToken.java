@@ -17,12 +17,13 @@ import java.util.Map;
 
 /**
  * @author Leone
- * @since 2018-04-16 09:28
+ * @since 2018-04-16
  **/
 @Slf4j
 public class JwtToken {
+
     //公用秘钥保存在服务器中，客户端无法知道
-    private static final String SECRET = "andy";
+    private static final String SECRET = "#ili98@";
 
     private static final String ISSUER = "jwt-user";
 
@@ -30,8 +31,7 @@ public class JwtToken {
     public static String createToken() throws Exception {
         Calendar nowTime = Calendar.getInstance();
         nowTime.add(Calendar.MINUTE, 1);
-        Date expirsDate = nowTime.getTime();
-
+        Date expireDate = nowTime.getTime();
         Map<String, Object> map = new HashMap<>();
         map.put("alg", "HS256");
         map.put("typ", "JWT");
@@ -40,29 +40,17 @@ public class JwtToken {
                 .withClaim("name", "james")
                 .withClaim("age", 23)
                 .withClaim("org", "今日头条")
-                .withExpiresAt(expirsDate)
+                .withExpiresAt(expireDate)
                 .sign(Algorithm.HMAC256(SECRET));
         return token;
     }
 
-    public static Map<String, Claim> verifToken(String token) throws Exception {
-        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
-        DecodedJWT jwt;
-        try {
-            jwt = verifier.verify(token);
-        } catch (Exception e) {
-            throw new RuntimeException("登录凭证验证失败，请重新登录");
-        }
-        return jwt.getClaims();
-    }
-
-    //---------------------------------------------------------------------------------------------
-
-    public static String getToken(Map<String, String> claims) throws Exception {
+    //---------------------------------------------------------------------
+    public static String getToken(Map<String, String> claims) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             JWTCreator.Builder builder = JWT.create().withIssuer(ISSUER).withExpiresAt(DateUtils.addDays(new Date(), 1));
-            claims.forEach((k, v) -> builder.withClaim(k, v));
+            claims.forEach(builder::withClaim);
             return builder.sign(algorithm);
         } catch (Exception e) {
             log.info("create jwt token is fail！");
@@ -71,7 +59,7 @@ public class JwtToken {
     }
 
     public static Map<String, String> verifyToken(String token) {
-        Algorithm algorithm = null;
+        Algorithm algorithm;
         try {
             algorithm = Algorithm.HMAC256(SECRET);
         } catch (Exception e) {

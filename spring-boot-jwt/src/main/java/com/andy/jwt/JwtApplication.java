@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Leone
- * @since 2018-04-15 09:29
+ * @since 2018-04-15
  **/
 @SpringBootApplication
-public class JWTApplication {
+public class JwtApplication {
     public static void main(String[] args) {
-        SpringApplication.run(JWTApplication.class, args);
+        SpringApplication.run(JwtApplication.class, args);
     }
 }

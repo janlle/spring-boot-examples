@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Leone
- * @since 2018-04-19 19:32
+ * @since 2018-04-19
  **/
 @Slf4j
 @RestController
@@ -36,10 +36,10 @@ public class UserController {
     //用户登录功能
     @PostMapping("/login")
     public BaseResponse<User> login(@RequestBody User user) throws Exception {
-        String token = JwtToken.getToken(ImmutableMap.of("email",user.getEmail(),"name",user.getUsername(),"ts", Instant.now().getEpochSecond() + ""));
-        user.setToken(token);
+        String token = JwtToken.getToken(ImmutableMap.of("email",user.getAccount(),"name",user.getUserId().toString(),"ts", Instant.now().getEpochSecond() + ""));
+        user.setPassword(token);
         log.info("token={}", token);
-        renewToken(token, user.getEmail());
+        renewToken(token, user.getAccount());
         return BaseResponse.success(user);
     }
 
@@ -53,14 +53,14 @@ public class UserController {
         } catch (Exception e) {
             log.error("token validate fail!");
         }
-        String email = map.get("email");
+        String account = map.get("account");
 
-        Long expild = redisTemplate.getExpire(email);
+        Long expire = redisTemplate.getExpire(account);
 
-        if (expild > 0) {
-            renewToken(token, email);
-            User user = userRepository.findUserByEmail(email);
-            user.setToken(token);
+        if (expire > 0) {
+            renewToken(token, account);
+            User user = userRepository.findUserByAccount(account);
+            user.setPassword(token);
             return BaseResponse.success("用户验证成功");
         } else {
             return BaseResponse.error("用户验证失败");
@@ -69,7 +69,7 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public BaseResponse<User> user(@PathVariable Long id) {
-        User user = userRepository.findUserById(id);
+        User user = userRepository.findById(id).orElse(null);
         return BaseResponse.success(user);
     }
 
@@ -83,7 +83,6 @@ public class UserController {
     public void renewToken(String token, String email) {
         redisTemplate.opsForValue().set(email, token, 30, TimeUnit.MINUTES);
     }
-
 
     public void invalidate(String token) {
         Map<String, String> map = JwtToken.verifyToken(token);
