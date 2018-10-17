@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+/**
+ * <p>
+ *
+ * @author Leone
+ **/
 public class CorsFilter extends AbstractFilter {
 
     @Override

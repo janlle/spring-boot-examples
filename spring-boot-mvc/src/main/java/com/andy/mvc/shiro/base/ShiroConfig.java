@@ -1,11 +1,11 @@
 package com.andy.mvc.shiro.base;
 
+
 import com.andy.mvc.shiro.filter.CorsFilter;
 import com.andy.mvc.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -25,7 +25,6 @@ import java.util.Map;
 
 /**
  * @author Leone
- * @since 2018-05-17
  **/
 @Configuration
 public class ShiroConfig {
@@ -33,7 +32,7 @@ public class ShiroConfig {
     private final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroModuleProperties properties) {
+    public ShiroFilterFactoryBean shiroFilter(org.apache.shiro.mgt.SecurityManager securityManager, ShiroModuleProperties properties) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
         swaggerFilterChain(filterChainDefinitionMapping);
@@ -68,7 +67,7 @@ public class ShiroConfig {
     }
 
     @Bean(name = "securityManager")
-    public SecurityManager securityManager(TokenRealm realm) {
+    public org.apache.shiro.mgt.SecurityManager securityManager(TokenRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         //禁用sessionStorage
         DefaultSubjectDAO de = (DefaultSubjectDAO) manager.getSubjectDAO();
@@ -93,7 +92,7 @@ public class ShiroConfig {
 
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
-    public AuthorizationAttributeSourceAdvisor advisor(SecurityManager securityManager) {
+    public AuthorizationAttributeSourceAdvisor advisor(org.apache.shiro.mgt.SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;

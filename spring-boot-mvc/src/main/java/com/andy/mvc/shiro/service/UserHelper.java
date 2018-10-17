@@ -5,19 +5,43 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 
 /**
+ * <p>
+ *
  * @author Leone
- * @since 2018-08-13
  **/
 public class UserHelper {
 
-    private static final Subject subject = SecurityUtils.getSubject();
+    /**
+     * 获取用户id,必须通过token认证
+     *
+     * @return
+     */
+    public static Integer getUserId() {
+        Subject subject = SecurityUtils.getSubject();
+        Object userId = subject.getPrincipal();
 
-    public static Integer getId() {
-        Object id = subject.getPrincipal();
-        if (id == null) {
+        if (userId == null) {
             throw new AuthenticationException();
         }
-        return Integer.parseInt(id.toString());
+
+        return Integer.parseInt(userId.toString());
+    }
+
+    /**
+     * 判断用户是否登录,必须通过token认证
+     *
+     * @return
+     */
+    public static Boolean isLogin() {
+        Subject subject = SecurityUtils.getSubject();
+
+        Object userId = subject.getPrincipal();
+
+        if (userId == null) {
+            return false;
+        }
+
+        return true;
     }
 
 }

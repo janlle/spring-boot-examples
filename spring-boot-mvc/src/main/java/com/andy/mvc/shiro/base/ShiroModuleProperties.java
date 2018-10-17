@@ -8,10 +8,9 @@ import java.util.List;
 
 /**
  * @author Leone
- * @since 2018-05-17
  **/
 @Configuration
-@ConfigurationProperties(prefix = "module.shiro")
+@ConfigurationProperties(prefix = "luwei.module.shiro")
 public class ShiroModuleProperties {
 
     private String tokenName = "auth.token:";
@@ -21,6 +20,8 @@ public class ShiroModuleProperties {
     private boolean multiLogin = false;
 
     private int cacheDays = 30;
+
+    private String rule = ")#*J&@J(#_=*!A";
 
     private List<String> anonUrls = new ArrayList<>();
 
@@ -88,5 +89,13 @@ public class ShiroModuleProperties {
 
     public void setTokenName(String tokenName) {
         this.tokenName = tokenName;
+    }
+
+    public String getRule() {
+        return rule;
+    }
+
+    public void setRule(String rule) {
+        this.rule = rule;
     }
 }
