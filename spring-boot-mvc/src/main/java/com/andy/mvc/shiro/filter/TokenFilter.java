@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 
 /**
  * @author Leone
- * @since 2018-05-17
  **/
 public class TokenFilter extends AuthenticationFilter {
 
@@ -30,12 +29,12 @@ public class TokenFilter extends AuthenticationFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         String token = getToken(request);
         if (StringUtils.isEmpty(token)) {
-            printUnauthorized("auth.token.empty", WebUtils.toHttp(response));
+            print("auth.token.empty", WebUtils.toHttp(response));
             return false;
         }
         boolean loginSuccess = login(new Token(token));
         if (!loginSuccess) {
-            printUnauthorized("auth.token.wrong", WebUtils.toHttp(response));
+            print("auth.token.wrong", WebUtils.toHttp(response));
         }
         return loginSuccess;
     }
@@ -50,7 +49,7 @@ public class TokenFilter extends AuthenticationFilter {
         return token;
     }
 
-    private void printUnauthorized(String messageCode, HttpServletResponse response) {
+    private void print(String messageCode, HttpServletResponse response) {
         String content = String.format("{\"code\":\"%s\",\"message\":\"%s\"}", messageCode, HttpStatus.UNAUTHORIZED.getReasonPhrase());
         response.setContentType("application/json;charset=UTF-8");
         response.setContentLength(content.length());

@@ -4,7 +4,9 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.web.mgt.DefaultWebSubjectFactory;
 
-
+/**
+ * @author Leone
+ **/
 public class StatelessDefaultSubjectFactory extends DefaultWebSubjectFactory {
 
     @Override

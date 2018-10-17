@@ -11,13 +11,15 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
 
+/**
+ * @author Leone
+ **/
 @Component
 public class TokenRealm extends AuthorizingRealm {
 
@@ -50,19 +52,21 @@ public class TokenRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         Token token = (Token) authenticationToken;
         String tokenString = token.getToken();
-        String userRole = TokenUtil.decode(tokenString);
-        System.out.printf(tokenString);
-        System.out.println(userRole);
-        if (StringUtils.isEmpty(tokenString)) {
-            return null;
-        }
+        String userIdTokenRole = TokenUtil.decode(tokenString);
+//        logger.info("tokenString:{}----userIdTokenRole:{}", tokenString, userIdTokenRole);
         String userId;
         try {
-            userId = userRole.split("\\.")[0];
+            userId = userIdTokenRole.split("\\.")[0];
         } catch (Exception e) {
             return null;
         }
-        logger.info("----userId:{}----token:{}----", userId, tokenString);
+
+        String redisToken = stringRedisTemplate.opsForValue().get(shiroModuleProperties.getTokenPrefix() + shiroModuleProperties.getTokenName() + userId);
+        if (StringUtils.isEmpty(redisToken)) {
+            return null;
+        }
+
+        logger.info("userId:{}----token:{}", userId, tokenString);
         if (!StringUtils.isEmpty(userId)) {
             return new SimpleAuthenticationInfo(userId, tokenString, getName());
         }
@@ -82,11 +86,12 @@ public class TokenRealm extends AuthorizingRealm {
             String token = stringRedisTemplate.opsForValue().get(shiroModuleProperties.getTokenPrefix() + shiroModuleProperties.getTokenName() + userId);
             String userRole;
             try {
-                userRole = token.split("\\.")[1];
+                String userIdTokenRole = TokenUtil.decode(token);
+                userRole = userIdTokenRole.split("\\.")[1];
             } catch (Exception e) {
                 return null;
             }
-            logger.info("----userId:{}----role:{}----", userId, userRole);
+            logger.info("userId:{}----role:{}", userId, userRole);
             if (!StringUtils.isEmpty(userRole)) {
                 SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
                 info.addRole(userRole);

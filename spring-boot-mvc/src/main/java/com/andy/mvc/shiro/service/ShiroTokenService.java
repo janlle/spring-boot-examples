@@ -12,6 +12,11 @@ import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * <p>
+ *
+ * @author Leone
+ **/
 @Service
 public class ShiroTokenService {
 
@@ -23,26 +28,34 @@ public class ShiroTokenService {
     @Resource
     private ShiroModuleProperties shiroModuleProperties;
 
+    /**
+     * 登录
+     *
+     * @param userId
+     * @return
+     */
     public String login(String userId) {
         return updateToken(userId, null);
     }
 
+    /**
+     * 登录
+     *
+     * @param userId
+     * @param role
+     * @return
+     */
     public String login(String userId, String role) {
         return updateToken(userId, role);
     }
 
+    /**
+     * @param userId
+     * @param role
+     * @return
+     */
     private String updateToken(String userId, String role) {
-//        String prefix = shiroModuleProperties.getPrefix();
-//        Integer cacheDays = shiroModuleProperties.getCacheDays();
-//        stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getToken_to_user_id() + token, userId, cacheDays, TimeUnit.DAYS);
-//        if (!shiroModuleProperties.isMultiLogin()) {
-//            stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getUser_id_to_token() + userId, token, cacheDays, TimeUnit.DAYS);
-//        }
-//        if (!StringUtils.isEmpty(role)) {
-//            stringRedisTemplate.opsForValue().set(prefix + shiroModuleProperties.getUser_id_to_role() + userId, role, cacheDays, TimeUnit.DAYS);
-//        }
-
-        String salt = (int) (Math.random() * 10000) + "";
+        String salt = (int) (Math.random() * 100000) + "";
 
         String tokenPrefix = this.shiroModuleProperties.getTokenPrefix();
         String tokenName = this.shiroModuleProperties.getTokenName();
@@ -59,28 +72,29 @@ public class ShiroTokenService {
         logger.info("setToken userId:{}=token:{}", userId, token);
         this.stringRedisTemplate.opsForValue().set(tokenPrefix + tokenName + userId, token, cacheDays, TimeUnit.DAYS);
         String value = this.stringRedisTemplate.opsForValue().get(tokenPrefix + tokenName + userId);
-        System.out.println(value);
         return token;
     }
 
+    /**
+     * 登出
+     *
+     * @param userId
+     */
     public void logout(String userId) {
-
-//        if (!shiroModuleProperties.isMultiLogin()) {
-//            String prefix = shiroModuleProperties.getPrefix();
-//            String token = stringRedisTemplate.opsForValue().get(prefix + shiroModuleProperties.getUser_id_to_token() + userId);
-//            stringRedisTemplate.delete(prefix + shiroModuleProperties.getToken_to_user_id() + token);
-//            stringRedisTemplate.delete(prefix + shiroModuleProperties.getUser_id_to_token() + userId);
-//            stringRedisTemplate.delete(prefix + shiroModuleProperties.getUser_id_to_role() + userId);
-//        }
         if (!shiroModuleProperties.isMultiLogin()) {
             String tokenPrefix = shiroModuleProperties.getTokenPrefix();
             String tokenName = shiroModuleProperties.getTokenName();
             String token = stringRedisTemplate.opsForValue().get(tokenPrefix + tokenName + userId);
             stringRedisTemplate.delete(tokenPrefix + tokenName + userId);
         }
-
     }
 
+    /**
+     * 更新用户角色
+     *
+     * @param userId
+     * @param role
+     */
     public void updateRole(String userId, String role) {
         String tokenPrefix = shiroModuleProperties.getTokenPrefix();
         String tokenName = shiroModuleProperties.getTokenName();
