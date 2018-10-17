@@ -26,4 +26,4 @@ swagger:
       name: service-b
       url: /service-b/v2/api-docs
       swagger-version: 2.0
-  show: false
+  show: true

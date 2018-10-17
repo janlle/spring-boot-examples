@@ -13,7 +13,7 @@ import java.util.Date;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @Column(columnDefinition = "varchar(128) not null comment '账号'")

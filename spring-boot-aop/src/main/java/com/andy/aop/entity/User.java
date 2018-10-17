@@ -7,7 +7,8 @@ import java.util.Date;
  * @author Leone
  * @since 2018-06-21
  **/
-public class User implements Serializable, Cloneable {
+
+public class User implements Serializable {
 
     private Long userId;
 
@@ -15,23 +16,32 @@ public class User implements Serializable, Cloneable {
 
     private String password;
 
-    private Date birthday;
+    private String description;
 
-    private Double salary;
+    private Integer age;
 
     private Date createTime;
 
-    private Boolean deleted;
+    private boolean deleted;
 
     public User() {
     }
 
-    public User(Long userId, String account, String password, Date birthday, Double salary, Date createTime, Boolean deleted) {
+    public User(String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
+        this.account = account;
+        this.password = password;
+        this.description = description;
+        this.age = age;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
+
+    public User(Long userId, String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
         this.userId = userId;
         this.account = account;
         this.password = password;
-        this.birthday = birthday;
-        this.salary = salary;
+        this.description = description;
+        this.age = age;
         this.createTime = createTime;
         this.deleted = deleted;
     }
@@ -60,20 +70,20 @@ public class User implements Serializable, Cloneable {
         this.password = password;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Double getSalary() {
-        return salary;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setSalary(Double salary) {
-        this.salary = salary;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Date getCreateTime() {
@@ -84,30 +94,11 @@ public class User implements Serializable, Cloneable {
         this.createTime = createTime;
     }
 
-    public Boolean getDeleted() {
+    public boolean isDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", birthday=" + birthday +
-                ", salary=" + salary +
-                ", createTime=" + createTime +
-                ", deleted=" + deleted +
-                '}';
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        User user = (User) super.clone();
-        return super.clone();
     }
 }
