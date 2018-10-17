@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -37,9 +36,11 @@ public class JwtTokenUtil {
             Map<String, Object> header = new HashMap<>();
             header.put("alg", "HS256");
             header.put("typ", "JWT");
+
             Calendar nowTime = Calendar.getInstance();
-            nowTime.add(Calendar.MINUTE, 1);
+            nowTime.add(Calendar.MINUTE, 3);
             Date expireDate = nowTime.getTime();
+
             JWTCreator.Builder builder = JWT.create()
                     .withHeader(header)
                     .withIssuer(ISSUER)
@@ -49,8 +50,8 @@ public class JwtTokenUtil {
             claims.forEach(builder::withClaim);
             return builder.sign(Algorithm.HMAC256(SECRET));
         } catch (Exception e) {
-            log.info("create jwt token failed!");
-            throw new RuntimeException(e.getMessage());
+            log.info("create jwt token failed message {}", e.getMessage());
+            return null;
         }
     }
 
@@ -61,19 +62,16 @@ public class JwtTokenUtil {
      * @return
      */
     public static Map<String, String> verifyToken(String token) {
-        Algorithm algorithm;
         try {
-            algorithm = Algorithm.HMAC256(SECRET);
+            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).withIssuer(ISSUER).build();
+            DecodedJWT jwt = verifier.verify(token);
+            Map<String, String> result = Maps.newHashMap();
+            jwt.getClaims().forEach((k, v) -> result.put(k, v.asString()));
+            return result;
         } catch (Exception e) {
-            log.info("verify jwt token is fail！");
-            throw new RuntimeException(e.getMessage());
+            log.info("verify jwt token failed message:{}", e.getMessage());
+            return null;
         }
-        JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUER).build();
-        DecodedJWT jwt = verifier.verify(token);
-        Map<String, Claim> map = jwt.getClaims();
-        Map<String, String> resultMap = Maps.newHashMap();
-        map.forEach((k, v) -> resultMap.put(k, v.asString()));
-        return resultMap;
     }
 
 }
