@@ -14,22 +14,25 @@ import java.util.Date;
 @ApiModel
 public class UserDTO {
 
-    @ApiModelProperty("用户账号")
+    @ApiModelProperty(value = "用户账号", name = "accountName", allowableValues = "hello", access = "access",
+            notes = "notes", dataType = "dataType", required = true, position = 2, hidden = false, example = "example", readOnly = true
+            , reference = "reference", allowEmptyValue = true
+    )
     private String account;
 
-    @ApiModelProperty("密码")
+    @ApiModelProperty(value = "密码")
     private String password;
 
-    @ApiModelProperty("生日")
+    @ApiModelProperty(value = "生日")
     private Date birthday;
 
-    @ApiModelProperty("工资")
+    @ApiModelProperty(value = "工资")
     private Double salary;
 
-    @ApiModelProperty("创建时间")
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    @ApiModelProperty("是否删除")
+    @ApiModelProperty(value = "是否删除")
     private Boolean deleted;
 
 }
