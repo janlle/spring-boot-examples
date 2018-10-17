@@ -19,7 +19,7 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
 
 /**
  * @author Leone
- * @since 2018-07-12 20:12
+ * @since 2018-07-12
  **/
 @Component
 public class SwaggerConfig {
@@ -27,6 +27,7 @@ public class SwaggerConfig {
     @Bean
     public Docket swaggerApi() {
         Parameter parameter = new ParameterBuilder()
+                .hidden(true)
                 .name("Authorization")
                 .description("token")
                 .modelRef(new ModelRef("string"))
