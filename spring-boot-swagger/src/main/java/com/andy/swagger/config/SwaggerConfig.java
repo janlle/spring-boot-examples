@@ -1,6 +1,8 @@
 package com.andy.swagger.config;
 
 import com.google.common.base.Predicates;
+import org.apache.el.parser.BooleanNode;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -24,10 +26,12 @@ import static springfox.documentation.builders.RequestHandlerSelectors.basePacka
 @Component
 public class SwaggerConfig {
 
+    @Value("${swagger.show}")
+    private Boolean enable;
+
     @Bean
     public Docket swaggerApi() {
         Parameter parameter = new ParameterBuilder()
-                .hidden(true)
                 .name("Authorization")
                 .description("token")
                 .modelRef(new ModelRef("string"))
@@ -36,6 +40,7 @@ public class SwaggerConfig {
                 .defaultValue("token ")
                 .build();
         return new Docket(DocumentationType.SWAGGER_2)
+                .enable(enable)
                 .apiInfo(apiInfo())
                 .groupName("web-API")
                 .globalOperationParameters(Collections.singletonList(parameter))

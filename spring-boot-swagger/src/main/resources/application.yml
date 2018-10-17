@@ -1,6 +1,3 @@
-server:
-  servlet:
-    path: /swagger
 spring:
   application:
     name: spring-swagger

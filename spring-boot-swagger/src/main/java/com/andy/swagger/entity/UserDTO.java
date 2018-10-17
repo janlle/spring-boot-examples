@@ -12,21 +12,24 @@ import java.util.Date;
  **/
 @Data
 @ApiModel
-public class UserVO {
+public class UserDTO {
 
-    @ApiModelProperty(value = "主键",example = "1200L")
-    private Long userId;
-
-    @ApiModelProperty("账号")
+    @ApiModelProperty("用户账号")
     private String account;
 
-    @ApiModelProperty("自我介绍")
-    private String description;
+    @ApiModelProperty("密码")
+    private String password;
 
-    @ApiModelProperty("年龄")
-    private Integer age;
+    @ApiModelProperty("生日")
+    private Date birthday;
+
+    @ApiModelProperty("工资")
+    private Double salary;
 
     @ApiModelProperty("创建时间")
     private Date createTime;
+
+    @ApiModelProperty("是否删除")
+    private Boolean deleted;
 
 }
