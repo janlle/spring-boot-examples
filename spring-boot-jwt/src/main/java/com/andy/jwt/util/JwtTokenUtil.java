@@ -8,7 +8,6 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -20,44 +19,47 @@ import java.util.Map;
  * @since 2018-04-16
  **/
 @Slf4j
-public class JwtToken {
+public class JwtTokenUtil {
 
     //公用秘钥保存在服务器中，客户端无法知道
-    private static final String SECRET = "#ili98@";
+    private static final String SECRET = "#ili^0+%98@";
 
     private static final String ISSUER = "jwt-user";
 
-    //生成token
-    public static String createToken() throws Exception {
-        Calendar nowTime = Calendar.getInstance();
-        nowTime.add(Calendar.MINUTE, 1);
-        Date expireDate = nowTime.getTime();
-        Map<String, Object> map = new HashMap<>();
-        map.put("alg", "HS256");
-        map.put("typ", "JWT");
-        String token = JWT.create()
-                .withHeader(map)
-                .withClaim("name", "james")
-                .withClaim("age", 23)
-                .withClaim("org", "今日头条")
-                .withExpiresAt(expireDate)
-                .sign(Algorithm.HMAC256(SECRET));
-        return token;
-    }
-
-    //---------------------------------------------------------------------
-    public static String getToken(Map<String, String> claims) {
+    /**
+     * 生成token
+     *
+     * @param claims
+     * @return
+     */
+    public static String createToken(Map<String, String> claims) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(SECRET);
-            JWTCreator.Builder builder = JWT.create().withIssuer(ISSUER).withExpiresAt(DateUtils.addDays(new Date(), 1));
+            Map<String, Object> header = new HashMap<>();
+            header.put("alg", "HS256");
+            header.put("typ", "JWT");
+            Calendar nowTime = Calendar.getInstance();
+            nowTime.add(Calendar.MINUTE, 1);
+            Date expireDate = nowTime.getTime();
+            JWTCreator.Builder builder = JWT.create()
+                    .withHeader(header)
+                    .withIssuer(ISSUER)
+                    .withExpiresAt(expireDate)
+                    .withIssuedAt(nowTime.getTime())
+                    .withSubject("user");
             claims.forEach(builder::withClaim);
-            return builder.sign(algorithm);
+            return builder.sign(Algorithm.HMAC256(SECRET));
         } catch (Exception e) {
-            log.info("create jwt token is fail！");
+            log.info("create jwt token failed!");
             throw new RuntimeException(e.getMessage());
         }
     }
 
+    /**
+     * 校验token
+     *
+     * @param token
+     * @return
+     */
     public static Map<String, String> verifyToken(String token) {
         Algorithm algorithm;
         try {

@@ -3,7 +3,7 @@ package com.andy.jwt.controller;
 import com.andy.jwt.common.BaseResponse;
 import com.andy.jwt.entity.User;
 import com.andy.jwt.repository.UserRepository;
-import com.andy.jwt.util.JwtToken;
+import com.andy.jwt.util.JwtTokenUtil;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class UserController {
     //用户登录功能
     @PostMapping("/login")
     public BaseResponse<User> login(@RequestBody User user) throws Exception {
-        String token = JwtToken.getToken(ImmutableMap.of("email",user.getAccount(),"name",user.getUserId().toString(),"ts", Instant.now().getEpochSecond() + ""));
+        String token = JwtTokenUtil.createToken(ImmutableMap.of("email",user.getAccount(),"name",user.getUserId().toString(),"ts", Instant.now().getEpochSecond() + ""));
         user.setPassword(token);
         log.info("token={}", token);
         renewToken(token, user.getAccount());
@@ -49,7 +49,7 @@ public class UserController {
     public BaseResponse<Object> valid(String token) {
         Map<String, String> map = null;
         try {
-            map = JwtToken.verifyToken(token);
+            map = JwtTokenUtil.verifyToken(token);
         } catch (Exception e) {
             log.error("token validate fail!");
         }
@@ -57,7 +57,7 @@ public class UserController {
 
         Long expire = redisTemplate.getExpire(account);
 
-        if (expire > 0) {
+        if (expire != null && expire > 0) {
             renewToken(token, account);
             User user = userRepository.findUserByAccount(account);
             user.setPassword(token);
@@ -85,7 +85,7 @@ public class UserController {
     }
 
     public void invalidate(String token) {
-        Map<String, String> map = JwtToken.verifyToken(token);
+        Map<String, String> map = JwtTokenUtil.verifyToken(token);
         redisTemplate.delete(map.get("email"));
     }
 
