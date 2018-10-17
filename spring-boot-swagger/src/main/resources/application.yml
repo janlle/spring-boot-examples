@@ -1,8 +1,9 @@
 server:
-  servlet-path: /swagger
+  servlet:
+    path: /swagger
 spring:
   application:
-    name: spring-document
+    name: spring-swagger
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/boot?useSSL=false
@@ -25,3 +26,4 @@ swagger:
       name: service-b
       url: /service-b/v2/api-docs
       swagger-version: 2.0
+  show: false
