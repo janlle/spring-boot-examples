@@ -8,6 +8,9 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,15 +40,20 @@ public class JwtTokenUtil {
             header.put("alg", "HS256");
             header.put("typ", "JWT");
 
-            Calendar nowTime = Calendar.getInstance();
-            nowTime.add(Calendar.MINUTE, 3);
-            Date expireDate = nowTime.getTime();
+            ZoneId zoneId = ZoneId.systemDefault();
+            LocalDateTime localDateTime = LocalDateTime.now();
+
+            ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
+
+            System.out.println(Date.from(zonedDateTime.toInstant()));
+            localDateTime.plusSeconds(180);
+            System.out.println(Date.from(zonedDateTime.toInstant()));
 
             JWTCreator.Builder builder = JWT.create()
                     .withHeader(header)
                     .withIssuer(ISSUER)
-                    .withExpiresAt(expireDate)
-                    .withIssuedAt(nowTime.getTime())
+//                    .withExpiresAt(expireDate)
+//                    .withIssuedAt(nowTime.getTime())
                     .withSubject("user");
             claims.forEach(builder::withClaim);
             return builder.sign(Algorithm.HMAC256(SECRET));

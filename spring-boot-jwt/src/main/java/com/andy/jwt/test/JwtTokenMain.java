@@ -20,8 +20,8 @@ public class JwtTokenMain {
         body.put("sex", "男");
         String token = JwtTokenUtil.createToken(body);
         System.out.println(token);
-
-        JwtTokenUtil.verifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwic2V4Ijoi55S3IiwiaXNzIjoiand0LXVzZXIiLCJuYW1lIjoi5byg5LiJIiwiZXhwIjoxNTM5NzYwODk2LCJpYXQiOjE1Mzk3NjA4OTYsImFnZSI6IjEyIn0.RoeEc-No1PtVp4n7o0pyCXX7rwo8sLobytBXvvpbV1o");
+        Map<String, String> result = JwtTokenUtil.verifyToken(token);
+        System.out.println(result);
 
     }
 
