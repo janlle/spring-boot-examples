@@ -67,7 +67,7 @@ public class UserController {
         return this.userRepository.findById(id)
                 .flatMap(u -> {
                     u.setAge(user.getAge());
-                    u.setEmail(user.getEmail());
+                    u.setPassword(user.getPassword());
                     u.setPassword(user.getPassword());
                     return this.userRepository.save(u);
                 }).map(u -> new ResponseEntity<User>(HttpStatus.OK))

@@ -1,6 +1,7 @@
 package com.andy.flux.service;
 
 import com.andy.flux.entity.User;
+import com.andy.flux.util.EntityFactory;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,17 +19,12 @@ public class UserService {
 
     private final Map<String, User> data = new ConcurrentHashMap<>();
 
-    private final List<User> users = Arrays.asList(
-            new User("000", "User1", "user1@gmail.com"),
-            new User("001", "User2", "user2@gmail.com"),
-            new User("002", "User3", "user3@gmail.com"),
-            new User("003", "User4", "user4@gmail.com"),
-            new User("004", "User5", "user5@gmail.com"));
+    private final List<User> users = EntityFactory.getUsers(20);
 
 
     public Mono<User> getUserById(String id) {
         return Mono.justOrEmpty(users.stream().filter(user ->
-                user.getId().equals(id)
+                user.getUserId().equals(id)
         ).findFirst().orElse(null));
     }
 
@@ -54,11 +50,11 @@ public class UserService {
     }
 
     Flux<User> createOrUpdate(final Flux<User> users) {
-        return users.doOnNext(user -> this.data.put(user.getId(), user));
+        return users.doOnNext(user -> this.data.put(user.getUserId().toString(), user));
     }
 
     Mono<User> createOrUpdate(final User user) {
-        this.data.put(user.getId(), user);
+        this.data.put(user.getUserId().toString(), user);
         return Mono.just(user);
     }
 
