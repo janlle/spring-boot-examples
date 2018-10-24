@@ -256,7 +256,7 @@ public class ExcelExportHelper {
         HSSFWorkbook book = exportExcel(header, properties, excelList, sheetTitle);
 
         //将生成的Excel打包保存起来
-        List<HSSFWorkbook> books = new ArrayList<HSSFWorkbook>();
+        List<HSSFWorkbook> books = new ArrayList<>();
         books.add(book);
         zipExcelAndSave(books, filePath, zipName, excelName);
     }

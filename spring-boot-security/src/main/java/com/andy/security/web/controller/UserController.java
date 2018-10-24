@@ -1,17 +1,17 @@
 package com.andy.security.web.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import com.andy.security.entity.User;
+import com.andy.security.util.EntityFactory;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.andy.security.entity.User;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -19,12 +19,7 @@ public class UserController {
 
     @GetMapping("/list")
     public List<User> list() {
-        List<User> users = new ArrayList<>();
-        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
-        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
-        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
-        users.add(new User(1002L, "james", "james", new Date(), 1000.0, new Date(), false));
-        return users;
+        return EntityFactory.getUsers(10);
     }
 
     @PostMapping("/authentication/form")
