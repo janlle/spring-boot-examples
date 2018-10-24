@@ -3,6 +3,7 @@ package com.andy.dubbo.provider;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.andy.dubbo.common.User;
 import com.andy.dubbo.common.UserService;
+import com.andy.dubbo.util.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     {
         for (long i = 0; i < 10; i++) {
-            User user = new User(i, "james" + i, "password" + i, "james"+ i +"@126.com", 12000.00, new Date(), "token" + i * 1000);
+            User user = EntityFactory.getUser();
             userList.add(user);
         }
     }
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = null;
         for (int i = 0; i < userList.size(); i++) {
-            if (username.equals(userList.get(i).getUsername())) {
+            if (username.equals(userList.get(i).getAccount())) {
                 user = userList.get(i);
             }
         }

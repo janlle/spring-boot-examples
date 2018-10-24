@@ -3,13 +3,12 @@ package com.andy.jms.rabbitmq.controller;
 import com.andy.jms.entity.User;
 import com.andy.jms.rabbitmq.config.RabbitMQConstant;
 import com.andy.jms.rabbitmq.sender.MessageSender;
+import com.andy.jms.util.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
 
 /**
  * @author Leone
@@ -27,7 +26,7 @@ public class RabbitMQController {
 
         String message = "hello james how are you!";
 
-        User user = new User(1L, "james", "admin", new Date(), 10000 + 0.1, new Date(), false);
+        User user = EntityFactory.getUser();
 
         switch (target) {
             case "topic":
