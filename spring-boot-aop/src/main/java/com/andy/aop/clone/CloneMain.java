@@ -22,7 +22,7 @@ public class CloneMain {
 
         System.out.println(u1.hashCode());
 
-        User u2 = (User) user.clone();
+        User u2 =  user.clone();
 
         System.out.println(u2.hashCode());
 

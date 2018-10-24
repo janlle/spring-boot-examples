@@ -1,6 +1,6 @@
-package com.andy.flux.util;
+package com.andy.aop.util;
 
-import com.andy.flux.entity.User;
+import com.andy.aop.entity.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
