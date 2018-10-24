@@ -7,26 +7,24 @@ import java.util.List;
 
 /**
  * @author Leone
- * @since 2018-05-11 18:43
+ * @since 2018-05-11
  **/
 @Mapper
 public interface UserMapper {
 
     @Insert("insert into t_user(`user_id`, `account`, `create_time`, `deleted`, `password`, `age`, `email`, `sex`) values(#{userId},#{account},#{createTime},#{deleted},#{password},#{age},#{email}，#{sex})")
-    int insert(User user);
+    void insert(User user);
 
     int insertSelective(User user);
 
-    int insertList(@Param("users") List<User> users);
+    void insertList(@Param("users") List<User> users);
 
     @Delete("delete from t_user where user_id = #{userId}")
     int deleteById(@Param("userId") Long userId);
 
-
     int updateByIdSelective(User user);
 
     int updateById(User user);
-
 
     @Select("select * from t_user where user_id = #{userId}")
     User findByUserId(@Param("userId") Long userId);
