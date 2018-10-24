@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisService {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, java.util.List<com.andy.data.entity.User>> redisTemplate;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -36,7 +36,7 @@ public class RedisService {
     private ValueOperations valueOperations;
 
     @Autowired
-    private ListOperations listOperations;
+    private ListOperations<String, String> listOperations;
 
     @Autowired
     private SetOperations setOperations;
@@ -79,6 +79,7 @@ public class RedisService {
         log.info("insert:{}", count);
         long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
+//            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
             redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
         }
         long end = System.currentTimeMillis();

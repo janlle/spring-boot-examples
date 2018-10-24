@@ -12,20 +12,18 @@ public class RandomUtil {
     /**
      * 生成随机字符串
      *
-     * @author Leone
-     * @since 2018/6/25
-     * @params: []
-     * @return: java.lang.String
-     **/
+     * @param length
+     * @return
+     */
     public static String getNum(Integer length) {
-        if (length <= 0 || length > 512) {
-            length = 31;
+        if (length < 0 && length > 512) {
+            length = 32;
         }
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         final String sources = "0123456789";
         Random rand = new Random();
         for (int i = 0; i < length; i++) {
-            result.append(sources.charAt(rand.nextInt(9)) + "");
+            result.append(sources.charAt(rand.nextInt(9)));
         }
         return result.toString();
     }
@@ -33,11 +31,9 @@ public class RandomUtil {
     /**
      * 生成32位随机数字
      *
-     * @author Leone
-     * @since 2018/6/25
-     * @params: []
-     * @return: java.lang.String
-     **/
+     * @param length
+     * @return
+     */
     public static String getStr(Integer length) {
         if (length <= 0 || length > 32) {
             length = 32;
@@ -45,28 +41,16 @@ public class RandomUtil {
         return UUID.randomUUID().toString().replace("-", "").substring(0, length);
     }
 
-
     /**
      * 获取当前时间戳，单位秒(10位)
-     *
-     * @author Leone
-     * @since 2018/6/25
-     * @params: []
-     * @return: java.lang.String
      **/
-    public static String timestamp() {
-        return System.currentTimeMillis() / 1000 + "";
-    }
-
-    public static String currentTimestamp() {
-        return System.currentTimeMillis() + "" + new Random().nextInt(9);
+    public static long getTimestamp() {
+        return System.currentTimeMillis() / 1000;
     }
 
     public static void main(String[] args) {
         System.out.println(getStr(34));
         System.out.println(getNum(35));
-        System.out.println(currentTimestamp());
-        System.out.println(timestamp());
     }
 
 
