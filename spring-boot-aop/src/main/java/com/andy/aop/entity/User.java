@@ -7,7 +7,6 @@ import java.util.Date;
  * @author Leone
  * @since 2018-06-21
  **/
-
 public class User implements Serializable {
 
     private Long userId;

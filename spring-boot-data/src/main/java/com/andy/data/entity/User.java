@@ -7,6 +7,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-01-24
+ **/
 @Data
 @Entity
 @Table(name = "t_user")

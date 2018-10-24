@@ -1,29 +1,102 @@
 package com.andy.dubbo.common;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements Serializable {
 
-    private long id;
+    private Long userId;
 
-    private String username;
+    private String account;
 
     private String password;
 
-    private String email;
+    private String description;
 
-    private double salary;
+    private Integer age;
 
-    private Date birthday;
+    private Date createTime;
 
-    private String token;
+    private boolean deleted;
 
+    public User() {
+    }
+
+    public User(String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
+        this.account = account;
+        this.password = password;
+        this.description = description;
+        this.age = age;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
+
+    public User(Long userId, String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
+        this.userId = userId;
+        this.account = account;
+        this.password = password;
+        this.description = description;
+        this.age = age;
+        this.createTime = createTime;
+        this.deleted = deleted;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

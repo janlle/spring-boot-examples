@@ -14,27 +14,18 @@ import java.util.Date;
 @Table(name = "t_user")
 public class User implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(columnDefinition = "varchar(128) not null comment '账号'")
     private String account;
 
-    @Column(columnDefinition = "varchar(128) not null comment '密码'")
     private String password;
 
-    @Column(columnDefinition = "text comment '自我介绍'")
     private String description;
 
-    @Column(columnDefinition = "int(11) not null comment '年龄'")
     private Integer age;
 
-    @CreatedDate
-    @Column(columnDefinition = "timestamp not null default current_timestamp comment '创建时间'")
     private Date createTime;
 
-    @Column(columnDefinition = "bit not null comment '是否删除'")
     private boolean deleted;
 
     public User() {
@@ -115,3 +106,4 @@ public class User implements Serializable {
         this.deleted = deleted;
     }
 }
+
