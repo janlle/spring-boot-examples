@@ -43,7 +43,7 @@ public class HelloController {
     @GetMapping("insertMybatis/{num}")
     public String insert(@PathVariable("num") Integer num) {
         long start = System.currentTimeMillis();
-        userService.insertUserMybaits(num);
+        userService.insertUserMybatis(num);
         long end = System.currentTimeMillis();
         double time = (double) (end - start) / 1000;
         return "使用mybaits插入" + num + "条数据到mysql一共用了" + time + "秒！";
