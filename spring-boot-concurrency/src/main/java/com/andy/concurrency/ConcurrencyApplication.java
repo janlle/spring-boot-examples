@@ -1,7 +1,6 @@
 package com.andy.concurrency;
 
 import com.andy.concurrency.test.HttpFilter;
-import com.andy.concurrency.test.HttpInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -12,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * @author Leone
- * @since 2018-04-22 15:13
+ * @since 2018-04-22
  **/
 @Configuration
 @SpringBootApplication
