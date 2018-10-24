@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-05-24
+ **/
 @Slf4j
 @Service
 public class JpaService {

@@ -9,11 +9,16 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-05-24
+ **/
 @Slf4j
 @Service
 //@Transactional
-public class MyBatisService {
+public class MybatisService {
 
     @Autowired
     private UserMapper userMapper;

@@ -2,7 +2,7 @@ package com.andy.data.controller;
 
 import com.andy.data.entity.User;
 import com.andy.data.mybatis.mapper.UserMapper;
-import com.andy.data.service.MyBatisService;
+import com.andy.data.service.MybatisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class MybatisController {
     private UserMapper userMapper;
 
     @Autowired
-    private MyBatisService myBatisService;
+    private MybatisService myBatisService;
 
     @PutMapping("/update")
     public String update(@RequestBody User user) {

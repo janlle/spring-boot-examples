@@ -16,10 +16,14 @@ import java.util.List;
 @Slf4j
 public class EntityFactory {
 
+    private static final String jsonUserData = "{\"username\":\"james\",\"password\":\"admin\",\"email\":\"andy@163.com\",\"token\":\"token:12idkail8lld\",\"salary\":10004,\"birthday\":\"2018-04-02\"}";
 
-    private static String jsonUserData = "{\"username\":\"james\",\"password\":\"admin\",\"email\":\"andy@163.com\",\"token\":\"token:12idkail8lld\",\"salary\":10004,\"birthday\":\"2018-04-02\"}";
-
-
+    /**
+     * 获取object数据格式数据
+     *
+     * @param count
+     * @return
+     */
     public static List<User> getUsers(Integer count) {
         List<User> userList = new ArrayList<>();
         for (long i = 0; i < count; i++) {
@@ -29,6 +33,11 @@ public class EntityFactory {
         return userList;
     }
 
+    /**
+     * 获取json数据格式数据
+     *
+     * @return
+     */
     public static String getJsonUser() {
         return jsonUserData;
     }
