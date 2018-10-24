@@ -23,17 +23,6 @@ import java.util.concurrent.Future;
 @RequestMapping("/test")
 public class TestController {
 
-    /**
-     * 固定大小的线程池
-     */
-    static ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
-
-    @GetMapping("/thread")
-    public String parse() {
-        Future<?> submit = fixedThreadPool.submit(() -> System.out.println("线程名称：" + Thread.currentThread().getName()));
-        return Thread.currentThread().getName();
-    }
-
     private static Map<Integer, Boolean> data = new HashMap<>();
 
     Stack stack = new Stack();
