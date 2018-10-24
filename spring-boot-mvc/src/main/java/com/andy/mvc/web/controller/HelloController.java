@@ -92,7 +92,7 @@ public class HelloController {
 
     @GetMapping("/api/lyon")
     public String Leone() {
-        Integer userId = UserHelper.getId();
+        Integer userId = UserHelper.getUserId();
         return userId.toString();
     }
 
