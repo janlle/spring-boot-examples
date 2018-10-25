@@ -37,12 +37,14 @@ public class SpringAopConfig {
         Object result = null;
         String methodName = point.getSignature().getName();
         try {
-            log.info("环绕通知开始,方法名:" + methodName + ",参数:" + Arrays.asList(point.getArgs()));
+            log.info("around start method name:" + methodName + ", params:" + Arrays.asList(point.getArgs()));
+            long start = System.currentTimeMillis();
             result = point.proceed();
-            log.info("环绕通知结束,方法名:" + methodName + ",参数:" + Arrays.asList(point.getArgs()));
+            long end = System.currentTimeMillis();
+            long time = (end - start);
+            log.info("around end time:{}", time + " ms!");
         } catch (Throwable e) {
-            log.info("发生异常...");
-            e.printStackTrace();
+            log.error("message:{}", e.getMessage());
         }
         return result;
     }
@@ -57,7 +59,7 @@ public class SpringAopConfig {
     public void beforeMethod(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         List<Object> args = Arrays.asList(joinPoint.getArgs());
-        log.info("前置通知,方法名:" + methodName + ",参数:" + args);
+        log.info("before inform method name :" + methodName + ", param:" + args);
     }
 
     /**
@@ -69,7 +71,7 @@ public class SpringAopConfig {
     public void afterMethod(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         List<Object> args = Arrays.asList(joinPoint.getArgs());
-        log.info("后置通知,方法名:" + methodName + ",参数:" + args);
+        log.info("after inform method name :" + methodName + ", param:" + args);
     }
 
     /**
@@ -81,7 +83,7 @@ public class SpringAopConfig {
     @AfterReturning(value = "pointCut()", returning = "result")
     public void afterReturning(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().getName();
-        log.info("后置返回,方法名:" + methodName + ",返回值:" + result);
+        log.info("afterReturning inform method name :" + methodName + ", return value:" + result);
     }
 
     /**
@@ -93,10 +95,16 @@ public class SpringAopConfig {
     @AfterThrowing(value = "pointCut()", throwing = "ex")
     public void afterThrowing(JoinPoint joinPoint, Exception ex) {
         String methodName = joinPoint.getSignature().getName();
-        log.info("后置异常通知 " + methodName + " exceptions " + ex);
+        log.info("afterThrowing inform method name :" + methodName + ", exceptions:" + ex);
     }
 
 
+    /**
+     * 环绕通知
+     * @param joinPoint
+     * @return
+     * @throws Throwable
+     */
     @Around("@annotation(com.andy.aop.anno.SystemLog)")
     public Object customerAround(ProceedingJoinPoint joinPoint) throws Throwable {
         SystemLog systemLog = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(SystemLog.class);
