@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2018-07-14 13:14
  **/
 @SpringBootApplication
-public class JVMApplication {
+public class JvmApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JVMApplication.class, args);
+        SpringApplication.run(JvmApplication.class, args);
         if (args.length > 0) {
             for (int i = 0; i < args.length; i++) {
                 System.out.println(args[i]);
