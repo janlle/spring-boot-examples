@@ -1,7 +1,7 @@
 package com.andy.data.controller;
 
 import com.andy.data.entity.User;
-import com.andy.data.jpa.repository.UserRepository;
+import com.andy.data.repository.jpa.repository.UserRepository;
 import com.andy.data.service.JpaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Leone
- * @since 2018-05-11 19:30
+ * @since 2018-05-11
  **/
 @Slf4j
 @RestController
@@ -25,22 +25,20 @@ public class JpaController {
     @GetMapping("/insertBatch")
     public String insertBatch(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = jpaService.insertBatch(count);
-        return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
+        return "batch insert " + count + " expenditure:" + time + " ms!";
     }
 
     @GetMapping("/foreachInsert")
     public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = jpaService.insertForeach(count);
-        return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
+        return "foreach insert " + count + " expenditure:" + time + " ms!";
     }
 
 
     @PutMapping("/update")
     public String update(@RequestBody User user) {
-        long start = System.currentTimeMillis();
         int result = jpaService.update(user);
-        long end = System.currentTimeMillis();
-        return "修改1条数据一共用了:" + (end - start) + "豪秒!返回的结果是:" + result;
+        return "update one expenditure:" + result + " ms!";
     }
 
 //    @InitBinder
