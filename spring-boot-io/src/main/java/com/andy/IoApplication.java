@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Leone
- * @since 2018-06-29 20:58
+ * @since 2018-06-29
  **/
 @SpringBootApplication
-public class IOApplication {
+public class IoApplication {
     public static void main(String[] args) {
-        SpringApplication.run(IOApplication.class, args);
+        SpringApplication.run(IoApplication.class, args);
     }
 }

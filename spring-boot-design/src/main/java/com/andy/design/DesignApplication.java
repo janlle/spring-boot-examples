@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2018-09-11
  **/
 @SpringBootApplication
-public class Application {
+public class DesignApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(DesignApplication.class, args);
     }
 }
