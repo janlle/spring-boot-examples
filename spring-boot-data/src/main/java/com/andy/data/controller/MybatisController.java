@@ -1,7 +1,7 @@
 package com.andy.data.controller;
 
 import com.andy.data.entity.User;
-import com.andy.data.mybatis.UserMapper;
+import com.andy.data.serializ.mybatis.UserMapper;
 import com.andy.data.service.MybatisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +27,19 @@ public class MybatisController {
     @PutMapping("/update")
     public String update(@RequestBody User user) {
         long result = myBatisService.update(user);
-        return "修改1条数据一共用了:" + result + " 豪秒!返回的结果是:" + result;
+        return "update one time:" + result + " ms!";
     }
 
     @GetMapping("/delete")
     public String deleteById(Long id) {
         int result = userMapper.deleteById(id);
-        return "删除1条数据一共用了:" + result + "豪秒!返回的结果是:" + result;
+        return "delete one line time:" + result;
     }
 
     @GetMapping("/list")
     public String selectList() {
         List<User> result = userMapper.findAll();
-        return "selectList查询了:" + result.size() + "条数据一共用了:" + result + "豪秒!";
+        return "select all result size:" + result.size() + "expenditure:" + result + " ms!";
     }
 
     @GetMapping("/user")
@@ -50,13 +50,13 @@ public class MybatisController {
     @GetMapping("/batchInsert")
     public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = myBatisService.insertBatch(count);
-        return "batch insert " + count + " expenditure:" + time + " MS！";
+        return "batch insert " + count + " expenditure:" + time + " ms!";
     }
 
     @GetMapping("/foreachInsert")
     public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = myBatisService.insertForeach(count);
-        return "foreach insert " + count + " expenditure:" + time + " MS！";
+        return "foreach insert " + count + " expenditure:" + time + " ms!";
     }
 
 }

@@ -27,26 +27,26 @@ public class RedisController {
     @GetMapping("/batchInsert")
     public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = redisService.batchInsert(count);
-        return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
+        return "foreach batch " + count + " expenditure:" + time + " ms!";
     }
 
     @GetMapping("/foreachInsert")
     public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = redisService.foreachInsert(count);
-        return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
+        return "foreach batch " + count + " expenditure:" + time + " ms!";
     }
 
     @GetMapping("/setValue")
     public String setValue(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = redisService.setValue(count);
-        return "set" + count + "条数据一共用了:" + time + "豪秒！";
+        return "save " + count + " expenditure:" + time + " ms!";
     }
 
 
     @GetMapping("/insert")
     public String insert(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = redisService.insert(count);
-        return "set" + count + "条数据一共用了:" + time + "豪秒！";
+        return "save " + count + " expenditure:" + time + " ms!";
     }
 
 

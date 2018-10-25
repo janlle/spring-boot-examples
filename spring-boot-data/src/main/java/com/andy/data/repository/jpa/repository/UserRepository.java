@@ -1,4 +1,4 @@
-package com.andy.data.jpa.repository;
+package com.andy.data.repository.jpa.repository;
 
 import com.andy.data.entity.User;
 import org.apache.ibatis.annotations.Param;
@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Leone
