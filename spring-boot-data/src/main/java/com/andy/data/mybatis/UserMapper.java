@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Insert("insert into t_user(`user_id`, `account`, `create_time`, `deleted`, `password`, `age`, `email`, `sex`) values(#{userId},#{account},#{createTime},#{deleted},#{password},#{age},#{email}，#{sex})")
+    @Insert("insert into t_user(`user_id`, `account`, `password`, `age`, `description`, `deleted`, `create_time`) values(#{userId},#{account},#{password},#{age},#{description},#{deleted},#{createTime})")
     void insert(User user);
 
     int insertSelective(User user);

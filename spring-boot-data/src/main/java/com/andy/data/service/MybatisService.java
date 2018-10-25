@@ -30,10 +30,8 @@ public class MybatisService {
      * @return
      */
     public long insertBatch(Integer count) {
-        long start = System.currentTimeMillis();
         userMapper.insertBatch(EntityFactory.getUsers(count));
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
     /**
@@ -43,18 +41,17 @@ public class MybatisService {
      * @return
      */
     public long insertForeach(Integer count) {
-        long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
-            userMapper.insert(EntityFactory.getUsers(1).get(0));
+            userMapper.insert(EntityFactory.getUser());
         }
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
     @Transactional
-    public int update(User user) {
+    public long update(User user) {
         Integer result = userMapper.updateById(user);
-        throw new RuntimeException("发生异常");
+        int i = 100 / 0;
+        return 0;
     }
 
 

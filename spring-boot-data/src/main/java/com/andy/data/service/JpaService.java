@@ -31,10 +31,8 @@ public class JpaService {
      */
     public long insertBatch(Integer count) {
         List<User> list = EntityFactory.getUsers(count);
-        long start = System.currentTimeMillis();
         userRepository.saveAll(list);
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
     /**
@@ -42,12 +40,10 @@ public class JpaService {
      * @return
      */
     public long insertForeach(Integer count) {
-        long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
             userRepository.save(EntityFactory.getUser());
         }
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
 
@@ -56,6 +52,7 @@ public class JpaService {
         User entity = userRepository.findById(user.getUserId()).orElse(null);
         BeanUtils.copyProperties(user, entity);
         userRepository.save(user);
-        throw new RuntimeException("发生异常");
+        int i = 100 / 0;
+        return 0;
     }
 }
