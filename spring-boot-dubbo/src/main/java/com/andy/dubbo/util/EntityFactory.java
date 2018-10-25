@@ -1,6 +1,6 @@
 package com.andy.dubbo.util;
 
-import com.andy.dubbo.common.User;
+import com.andy.dubbo.entity.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

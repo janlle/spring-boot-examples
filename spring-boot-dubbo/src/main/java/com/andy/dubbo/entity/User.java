@@ -1,11 +1,14 @@
-package com.andy.dubbo.common;
-
-import lombok.Data;
+package com.andy.dubbo.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-06-25
+ **/
 public class User implements Serializable {
 
     private Long userId;
