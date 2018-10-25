@@ -1,4 +1,4 @@
-package com.andy.data.redis;
+package com.andy.data.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;

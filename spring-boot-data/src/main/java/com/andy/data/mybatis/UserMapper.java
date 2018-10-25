@@ -1,4 +1,4 @@
-package com.andy.data.mybatis.mapper;
+package com.andy.data.mybatis;
 
 import com.andy.data.entity.User;
 import org.apache.ibatis.annotations.*;
@@ -17,7 +17,7 @@ public interface UserMapper {
 
     int insertSelective(User user);
 
-    void insertList(@Param("users") List<User> users);
+    void insertBatch(@Param("users") List<User> users);
 
     @Delete("delete from t_user where user_id = #{userId}")
     int deleteById(@Param("userId") Long userId);

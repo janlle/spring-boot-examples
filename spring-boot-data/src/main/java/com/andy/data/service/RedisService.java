@@ -1,4 +1,4 @@
-package com.andy.data.redis;
+package com.andy.data.service;
 
 import com.andy.data.config.RedisPrefix;
 import com.andy.data.util.EntityFactory;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisService {
 
     @Autowired
-    private RedisTemplate<String, java.util.List<com.andy.data.entity.User>> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;

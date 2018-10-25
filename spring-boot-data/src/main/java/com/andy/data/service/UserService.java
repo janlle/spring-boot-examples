@@ -2,7 +2,7 @@ package com.andy.data.service;
 
 import com.andy.data.entity.User;
 import com.andy.data.jpa.repository.UserRepository;
-import com.andy.data.mybatis.mapper.UserMapper;
+import com.andy.data.mybatis.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,11 +21,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     @Autowired
     private UserMapper userMapper;
 
+
     @Autowired
     private RedisTemplate redisTemplate;
+
 
     public List<User> getUsers() {
         return userRepository.findAll();

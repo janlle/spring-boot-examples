@@ -34,7 +34,7 @@ public class EntityFactory {
     }
 
     public static User getUser() {
-        return new User(Long.parseLong(1 + RandomUtil.getNum(8)), "andy", RandomUtil.getStr(12), "hello my friend i am a boy " + RandomUtil.getStr(6), 18, new Date(), false);
+        return new User(Long.parseLong(1 + RandomUtil.getNum(7)), "andy", RandomUtil.getStr(12), "hello my friend i am a boy " + RandomUtil.getStr(6), 18, new Date(), false);
     }
 
     /**

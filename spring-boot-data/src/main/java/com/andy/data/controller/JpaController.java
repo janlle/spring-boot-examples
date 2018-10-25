@@ -22,9 +22,9 @@ public class JpaController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/batchInsert")
-    public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = jpaService.insertList(count);
+    @GetMapping("/insertBatch")
+    public String insertBatch(@RequestParam(required = false, defaultValue = "1") Integer count) {
+        long time = jpaService.insertBatch(count);
         return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
     }
 

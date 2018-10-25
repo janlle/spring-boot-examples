@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,21 +25,26 @@ public class JpaService {
     @Autowired
     private UserRepository userRepository;
 
-    public long insertList(Integer count) {
-        List<User> list = new ArrayList<>();
-        for (long i = 0; i < count; i++) {
-            list.add(EntityFactory.getUsers(1).get(0));
-        }
+    /**
+     * @param count
+     * @return
+     */
+    public long insertBatch(Integer count) {
+        List<User> list = EntityFactory.getUsers(count);
         long start = System.currentTimeMillis();
         userRepository.saveAll(list);
         long end = System.currentTimeMillis();
         return (end - start);
     }
 
+    /**
+     * @param count
+     * @return
+     */
     public long insertForeach(Integer count) {
         long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
-            userRepository.save(EntityFactory.getUsers(1).get(0));
+            userRepository.save(EntityFactory.getUser());
         }
         long end = System.currentTimeMillis();
         return (end - start);

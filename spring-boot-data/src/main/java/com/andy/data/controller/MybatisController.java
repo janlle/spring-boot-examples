@@ -1,7 +1,7 @@
 package com.andy.data.controller;
 
 import com.andy.data.entity.User;
-import com.andy.data.mybatis.mapper.UserMapper;
+import com.andy.data.mybatis.UserMapper;
 import com.andy.data.service.MybatisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +55,14 @@ public class MybatisController {
 
     @GetMapping("/batchInsert")
     public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = myBatisService.insertList(count);
-        return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
+        long time = myBatisService.insertBatch(count);
+        return "batch insert " + count + " expenditure:" + time + "MS！";
     }
 
     @GetMapping("/foreachInsert")
     public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = myBatisService.insertForeach(count);
-        return "批量插入" + count + "条数据一共用了:" + time + "豪秒！";
+        return "foreach insert " + count + " expenditure:" + time + "MS！";
     }
 
 }
