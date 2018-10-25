@@ -9,5 +9,4 @@ import com.andy.dubbo.entity.User;
 public interface UserService {
 
     User getUser(String username);
-
 }

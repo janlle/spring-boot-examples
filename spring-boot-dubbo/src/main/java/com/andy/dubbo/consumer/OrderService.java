@@ -6,16 +6,19 @@ import com.andy.dubbo.entity.Order;
 import com.andy.dubbo.entity.User;
 import com.andy.dubbo.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 /**
+ * 消费者
+ *
  * @author Leone
  * @since 2018-06-03
  **/
 @Slf4j
-@Service
+@Component
 public class OrderService {
 
     @Reference(version = "1.0.0")
