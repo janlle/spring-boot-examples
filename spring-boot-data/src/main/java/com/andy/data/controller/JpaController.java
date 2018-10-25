@@ -1,7 +1,7 @@
 package com.andy.data.controller;
 
 import com.andy.data.entity.User;
-import com.andy.data.repository.jpa.repository.UserRepository;
+import com.andy.data.repository.jpa.UserRepository;
 import com.andy.data.service.JpaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

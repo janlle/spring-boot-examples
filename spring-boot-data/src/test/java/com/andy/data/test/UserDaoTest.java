@@ -2,7 +2,7 @@ package com.andy.data.test;
 
 import com.andy.data.DataApplication;
 import com.andy.data.entity.User;
-import com.andy.data.repository.jpa.repository.UserRepository;
+import com.andy.data.repository.jpa.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,17 +54,6 @@ public class UserDaoTest {
 //        int user = userRepository.findUserByUserId(1L);
 //        log.info("user:", user);
 //    }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

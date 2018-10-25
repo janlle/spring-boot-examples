@@ -1,4 +1,4 @@
-package com.andy.data.repository.jpa.repository;
+package com.andy.data.repository.jpa;
 
 import com.andy.data.entity.User;
 import org.apache.ibatis.annotations.Param;
@@ -22,8 +22,8 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 //    int updateUser(@Param("user") User user);
 
     @Modifying
-//    @Query("delete from User where id = ?1")
-    @Query("delete from User where id = :userId")
+//    @Query("delete from User where userId = ?1")
+    @Query("delete from User where userId = :userId")
     int deleteUser(@Param("userId") Long userId);
 
 }
