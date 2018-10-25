@@ -36,21 +36,21 @@
         <typeAlias type="com.andy.data.entity.User" alias="User"/>
     </typeAliases>
 
-    <plugins>
-        <!-- com.github.pagehelper为PageHelper类所在包名 -->
-        <plugin interceptor="com.github.pagehelper.PageHelper">
-            <!-- 方言 -->
-            <property name="dialect" value="mysql"/>
-            <!-- 该参数默认为false设置为true时，使用RowBounds分页会进行count查询 -->
-            <property name="rowBoundsWithCount" value="true"/>
-            <property name="offsetAsPageNum" value="false"/>
-            <property name="rowBoundsWithCount" value="false"/>
-            <property name="pageSizeZero" value="true"/>
-            <property name="reasonable" value="false"/>
-            <property name="supportMethodsArguments" value="false"/>
-            <property name="returnPageInfo" value="none"/>
-        </plugin>
-    </plugins>
+    <!--<plugins>-->
+        <!--&lt;!&ndash; com.github.pagehelper为PageHelper类所在包名 &ndash;&gt;-->
+        <!--<plugin interceptor="com.github.pagehelper.PageHelper">-->
+            <!--&lt;!&ndash; 方言 &ndash;&gt;-->
+            <!--<property name="dialect" value="mysql"/>-->
+            <!--&lt;!&ndash; 该参数默认为false设置为true时，使用RowBounds分页会进行count查询 &ndash;&gt;-->
+            <!--<property name="rowBoundsWithCount" value="true"/>-->
+            <!--<property name="offsetAsPageNum" value="false"/>-->
+            <!--<property name="rowBoundsWithCount" value="false"/>-->
+            <!--<property name="pageSizeZero" value="true"/>-->
+            <!--<property name="reasonable" value="false"/>-->
+            <!--<property name="supportMethodsArguments" value="false"/>-->
+            <!--<property name="returnPageInfo" value="none"/>-->
+        <!--</plugin>-->
+    <!--</plugins>-->
 
     <mappers>
         <!--<mapper resource="mapper/userMapper.xml" />-->

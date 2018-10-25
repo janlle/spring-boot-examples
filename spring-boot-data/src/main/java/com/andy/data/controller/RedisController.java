@@ -1,7 +1,7 @@
 package com.andy.data.controller;
 
-import com.andy.data.redis.RedisCacheService;
-import com.andy.data.redis.RedisService;
+import com.andy.data.service.RedisCacheService;
+import com.andy.data.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
