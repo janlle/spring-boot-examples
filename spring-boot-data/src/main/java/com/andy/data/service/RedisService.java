@@ -47,43 +47,35 @@ public class RedisService {
 
     public long insert(Integer count) {
         log.info("insert:{}", count);
-        long start = System.currentTimeMillis();
         for (int i = 0; i < count; i++) {
 //            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 30, TimeUnit.SECONDS);
 //            stringRedisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1).toString(), 1, TimeUnit.SECONDS);
 //            valueOperations.set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1).toString(), 30, TimeUnit.SECONDS);
         }
         listOperations.set(RedisPrefix.userCatch(RandomUtil.getNum(6)), 1L, EntityFactory.getUsers(1).toString());
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
     public long batchInsert(Integer count) {
         log.info("insert:{}", count);
-        long start = System.currentTimeMillis();
         operations.set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(count).toString(), 1, TimeUnit.SECONDS);
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
     public long foreachInsert(Integer count) {
         log.info("insert:{}", count);
-        long start = System.currentTimeMillis();
         redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(count), 3, TimeUnit.SECONDS);
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
 
     public long setValue(Integer count) {
         log.info("insert:{}", count);
-        long start = System.currentTimeMillis();
         for (long i = 0; i < count; i++) {
 //            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
             redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
         }
-        long end = System.currentTimeMillis();
-        return (end - start);
+        return 0;
     }
 
 

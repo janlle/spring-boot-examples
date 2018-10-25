@@ -135,7 +135,7 @@
                         #{user.description,jdbcType=VARCHAR},
                     </when>
                     <otherwise>
-                        'default@gmail.com',
+                        '我是杰克！今年32岁，我喜欢的篮球',
                     </otherwise>
                 </choose>
 
