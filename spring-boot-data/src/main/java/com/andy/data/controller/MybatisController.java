@@ -1,7 +1,7 @@
 package com.andy.data.controller;
 
 import com.andy.data.entity.User;
-import com.andy.data.serializ.mybatis.UserMapper;
+import com.andy.data.repository.mybatis.UserMapper;
 import com.andy.data.service.MybatisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.andy.data.serializ.mybatis;
+package com.andy.data.repository.mybatis;
 
 import com.andy.data.entity.User;
 import org.apache.ibatis.annotations.*;

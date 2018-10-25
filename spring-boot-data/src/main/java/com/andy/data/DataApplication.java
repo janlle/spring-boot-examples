@@ -16,7 +16,7 @@ import java.util.Date;
  **/
 @EnableCaching
 @SpringBootApplication
-@MapperScan("com.andy.data.serializ.mybatis.mapper")
+@MapperScan("com.andy.data.repository.mybatis.mapper")
 public class DataApplication {
     public static void main(String[] args) {
         SpringApplication.run(DataApplication.class, args);
