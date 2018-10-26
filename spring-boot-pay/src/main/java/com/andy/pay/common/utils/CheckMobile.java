@@ -16,6 +16,7 @@ public class CheckMobile {
             + "|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp"
             + "|laystation portable)|nokia|fennec|htc[-_]"
             + "|mobile|up.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
+
     static String tableReg = "\\b(ipad|tablet|(Nexus 7)|up.browser"
             + "|[1-4][0-9]{2}x[1-4][0-9]{2})\\b";
 

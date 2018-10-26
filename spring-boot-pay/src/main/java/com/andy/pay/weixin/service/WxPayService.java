@@ -2,8 +2,8 @@ package com.andy.pay.weixin.service;
 
 import com.andy.pay.common.enums.OrderStatusEnum;
 import com.andy.pay.common.property.AppProperties;
-import com.andy.pay.common.utils.AppUtils;
-import com.andy.pay.common.utils.HttpUtils;
+import com.andy.pay.common.utils.AppUtil;
+import com.andy.pay.common.utils.HttpUtil;
 import com.andy.pay.common.utils.QRCodeUtil;
 import com.andy.pay.common.utils.RandomUtil;
 import com.andy.pay.mapper.OrderMapper;
@@ -68,13 +68,13 @@ public class WxPayService {
         params.put("spbill_create_ip", order.getCreateIp());                 //订单生成的机器IP，指用户浏览器端IP
         params.put("notify_url", appProperties.getWx().getNotify_url());        //回调url
         params.put("trade_type", "APP");                                     // 交易类型:JS_API=公众号支付、NATIVE=扫码支付、APP=app支付
-        String sign = AppUtils.createSign(params, appProperties.getWx().getApi_key());
+        String sign = AppUtil.createSign(params, appProperties.getWx().getApi_key());
         params.put("sign", "sign");
-        String xmlData = AppUtils.mapToXml(params);
+        String xmlData = AppUtil.mapToXml(params);
         log.info("xmlData:{}", xmlData);
-        String wxRetXmlData = HttpUtils.sendPostXml(appProperties.getWx().getCreate_order(), xmlData);
+        String wxRetXmlData = HttpUtil.sendPostXml(appProperties.getWx().getCreate_order(), xmlData);
         log.info("微信返回数据:{}", wxRetXmlData);
-        Map<String, String> retData = AppUtils.xmlToMap(wxRetXmlData);
+        Map<String, String> retData = AppUtil.xmlToMap(wxRetXmlData);
         log.info("微信返回信息:{}", retData);
     }
 
@@ -93,7 +93,7 @@ public class WxPayService {
             throw new RuntimeException("订单不存在！");
         }
 
-        String refundNo = AppUtils.genNonceStr();
+        String refundNo = AppUtil.genNonceStr();
         String param = getWxRefundParam("", "", "");
         if (param == null) {
             throw new RuntimeException("参数封装错误！");
@@ -140,11 +140,11 @@ public class WxPayService {
         params.put("spbill_create_ip", spbillCreateIp);
         params.put("notify_url", notifyUrl);
         params.put("trade_type", "NATIVE");
-        String sign = AppUtils.createSign(params, appProperties.getWx().getApi_key());
+        String sign = AppUtil.createSign(params, appProperties.getWx().getApi_key());
         params.put("sign", sign);
-        String requestXML = AppUtils.mapToXml(params);
-        String responseXml = HttpUtils.sendPostXml(appProperties.getWx().getCreate_order(), requestXML);
-        Map<String, String> mapResult = AppUtils.xmlToMap(responseXml);
+        String requestXML = AppUtil.mapToXml(params);
+        String responseXml = HttpUtil.sendPostXml(appProperties.getWx().getCreate_order(), requestXML);
+        Map<String, String> mapResult = AppUtil.xmlToMap(responseXml);
         log.info("微信相应结果为:{}", mapResult);
         //return_code为微信返回的状态码，SUCCESS表示成功，return_msg 如非空，为错误原因 签名失败 参数格式校验错误
         if (mapResult.get("return_code").equalsIgnoreCase("SUCCESS") && mapResult.get("result_code").equalsIgnoreCase("SUCCESS")) {
@@ -180,7 +180,7 @@ public class WxPayService {
     public String getWxRefundParam(String wxOrderId, String outTradeNum, String totalFee) {
         String data;
         try {
-            String nonceStr = AppUtils.genNonceStr();
+            String nonceStr = AppUtil.genNonceStr();
             SortedMap<String, String> params = new TreeMap<>();
             params.put("appid", appProperties.getWx().getApp_id());
             params.put("mch_id", appProperties.getWx().getMch_id());
@@ -189,8 +189,8 @@ public class WxPayService {
             params.put("out_trade_no", outTradeNum);
             params.put("total_fee", totalFee);
             params.put("refund_fee", totalFee);
-            params.put("sign", AppUtils.createSign(params, appProperties.getWx().getApi_key()));
-            data = AppUtils.mapToXml(params);
+            params.put("sign", AppUtil.createSign(params, appProperties.getWx().getApi_key()));
+            data = AppUtil.mapToXml(params);
         } catch (Exception e) {
             log.error("微信退款参数封装异常！");
             return null;

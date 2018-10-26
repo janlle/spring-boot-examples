@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 操作cookie的工具类
  */
-public class CookieUtils {
+public class CookieUtil {
 
     public static void set(HttpServletResponse response, String name, String value, int maxAge) {
         Cookie cookie = new Cookie(name, value);
