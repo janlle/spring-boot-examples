@@ -22,7 +22,7 @@ public class JpaController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/insertBatch")
+    @GetMapping("/batchInsert")
     public String insertBatch(@RequestParam(required = false, defaultValue = "1") Integer count) {
         long time = jpaService.insertBatch(count);
         return "batch insert " + count + " expenditure:" + time + " ms!";
