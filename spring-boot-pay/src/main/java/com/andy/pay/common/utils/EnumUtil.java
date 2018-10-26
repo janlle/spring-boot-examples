@@ -1,6 +1,6 @@
 package com.andy.pay.common.utils;
 
-public class EnumUtils {
+public class EnumUtil {
 
 //    public static <T extends CodeEnum> T getByCode(Integer code, Class<T> enumClass) {
 //        for (T each : enumClass.getEnumConstants()) {

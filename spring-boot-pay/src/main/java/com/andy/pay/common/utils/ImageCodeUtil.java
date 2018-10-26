@@ -9,12 +9,11 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,84 +21,80 @@ import java.util.Random;
 
 /**
  * @author Leone
- * @since 2018-06-25 14:05
+ * @since 2018-06-25
  **/
 @Slf4j
-public class ImgCodeUtil {
+public class ImageCodeUtil {
 
     /**
      * 生成二维码
      *
-     * @author Leone
-     * @since 2018-06-17 12:40
-     * @params: [qrCodePath, content, filename]
-     * @return: void
-     **/
-    public static void createQRCode(String qrCodePath, String content, String filename) {
-
-        int width = 300;
-        int height = 300;
+     * @param filePath
+     * @param content
+     * @param filename
+     */
+    public static void createQRCode(String filePath, String content, String filename) {
+        int width = 300, height = 300;
         String format = "png";
         Map<EncodeHintType, Object> hashMap = new HashMap();
-        hashMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        hashMap.put(EncodeHintType.CHARACTER_SET, StandardCharsets.UTF_8.displayName());
         hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
         hashMap.put(EncodeHintType.MARGIN, 1);
         try {
-            File qrCodeFile = new File(qrCodePath);
+            File qrCodeFile = new File(filePath);
             if (!qrCodeFile.exists()) {
                 // 创建二维码生成目录
                 qrCodeFile.mkdirs();
             }
-            File file = new File(qrCodePath + filename + ".png");
+            File file = new File(filePath + filename + ".png");
             if (!file.exists()) {
                 BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hashMap);
                 Path path = file.toPath();
                 MatrixToImageWriter.writeToPath(bitMatrix, format, path);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            log.info(" createQRCode error ");
+            log.info("create QRCode error message:{}", e.getMessage());
         }
     }
 
     /**
      * 生成二维码并响应到浏览器
      *
-     * @author Leone
-     * @since 2018-06-17 12:40
-     * @params: [content, response]
-     * @return: void
-     **/
+     * @param content
+     * @param response
+     */
     public static void createQRCode(String content, HttpServletResponse response) {
-        int width = 300;
-        int height = 300;
+        int width = 300, height = 300;
         String format = "png";
-        Map<EncodeHintType, Object> hashMap = new HashMap();
-        hashMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        Map<EncodeHintType, Object> hashMap = new HashMap<>();
+        hashMap.put(EncodeHintType.CHARACTER_SET, StandardCharsets.UTF_8);
         hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
         hashMap.put(EncodeHintType.MARGIN, 1);
         try {
             response.setHeader("Cache-control", "no-cache");
             response.setHeader("Pragma", "no-cache");
             response.setHeader("content-type", "image/png");
-            response.setCharacterEncoding("utf-8");
+            response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
             response.setDateHeader("Expires", 0);
             BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hashMap);
             BufferedImage img = MatrixToImageWriter.toBufferedImage(bitMatrix);
             ImageIO.write(img, format, response.getOutputStream());
         } catch (Exception e) {
-            e.printStackTrace();
-            log.info("createQRCode error");
+            log.warn("create QRCode error message:{}", e.getMessage());
         }
     }
 
+
     /**
-     * @author Leone
-     * @since 2018-06-25 16:51
-     * @params: [request, response, session]
-     * @return: void
-     **/
-    public static String generate(HttpServletResponse response, int width, int height) throws Exception {
+     * 生成验证码
+     *
+     * @param response
+     * @param width
+     * @param height
+     * @return
+     * @throws Exception
+     */
+    public static String verificationCode(HttpServletResponse response, int width, int height) throws Exception {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
         Random random = new Random();

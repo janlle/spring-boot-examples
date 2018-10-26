@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
  * @since 2018-05-10
  **/
 @Slf4j
-public class AppUtils {
+public class AppUtil {
 
     public static String urlEncoder(String value) {
         try {
