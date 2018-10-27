@@ -1,6 +1,6 @@
 package com.andy.pay.web.controller;
 
-import com.andy.pay.common.Result;
+import com.andy.pay.common.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class HttpController {
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public Object get(HttpServletRequest request, HttpServletResponse response, String return_msg, String return_code) {
         log.info("get请求");
-        return Result.build(20000, return_msg, null);
+        return Response.build(20000, return_msg, null);
     }
 
 
@@ -57,21 +57,21 @@ public class HttpController {
     @RequestMapping(value = "/post1", method = RequestMethod.POST)
     public Object pust1(HttpServletRequest request, HttpServletResponse response) {
         log.info("put请求");
-        return Result.build(20000, "SUCCESS", null);
+        return Response.build(20000, "SUCCESS", null);
     }
 
     @ApiOperation(value = "post请求")
     @RequestMapping(value = "/post2", method = RequestMethod.POST)
     public Object post2(HttpServletRequest request, HttpServletResponse response, String return_msg, String return_code) {
         log.info("put请求");
-        return Result.build(20000, "SUCCESS", null);
+        return Response.build(20000, "SUCCESS", null);
     }
 
     @ApiOperation(value = "put请求")
     @RequestMapping(value = "/put", method = RequestMethod.PUT)
     public Object put(HttpServletRequest request, HttpServletResponse response) {
         log.info("put请求");
-        return Result.build(20000, "SUCCESS", null);
+        return Response.build(20000, "SUCCESS", null);
     }
 
 
