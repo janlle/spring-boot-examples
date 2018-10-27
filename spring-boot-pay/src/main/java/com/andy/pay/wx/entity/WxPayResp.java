@@ -1,4 +1,4 @@
-package com.andy.pay.weixin.entity;
+package com.andy.pay.wx.entity;
 
 import lombok.Data;
 

@@ -1,8 +1,8 @@
-package com.andy.pay.weixin.service;
+package com.andy.pay.wx.service;
 
 import com.andy.pay.common.property.AppProperties;
 import com.andy.pay.common.utils.JsonUtils;
-import com.andy.pay.weixin.entity.WxUser;
+import com.andy.pay.wx.entity.WxUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

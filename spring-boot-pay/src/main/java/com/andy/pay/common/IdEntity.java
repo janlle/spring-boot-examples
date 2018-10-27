@@ -22,22 +22,16 @@ import java.util.Date;
 public class IdEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(columnDefinition = " timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @CreatedDate
+    @Column(columnDefinition = "timestamp not null default current_timestamp")
     protected Date createTime;
 
-    @Column(columnDefinition = " timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @LastModifiedDate
+    @Column(columnDefinition = "timestamp not null default current_timestamp on update current_timestamp")
     protected Date updateTime;
 
-    @Column
+    @Column(columnDefinition = "bigint not null default 0")
     @Version
     protected Long version = 0L;
 

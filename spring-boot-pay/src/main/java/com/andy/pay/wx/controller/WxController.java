@@ -1,7 +1,7 @@
-package com.andy.pay.weixin.controller;
+package com.andy.pay.wx.controller;
 
 import com.andy.pay.common.property.AppProperties;
-import com.andy.pay.weixin.service.WxService;
+import com.andy.pay.wx.service.WxService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 微信zhi
+ * 微信
  *
  * @author Leone
  * @since 2018-05-22
