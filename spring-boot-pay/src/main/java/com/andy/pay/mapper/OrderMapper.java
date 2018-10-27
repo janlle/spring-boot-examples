@@ -15,8 +15,8 @@ public interface OrderMapper {
 
     Order selectByPrimaryKey(Long id);
 
-    @Select("select * from t_user where orderId = #{orderId}")
-    List<Order> selectByOrderId(@Param("orderId") String orderId);
+    @Select("select * from t_order where orderId = #{orderId}")
+    Order findByOrderId(@Param("orderId") Long orderId);
 
     int updateByPrimaryKeySelective(Order record);
 

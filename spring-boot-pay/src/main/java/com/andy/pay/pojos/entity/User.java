@@ -25,6 +25,8 @@ public class User implements Serializable {
 
     private Integer age;
 
+    private String openid;
+
     private Date createTime;
 
     private boolean deleted;
@@ -105,5 +107,13 @@ public class User implements Serializable {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 }

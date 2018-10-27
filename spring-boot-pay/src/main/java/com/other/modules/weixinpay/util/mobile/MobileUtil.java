@@ -31,7 +31,7 @@ public class MobileUtil {
 	 */
 	public static String getOpenId(String code){
 		if (code != null) {
-			String url = "https://api.weixin.qq.com/sns/oauth2/access_token?"
+			String url = "https://api.wx.qq.com/sns/oauth2/access_token?"
 					+ "appid="+ ConfigUtil.APP_ID
 					+ "&secret="+ ConfigUtil.APP_SECRET + "&code="
 					+code + "&grant_type=authorization_code";

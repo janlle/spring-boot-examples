@@ -90,7 +90,7 @@ public class WeixinPayServiceImpl implements IWeixinPayService {
 		String sign = PayCommonUtil.createSign("UTF-8", packageParams, ConfigUtil.API_KEY);
 		//组装二维码信息(注意全角和半角：的区别 狗日的腾讯)
     	StringBuffer qrCode = new StringBuffer();
-    	qrCode.append("weixin://wxpay/bizpayurl?");
+    	qrCode.append("wx://wxpay/bizpayurl?");
     	qrCode.append("appid="+ ConfigUtil.APP_ID);
     	qrCode.append("&mch_id="+ ConfigUtil.MCH_ID);
     	qrCode.append("&nonce_str="+packageParams.get("nonce_str"));
