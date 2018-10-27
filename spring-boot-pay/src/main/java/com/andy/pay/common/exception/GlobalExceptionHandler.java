@@ -1,7 +1,5 @@
 package com.andy.pay.common.exception;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -29,19 +27,19 @@ public class GlobalExceptionHandler {
         return new ExceptionResult(e.getCode(), e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(AuthorizationException.class)
-    public ExceptionResult handleAuthorizationException(Throwable e) {
-        logger.error("{}", e.getMessage());
-        return new ExceptionResult(ExceptionMessage.PERMISSION_DENIED.getCode(), ExceptionMessage.PERMISSION_DENIED.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(AuthenticationException.class)
-    public ExceptionResult handleAuthenticationException(Throwable e) {
-        logger.error("{}", e.getMessage());
-        return new ExceptionResult(40003, e.getMessage());
-    }
+//    @ResponseStatus(HttpStatus.FORBIDDEN)
+//    @ExceptionHandler(AuthorizationException.class)
+//    public ExceptionResult handleAuthorizationException(Throwable e) {
+//        logger.error("{}", e.getMessage());
+//        return new ExceptionResult(ExceptionMessage.PERMISSION_DENIED.getCode(), ExceptionMessage.PERMISSION_DENIED.getMessage());
+//    }
+//
+//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//    @ExceptionHandler(AuthenticationException.class)
+//    public ExceptionResult handleAuthenticationException(Throwable e) {
+//        logger.error("{}", e.getMessage());
+//        return new ExceptionResult(40003, e.getMessage());
+//    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(FailedLoginException.class)

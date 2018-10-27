@@ -5,9 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * @Description:
  * @author Leone
- * @since 2018-05-22 21:47
+ * @since 2018-05-22
  **/
 @Configuration
 public class AppConfig {

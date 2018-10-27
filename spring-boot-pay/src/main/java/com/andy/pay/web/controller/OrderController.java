@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @Api(tags = "订单操作接口")
-@RequestMapping(value = "/api/order")
+@RequestMapping("/api/order")
 public class OrderController {
 
 

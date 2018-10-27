@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/boot?useSSL=false
     username: root
     password: root
   thymeleaf:
@@ -50,8 +50,8 @@ app:
         openApi: https://openapi.alipay.com/gateway.do
 
 mybatis:
-  mapper-locations: classpath:mybatis/mapper/*.xml
-  config-location: classpath:mybatis/config/mybatis-config.xml
+#  mapper-locations: classpath:mybatis/mapper/*.xml
+#  config-location: classpath:mybatis/config/mybatis-config.xml
 
 swagger:
   butler:

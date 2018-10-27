@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Api(tags ="银联支付")
 @Controller
-@RequestMapping("unionpay")
+@RequestMapping("/union")
 public class UnionPayController {
 
 }
