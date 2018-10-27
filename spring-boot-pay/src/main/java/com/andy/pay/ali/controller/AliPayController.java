@@ -1,26 +1,9 @@
 package com.andy.pay.ali.controller;
 
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.demo.trade.config.Configs;
-import com.andy.pay.ali.service.AliPayService;
-import com.other.common.constants.Constants;
-import com.other.common.model.Product;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Leone
@@ -28,10 +11,10 @@ import java.util.Map;
  **/
 @Slf4j
 @Controller
-@Api(tags ="支付宝支付")
+@Api(tags = "支付宝支付")
 @RequestMapping(value = "/alipay")
 public class AliPayController {
-	
+
 //	@Autowired
 //	private AliPayService aliPayService;
 //
