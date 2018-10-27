@@ -2,6 +2,12 @@ package com.other.common.constants;
 
 import org.springframework.util.ClassUtils;
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-10-27
+ **/
 public class Constants {
 
     public static final String SF_FILE_SEPARATOR = System.getProperty("file.separator");//文件分隔符

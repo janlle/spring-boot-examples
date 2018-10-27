@@ -22,14 +22,14 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 public class OrderMapperTest {
 
-    String orderId = "1001";
+    Long orderId = 1001L;
 
     @Autowired
     private OrderMapper orderMapper;
 
     @Test
     public void test() {
-        List<Order> order = orderMapper.selectByOrderId(orderId);
+        Order order = orderMapper.findByOrderId(orderId);
         log.info("order:{}", order);
     }
 
