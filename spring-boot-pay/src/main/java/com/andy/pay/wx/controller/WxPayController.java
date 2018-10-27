@@ -1,6 +1,6 @@
-package com.andy.pay.weixin.controller;
+package com.andy.pay.wx.controller;
 
-import com.andy.pay.weixin.service.WxPayService;
+import com.andy.pay.wx.service.WxPayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Leone
  * @since 2018-05-20
  **/
-
 @Slf4j
 @RestController
 @Api(tags = "微信支付接口")
@@ -45,7 +44,6 @@ public class WxPayController {
     public void appRefund(String orderId) {
         weChatPayService.appPayRefund(orderId);
     }
-
 
     @GetMapping("/qr/code/pay")
     @ApiOperation("微信扫码支付预下单")
