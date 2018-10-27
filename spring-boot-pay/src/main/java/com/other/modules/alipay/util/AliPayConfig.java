@@ -7,14 +7,14 @@ import com.alipay.demo.trade.service.impl.AlipayTradeServiceImpl;
 
 /**
  * @author Leone
- * @since 2018-06-16 21:44
+ * @since 2018-06-16
  **/
 public final class AliPayConfig {
 	
 	 /**
      * 私有的默认构造子，保证外界无法直接实例化
      */
-    private AliPayConfig(){};
+    private AliPayConfig(){}
 	 /**
      * 参数类型
      */

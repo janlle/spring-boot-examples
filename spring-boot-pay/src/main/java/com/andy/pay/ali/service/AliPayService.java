@@ -17,22 +17,49 @@ import com.alipay.demo.trade.model.builder.AlipayTradeRefundRequestBuilder;
 import com.alipay.demo.trade.model.result.AlipayF2FPrecreateResult;
 import com.alipay.demo.trade.model.result.AlipayF2FRefundResult;
 import com.alipay.demo.trade.utils.ZxingUtils;
+import com.andy.pay.common.exception.ExceptionMessage;
+import com.andy.pay.common.property.AppProperties;
+import com.andy.pay.pojos.entity.Order;
+import com.andy.pay.service.OrderService;
+import com.andy.pay.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.other.common.constants.Constants;
 import com.other.common.model.Product;
 import com.other.common.utils.CommonUtil;
-import com.other.modules.alipay.util.AliPayConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 
+/**
+ * <p> 支付宝支付
+ *
+ * @author Leone
+ * @since 2018-05-27
+ **/
 @Slf4j
 @Service
 public class AliPayService {
 
     private String notify_url = "";
+
+    @Resource
+    private OrderService orderService;
+
+    @Resource
+    private UserService userService;
+
+    @Resource
+    private static AppProperties appProperties;
+
+    @Resource
+    private ObjectMapper objectMapper;
+
 
     public String aliPay(Product product) {
         log.info("订单号：{}生成支付宝支付码", product.getOutTradeNo());
@@ -158,7 +185,7 @@ public class AliPayService {
      * =====只有支付成功后 调用此订单才可以=====
      */
 
-    public String aliCloseorder(Product product) {
+    public String aliCloseOrder(Product product) {
         log.info("订单号：" + product.getOutTradeNo() + "支付宝关闭订单");
         String message = Constants.SUCCESS;
         try {
@@ -241,56 +268,90 @@ public class AliPayService {
         return form;
     }
 
-    public String aliPayPc(Product product) {
-        log.info("支付宝PC支付下单");
+
+    /**
+     * 阿里pc支付
+     *
+     * @param orderId
+     * @param servletRequest
+     * @return
+     */
+    public String pcPay(Long orderId, HttpServletRequest servletRequest) throws Exception {
+        Order order = orderService.findOne(orderId);
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-        String returnUrl = "前台回调地址 http 自定义";
-        alipayRequest.setReturnUrl(returnUrl);//前台通知
-        alipayRequest.setNotifyUrl(notify_url);//后台回调
-        JSONObject bizContent = new JSONObject();
-        bizContent.put("out_trade_no", product.getOutTradeNo());
-        bizContent.put("total_amount", product.getTotalFee());//订单金额:元
-        bizContent.put("subject", product.getSubject());//订单标题
-        bizContent.put("seller_id", Configs.getPid());//实际收款账号，一般填写商户PID即可
-        bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");//电脑网站支付
-        bizContent.put("body", "两个苹果五毛钱");
-        String biz = bizContent.toString().replaceAll("\"", "'");
-        alipayRequest.setBizContent(biz);
+        //前台通知
+        alipayRequest.setReturnUrl(appProperties.getAli().getReturn_url());
+        //后台回调
+        alipayRequest.setNotifyUrl(notify_url);
+        Map<String, String> params = new TreeMap<>();
+        params.put("out_trade_no", order.getOutTradeNo());
+        //订单金额:元
+        params.put("total_amount", order.getTotalFee().toString());
+        params.put("subject", "订单标题");
+        //实际收款账号，一般填写商户PID即可
+        params.put("seller_id", appProperties.getAli().getMch_id());
+        //电脑网站支付
+        params.put("product_code", "FAST_INSTANT_TRADE_PAY");
+        params.put("body", "两个橘子");
+        alipayRequest.setBizContent(objectMapper.writeValueAsString(params));
         log.info("业务参数:" + alipayRequest.getBizContent());
-        String form = Constants.FAIL;
+        String result = ExceptionMessage.ERROR.getMessage();
         try {
-            form = AliPayConfig.getAlipayClient().pageExecute(alipayRequest).getBody();
+            result = AliPayConfig.getAlipayClient().pageExecute(alipayRequest).getBody();
         } catch (AlipayApiException e) {
-            log.error("支付宝构造表单失败", e);
+            log.error("ali pay error message:{}", e.getMessage());
         }
-        return form;
+        return result;
     }
 
-    public String appPay(Product product) {
+    /**
+     * 支付宝App支付
+     *
+     * @param orderId
+     * @param servletRequest
+     * @return
+     */
+    public String appPay(Long orderId, HttpServletRequest servletRequest) {
+        Order order = orderService.findOne(orderId);
         String orderString = Constants.FAIL;
-        // 实例化客户端
         AlipayClient alipayClient = AliPayConfig.getAlipayClient();
-        // 实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
         // SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
-        model.setBody(product.getBody());
-        model.setSubject(product.getSubject());
-        model.setOutTradeNo(product.getOutTradeNo());
+        model.setBody("描述");
+        model.setSubject("商品名称");
+        model.setOutTradeNo(order.getOutTradeNo());
         model.setTimeoutExpress("30m");
-        model.setTotalAmount(product.getTotalFee());
+        model.setTotalAmount(order.getTotalFee().toString());
         model.setProductCode("QUICK_MSECURITY_PAY");
         request.setBizModel(model);
-        request.setNotifyUrl("商户外网可以访问的异步地址");
+        request.setNotifyUrl(appProperties.getAli().getNotify_url());
         try {
             // 这里和普通的接口调用不同，使用的是sdkExecute
-            AlipayTradeAppPayResponse response = alipayClient
-                    .sdkExecute(request);
-            orderString = response.getBody();//就是orderString 可以直接给客户端请求，无需再做处理。
-            //System.out.println(response.getBody());
+            AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
+            //就是orderString 可以直接给客户端请求，无需再做处理。
+            orderString = response.getBody();
+            log.info("orderString:{}", orderString);
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
         return orderString;
     }
+
+    public static void main(String[] args) throws Exception {
+        Map<String, String> bizContent = new TreeMap<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        bizContent.put("out_trade_no", "aaa");
+        //订单金额:元
+        bizContent.put("total_amount", "b bbb");
+        bizContent.put("subject", "订单标题");
+        //实际收款账号，一般填写商户PID即可
+        bizContent.put("seller_id", "eeee");
+        //电脑网站支付
+        bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
+        bizContent.put("body", "两个橘子");
+        System.out.println(objectMapper.writeValueAsString(bizContent));
+    }
+
+
 }
