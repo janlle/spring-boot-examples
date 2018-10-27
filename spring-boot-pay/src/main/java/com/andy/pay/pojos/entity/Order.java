@@ -1,44 +1,39 @@
 package com.andy.pay.pojos.entity;
 
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-10-27
+ **/
 @Data
-@ApiModel("")
 public class Order {
-    private Long id;
 
-    private String orderId;
+    private Long orderId;
 
-    private String receiveId;
+    private Long userId;
 
-    private String buyerNick;
+    private String consignee;
 
     private Integer postFee;
 
     private Integer totalFee;
 
-    private String buyerRate;
-
     private Byte status;
 
     private String remark;
 
-    private String outTradeNum;
+    private String outTradeNo;
 
     private String createIp;
 
-    private String description;
-
     private Date createTime;
 
-    private Date consignTime;
-
-    private Date endTime;
-
-    private Date closeTime;
+    private Date finishTime;
 
     private Date payTime;
 

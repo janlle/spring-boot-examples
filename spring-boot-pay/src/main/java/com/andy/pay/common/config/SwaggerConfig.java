@@ -68,7 +68,7 @@ public class SwaggerConfig {
                 .globalOperationParameters(Collections.singletonList(parameter))
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.andy.pay.weixin"))
+                .apis(RequestHandlerSelectors.basePackage("com.andy.pay.wx"))
                 .paths(PathSelectors.any())
                 .build();
     }
