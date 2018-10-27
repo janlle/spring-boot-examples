@@ -45,7 +45,7 @@ public class AliPayService {
     private UserService userService;
 
     @Resource
-    private static AppProperties appProperties;
+    private AppProperties appProperties;
 
     @Resource
     private ObjectMapper objectMapper;

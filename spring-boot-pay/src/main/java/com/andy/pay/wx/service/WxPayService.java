@@ -38,7 +38,7 @@ public class WxPayService {
     private UserService userService;
 
     @Resource
-    private static AppProperties appProperties;
+    private AppProperties appProperties;
 
     /**
      * App支付
@@ -143,7 +143,7 @@ public class WxPayService {
      * @return
      * @throws Exception
      */
-    public static boolean wxRefund(String xmlData) throws Exception {
+    public boolean wxRefund(String xmlData) throws Exception {
         CloseableHttpClient httpClient = HttpUtil.sslHttpsClient(appProperties.getWx().getCertificate(), appProperties.getWx().getApi_key());
         String xmlResponse = HttpUtil.sendSslXmlPost(appProperties.getWx().getRefund_url(), xmlData, null, httpClient);
         Map<String, String> mapData = AppUtil.xmlToMap(xmlResponse);

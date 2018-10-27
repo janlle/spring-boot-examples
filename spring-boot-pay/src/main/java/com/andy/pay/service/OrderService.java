@@ -4,8 +4,8 @@ import com.andy.pay.common.exception.ExceptionMessage;
 import com.andy.pay.mapper.OrderMapper;
 import com.andy.pay.pojos.entity.Order;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.util.Assert;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 

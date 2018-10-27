@@ -1,6 +1,5 @@
 package com.andy.pay.pojos.entity;
 
-import com.andy.pay.common.IdEntity;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -12,7 +11,6 @@ import java.util.Date;
  * @since 2018/6/3 20:09
  **/
 @Data
-@ApiModel("用户实体")
 public class User implements Serializable {
 
     private Long userId;

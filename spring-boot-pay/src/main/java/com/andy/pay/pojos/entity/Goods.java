@@ -1,6 +1,5 @@
 package com.andy.pay.pojos.entity;
 
-import com.andy.pay.common.IdEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,8 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@ApiModel("")
-public class Product extends IdEntity {
+public class Goods {
 
 
     @ApiModelProperty("商品id")

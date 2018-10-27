@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@ApiModel("")
 public class OrderDetail {
 
     private String id;

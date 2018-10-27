@@ -1,17 +1,17 @@
 package com.andy.pay.mapper;
 
-import com.andy.pay.pojos.entity.Product;
+import com.andy.pay.pojos.entity.Goods;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Product record);
+    int insert(Goods record);
 
-    int insertSelective(Product record);
+    int insertSelective(Goods record);
 
-    Product selectByPrimaryKey(Long id);
+    Goods selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Product record);
+    int updateByPrimaryKeySelective(Goods record);
 
-    int updateByPrimaryKey(Product record);
+    int updateByPrimaryKey(Goods record);
 }
