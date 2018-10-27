@@ -2,11 +2,14 @@ package com.andy.pay.ali.service;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
-import com.alipay.api.AlipayResponse;
 import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.AlipayFundTransToaccountTransferModel;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.request.*;
-import com.alipay.api.response.*;
+import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
+import com.alipay.api.response.AlipayTradeAppPayResponse;
+import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.andy.pay.common.exception.ExceptionMessage;
 import com.andy.pay.common.property.AppProperties;
 import com.andy.pay.common.utils.ImageCodeUtil;
@@ -15,17 +18,13 @@ import com.andy.pay.pojos.entity.Order;
 import com.andy.pay.service.OrderService;
 import com.andy.pay.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.other.common.constants.Constants;
-import com.other.common.model.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -63,6 +62,32 @@ public class AliPayService {
                 appProperties.getAli().getCharset(),
                 appProperties.getAli().getAlipay_public_key(),
                 appProperties.getAli().getSign_type());
+    }
+
+    /**
+     * 支付宝提现
+     *
+     * @param orderId
+     */
+    public boolean deposit(Long orderId) {
+        AlipayFundTransToaccountTransferModel transferModel = new AlipayFundTransToaccountTransferModel();
+        Order order = orderService.findOne(orderId);
+        transferModel.setOutBizNo(1 + RandomUtil.getNum(11));
+        transferModel.setAmount(order.getTotalFee().toString());
+        transferModel.setPayeeAccount("支付宝账号真实账号");
+        transferModel.setPayeeRealName("支付宝账号真实姓名");
+        transferModel.setPayerShowName("付款方显示姓名");
+        transferModel.setRemark("备注");
+        transferModel.setPayeeType("ALIPAY_LOGONID");
+        try {
+            AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
+            request.setBizModel(transferModel);
+            AlipayFundTransToaccountTransferResponse response = alipayClient.execute(request);
+        } catch (AlipayApiException e) {
+            log.info("ali deposit error message:{}", e.getMessage());
+            return false;
+        }
+        return true;
     }
 
 
@@ -155,7 +180,7 @@ public class AliPayService {
         log.info("业务参数:" + payRequest.getBizContent());
         String result = ExceptionMessage.ERROR.getMessage();
         try {
-            result = AliPayConfig.getAlipayClient().pageExecute(payRequest).getBody();
+            result = alipayClient.pageExecute(payRequest).getBody();
         } catch (AlipayApiException e) {
             log.error("ali pay error message:{}", e.getMessage());
         }
@@ -171,8 +196,6 @@ public class AliPayService {
      */
     public String appPay(Long orderId, HttpServletRequest servletRequest) {
         Order order = orderService.findOne(orderId);
-        String orderString = Constants.FAIL;
-        AlipayClient alipayClient = AliPayConfig.getAlipayClient();
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
         // SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
@@ -188,12 +211,12 @@ public class AliPayService {
             // 这里和普通的接口调用不同，使用的是sdkExecute
             AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
             //就是orderString 可以直接给客户端请求，无需再做处理。
-            orderString = response.getBody();
-            log.info("orderString:{}", orderString);
+            log.info("orderString:{}", response.getBody());
+            return response.getBody();
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
-        return orderString;
+        return null;
     }
 
     public static void main(String[] args) throws Exception {
@@ -210,82 +233,5 @@ public class AliPayService {
         bizContent.put("body", "两个橘子");
         System.out.println(objectMapper.writeValueAsString(bizContent));
     }
-
-    /**
-     * 如果你调用的是当面付预下单接口(alipay.trade.precreate)，调用成功后订单实际上是没有生成，因为创建一笔订单要买家、卖家、金额三要素。
-     * 预下单并没有创建订单，所以根据商户订单号操作订单，比如查询或者关闭，会报错订单不存在。
-     * 当用户扫码后订单才会创建，用户扫码之前二维码有效期2小时，扫码之后有效期根据timeout_express时间指定。
-     * =====只有支付成功后 调用此订单才可以=====
-     */
-    public String aliCloseOrder(Product product) {
-        log.info("订单号：" + product.getOutTradeNo() + "支付宝关闭订单");
-        String message = Constants.SUCCESS;
-        try {
-            String imgPath = Constants.QRCODE_PATH + Constants.SF_FILE_SEPARATOR + "alipay_" + product.getOutTradeNo() + ".png";
-            File file = new File(imgPath);
-            if (file.exists()) {
-                AlipayClient alipayClient = AliPayConfig.getAlipayClient();
-                AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
-                request.setBizContent("{" +
-                        "    \"out_trade_no\":\"" + product.getOutTradeNo() + "\"" +
-                        "  }");
-                AlipayTradeCloseResponse response = alipayClient.execute(request);
-                if (response.isSuccess()) {//扫码未支付的情况
-                    log.info("订单号：" + product.getOutTradeNo() + "支付宝关闭订单成功并删除支付二维码");
-                    file.delete();
-                } else {
-                    if ("ACQ.TRADE_NOT_EXIST".equals(response.getSubCode())) {
-                        log.info("订单号：" + product.getOutTradeNo() + response.getSubMsg() + "(预下单 未扫码的情况)");
-                    } else if ("ACQ.TRADE_STATUS_ERROR".equals(response.getSubCode())) {
-                        log.info("订单号：" + product.getOutTradeNo() + response.getSubMsg());
-                    } else {
-                        log.info("订单号：" + product.getOutTradeNo() + "支付宝关闭订单失败" + response.getSubCode() + response.getSubMsg());
-                        message = Constants.FAIL;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            message = Constants.FAIL;
-            log.info("订单号：" + product.getOutTradeNo() + "支付宝关闭订单异常");
-        }
-        return message;
-    }
-
-    public String downloadBillUrl(String billDate, String billType) {
-        log.info("获取支付宝订单地址:" + billDate);
-        String downloadBillUrl = "";
-        try {
-            AlipayDataDataserviceBillDownloadurlQueryRequest request = new AlipayDataDataserviceBillDownloadurlQueryRequest();
-            request.setBizContent("{" + "    \"bill_type\":\"trade\","
-                    + "    \"bill_date\":\"2016-12-26\"" + "  }");
-
-            AlipayDataDataserviceBillDownloadurlQueryResponse response
-                    = AliPayConfig.getAlipayClient().execute(request);
-            if (response.isSuccess()) {
-                log.info("获取支付宝订单地址成功:" + billDate);
-                downloadBillUrl = response.getBillDownloadUrl();//获取下载地
-            } else {
-                log.info("获取支付宝订单地址失败" + response.getSubMsg() + ":" + billDate);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.info("获取支付宝订单地址异常:" + billDate);
-        }
-        return downloadBillUrl;
-    }
-
-
-    // 简单打印应答
-    private void dumpResponse(AlipayResponse response) {
-        if (response != null) {
-            log.info(String.format("code:%s, msg:%s", response.getCode(), response.getMsg()));
-            if (StringUtils.isEmpty(response.getSubCode())) {
-                log.info(String.format("subCode:%s, subMsg:%s", response.getSubCode(), response.getSubMsg()));
-            }
-            log.info("body:" + response.getBody());
-        }
-    }
-
 
 }
