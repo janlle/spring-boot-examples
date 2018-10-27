@@ -2,6 +2,7 @@ package com.andy.pay.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -10,14 +11,16 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -34,7 +37,7 @@ public class AppUtil {
 
     public static String urlEncoder(String value) {
         try {
-            return URLEncoder.encode(value, "UTF-8");
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -43,11 +46,23 @@ public class AppUtil {
 
     public static String urlDecoder(String value) {
         try {
-            return URLDecoder.decode(value, "UTF-8");
+            return URLDecoder.decode(value, StandardCharsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 校验手机号
+     *
+     * @param phone
+     * @return
+     */
+    public static boolean isMobile(String phone) {
+        Pattern pattern = Pattern.compile("^[1][3,4,5,7,8,9][0-9]{9}$");
+        Matcher matcher = pattern.matcher(phone);
+        return matcher.matches();
     }
 
     /**
@@ -63,44 +78,57 @@ public class AppUtil {
         return matcher.matches();
     }
 
+
     /**
-     * 生成md5签名的方法
+     * 支付参数生成签名
      *
-     * @author Leone
-     * @params: [charset, params, apiKey]
-     * @return: java.lang.String
-     * @since 2018/6/3 14:59
-     **/
-    public static String createSign(Map params, String apiKey) {
-        StringBuffer sb = new StringBuffer();
-        Set set = params.entrySet();
-        Iterator it = set.iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            String k = (String) entry.getKey();
-            String v = (String) entry.getValue();
+     * @param params
+     * @param apiKey
+     * @return
+     */
+    public static String createSign(Map<String, String> params, String apiKey) {
+        StringBuilder sb = new StringBuilder();
+        Set<Map.Entry<String, String>> set = params.entrySet();
+        for (Map.Entry<String, String> entry : set) {
+            String k = entry.getKey();
+            Object v = entry.getValue();
             if (null != v && !"".equals(v) && !"sign".equals(k) && !"key".equals(k)) {
-                sb.append(k + "=" + v + "&");
+                sb.append(k).append("=").append(v).append("&");
             }
         }
-        sb.append("key=" + apiKey);
+        sb.append("key=").append(apiKey);
+        return MD5(sb.toString()).toUpperCase();
+    }
+
+
+    /**
+     * 支付参数生成签名
+     *
+     * @param params
+     * @return
+     */
+    public static String createSign(Map<String, String> params) {
+        StringBuilder sb = new StringBuilder();
+        Set<Map.Entry<String, String>> set = params.entrySet();
+        for (Map.Entry<String, String> entry : set) {
+            String k = entry.getKey();
+            Object v = entry.getValue();
+        }
         return MD5(sb.toString()).toUpperCase();
     }
 
     /**
-     * 生成MD5摘要算法
+     * 生成md5摘要
      *
-     * @author Leone
-     * @params: [message, charset]
-     * @return: java.lang.String
-     * @since 2018/6/3 15:00
-     **/
+     * @param content
+     * @return
+     */
     public static String MD5(String content) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            byte[] hashCode = messageDigest.digest(content.getBytes("UTF-8"));
-            HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
-            return hexBinaryAdapter.marshal(hashCode).toLowerCase();
+            messageDigest.update(content.getBytes(StandardCharsets.UTF_8));
+            byte[] hashCode = messageDigest.digest();
+            return new HexBinaryAdapter().marshal(hashCode).toLowerCase();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,21 +138,12 @@ public class AppUtil {
     /**
      * 生成 HMAC_SHA256
      *
-     * @author Leone
-     * @params: [data, key]
-     * @return: java.lang.String
-     * @since 2018/6/3 15:01
-     **/
-    public static String HMAC_SHA256(String content, String api_key) throws Exception {
-//        Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
-//        SecretKeySpec secret_key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
-//        sha256_HMAC.init(secret_key);
-//        byte[] array = sha256_HMAC.doFinal(content.getBytes("UTF-8"));
-//        StringBuilder sb = new StringBuilder();
-//        for (byte item : array) {
-//            sb.append(Integer.toHexString((item & 0xFF) | 0x100).substring(1, 3));
-//        }
-//        return sb.toString().toUpperCase();
+     * @param content
+     * @param api_key
+     * @return
+     * @throws Exception
+     */
+    public static String HMAC_SHA256(String content, String api_key) {
         try {
             KeyGenerator generator = KeyGenerator.getInstance("HmacSHA256");
             SecretKey secretKey = generator.generateKey();
@@ -145,13 +164,11 @@ public class AppUtil {
     /**
      * XML格式字符串转换为Map
      *
-     * @author Leone
-     * @params: [xmlStr]
-     * @return: java.util.Map
-     * @since 2018/6/3 15:02
-     **/
-    public static Map xmlToMap(String xmlStr) {
-        try (InputStream inputStream = new ByteArrayInputStream(xmlStr.getBytes("UTF-8"))) {
+     * @param xmlStr
+     * @return
+     */
+    public static Map<String, String> xmlToMap(String xmlStr) {
+        try (InputStream inputStream = new ByteArrayInputStream(xmlStr.getBytes(StandardCharsets.UTF_8))) {
             Map<String, String> data = new HashMap<>();
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -161,96 +178,55 @@ public class AppUtil {
             for (int idx = 0; idx < nodeList.getLength(); ++idx) {
                 Node node = nodeList.item(idx);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    org.w3c.dom.Element element = (org.w3c.dom.Element) node;
+                    Element element = (Element) node;
                     data.put(element.getNodeName(), element.getTextContent());
                 }
             }
             return data;
         } catch (Exception ex) {
-            log.warn("xml转换map异常,message: {}. XML content: {}", ex.getMessage(), xmlStr);
+            log.warn("xml convert to map failed message: {}", ex.getMessage());
+            return null;
         }
-        return null;
     }
 
-
     /**
-     * map转换为xml字符串
+     * map转换为xml格式
      *
-     * @author Leone
-     * @params: [params]
-     * @return: java.lang.String
-     * @since 2018/6/3 15:02
-     **/
-    public static String mapToXml(Map params) {
+     * @param params
+     * @return
+     */
+    public static String mapToXml(Map<String, String> params) {
         StringBuilder sb = new StringBuilder();
-        Set set = params.entrySet();
-        Iterator it = set.iterator();
-        sb.append("<xml>\n");
+        Set<Map.Entry<String, String>> es = params.entrySet();
+        Iterator<Map.Entry<String, String>> it = es.iterator();
+        sb.append("<xml>");
         while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            String k = (String) entry.getKey();
+            Map.Entry<String, String> entry = it.next();
+            String k = entry.getKey();
             Object v = entry.getValue();
-            sb.append("<" + k + ">").append(v).append("</" + k + ">\n");
+            sb.append("<").append(k).append(">").append(v).append("</").append(k).append(">");
         }
         sb.append("</xml>");
         return sb.toString();
     }
 
-    /**
-     * 生成32位随机数字
-     *
-     * @author Leone
-     * @params: []
-     * @return: java.lang.String
-     * @since 2018/6/3 15:02
-     **/
-    public static String genNonceStr() {
-        return UUID.randomUUID().toString().replace("-", "");
-    }
-
-    /**
-     * 获取当前时间戳，单位秒(10位)
-     *
-     * @author Leone
-     * @params: []
-     * @return: java.lang.String
-     * @since 2018/6/3 15:02
-     **/
-    public static long getTimestamp() {
-        return System.currentTimeMillis() / 1000;
-    }
-
-    /**
-     * 生成32位字符串
-     *
-     * @author Leone
-     * @params: []
-     * @return: java.lang.String
-     * @since 2018/6/3 15:02
-     **/
-    public static String generateNum(int length) {
-        StringBuffer result = new StringBuffer();
-        final String sources = "0123456789";
-        if (length < 0 && length > 512) {
-            return null;
-        }
-        Random rand = new Random();
-        for (int i = 0; i < length; i++) {
-            result.append(sources.charAt(rand.nextInt(9)) + "");
-        }
-        return result.toString();
-    }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(genNonceStr());
-        System.out.println(getTimestamp());
-        System.out.println(generateNum(6));
         System.out.println(MD5("hello"));
+        String s = null;
+        System.out.println(Objects.nonNull(s));
+
     }
 
-    public static String getIp(HttpServletRequest request) {
+    /**
+     * 获得request的ip
+     *
+     * @param request
+     * @return
+     */
+    public static String getIpAddress(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
-        if (null != ip && "".equals(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+        if (Objects.nonNull(ip) && !"unKnown".equalsIgnoreCase(ip)) {
             //多次反向代理后会有多个ip值，第一个ip才是真实ip
             int index = ip.indexOf(",");
             if (index != -1) {
@@ -260,10 +236,70 @@ public class AppUtil {
             }
         }
         ip = request.getHeader("X-Real-IP");
-        if (null != ip && "".equals(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+        if (Objects.nonNull(ip) && !"unKnown".equalsIgnoreCase(ip)) {
             return ip;
         }
         return request.getRemoteAddr();
+    }
+
+    /**
+     * 过滤掉关键参数
+     *
+     * @param param
+     * @return
+     */
+    public static HashMap<String, String> paramFilter(Map<String, String> param) {
+        HashMap<String, String> result = new HashMap<>();
+        if (param == null || param.size() <= 0) {
+            return result;
+        }
+        for (String key : param.keySet()) {
+            String value = param.get(key);
+            if (value == null || value.equals("") || key.equalsIgnoreCase("sign") || key.equalsIgnoreCase("sign_type")) {
+                continue;
+            }
+            result.put(key, value);
+        }
+        return result;
+    }
+
+    /**
+     * 把Request中的数据解析为xml
+     *
+     * @param request
+     * @return
+     */
+    public static String requestDataToXml(HttpServletRequest request) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
+            String line;
+            StringBuilder sb = new StringBuilder();
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * xml 转换 bean
+     *
+     * @param clazz
+     * @param xml
+     * @param <T>
+     * @return
+     */
+    public static <T> T xmlToBean(Class<T> clazz, String xml) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(clazz);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            return (T) unmarshaller.unmarshal(new StringReader(xml));
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

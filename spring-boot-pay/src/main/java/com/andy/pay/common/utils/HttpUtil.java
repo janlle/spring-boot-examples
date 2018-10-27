@@ -178,6 +178,32 @@ public class HttpUtil {
     }
 
 
+    /**
+     * 发送get请求
+     *
+     * @param url
+     * @param xml
+     * @param headers
+     * @return
+     */
+    public static String sendSslXmlPost(String url, String xml, Map<String, Object> headers, CloseableHttpClient httpClient) {
+        String result = null;
+        try {
+            HttpPost httpPost = new HttpPost(url);
+            setHeaders(headers, httpPost);
+            StringEntity entity = new StringEntity(xml, StandardCharsets.UTF_8);
+            httpPost.addHeader("Content-Type", "text/xml");
+            httpPost.setEntity(entity);
+            HttpResponse response = httpClient.execute(httpPost);
+            HttpEntity responseData = response.getEntity();
+            result = EntityUtils.toString(responseData, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
     public static void main(String[] args) {
         String xml = "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
         String json = "{\"return_msg\": \"OK\",\"return_code\": \"SUCCESS\"}";
