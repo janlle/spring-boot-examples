@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
