@@ -10,22 +10,22 @@ import lombok.Data;
 public class AliProperties {
 
     //应用id
-    public String APP_ID = "";
+    public String app_id = "";
 
     //应用私钥
-    public String ALIPAY_PRIVATE_KEY = "";
+    public String alipay_private_key = "";
 
     //支付宝公钥
-    public String ALIPAY_PUBLIC_KEY = "";
+    public String alipay_public_key = "";
 
     //字符编码
-    public String CHARSET = "UTF-8";
+    public String charset = "UTF-8";
 
     //签名方式
-    public String SIGN_TYPE = "RSA2";
+    public String sign_type = "RSA2";
 
     //数据格式
-    public String LAYOUT = "JSON";
+    public String format = "JSON";
 
     /*支付回调url*/
     private String notify_url;
@@ -35,6 +35,9 @@ public class AliProperties {
 
     /*商家id*/
     private String mch_id;
+
+    /*退款url*/
+    private String refund_url;
 
 
 }

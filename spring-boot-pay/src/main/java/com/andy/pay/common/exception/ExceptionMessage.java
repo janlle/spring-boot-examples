@@ -5,7 +5,8 @@ package com.andy.pay.common.exception;
  **/
 public enum ExceptionMessage {
 
-    ERROR(5000, "异常"),
+    ERROR(50000, "异常"),
+    SUCCESS(20000, "成功"),
     PERMISSION_DENIED(40001, "权限不足"),
     PHONE_LAYOUT_FAIL(40002, "手机号码格式不正确"),
     AUTH_TOKEN(40010, "auth.token.wrong"),
