@@ -27,4 +27,14 @@ public class AliProperties {
     //数据格式
     public String LAYOUT = "JSON";
 
+    /*支付回调url*/
+    private String notify_url;
+
+    /*pc支付前台通知*/
+    private String return_url;
+
+    /*商家id*/
+    private String mch_id;
+
+
 }
