@@ -40,7 +40,7 @@ public class WxController {
     @ApiOperation("微信授权回调地址")
     public String getUserInfo(String state, String code, HttpServletRequest request) {
         log.info("微信授权回调方法,code:{},state:{}", code, state);
-        String url = String.format(appProperties.getWx().getTokenUrl(), appProperties.getWx().getApp_id(), appProperties.getWx().getApp_secret(), code);
+        String url = String.format(appProperties.getWx().getToken_url(), appProperties.getWx().getApp_id(), appProperties.getWx().getApp_secret(), code);
         log.info("url:{}", url);
         String result = restTemplate.getForObject(url, String.class);
         log.info("result:{}", result);
@@ -51,7 +51,7 @@ public class WxController {
     @GetMapping("/code")
     public void code(String state, String code, HttpServletRequest request) {
         log.info("获取code.....");
-        String url = String.format(appProperties.getWx().getAuthUrl(), appProperties.getWx().getApp_id(), appProperties.getWx().getCreate_order());
+        String url = String.format(appProperties.getWx().getAuth_url(), appProperties.getWx().getApp_id(), appProperties.getWx().getCreate_order());
         log.info("url:{}", url);
         restTemplate.getForObject(url, String.class);
     }
