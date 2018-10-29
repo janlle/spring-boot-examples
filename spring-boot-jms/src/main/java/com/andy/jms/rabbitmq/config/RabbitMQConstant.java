@@ -24,7 +24,7 @@ public interface RabbitMQConstant {
     String TOPIC_EXCHANGE = "topic-exchange";
 
 
-    // 绑定匹配规则*表示一个词,#表示任意数量（零个或多个）单词。
+    // 绑定匹配规则[*]表示一个单词,[#]表示任意数量（零个或多个）单词。
     String KEY_A = "topic.#";
     String KEY_B = "topic.msg";
     String KEY_C = "direct-a";
