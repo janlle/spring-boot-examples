@@ -1,12 +1,10 @@
 package com.andy.mvc.utils.qiniu;
 
-import com.andy.mvc.utils.math.RandomUtils;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import javassist.bytecode.ByteArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,7 +71,6 @@ public class QiNiuService {
      *
      * @param file
      * @return
-     *
      */
     public FileVO upload(MultipartFile file) {
         try {

@@ -29,7 +29,7 @@ public class UserTest {
         assert result.getStatus().value() == 200;
         List<User> users = result.getResponseBody().collectList().block();
         assert users.size() == 2;
-        assert users.iterator().next().getEmail().equals("abc@def.com");
+        assert users.iterator().next().getAccount().equals("abc@def.com");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class UserTest {
         User user = webTestClient.get().uri("/api/user/1")
                 .accept(MediaType.APPLICATION_JSON).exchange().returnResult(User.class).getResponseBody().blockFirst();
 //        assert user.getId() == 1L;
-        assert user.getEmail().equals("abc@def.com");
+        assert user.getAccount().equals("abc@def.com");
     }
 
     @Test
