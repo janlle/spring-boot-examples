@@ -1,4 +1,4 @@
-package com.andy.jms.rabbitmq.listener;
+package com.andy.jms.rabbitmq.receive;
 
 import com.andy.jms.rabbitmq.config.RabbitMQConstant;
 import lombok.extern.slf4j.Slf4j;

@@ -8,6 +8,14 @@ spring:
     host: 127.0.0.1
     publisher-confirms: true
     virtual-host: /cloud
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10
+        acknowledge-mode: manual
+        prefetch: 1
+
+
 #  kafka:
 #    bootstrap-servers: 120.76.77.230:9092
 #    consumer:

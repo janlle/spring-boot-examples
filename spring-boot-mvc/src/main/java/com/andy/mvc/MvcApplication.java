@@ -18,7 +18,7 @@ import java.util.List;
  * @author Leone
  * @since 2018-05-17
  **/
-//扫描servlet filter listener
+//扫描servlet filter receive
 @EnableScheduling
 @ServletComponentScan
 @MapperScan("com.andy.mvc.dao.mapper")

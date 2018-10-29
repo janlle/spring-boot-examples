@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-10-29
+ **/
 @Slf4j
 public class EntityFactory {
 
