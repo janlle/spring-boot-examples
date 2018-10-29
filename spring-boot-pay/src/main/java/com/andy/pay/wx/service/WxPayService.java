@@ -144,7 +144,7 @@ public class WxPayService {
      * @throws Exception
      */
     public boolean wxRefund(String xmlData) throws Exception {
-        CloseableHttpClient httpClient = HttpUtil.sslHttpsClient(appProperties.getWx().getCertificate(), appProperties.getWx().getApi_key());
+        CloseableHttpClient httpClient = HttpUtil.sslHttpsClient(appProperties.getWx().getCertificate_path(), appProperties.getWx().getApi_key());
         String xmlResponse = HttpUtil.sendSslXmlPost(appProperties.getWx().getRefund_url(), xmlData, null, httpClient);
         Map<String, String> mapData = AppUtil.xmlToMap(xmlResponse);
         //return_code为微信返回的状态码，SUCCESS表示申请退款成功，return_msg 如非空，为错误原因 签名失败 参数格式校验错误
