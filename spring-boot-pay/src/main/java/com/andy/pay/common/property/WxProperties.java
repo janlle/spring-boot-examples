@@ -31,15 +31,15 @@ public class WxProperties {
     private String refund_url;
 
     /*授权url*/
-    private String authUrl;
+    private String auth_url;
 
     /*获取token的url*/
-    private String tokenUrl;
+    private String token_url;
 
     /*获取openid的url*/
-    private String sessionKeyUrl;
+    private String sessionKey_url;
 
     /*证书路径*/
-    private String certificate;
+    private String certificate_path;
 
 }
