@@ -2,6 +2,7 @@ package com.andy.jms.entity;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -11,13 +12,17 @@ import java.util.Date;
  * @since 2018-10-27
  **/
 @Data
+@Entity
+@Table(name = "t_order")
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
     private Long userId;
 
-    private String consignee;
+    private Long addressId;
 
     private Integer postFee;
 
@@ -28,6 +33,8 @@ public class Order {
     private String remark;
 
     private String outTradeNo;
+
+    private String transactionId;
 
     private String createIp;
 

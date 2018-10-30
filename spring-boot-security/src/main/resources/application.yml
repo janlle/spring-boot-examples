@@ -2,10 +2,17 @@ spring:
   application:
     name: seurity
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/boot?useSSL=false
     username: root
     password: root
+    driver-class-name: com.mysql.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    show-sql: true
+#    open-in-view: true
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
