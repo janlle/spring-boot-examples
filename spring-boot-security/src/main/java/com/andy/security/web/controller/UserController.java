@@ -1,6 +1,7 @@
 package com.andy.security.web.controller;
 
 import com.andy.security.entity.User;
+import com.andy.security.service.UserService;
 import com.andy.security.util.EntityFactory;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
@@ -11,11 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Resource
+    private UserService userService;
 
     @GetMapping("/list")
     public List<User> list() {
@@ -49,6 +54,11 @@ public class UserController {
     @RequestMapping("/test2")
     public List<Integer> test(List<Integer> idList) {
         return idList;
+    }
+
+    @GetMapping("/login-test")
+    public boolean login(String account, String password) {
+        return userService.login(account, password);
     }
 
 }
