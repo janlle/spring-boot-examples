@@ -48,10 +48,5 @@ public class RandomUtil {
         return System.currentTimeMillis() / 1000;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getStr(34));
-        System.out.println(getNum(35));
-    }
-
 
 }

@@ -15,6 +15,7 @@ public interface RabbitMQConstant {
     String QUEUE_F = "queue-f";
     String QUEUE_G = "queue-g";
     String QUEUE_H = "queue-h";
+    String QUEUE_I = "queue-i";
 
 
     // rabbitMQ有四种类型的交换机fanout、direct、topic、headers
