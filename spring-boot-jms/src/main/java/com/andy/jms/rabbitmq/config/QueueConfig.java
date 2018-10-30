@@ -53,4 +53,9 @@ public class QueueConfig {
         return new Queue(RabbitMQConstant.QUEUE_H, true);
     }
 
+    @Bean
+    public Queue queueI() {
+        return new Queue(RabbitMQConstant.QUEUE_I, true);
+    }
+
 }
