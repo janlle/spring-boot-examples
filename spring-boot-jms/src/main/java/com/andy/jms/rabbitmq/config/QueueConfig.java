@@ -14,47 +14,47 @@ import org.springframework.context.annotation.Configuration;
 public class QueueConfig {
 
     @Bean
-    public Queue queueA() {
+    public Queue queue_a() {
         return new Queue(RabbitMQConstant.QUEUE_A, true);
     }
 
     @Bean
-    public Queue queueB() {
+    public Queue queue_b() {
         return new Queue(RabbitMQConstant.QUEUE_B, true);
     }
 
     @Bean
-    public Queue queueC() {
+    public Queue queue_c() {
         return new Queue(RabbitMQConstant.QUEUE_C, true);
     }
 
     @Bean
-    public Queue queueD() {
+    public Queue queue_d() {
         return new Queue(RabbitMQConstant.QUEUE_D, true);
     }
 
     @Bean
-    public Queue queueE() {
+    public Queue queue_e() {
         return new Queue(RabbitMQConstant.QUEUE_E, true);
     }
 
     @Bean
-    public Queue queueF() {
+    public Queue queue_f() {
         return new Queue(RabbitMQConstant.QUEUE_F, true);
     }
 
     @Bean
-    public Queue queueG() {
+    public Queue queue_g() {
         return new Queue(RabbitMQConstant.QUEUE_G, true);
     }
 
     @Bean
-    public Queue queueH() {
+    public Queue queue_h() {
         return new Queue(RabbitMQConstant.QUEUE_H, true);
     }
 
     @Bean
-    public Queue queueI() {
+    public Queue queue_i() {
         return new Queue(RabbitMQConstant.QUEUE_I, true);
     }
 

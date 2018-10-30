@@ -74,7 +74,6 @@ public class BindingConfig {
     }
 
 
-
     // ----------------------扇形交换机(广播):Fanout ----------------------
     @Bean
     public Binding fanoutBindingA() {
@@ -87,7 +86,6 @@ public class BindingConfig {
     }
 
 
-
     // ----------------------首部交换机:Headers exchange----------------------
     @Bean
     public Binding headersBinding() {
@@ -96,8 +94,6 @@ public class BindingConfig {
         map.put("header-b", "value-b");
         return BindingBuilder.bind(queueF).to(headersExchange).whereAll(map).match();
     }
-
-
 
     // ----------------------直连交换机:Direct exchange----------------------
     @Bean
