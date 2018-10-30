@@ -12,8 +12,6 @@ public class JmsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(JmsApplication.class, args);
-
-
     }
 
 }

@@ -3,6 +3,7 @@ package com.andy.jms.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "t_broker_message_log")
-public class BrokerMessageLog {
+public class BrokerMessageLog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

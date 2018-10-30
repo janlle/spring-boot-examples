@@ -5,9 +5,9 @@ package com.andy.pay.common;
  **/
 public enum ResultEnum {
 
-    SUCCESS("SUCCESS", 20000),
-    WARNING("WARNING", 40000),
-    ERROR("ERROR", 50000);
+    SUCCESS("success", 20000),
+    WARNING("warning", 40000),
+    ERROR("error", 50000);
 
     private String msg;
 
