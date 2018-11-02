@@ -15,7 +15,10 @@ import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -38,7 +41,28 @@ public class QiNiuService {
 
     @PostConstruct
     public void init() {
-        configuration = new Configuration(Zone.zone0());
+        Zone zone;
+        switch (properties.getZone()) {
+            case BEI_MEI:
+                zone = Zone.zoneNa0();
+                break;
+            case HUA_BEI:
+                zone = Zone.zone1();
+                break;
+            case HUA_NAN:
+                zone = Zone.zone2();
+                break;
+            case HUA_DONG:
+                zone = Zone.zone0();
+                break;
+            case DONG_NAN_YA:
+                zone = Zone.zoneAs0();
+                break;
+            default:
+                zone = Zone.zone0();
+                break;
+        }
+        configuration = new Configuration(zone);
         uploadManager = new UploadManager(configuration);
         auth = Auth.create(properties.getAccessKey(), properties.getSecretKey());
     }
