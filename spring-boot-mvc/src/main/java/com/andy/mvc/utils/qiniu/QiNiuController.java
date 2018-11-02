@@ -24,7 +24,7 @@ public class QiNiuController {
     private QiNiuService qiNiuService;
 
     @GetMapping("/token")
-    @ApiOperation("前端上传: 返回Token")
+    @ApiOperation("返回Token")
     public QiNiuToken getToken(@RequestParam(required = false) String key) {
         return qiNiuService.getToken(key);
     }
@@ -37,7 +37,7 @@ public class QiNiuController {
 
     @PostMapping("/batch")
     @ApiOperation("上传多文件")
-    public FileVO batch(MultipartFile[] files) {
+    public FileVO batch(@NotNull MultipartFile[] files) {
         return qiNiuService.uploadBatch(files);
     }
 

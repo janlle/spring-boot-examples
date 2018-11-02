@@ -20,6 +20,8 @@ public class QiNiuProperties {
 
     private String linkAddress;
 
+    private ZoneEnum zone = ZoneEnum.HUA_DONG;
+
     public String getBucket() {
         return this.bucket;
     }
@@ -50,5 +52,13 @@ public class QiNiuProperties {
 
     public void setLinkAddress(String linkAddress) {
         this.linkAddress = linkAddress;
+    }
+
+    public ZoneEnum getZone() {
+        return zone;
+    }
+
+    public void setZone(ZoneEnum zone) {
+        this.zone = zone;
     }
 }

@@ -15,10 +15,7 @@ import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -76,12 +73,11 @@ public class QiNiuService {
         try {
             byte[] fileBytes = file.getBytes();
             String token = getToken();
-            System.out.println(token);
             Response res = uploadManager.put(fileBytes, null, token);
             QiNiu qiniu = res.jsonToObject(QiNiu.class);
-            return new FileVO(Collections.singletonList(properties.getLinkAddress() + qiniu.getHash()));
+            return new FileVO(Collections.singletonList(properties.getLinkAddress() + qiniu.getKey()));
         } catch (IOException e) {
-            logger.error("message:{}", e);
+            logger.error("message:{}", e.getMessage());
             return null;
         }
     }
@@ -93,7 +89,7 @@ public class QiNiuService {
      * @return
      */
     public FileVO uploadBatch(MultipartFile[] files) {
-        if (null == files || files.length < 1) {
+        if (Objects.isNull(files)) {
             throw new RuntimeException("file array is empty");
         }
         List<String> list = new ArrayList<>();
@@ -103,9 +99,9 @@ public class QiNiuService {
                 byte[] fileBytes = files[i].getBytes();
                 Response res = uploadManager.put(fileBytes, null, getToken());
                 QiNiu qiniu = res.jsonToObject(QiNiu.class);
-                list.add(properties.getLinkAddress() + qiniu.getHash());
+                list.add(properties.getLinkAddress() + qiniu.getKey());
             } catch (IOException e) {
-                logger.error("message:{}", e);
+                logger.error("message:{}", e.getMessage());
             }
         }
         return new FileVO(list);
@@ -128,9 +124,9 @@ public class QiNiuService {
             byte[] byteData = outputStream.toByteArray();
             Response res = uploadManager.put(byteData, null, getToken());
             QiNiu qiniu = res.jsonToObject(QiNiu.class);
-            return new FileVO(Arrays.asList(properties.getLinkAddress() + qiniu.getHash()));
+            return new FileVO(Collections.singletonList(properties.getLinkAddress() + qiniu.getKey()));
         } catch (IOException e) {
-            logger.error("message:{}", e);
+            logger.error("message:{}", e.getMessage());
             return null;
         }
     }

@@ -96,19 +96,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>2.7</version>
-                <!--<executions>-->
-                <!--<execution>-->
-                <!--<id>set-new-version</id>-->
-                <!--<goals>-->
-                <!--<goal>set</goal>-->
-                <!--</goals>-->
-                <!--<phase>validate</phase>-->
-                <!--<configuration>-->
-                <!--<generateBackupPoms>false</generateBackupPoms>-->
-                <!--<newVersion>${new-user-version}</newVersion>-->
-                <!--</configuration>-->
-                <!--</execution>-->
-                <!--</executions>-->
             </plugin>
 
             <plugin>
