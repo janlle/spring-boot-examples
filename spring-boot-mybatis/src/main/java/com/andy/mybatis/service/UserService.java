@@ -39,7 +39,7 @@ public class UserService {
         User exampleUser = userMapper.selectById(user.getUserId());
 
         // 查询姓名为‘张三’的所有用户记录
-        List<User> userList = userMapper.selectList(new EntityWrapper<User>().eq("name", "张三"));
+//        List<User> userList = userMapper.selectList(new EntityWrapper<User>().eq("name", "张三"));
 
         // 删除 User
         result = userMapper.deleteById(user.getUserId());
