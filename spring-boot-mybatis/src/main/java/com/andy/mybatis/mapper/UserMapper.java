@@ -1,5 +1,6 @@
 package com.andy.mybatis.mapper;
 
+
 import com.andy.mybatis.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -11,8 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  **/
 
 public interface UserMapper extends BaseMapper<User> {
-
-
 
 
 }
