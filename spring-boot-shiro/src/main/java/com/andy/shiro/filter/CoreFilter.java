@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <p>
+ *
+ * @author Leone
+ * @since 2018-11-08
+ **/
 @Component
 public class CoreFilter extends AbstractFilter {
 

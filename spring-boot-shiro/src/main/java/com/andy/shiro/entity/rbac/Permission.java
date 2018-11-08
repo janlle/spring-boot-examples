@@ -34,10 +34,6 @@ public class Permission implements Serializable {
 
     private Date createTime;
 
-    private Date updateTime;
-
-    private Boolean disable;
-
     private Boolean deleted;
 
 }

@@ -22,17 +22,13 @@ public class User implements Serializable {
 
     private String password;
 
-    private String email;
+    private String description;
 
-    private String salt;
-
-    private Boolean disable;
-
-    private Boolean deleted;
+    private Integer age;
 
     private Date createTime;
 
-    private Date updateTime;
+    private boolean deleted;
 
     private Set<Role> roles = new HashSet<>();
 

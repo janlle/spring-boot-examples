@@ -21,13 +21,9 @@ public class Role {
 
     private String description;
 
-    private Boolean disable;
-
     private Boolean deleted;
 
     private Date createTime;
-
-    private Date updateTime;
 
     private Set<Permission> permissions = new HashSet<>();
 

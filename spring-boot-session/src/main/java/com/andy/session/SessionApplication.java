@@ -11,12 +11,13 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author Leone
- * @since 2018-05-19 20:46
+ * @since 2018-05-19
  **/
 @RestController
 @EnableRedisHttpSession
 @SpringBootApplication
 public class SessionApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(SessionApplication.class, args);
     }
