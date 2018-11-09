@@ -29,7 +29,7 @@ public class WebController {
     public Object sessions(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
         map.put("sessionId", request.getSession().getId());
-        map.put("message", request.getSession().getAttribute("map"));
+        map.put("message", request.getSession().getAttribute("request Url"));
         return map;
     }
 }  

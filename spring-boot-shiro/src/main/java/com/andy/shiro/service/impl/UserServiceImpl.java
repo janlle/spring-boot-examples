@@ -16,7 +16,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByAccount(String account) {
-        User user = userMapper.getByAccount(account);
+//        User user = userMapper.getByAccount(account);
+        User user = new User();
         log.info("user:{}", user);
         return user;
     }

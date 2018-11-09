@@ -4,26 +4,19 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
-#  thymeleaf:
-#    cache: false
-#    prefix: classpath:/templates/
-#    suffix: .html
-#    mode: HTML5
-#    encoding: UTF-8
-#    servlet:
-#      content-type: text/html
-  jpa:
-    hibernate:
-      ddl-auto: update
-      naming:
-        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-    show-sql: true
-    open-in-view: false
+  thymeleaf:
+    cache: false
+    prefix: classpath:templates
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    check-template-location: false
 
 mybatis:
   type-aliases-package: com.andy.shiro.entity.rbac
   mapper-locations: classpath:mybatis/mappers/*.xml
-  config-location: classpath:mybatis/config/mybatis-config.xml
 
 model:
   shiro:
