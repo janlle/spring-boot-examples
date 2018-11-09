@@ -11,9 +11,11 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Leone
@@ -22,10 +24,16 @@ import java.util.*;
 @Slf4j
 public class AuthRealm extends AuthorizingRealm {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    // 认证时调用
+    /**
+     * 认证时调用
+     *
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         log.info("进入AuthorizingRealm认证方法...");
@@ -40,11 +48,16 @@ public class AuthRealm extends AuthorizingRealm {
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 
-    // 授权时调用
+
+    /**
+     * 授权时调用
+     *
+     * @param principalCollection
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.info("进入AuthorizingRealm授权方法...");
-
         User user = (User) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
         List<String> permissionList = new ArrayList<>();
         List<String> roleList = new ArrayList<>();
