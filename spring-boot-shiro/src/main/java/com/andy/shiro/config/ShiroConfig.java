@@ -1,7 +1,7 @@
 package com.andy.shiro.config;
 
 
-import com.andy.shiro.filter.CoreFilter;
+import com.andy.shiro.filter.CsrfFilter;
 import com.andy.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
@@ -48,20 +48,27 @@ public class ShiroConfig {
     @Resource
     private RedisProperties redisProperties;
 
+    /**
+     * shiro 核心 filter
+     *
+     * @param securityManager
+     * @param shiroProperty
+     * @return
+     */
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty/*, TokenFilter tokenFilter, CoreFilter coreFilter*/) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperty shiroProperty) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
 
-        Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
-        swaggerFilterChain(filterChainDefinitionMapping);
-        setUrl(filterChainDefinitionMapping, "anon", shiroProperty.getAnonUrls());
-        setUrl(filterChainDefinitionMapping, "core,anon", shiroProperty.getCoreUrls());
-        setUrl(filterChainDefinitionMapping, "core,auth", shiroProperty.getAuthUrls());
+        Map<String, String> filterChainMapping = shiroFilter.getFilterChainDefinitionMap();
+        swaggerFilterChain(filterChainMapping);
+        setUrl(filterChainMapping, "anon", shiroProperty.getAnonUrls());
+        setUrl(filterChainMapping, "core,anon", shiroProperty.getCoreUrls());
+        setUrl(filterChainMapping, "core,auth", shiroProperty.getAuthUrls());
 
-        shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
+        shiroFilter.setFilterChainDefinitionMap(filterChainMapping);
         shiroFilter.setSecurityManager(securityManager);
-        Map<String, Filter> filters = new HashMap();
-        filters.put("core", new CoreFilter());
+        Map<String, Filter> filters = new HashMap<>();
+        filters.put("core", new CsrfFilter());
         filters.put("auth", new TokenFilter());
         shiroFilter.setFilters(filters);
         shiroFilter.setLoginUrl("/api/login");
@@ -160,7 +167,7 @@ public class ShiroConfig {
      *
      * @param mapping
      */
-    public void swaggerFilterChain(Map<String, String> mapping) {
+    private void swaggerFilterChain(Map<String, String> mapping) {
         mapping.put("/v2/api-docs", "anon");
         mapping.put("/configuration/**", "anon");
         mapping.put("/webjars/**", "anon");

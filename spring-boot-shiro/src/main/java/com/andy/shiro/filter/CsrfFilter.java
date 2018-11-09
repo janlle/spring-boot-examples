@@ -22,13 +22,13 @@ import java.io.IOException;
  * @since 2018-11-08
  **/
 @Component
-public class CoreFilter extends AbstractFilter {
+public class CsrfFilter extends AbstractFilter {
 
-    public CoreFilter() {
-        logger.info("core filter init...");
+    public CsrfFilter() {
+        logger.info("csrf filter init...");
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(CoreFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(CsrfFilter.class);
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
@@ -43,7 +43,7 @@ public class CoreFilter extends AbstractFilter {
         if (request.getMethod().equals(RequestMethod.OPTIONS.name())) {
             response.setStatus(HttpStatus.OK.value());
         } else {
-            logger.info("coreFilter.doFilter");
+            logger.info("csrf filter doFilter");
             filterChain.doFilter(servletRequest, servletResponse);
         }
 

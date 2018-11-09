@@ -2,52 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.andy.shiro.mapper.UserMapper">
 
-    <!--<resultMap id="userMap" type="com.andy.shiro.entity.rbac.User">-->
-        <!--<id property="userId" column="user_id"/>-->
-        <!--<result property="account" column="account"/>-->
-        <!--<result property="password" column="password"/>-->
-        <!--<result property="email" column="email"/>-->
-        <!--<result property="salt" column="salt"/>-->
-        <!--<result property="disable" column="disable"/>-->
-        <!--<result property="deleted" column="deleted"/>-->
-        <!--<result property="createTime" column="create_time"/>-->
-        <!--<result property="updateTime" column="update_time"/>-->
+    <resultMap id="userMap" type="com.andy.shiro.entity.rbac.User">
+        <id property="userId" column="user_id"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="description" column="description"/>
+        <result property="age" column="age"/>
+        <result property="deleted" column="deleted"/>
+        <result property="createTime" column="create_time"/>
 
-        <!--<collection property="roles" ofType="com.andy.shiro.entity.rbac.Role">-->
-            <!--<id property="roleId" column="role_id"/>-->
-            <!--<result property="roleName" column="role_name"/>-->
-            <!--<result property="description" column="description"/>-->
-            <!--<result property="disable" column="disable"/>-->
-            <!--<result property="deleted" column="deleted"/>-->
-            <!--<result property="createTime" column="create_time"/>-->
-            <!--<result property="updateTime" column="update_time"/>-->
+        <collection property="roles" ofType="com.andy.shiro.entity.rbac.Role">
+            <id property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+            <result property="description" column="description"/>
+            <result property="deleted" column="deleted"/>
+            <result property="createTime" column="create_time"/>
 
-            <!--<collection property="permissions" ofType="com.andy.shiro.entity.rbac.Permission">-->
-                <!--<id property="permissionId" column="permission_id"/>-->
-                <!--<result property="permissionName" column="permission_name"/>-->
-                <!--<result property="url" column="url"/>-->
-                <!--<result property="parentId" column="parent_id"/>-->
-                <!--<result property="description" column="description"/>-->
-                <!--<result property="resourceType" column="resource_type" typeHandler="com.andy.shiro.common.enums.UniversalEnumHandler"/>-->
-                <!--<result property="disable" column="disable"/>-->
-                <!--<result property="deleted" column="deleted"/>-->
-                <!--<result property="createTime" column="create_time"/>-->
-                <!--<result property="updateTime" column="update_time"/>-->
-            <!--</collection>-->
-        <!--</collection>-->
-    <!--</resultMap>-->
+            <collection property="permissions" ofType="com.andy.shiro.entity.rbac.Permission">
+                <id property="permissionId" column="permission_id"/>
+                <result property="permissionName" column="permission_name"/>
+                <result property="url" column="url"/>
+                <result property="parentId" column="parent_id"/>
+                <result property="description" column="description"/>
+                <result property="resourceType" column="resource_type" typeHandler="com.andy.shiro.common.enums.UniversalEnumHandler"/>
+                <result property="deleted" column="deleted"/>
+                <result property="createTime" column="create_time"/>
+            </collection>
+        </collection>
+    </resultMap>
 
-    <!--<select id="getByAccount" parameterType="String" resultMap="userMap">-->
-        <!--SELECT-->
-            <!--u.*,-->
-            <!--p.*,-->
-            <!--r.*-->
-        <!--FROM sys_user u-->
-            <!--INNER JOIN sys_user_role ur on u.user_id = ur.u_id-->
-            <!--INNER JOIN sys_role r on r.role_id = ur.r_id-->
-            <!--INNER JOIN sys_permission_role pr on pr.r_id = r.role_id-->
-            <!--INNER JOIN sys_permission p on p.permission_id = pr.p_id-->
-        <!--WHERE u.account = #{account} limit 1-->
-    <!--</select>-->
+    <select id="getByAccount" parameterType="String" resultMap="userMap">
+        SELECT
+            u.*,
+            p.*,
+            r.*
+        FROM sys_user u
+            INNER JOIN sys_user_role ur on u.user_id = ur.u_id
+            INNER JOIN sys_role r on r.role_id = ur.r_id
+            INNER JOIN sys_permission_role pr on pr.r_id = r.role_id
+            INNER JOIN sys_permission p on p.permission_id = pr.p_id
+        WHERE u.account = #{account} limit 1
+    </select>
 
 </mapper>
