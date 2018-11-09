@@ -13,12 +13,19 @@ import java.util.Objects;
  * @author Leone
  * @since 2018-04-21
  **/
-public class CredentialMatcher extends SimpleCredentialsMatcher {
+public class PasswordCredentialMatcher extends SimpleCredentialsMatcher {
 
+    /**
+     * 自定义匹配逻辑
+     *
+     * @param token
+     * @param info
+     * @return
+     */
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
-        String password = usernamePasswordToken.getPassword().toString();
+        String password = String.valueOf(usernamePasswordToken.getPassword());
         String dbPassword = info.getCredentials().toString();
         return Objects.equals(password, dbPassword);
     }

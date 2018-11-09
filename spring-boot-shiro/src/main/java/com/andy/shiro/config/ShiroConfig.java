@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import java.util.Base64;
 import java.util.HashMap;
@@ -44,6 +45,7 @@ public class ShiroConfig {
 
     private Base64.Decoder decoder = Base64.getDecoder();
 
+    @Resource
     private RedisProperties redisProperties;
 
     @Bean
@@ -93,7 +95,7 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public AuthRealm authRealm(CredentialMatcher credentialMatcher) {
+    public AuthRealm authRealm(CredentialsMatcher credentialMatcher) {
         AuthRealm authRealm = new AuthRealm();
         authRealm.setCredentialsMatcher(credentialMatcher);
         return authRealm;
