@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  * @author Leone
- * @since 2018-07-21 13:06
+ * @since 2018-07-21
  **/
 
 public class RealmTest {
@@ -35,7 +35,6 @@ public class RealmTest {
         subject.login(token);
 
         System.out.println("is login:" + subject.isAuthenticated());
-
 
         subject.checkRoles("admin", "user");
 //        subject.logout();

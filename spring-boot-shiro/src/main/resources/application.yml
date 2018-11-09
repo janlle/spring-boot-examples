@@ -18,16 +18,16 @@ mybatis:
   type-aliases-package: com.andy.shiro.entity.rbac
   mapper-locations: classpath:mybatis/mappers/*.xml
 
-model:
+module:
   shiro:
-    mulitLogin: false
+    multiLogin: false
     cacheDays: 7
     redisPrefix: ${server.port}
     anonUrls:
     - /api/user/property
     - /api/user/login
-    coreUrls: /a
+    csrfUrls: /**
     authUrls: /**
-    tokenPrefix: auth.token.id
+    tokenPrefix: auth.token.
 
 

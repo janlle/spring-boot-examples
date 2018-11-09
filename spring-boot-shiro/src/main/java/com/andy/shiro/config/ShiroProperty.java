@@ -10,16 +10,16 @@ import java.util.List;
  * @since 2018-07-16
  **/
 @Configuration
-@ConfigurationProperties(prefix = "model.shiro")
+@ConfigurationProperties(prefix = "module.shiro")
 public class ShiroProperty {
 
     private boolean multiLogin = false;
 
-    private int cacheDays = 14;
+    private Integer cacheDays = 14;
 
-    private String redisPrefix = "default.prefix:";
+    private String redisPrefix;
 
-    private String tokenPrefix = "default.auth.token:";
+    private String tokenPrefix;
 
     private List<String> anonUrls;
 
@@ -35,11 +35,11 @@ public class ShiroProperty {
         this.multiLogin = multiLogin;
     }
 
-    public int getCacheDays() {
+    public Integer getCacheDays() {
         return cacheDays;
     }
 
-    public void setCacheDays(int cacheDays) {
+    public void setCacheDays(Integer cacheDays) {
         this.cacheDays = cacheDays;
     }
 
