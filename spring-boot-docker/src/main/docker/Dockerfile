@@ -8,7 +8,7 @@ MAINTAINER leone "janlle@126.com"
 RUN mkdir -p /usr/local/app
 
 # 拷贝文件到容器
-ADD target/spring-docker.jar /usr/local/app/spring-docker.jar
+ADD spring-docker.jar /usr/local/app/spring-docker.jar
 
 # 声明需要暴露的端口
 EXPOSE 8761
