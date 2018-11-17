@@ -8,7 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ * <p> 
+ *
+ * @author Leone
+ * @since 2018-11-09
+ **/
 public class UniversalEnumHandler<E extends BaseEnum> extends BaseTypeHandler<E> {
 
     private Class<E> type;
