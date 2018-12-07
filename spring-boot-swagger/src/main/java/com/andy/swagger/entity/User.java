@@ -1,8 +1,5 @@
 package com.andy.swagger.entity;
 
-import org.springframework.data.annotation.CreatedDate;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,8 +7,6 @@ import java.util.Date;
  * @author Leone
  * @since 2018-07-12
  **/
-@Entity
-@Table(name = "t_user")
 public class User implements Serializable {
 
     private Long userId;

@@ -4,11 +4,11 @@ package com.andy.websocket.config;
  * @author Leone
  * @since 2018-07-06
  **/
-public class WSResponse {
+public class WsResponse {
 
     private String message;
 
-    public WSResponse(String message){
+    public WsResponse(String message){
         this.message = message;
     }
 
