@@ -54,7 +54,7 @@ public class SwaggerConfig {
                 .description("web接口文档")
                 .version("v1.0.0")
                 .termsOfServiceUrl("http://www.baidu.com")
-                .contact(new Contact("lyon", "https://lyon.com", "lyon@gmail.com"))
+                .contact(new Contact("leone", "https://leone.com", "leone@gmail.com"))
                 .license("Apache2.0")
                 .licenseUrl("http://www.apache.org")
                 .build();

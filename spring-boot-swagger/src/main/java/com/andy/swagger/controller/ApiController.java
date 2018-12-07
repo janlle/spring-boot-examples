@@ -22,7 +22,6 @@ public class ApiController {
         return "list";
     }
 
-    @ApiImplicitParam(name = "userForm", value = "用户模型", type = "Form", dataType = "UserForm")
     @ApiOperation("保存用户")
     @PostMapping
     public String save(@RequestBody UserDTO userForm) {
