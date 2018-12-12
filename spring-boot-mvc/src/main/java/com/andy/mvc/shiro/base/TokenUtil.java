@@ -27,11 +27,6 @@ public class TokenUtil {
 
     private static String rule = "#*J&@J(#_=*!A";
 
-    @Value("${luwei.module.shiro.rule}")
-    public void setRule(String rule) {
-        this.rule = rule;
-    }
-
     private static Base64.Encoder encoder = Base64.getEncoder();
 
     private static Base64.Decoder decoder = Base64.getDecoder();
