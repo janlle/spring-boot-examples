@@ -1,7 +1,10 @@
 package com.andy.jms.kafka.commen;
 
+import lombok.ToString;
+
 import java.util.Date;
 
+@ToString
 public class Message<T> {
 
     private Long id;

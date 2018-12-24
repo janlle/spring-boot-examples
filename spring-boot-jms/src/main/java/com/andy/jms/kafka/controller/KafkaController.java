@@ -21,12 +21,8 @@ public class KafkaController {
     @ApiOperation("发送消息的接口")
     @GetMapping("/kafka/{topic}")
     public String send(@PathVariable("topic") String topic, @RequestParam String message) {
-        try {
-            kafkaSender.send(topic, message);
-            return "success";
-        } catch (Exception e) {
-            return "error";
-        }
+        kafkaSender.send(topic, message);
+        return "success";
     }
 
 }

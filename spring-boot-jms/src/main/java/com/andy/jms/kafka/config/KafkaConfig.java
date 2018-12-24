@@ -75,30 +75,6 @@ public class KafkaConfig {
     }
 
 
-    // 实际执行消息消费的类，用于处理消息，做一些业务逻辑
-    @Bean
-    public MessageListener myMessageListener() {
-        return new MessageListener();
-    }
-
-    // 消费者容器配置信息
-    @Bean
-    public ContainerProperties containerProperties() {
-        //匹配满足正则的topic
-        Pattern topicPattern = Pattern.compile(".*[tT]opic.*");
-        //订阅满足正则表达式的topic
-        ContainerProperties containerProperties = new ContainerProperties(topicPattern);
-        //订阅的topic的消息用myMessageListener去处理
-        containerProperties.setMessageListener(myMessageListener());
-        return containerProperties;
-    }
-
-
-    @Bean
-    public KafkaMessageListenerContainer<String, String> kafkaMessageListenerContainer() {
-        return new KafkaMessageListenerContainer<>(consumerFactory(), containerProperties());
-    }
-
     /* --------------kafka template configuration-----------------**/
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
