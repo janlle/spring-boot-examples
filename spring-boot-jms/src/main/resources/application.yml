@@ -19,19 +19,6 @@ spring:
         max-concurrency: 10
         acknowledge-mode: manual
         prefetch: 1
-  datasource:
-    url: jdbc:mysql://localhost:3306/boot?useSSL=false
-    username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
-    open-in-view: true
-
   kafka:
     bootstrap-servers: node-2:9092,node-3:9092,node-4:9092
     producer:
@@ -44,7 +31,6 @@ spring:
       group-id: 0
       auto-offset-reset: earliest
       enable-auto-commit: true
-
 
 info:
    app:

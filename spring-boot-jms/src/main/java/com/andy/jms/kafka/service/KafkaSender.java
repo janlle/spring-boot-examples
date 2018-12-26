@@ -10,6 +10,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * <p>
+ *
+ * @author leone
+ * @since 2018-12-26
+ **/
 @Slf4j
 @Component
 public class KafkaSender {

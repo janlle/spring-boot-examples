@@ -4,6 +4,12 @@ import lombok.ToString;
 
 import java.util.Date;
 
+/**
+ * <p>
+ *
+ * @author leone
+ * @since 2018-12-26
+ **/
 @ToString
 public class Message<T> {
 
