@@ -5,20 +5,7 @@ server:
 
 spring:
   application:
-    name: spring-jms
-  rabbitmq:
-    port: 5672
-    username: cloud
-    password: cloud
-    host: 127.0.0.1
-    publisher-confirms: true
-    virtual-host: /cloud
-    listener:
-      simple:
-        concurrency: 5
-        max-concurrency: 10
-        acknowledge-mode: manual
-        prefetch: 1
+    name: spring-kafka
   kafka:
     bootstrap-servers: node-2:9092,node-3:9092,node-4:9092
     producer:
@@ -31,8 +18,3 @@ spring:
       group-id: 0
       auto-offset-reset: earliest
       enable-auto-commit: true
-
-info:
-   app:
-      name: spring-boot-actuator
-      version: 1.0.0
