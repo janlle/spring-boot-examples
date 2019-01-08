@@ -2,7 +2,6 @@ package com.andy.spring.scan;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>

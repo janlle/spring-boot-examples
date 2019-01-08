@@ -1,14 +1,7 @@
 package com.andy.spring;
 
-import com.andy.spring.beans.Person;
-import com.andy.spring.beans.Student;
-import com.andy.spring.scan.Teacher;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
 /**
  * @author Leone
