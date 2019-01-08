@@ -14,10 +14,7 @@ import java.util.Date;
 @ApiModel
 public class UserDTO {
 
-    @ApiModelProperty(value = "用户账号", name = "accountName", allowableValues = "hello", access = "access",
-            notes = "notes", dataType = "dataType", required = true, position = 2, hidden = false, example = "example", readOnly = true
-            , reference = "reference", allowEmptyValue = true
-    )
+    @ApiModelProperty(value = "用户账号")
     private String account;
 
     @ApiModelProperty(value = "密码")

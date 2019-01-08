@@ -10,7 +10,7 @@ import java.util.List;
  * @author Leone
  **/
 @Configuration
-@ConfigurationProperties(prefix = "luwei.module.shiro")
+@ConfigurationProperties(prefix = "module.shiro")
 public class ShiroModuleProperties {
 
     private String tokenName = "auth.token:";
