@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+      host: localhost
+      port: 27017
+      database: test
+
+swagger:
+  show: true
