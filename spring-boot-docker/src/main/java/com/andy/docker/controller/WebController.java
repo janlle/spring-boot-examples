@@ -22,11 +22,11 @@ public class WebController {
 
     @GetMapping("/debug")
     public String debug(String name) throws Exception {
-        sum = new Integer(0);
+        sum = 0;
         System.out.println("hello");
         sum += 3;
         System.out.println("world");
-        sum = new Integer(5);
+        sum = 5;
         System.out.println("hello");
         sum = 23;
         System.out.println("hello");
