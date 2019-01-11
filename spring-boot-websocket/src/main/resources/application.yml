@@ -7,3 +7,6 @@ server:
     key-password: 123456
     key-store-type: PKCS12
     key-alias: tomcat
+  servlet:
+    context-path: /ws
+  port: 8080

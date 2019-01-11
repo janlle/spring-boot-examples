@@ -1,5 +1,12 @@
 package com.andy.websocket.config;
 
+
+/**
+ * webSocket相关配置
+ *
+ * @author Leone
+ * @since 2018-07-06
+ **/
 public class WsMessage {
 
     private String name;
