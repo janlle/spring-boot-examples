@@ -1,5 +1,6 @@
 package com.andy.docker.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Leone
  * @since 2018-03-06
  **/
+@Slf4j
 @RestController
 public class WebController {
 
@@ -31,7 +33,7 @@ public class WebController {
         sum = 23;
         System.out.println("hello");
         if (sum > 23) {
-            System.out.println("haha");
+            System.out.println("hi");
         }
         for (int i = 1; i < 3; i++) {
             System.out.println("i:" + i);
