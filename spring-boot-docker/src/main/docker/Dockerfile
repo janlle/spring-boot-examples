@@ -7,13 +7,14 @@ VOLUME /tmp
 # 维护者信息
 MAINTAINER leone "exklin@126.com"
 
-RUN mkdir -p /usr/local/app
-
 # 拷贝文件到容器
-ADD spring-docker.jar /usr/local/app/spring-docker.jar
+ADD spring-docker.jar eureka.jar
 
-# 声明需要暴露的端口
+# 执行命令
+RUN bash -c 'touch eureka.jar'
+
+# 声明端口
 EXPOSE 8761
 
 # 配置容器启动后执行的命令
-ENTRYPOINT ["java","-jar","/usr/local/app/spring-docker.jar"]
+ENTRYPOINT ["java","-jar","-Djava.security.egd=file:/dev/./urandom","eureka.jar"]
