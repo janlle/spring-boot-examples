@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 /**
  * @author Leone
  * @since 2018-05-11
@@ -14,16 +16,12 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
     @Modifying
-    @Query(value = "select * from t_user where id = ?1", nativeQuery = true)
-    User findUserByUserId(@Param("userId") long userId);
-
-//    @Modifying
-//    @Query("update User set username = :user.username")
-//    int updateUser(@Param("user") User user);
+    @Query(value = "select * from t_user where account = ?1", nativeQuery = true)
+    User findUserByAccount(@Param("account") String account);
 
     @Modifying
-//    @Query("delete from User where userId = ?1")
-    @Query("delete from User where userId = :userId")
-    int deleteUser(@Param("userId") Long userId);
+    @Query("update User set deleted = 1 where userId in ?1")
+    Integer delByIds(List<Integer> ids);
+
 
 }

@@ -5,7 +5,7 @@ FROM java:8
 VOLUME /tmp
 
 # 维护者信息
-MAINTAINER leone "exklin@126.com"
+MAINTAINER leone "exklin@gmail.com"
 
 # 拷贝文件到容器
 ADD spring-docker.jar eureka.jar
