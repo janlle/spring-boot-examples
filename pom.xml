@@ -78,6 +78,7 @@
         <module>spring-boot-rabbitmq</module>
         <module>spring-boot-redis</module>
         <module>spring-boot-mongodb</module>
+        <module>spring-boot-jpa</module>
     </modules>
 
     <build>
