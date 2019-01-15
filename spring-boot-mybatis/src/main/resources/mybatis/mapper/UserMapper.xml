@@ -62,7 +62,7 @@
     </insert>
 
 
-    <update id="updateByIdSelective" parameterType="User">
+    <update id="updateByIdSelective" parameterType="com.andy.mybatis.entity.User">
         update t_user
         <set>
             <if test="account != null">
@@ -88,7 +88,7 @@
     </update>
 
 
-    <update id="updateById" parameterType="User">
+    <update id="updateById" parameterType="com.andy.mybatis.entity.User">
         update t_user
         set account     = #{account,jdbcType=VARCHAR},
             password    = #{password,jdbcType=VARCHAR},

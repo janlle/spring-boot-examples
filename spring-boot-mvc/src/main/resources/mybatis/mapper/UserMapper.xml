@@ -27,7 +27,7 @@
     </delete>
 
     <insert id="insert" parameterType="User">
-        insert into t_user (email, username, password, token, salary, birthday)
+        insert into t_user (email, account, password, token, salary, birthday)
         values (
             #{email,jdbcType=VARCHAR},
             #{username,jdbcType=VARCHAR},
@@ -115,7 +115,7 @@
         update t_user
         set
             email    = #{email,jdbcType=VARCHAR},
-            username = #{username,jdbcType=VARCHAR},
+            account = #{username,jdbcType=VARCHAR},
             password = #{password,jdbcType=VARCHAR},
             token    = #{token,jdbcType=VARCHAR},
             salary   = #{salary,jdbcType=DOUBLE},
@@ -124,7 +124,7 @@
     </update>
 
     <insert id="insertList" parameterType="java.util.List">
-        INSERT INTO t_user (email, username, password, token, salary, birthday) VALUES
+        INSERT INTO t_user (email, account, password, token, salary, birthday) VALUES
         <foreach collection="users" item="user" index="inx" separator=",">
             <trim prefix="(" suffixOverrides="," suffix=")">
                 <choose>

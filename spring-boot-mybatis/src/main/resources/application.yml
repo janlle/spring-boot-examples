@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?useSSL=false
+    url: jdbc:mysql://ip:3306/boot?useSSL=false&characterEncoding=utf8&allowMultiQueries=true
     username: root
     password: root
 
@@ -27,7 +27,7 @@ mybatis:
     default-statement-timeout: 25000
     # 打印sql语句
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # 允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键，有一些驱动器不兼容不过仍然可以执行。  default:false 
+    # 允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键，有一些驱动器不兼容不过仍然可以执行。  default:false
     use-generated-keys: true
     # 设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型
     jdbc-type-for-null: null
