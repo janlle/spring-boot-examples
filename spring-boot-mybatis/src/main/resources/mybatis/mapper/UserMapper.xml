@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.andy.data.repository.mybatis.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.andy.mybatis.entity.User">
+        <id column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="base_column">
+        user_id, account, password, age, description, deleted, create_time
+    </sql>
+
+    <insert id="insertSelective" parameterType="com.andy.mybatis.entity.User">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="deleted != null">
+                deleted= #{deleted,jdbcType=BIT}
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByIdSelective" parameterType="User">
+        update t_user
+        <set>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="deleted != null">
+                deleted= #{deleted,jdbcType=BIT}
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+
+    <update id="updateById" parameterType="User">
+        update t_user
+        set account     = #{account,jdbcType=VARCHAR},
+            password    = #{password,jdbcType=VARCHAR},
+            age         = #{age,jdbcType=INTEGER},
+            description = #{description,jdbcType=VARCHAR},
+            deleted     = #{deleted,jdbcType=BIT},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO t_user (account, password, age, description, deleted, create_time) VALUES
+        <foreach collection="users" item="user" index="inx" separator=",">
+            <trim prefix="(" suffixOverrides="," suffix=")">
+                <choose>
+                    <when test="user.account != null">
+                        #{user.account,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        'defaultAccount',
+                    </otherwise>
+                </choose>
+
+                <choose>
+                    <when test="user.password != null">
+                        #{user.password,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        'defPassword',
+                    </otherwise>
+                </choose>
+
+                <choose>
+                    <when test="user.age != null">
+                        #{user.age,jdbcType=INTEGER},
+                    </when>
+                    <otherwise>
+                        0,
+                    </otherwise>
+                </choose>
+
+                <choose>
+                    <when test="user.description != null">
+                        #{user.description,jdbcType=VARCHAR},
+                    </when>
+                    <otherwise>
+                        '我是杰克！今年32岁，我喜欢的篮球',
+                    </otherwise>
+                </choose>
+
+                <choose>
+                    <when test="user.deleted != null">
+                        #{user.deleted,jdbcType=BIT},
+                    </when>
+                    <otherwise>
+                        0,
+                    </otherwise>
+                </choose>
+
+                <choose>
+                    <when test="user.createTime != null">
+                        #{user.createTime,jdbcType=TIMESTAMP},
+                    </when>
+                    <otherwise>
+                        '2018-6-9',
+                    </otherwise>
+                </choose>
+            </trim>
+        </foreach>
+    </insert>
+
+</mapper>

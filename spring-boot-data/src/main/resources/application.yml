@@ -28,5 +28,18 @@ spring:
 
 
 mybatis:
+  configuration:
+    # 全局映射器启用缓存
+    cache-enabled: true
+    # 按需加载字段(加载字段由SQL指定),不会加载关联表的所有字段,以提高性能
+    aggressive-lazy-loading: false
+    # 查询时,关闭关联对象及时加载以提高性能
+    lazy-loading-enabled: false
+    #对于批量更新操作缓存SQL以提高性能
+    default-executor-type: reuse
+    #允许返回不同的结果集以达到通用的效果
+    multiple-result-sets-enabled: true
+    #数据库执行超时时间
+    default-statement-timeout: 25000
   mapper-locations: classpath:mybatis/mapper/*.xml
-  config-location: classpath:mybatis/config/mybatis-config.xml
+  type-aliases-package: com.andy.mapper

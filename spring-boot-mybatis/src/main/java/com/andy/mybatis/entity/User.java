@@ -7,7 +7,7 @@ import java.util.Date;
  * <p>
  *
  * @author Leone
- * @since 2018-11-04
+ * @since 2018-03-02
  **/
 public class User implements Serializable {
 

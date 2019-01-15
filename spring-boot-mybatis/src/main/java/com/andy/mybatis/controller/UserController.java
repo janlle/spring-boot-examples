@@ -1,14 +1,14 @@
 package com.andy.mybatis.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
  *
  * @author Leone
- * @since 2018-11-04
+ * @since 2018-03-02
  **/
-@Controller
+@RestController
 public class UserController {
 
 

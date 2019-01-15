@@ -23,5 +23,4 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     @Query("update User set deleted = 1 where userId in ?1")
     Integer delByIds(List<Integer> ids);
 
-
 }
