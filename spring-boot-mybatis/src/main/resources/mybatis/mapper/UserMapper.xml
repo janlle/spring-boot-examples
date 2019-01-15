@@ -16,7 +16,7 @@
         user_id, account, password, age, description, deleted, create_time
     </sql>
 
-    <insert id="insertSelective" parameterType="com.andy.mybatis.entity.User">
+    <insert id="insert" parameterType="com.andy.mybatis.entity.User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="account != null">
@@ -62,7 +62,7 @@
     </insert>
 
 
-    <update id="updateByIdSelective" parameterType="com.andy.mybatis.entity.User">
+    <update id="updateByUserId" parameterType="com.andy.mybatis.entity.User">
         update t_user
         <set>
             <if test="account != null">

@@ -8,14 +8,15 @@ import org.apache.ibatis.annotations.Update;
 public interface SqlToolDao {
 
 
-    @Update({"create table ${tableName}( user_id int PRIMARY KEY NOT NULL AUTO_INCREMENT," +
-            " title varchar(20) NOT NULL," +
-            " detail varchar(200) DEFAULT NULL," +
-            " status int(1) DEFAULT 0," +
-            " priority int(1) DEFAULT 0," +
-            " description date DEFAULT null," +
+    @Update({"create table ${tableName}( " +
+            " user_id int primary key not null auto_increment," +
+            " account varchar(20) NOT NULL," +
+            " password varchar(200) DEFAULT NULL," +
+            " age int(1) DEFAULT 0," +
+            " description int(1) DEFAULT 0," +
+            " deleted date DEFAULT null," +
             " create_time currentTimestamp)" +
-            " ENGINE=Innodb DEFAULT CHARSET=utf8"})
+            " engine=innodb default charset=utf8"})
     void createTable(@Param("tableName") String tableName);
 
 

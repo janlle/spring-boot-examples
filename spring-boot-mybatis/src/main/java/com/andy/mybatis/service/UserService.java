@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Set;
 
 /**
  * <p>
@@ -24,7 +23,7 @@ public class UserService {
 
 
     /**
-     * 添加
+     * 插入
      *
      * @param user
      * @return
@@ -44,15 +43,34 @@ public class UserService {
     }
 
 
+    /**
+     * 更新
+     *
+     * @param user
+     * @return
+     */
     public int update(User user) {
         return userMapper.update(user);
     }
 
+    /**
+     * 批量更新
+     *
+     * @param users
+     * @return
+     */
     public int updateBatch(List<User> users) {
         return userMapper.updateBatch(users);
     }
 
 
+    /**
+     * 分页
+     *
+     * @param start
+     * @param size
+     * @return
+     */
     public List<User> page(Integer start, Integer size) {
         return userMapper.page(start, size);
     }
@@ -64,7 +82,6 @@ public class UserService {
      * @param userId
      */
     public int delete(Long userId) {
-        System.out.println(userId);
         return userMapper.deleteByUserId(userId);
     }
 
@@ -74,7 +91,6 @@ public class UserService {
      * @param userIds
      */
     public int deleteByIds(List<Long> userIds) {
-        System.out.println(userIds);
         return userMapper.deleteByUserIds(userIds);
     }
 
