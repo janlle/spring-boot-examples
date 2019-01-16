@@ -30,8 +30,7 @@ public class MybatisService {
      * @return
      */
     public long insertBatch(Integer count) {
-        userMapper.insertBatch(EntityFactory.getUsers(count));
-        return 0;
+        return userMapper.insertBatch(EntityFactory.getUsers(count));
     }
 
     /**
@@ -44,7 +43,7 @@ public class MybatisService {
         for (long i = 0; i < count; i++) {
             userMapper.insert(EntityFactory.getUser());
         }
-        return 0;
+        return count;
     }
 
     @Transactional
@@ -53,6 +52,5 @@ public class MybatisService {
         int i = 100 / 0;
         return 0;
     }
-
 
 }

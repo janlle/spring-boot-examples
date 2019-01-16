@@ -2,7 +2,7 @@ package com.andy.data.service;
 
 import com.andy.data.config.RedisPrefix;
 import com.andy.data.util.EntityFactory;
-import com.andy.data.util.RandomUtil;
+import com.andy.data.util.RandomValue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisService {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -30,19 +30,19 @@ public class RedisService {
     private ValueOperations<String, String> operations;
 
     @Autowired
-    private HashOperations hashOperations;
+    private HashOperations<String, String, Object> hashOperations;
 
     @Autowired
-    private ValueOperations valueOperations;
+    private ValueOperations<String, String> valueOperations;
 
     @Autowired
     private ListOperations<String, String> listOperations;
 
     @Autowired
-    private SetOperations setOperations;
+    private SetOperations<String, String> setOperations;
 
     @Autowired
-    private ZSetOperations zSetOperations;
+    private ZSetOperations<String, String> zSetOperations;
 
 
     public long insert(Integer count) {
@@ -52,19 +52,19 @@ public class RedisService {
 //            stringRedisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1).toString(), 1, TimeUnit.SECONDS);
 //            valueOperations.set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1).toString(), 30, TimeUnit.SECONDS);
         }
-        listOperations.set(RedisPrefix.userCatch(RandomUtil.getNum(6)), 1L, EntityFactory.getUsers(1).toString());
+        listOperations.set(RedisPrefix.userCatch(RandomValue.getNum(6)), 1L, EntityFactory.getUsers(1).toString());
         return 0;
     }
 
     public long batchInsert(Integer count) {
         log.info("insert:{}", count);
-        operations.set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(count).toString(), 1, TimeUnit.SECONDS);
+        operations.set(RedisPrefix.userCatch(RandomValue.getNum(6)), EntityFactory.getUsers(count).toString(), 1, TimeUnit.SECONDS);
         return 0;
     }
 
     public long foreachInsert(Integer count) {
         log.info("insert:{}", count);
-        redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(count), 3, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomValue.getNum(6)), EntityFactory.getUsers(count), 3, TimeUnit.SECONDS);
         return 0;
     }
 
@@ -73,7 +73,7 @@ public class RedisService {
         log.info("insert:{}", count);
         for (long i = 0; i < count; i++) {
 //            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
-            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomValue.getNum(6)), EntityFactory.getUsers(1), 3, TimeUnit.SECONDS);
         }
         return 0;
     }

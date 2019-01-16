@@ -37,14 +37,13 @@ public class UserDaoTest {
     public void testFind() {
 //        User user = userRepository.findOne(1L);
 //        User user = userRepository.getOne(2L);
-        User user = userRepository.findUserByUserId(4);
-        log.info("user:", user);
+//        log.info("user:", user);
     }
 
     @Test
     public void testDelete() {
 //        userRepository.delete(3L);
-        userRepository.deleteUser(2L);
+//        userRepository.deleteUser(2L);
     }
 
 
