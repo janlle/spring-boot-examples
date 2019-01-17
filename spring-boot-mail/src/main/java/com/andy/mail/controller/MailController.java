@@ -18,23 +18,18 @@ import java.util.Map;
  **/
 @Slf4j
 @Controller
-@RequestMapping("/mail")
+@RequestMapping("/api/mail")
 public class MailController {
 
     @Autowired
     private MailService mailService;
 
-    @GetMapping("/")
-    public String home() {
-        return "success";
-    }
-
     @ResponseBody
     @GetMapping("/send")
-    public BaseResult<Object> login(String to, HttpServletRequest request) {
+    public BaseResult sendMain(String to, HttpServletRequest request) {
         boolean flag = false;
         try {
-            flag = mailService.sendFromThymeleaf(to, "激活邮件");
+            flag = mailService.sendFreemarkerMail(to, "激活邮件");
             log.info("发送邮件{}", flag ? "成功":"失败");
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,24 +37,17 @@ public class MailController {
         return BaseResult.success(flag);
     }
 
-    @RequestMapping("/helloHtml")
+    @RequestMapping("/html")
     public String helloHtml(Map<String,Object> map){
         map.put("hello", "thymeleaf渲染");
         return "/htmlMail";
     }
 
-    @RequestMapping("/helloFtl")
+    @RequestMapping("/ftl")
     public String helloFtl(Map<String,Object> map){
         map.put("hello", "freemarker渲染");
         map.put("code", "admin");
         return "ftlMail";
     }
-
-    @RequestMapping("/getCode")
-    public String get(String code, HttpServletResponse response, HttpServletRequest request){
-
-        return "SUCCESS";
-    }
-
 
 }

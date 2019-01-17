@@ -34,7 +34,7 @@ public class CsvBeanValidator<T> implements Validator<T>, InitializingBean {
         if (constraintViolations.size() > 0) {
             StringBuilder message = new StringBuilder();
             for (ConstraintViolation<T> constraintViolation : constraintViolations) {
-                message.append(constraintViolation.getMessage() + "\n");
+                message.append(constraintViolation.getMessage()).append("\n");
             }
             throw new ValidationException(message.toString());
         }
