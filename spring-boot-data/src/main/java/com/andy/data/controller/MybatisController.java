@@ -15,7 +15,7 @@ import java.util.List;
  **/
 @Slf4j
 @RestController
-@RequestMapping("/mybatis")
+@RequestMapping("/api/mybatis")
 public class MybatisController {
 
     @Autowired

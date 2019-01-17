@@ -14,7 +14,7 @@ spring:
         max-idle: 8
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?useSSL=false
+    url: jdbc:mysql://39.108.125.41:3306/boot?useSSL=false
     username: root
     password: root
   jpa:
@@ -42,4 +42,4 @@ mybatis:
     #数据库执行超时时间
     default-statement-timeout: 25000
   mapper-locations: classpath:mybatis/mapper/*.xml
-  type-aliases-package: com.andy.mapper
+  type-aliases-package: com.andy.entity

@@ -21,44 +21,56 @@ public class LogTask {
 
     private static final Logger logger = LoggerFactory.getLogger(LogTask.class);
 
-    private static String goods[] = {"iphone", "笔记本", "苹果", "橘子", "橙子", "矿泉水","手机", "书包"};
 
     private static final Random RANDOM = new Random();
 
+    private static final Date date = new Date();
+
     private static LocalDateTime localDateTime = LocalDateTime.now();
 
+    /**
+     * 用户购物产生的日志()
+     */
     @Async
-    @Scheduled(fixedRate = 1000 * 2)
-    public void timeTask() {
-        logger.info(localDateTime.toLocalDate()+ RandomValue.getName()+"-买了-"+goods[RANDOM.nextInt(goods.length)]+"-订单号是-"+System.currentTimeMillis());
+    @Scheduled(fixedRate = 100)
+    public void orderLogTask() {
+        logger.info(System.currentTimeMillis() + "\tip\t" + RandomValue.getIp() + "\tusername\t" + RandomValue.getName() + "\tgoodsName\t" + RandomValue.getGoods() + "\torderId\t" + RandomValue.getNum(24));
     }
 
+    /**
+     * 用户聊天产生的日志()
+     */
     @Async
-    @Scheduled(fixedDelay = 1000 * 5)
-    public void DelayTask() {
-        logger.info(localDateTime.toLocalDate()+RandomValue.getName()+"-购买的-"+goods[RANDOM.nextInt(goods.length)]+"-发货了！-"+System.currentTimeMillis());
+    @Scheduled(fixedDelay = 50 * 2)
+    public void userChatLogTask() {
+        logger.info(System.currentTimeMillis() + "\tfromUser\t" + RandomValue.getName() + "\tip\t" + RandomValue.getIp() + "\ttoUser\t" + RandomValue.getName() + "\tip\t" + RandomValue.getIp() + "\tmessage\t" + RandomValue.getMessage() + "\ttime\t" + LocalDateTime.now().toLocalTime());
     }
 
-    //每5秒执行一次
+    /**
+     * 用户访问ip产生的日志(每3秒执行一次)
+     */
     @Async
-    @Scheduled(cron = "0/3 * * * * ?")
-    public void doSomething() {
-        logger.info(new Date().getTime()+"-"+RandomValue.getTel()+"-访问了-"+RandomValue.getIp()+"-用了"+RANDOM.nextInt(500) + "-秒");
+    @Scheduled(cron = "0/1 * * * * ?")
+    public void userVisitLogTask() {
+        logger.info(System.currentTimeMillis() + "\tphone\t" + RandomValue.getTel() + "\turl\t" + RandomValue.getUrl() + "\tip\t" + RandomValue.getIp() + "\ttime\t" + RANDOM.nextInt(20));
     }
 
-    // 每分钟执行一次
+    /**
+     * 用户发送邮件产生的日志(每分钟执行一次)
+     */
     @Async
-    @Scheduled(cron = "0 0/1 * * * ?")
-    public void work() {
-        logger.info(new Date().getTime()+"-"+RandomValue.getName()+"-登陆了-"+RandomValue.getEmail(5,8)+"-邮箱，发送了-"+RANDOM.nextInt(4) + "条邮件！");
+    @Scheduled(cron = "0/1 * * * * ?")
+    public void userSendMailLogTask() {
+        logger.info(System.currentTimeMillis() + "\tfromMail\t" + RandomValue.getEmail() + "\ttoMail\t" + RandomValue.getEmail() + "\tcontent\t" + RandomValue.getMessage() + "\ttime\t" + LocalDateTime.now().toLocalTime());
     }
 
-
-    // 每8分钟执行一次
-    @Scheduled(cron = "0 0/8 * * * ?")
-    public void works() {
-        for (int i = 0; i < 256; i++) {
-            logger.info(new Date().getTime()+"-"+RandomValue.getName()+"-登陆了-"+RandomValue.getEmail(5,8)+"-邮箱，发送了-"+RANDOM.nextInt(4) + "条邮件！");
+    /**
+     * 用户秒杀商品产生的日志(每2分钟执行一次)
+     */
+    @Scheduled(cron = "0 0/2 * * * ?")
+    public void secondKillLogTask() {
+        for (int i = 0; i < RandomValue.random.nextInt(156) + 100; i++) {
+            logger.info(System.currentTimeMillis() + "\t" + RandomValue.getName() + "\tsecKill\t" + RandomValue.getGoods() + "\tphone\t" + RandomValue.getTel() + "\ttime\t" + LocalDateTime.now().toLocalTime());
         }
     }
 

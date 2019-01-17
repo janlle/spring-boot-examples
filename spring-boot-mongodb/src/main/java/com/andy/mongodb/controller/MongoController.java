@@ -19,39 +19,33 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/api/mongo")
-@Api(tags = "MongoDB")
 public class MongoController {
 
     @Autowired
     private MongoService mongoService;
 
 
-    @ApiOperation("保存")
     @PostMapping
     public User save(@RequestBody User user) {
         return mongoService.save(user);
     }
 
-    @ApiOperation("列表")
     @GetMapping("/list")
     public List<User> list() {
         return mongoService.list();
     }
 
 
-    @ApiOperation("查找")
     @GetMapping("/account")
     public User findByName(@RequestParam("account") String account) {
         return mongoService.findByName(account);
     }
 
-    @ApiOperation("修改")
     @PutMapping
     public void update(@RequestBody User user) {
         mongoService.update(user);
     }
 
-    @ApiOperation("删除")
     @DeleteMapping("/{userId}")
     public void delete(@PathVariable("userId") Integer userId) {
         mongoService.delete(userId);

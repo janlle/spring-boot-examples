@@ -37,6 +37,10 @@ mybatis:
     auto-mapping-behavior: partial
     # 是否可以使用列的别名 (取决于驱动的兼容性) default:true
     use-column-label: true
+    # 指定 Mybatis 创建具有延迟加载能力的对象所用到的代理工具。CGLIB|JAVASSIST, default(JAVASSIST)
+    proxy-factory: CGLIB
+    # 指定 MyBatis 增加到日志名称的前缀。任何字符串
+    log-prefix: test
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.andy.mapper
   executor-type: reuse

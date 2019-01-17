@@ -9,10 +9,12 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * @author Leone
- * @since 2018-07-04
+ * <p> 随机生成中文姓名，性别，Email，手机号，住址
+ *
+ * @author leone
+ * @since 2018-06-02
  **/
-public class RandomUtil {
+public class RandomValue {
 
     private static String[] urls = {"http://www.baidu.com",
             "http://www.github.com",
@@ -42,7 +44,7 @@ public class RandomUtil {
             "https://www.aliyun.com/",
     };
 
-    private RandomUtil() {
+    private RandomValue() {
     }
 
     private static String[] telFirst = "134,135,136,137,138,139,150,151,152,157,158,159,130,131,132,155,156,133,153".split(",");
@@ -278,6 +280,4 @@ public class RandomUtil {
     public static String getUrl() {
         return urls[random.nextInt(urls.length)];
     }
-
-
 }
