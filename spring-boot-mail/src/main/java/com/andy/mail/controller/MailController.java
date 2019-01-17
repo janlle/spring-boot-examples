@@ -48,6 +48,20 @@ public class MailController {
         return BaseResult.success(flag);
     }
 
+    @ResponseBody
+    @GetMapping("/send/simple")
+    public BaseResult sendSimpleMain(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = mailService.sendSimpleMail(to, subject, content);
+        return BaseResult.success(flag);
+    }
+
+    @ResponseBody
+    @GetMapping("/send/htm")
+    public BaseResult sendAttachmentsMail(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = mailService.sendAttachmentsMail(to, subject, content);
+        return BaseResult.success(flag);
+    }
+
 
     @RequestMapping("/html")
     public String helloHtml(Map<String, Object> map) {
