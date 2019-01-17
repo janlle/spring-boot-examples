@@ -1,46 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>mail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
-<style type="text/css">
-    table {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    td, th {
-        font-size: 1em;
-        border: 1px solid #5B4A42;
-        padding: 3px 7px 2px 7px;
-    }
-
-    th {
-        font-size: 1.1em;
-        text-align: center;
-        padding-top: 5px;
-        padding-bottom: 4px;
-        background-color: #24A9E1;
-        color: #ffffff;
-    }
-</style>
 <body>
-<div>
-    <h2>邮件消息通知</h2>
-    <table id="customers">
-        <tr>
-            <th>title</th>
-            <th>content</th>
-            <th>code</th>
-        </tr>
-        <tr>
-            <td>${(title)!""}</td>
-            <td>${(content)!""}</td>
-            <td>${(code)!""}</td>
-        </tr>
-    </table>
+<div style="width: 600px; text-align: left; margin: 0 auto;">
+    <h3 style="color: #005da7;">您好！${(to)!""}</h3>
+    <div style="border-bottom: 5px solid #005da7; height: 2px; width: 100%;"></div>
+    <div style="border: 1px solid #005da7; font-size: 16px; line-height: 50px; padding: 20px;">
+        <div>
+            欢迎注册xxx!
+        </div>
+        <div style="border-bottom: 2px solid #005da7; height: 2px; width: 100%;"></div>
+        <div>点击链接激活您的账号!</div>
+        <div>
+            <span><a href="${(content)!""}">激活</a></span>
+        </div>
+        <div>
+            <img src="https://www.baidu.com/img/xinshouye_7c5789a51e2bfd441c7fe165691b31a1.png" alt="baidu"/>
+        </div>
+        <div>
+            想了解更多信息，请访问 <a href="https://www.baidu.com/">https://www.baidu.com/</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
+
+
+
+
+
+

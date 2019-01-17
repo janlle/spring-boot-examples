@@ -5,17 +5,16 @@
 </head>
 <body>
 <div style="width: 600px; text-align: left; margin: 0 auto;">
-    <h1 style="color: #005da7;">TEST</h1>
+    <h1>XXX</h1>
     <div style="border-bottom: 5px solid #005da7; height: 2px; width: 100%;"></div>
     <div style="border: 1px solid #005da7; font-size: 16px; line-height: 50px; padding: 20px;">
-        <p th:text="${to}+' ,您好!'"></p>
         <div>
-            欢迎加入千图美!
+            <p th:text="${to}+' 您好,欢迎注册xxx!!'"></p>
         </div>
         <div style="border-bottom: 2px solid #005da7; height: 2px; width: 100%;"></div>
-        <div>欢迎注册“xxx”，点击链接激活您的账号!</div>
+        <div>请点击下面链接激活您的账号!</div>
         <div>
-            <span th:text="'点击激活:'${link}"></span>
+            <span><a th:href="${content}">激活</a></span>
         </div>
         <div>
             <img src="https://www.baidu.com/img/xinshouye_7c5789a51e2bfd441c7fe165691b31a1.png" alt="baidu"/>

@@ -1,6 +1,5 @@
 package com.andy.mail.service;
 
-import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +21,6 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -44,7 +42,7 @@ public class MailService {
     @Autowired
     private TemplateEngine templateEngine;
 
-    @Autowired
+//    @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
 
     private static final Charset CHARSET = StandardCharsets.UTF_8;
@@ -62,24 +60,25 @@ public class MailService {
      * @return
      * @throws Exception
      */
-    public boolean sendFreemarkerMail(String to, String subject) throws Exception {
+    public boolean sendFreemarkerMail(String to, String subject, String content) {
         try {
-            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setFrom(from);
-            helper.setTo(InternetAddress.parse(to));
-            helper.setSubject("[" + subject + "-" + LocalDate.now() + " " + LocalTime.now().withNano(0));
-            Map<String, Object> model = new HashMap<>();
-            model.put("title", "普通邮件");
-            model.put("content", "邮件内容");
-            model.put("code", "28918881881");
-            Template template = freeMarkerConfigurer.getConfiguration().getTemplate(FREEMARKER_TEMPLATE);
-            String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
-            helper.setText(text, true);
-            javaMailSender.send(mimeMessage);
+//            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+//            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+//            helper.setFrom(from);
+//            helper.setTo(InternetAddress.parse(to));
+//            helper.setSubject("[" + subject + " " + LocalDate.now() + "]");
+//            Map<String, Object> model = new HashMap<>();
+//            model.put("subject", subject);
+//            model.put("content", content);
+//            model.put("to", to);
+//            Template template = freeMarkerConfigurer.getConfiguration().getTemplate(FREEMARKER_TEMPLATE);
+//            String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+//            helper.setText(text, true);
+//            javaMailSender.send(mimeMessage);
+            log.info("send mail success!");
             return true;
-        } catch (MessagingException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("send mail filed:{}", e);
             return false;
         }
     }
@@ -92,15 +91,16 @@ public class MailService {
      * @return
      * @throws Exception
      */
-    public boolean sendThymeleafMail(String to, String subject) throws Exception {
+    public boolean sendThymeleafMail(String to, String subject, String content) {
 //        String token = storage(to);
         String token = "xxx";
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, CHARSET.displayName());
             Map<String, Object> map = new HashMap<>();
-            map.put("token", token);
+            map.put(content, token);
+            map.put("content", content);
+            map.put("subject", subject);
             map.put("to", to);
             IContext context = new Context(Locale.CHINESE, map);
             String process = templateEngine.process(THYMELEAF_TEMPLATE, context);
@@ -109,13 +109,13 @@ public class MailService {
             messageHelper.setSubject(subject);
             messageHelper.setText(process, true);
             javaMailSender.send(mimeMessage);
-            log.info("发送邮件,[邮件发送成功]->{}!", to);
+            log.info("send mail success!");
+            return true;
         } catch (Exception e) {
-            log.error("发送邮件,[邮件发送失败]->{}!", to);
+            log.error("send mail filed:{}", e);
             e.printStackTrace();
             return false;
         }
-        return true;
     }
 
 

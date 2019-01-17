@@ -28,22 +28,22 @@ spring:
 # thymeleaf 配置
   thymeleaf:
     cache: false
-    prefix: classpath:/templates/thymeleaf/
+    prefix: classpath:/templates/thymeleaf
     suffix: .html
     mode: HTML
     encoding: UTF-8
     servlet:
       content-type: text/html
 # freemarker配置
-  freemarker:
-    template-loader-path: classpath:/templates/freemarker/
-    allow-request-override: false
-    cache: false
-    suffix: .ftl
-    charset: UTF-8
-    content-type: text/html
-    check-template-location: true
-    expose-request-attributes: false
-    expose-session-attributes: false
-    expose-spring-macro-helpers: false
+#  freemarker:
+#    template-loader-path: classpath:/templates/freemarker/
+#    allow-request-override: false
+#    cache: false
+#    suffix: .ftl
+#    charset: UTF-8
+#    content-type: text/html
+#    check-template-location: true
+#    expose-request-attributes: false
+#    expose-session-attributes: false
+#    expose-spring-macro-helpers: false
 

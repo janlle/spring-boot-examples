@@ -6,10 +6,12 @@ import com.andy.mail.service.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,29 +26,38 @@ public class MailController {
     @Autowired
     private MailService mailService;
 
+    private static Map<String, Object> content = new HashMap<>();
+
+    static {
+        content.put("title", "标题");
+        content.put("content", "http://www.baidu.com");
+        content.put("to", "james@gmail.com");
+    }
+
     @ResponseBody
-    @GetMapping("/send")
-    public BaseResult sendMain(String to, HttpServletRequest request) {
-        boolean flag = false;
-        try {
-            flag = mailService.sendFreemarkerMail(to, "激活邮件");
-            log.info("发送邮件{}", flag ? "成功":"失败");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @GetMapping("/send/ftl")
+    public BaseResult sendFtlMain(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = mailService.sendFreemarkerMail(to, subject, content);
         return BaseResult.success(flag);
     }
 
+    @ResponseBody
+    @GetMapping("/send/html")
+    public BaseResult sendHtmlMain(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = mailService.sendThymeleafMail(to, subject, content);
+        return BaseResult.success(flag);
+    }
+
+
     @RequestMapping("/html")
-    public String helloHtml(Map<String,Object> map){
-        map.put("hello", "thymeleaf渲染");
+    public String helloHtml(Map<String, Object> map) {
+        map.putAll(content);
         return "/htmlMail";
     }
 
     @RequestMapping("/ftl")
-    public String helloFtl(Map<String,Object> map){
-        map.put("hello", "freemarker渲染");
-        map.put("code", "admin");
+    public String helloFtl(Map<String, Object> map) {
+        map.putAll(content);
         return "ftlMail";
     }
 
