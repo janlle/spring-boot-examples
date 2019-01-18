@@ -14,7 +14,7 @@ spring:
   mail:
     host: smtp.163.com
     username: break_a@163.com
-    password: break90
+    password: xxx
     properties:
       mail:
         smtp:
