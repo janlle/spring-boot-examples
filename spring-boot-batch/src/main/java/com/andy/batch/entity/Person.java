@@ -1,6 +1,7 @@
 package com.andy.batch.entity;
 
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 /**
  * <p>
@@ -10,14 +11,14 @@ import javax.validation.constraints.Size;
  **/
 public class Person {
 
-    @Size(max = 5, min = 2)
+    @Size(max = 10, min = 2)
     private String name;
 
-    private int age;
+    private Integer age;
 
-    private String nation;
+    private String sex;
 
-    private String address;
+    private Date birthday;
 
     public String getName() {
         return name;
@@ -27,27 +28,27 @@ public class Person {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
-    }
-
-    public String getNation() {
-        return nation;
-    }
-
-    public void setNation(String nation) {
-        this.nation = nation;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 }

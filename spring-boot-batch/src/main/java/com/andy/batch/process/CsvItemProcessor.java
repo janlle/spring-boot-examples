@@ -17,11 +17,11 @@ public class CsvItemProcessor extends ValidatingItemProcessor<Person> {
     public Person process(Person item) throws ValidationException {
         // 需执行super.process (item) 才会调用自定义校验器
         super.process(item);
-        // 对数据做简单的处理，若民族为汉族，则数据转换成01，其余转换成02
-        if (item.getNation().equals("汉族")) {
-            item.setNation("01");
+        // 对数据做简单的处理 将性别装换为中文
+        if (item.getSex().equals("1")) {
+            item.setSex("男");
         } else {
-            item.setNation("02");
+            item.setSex("女");
         }
         return item;
     }

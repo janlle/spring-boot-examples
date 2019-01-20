@@ -1,7 +1,6 @@
 package com.andy.mail.controller;
 
 
-import com.andy.mail.common.BaseResult;
 import com.andy.mail.service.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,30 +35,30 @@ public class MailController {
 
     @ResponseBody
     @GetMapping("/send/ftl")
-    public BaseResult sendFtlMain(String to, String subject, String content, HttpServletRequest request) {
+    public String sendFtlMain(String to, String subject, String content, HttpServletRequest request) {
         boolean flag = mailService.sendFreemarkerMail(to, subject, content);
-        return BaseResult.success(flag);
+        return String.valueOf(flag);
     }
 
     @ResponseBody
     @GetMapping("/send/html")
-    public BaseResult sendHtmlMain(String to, String subject, String content, HttpServletRequest request) {
+    public String sendHtmlMain(String to, String subject, String content, HttpServletRequest request) {
         boolean flag = mailService.sendThymeleafMail(to, subject, content);
-        return BaseResult.success(flag);
+        return String.valueOf(flag);
     }
 
     @ResponseBody
     @GetMapping("/send/simple")
-    public BaseResult sendSimpleMain(String to, String subject, String content, HttpServletRequest request) {
+    public String sendSimpleMain(String to, String subject, String content, HttpServletRequest request) {
         boolean flag = mailService.sendSimpleMail(to, subject, content);
-        return BaseResult.success(flag);
+        return String.valueOf(flag);
     }
 
     @ResponseBody
     @GetMapping("/send/htm")
-    public BaseResult sendAttachmentsMail(String to, String subject, String content, HttpServletRequest request) {
+    public String sendAttachmentsMail(String to, String subject, String content, HttpServletRequest request) {
         boolean flag = mailService.sendAttachmentsMail(to, subject, content);
-        return BaseResult.success(flag);
+        return String.valueOf(flag);
     }
 
 

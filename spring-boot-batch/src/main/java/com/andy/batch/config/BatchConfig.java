@@ -53,7 +53,7 @@ public class BatchConfig {
     @Bean
     public JobRepository jobRepository(DataSource dataSource, PlatformTransactionManager transactionManager)
             throws Exception {
-        //jobRepository的定义需要dataSource和transactionManager，Spring Boot已为我们自动配置了这两个类，Spring可通过方法注入已有的Bean。
+        // jobRepository的定义需要dataSource和transactionManager，Spring Boot已为我们自动配置了这两个类，Spring可通过方法注入已有的Bean。
         JobRepositoryFactoryBean jobRepositoryFactoryBean = new JobRepositoryFactoryBean();
         jobRepositoryFactoryBean.setDataSource(dataSource);
         jobRepositoryFactoryBean.setTransactionManager(transactionManager);
@@ -89,10 +89,8 @@ public class BatchConfig {
         return jobBuilderFactory
                 .get("importJob")
                 .incrementer(new RunIdIncrementer())
-                // 为Job指定Step
                 .flow(step)
                 .end()
-                // 绑定监听
                 .listener(csvJobListener())
                 .build();
     }
@@ -112,13 +110,13 @@ public class BatchConfig {
                       ItemReader<Person> reader,
                       ItemWriter<Person> writer,
                       ItemProcessor<Person, Person> processor) {
-        //1批处理每次提交65000条数据。
+        // 1.批处理每次提交65000条数据。
         return stepBuilderFactory.get("step1").<Person, Person>chunk(65000)
-                //2给step绑定reader
+                // 2.给step绑定reader
                 .reader(reader)
-                //3给step绑定processor
+                // 3.给step绑定processor
                 .processor(processor)
-                //4给step绑定writer
+                // 4.给step绑定writer
                 .writer(writer)
                 .build();
     }
@@ -135,11 +133,11 @@ public class BatchConfig {
         // 使用FlatFileItemReader读取文件
         FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
         // 使用FlatFileItemReader的setResource方法设置csv文件的路径
-        reader.setResource(new ClassPathResource("people.csv"));
+        reader.setResource(new ClassPathResource("person.csv"));
         // 在此处对cvs文件的数据和领域模型类做对应映射
         reader.setLineMapper(new DefaultLineMapper<Person>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
-                setNames("name", "age", "nation", "address");
+                setNames("name", "age", "sex", "address", "birthday");
             }});
             setFieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
                 setTargetType(Person.class);
@@ -173,7 +171,7 @@ public class BatchConfig {
         // 我们使用JDBC批处理的JdbcBatchItemWriter来写数据到数据库。
         JdbcBatchItemWriter<Person> writer = new JdbcBatchItemWriter<Person>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
-        String sql = "insert into person (name,age,nation,address) values ( :name, :age, :nation,:address)";
+        String sql = "insert into t_person (name,age,sex,address,birthday) values (:name, :age, :sex, :address, :birthday)";
         // 在此设置要执行批处理的SQL语句。
         writer.setSql(sql);
         writer.setDataSource(dataSource);
