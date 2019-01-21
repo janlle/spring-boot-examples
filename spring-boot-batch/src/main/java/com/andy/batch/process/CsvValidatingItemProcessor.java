@@ -1,9 +1,11 @@
 package com.andy.batch.process;
 
 import com.andy.batch.entity.Person;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.validator.ValidatingItemProcessor;
 
 import javax.validation.ValidationException;
+import java.text.SimpleDateFormat;
 
 /**
  * <p>数据处理只需实现ItemProcessor接口，重写其process方法。方法输入的参数是从ItemReader读取到的数据，返回的数据给ItemWriter
@@ -11,7 +13,7 @@ import javax.validation.ValidationException;
  * @author Leone
  * @since 2018-10-08
  **/
-public class CsvItemProcessor extends ValidatingItemProcessor<Person> {
+public class CsvValidatingItemProcessor extends ValidatingItemProcessor<Person> {
 
     @Override
     public Person process(Person item) throws ValidationException {

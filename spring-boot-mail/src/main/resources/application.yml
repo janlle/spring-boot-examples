@@ -24,7 +24,6 @@ spring:
             required: true
     default-encoding: UTF-8
 
-
 # thymeleaf 配置
   thymeleaf:
     cache: false

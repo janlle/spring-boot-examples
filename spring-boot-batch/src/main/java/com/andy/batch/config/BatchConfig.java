@@ -3,7 +3,8 @@ package com.andy.batch.config;
 import com.andy.batch.entity.Person;
 import com.andy.batch.listener.CsvJobListener;
 import com.andy.batch.process.CsvBeanValidator;
-import com.andy.batch.process.CsvItemProcessor;
+import com.andy.batch.process.CsvValidatingItemProcessor;
+import com.andy.batch.process.CsvLineMapper;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -19,9 +20,6 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.mapping.DefaultLineMapper;
-import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.validator.Validator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -132,17 +130,21 @@ public class BatchConfig {
     public ItemReader<Person> reader() throws IOException {
         // 使用FlatFileItemReader读取文件
         FlatFileItemReader<Person> reader = new FlatFileItemReader<>();
+
         // 使用FlatFileItemReader的setResource方法设置csv文件的路径
         reader.setResource(new ClassPathResource("person.csv"));
+
         // 在此处对cvs文件的数据和领域模型类做对应映射
-        reader.setLineMapper(new DefaultLineMapper<Person>() {{
+        reader.setLineMapper(csvLineMapper());
+
+        /*reader.setLineMapper(new DefaultLineMapper<Person>() {{
             setLineTokenizer(new DelimitedLineTokenizer() {{
                 setNames("name", "age", "sex", "address", "birthday");
             }});
             setFieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {{
                 setTargetType(Person.class);
             }});
-        }});
+        }});*/
         return reader;
     }
 
@@ -154,7 +156,7 @@ public class BatchConfig {
     @Bean
     public ItemProcessor<Person, Person> processor() {
         // 使用我们自己定义的ItemProcessor的实现CsvItemProcessor。
-        CsvItemProcessor processor = new CsvItemProcessor();
+        CsvValidatingItemProcessor processor = new CsvValidatingItemProcessor();
         // 为processor指定校验器为CsvBeanValidator；
         processor.setValidator(csvBeanValidator());
         return processor;
@@ -169,7 +171,7 @@ public class BatchConfig {
     @Bean
     public ItemWriter<Person> writer(DataSource dataSource) {
         // 我们使用JDBC批处理的JdbcBatchItemWriter来写数据到数据库。
-        JdbcBatchItemWriter<Person> writer = new JdbcBatchItemWriter<Person>();
+        JdbcBatchItemWriter<Person> writer = new JdbcBatchItemWriter<>();
         writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>());
         String sql = "insert into t_person (name,age,sex,address,birthday) values (:name, :age, :sex, :address, :birthday)";
         // 在此设置要执行批处理的SQL语句。
@@ -198,6 +200,16 @@ public class BatchConfig {
     @Bean
     public Validator<Person> csvBeanValidator() {
         return new CsvBeanValidator<>();
+    }
+
+    /**
+     * 自定义lineMapper
+     *
+     * @return
+     */
+    @Bean
+    public CsvLineMapper csvLineMapper() {
+        return new CsvLineMapper();
     }
 
 }

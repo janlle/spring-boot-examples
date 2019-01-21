@@ -18,7 +18,20 @@ public class Person {
 
     private String sex;
 
+    private String address;
+
     private Date birthday;
+
+    public Person() {
+    }
+
+    public Person(String name, Integer age, String sex, String address, Date birthday) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.address = address;
+        this.birthday = birthday;
+    }
 
     public String getName() {
         return name;
@@ -50,5 +63,13 @@ public class Person {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
