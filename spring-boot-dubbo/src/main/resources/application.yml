@@ -1,21 +1,18 @@
 profiles:
-  active: provicer
+  active: consumer
 
 ---
 spring:
   profiles: provider
+  application:
+    name: spring-dubbo
   dubbo:
     server: true
     application:
       name: provider
-    registry:
-      address: zookeeper://39.108.125.41:2181
-    protocol:
-      name: dubbo
-      port: 20880
-    scan: com.andy.dubbo.provider
+    registry: N/A
 server:
-  port: 8080
+  port: 8081
 
 ---
 spring:
@@ -33,5 +30,4 @@ spring:
     scan: com.andy.dubbo.provider
 
 server:
-  port: 8080
-
+  port: 8082

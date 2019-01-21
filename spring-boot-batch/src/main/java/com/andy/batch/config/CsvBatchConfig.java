@@ -38,7 +38,7 @@ import java.io.IOException;
  **/
 @Configuration
 @EnableBatchProcessing
-public class BatchConfig {
+public class CsvBatchConfig {
 
     /**
      * JobRepository 用户注册Job的容器

@@ -5,10 +5,10 @@ import java.util.Date;
 /**
  * <p>
  *
- * @author Leone
- * @since 2018-06-25
+ * @author leone
+ * @since 2019-01-21
  **/
-public class Order {
+public class OrderVO {
 
     private Integer orderId;
 
@@ -20,16 +20,9 @@ public class Order {
 
     private Date createTime;
 
-    public Order() {
-    }
+    private String userAccount;
 
-    public Order(Integer orderId, String orderNo, Integer userId, Integer totalAmount, Date createTime) {
-        this.orderId = orderId;
-        this.orderNo = orderNo;
-        this.userId = userId;
-        this.totalAmount = totalAmount;
-        this.createTime = createTime;
-    }
+    private Integer userAge;
 
     public Integer getOrderId() {
         return orderId;
@@ -69,5 +62,21 @@ public class Order {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public Integer getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
     }
 }

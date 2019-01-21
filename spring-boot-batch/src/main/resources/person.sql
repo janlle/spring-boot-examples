@@ -1,3 +1,5 @@
+drop table if exists t_person;
+
 create table if not exists t_person (
   id       int primary key auto_increment comment '主键',
   name     varchar(48) comment '姓名',

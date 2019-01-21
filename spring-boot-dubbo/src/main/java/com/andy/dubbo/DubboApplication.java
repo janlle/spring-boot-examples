@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Leone
  * @since 2018-06-03
  **/
-@SpringBootApplication
 @EnableDubboConfiguration
+@SpringBootApplication(scanBasePackages = "com.andy.dubbo.provider")
 public class DubboApplication {
     public static void main(String[] args) {
         SpringApplication.run(DubboApplication.class, args);
