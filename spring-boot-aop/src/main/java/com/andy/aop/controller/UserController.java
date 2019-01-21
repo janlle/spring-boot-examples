@@ -6,15 +6,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * @author Leone
  * @since 2018-06-21
  **/
 @Slf4j
 @RestController
-public class HelloController {
+public class UserController {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)

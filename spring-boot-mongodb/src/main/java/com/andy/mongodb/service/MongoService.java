@@ -3,13 +3,13 @@ package com.andy.mongodb.service;
 import com.andy.mongodb.entity.User;
 import com.mongodb.client.result.UpdateResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class MongoService {
 
-    @Autowired
+    @Resource
     private MongoTemplate mongoTemplate;
 
 
@@ -58,7 +58,6 @@ public class MongoService {
         Query query = new Query(Criteria.where("account").is(account));
         return mongoTemplate.findOne(query, User.class);
     }
-
 
     /**
      * 更新
