@@ -1,0 +1,29 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: spring-redis
+  redis:
+    # 数据库索引
+    database: 3
+    # 连接超时时间
+    timeout: 10000ms
+    # ip地址
+    host: 127.0.0.1
+    # 端口
+    port: 6379
+    # 密码
+    # password:
+    jedis:
+      pool:
+        # 最大连接数
+        max-active: 8
+        # 最大阻塞等待时间(负数表示没限制)
+        max-wait: -1ms
+        # 最大空闲
+        max-idle: 8
+        # 最小空闲
+        min-idle: 0

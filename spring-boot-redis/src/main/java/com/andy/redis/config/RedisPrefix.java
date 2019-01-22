@@ -1,6 +1,8 @@
 package com.andy.redis.config;
 
 /**
+ * redis 前缀生成器
+ *
  * @author Leone
  * @since 2018-07-08
  **/

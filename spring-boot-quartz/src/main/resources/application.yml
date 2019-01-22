@@ -1,3 +1,6 @@
+server:
+  port: 8085
+
 spring:
   jpa:
     show-sql: true
@@ -10,3 +13,31 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
+  quartz:
+    jdbc:
+      initialize-schema: always
+      schema: classpath:quartz_schema.sql
+    job-store-type: jdbc
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            useProperties: false
+            dataSource: myDs
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+          dataSource:
+            myDs:
+              driver: com.mysql.jdbc.Driver
+              URL: jdbc:mysql://localhost:3306/testa?useSSL=false
+              user: root
+              password: root

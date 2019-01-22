@@ -2,51 +2,50 @@ package com.andy.redis.controller;
 
 import com.andy.redis.service.RedisCacheService;
 import com.andy.redis.service.RedisService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @author Leone
  * @since 2018-07-08
  **/
-@Slf4j
 @RestController
-@RequestMapping("/redis")
+@RequestMapping("/api/redis")
 public class RedisController {
 
-    @Autowired
+    @Resource
     private RedisService redisService;
 
-    @Autowired
+    @Resource
     private RedisCacheService redisCacheService;
 
-    @GetMapping("/batchInsert")
-    public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = redisService.batchInsert(count);
-        return "foreach batch " + count + " expenditure:" + time + " ms!";
+    @GetMapping("/list")
+    public String list() {
+        return "list: " + redisService.list() + " !";
     }
 
-    @GetMapping("/foreachInsert")
-    public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = redisService.foreachInsert(count);
-        return "foreach batch " + count + " expenditure:" + time + " ms!";
+    @GetMapping("/value")
+    public String value() {
+        return "value: " + redisService.value() + " !";
     }
 
-    @GetMapping("/setValue")
-    public String setValue(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = redisService.setValue(count);
-        return "save " + count + " expenditure:" + time + " ms!";
+    @GetMapping("/set")
+    public String set() {
+        return "set " + redisService.set() + " !";
     }
 
 
-    @GetMapping("/insert")
-    public String insert(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = redisService.insert(count);
-        return "save " + count + " expenditure:" + time + " ms!";
+    @GetMapping("/zSet")
+    public String zSet() {
+        return "zSet " + redisService.zSet() + " !";
+    }
+
+    @GetMapping("/hash")
+    public String hash() {
+        return "hash " + redisService.hash() + " !";
     }
 
 

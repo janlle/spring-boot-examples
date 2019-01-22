@@ -31,7 +31,7 @@ public class EntityFactory {
     public static List<User> getUsers(Integer count) {
         List<User> userList = new ArrayList<>();
         for (long i = 0; i < count; i++) {
-            User user = new User(RandomUtil.getName(), RandomUtil.getStr(12), RandomUtil.getUser().toString(), 1 + random.nextInt(90), new Date(), false);
+            User user = new User(1L, RandomUtil.getName(), RandomUtil.getStr(12), RandomUtil.getUser().toString(), 1 + random.nextInt(90), new Date(), false);
             userList.add(user);
         }
         return userList;
@@ -43,7 +43,7 @@ public class EntityFactory {
      * @return
      */
     public static User getUser() {
-        return new User(RandomUtil.getName(), RandomUtil.getStr(12), RandomUtil.getUser().toString(), 1 + random.nextInt(90), new Date(), false);
+        return new User(1L, RandomUtil.getName(), RandomUtil.getStr(12), RandomUtil.getUser().toString(), 1 + random.nextInt(90), new Date(), false);
     }
 
     /**
