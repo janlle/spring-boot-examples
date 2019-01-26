@@ -1,13 +1,17 @@
-package com.andy.aop.entity;
+package com.andy.common.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * <p> 
+ *
  * @author Leone
- * @since 2018-06-21
+ * @since 2017-11-09
  **/
 public class User implements Serializable {
+
+    private static final long serialVersionUID = -8654229598582165411L;
 
     private Long userId;
 
