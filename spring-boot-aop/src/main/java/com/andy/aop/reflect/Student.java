@@ -1,6 +1,6 @@
 package com.andy.aop.reflect;
 
-import com.andy.aop.anno.NameAnnotation;
+import com.andy.aop.anno.NameAnno;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -53,7 +53,7 @@ public class Student implements Serializable {
         return "default method " + message;
     }
 
-    @NameAnnotation(name = "jack", age = 23)
+    @NameAnno(name = "jack", age = 23)
     private Long priMethod() {
         return 1L;
     }

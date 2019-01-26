@@ -1,6 +1,6 @@
 package com.andy.aop.service;
 
-import com.andy.aop.anno.SystemLog;
+import com.andy.aop.anno.SystemLogAnno;
 import com.andy.common.entity.User;
 import com.andy.common.service.UserService;
 import com.andy.common.utils.EntityFactory;
@@ -19,7 +19,7 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
 
     @Override
-    @SystemLog(description = "获取用户", value = "value", name = "基于自定义注解的aop")
+    @SystemLogAnno(description = "获取用户", value = "value", name = "基于自定义注解的aop")
     public User findOne(Long userId) {
         log.info("findOne(Long userId)");
         if (new Random().nextBoolean()) {

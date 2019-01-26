@@ -7,14 +7,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <p> 
+ * <p>
  *
  * @author Leone
  * @since 2018-09-29
  **/
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SystemLog {
+public @interface SystemLogAnno {
 
     String description() default "";
 

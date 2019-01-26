@@ -1,6 +1,6 @@
 package com.andy.aop.reflect;
 
-import com.andy.aop.anno.NameAnnotation;
+import com.andy.aop.anno.NameAnno;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
@@ -90,7 +90,7 @@ public class ReflectMain {
 
         Method annotationMethod = clazz.getDeclaredMethod("priMethod");
         annotationMethod.setAccessible(true);
-        NameAnnotation annotation = annotationMethod.getAnnotation(NameAnnotation.class);
+        NameAnno annotation = annotationMethod.getAnnotation(NameAnno.class);
         Annotation[][] parameterAnnotations = annotationMethod.getParameterAnnotations();
         System.out.println(Arrays.toString(parameterAnnotations));
         System.out.println(annotation.name());

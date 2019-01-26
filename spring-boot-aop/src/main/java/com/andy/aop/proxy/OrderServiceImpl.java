@@ -27,11 +27,13 @@ public class OrderServiceImpl implements OrderService, MethodInterceptor {
 
     @Override
     public Order findOne(Long orderId) {
+        System.out.println("findOne");
         return null;
     }
 
     @Override
     public List<Order> list(Long userId) {
+        System.out.println("list");
         return null;
     }
 
@@ -40,17 +42,23 @@ public class OrderServiceImpl implements OrderService, MethodInterceptor {
      *
      * @return
      */
-    public static Object getInstance() {
+    public Object getInstance(Object target) {
+        // 给业务对象赋值
+        this.target = target;
+
+        // 创建加强器，用来创建动态代理类
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(OrderServiceImpl.class);
-        enhancer.setCallback(new OrderServiceImpl());
-        OrderServiceImpl userService = (OrderServiceImpl) enhancer.create();
+        // 为加强器指定要代理的业务类（即：为下面生成的代理类指定父类）
+        enhancer.setSuperclass(target.getClass());
+        // 设置回调：对于代理类上所有方法的调用，都会调用CallBack，而Callback则需要实现intercept()方法进行拦
+        enhancer.setCallback(this);
+        // 创建动态代理类对象并返回
         return enhancer.create();
+
     }
 
 
     /**
-     *
      * @param o
      * @param method
      * @param objects
@@ -60,9 +68,9 @@ public class OrderServiceImpl implements OrderService, MethodInterceptor {
      */
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        System.out.println("Before:" + method);
+        System.out.println("Before:" + method.getName());
         Object object = methodProxy.invokeSuper(o, objects);
-        System.out.println("After:" + method);
+        System.out.println("After:" + method.getName());
         return object;
     }
 

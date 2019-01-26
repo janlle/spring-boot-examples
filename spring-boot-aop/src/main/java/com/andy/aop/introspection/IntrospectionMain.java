@@ -15,9 +15,13 @@ public class IntrospectionMain {
 
     public static void main(String[] args) throws Exception {
         Point point = new Point(2, 5);
+
         String proName = "x";
+
         System.out.println(point);
+
         getProperty(point, proName);
+
         setProperty(point, proName);
 
 
@@ -27,7 +31,8 @@ public class IntrospectionMain {
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
         System.out.println("propertyDescriptors.length:" + propertyDescriptors.length);
         for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-            System.out.println("getName" + propertyDescriptor.getName());  //获取实体的对象名
+            //获取实体的对象名
+            System.out.println("getName" + propertyDescriptor.getName());
             Method method = propertyDescriptor.getReadMethod();
             System.out.println("invoke" + method.invoke(point));
         }

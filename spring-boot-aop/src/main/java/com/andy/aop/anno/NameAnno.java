@@ -11,12 +11,10 @@ import java.lang.annotation.*;
 @Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface NameAnnotation {
+public @interface NameAnno {
 
     String name() default "";
 
     int age() default 0;
-
-
 
 }

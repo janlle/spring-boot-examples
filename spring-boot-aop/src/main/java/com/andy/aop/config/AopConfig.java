@@ -1,6 +1,6 @@
 package com.andy.aop.config;
 
-import com.andy.aop.anno.SystemLog;
+import com.andy.aop.anno.SystemLogAnno;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -106,9 +106,9 @@ public class AopConfig {
      * @return
      * @throws Throwable
      */
-    @Around("@annotation(com.andy.aop.anno.SystemLog)")
+    @Around("@annotation(com.andy.aop.anno.SystemLogAnno)")
     public Object customerAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        SystemLog systemLog = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(SystemLog.class);
+        SystemLogAnno systemLog = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(SystemLogAnno.class);
         System.out.println("description" + systemLog.description());
         System.out.println("name" + systemLog.name());
         System.out.println("value" + systemLog.value());

@@ -8,12 +8,10 @@ package com.andy.aop.proxy;
  **/
 public class CglibProxy {
 
-
     public static void main(String[] args) {
-        OrderService orderService = (OrderService) OrderServiceImpl.getInstance();
-        orderService.save();
-
-
+        OrderServiceImpl orderService = new OrderServiceImpl();
+        OrderServiceImpl proxy = (OrderServiceImpl) orderService.getInstance(orderService);
+        proxy.save();
     }
 
 }
