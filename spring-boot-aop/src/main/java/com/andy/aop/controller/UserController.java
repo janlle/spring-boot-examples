@@ -1,10 +1,12 @@
 package com.andy.aop.controller;
 
-import com.andy.aop.entity.User;
-import com.andy.aop.service.UserService;
+import com.andy.common.entity.User;
+import com.andy.common.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -19,9 +21,9 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public User hello(@PathVariable Long id) {
-        return userService.user(id);
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public User hello(@PathVariable Long userId) {
+        return userService.findOne(userId);
     }
 
 }

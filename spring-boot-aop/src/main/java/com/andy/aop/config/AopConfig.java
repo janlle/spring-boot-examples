@@ -1,4 +1,4 @@
-package com.andy.aop.proxy;
+package com.andy.aop.config;
 
 import com.andy.aop.anno.SystemLog;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @Aspect
 @Component
-public class SpringAopConfig {
+public class AopConfig {
 
     @Pointcut("execution(* com.andy.aop.service.*.*(..))")
     public void pointCut() {
@@ -101,6 +101,7 @@ public class SpringAopConfig {
 
     /**
      * 环绕通知
+     *
      * @param joinPoint
      * @return
      * @throws Throwable

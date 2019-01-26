@@ -10,7 +10,6 @@ public class CglibProxy {
 
 
     public static void main(String[] args) {
-
         OrderService orderService = (OrderService) OrderServiceImpl.getInstance();
         orderService.save();
 
