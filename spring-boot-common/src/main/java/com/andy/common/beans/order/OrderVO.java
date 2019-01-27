@@ -1,15 +1,15 @@
-package com.andy.common.entity;
+package com.andy.common.beans.order;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author Leone
- * @since 2018-06-21
+ * <p>
+ *
+ * @author leone
+ * @since 2019-01-22
  **/
-public class Order implements Serializable {
-
-    private static final long serialVersionUID = -6168821504343515580L;
+public class OrderVO implements Serializable {
 
     private Long orderId;
 
@@ -25,21 +25,11 @@ public class Order implements Serializable {
 
     private Date payTime;
 
-    private boolean deleted;
+    private String userAccount;
 
-    public Order() {
-    }
+    private Integer userAge;
 
-    public Order(Long orderId, Long userId, Integer totalAmount, String remark, String tradeNo, Date createTime, Date payTime, boolean deleted) {
-        this.orderId = orderId;
-        this.userId = userId;
-        this.totalAmount = totalAmount;
-        this.remark = remark;
-        this.tradeNo = tradeNo;
-        this.createTime = createTime;
-        this.payTime = payTime;
-        this.deleted = deleted;
-    }
+    private String userDescription;
 
     public Long getOrderId() {
         return orderId;
@@ -97,11 +87,27 @@ public class Order implements Serializable {
         this.payTime = payTime;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public String getUserAccount() {
+        return userAccount;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public Integer getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(Integer userAge) {
+        this.userAge = userAge;
+    }
+
+    public String getUserDescription() {
+        return userDescription;
+    }
+
+    public void setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
     }
 }

@@ -12,9 +12,9 @@ public class EntityFactory {
 
     private static Random random = new Random();
 
-    private static List<User> userList = new LinkedList<>();
+    public static List<User> userList = new LinkedList<>();
 
-    private static List<Order> orderList = new LinkedList<>();
+    public static List<Order> orderList = new LinkedList<>();
 
 
     static {
