@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: spring-dubbo
+  dubbo:
+    application.name: provider
+    registry.address: zookeeper://39.108.125.41:2181
+    scan: com.andy.common.dubbo

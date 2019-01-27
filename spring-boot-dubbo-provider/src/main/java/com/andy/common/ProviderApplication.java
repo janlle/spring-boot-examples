@@ -1,4 +1,4 @@
-package com.andy.dubbo;
+package com.andy.common;
 
 import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import org.springframework.boot.SpringApplication;
@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2018-06-03
  **/
 @EnableDubboConfiguration
-@SpringBootApplication(scanBasePackages = "com.andy.dubbo.provider")
-public class DubboApplication {
+@SpringBootApplication
+public class ProviderApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DubboApplication.class, args);
+        SpringApplication.run(ProviderApplication.class, args);
     }
 }
