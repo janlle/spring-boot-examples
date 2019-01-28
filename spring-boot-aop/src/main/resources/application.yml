@@ -11,4 +11,3 @@ spring:
     proxy-target-class: true
   thymeleaf:
     check-template-location: false
-#debug: true

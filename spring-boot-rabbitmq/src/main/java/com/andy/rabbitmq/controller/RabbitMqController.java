@@ -1,13 +1,12 @@
 package com.andy.rabbitmq.controller;
 
-import com.andy.rabbitmq.entity.User;
 import com.andy.rabbitmq.config.RabbitMQConstant;
 import com.andy.rabbitmq.sender.MessageSender;
-import com.andy.rabbitmq.util.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,18 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @Slf4j
 @RestController
-public class RabbitMQController {
+public class RabbitMqController {
 
     @Autowired
     private MessageSender messageSender;
 
     @GetMapping("/send/{target}")
-    public String send(@PathVariable("target") String target) {
-
-        String message = "hello james how are you!";
-
-        User user = EntityFactory.getUser();
-
+    public String send(@PathVariable("target") String target, @RequestParam String message) {
         switch (target) {
             case "topic":
                 messageSender.sendTopic(RabbitMQConstant.TOPIC_EXCHANGE, RabbitMQConstant.KEY_A, message);

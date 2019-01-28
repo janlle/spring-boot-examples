@@ -35,6 +35,12 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.andy</groupId>
+            <artifactId>spring-boot-common</artifactId>
+            <version>1.0.7.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
