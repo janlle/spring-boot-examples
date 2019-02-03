@@ -55,7 +55,6 @@
         <module>spring-boot-mvc</module>
         <module>spring-boot-security</module>
         <module>spring-boot-kafka</module>
-        <module>spring-boot-shiro</module>
         <module>spring-boot-jwt</module>
         <module>spring-boot-concurrency</module>
         <module>spring-boot-mail</module>
@@ -64,12 +63,10 @@
         <module>spring-boot-session</module>
         <module>spring-boot-quartz</module>
         <module>spring-boot-swagger</module>
-        <module>spring-boot-dubbo</module>
         <module>spring-boot-log</module>
         <module>spring-boot-aop</module>
         <module>spring-boot-io</module>
         <module>spring-boot-spring</module>
-        <module>spring-boot-websocket</module>
         <module>spring-boot-jvm</module>
         <module>spring-boot-design</module>
         <module>spring-boot-cache</module>
@@ -80,6 +77,9 @@
         <module>spring-boot-mongodb</module>
         <module>spring-boot-jpa</module>
         <module>spring-boot-common</module>
+        <module>spring-boot-shiro</module>
+        <module>spring-boot-websocket</module>
+        <module>spring-boot-dubbo-provider</module>
         <module>spring-boot-dubbo-consumer</module>
     </modules>
 
