@@ -14,11 +14,11 @@ public class DataService {
     private Boolean flag = true;
 
     public void addObjects(Integer count) throws Exception {
-        log.info("count:{}", count);
         for (int i = 0; i < count; i++) {
             if (flag) {
-                Thread.sleep(100);
+                Thread.sleep(200);
                 byte[][] bytes = new byte[1024][1024];
+                log.info("count: {} current: {}", count, i);
             }
             System.out.println(i);
         }
