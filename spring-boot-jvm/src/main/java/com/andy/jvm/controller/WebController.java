@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class DataController {
+public class WebController {
 
     @Autowired
     private DataService dataService;
