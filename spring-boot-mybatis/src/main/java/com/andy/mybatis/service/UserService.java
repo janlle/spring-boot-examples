@@ -1,6 +1,6 @@
 package com.andy.mybatis.service;
 
-import com.andy.mybatis.entity.User;
+import com.andy.common.entity.User;
 import com.andy.mybatis.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

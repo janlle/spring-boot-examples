@@ -44,6 +44,11 @@
             <version>5.1.47</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.andy</groupId>
+            <artifactId>spring-boot-common</artifactId>
+            <version>1.0.7.RELEASE</version>
+        </dependency>
 
     </dependencies>
 

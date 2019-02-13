@@ -1,6 +1,6 @@
 package com.andy.mybatis.controller;
 
-import com.andy.mybatis.entity.User;
+import com.andy.common.entity.User;
 import com.andy.mybatis.service.UserService;
 import org.springframework.web.bind.annotation.*;
 

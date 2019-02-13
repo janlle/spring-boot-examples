@@ -1,7 +1,7 @@
 package com.andy.mybatis.mapper;
 
 
-import com.andy.mybatis.entity.User;
+import com.andy.common.entity.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
