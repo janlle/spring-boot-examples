@@ -1,12 +1,10 @@
 package com.andy.log.util;
 
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * <p> 随机生成中文姓名，性别，Email，手机号，住址
@@ -49,8 +47,13 @@ public class RandomValue {
 
     private static final String SEPARATOR_OF_MAC = ":";
 
-    private static final String[] telFirst = "135,136,137,138,139,150,151,157,158,159".split(",");
-    private static final String[] telOther = "23490985,12350867,12520956,15671573,56830962,09841252,23519090,209839087".split(",");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+    private static final Date date = new Date();
+
+    private static final String[] telFirst = "135,139,150,159,168,180".split(",");
+
+    private static final String[] telOther = "23490985,12350867,12520956,15671573,09841252,209839087".split(",");
 
     private static final String[] driver = "Android,iPhone,MacBook,PC,IPAD,IPod".split(",");
 
@@ -316,8 +319,18 @@ public class RandomValue {
 
     public static void main(String[] args) {
         for (int i = 0; i < 1000; i++) {
-            System.out.println(randomDriver());
+            System.out.println(randomTime());
         }
     }
+
+    /**
+     * 生成随机事件
+     *
+     * @return
+     */
+    public static String randomTime() {
+        return sdf.format(new Date(System.currentTimeMillis() - random.nextInt(999999999 + 999999999)));
+    }
+
 
 }

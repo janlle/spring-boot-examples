@@ -13,7 +13,6 @@ import java.util.*;
  **/
 public class CallLogTask {
 
-
     private static Random r = new Random();
 
     private static List<String> phoneNumbers = new ArrayList<>();
@@ -54,13 +53,12 @@ public class CallLogTask {
     public static void genCallLog(String logFile) throws Exception {
         FileWriter fw = new FileWriter(logFile, true);
         while (true) {
-            //取主叫
+            // 取主叫
             String caller = phoneNumbers.get(r.nextInt(callers.size()));
-            //主叫名字
+            // 主叫名字
             String callerName = callers.get(caller);
-
-            //被叫号
-            String callee = null;
+            // 被叫号
+            String callee;
             String calleeName = null;
             while (true) {
                 callee = phoneNumbers.get(r.nextInt(callers.size()));
