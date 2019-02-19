@@ -14,6 +14,7 @@
     <conversionRule conversionWord="wEx"
                     converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
@@ -22,12 +23,8 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/${LOG_NAME}.log</file>
-
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${LOG_NAME}-%d{yyyyMMdd}-%i.txt</fileNamePattern>
-            <!--<minIndex>1</minIndex>-->
-            <!--<maxIndex>3</maxIndex>-->
+            <fileNamePattern>${LOG_PATH}/web/${LOG_NAME}-%d{yyyyMMdd}-%i.txt</fileNamePattern>
             <MaxHistory>7</MaxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>128kB</maxFileSize>
@@ -37,9 +34,51 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%m%n</pattern>
         </layout>
+
     </appender>
 
+
+    <appender name="call-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/call/call-%d{yyyyMMdd}-%i.txt</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>128kB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="user-info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/user/user-%d{yyyyMMdd}-%i.txt</fileNamePattern>
+            <MaxHistory>7</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>128kB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+
     <logger name="org" level="WARN"/>
+
+    <logger name="call-log" level="INFO" additivity="false">
+        <appender-ref ref="call-log"/>
+    </logger>
+
+    <logger name="user-info" level="INFO" additivity="false">
+        <appender-ref ref="user-info"/>
+    </logger>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
