@@ -45,7 +45,7 @@ public class LogTask {
      * 用户打电话日志
      */
     @Async
-    @Scheduled(fixedRate = 20)
+    @Scheduled(fixedRate = 30)
     public void callLogTask() {
         CALL_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
     }
@@ -55,7 +55,7 @@ public class LogTask {
      * 用户聊天产生的日志()
      */
     @Async
-    @Scheduled(fixedDelay = 50)
+    @Scheduled(fixedDelay = 30)
     public void userChatLogTask() {
         logger.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.getIp() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.getIp() + "\t" + RandomValue.getMessage() + "\t" + LocalDateTime.now().toLocalTime());
     }
@@ -83,7 +83,7 @@ public class LogTask {
      * 产生json日志任务
      */
     @Async
-    @Scheduled(fixedDelay = 20)
+    @Scheduled(fixedDelay = 30)
     public void jsonLogTask() throws JsonProcessingException {
         USER_INFO.info(objectMapper.writeValueAsString(RandomValue.getUser()));
     }
