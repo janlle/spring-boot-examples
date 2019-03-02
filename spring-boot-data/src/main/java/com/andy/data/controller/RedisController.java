@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @Slf4j
 @RestController
-@RequestMapping("/redis")
+@RequestMapping("/api/redis")
 public class RedisController {
 
     @Autowired

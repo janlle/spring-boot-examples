@@ -35,7 +35,7 @@ public class EntityFactory {
             return Collections.emptyList();
         }
         for (long i = 0; i < count; i++) {
-            userList.add(new User(i, RandomValue.randomUsername(), RandomValue.randomStr(16), RandomValue.randomMessage(), RandomValue.random.nextInt(50) + 10, RandomValue.randomDate(), false));
+            userList.add(new User(i, RandomValue.randomUsername(), RandomValue.randomUUID(), RandomValue.randomMessage(), RandomValue.random.nextInt(50) + 12, RandomValue.randomDate(), random.nextBoolean()));
         }
         return userList;
     }
@@ -45,7 +45,7 @@ public class EntityFactory {
      * @return
      */
     public static User getUser() {
-        return new User(RandomValue.random.nextLong(), RandomValue.randomUsername(), RandomValue.randomStr(16), RandomValue.randomMessage(), RandomValue.random.nextInt(50) + 10, RandomValue.randomDate(), false);
+        return new User(RandomValue.random.nextLong(), RandomValue.randomUsername(), RandomValue.randomUUID(), RandomValue.randomMessage(), RandomValue.random.nextInt(50) + 12, RandomValue.randomDate(), random.nextBoolean());
     }
 
     /**

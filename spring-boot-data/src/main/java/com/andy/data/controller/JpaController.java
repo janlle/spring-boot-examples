@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  **/
 @Slf4j
 @RestController
-@RequestMapping("/jpa")
+@RequestMapping("/api/jpa")
 public class JpaController {
 
     @Autowired
@@ -33,7 +33,6 @@ public class JpaController {
         long time = jpaService.insertForeach(count);
         return "foreach insert " + count + " expenditure:" + time + " ms!";
     }
-
 
     @PutMapping("/update")
     public String update(@RequestBody User user) {
