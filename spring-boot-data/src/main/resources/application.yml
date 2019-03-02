@@ -5,7 +5,7 @@ spring:
     port: 6379
     host: 127.0.0.1
     database: 5
-#    password: admin
+    # password: admin
     jedis:
       pool:
         max-active: 8
@@ -17,6 +17,21 @@ spring:
     url: jdbc:mysql://39.108.125.41:3306/boot?useSSL=false
     username: root
     password: root
+    hikari:
+      connection-test-query: select 1
+      validation-timeout: 50000
+      idle-timeout: 600000
+      # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省:30秒
+      connection-timeout: 30000
+      # 一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒
+      max-lifetime: 1800000
+      # 连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+      maximumPoolSize: 60
+      #
+      minimum-idle: 10
+      # 连接只读数据库时配置为true， 保证安全
+      read-only: false
+
   jpa:
     hibernate:
       ddl-auto: update

@@ -1,7 +1,7 @@
 package com.andy.data.json.jsonlib;
 
 import com.andy.data.entity.User;
-import com.andy.data.util.EntityFactory;
+import com.andy.data.utils.EntityFactory;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

@@ -1,8 +1,8 @@
 package com.andy.data.service;
 
 import com.andy.data.entity.User;
+import com.andy.data.utils.EntityFactory;
 import com.andy.data.repository.jpa.UserRepository;
-import com.andy.data.util.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

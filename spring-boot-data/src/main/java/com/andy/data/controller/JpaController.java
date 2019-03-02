@@ -41,11 +41,4 @@ public class JpaController {
         return "update one expenditure:" + result + " ms!";
     }
 
-//    @InitBinder
-//    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-//        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-//        CustomDateEditor dateEditor = new CustomDateEditor(fmt, true);
-//        binder.registerCustomEditor(Date.class, dateEditor);
-//    }
-
 }

@@ -1,22 +1,20 @@
 package com.andy.data.entity;
 
-import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
+ * <p> 
  *
  * @author Leone
- * @since 2018-01-24
+ * @since 2017-11-09
  **/
-@Data
 @Entity
 @Table(name = "t_user")
 public class User implements Serializable {
+
+    private static final long serialVersionUID = 2083333064832472496L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +32,6 @@ public class User implements Serializable {
     @Column(columnDefinition = "int(11) not null comment '年龄'")
     private Integer age;
 
-    @CreatedDate
     @Column(columnDefinition = "timestamp not null default current_timestamp comment '创建时间'")
     private Date createTime;
 
