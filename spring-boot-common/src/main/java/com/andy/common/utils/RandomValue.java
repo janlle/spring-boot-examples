@@ -41,6 +41,13 @@ public class RandomValue {
 
     private static final String base = "abcdefghijklmnopqrstuvwxyz";
 
+    private static final String provinces[] = {"11", "12", "13", "14", "15", "21", "22", "23",
+            "31", "32", "33", "34", "35", "36", "37", "41", "42", "43",
+            "44", "45", "46", "50", "51", "52", "53", "54", "61", "62",
+            "63", "64", "65", "71", "81", "82"};
+
+    private static final String checks[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "X"};
+
 
     private static String[] firstName = {
             "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "计", "熊", "蒋", "沈", "韩", "杨",
@@ -350,13 +357,53 @@ public class RandomValue {
         return new Date(System.currentTimeMillis() - l);
     }
 
+    /**
+     * 获取随机UUID
+     *
+     * @return
+     */
     public static String randomUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
+    /**
+     * 获取随机身份证号码
+     *
+     * @return
+     */
+    public static String randomIDCard() {
+        StringBuffer sb = new StringBuffer();
+        // 1-2 随机生成省、自治区、直辖市代码
+        String province = provinces[random.nextInt(provinces.length - 1)];
+        // 3-4 随机生成地级市、盟、自治州代码
+        String city = String.format("%02d", 18);
+        // 5-6 随机生成县、县级市、区代码
+        String county = String.format("%02d", 28);
+        // 7-14 随机生成出生年月
+        String birth = randomBirth();
+        // 15-17 随机生成性别
+        String no = String.format("%03d", random.nextInt(1000));
+        // 18 随机生成校验码
+        String check = checks[random.nextInt(checks.length - 1)];
+        // 拼接身份证号码
+        sb.append(province).append(city).append(county).append(birth).append(no).append(check);
+        return sb.toString();
+    }
+
+    /**
+     * 随机生成minAge到maxAge年龄段的人的生日日期
+     *
+     * @return
+     */
+    public static String randomBirth() {
+        sdf.applyPattern("yyyyMMdd");
+        long l = 31536000000L * (random.nextInt(72) + 1);
+        return sdf.format(new Date(System.currentTimeMillis() - l - random.nextInt(1000000000)));
+    }
+
     public static void main(String[] args) {
-        for (int i = 0; i < 500; i++) {
-            System.out.println(randomUUID());
+        for (int i = 0; i < 200; i++) {
+            System.out.println(randomIDCard());
         }
     }
 
