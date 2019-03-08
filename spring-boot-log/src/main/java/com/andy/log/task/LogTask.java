@@ -56,7 +56,7 @@ public class LogTask {
     @Async
     @Scheduled(fixedDelay = 30)
     public void userPortrait() {
-        COMMON_LOG.info(RandomValue.randomTime() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.randomIp() + "\t" + RandomValue.randomIDCard() + "\t" + RandomValue.randomDriver());
+        COMMON_LOG.info(RandomValue.randomTime() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.randomIp() + "\t" + RandomValue.randomIDCard() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomUserAgent());
     }
 
     /**

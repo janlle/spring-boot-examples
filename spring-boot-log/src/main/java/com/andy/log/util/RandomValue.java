@@ -397,6 +397,15 @@ public class RandomValue {
         return sdf.format(new Date(System.currentTimeMillis() - l - random.nextInt(1000000000)));
     }
 
+    /**
+     * 获取随机userAgent
+     *
+     * @return
+     */
+    public static String randomUserAgent() {
+        return userAgent[random.nextInt(userAgent.length)];
+    }
+
     public static void main(String[] args) {
         for (int i = 0; i < 200; i++) {
             System.out.println(randomIDCard());
