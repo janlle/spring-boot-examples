@@ -59,8 +59,7 @@ public class RandomValue {
     private static final String[] email_suffix = "@gmail.com,@yahoo.com,@msn.com,@ask.com,@qq.com,@163.com,@yeah.net,@126.com,@sina.com,@sohu.com".split(",");
 
     private static String[] messages = {
-            " Hi, good morning",
-            "Hi, good morning. Nice to meet you",
+            "Hi good morning Nice to meet you",
             "Nice to meet you, too, what do you do, please",
             "Yes, I like it very much. Where do you teach",
             "I teach in No. 1 Middle school, and you?",
@@ -75,7 +74,6 @@ public class RandomValue {
             "Red cooked carp and rape with fresh mushrooms",
             "Please speak a little louder",
             "It was pretty devastating5 because other children constantly made fun of her",
-            "Enjoy your time",
             "We always knew our daughter Kendall was going be a performer of some sort",
             "When Kendall was five, we began to notice that she was blinking a lot and clearing her throat frequently",
             "What's your dream",
@@ -182,7 +180,7 @@ public class RandomValue {
     }
 
     /**
-     * 数据封装
+     * 获取用户
      *
      * @return
      */
@@ -270,7 +268,7 @@ public class RandomValue {
      * @return
      */
     public static String timestamp() {
-        return System.currentTimeMillis() / 1000 + "";
+        return String.valueOf(System.currentTimeMillis() / 1000);
     }
 
     /**
@@ -278,7 +276,7 @@ public class RandomValue {
      *
      * @return
      */
-    public static String getDateStr() {
+    public static String randomDatetime() {
         LocalDateTime localDateTime = LocalDateTime.now();
         return localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
     }
@@ -406,7 +404,6 @@ public class RandomValue {
             System.out.println(randomIDCard());
         }
     }
-
 
 }
 

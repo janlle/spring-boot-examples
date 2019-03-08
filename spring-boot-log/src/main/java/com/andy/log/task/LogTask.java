@@ -24,11 +24,11 @@ import java.util.Random;
 @Component
 public class LogTask {
 
-    private static final Logger logger = LoggerFactory.getLogger(LogTask.class);
+    private static final Logger JSON_LOG = LoggerFactory.getLogger("json-log");
 
-    private static final Logger CALL_LOG = LoggerFactory.getLogger("call-log");
+    private static final Logger CSV_LOG = LoggerFactory.getLogger("csv-log");
 
-    private static final Logger USER_INFO = LoggerFactory.getLogger("user-info");
+    private static final Logger COMMON_LOG = LoggerFactory.getLogger("common-log");
 
     private static final Random RANDOM = new Random();
 
@@ -40,24 +40,23 @@ public class LogTask {
 
     /**
      * 18332562075,15032293356,2017/09/11 01:01:08,541
-     *
-     *
-     * 用户打电话日志
+     * 打电话日志
      */
     @Async
     @Scheduled(fixedRate = 30)
     public void callLogTask() {
-        CALL_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
+        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
     }
 
     /**
+     * 用户画像
+     *
      * @Scheduled(fixedDelay = 50)
-     * 用户聊天产生的日志()
      */
     @Async
     @Scheduled(fixedDelay = 30)
-    public void userChatLogTask() {
-        logger.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.getIp() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.getIp() + "\t" + RandomValue.getMessage() + "\t" + LocalDateTime.now().toLocalTime());
+    public void userPortrait() {
+        COMMON_LOG.info(RandomValue.randomTime() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.randomIp() + "\t" + RandomValue.randomIDCard() + "\t" + RandomValue.randomDriver());
     }
 
     /**
@@ -66,7 +65,7 @@ public class LogTask {
      */
     @Async
     public void randomWord() {
-        logger.info(RandomValue.getMessage() + " " + RandomValue.getMessage());
+        COMMON_LOG.info(RandomValue.randomMessage() + " " + RandomValue.randomMessage());
     }
 
     /**
@@ -75,7 +74,7 @@ public class LogTask {
     @Async
 //    @Scheduled(fixedRate = 20)
     public void userVisitLogTask() {
-        logger.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomTel() + "\t" + RandomValue.getUrl() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.getIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
+        COMMON_LOG.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomTel() + "\t" + RandomValue.randomUrl() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
     }
 
     /**
@@ -85,7 +84,7 @@ public class LogTask {
     @Async
     @Scheduled(fixedDelay = 30)
     public void jsonLogTask() throws JsonProcessingException {
-        USER_INFO.info(objectMapper.writeValueAsString(RandomValue.getUser()));
+        JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
     }
 
 }
