@@ -60,24 +60,24 @@ public class RandomValue {
 
     private static String[] messages = {
             "Hi good morning Nice to meet you",
-            "Nice to meet you, too, what do you do, please",
-            "Yes, I like it very much. Where do you teach",
-            "I teach in No. 1 Middle school, and you?",
-            "I'm a teacher, how about you",
-            "Great! My brother works there, too",
-            "Good morning, may I help you",
-            "It's very nice of you to invite me",
-            "Mr. liu, would you care for another helping",
-            "Did you enjoy the meal",
-            "We took our daughter from doctor to doctor, but all they did was give her medication that just made it worse",
+            "Nice to meet you too what do you do please",
+            "Yes I like it very much Where do you teach",
+            "I teach in No Middle school and you?",
+            "I'm a teacher how about you was give her medication",
+            "Great! My brother works there too",
+            "Good morning may I help you made fun of her",
+            "It's very nice of you to invite me on our front porch ",
+            "Mr liu would you care for another helping",
+            "Did you enjoy the meal that just made it worse",
+            "We took our daughter from doctor to doctor but all they did ",
             "Thank you very much for your hospitality",
             "Red cooked carp and rape with fresh mushrooms",
-            "Please speak a little louder",
-            "It was pretty devastating5 because other children constantly made fun of her",
+            "Please speak a little louder clearing her throat frequently",
+            "It was pretty devastating5 because other children constantly ",
             "We always knew our daughter Kendall was going be a performer of some sort",
-            "When Kendall was five, we began to notice that she was blinking a lot and clearing her throat frequently",
-            "What's your dream",
-            "She entertained people in our small town by putting on shows on our front porch when she was only three or four",
+            "When Kendall was five we began to notice that she was blinking a lot and ",
+            "What's your dream when she was only three or four",
+            "She entertained people in our small town by putting on shows ",
             "What sports do you like",
             "I like playing football"};
 
@@ -276,7 +276,7 @@ public class RandomValue {
      *
      * @return
      */
-    public static String randomDatetime() {
+    public static String currentDatetime() {
         LocalDateTime localDateTime = LocalDateTime.now();
         return localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));
     }
@@ -339,7 +339,7 @@ public class RandomValue {
      * @return
      */
     public static String randomTime() {
-        long l = (long) random.nextInt(3650) * 1000 * 60 * 60 * 24 + random.nextInt(1000000000);
+        long l = (long) random.nextInt(3650) * 1000 * 60 * 60 * 24 + random.nextInt(100000000);
         return sdf.format(new Date(System.currentTimeMillis() - l));
     }
 
@@ -349,8 +349,13 @@ public class RandomValue {
      * @return
      */
     public static Date randomDate() {
-        long l = (long) random.nextInt(3650) * 1000 * 60 * 60 * 24 + random.nextInt(1000000000);
+        long l = (long) random.nextInt(3650) * 1000 * 60 * 60 * 24 + random.nextInt(100000000);
         return new Date(System.currentTimeMillis() - l);
+    }
+
+    public static long currentTimestamp() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return Long.parseLong(localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")));
     }
 
     /**
@@ -408,7 +413,7 @@ public class RandomValue {
 
     public static void main(String[] args) {
         for (int i = 0; i < 200; i++) {
-            System.out.println(randomIDCard());
+            System.out.println(currentTimestamp());
         }
     }
 }

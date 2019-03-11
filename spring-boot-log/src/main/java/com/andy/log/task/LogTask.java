@@ -43,9 +43,10 @@ public class LogTask {
      * 打电话日志
      */
     @Async
-    @Scheduled(fixedRate = 30)
-    public void callLogTask() {
-        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
+    @Scheduled(fixedRate = 10)
+    public void csvLog() {
+//        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
+        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomUsername() + "," + RandomValue.random.nextInt(60) + "," + RandomValue.randomTime() + "," + RandomValue.randomUUID().substring(15) + "," + RandomValue.randomMessage() + "," + RANDOM.nextBoolean());
     }
 
     /**
@@ -54,8 +55,8 @@ public class LogTask {
      * @Scheduled(fixedDelay = 50)
      */
     @Async
-    @Scheduled(fixedDelay = 30)
-    public void userPortrait() {
+//    @Scheduled(fixedDelay = 30)
+    public void commonLog() {
         COMMON_LOG.info(RandomValue.randomTime() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.randomIp() + "\t" + RandomValue.randomIDCard() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomUserAgent());
     }
 
@@ -82,8 +83,8 @@ public class LogTask {
      * 产生json日志任务
      */
     @Async
-    @Scheduled(fixedDelay = 30)
-    public void jsonLogTask() throws JsonProcessingException {
+//    @Scheduled(fixedDelay = 30)
+    public void jsonLog() throws JsonProcessingException {
         JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
     }
 
