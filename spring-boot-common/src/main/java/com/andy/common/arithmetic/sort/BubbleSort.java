@@ -13,7 +13,6 @@ public class BubbleSort {
     private static int[] arr = {5, 9, 8, 1, 3, 12, 5, 30};
 
     public static void main(String[] args) {
-        System.out.println(arr.length);
         System.out.println(Arrays.toString(arr));
         bubbleSort(arr);
         System.out.println(Arrays.toString(arr));
