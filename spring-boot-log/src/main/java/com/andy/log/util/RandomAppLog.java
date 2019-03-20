@@ -3,9 +3,6 @@ package com.andy.log.util;
 import com.andy.log.app.entity.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -16,12 +13,7 @@ import java.util.Random;
  * @author leone
  * @since 2019-03-20
  **/
-public class RandomAppLog<T> {
-
-    private static RandomAppLog instance = new RandomAppLog();
-
-    private RandomAppLog() {
-    }
+public class RandomAppLog {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
@@ -101,7 +93,7 @@ public class RandomAppLog<T> {
     private static int[] visitIndexArr = {0, 1, 2, 3, 4};
 
     // 下一个访问页面，如为空则表示为退出应用的页面
-    private static String[] nextPages = {"list.html", "main.html", "test.html", null};
+    private static String[] nextPages = {"list.html", "main.html", "test.html"};
 
     // 当前页面停留时长
     private static Long[] stayDurationSecsS = {45L, 23L, 59L, 129L, 290L};
@@ -258,7 +250,8 @@ public class RandomAppLog<T> {
     }
 
     public static void main(String[] args) {
-        randomAppLog();
+        String s = randomAppLog();
+        System.out.println(s);
     }
 
     public static String randomAppLog() {

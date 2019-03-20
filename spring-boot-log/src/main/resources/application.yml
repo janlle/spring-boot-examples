@@ -2,3 +2,19 @@ server:
   port: 8081
   servlet:
     path: /log
+
+spring:
+  application:
+    name: spring-kafka
+  kafka:
+    bootstrap-servers: node-2:9092,node-3:9092,node-4:9092
+    producer:
+      retries:
+      batch-size: 16384
+      buffer-memory: 33554432
+      compressionType: snappy
+      acks: all
+    consumer:
+      group-id: 1
+      auto-offset-reset: earliest
+      enable-auto-commit: true

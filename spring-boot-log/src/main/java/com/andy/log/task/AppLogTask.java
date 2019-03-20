@@ -1,14 +1,12 @@
 package com.andy.log.task;
 
 import com.andy.log.util.RandomAppLog;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Random;
 
 /**
@@ -19,9 +17,6 @@ import java.util.Random;
  **/
 @Component
 public class AppLogTask {
-
-    @Resource
-    private static ObjectMapper objectMapper = new ObjectMapper();
 
     private static final Logger JSON_LOG = LoggerFactory.getLogger("json-log");
 
@@ -37,7 +32,7 @@ public class AppLogTask {
     @Async
     @Scheduled(fixedDelay = 50)
     public void commonLog() {
-        JSON_LOG.info(RandomAppLog.randomAppLog());
+        JSON_LOG.info("{}", RandomAppLog.randomAppLog());
     }
 
 
