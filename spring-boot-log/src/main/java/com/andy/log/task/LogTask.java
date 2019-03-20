@@ -89,4 +89,11 @@ public class LogTask {
         JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
     }
 
+
+
+
+
+
+
+
 }
