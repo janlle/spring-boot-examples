@@ -36,6 +36,8 @@ public class LogTask {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
+    private static Long offset = 0L;
+
     private static LocalDateTime localDateTime = LocalDateTime.now();
 
     /**
@@ -65,9 +67,11 @@ public class LogTask {
      * 产生随机单词
      */
     @Async
-    @Scheduled(fixedRate = 10)
+    @Scheduled(fixedRate = 5)
     public void randomWord() {
-        COMMON_LOG.info(RandomValue.randomMessage() + " " + RandomValue.randomMessage());
+//        COMMON_LOG.info(RandomValue.randomMessage() + " " + RandomValue.randomMessage());
+        COMMON_LOG.info(offset + "," + (RandomValue.random.nextInt(100) + 1000) + "," + RandomValue.randomTime() + "," + RandomValue.random.nextInt(1000000000));
+        offset++;
     }
 
     /**
@@ -88,12 +92,6 @@ public class LogTask {
     public void jsonLog() throws JsonProcessingException {
         JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
     }
-
-
-
-
-
-
 
 
 }

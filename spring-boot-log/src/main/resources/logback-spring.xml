@@ -69,7 +69,7 @@
             <fileNamePattern>${LOG_PATH}/common/log-%d{yyyyMMdd}-%i.txt</fileNamePattern>
             <MaxHistory>7</MaxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>256kB</maxFileSize>
+                <maxFileSize>512kB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
 
