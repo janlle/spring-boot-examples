@@ -1,5 +1,6 @@
 package com.andy.log.task;
 
+import com.andy.log.util.ParquetUtil;
 import com.andy.log.util.RandomValue;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
@@ -45,9 +47,9 @@ public class LogTask {
      * 打电话日志
      */
     @Async
-//    @Scheduled(fixedRate = 10)
+    // @Scheduled(fixedRate = 10)
     public void csvLog() {
-//        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
+        // CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
         CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomUsername() + "," + RandomValue.random.nextInt(60) + "," + RandomValue.randomTime() + "," + RandomValue.randomUUID().substring(15) + "," + RandomValue.randomMessage() + "," + RANDOM.nextBoolean());
     }
 
@@ -57,7 +59,7 @@ public class LogTask {
      * @Scheduled(fixedDelay = 50)
      */
     @Async
-//    @Scheduled(fixedDelay = 30)
+    // @Scheduled(fixedDelay = 30)
     public void commonLog() {
         COMMON_LOG.info(RandomValue.randomTime() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.randomIp() + "\t" + RandomValue.randomIDCard() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomUserAgent());
     }
@@ -67,9 +69,9 @@ public class LogTask {
      * 产生随机单词
      */
     @Async
-    @Scheduled(fixedRate = 5)
+    // @Scheduled(fixedRate = 5)
     public void randomWord() {
-//        COMMON_LOG.info(RandomValue.randomMessage() + " " + RandomValue.randomMessage());
+        // COMMON_LOG.info(RandomValue.randomMessage() + " " + RandomValue.randomMessage());
         COMMON_LOG.info(offset + "," + (RandomValue.random.nextInt(100) + 1000) + "," + RandomValue.randomTime() + "," + RandomValue.random.nextInt(1000000000));
         offset++;
     }
@@ -78,7 +80,7 @@ public class LogTask {
      * 用户访问ip产生的日志(每3秒执行一次)
      */
     @Async
-//    @Scheduled(fixedRate = 20)
+    // @Scheduled(fixedRate = 20)
     public void userVisitLogTask() {
         COMMON_LOG.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomTel() + "\t" + RandomValue.randomUrl() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
     }
@@ -88,9 +90,19 @@ public class LogTask {
      * 产生json日志任务
      */
     @Async
-//    @Scheduled(fixedDelay = 30)
-    public void jsonLog() throws JsonProcessingException {
+    // @Scheduled(fixedDelay = 30)
+    public void jsonLogTask() throws JsonProcessingException {
         JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
+    }
+
+    /**
+     * @Scheduled() 产生 parquet 文件
+     */
+    @Async
+    @Scheduled(cron = "0 26 15 * * ?")
+    public void parquetTask() throws IOException {
+        ParquetUtil.parquetWriter(100000L, "e:/tmp/input/parquet/2019-03-20.parquet");
+        System.out.println("parquet task executor success!");
     }
 
 
