@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -17,16 +18,14 @@ public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-
-        log.info("开始读取数据！");
-        ByteBuf buf = (ByteBuf)msg;
+        ByteBuf buf = (ByteBuf) msg;
         byte[] req = new byte[buf.readableBytes()];
         buf.readBytes(req);
-        String body = new String(req, "UTF-8");
-        log.info("收到的数据是:{}", body);
-        //向客户端响应数据
-        log.info("像客户端响应数据");
+        String body = new String(req, StandardCharsets.UTF_8);
+        log.info("server 收到 client 发送的数据: {}", body);
+        // 向客户端响应数据
         String currentTime = new Date().toString();
+        log.info("向客户端响应数据: {}", currentTime);
         ByteBuf res = Unpooled.copiedBuffer(currentTime.getBytes());
         ctx.write(res);
     }
@@ -35,7 +34,7 @@ public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         log.info("数据读取完毕");
-        //刷新后才将数据发送到socketChannel
+        // 刷新后才将数据发送到socketChannel
         ctx.flush();
     }
 

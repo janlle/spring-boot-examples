@@ -28,32 +28,32 @@ public class SimpleClient {
     }
 
     public void start() throws Exception {
-        EventLoopGroup eventLoopGroup = null;
 
+        EventLoopGroup eventLoopGroup = null;
         try {
-            //创建Bootstrap对象用来引导启动客户端
+            // 创建Bootstrap对象用来引导启动客户端
             Bootstrap bootstrap = new Bootstrap();
-            //创建EventLoopGroup对象并设置到Bootstrap中，EventLoopGroup可以理解为是一个线程池，这个线程池用来处理连接、接受数据、发送数据
+            // 创建EventLoopGroup对象并设置到Bootstrap中，EventLoopGroup可以理解为是一个线程池，这个线程池用来处理连接、接受数据、发送数据
             eventLoopGroup = new NioEventLoopGroup();
-            //创建InetSocketAddress并设置到Bootstrap中，InetSocketAddress是指定连接的服务器地址
+            // 创建InetSocketAddress并设置到Bootstrap中，InetSocketAddress是指定连接的服务器地址
             bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class).remoteAddress(new InetSocketAddress(host, port))
-            .handler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel socketChannel) {
-                    socketChannel.pipeline().addLast(new SimpleClientHandler());
-                }
-            });
-            // • 调用Bootstrap.connect()来连接服务器
+                    .handler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) {
+                            socketChannel.pipeline().addLast(new SimpleClientHandler());
+                        }
+                    });
+            // 调用Bootstrap.connect()来连接服务器
             ChannelFuture future = bootstrap.connect().sync();
-            // • 最后关闭EventLoopGroup来释放资源
+            // 最后关闭EventLoopGroup来释放资源
             future.channel().close().sync();
         } catch (Exception e) {
-            log.info("erroe");
+            e.printStackTrace();
         } finally {
-            eventLoopGroup.shutdownGracefully().sync();
+            if (eventLoopGroup != null) {
+                eventLoopGroup.shutdownGracefully().sync();
+            }
         }
-
-
     }
 
     public static void main(String[] args) throws Exception {
