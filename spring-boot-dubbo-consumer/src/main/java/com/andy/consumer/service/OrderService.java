@@ -46,6 +46,7 @@ public class OrderService {
         BeanUtils.copyProperties(order, vo);
         vo.setUserAccount(user.getAccount());
         vo.setUserAge(user.getAge());
+        vo.setUserDescription(user.getDescription());
         return vo;
     }
 
