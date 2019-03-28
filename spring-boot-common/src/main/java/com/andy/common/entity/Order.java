@@ -104,4 +104,18 @@ public class Order implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", totalAmount=" + totalAmount +
+                ", remark='" + remark + '\'' +
+                ", tradeNo='" + tradeNo + '\'' +
+                ", createTime=" + createTime +
+                ", payTime=" + payTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

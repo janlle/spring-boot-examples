@@ -44,8 +44,20 @@
 
         <dependency>
             <groupId>com.andy</groupId>
-            <artifactId>spring-boot-common</artifactId>
+            <artifactId>spring-boot-dubbo-api</artifactId>
             <version>1.0.7.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
         </dependency>
 
     </dependencies>

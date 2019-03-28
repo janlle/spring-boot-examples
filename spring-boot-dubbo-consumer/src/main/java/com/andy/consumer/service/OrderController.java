@@ -1,4 +1,4 @@
-package com.andy.common.service;
+package com.andy.consumer.service;
 
 import com.andy.common.beans.order.OrderVO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +13,13 @@ import javax.annotation.Resource;
  * @since 2018-06-03
  **/
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/order")
 public class OrderController {
 
     @Resource
     private OrderService orderService;
 
-    @GetMapping("/order/{orderId}")
+    @GetMapping("/{orderId}")
     public OrderVO findOne(@PathVariable("orderId") Long orderId) {
         return orderService.findOne(orderId);
     }

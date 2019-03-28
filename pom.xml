@@ -82,6 +82,7 @@
         <module>spring-boot-dubbo-provider</module>
         <module>spring-boot-dubbo-consumer</module>
         <module>spring-boot-logstash</module>
+        <module>spring-boot-dubbo-api</module>
     </modules>
 
     <build>

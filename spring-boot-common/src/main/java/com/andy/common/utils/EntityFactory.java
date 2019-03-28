@@ -2,12 +2,10 @@ package com.andy.common.utils;
 
 import com.andy.common.entity.Order;
 import com.andy.common.entity.User;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Slf4j
 public class EntityFactory {
 
     private static Random random = new Random();

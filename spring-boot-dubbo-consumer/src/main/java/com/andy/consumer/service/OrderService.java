@@ -1,10 +1,11 @@
-package com.andy.common.service;
+package com.andy.consumer.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.andy.common.beans.order.OrderVO;
 import com.andy.common.entity.Order;
 import com.andy.common.entity.User;
 import com.andy.common.utils.EntityFactory;
+import com.andy.dubbo.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -47,5 +48,6 @@ public class OrderService {
         vo.setUserAge(user.getAge());
         return vo;
     }
+
 
 }

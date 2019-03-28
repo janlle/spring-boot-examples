@@ -44,7 +44,7 @@
 
         <dependency>
             <groupId>com.andy</groupId>
-            <artifactId>spring-boot-common</artifactId>
+            <artifactId>spring-boot-dubbo-api</artifactId>
             <version>1.0.7.RELEASE</version>
         </dependency>
 

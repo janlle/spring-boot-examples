@@ -100,4 +100,17 @@ public class User implements Serializable {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
+                ", age=" + age +
+                ", createTime=" + createTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }
