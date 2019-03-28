@@ -1,4 +1,4 @@
-package com.andy.common.service;
+package com.andy.dubbo.api;
 
 import com.andy.common.entity.Order;
 
@@ -17,6 +17,5 @@ public interface OrderService {
     Order findOne(Long orderId);
 
     List<Order> list(Long userId);
-
 
 }

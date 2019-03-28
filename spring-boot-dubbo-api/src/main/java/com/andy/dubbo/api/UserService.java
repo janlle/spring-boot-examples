@@ -1,4 +1,4 @@
-package com.andy.common.service;
+package com.andy.dubbo.api;
 
 import com.andy.common.entity.User;
 
