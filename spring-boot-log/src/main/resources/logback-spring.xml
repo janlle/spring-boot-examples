@@ -22,7 +22,7 @@
             <fileNamePattern>${LOG_PATH}/web/web-%d{yyyyMMdd}-%i.txt</fileNamePattern>
             <MaxHistory>7</MaxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>256kB</maxFileSize>
+                <maxFileSize>512kB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -37,7 +37,7 @@
             <fileNamePattern>${LOG_PATH}/json/log-%d{yyyyMMdd}-%i.json</fileNamePattern>
             <MaxHistory>7</MaxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>256kB</maxFileSize>
+                <maxFileSize>512kB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
 
@@ -54,7 +54,7 @@
             <fileNamePattern>${LOG_PATH}/csv/log-%d{yyyyMMdd}-%i.csv</fileNamePattern>
             <MaxHistory>7</MaxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>256kB</maxFileSize>
+                <maxFileSize>512kB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
 

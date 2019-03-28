@@ -43,7 +43,6 @@ public class ParquetUtil {
     public static void main(String[] args) {
         String inputPath = "e:\\tmp\\input\\parquet\\user.parquet";
         String outputPath = "e:\\tmp\\input\\parquet\\user.parquet";
-
     }
 
     /**
@@ -58,13 +57,11 @@ public class ParquetUtil {
                 .withWriterVersion(ParquetProperties.WriterVersion.PARQUET_1_0)
                 .withCompressionCodec(CompressionCodecName.SNAPPY)
                 .withType(schema);
-
         ParquetWriter<Group> writer = builder.build();
         SimpleGroupFactory groupFactory = new SimpleGroupFactory(schema);
-
         for (long i = 0; i < count; i++) {
             writer.write(groupFactory.newGroup()
-                    .append("userId", i)
+                    .append("userId", i + RandomValue.random.nextInt(10000000))
                     .append("account", RandomValue.randomNum(16))
                     .append("password", RandomValue.randomStr(18))
                     .append("age", (RandomValue.random.nextInt(60) + 12))

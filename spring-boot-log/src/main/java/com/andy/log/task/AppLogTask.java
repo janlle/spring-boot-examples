@@ -30,7 +30,7 @@ public class AppLogTask {
      * @Scheduled(fixedDelay = 50)
      */
     @Async
-    @Scheduled(fixedDelay = 50)
+//    @Scheduled(fixedDelay = 50)
     public void commonLog() {
         JSON_LOG.info("{}", RandomAppLog.randomAppLog());
     }
