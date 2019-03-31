@@ -90,7 +90,7 @@ public class LogTask {
      * 产生json日志任务
      */
     @Async
-    @Scheduled(fixedDelay = 10)
+    // @Scheduled(fixedDelay = 10)
     public void jsonLogTask() throws JsonProcessingException {
         JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
     }
@@ -99,9 +99,9 @@ public class LogTask {
      * @Scheduled() 产生 parquet 文件
      */
     @Async
-    // @Scheduled(cron = "0/10 * * * * ?")
+    //@Scheduled(cron = "0/10 * * * * ?")
     public void parquetTask() throws IOException {
-        String file = "/root/logs/parquet/user-20190129-" + String.format("%03d", offset) + ".parquet";
+        String file = "/root/logs/parquet/user-20190329-" + String.format("%03d", offset) + ".parquet";
         ParquetUtil.parquetWriter(100000L, file);
         offset++;
         System.out.println("save parquet file " + file + " successful...");

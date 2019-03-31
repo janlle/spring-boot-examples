@@ -29,14 +29,14 @@ public class ParquetUtil {
 
 
     private static String schemaStr = "message schema {"
-            + "optional int64 userId;"
-            + "optional binary account;"
-            + "optional binary password;"
+            + "optional int64 user_id;"
+            + "optional binary account (UTF8);"
+            + "optional binary password (UTF8);"
             + "optional int32 age;"
             + "optional int32 sex;"
-            + "optional binary description;"
+            + "optional binary description (UTF8);"
             + "optional boolean deleted;"
-            + "optional binary createTime;}";
+            + "optional binary create_time (UTF8);}";
 
     private static MessageType schema = MessageTypeParser.parseMessageType(schemaStr);
 
@@ -61,14 +61,14 @@ public class ParquetUtil {
         SimpleGroupFactory groupFactory = new SimpleGroupFactory(schema);
         for (long i = 0; i < count; i++) {
             writer.write(groupFactory.newGroup()
-                    .append("userId", i + RandomValue.random.nextInt(10000000))
+                    .append("user_id", i + RandomValue.random.nextInt(1000000000))
                     .append("account", RandomValue.randomNum(16))
                     .append("password", RandomValue.randomStr(18))
                     .append("age", (RandomValue.random.nextInt(60) + 12))
                     .append("sex", RandomValue.random.nextInt(2))
                     .append("description", RandomValue.randomMessage())
                     .append("deleted", RandomValue.random.nextBoolean())
-                    .append("createTime", RandomValue.randomTime()));
+                    .append("create_time", RandomValue.randomTime()));
         }
         writer.close();
     }
