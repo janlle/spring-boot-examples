@@ -107,4 +107,16 @@ public class LogTask {
         System.out.println("save parquet file " + file + " successful...");
     }
 
+    /**
+     * @Scheduled() 产生 orc 文件
+     */
+    @Async
+    // @Scheduled(cron = "0/10 * * * * ?")
+    public void orcTask() throws IOException {
+        String file = "/root/logs/orc/user-20190129-" + String.format("%03d", offset) + ".orc";
+        ParquetUtil.parquetWriter(100000L, file);
+        offset++;
+        System.out.println("save orc file " + file + " successful...");
+    }
+
 }

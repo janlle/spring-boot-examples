@@ -31,7 +31,6 @@ public class ParquetUtil {
     private static String schemaStr = "message schema {"
             + "optional int64 user_id;"
             + "optional binary account (UTF8);"
-            + "optional binary password (UTF8);"
             + "optional int32 age;"
             + "optional int32 sex;"
             + "optional binary description (UTF8);"
@@ -63,7 +62,6 @@ public class ParquetUtil {
             writer.write(groupFactory.newGroup()
                     .append("user_id", i + RandomValue.random.nextInt(1000000000))
                     .append("account", RandomValue.randomNum(16))
-                    .append("password", RandomValue.randomStr(18))
                     .append("age", (RandomValue.random.nextInt(60) + 12))
                     .append("sex", RandomValue.random.nextInt(2))
                     .append("description", RandomValue.randomMessage())

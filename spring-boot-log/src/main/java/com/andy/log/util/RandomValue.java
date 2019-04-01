@@ -415,5 +415,9 @@ public class RandomValue {
             System.out.println(currentTimestamp());
         }
     }
+
+    public static Long randomLong() {
+        return random.nextLong();
+    }
 }
 
