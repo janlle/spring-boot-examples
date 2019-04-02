@@ -186,19 +186,16 @@ public class RandomValue {
      */
     public static Map randomUser() {
         Map<String, Object> map = new LinkedHashMap<>();
-        map.put("userId", offset);
+        map.put("user_id", offset);
         map.put("username", randomUsername());
         map.put("sex", random.nextBoolean() ? "男" : "女");
         map.put("age", random.nextInt(58) + 12);
-        map.put("address", randomAddress());
         map.put("tel", randomTel());
-        map.put("email", randomEmail());
-        map.put("createTime", randomTime());
-        map.put("integral", random.nextInt(9990) + 10);
+        map.put("create_time", randomTime());
+        map.put("deleted", random.nextBoolean());
         offset++;
         return map;
     }
-
     /**
      * 获取ip
      *

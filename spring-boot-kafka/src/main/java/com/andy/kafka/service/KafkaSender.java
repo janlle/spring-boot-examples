@@ -1,14 +1,11 @@
 package com.andy.kafka.service;
 
-import com.andy.kafka.commen.Message;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.andy.common.utils.RandomValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * <p>
@@ -26,23 +23,23 @@ public class KafkaSender {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private Long offset = 0L;
+
     /**
-     *
      * @param topic
-     * @param body
+     * @param count
      */
-    public void send(String topic, Object body) {
-        Message<String> message = new Message<>();
-        message.setId(System.currentTimeMillis());
-        message.setMessage(body.toString());
-        message.setTime(new Date());
-        String content = null;
-        try {
-            content = objectMapper.writeValueAsString(message);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+    public String send(String topic, Integer count) throws Exception {
+        for (int i = 0; i < count; i++) {
+            // Message<Map> message = new Message<>(offset, RandomValue.randomUser(), new Date());
+            String message = RandomValue.randomMessage();
+            offset++;
+            //String content = objectMapper.writeValueAsString(message);
+            kafkaTemplate.send(topic, message);
+            Thread.sleep(500);
+            log.info("send message: {} ", message);
         }
-        kafkaTemplate.send(topic, content);
-        log.info("send {} to {} success!", message, topic);
+        return "send to " + topic + " count: " + count;
     }
+
 }

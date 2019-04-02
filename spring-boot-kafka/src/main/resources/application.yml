@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: spring-kafka
+    name: spring-boot-kafka
   kafka:
     bootstrap-servers: node-2:9092,node-3:9092,node-4:9092
     producer:

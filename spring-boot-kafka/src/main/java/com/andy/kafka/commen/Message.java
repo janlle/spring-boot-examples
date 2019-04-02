@@ -1,7 +1,5 @@
 package com.andy.kafka.commen;
 
-import lombok.ToString;
-
 import java.util.Date;
 
 /**
@@ -10,7 +8,6 @@ import java.util.Date;
  * @author leone
  * @since 2018-12-26
  **/
-@ToString
 public class Message<T> {
 
     private Long id;
@@ -18,6 +15,15 @@ public class Message<T> {
     private T message;
 
     private Date time;
+
+    public Message() {
+    }
+
+    public Message(Long id, T message, Date time) {
+        this.id = id;
+        this.message = message;
+        this.time = time;
+    }
 
     public Long getId() {
         return id;
@@ -41,5 +47,14 @@ public class Message<T> {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", message=" + message +
+                ", time=" + time +
+                '}';
     }
 }

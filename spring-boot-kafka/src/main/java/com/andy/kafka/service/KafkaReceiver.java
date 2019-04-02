@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * <p> 
+ * <p>
  *
  * @author leone
  * @since 2018-12-26
@@ -17,14 +17,13 @@ import java.util.Optional;
 @Component
 public class KafkaReceiver {
 
-
-    @KafkaListener(topics = {"order"})
+    @KafkaListener(topics = {"spring-boot-topic"})
     public void listen(ConsumerRecord<?, ?> record) {
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
         if (kafkaMessage.isPresent()) {
             Object message = kafkaMessage.get();
-            log.info("record:{}", record);
-            log.info("message:{}", message);
+            log.info("record: {} message: {}", record, message);
         }
     }
+
 }
