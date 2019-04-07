@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>跨域</title>
 </head>
+
 <body>
-<h3 id="h1">andy</h3>
+<input id="h1" value="andy">
 <button id="d1" onclick="async()">click</button>
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 <script>
     function async() {
         $.ajax({
-            url: 'http://127.0.0.1:8082/ws/api/name',
-            type: 'post',
-            date: {"name": "james"},
+            url: 'http://127.0.0.1:8082/ws/api/name?name=james',
+            async: true,
+            type: 'GET',
+            // headers: {
+            //     'Content-type': 'application/json; charset=utf-8'
+            // },
+            // date: JSON.stringify({name: "james"}),
+            // dataType: "json",
             success: function (data) {
-                $("#h1").innerText = "hello";
-                alert(data)
+                $("#h1").val("success " + data);
             },
             error: function (data) {
-                $("#h1").innerText="www";
-                alert(data)
+                $("#h1").val("error " + data);
             }
         });
     }
 </script>
 
 </body>
+
 </html>

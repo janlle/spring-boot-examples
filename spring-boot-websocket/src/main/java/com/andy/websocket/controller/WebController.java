@@ -4,24 +4,27 @@ import com.andy.websocket.config.Constant;
 import com.andy.websocket.config.WsMessage;
 import com.andy.websocket.config.WsResponse;
 import com.andy.websocket.service.WebSocketService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Leone
  * @since 2018-07-06
  **/
+@Slf4j
 @RestController
 @RequestMapping("/api")
+// 局部跨域
+@CrossOrigin(origins = "http://localhost:63342", maxAge = 3600)
 public class WebController {
 
     @Resource
@@ -33,8 +36,9 @@ public class WebController {
     }
 
     @RequestMapping("/name")
-    public String getName(HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) String name) {
-        return "origin-name" + name;
+    public String getName(HttpServletRequest request, @RequestParam(required = false) String name) {
+        log.info("name: {}", name);
+        return "origin-name: " + name;
     }
 
     // @MessageMapping和@RequestMapping功能类似，用于设置URL映射地址，浏览器向服务器发起请求，需要通过该地址。
