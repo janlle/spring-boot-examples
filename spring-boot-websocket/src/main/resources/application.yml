@@ -2,11 +2,11 @@ spring:
   application:
     name: websocket
 server:
-  ssl:
-    key-store: tomcat.keystore
-    key-password: 123456
-    key-store-type: PKCS12
-    key-alias: tomcat
+#  ssl:
+#    key-store: tomcat.keystore
+#    key-password: 123456
+#    key-store-type: PKCS12
+#    key-alias: tomcat
   servlet:
     context-path: /ws
-  port: 8080
+  port: 8082

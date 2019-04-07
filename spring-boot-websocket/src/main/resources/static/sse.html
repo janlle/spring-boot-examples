@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SSE</title>
 </head>
 <body>
 <h1>hello world</h1>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 <script>
-    if (typeof(EventSource) !== "undefined") {
+    if (typeof (EventSource) !== "undefined") {
         var sse = new EventSource("/sse");
         sse.onmessage = function (event) {
             console.log("event.data=" + event.data);

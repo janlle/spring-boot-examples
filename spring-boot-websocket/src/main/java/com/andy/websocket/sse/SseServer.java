@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 @WebServlet(name = "/sseServlet", urlPatterns = "/sse")
 public class SseServer extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/event-stream");
@@ -32,7 +31,6 @@ public class SseServer extends HttpServlet {
             }
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

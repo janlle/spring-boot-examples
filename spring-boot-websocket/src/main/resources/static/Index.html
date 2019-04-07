@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨域</title>
+</head>
+<body>
+<h3 id="h1">andy</h3>
+<button id="d1" onclick="async()">click</button>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+    function async() {
+        $.ajax({
+            url: 'http://127.0.0.1:8082/ws/api/name',
+            type: 'post',
+            date: {"name": "james"},
+            success: function (data) {
+                $("#h1").innerText = "hello";
+                alert(data)
+            },
+            error: function (data) {
+                $("#h1").innerText="www";
+                alert(data)
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
