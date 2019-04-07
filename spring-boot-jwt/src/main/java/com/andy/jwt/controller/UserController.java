@@ -1,14 +1,14 @@
 package com.andy.jwt.controller;
 
-import com.andy.jwt.common.BaseResponse;
-import com.andy.jwt.entity.User;
+import com.andy.common.Result;
+import com.andy.common.entity.User;
 import com.andy.jwt.repository.UserRepository;
 import com.andy.jwt.util.JwtTokenUtil;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -21,32 +21,30 @@ import java.util.concurrent.TimeUnit;
  **/
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
-    private RedisTemplate redisTemplate;
-
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private UserRepository userRepository;
 
 
-    //用户登录功能
+    // 用户登录功能
     @PostMapping("/login")
-    public BaseResponse<User> login(@RequestBody User user) throws Exception {
-        String token = JwtTokenUtil.createToken(ImmutableMap.of("email",user.getAccount(),"name",user.getUserId().toString(),"ts", Instant.now().getEpochSecond() + ""));
+    public Result<User> login(@RequestBody User user) throws Exception {
+        String token = JwtTokenUtil.createToken(ImmutableMap.of("email", user.getAccount(), "name", user.getUserId().toString(), "ts", Instant.now().getEpochSecond() + ""));
         user.setPassword(token);
-        log.info("token={}", token);
+        log.info("token: {}", token);
         renewToken(token, user.getAccount());
-        return BaseResponse.success(user);
+        return Result.success(user);
     }
 
 
-    //鉴权
+    // 鉴权
     @GetMapping("/auth")
-    public BaseResponse<Object> valid(String token) {
+    public Result<Object> valid(String token) {
         Map<String, String> map = null;
         try {
             map = JwtTokenUtil.verifyToken(token);
@@ -61,22 +59,22 @@ public class UserController {
             renewToken(token, account);
             User user = userRepository.findUserByAccount(account);
             user.setPassword(token);
-            return BaseResponse.success("用户验证成功");
+            return Result.success("用户验证成功");
         } else {
-            return BaseResponse.error("用户验证失败");
+            return Result.error("用户验证失败");
         }
     }
 
-    @GetMapping("/user/{id}")
-    public BaseResponse<User> user(@PathVariable Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        return BaseResponse.success(user);
+    @GetMapping("/user/{account}")
+    public Result<User> user(@PathVariable Long account) {
+        User user = userRepository.findById(account).orElse(null);
+        return Result.success(user);
     }
 
     @PostMapping("/logout")
-    public BaseResponse<String> logout(String email) {
-        redisTemplate.delete(email);
-        return BaseResponse.success("登出成功");
+    public Result<String> logout(String account) {
+        redisTemplate.delete(account);
+        return Result.success("登出成功");
     }
 
 
@@ -86,6 +84,7 @@ public class UserController {
 
     public void invalidate(String token) {
         Map<String, String> map = JwtTokenUtil.verifyToken(token);
+        Assert.notNull(map);
         redisTemplate.delete(map.get("email"));
     }
 

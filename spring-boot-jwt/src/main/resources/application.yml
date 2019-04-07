@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
     username: root
-    password: root
+    password: xxxx
   application:
     name: spring-jwt
   redis:
@@ -17,7 +17,7 @@ spring:
     show-sql: true
     open-in-view: false
 
-##jwt配置
+# jwt配置
 audience:
   clientId: 098f6bcd4621d373cade4e832627b4f6
   base64Secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=

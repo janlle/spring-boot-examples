@@ -1,6 +1,6 @@
 package com.andy.jwt.repository;
 
-import com.andy.jwt.entity.User;
+import com.andy.common.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

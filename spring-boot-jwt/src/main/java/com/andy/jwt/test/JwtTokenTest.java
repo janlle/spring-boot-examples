@@ -11,7 +11,7 @@ import java.util.Map;
  * @author Leone
  * @since 2018-08-27
  **/
-public class JwtTokenMain {
+public class JwtTokenTest {
 
     public static void main(String[] args) throws Exception {
         Map<String, String> body = new HashMap<>();
@@ -22,7 +22,6 @@ public class JwtTokenMain {
         System.out.println(token);
         Map<String, String> result = JwtTokenUtil.verifyToken(token);
         System.out.println(result);
-
     }
 
 
