@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://39.1.8.125.41:3306/boot?characterEncoding=UTF-8&useSSL=false
     username: root
-    password: xxxx
+    password: cloud
   application:
     name: spring-jwt
   redis:

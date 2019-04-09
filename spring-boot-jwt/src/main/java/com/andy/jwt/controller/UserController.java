@@ -11,7 +11,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +33,7 @@ public class UserController {
     // 用户登录功能
     @PostMapping("/login")
     public Result<User> login(@RequestBody User user) throws Exception {
-        String token = JwtTokenUtil.createToken(ImmutableMap.of("email", user.getAccount(), "name", user.getUserId().toString(), "ts", Instant.now().getEpochSecond() + ""));
+        String token = JwtTokenUtil.createToken(ImmutableMap.of("account", user.getAccount(), "userId", user.getUserId().toString(), "ts", String.valueOf(System.currentTimeMillis())));
         user.setPassword(token);
         log.info("token: {}", token);
         renewToken(token, user.getAccount());
@@ -77,11 +76,12 @@ public class UserController {
         return Result.success("登出成功");
     }
 
-
+    // 更新token
     public void renewToken(String token, String email) {
         redisTemplate.opsForValue().set(email, token, 30, TimeUnit.MINUTES);
     }
 
+    // 删除token
     public void invalidate(String token) {
         Map<String, String> map = JwtTokenUtil.verifyToken(token);
         Assert.notNull(map);
