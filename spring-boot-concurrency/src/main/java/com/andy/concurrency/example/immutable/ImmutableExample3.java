@@ -21,10 +21,9 @@ import java.util.Map;
 public class ImmutableExample3 {
 
     private final static ImmutableList list = ImmutableList.of(1, 2, 3);
-//    private final static List<Integer> list = ImmutableList.of(1, 2, 3);
+    // private final static List<Integer> list = ImmutableList.of(1, 2, 3);
 
     private final static ImmutableSet set = ImmutableSet.copyOf(list);
-
 
     private final static ImmutableMap<Integer, Integer> map = ImmutableMap.of(1, 2, 3, 4, 5, 6);
 
