@@ -24,13 +24,9 @@ public class Escape {
     }
 
     private class InnerClass {
-
         public InnerClass() {
             log.info("{}", Escape.this.thisCanEscape);
         }
-
     }
-
-
 
 }

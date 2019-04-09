@@ -43,7 +43,6 @@ public class CountDownLatchExample2 {
 //        Thread.sleep(100);
         log.info("{}", threadNum);
 //        Thread.sleep(100);
-
         Thread.sleep(1);
     }
 

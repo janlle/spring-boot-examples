@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AtomicExample1 {
 
     private static int clientTotal = 10000;
+
     private static int threadTotal = 50;
 
     public static AtomicInteger count = new AtomicInteger(0);
@@ -39,7 +40,7 @@ public class AtomicExample1 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("count={}", count.get());
+        log.info("count: {}", count.get());
     }
 
     private static void add() {

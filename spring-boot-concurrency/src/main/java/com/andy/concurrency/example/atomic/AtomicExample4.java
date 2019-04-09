@@ -21,7 +21,7 @@ public class AtomicExample4 {
         count.compareAndSet(1, 3);
         count.compareAndSet(2, 4);
         count.compareAndSet(3, 5);
-        log.info("count={}", count);
+        log.info("count: {}", count);
     }
 
 

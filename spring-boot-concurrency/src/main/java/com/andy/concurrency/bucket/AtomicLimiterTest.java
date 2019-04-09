@@ -23,13 +23,13 @@ public class AtomicLimiterTest {
     private static final AtomicInteger atomic = new AtomicInteger(0);
 
     private void atomicLimiter() {
-        // 最大支持 3 個
+        // 最大支持 3 个
         if (atomic.get() >= 3) {
-            System.out.println(LocalDateTime.now() + " - " + Thread.currentThread().getName() + " - " + "拒絕...");
+            System.out.println(LocalDateTime.now() + " - " + Thread.currentThread().getName() + " - " + "拒绝...");
         } else {
             try {
                 atomic.incrementAndGet();
-                //处理核心逻辑
+                // 处理核心逻辑
                 System.out.println(LocalDateTime.now() + " - " + Thread.currentThread().getName() + " - " + "通过...");
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
@@ -38,6 +38,11 @@ public class AtomicLimiterTest {
                 atomic.decrementAndGet();
             }
         }
+    }
+
+
+    public static void main(String[] args) throws Exception {
+
     }
 
     @Test

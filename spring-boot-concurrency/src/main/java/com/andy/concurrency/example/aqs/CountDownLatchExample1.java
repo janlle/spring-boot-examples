@@ -34,7 +34,6 @@ public class CountDownLatchExample1 {
         countDownLatch.await();
         executorService.shutdown();
         log.info("finish");
-
     }
 
     private static void test(int threadNum) throws Exception {
