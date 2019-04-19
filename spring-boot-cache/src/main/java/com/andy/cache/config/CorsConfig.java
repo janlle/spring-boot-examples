@@ -15,10 +15,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
-    static final String ORIGINS[] = new String[]{"GET", "POST", "PUT", "DELETE"};
+    private static final String ORIGINS[] = new String[]{"GET", "POST", "PUT", "DELETE"};
 
     @Bean
     public void corsRegistryConfig(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*").allowCredentials(true).allowedMethods(ORIGINS).maxAge(3600);
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods(ORIGINS)
+                .maxAge(3600);
     }
 }

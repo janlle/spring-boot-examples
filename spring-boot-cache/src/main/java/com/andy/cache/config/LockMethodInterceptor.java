@@ -57,7 +57,7 @@ public class LockMethodInterceptor {
         } catch (Throwable throwable) {
             throw new RuntimeException("服务器异常");
         } finally {
-            // TODO 为了演示效果,这里就不调用 CACHES.invalidate(key); 代码了
+            // 为了演示效果,这里就不调用 CACHES.invalidate(key); 代码了
         }
     }
 

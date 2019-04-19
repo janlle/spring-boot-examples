@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-cache</artifactId>
+    <artifactId>spring-boot-limited</artifactId>
 
 
     <dependencyManagement>
@@ -87,5 +87,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

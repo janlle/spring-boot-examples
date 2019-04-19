@@ -36,6 +36,7 @@ public class LockKeyGenerator implements CacheKeyGenerator {
             }
             builder.append(lockAnnotation.delimiter()).append(args[i]);
         }
+
         if (StringUtils.isEmpty(builder.toString())) {
             final Annotation[][] parameterAnnotations = method.getParameterAnnotations();
             for (int i = 0; i < parameterAnnotations.length; i++) {
