@@ -11,8 +11,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/boot?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: root
+    username: xxxx
+    password: xxxx
   quartz:
     jdbc:
       initialize-schema: always
@@ -40,4 +40,4 @@ spring:
               driver: com.mysql.jdbc.Driver
               URL: jdbc:mysql://localhost:3306/testa?useSSL=false
               user: root
-              password: root
+              password: xxxx

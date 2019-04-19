@@ -15,8 +15,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/boot?useSSL=false
-    username: root
-    password: root
+    username: xxxx
+    password: xxxx
     hikari:
       connection-test-query: select 1
       validation-timeout: 50000

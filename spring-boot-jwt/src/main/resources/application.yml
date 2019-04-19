@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://39.1.8.125.41:3306/boot?characterEncoding=UTF-8&useSSL=false
-    username: root
+    username: xxxx
     password: cloud
   application:
     name: spring-jwt

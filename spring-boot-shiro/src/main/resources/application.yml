@@ -2,8 +2,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/boot?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: root
+    username: xxxx
+    password: xxxx
   thymeleaf:
     cache: false
     prefix: classpath:templates

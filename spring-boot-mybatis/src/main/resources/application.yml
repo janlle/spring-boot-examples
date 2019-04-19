@@ -7,8 +7,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://ip:3306/boot?useSSL=false&characterEncoding=utf8&allowMultiQueries=true
-    username: root
-    password: root
+    username: xxxx
+    password: xxxx
 
 # mybatis-springBoot 配置
 mybatis:

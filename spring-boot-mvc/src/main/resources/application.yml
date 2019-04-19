@@ -3,8 +3,8 @@ server:
 app:
   config:
     redis:
-      username: root
-      password: root;
+      username: xxxx
+      password: xxxx;
       url: localhost:6379
       timeout: 3600
       port: 6379
@@ -17,8 +17,8 @@ spring:
     database: 2
   datasource:
     url: jdbc:mysql://localhost:3306/boot?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
-    username: root
-    password: root
+    username: xxxx
+    password: xxxx
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     # Hikari will use the above plus the following to setup connection pooling
