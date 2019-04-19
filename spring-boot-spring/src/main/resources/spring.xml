@@ -10,11 +10,11 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="com.andy.quartz.spring.scan,com.andy.quartz.spring.config"/>
+    <context:component-scan base-package="com.leone.quartz.spring.scan,com.leone.quartz.spring.config"/>
 
-    <bean id="001" class="com.andy.spring.beans.Person" name="person"/>
+    <bean id="001" class="com.leone.spring.beans.Person" name="person"/>
 
-    <bean id="003" class="com.andy.spring.scan.InitTest" name="initTest2" init-method="init"/>
+    <bean id="003" class="com.leone.spring.scan.InitTest" name="initTest2" init-method="init"/>
 
 
     <!--<bean id="002" class="Student" name="student"/>-->
