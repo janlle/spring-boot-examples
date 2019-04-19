@@ -23,9 +23,10 @@ public class BaseController {
     @Value("${server.port}")
     private String port;
 
-    @GetMapping("/test")
-    public void test(HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping("/choose")
+    public String test(HttpServletRequest request, HttpServletResponse response) {
         log.info("port: {} address: {}", port, request.getRemoteAddr());
+        return String.format("port: %s address: %s",port,request.getRemoteAddr());
     }
 
 }
