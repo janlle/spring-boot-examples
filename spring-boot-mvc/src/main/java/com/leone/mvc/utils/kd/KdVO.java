@@ -1,10 +1,8 @@
 package com.leone.mvc.utils.kd;
 
 import com.leone.mvc.utils.kd.dto.KdStatus;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
-
 
 /**
  * <p>
@@ -14,16 +12,24 @@ import java.util.List;
  **/
 public class KdVO {
 
-    @ApiModelProperty("快递单号")
+    /*
+     * 快递单号
+     */
     private String shipperCode;
 
-    @ApiModelProperty("快递公司")
+    /*
+     *快递公司
+     */
     private String shipper;
 
-    @ApiModelProperty("收货状态状态")
+    /*
+     *收货状态状态
+     */
     private String status;
 
-    @ApiModelProperty("详情列表")
+    /*
+     *详情列表
+     */
     private List<KdStatus> detail;
 
     public String getShipperCode() {

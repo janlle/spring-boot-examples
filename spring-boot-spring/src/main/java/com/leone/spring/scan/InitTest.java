@@ -1,6 +1,5 @@
 package com.leone.spring.scan;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.InitializingBean;
  * @author Leone
  * @since 2018-08-28
  **/
-@Slf4j
 //@Service
 public class InitTest implements InitializingBean {
 
@@ -19,7 +17,6 @@ public class InitTest implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.info("init test");
     }
 
     public void init() {

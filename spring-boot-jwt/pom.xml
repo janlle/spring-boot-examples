@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>spring-boot-examples</artifactId>
-        <groupId>com.andy</groupId>
+        <groupId>com.leone</groupId>
         <version>1.0.7.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -60,7 +60,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.andy</groupId>
+            <groupId>com.leone</groupId>
             <artifactId>spring-boot-common</artifactId>
             <version>1.0.7.RELEASE</version>
         </dependency>

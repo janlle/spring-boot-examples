@@ -1,8 +1,8 @@
 package com.leone.aop.service;
 
 import com.leone.aop.anno.SystemLogAnno;
+import com.leone.aop.interf.UserService;
 import com.leone.common.entity.User;
-import com.leone.common.service.UserService;
 import com.leone.common.utils.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.leone.aop.controller;
 
+import com.leone.aop.interf.UserService;
 import com.leone.common.entity.User;
-import com.leone.common.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

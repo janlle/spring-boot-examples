@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>spring-boot-examples</artifactId>
-        <groupId>com.andy</groupId>
+        <groupId>com.leone</groupId>
         <version>1.0.7.RELEASE</version>
     </parent>
     <artifactId>spring-boot-webflux</artifactId>
@@ -63,6 +63,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.leone</groupId>
+            <artifactId>spring-boot-common</artifactId>
+            <version>1.0.7.RELEASE</version>
         </dependency>
 
     </dependencies>

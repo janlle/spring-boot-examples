@@ -4,7 +4,7 @@
 
     <parent>
         <artifactId>spring-boot-examples</artifactId>
-        <groupId>com.andy</groupId>
+        <groupId>com.leone</groupId>
         <version>1.0.7.RELEASE</version>
     </parent>
 
@@ -67,7 +67,7 @@
         </dependency>
 
         <!--<dependency>-->
-        <!--<groupId>com.andy</groupId>-->
+        <!--<groupId>com.leone</groupId>-->
         <!--<artifactId>spring-boot-starter</artifactId>-->
         <!--<version>1.0.3.RELEASE</version>-->
         <!--</dependency>-->
@@ -134,6 +134,12 @@
             <groupId>com.github.sarxos</groupId>
             <artifactId>webcam-capture</artifactId>
             <version>0.3.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.leone</groupId>
+            <artifactId>spring-boot-common</artifactId>
+            <version>1.0.7.RELEASE</version>
         </dependency>
 
     </dependencies>

@@ -1,7 +1,7 @@
 package com.leone.aop.proxy;
 
+import com.leone.aop.interf.UserService;
 import com.leone.common.entity.User;
-import com.leone.common.service.UserService;
 
 import java.util.List;
 

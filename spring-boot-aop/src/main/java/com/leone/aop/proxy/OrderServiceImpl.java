@@ -1,7 +1,7 @@
 package com.leone.aop.proxy;
 
+import com.leone.aop.interf.OrderService;
 import com.leone.common.entity.Order;
-import com.leone.common.service.OrderService;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
