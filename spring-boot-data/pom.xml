@@ -89,11 +89,11 @@
         </dependency>
 
         <!--json-lib解析依赖-->
-        <dependency>
+        <!--<dependency>
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-        </dependency>
+            <version>2.3</version>
+        </dependency>-->
 
         <!--谷歌工具类-->
         <dependency>
