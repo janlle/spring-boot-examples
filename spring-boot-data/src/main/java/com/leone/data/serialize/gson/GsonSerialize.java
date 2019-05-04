@@ -1,4 +1,4 @@
-package com.leone.data.serializ.gson;
+package com.leone.data.serialize.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

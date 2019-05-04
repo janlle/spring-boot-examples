@@ -1,4 +1,4 @@
-package com.leone.data.serializ.jsonlib;
+package com.leone.data.serialize.jsonlib;
 
 import com.leone.common.entity.User;
 import com.leone.common.utils.EntityFactory;

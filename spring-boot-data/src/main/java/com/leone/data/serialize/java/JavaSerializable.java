@@ -1,4 +1,4 @@
-package com.leone.data.serializ.java;
+package com.leone.data.serialize.java;
 
 import com.leone.common.utils.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
