@@ -1,8 +1,8 @@
 package com.leone.data.service;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
+import com.leone.common.utils.EntityFactory;
 import com.leone.data.repository.mybatis.UserMapper;
-import com.leone.data.utils.EntityFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

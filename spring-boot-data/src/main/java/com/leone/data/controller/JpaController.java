@@ -1,6 +1,6 @@
 package com.leone.data.controller;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
 import com.leone.data.repository.jpa.UserRepository;
 import com.leone.data.service.JpaService;
 import lombok.extern.slf4j.Slf4j;

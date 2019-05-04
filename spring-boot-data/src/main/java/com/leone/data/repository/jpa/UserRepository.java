@@ -1,6 +1,6 @@
 package com.leone.data.repository.jpa;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

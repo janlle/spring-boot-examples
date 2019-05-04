@@ -1,6 +1,6 @@
 package com.leone.data.repository.mybatis;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
