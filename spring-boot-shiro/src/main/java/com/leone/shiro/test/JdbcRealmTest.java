@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-21
  **/
 

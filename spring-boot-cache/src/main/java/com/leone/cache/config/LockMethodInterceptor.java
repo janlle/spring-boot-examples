@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * <p> 基于aop本地缓存来方法调用限制
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-08
  **/
 @Aspect

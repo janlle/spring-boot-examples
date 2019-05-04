@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-06-21
  **/
 @EnableAspectJAutoProxy

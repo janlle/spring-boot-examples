@@ -3,7 +3,7 @@ package com.leone.shiro.common.util;
 /**
  * <p> 通过银行的Bin号 来获取 银行名称
  *
- * @author Leone
+ * @author leone
  * @since 2018-11-09
  **/
 public class BankUtil {

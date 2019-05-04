@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-04-22
  **/
 @Slf4j

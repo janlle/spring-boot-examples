@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 /**
  * <p> 极光推送工具类
  *
- * @author Leone
+ * @author leone
  **/
 @Slf4j
 public class JPushClientUtil {

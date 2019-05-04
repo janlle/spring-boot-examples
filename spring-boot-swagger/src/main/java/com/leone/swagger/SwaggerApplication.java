@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-29
  **/
 //@EnableSwaggerButler

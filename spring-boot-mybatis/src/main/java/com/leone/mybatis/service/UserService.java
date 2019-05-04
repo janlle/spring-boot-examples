@@ -1,5 +1,7 @@
 package com.leone.mybatis.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.leone.common.entity.User;
 import com.leone.mybatis.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +13,7 @@ import java.util.List;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-03-02
  **/
 @Slf4j
@@ -21,12 +23,11 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-
     /**
      * 插入
      *
-     * @param user
-     * @return
+     * @param user 用户实体
+     * @return 改变的条数
      */
     public int insert(User user) {
         return userMapper.insert(user);
@@ -35,8 +36,8 @@ public class UserService {
     /**
      * 批量插入
      *
-     * @param user
-     * @return
+     * @param user 用户实体
+     * @return 改变的条数
      */
     public int insertBatch(List<User> user) {
         return userMapper.insertBatch(user);
@@ -46,8 +47,8 @@ public class UserService {
     /**
      * 更新
      *
-     * @param user
-     * @return
+     * @param user 用户实体
+     * @return 改变的条数
      */
     public int update(User user) {
         return userMapper.update(user);
@@ -56,8 +57,8 @@ public class UserService {
     /**
      * 批量更新
      *
-     * @param users
-     * @return
+     * @param users 用户实体
+     * @return 改变的条数
      */
     public int updateBatch(List<User> users) {
         return userMapper.updateBatch(users);
@@ -67,19 +68,21 @@ public class UserService {
     /**
      * 分页
      *
-     * @param start
-     * @param size
-     * @return
+     * @param page 起始页码
+     * @param size 每页大小
+     * @return 分页对象
      */
-    public List<User> page(Integer start, Integer size) {
-        return userMapper.page(start, size);
+    public PageInfo<User> page(Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<User> userList = userMapper.findAll();
+        return new PageInfo<>(userList);
     }
 
 
     /**
      * 根据主键删除
      *
-     * @param userId
+     * @param userId 用户id
      */
     public int delete(Long userId) {
         return userMapper.deleteByUserId(userId);
@@ -88,13 +91,29 @@ public class UserService {
     /**
      * 批量删除
      *
-     * @param userIds
+     * @param userIds 用户id列表
      */
     public int deleteByIds(List<Long> userIds) {
         return userMapper.deleteByUserIds(userIds);
     }
 
-    public User selectById(Long userId) {
+
+    /**
+     * 根据用户id查询
+     *
+     * @param userId 用户id
+     * @return 用户实体
+     */
+    public User findOne(Long userId) {
         return userMapper.findByUserId(userId);
+    }
+
+    /**
+     * 查询所有
+     *
+     * @return 用户list
+     */
+    public List<User> list() {
+        return userMapper.findAll();
     }
 }

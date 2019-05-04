@@ -8,7 +8,7 @@ import javax.validation.ValidationException;
 /**
  * <p>数据处理只需实现ItemProcessor接口，重写其process方法。方法输入的参数是从ItemReader读取到的数据，返回的数据给ItemWriter
  *
- * @author Leone
+ * @author leone
  * @since 2018-10-08
  **/
 public class CsvValidatingItemProcessor extends ValidatingItemProcessor<Person> {

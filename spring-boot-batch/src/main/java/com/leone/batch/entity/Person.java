@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-10-08
  **/
 public class Person {

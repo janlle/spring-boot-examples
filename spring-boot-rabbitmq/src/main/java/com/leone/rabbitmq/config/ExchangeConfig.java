@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * rabbitMQ交换机配置
  *
- * @author Leone
+ * @author leone
  * @since 2018-05-05
  **/
 @Configuration

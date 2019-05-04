@@ -5,7 +5,7 @@ import com.leone.concurrency.annotations.NotThreadSafe;
 
 /**
  * 单例懒汉模式,线程安全，性能差
- * @author Leone
+ * @author leone
  * @since 2018-05-06
  **/
 @NotThreadSafe

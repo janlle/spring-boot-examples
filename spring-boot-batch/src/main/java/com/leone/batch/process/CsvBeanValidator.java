@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * <p> 我们可以JSR-303(主要实现由hibernate-validator)的注解，来校验ItemReader读取到的数据是否满足要求。我们可以让我们的ItemProcessor实现ValidatingItemProcessor接口
  *
- * @author Leone
+ * @author leone
  * @since 2018-10-09
  **/
 public class CsvBeanValidator<T> implements Validator<T>, InitializingBean {

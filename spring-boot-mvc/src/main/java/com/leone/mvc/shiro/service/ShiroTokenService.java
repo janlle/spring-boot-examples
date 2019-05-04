@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  **/
 @Service
 public class ShiroTokenService {

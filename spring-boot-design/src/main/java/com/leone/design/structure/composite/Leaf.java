@@ -3,7 +3,7 @@ package com.leone.design.structure.composite;
 /**
  * 叶子节点
  *
- * @author Leone
+ * @author leone
  * @since 2018-08-01
  **/
 public class Leaf extends Component {

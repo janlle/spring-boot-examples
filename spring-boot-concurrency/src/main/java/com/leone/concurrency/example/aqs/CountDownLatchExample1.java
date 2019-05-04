@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-06
  **/
 @Slf4j

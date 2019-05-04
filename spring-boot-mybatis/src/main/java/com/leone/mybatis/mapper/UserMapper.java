@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-03-02
  **/
 @Mapper
@@ -44,6 +44,9 @@ public interface UserMapper {
 
     @Select("select * from t_user limit ${start}, ${size}")
     List<User> page(@Param("start") int start, @Param("size") int size);
+
+    @Select("select * from t_user")
+    List<User> findAll();
 
 
     @Update({"update t_user set account=#{user.account}, password=#{user.password}, age=#{user.age}, description=#{user.description}, create_time=#{user.createTime, jdbcType=TIMESTAMP}, deleted=#{user.deleted} where user_id = #{user.userId}"})

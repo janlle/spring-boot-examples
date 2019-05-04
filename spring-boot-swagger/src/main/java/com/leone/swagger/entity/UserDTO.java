@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-12
  **/
 @Data

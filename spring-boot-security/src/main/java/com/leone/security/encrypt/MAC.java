@@ -13,7 +13,7 @@ import java.security.Security;
  * <p>
  * 消息摘要算法--MAC
  *
- * @author Leone
+ * @author leone
  * @since 2018-07-01
  **/
 public class MAC {

@@ -1,6 +1,6 @@
 package com.leone.data.controller;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
 import com.leone.data.repository.mybatis.UserMapper;
 import com.leone.data.service.MybatisService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-11
  **/
 @Slf4j

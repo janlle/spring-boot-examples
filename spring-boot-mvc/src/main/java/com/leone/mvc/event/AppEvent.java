@@ -3,7 +3,7 @@ package com.leone.mvc.event;
 import org.springframework.context.ApplicationEvent;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-04-10
  **/
 

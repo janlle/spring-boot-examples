@@ -1,5 +1,6 @@
 package com.leone.mybatis.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.leone.common.entity.User;
 import com.leone.mybatis.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-03-02
  **/
 @RestController
@@ -41,13 +42,18 @@ public class UserController {
     }
 
     @GetMapping("/page")
-    public List<User> selectList(@RequestParam Integer start, @RequestParam Integer size) {
-        return userService.page(start, size);
+    public PageInfo<User> page(@RequestParam Integer page, @RequestParam Integer size) {
+        return userService.page(page, size);
+    }
+
+    @GetMapping("/list")
+    public List<User> list() {
+        return userService.list();
     }
 
     @GetMapping("/{userId}")
-    public User selectById(@PathVariable("userId") Long userId) {
-        return userService.selectById(userId);
+    public User findOne(@PathVariable("userId") Long userId) {
+        return userService.findOne(userId);
     }
 
     @PutMapping

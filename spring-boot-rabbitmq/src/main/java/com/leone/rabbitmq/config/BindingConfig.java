@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * <p>把队列和交换机绑定
  *
- * @author Leone
+ * @author leone
  * @since 2018-10-30
  **/
 @Configuration

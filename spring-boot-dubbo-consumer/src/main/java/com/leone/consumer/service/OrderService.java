@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * 消费者
  *
- * @author Leone
+ * @author leone
  * @since 2018-06-03
  **/
 @Slf4j

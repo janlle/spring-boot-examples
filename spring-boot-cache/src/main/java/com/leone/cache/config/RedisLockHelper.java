@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * <p> 需要定义成 Bean
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-08
  **/
 @Configuration

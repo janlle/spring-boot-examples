@@ -1,7 +1,7 @@
 package com.leone.design.creation.factorymethod;
 
 /**
- * @author Leone
+ * @author leone
  * @cerateBy: 2018-07-28
  **/
 public class SenderFactory {

@@ -5,7 +5,7 @@ import com.leone.concurrency.annotations.ThreadSafe;
 
 /**
  * 枚举模式
- * @author Leone
+ * @author leone
  * @since 2018-05-06
  **/
 @ThreadSafe

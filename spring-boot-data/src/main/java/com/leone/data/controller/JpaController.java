@@ -1,6 +1,6 @@
 package com.leone.data.controller;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
 import com.leone.data.repository.jpa.UserRepository;
 import com.leone.data.service.JpaService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-11
  **/
 @Slf4j

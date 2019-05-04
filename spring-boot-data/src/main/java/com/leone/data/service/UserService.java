@@ -1,6 +1,6 @@
 package com.leone.data.service;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
 import com.leone.data.repository.jpa.UserRepository;
 import com.leone.data.repository.mybatis.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-08
  **/
 @Slf4j

@@ -6,7 +6,7 @@ import java.util.Collection;
 /**
  * <p> 克隆工具类，进行深克隆,包括对象、集合
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-08
  **/
 public class CloneUtils {

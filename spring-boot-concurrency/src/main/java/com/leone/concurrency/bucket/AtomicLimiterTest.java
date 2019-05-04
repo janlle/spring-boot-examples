@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-09
  **/
 public class AtomicLimiterTest {

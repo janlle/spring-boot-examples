@@ -1,7 +1,7 @@
 package com.leone.spring.beans;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-06-29
  **/
 public class Person {

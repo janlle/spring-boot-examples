@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * <p> 跨域问题
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-08
  **/
 @Configuration

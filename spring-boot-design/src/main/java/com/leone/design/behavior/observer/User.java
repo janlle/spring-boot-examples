@@ -3,7 +3,7 @@ package com.leone.design.behavior.observer;
 /**
  * <p> 观察者 实现了update方法
  *
- * @author Leone
+ * @author leone
  * @since 2018-08-22
  **/
 public class User implements Observer {

@@ -3,7 +3,7 @@ package com.leone.design.creation.prototype;
 import java.io.Serializable;
 
 /**
- * @author Leone
+ * @author leone
  * @cerateBy: 2018-07-29
  **/
 public class School implements Serializable {

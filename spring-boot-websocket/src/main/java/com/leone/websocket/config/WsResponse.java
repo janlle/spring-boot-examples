@@ -1,7 +1,7 @@
 package com.leone.websocket.config;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-06
  **/
 public class WsResponse {

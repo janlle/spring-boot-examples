@@ -1,6 +1,6 @@
 package com.leone.data.test;
 
-import com.leone.data.entity.User;
+import com.leone.common.entity.User;
 import com.leone.data.DataApplication;
 import com.leone.data.repository.jpa.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-21
  **/
 @Slf4j
@@ -53,7 +53,6 @@ public class UserDaoTest {
 //        int user = userRepository.findUserByUserId(1L);
 //        log.info("user:", user);
 //    }
-
 
 
 }

@@ -2,12 +2,13 @@ package com.leone.docker.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p> 
  *
- * @author Leone
+ * @author leone
  * @since 2018-03-06
  **/
 @Slf4j
@@ -23,7 +24,7 @@ public class WebController {
 
 
     @GetMapping("/debug")
-    public String debug(String name) throws Exception {
+    public String debug(@RequestParam String name) throws Exception {
         sum = 0;
         System.out.println("hello");
         sum += 3;

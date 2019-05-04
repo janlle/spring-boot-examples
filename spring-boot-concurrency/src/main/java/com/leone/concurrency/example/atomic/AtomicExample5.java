@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-04-22
  **/
 @Slf4j

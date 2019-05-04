@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Leone
+ * @author leone
  **/
 @Configuration
 public class ShiroConfig {

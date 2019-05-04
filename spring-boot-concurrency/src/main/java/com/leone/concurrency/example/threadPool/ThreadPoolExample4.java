@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 创建一个定长的线程池，而且支持定时的以及周期性的任务执行，支持定时及周期性任务执行。
  *
- * @author Leone
+ * @author leone
  * @since 2018-05-08
  **/
 @Slf4j

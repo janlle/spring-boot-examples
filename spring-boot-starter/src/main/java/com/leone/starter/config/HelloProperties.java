@@ -3,7 +3,7 @@ package com.leone.starter.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-12
  **/
 @ConfigurationProperties(prefix = "customer")

@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-12
  **/
 @RestController

@@ -3,7 +3,7 @@ package com.leone.spring.anno;
 import java.lang.annotation.*;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-01
  **/
 @Documented

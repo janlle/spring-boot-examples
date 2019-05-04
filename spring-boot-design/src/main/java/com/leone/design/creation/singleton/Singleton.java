@@ -1,7 +1,7 @@
 package com.leone.design.creation.singleton;
 
 /**
- * @author Leone
+ * @author leone
  * @cerateBy: 2018-07-28
  **/
 public class Singleton {

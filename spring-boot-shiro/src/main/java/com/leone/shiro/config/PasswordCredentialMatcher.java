@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * <p>匹配器
  *
- * @author Leone
+ * @author leone
  * @since 2018-04-21
  **/
 public class PasswordCredentialMatcher extends SimpleCredentialsMatcher {

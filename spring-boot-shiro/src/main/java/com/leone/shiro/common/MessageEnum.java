@@ -1,7 +1,7 @@
 package com.leone.shiro.common;
 
 /**
- * @author Leone
+ * @author leone
  **/
 public enum MessageEnum {
 

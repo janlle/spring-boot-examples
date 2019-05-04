@@ -1,7 +1,7 @@
 package com.leone.data.service;
 
-import com.leone.data.utils.EntityFactory;
-import com.leone.data.utils.RandomValue;
+import com.leone.common.utils.EntityFactory;
+import com.leone.common.utils.RandomValue;
 import com.leone.data.config.RedisPrefix;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-08-11
  **/
 @Slf4j

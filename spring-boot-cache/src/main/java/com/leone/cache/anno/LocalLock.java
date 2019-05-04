@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-29
  **/
 @Documented

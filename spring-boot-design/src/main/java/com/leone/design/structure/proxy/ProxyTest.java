@@ -1,7 +1,7 @@
 package com.leone.design.structure.proxy;
 
 /**
- * @author Leone
+ * @author leone
  * @cerateBy: 2018-07-29
  **/
 public class ProxyTest {

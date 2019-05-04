@@ -33,7 +33,7 @@ import java.io.IOException;
 /**
  * <p>Spring Batch的主要组成部分只需注册成Spring的bean即可。若想开启批处理的支持还需在配置类上使用@EnableBatchProcessing
  *
- * @author Leone
+ * @author leone
  * @since 2018-10-08
  **/
 @Configuration

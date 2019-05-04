@@ -34,7 +34,7 @@ import java.util.Map;
 /**
  * <p> shiro 配置
  *
- * @author Leone
+ * @author leone
  * @see org.apache.shiro.web.filter.mgt.DefaultFilter
  * @since 2018-04-21
  **/

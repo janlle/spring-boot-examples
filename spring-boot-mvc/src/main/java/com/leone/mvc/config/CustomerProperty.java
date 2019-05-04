@@ -3,7 +3,7 @@ package com.leone.mvc.config;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-08-19
  **/
 public class CustomerProperty {

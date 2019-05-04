@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 /**
  * 锁的参数
  *
- * @author Leone
+ * @author leone
  */
 @Documented
 @Inherited

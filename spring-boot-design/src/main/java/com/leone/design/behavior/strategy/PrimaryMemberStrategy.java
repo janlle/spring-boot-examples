@@ -1,7 +1,7 @@
 package com.leone.design.behavior.strategy;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-08-03
  **/
 public class PrimaryMemberStrategy implements MemberStrategy {

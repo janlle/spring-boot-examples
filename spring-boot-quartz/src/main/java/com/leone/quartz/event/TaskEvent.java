@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationEvent;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-15
  **/
 public class TaskEvent extends ApplicationEvent {

@@ -7,7 +7,7 @@ import org.springframework.batch.core.JobExecutionListener;
 /**
  * <p>监听器实现JobExecutionListener接口，并重写其beforeJob、afterJob方法即可
  *
- * @author Leone
+ * @author leone
  * @since 2018-10-08
  **/
 @Slf4j

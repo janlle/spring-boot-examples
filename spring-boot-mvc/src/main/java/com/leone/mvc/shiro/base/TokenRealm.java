@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 
 
 /**
- * @author Leone
+ * @author leone
  **/
 @Component
 public class TokenRealm extends AuthorizingRealm {
