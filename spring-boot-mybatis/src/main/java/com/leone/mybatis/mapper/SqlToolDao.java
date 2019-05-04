@@ -4,9 +4,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
+/**
+ * <p>
+ *
+ * @author leone
+ * @since 2019-05-04
+ **/
 @Mapper
 public interface SqlToolDao {
-
 
     @Update({"create table ${tableName}( " +
             " user_id int primary key not null auto_increment," +

@@ -1,12 +1,8 @@
-server:
-  port: 8081
-  servlet:
-    context-path: /
 # spring-boot 连接 mysql 配置
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://ip:3306/boot?useSSL=false&characterEncoding=utf8&allowMultiQueries=true
+    url: jdbc:mysql://ip:3306/xxxx?useSSL=false&characterEncoding=utf8
     username: xxxx
     password: xxxx
 
@@ -37,10 +33,16 @@ mybatis:
     auto-mapping-behavior: partial
     # 是否可以使用列的别名 (取决于驱动的兼容性) default:true
     use-column-label: true
-    # 指定 Mybatis 创建具有延迟加载能力的对象所用到的代理工具。CGLIB|JAVASSIST, default(JAVASSIST)
-    proxy-factory: CGLIB
     # 指定 MyBatis 增加到日志名称的前缀。任何字符串
     log-prefix: test
   mapper-locations: classpath:mybatis/mapper/*.xml
-  type-aliases-package: com.andy.mapper
+  type-aliases-package: com.leone.mapper
   executor-type: reuse
+
+
+# pageHelper 插件的配置使用的是默认的参数，因此下面不需要配置
+pagehelper:
+  helper-dialect: com.github.pagehelper.dialect.helper.MySqlDialect
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
