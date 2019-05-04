@@ -5,7 +5,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 /**
  * <p> key生成器
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-08
  **/
 public interface CacheKeyGenerator {

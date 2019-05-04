@@ -3,7 +3,7 @@ package com.leone.shiro.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-13
  **/
 @Mapper

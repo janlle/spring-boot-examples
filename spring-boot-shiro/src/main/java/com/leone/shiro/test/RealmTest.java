@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-21
  **/
 

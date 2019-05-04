@@ -20,7 +20,7 @@ import java.util.Random;
  * 每隔指定毫秒生成日志   @Scheduled(fixedRate = 100)
  * 使用cron表达式       @Scheduled(cron = "0/1 * * * * ?")
  *
- * @author Leone
+ * @author leone
  * @since 2018-06-12
  **/
 @Component

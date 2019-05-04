@@ -5,7 +5,7 @@ import com.leone.concurrency.annotations.NotThreadSafe;
 
 /**
  * 双重单例锁模式，线程不安全
- * @author Leone
+ * @author leone
  * @since 2018-05-06
  **/
 @NotThreadSafe

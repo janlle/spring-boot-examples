@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-11
  **/
 @Slf4j

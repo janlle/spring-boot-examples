@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author Leone
+ * @author leone
  **/
 @Component
 public class GlobalErrorAttributes implements ErrorAttributes {

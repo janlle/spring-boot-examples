@@ -4,7 +4,7 @@ package com.leone.shiro.exception;
 import com.leone.shiro.common.MessageEnum;
 
 /**
- * @author Leone
+ * @author leone
  **/
 public class ValidateException extends RuntimeException {
 

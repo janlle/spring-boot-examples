@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-21
  **/
 @Slf4j

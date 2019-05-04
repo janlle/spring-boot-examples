@@ -18,7 +18,7 @@ import java.util.Hashtable;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  **/
 public class MatrixToImageWriterEx {
 

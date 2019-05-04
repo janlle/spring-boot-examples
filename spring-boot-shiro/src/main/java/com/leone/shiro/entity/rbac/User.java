@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * 用户信息
  *
- * @author Leone
+ * @author leone
  * @since 2018-04-19
  **/
 @Data

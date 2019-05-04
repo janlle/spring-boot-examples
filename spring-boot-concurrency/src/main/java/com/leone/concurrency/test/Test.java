@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-10-30
  **/
 public class Test {

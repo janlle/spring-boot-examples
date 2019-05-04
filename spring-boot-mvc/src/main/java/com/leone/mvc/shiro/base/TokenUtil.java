@@ -14,7 +14,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
- * @author Leone
+ * @author leone
  **/
 @Component
 public class TokenUtil {

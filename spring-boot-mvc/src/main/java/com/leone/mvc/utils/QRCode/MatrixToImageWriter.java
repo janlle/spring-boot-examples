@@ -27,7 +27,7 @@ import java.io.OutputStream;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  **/
 public final class MatrixToImageWriter {
 

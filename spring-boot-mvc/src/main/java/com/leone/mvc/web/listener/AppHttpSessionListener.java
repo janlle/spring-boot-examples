@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-13
  **/
 @Slf4j

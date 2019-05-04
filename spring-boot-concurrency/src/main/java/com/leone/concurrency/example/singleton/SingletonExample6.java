@@ -4,7 +4,7 @@ import com.leone.concurrency.annotations.ThreadSafe;
 
 /**
  * 单例饿汉模式
- * @author Leone
+ * @author leone
  * @since 2018-05-06
  **/
 @ThreadSafe

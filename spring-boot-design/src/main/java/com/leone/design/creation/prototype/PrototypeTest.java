@@ -3,7 +3,7 @@ package com.leone.design.creation.prototype;
 import java.util.Date;
 
 /**
- * @author Leone
+ * @author leone
  * @cerateBy: 2018-07-28
  **/
 public class PrototypeTest {

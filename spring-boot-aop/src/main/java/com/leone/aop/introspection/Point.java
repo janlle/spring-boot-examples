@@ -3,7 +3,7 @@ package com.leone.aop.introspection;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-30
  **/
 public class Point {

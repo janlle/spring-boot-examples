@@ -3,7 +3,7 @@ package com.leone.design.behavior.duty;
 /**
  * <p> 告警规则创建
  *
- * @author Leone
+ * @author leone
  * @since 2018-08-22
  **/
 public class AlarmRuleCreator {

@@ -3,7 +3,7 @@ package com.leone.spring.scan;
 import org.springframework.stereotype.Service;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-01
  **/
 @Service("teach")

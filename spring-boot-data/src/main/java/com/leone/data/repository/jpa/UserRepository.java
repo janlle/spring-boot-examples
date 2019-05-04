@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-11
  **/
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {

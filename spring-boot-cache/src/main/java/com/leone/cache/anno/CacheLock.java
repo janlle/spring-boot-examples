@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-09-08
  **/
 @Documented

@@ -3,7 +3,7 @@ package com.leone.mvc.utils.qiniu;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-11-02
  **/
 public enum ZoneEnum {

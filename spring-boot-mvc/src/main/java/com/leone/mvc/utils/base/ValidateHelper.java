@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * <p> 判断对象、字符串、集合是否为空、不为空
  *
- * @author Leone
+ * @author leone
  **/
 public final class ValidateHelper {
 

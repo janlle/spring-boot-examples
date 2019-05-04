@@ -1,7 +1,7 @@
 package com.leone.design.structure.composite;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-08-01
  **/
 public abstract class Component {

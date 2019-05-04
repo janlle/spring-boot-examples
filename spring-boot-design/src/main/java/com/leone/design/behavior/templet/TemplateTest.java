@@ -1,7 +1,7 @@
 package com.leone.design.behavior.templet;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-08-02
  **/
 public class TemplateTest {

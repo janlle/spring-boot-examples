@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * 如果这个线程异常结束，会有另一个取代它，保证顺序执行。
  * 单工作线程最大的特点是可保证顺序地执行各个任务，并且在任意给定的时间不会有多个线程是活动的。
  *
- * @author Leone
+ * @author leone
  * @since 2018-05-08
  **/
 @Slf4j

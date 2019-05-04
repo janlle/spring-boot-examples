@@ -5,7 +5,7 @@ import com.leone.spring.scan.Teacher;
 import javax.annotation.Resource;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-01
  **/
 public class Student {

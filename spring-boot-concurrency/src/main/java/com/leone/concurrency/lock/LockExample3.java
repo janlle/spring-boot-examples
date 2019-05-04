@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-06
  **/
 @Slf4j

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Leone
+ * @author leone
  **/
 @Configuration
 @ConfigurationProperties(prefix = "module.shiro")

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-09
  **/
 public class RateLimiterTest {

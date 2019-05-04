@@ -3,7 +3,7 @@ package com.leone.starter.config;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-12
  **/
 @Component

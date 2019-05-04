@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  **/
 public class CorsFilter extends AbstractFilter {
 

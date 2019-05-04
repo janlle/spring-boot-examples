@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author Leone
+ * @author leone
  **/
 public class TokenFilter extends AuthenticationFilter {
 

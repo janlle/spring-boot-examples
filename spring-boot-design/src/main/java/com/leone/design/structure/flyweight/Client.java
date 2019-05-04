@@ -1,7 +1,7 @@
 package com.leone.design.structure.flyweight;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-31
  **/
 public class Client {

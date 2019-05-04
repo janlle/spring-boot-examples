@@ -1,7 +1,7 @@
 package com.leone.design.creation.builder;
 
 /**
- * @author Leone
+ * @author leone
  * @cerateBy: 2018-07-29
  **/
 public class UserDirector {

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-06
  **/
 public interface TaskRepository extends JpaRepository<JobBean, Integer> {

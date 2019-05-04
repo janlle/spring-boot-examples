@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * <p> http工具类
  *
- * @author Leone
+ * @author leone
  **/
 @Slf4j
 public class HttpUtil {

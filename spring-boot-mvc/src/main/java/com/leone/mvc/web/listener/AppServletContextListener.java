@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-13
  **/
 @Slf4j

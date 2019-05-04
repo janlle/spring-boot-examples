@@ -10,7 +10,7 @@ import org.apache.shiro.subject.Subject;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-06-11
  **/
 @Slf4j

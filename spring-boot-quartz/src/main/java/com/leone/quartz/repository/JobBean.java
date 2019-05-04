@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-06
  **/
 @Entity

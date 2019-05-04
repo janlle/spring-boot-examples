@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-06-29
  **/
 @Service

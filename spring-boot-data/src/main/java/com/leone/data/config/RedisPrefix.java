@@ -1,7 +1,7 @@
 package com.leone.data.config;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-08
  **/
 public class RedisPrefix {

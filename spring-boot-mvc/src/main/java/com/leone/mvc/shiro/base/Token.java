@@ -3,7 +3,7 @@ package com.leone.mvc.shiro.base;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * @author Leone
+ * @author leone
  **/
 public class Token implements AuthenticationToken {
 

@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationListener;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-15
  **/
 public class TaskEventListener implements ApplicationListener<TaskEvent> {

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-19
  **/
 @RestController

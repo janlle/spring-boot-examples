@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-06-21
  **/
 public class Order implements Serializable {

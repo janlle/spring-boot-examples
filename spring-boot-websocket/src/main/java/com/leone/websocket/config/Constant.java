@@ -3,7 +3,7 @@ package com.leone.websocket.config;
 /**
  * webSocket相关配置
  *
- * @author Leone
+ * @author leone
  * @since 2018-07-06
  **/
 public class Constant {

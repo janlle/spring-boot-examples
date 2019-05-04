@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-08
  **/
 @Slf4j

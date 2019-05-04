@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-30
  **/
 public class IntrospectionMain {

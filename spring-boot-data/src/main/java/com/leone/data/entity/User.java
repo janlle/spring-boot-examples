@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * <p> 
  *
- * @author Leone
+ * @author leone
  * @since 2017-11-09
  **/
 @Entity

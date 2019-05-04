@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  **/
 public class MatrixToLogoImageConfig {
 

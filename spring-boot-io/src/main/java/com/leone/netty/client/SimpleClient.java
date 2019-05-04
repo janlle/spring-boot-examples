@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.net.InetSocketAddress;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-06-29
  **/
 @Slf4j

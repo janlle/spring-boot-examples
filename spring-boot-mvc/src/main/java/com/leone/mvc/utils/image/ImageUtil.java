@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * <p> 图像处理 对图片进行压缩、水印、伸缩变换、透明处理、格式转换操作
  *
- * @author Leone
+ * @author leone
  * @since 2018-09-08
  **/
 public class ImageUtil {

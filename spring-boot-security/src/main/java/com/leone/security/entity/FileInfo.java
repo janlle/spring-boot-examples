@@ -1,7 +1,7 @@
 package com.leone.security.entity;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-01-07
  **/
 public class FileInfo {

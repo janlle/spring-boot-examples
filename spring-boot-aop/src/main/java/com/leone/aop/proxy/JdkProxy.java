@@ -10,7 +10,7 @@ import java.lang.reflect.Proxy;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-11-09
  **/
 public class JdkProxy {

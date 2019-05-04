@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-08-27
  **/
 public class JwtTokenTest {

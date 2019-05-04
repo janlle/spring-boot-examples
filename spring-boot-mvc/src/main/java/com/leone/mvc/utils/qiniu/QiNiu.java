@@ -3,7 +3,7 @@ package com.leone.mvc.utils.qiniu;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  **/
 public class QiNiu {
 

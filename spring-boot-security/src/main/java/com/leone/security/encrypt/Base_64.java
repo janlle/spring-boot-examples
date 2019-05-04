@@ -3,7 +3,7 @@ package com.leone.security.encrypt;
 import java.util.Base64;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-10
  **/
 public class Base_64 {

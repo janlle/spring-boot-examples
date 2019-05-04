@@ -1,6 +1,6 @@
 package com.leone.design.behavior.templet;
 /**
- * @author Leone
+ * @author leone
  * @since 2018-08-03
  **/
 public class MoneyMarketAccount extends Account {

@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 普通map变为不可变map
  *
- * @author Leone
+ * @author leone
  * @since 2018-05-06
  **/
 @Slf4j

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 /**
  * <p> 
  *
- * @author Leone
+ * @author leone
  * @since 2018-11-09
  **/
 public class UniversalEnumHandler<E extends BaseEnum> extends BaseTypeHandler<E> {

@@ -7,7 +7,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-05-19
  **/
 public class QuartzTest {

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-06-05
  **/
 @Slf4j

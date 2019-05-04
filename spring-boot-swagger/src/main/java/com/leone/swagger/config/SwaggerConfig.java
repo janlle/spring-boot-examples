@@ -18,7 +18,7 @@ import java.util.Collections;
 import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-07-12
  **/
 @Component

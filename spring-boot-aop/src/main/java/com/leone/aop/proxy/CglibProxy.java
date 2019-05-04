@@ -3,7 +3,7 @@ package com.leone.aop.proxy;
 /**
  * <p>
  *
- * @author Leone
+ * @author leone
  * @since 2018-11-09
  **/
 public class CglibProxy {

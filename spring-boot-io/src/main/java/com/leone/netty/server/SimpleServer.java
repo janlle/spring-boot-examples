@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author Leone
+ * @author leone
  * @since 2018-06-29
  **/
 @Slf4j

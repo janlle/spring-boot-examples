@@ -3,7 +3,7 @@ package com.leone.design.behavior.command;
 /**
  * <p> FunctionButton：功能键类，请求发送者
  *
- * @author Leone
+ * @author leone
  * @since 2018-08-23
  **/
 public class FunctionButton {
