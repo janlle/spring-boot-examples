@@ -1,14 +1,12 @@
 package com.leone.mybatis.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p> 
+ * <p>
  *
  * @author leone
  * @since 2017-11-09
@@ -18,7 +16,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = -8654229598582165411L;
 
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long userId;
 
     @TableField
@@ -36,7 +34,7 @@ public class User implements Serializable {
     @TableField
     private Date createTime;
 
-    @TableField
+    @TableLogic
     private boolean deleted;
 
     public User() {

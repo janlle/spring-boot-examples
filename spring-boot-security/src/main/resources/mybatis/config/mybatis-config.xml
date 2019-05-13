@@ -18,6 +18,6 @@
     </typeAliases>
     
     <mappers>
-       <!--<mapper resource="mapper/userMapper.xml" />-->
+       <!--<mappers resource="mappers/userMapper.xml" />-->
     </mappers>
 </configuration>

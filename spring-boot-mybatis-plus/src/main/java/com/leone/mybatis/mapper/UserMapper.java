@@ -11,6 +11,4 @@ import com.leone.mybatis.entity.User;
  **/
 public interface UserMapper extends BaseMapper<User> {
 
-
-
 }

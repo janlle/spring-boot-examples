@@ -56,5 +56,5 @@ mybatis:
     multiple-result-sets-enabled: true
     #数据库执行超时时间
     default-statement-timeout: 25000
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  mapper-locations: classpath:mybatis/mappers/*.xml
   type-aliases-package: com.andy.entity

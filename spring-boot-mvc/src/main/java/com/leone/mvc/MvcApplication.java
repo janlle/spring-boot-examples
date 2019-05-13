@@ -21,7 +21,7 @@ import java.util.List;
 //扫描servlet filter receive
 @EnableScheduling
 @ServletComponentScan
-@MapperScan("com.andy.mvc.dao.mapper")
+@MapperScan("com.andy.mvc.dao.mappers")
 @SpringBootApplication
 public class MvcApplication {
 

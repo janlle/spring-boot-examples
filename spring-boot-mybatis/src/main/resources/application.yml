@@ -35,8 +35,8 @@ mybatis:
     use-column-label: true
     # 指定 MyBatis 增加到日志名称的前缀。任何字符串
     log-prefix: test
-  mapper-locations: classpath:mybatis/mapper/*.xml
-  type-aliases-package: com.leone.mapper
+  mapper-locations: classpath:mybatis/mappers/*.xml
+  type-aliases-package: com.leone.mappers
   executor-type: reuse
 
 
