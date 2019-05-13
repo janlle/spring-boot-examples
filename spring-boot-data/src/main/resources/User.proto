@@ -5,6 +5,7 @@ option java_package = "com.leone.data";
 option java_outer_classname = "User";
 
 message UserMessage {
+
     int64 userId = 1;
     string account = 2;
     string password = 3;
