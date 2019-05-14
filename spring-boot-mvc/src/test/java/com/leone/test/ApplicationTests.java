@@ -1,7 +1,7 @@
 package com.leone.test;
 
-import com.leone.mvc.MvcApplication;
-import com.leone.mvc.task.Task;
+import com.leone.boot.mvc.MvcApplication;
+import com.leone.boot.mvc.task.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

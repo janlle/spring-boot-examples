@@ -1,6 +1,6 @@
 package com.leone.test;
 
-import com.leone.quartz.QuartzApplication;
+import com.leone.boot.quartz.QuartzApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

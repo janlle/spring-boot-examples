@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.leone.starter.config.HelloServiceAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.leone.boot.starter.config.HelloServiceAutoConfiguration

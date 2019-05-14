@@ -1,0 +1,21 @@
+package com.leone.boot.starter.config;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+/**
+ * @author leone
+ * @since 2018-05-12
+ **/
+@ConfigurationProperties(prefix = "customer")
+public class HelloProperties {
+
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+}

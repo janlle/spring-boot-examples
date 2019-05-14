@@ -1,8 +1,8 @@
 package com.leone.data.test;
 
-import com.leone.common.entity.User;
-import com.leone.data.DataApplication;
-import com.leone.data.repository.jpa.UserRepository;
+import com.leone.boot.common.entity.User;
+import com.leone.boot.data.DataApplication;
+import com.leone.boot.data.repository.jpa.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
