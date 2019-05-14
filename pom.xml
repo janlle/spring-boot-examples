@@ -47,7 +47,7 @@
         <module>spring-boot-shiro</module>
         <module>spring-boot-dubbo-provider</module>
         <module>spring-boot-dubbo-consumer</module>
-        <module>spring-boot-logstash</module>
+        <module>spring-boot-tcc</module>
         <module>spring-boot-dubbo-api</module>
         <module>spring-boot-limited</module>
         <module>spring-boot-mybatis-plus</module>
