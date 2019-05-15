@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * <p>
  *
@@ -17,11 +18,10 @@ import java.util.List;
  **/
 public class GeneratorCode {
 
-    public void generator() throws Exception {
+    public static void main(String[] args) throws Exception {
         List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
-        // 指定配置文件
-        File configFile = new File("/mybatis/generatorConfig.xml");
+        File configFile = new File(GeneratorCode.class.getResource("/mybatis/generatorConfig.xml").getFile());
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
@@ -29,14 +29,4 @@ public class GeneratorCode {
         myBatisGenerator.generate(null);
     }
 
-    // 执行main方法以生成代码
-    public static void main(String[] args) {
-        System.out.println(GeneratorCode.class.getResource("/mybatis/generatorConfig.xml"));
-        try {
-            GeneratorCode generatorCode = new GeneratorCode();
-            generatorCode.generator();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
