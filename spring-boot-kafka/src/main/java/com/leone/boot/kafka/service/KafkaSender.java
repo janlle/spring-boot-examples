@@ -1,7 +1,7 @@
 package com.leone.boot.kafka.service;
 
-import com.leone.boot.common.utils.RandomValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leone.boot.common.utils.RandomValue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class KafkaSender {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -34,10 +34,10 @@ public class KafkaSender {
             // Message<Map> message = new Message<>(offset, RandomValue.randomUser(), new Date());
             String message = RandomValue.randomMessage();
             offset++;
-            //String content = objectMapper.writeValueAsString(message);
+            // String content = objectMapper.writeValueAsString(message);
             kafkaTemplate.send(topic, message);
             Thread.sleep(500);
-            log.info("send message: {} ", message);
+            log.info("send to: {} message: {} ", topic, message);
         }
         return "send to " + topic + " count: " + count;
     }

@@ -1,5 +1,6 @@
 package com.leone.boot.kafka.commen;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @author leone
  * @since 2018-12-26
  **/
-public class Message<T> {
+public class Message<T> implements Serializable {
 
     private Long id;
 
