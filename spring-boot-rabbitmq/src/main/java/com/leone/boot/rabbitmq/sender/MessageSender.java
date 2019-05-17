@@ -31,7 +31,7 @@ public class MessageSender {
      * @param message
      */
     public void send(String routingKey, Object message) {
-        log.info("send default direct routingKey: {}, message: {}", routingKey, message);
+        log.info("send default direct routingKey: {} message: {}", routingKey, message);
         template.convertAndSend(routingKey, message);
     }
 
@@ -43,7 +43,7 @@ public class MessageSender {
      */
     public void sendDirect(String exchange, String routingKey, Object message) {
         template.convertAndSend(exchange, routingKey, message);
-        log.info("send: {}, routingKey: {}, message: {}", exchange, routingKey, message);
+        log.info("send: {} routingKey: {} message: {}", exchange, routingKey, message);
     }
 
 
@@ -56,7 +56,7 @@ public class MessageSender {
      */
     public void sendTopic(String exchange, String routingKey, String message) {
         template.convertAndSend(exchange, routingKey, message);
-        log.info("send: {}, routingKye: {}, message: {}", exchange, routingKey, message);
+        log.info("send: {} routingKye: {} message: {}", exchange, routingKey, message);
     }
 
     /**
@@ -67,7 +67,7 @@ public class MessageSender {
      */
     public void sendFanout(String exchange, String message) {
         template.convertAndSend(exchange, null, message);
-        log.info("send: {}, message: {}", exchange, message);
+        log.info("send: {} message: {}", exchange, message);
     }
 
 
@@ -87,7 +87,7 @@ public class MessageSender {
         }
         Message data = new Message(message.getBytes(), properties);
         template.convertAndSend(exchange, "", data);
-        log.info("send: {}, message: {}", exchange, message);
+        log.info("send: {} message: {}", exchange, message);
     }
 
 }

@@ -18,10 +18,6 @@ import java.util.Map;
 public class BindingConfig {
 
     // 消息队列
-
-    @Resource(name = RabbitMqConstant.QUEUE_A)
-    private Queue queue_a;
-
     @Resource(name = RabbitMqConstant.QUEUE_B)
     private Queue queue_b;
 
@@ -47,7 +43,6 @@ public class BindingConfig {
     private Queue queue_i;
 
     // 交换机
-
     @Resource
     private TopicExchange topicExchange;
 
