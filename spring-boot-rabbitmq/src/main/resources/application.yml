@@ -3,7 +3,7 @@ spring:
     name: spring-rabbitmq
   rabbitmq:
     port: 5672
-    host: 39.108.125.41
+    host: ip
     username: cloud
     password: cloud
     publisher-confirms: true
