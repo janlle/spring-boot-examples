@@ -10,12 +10,22 @@ spring:
     port: 5672
     username: cloud
     password: cloud
-    host: 127.0.0.1
+    host: ip
     publisher-confirms: true
-    virtual-host: /cloud
+    virtual-host: /mc
     listener:
       simple:
+        # 消费端最小并发数
         concurrency: 5
-        max-concurrency: 10
+        # 消费端最大并发数
+        max-concurrency: 15
+        # 手动应答
         acknowledge-mode: manual
+        # 一次请求中预处理的消息数量
         prefetch: 1
+#      direct:
+#        acknowledge-mode: manual
+    cache:
+      channel:
+        # 缓存的channel数量
+        size: 50

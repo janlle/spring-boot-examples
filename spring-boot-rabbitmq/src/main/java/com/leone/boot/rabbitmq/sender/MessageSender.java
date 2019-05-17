@@ -22,7 +22,7 @@ public class MessageSender {
 
     //-------------------------普通队列模式-------------------------------
     public void sendQueue(String queue, Object msg) {
-        log.info("send:{},message:{}", queue, msg);
+        log.info("send: {}, message: {}", queue, msg);
         template.convertAndSend(queue, msg);
     }
 
@@ -37,8 +37,8 @@ public class MessageSender {
     public void sendDirect(String exchange, Object msg) {
         template.convertAndSend(exchange, RabbitMQConstant.KEY_C, msg);
         template.convertAndSend(exchange, RabbitMQConstant.KEY_D, msg);
-        log.info("send:{}交换机,routing_key:{},message:{}", exchange, RabbitMQConstant.KEY_C, msg);
-        log.info("send:{}交换机,routing_key:{},message:{}", exchange, RabbitMQConstant.KEY_D, msg);
+        log.info("send: {}, routing_key: {}, message: {}", exchange, RabbitMQConstant.KEY_C, msg);
+        log.info("send: {}, routing_key: {}, message: {}", exchange, RabbitMQConstant.KEY_D, msg);
     }
 
 
@@ -70,8 +70,8 @@ public class MessageSender {
      * @param msg
      */
     public void sendFanout(String exchange, Object msg) {
-        template.convertAndSend(exchange, "some thing", msg);
-        log.info("send:{},交换机,message:{}", exchange, msg);
+        template.convertAndSend(exchange,"", msg);
+        log.info("send: {}, message: {}", exchange, msg);
     }
 
 
@@ -90,8 +90,8 @@ public class MessageSender {
         properties.setHeader("header-b", "value-b");
 
         Message message = new Message(msg.getBytes(), properties);
-        template.convertAndSend(exchange, "", message);
-        log.info("send:{},交换机,message:{}", exchange, msg.getBytes());
+        template.convertAndSend(exchange, message);
+        log.info("send: {}, message: {}", exchange, msg.getBytes());
     }
 
 }
