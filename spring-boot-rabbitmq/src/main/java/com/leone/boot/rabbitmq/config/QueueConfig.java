@@ -13,49 +13,58 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class QueueConfig {
 
-    @Bean
+
+    /**
+     * 参数1 name ：队列名
+     * 参数2 durable ：是否持久化
+     * 参数3 exclusive ：仅创建者可以使用的私有队列，断开后自动删除
+     * 参数4 autoDelete : 当所有消费客户端连接断开后，是否自动删除队列
+     *
+     * @return
+     */
+    @Bean(name = "queue-a")
     public Queue queue_a() {
-        return new Queue(RabbitMQConstant.QUEUE_A, true);
+        return new Queue(RabbitMqConstant.QUEUE_A, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-b")
     public Queue queue_b() {
-        return new Queue(RabbitMQConstant.QUEUE_B, true);
+        return new Queue(RabbitMqConstant.QUEUE_B, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-c")
     public Queue queue_c() {
-        return new Queue(RabbitMQConstant.QUEUE_C, true);
+        return new Queue(RabbitMqConstant.QUEUE_C, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-d")
     public Queue queue_d() {
-        return new Queue(RabbitMQConstant.QUEUE_D, true);
+        return new Queue(RabbitMqConstant.QUEUE_D, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-e")
     public Queue queue_e() {
-        return new Queue(RabbitMQConstant.QUEUE_E, true);
+        return new Queue(RabbitMqConstant.QUEUE_E, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-f")
     public Queue queue_f() {
-        return new Queue(RabbitMQConstant.QUEUE_F, true);
+        return new Queue(RabbitMqConstant.QUEUE_F, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-g")
     public Queue queue_g() {
-        return new Queue(RabbitMQConstant.QUEUE_G, true);
+        return new Queue(RabbitMqConstant.QUEUE_G, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-h")
     public Queue queue_h() {
-        return new Queue(RabbitMQConstant.QUEUE_H, true);
+        return new Queue(RabbitMqConstant.QUEUE_H, true, false, false);
     }
 
-    @Bean
+    @Bean(name = "queue-i")
     public Queue queue_i() {
-        return new Queue(RabbitMQConstant.QUEUE_I, true);
+        return new Queue(RabbitMqConstant.QUEUE_I, true, false, false);
     }
 
 }

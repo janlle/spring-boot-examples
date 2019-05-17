@@ -1,16 +1,11 @@
-server:
-  port: 8081
-  servlet:
-    context-path: /
-
 spring:
   application:
     name: spring-rabbitmq
   rabbitmq:
     port: 5672
+    host: ip
     username: cloud
     password: cloud
-    host: ip
     publisher-confirms: true
     virtual-host: /mc
     listener:
@@ -21,11 +16,21 @@ spring:
         max-concurrency: 15
         # 手动应答
         acknowledge-mode: manual
-        # 一次请求中预处理的消息数量
+        # 消费者每次从队列中获取的消息数量
         prefetch: 1
-#      direct:
-#        acknowledge-mode: manual
+        # 消费者自动启动
+        auto-startup: true
+        # 消费失败，自动重新入队
+        default-requeue-rejected: true
+      direct:
+        acknowledge-mode: manual
     cache:
       channel:
         # 缓存的channel数量
         size: 50
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms
+        max-attempts: 3
+

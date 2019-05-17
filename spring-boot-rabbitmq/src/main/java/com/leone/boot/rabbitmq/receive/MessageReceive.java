@@ -1,23 +1,22 @@
 package com.leone.boot.rabbitmq.receive;
 
-import com.leone.boot.rabbitmq.config.RabbitMQConstant;
+import com.leone.boot.rabbitmq.config.RabbitMqConstant;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
 
 /**
  * @author leone
  * @since 2018-05-15
  **/
 @Slf4j
-@Component
+//@Component
 public class MessageReceive {
 
 
     //-------------------------普通队列模式-------------------------------
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_A)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_A)
     public void receiveQueue(Object msg, Channel channel) throws Exception {
         try {
             Thread.sleep(3000);
@@ -26,48 +25,48 @@ public class MessageReceive {
         } finally {
             // channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
         }
-        log.info("receive:{} message:{}  --- queue", RabbitMQConstant.QUEUE_A, msg);
+        log.info("receive:{} message:{}  --- queue", RabbitMqConstant.QUEUE_A, msg);
     }
 
 
     //-------------------------topic类型的交换机(主题模式)-------------------------
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_B)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_B)
     public void receiveTopicA(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("receive:{} message:{} --- receiveTopicA", RabbitMQConstant.TOPIC_EXCHANGE, msg);
+        log.info("receive:{} message:{} --- receiveTopicA", RabbitMqConstant.TOPIC_EXCHANGE, msg);
     }
 
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_C)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_C)
     public void receiveTopicB(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("receive:{} message:{} --- receiveTopicB", RabbitMQConstant.TOPIC_EXCHANGE, msg);
+        log.info("receive:{} message:{} --- receiveTopicB", RabbitMqConstant.TOPIC_EXCHANGE, msg);
     }
 
 
     //-------------------------headers类型的交换机(首部模式)------------------------
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_F)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_F)
     public void receiveHeaders(byte[] msg) throws Exception {
         Thread.sleep(3000);
-        log.info("receive:{} message:{} --- receiveHeaders", RabbitMQConstant.HEADERS_EXCHANGE, new String(msg));
+        log.info("receive:{} message:{} --- receiveHeaders", RabbitMqConstant.HEADERS_EXCHANGE, new String(msg));
     }
 
 
     //-------------------------direct类型的交换机(直连模式)------------------------
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_D)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_D)
     public void receiveDirectA(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("receive:{} message:{} --- receiveDirectA", RabbitMQConstant.DIRECT_EXCHANGE, msg);
+        log.info("receive:{} message:{} --- receiveDirectA", RabbitMqConstant.DIRECT_EXCHANGE, msg);
     }
 
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_E)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_E)
     public void receiveDirectB(Object msg) throws Exception {
         Thread.sleep(3000);
-        log.info("receive:{} message:{} --- receiveDirectB", RabbitMQConstant.DIRECT_EXCHANGE, msg);
+        log.info("receive:{} message:{} --- receiveDirectB", RabbitMqConstant.DIRECT_EXCHANGE, msg);
     }
 
 
     //------------------------- fanout类型的交换机(广播模式)-----------------------
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_G)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_G)
     public void receiveFanoutA(Message msg, Channel channel) throws Exception {
         try {
             Thread.sleep(3000);
@@ -81,7 +80,7 @@ public class MessageReceive {
         log.info("receive: {}, message: {}, consumerQueue: {}", msg.getMessageProperties().getReceivedExchange(), new String(msg.getBody()), msg.getMessageProperties().getConsumerQueue());
     }
 
-    @RabbitListener(queues = RabbitMQConstant.QUEUE_H)
+    @RabbitListener(queues = RabbitMqConstant.QUEUE_H)
     public void receiveFanoutB(Message msg, Channel channel) throws Exception {
         try {
             Thread.sleep(3000);
