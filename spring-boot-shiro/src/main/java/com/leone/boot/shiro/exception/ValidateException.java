@@ -1,7 +1,6 @@
 package com.leone.boot.shiro.exception;
 
-
-import com.leone.boot.shiro.common.MessageEnum;
+import com.leone.boot.shiro.common.ExceptionMessage;
 
 /**
  * @author leone
@@ -21,7 +20,7 @@ public class ValidateException extends RuntimeException {
     public ValidateException() {
     }
 
-    public ValidateException(MessageEnum messageEnum) {
+    public ValidateException(ExceptionMessage messageEnum) {
         this.code = messageEnum.getCode();
         this.message = messageEnum.getMessage();
     }

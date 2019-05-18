@@ -3,6 +3,7 @@ package com.leone.boot.shiro.entity;
 import java.util.Date;
 
 public class Permission {
+
     private Long permissionId;
 
     private String name;

@@ -3,7 +3,7 @@ package com.leone.boot.shiro.common;
 /**
  * @author leone
  **/
-public enum MessageEnum {
+public enum ExceptionMessage {
 
     SUCCESS(20000, "success"),
     WARNING(40000, "warning"),
@@ -50,10 +50,10 @@ public enum MessageEnum {
 
     private String message;
 
-    MessageEnum() {
+    ExceptionMessage() {
     }
 
-    MessageEnum(Integer code, String message) {
+    ExceptionMessage(Integer code, String message) {
         this.message = message;
         this.code = code;
     }
@@ -74,8 +74,8 @@ public enum MessageEnum {
         this.message = message;
     }
 
-    public MessageEnum get(MessageEnum target) {
-        for (MessageEnum result : MessageEnum.values()) {
+    public ExceptionMessage get(ExceptionMessage target) {
+        for (ExceptionMessage result : ExceptionMessage.values()) {
             if (result == target) {
                 return result;
             }
