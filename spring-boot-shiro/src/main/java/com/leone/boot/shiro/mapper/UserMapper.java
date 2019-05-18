@@ -8,7 +8,7 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
-    User findByAccount(String account);
+    User findByAccount(@Param("account") String account);
 
     User login(@Param("account") String account, @Param("password") String password);
 

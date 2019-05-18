@@ -2,11 +2,11 @@ spring:
   datasource:
     url: jdbc:mysql://ip:3306/boot?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
-    username: xxx
-    password: xxx
+    username: root
+    password: cloud
   thymeleaf:
     cache: false
-    prefix: classpath:templates
+    prefix: classpath:/templates/
     suffix: .html
     mode: HTML
     encoding: UTF-8
@@ -14,20 +14,20 @@ spring:
       content-type: text/html
     check-template-location: false
 
+
 mybatis:
   type-aliases-package: com.leone.shiro.entity
   mapper-locations: classpath:mybatis/mappers/*.xml
 
-module:
+app:
   shiro:
-    multiLogin: false
-    cacheDays: 7
-    redisPrefix: ${server.port}
-    anonUrls:
-    - /api/user/property
-    - /api/user/login
-    csrfUrls: /**
-    authUrls: /**
+    cacheTime: 4320
+    redisPrefix: shiro:${server.port}
     tokenPrefix: auth.token.
+    anonUrls:
+      - /login
+      - /image
+      - /api/shiro/user/account
+    authUrls: /**
 
 

@@ -10,7 +10,7 @@
 
         <!-- 数据库链接URL、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://39.108.125.41:3306/boot?useSSL=false"
+                        connectionURL="jdbc:mysql://ip:3306/boot?useSSL=false"
                         userId="root"
                         password="cloud">
         </jdbcConnection>

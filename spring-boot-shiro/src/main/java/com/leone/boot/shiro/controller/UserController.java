@@ -32,15 +32,9 @@ public class UserController {
         return userService.findByAccount(account);
     }
 
-    @PostMapping("/login")
-    public User login(@RequestBody User user) {
-        return userService.login(user.getAccount(), user.getPassword());
-    }
-
     /**
      * 查询用户
      */
-
     @RequestMapping("/list")//符合user:view或user:add权限要求即可
     @RequiresPermissions(value = {"user:add", "user:select"}, logical = Logical.OR)
     public String user() {
@@ -83,12 +77,7 @@ public class UserController {
     public String index(ModelMap modelMap) {
         return "index";
     }
-    //登录页(shiro配置需要两个/login 接口,一个是get用来获取登陆页面,一个用post用于登录,这是一个坑)
-//    @GetMapping("/login")
-//    public String login() {
-//        log.info("跳转到login页面控制器！");
-//        return "login";
-//    }
+
 
 
     //    @ResponseStatus(HttpStatus.GONE)
@@ -106,15 +95,6 @@ public class UserController {
 //        }
 //    }
 
-    @RequestMapping("/logout")
-    public String logout() {
-        Subject subject = SecurityUtils.getSubject();
-        if (subject != null) {
-            subject.logout();
-        }
-        return "login";
-    }
-
 //    @RequiresUser
 //    @RequestMapping("/guest")
 //    public String guest() {
@@ -128,12 +108,7 @@ public class UserController {
 //        System.out.println(user);
 //    }
 
-    @RequestMapping("/image")
-    public void validCode(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-        ImgCodeUtil.generate(response, 200, 20);
-        String code = (String) session.getAttribute("imageCode");
-        log.info("imageCode:{}", code);
-    }
+
 
 
 }

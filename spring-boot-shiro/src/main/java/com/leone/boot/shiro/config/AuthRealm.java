@@ -7,7 +7,10 @@ import com.leone.boot.shiro.entity.User;
 import com.leone.boot.shiro.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -37,14 +40,9 @@ public class AuthRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        log.info("进入AuthorizingRealm认证方法...");
-        String name = (String) token.getPrincipal();
-        // 获取用户名和密码
-        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
-        String username = usernamePasswordToken.getUsername();
-        String password = usernamePasswordToken.getPassword().toString();
-        // 查询数据库
-        User user = userService.findByAccount(username);
+        log.info("进入 AuthorizingRealm 认证方法...");
+        String name = token.getPrincipal().toString();
+        User user = userService.findByAccount(name);
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 
@@ -59,8 +57,10 @@ public class AuthRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.info("进入AuthorizingRealm授权方法...");
         User user = (User) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
+
         List<String> permissionList = new ArrayList<>();
         List<String> roleList = new ArrayList<>();
+
         Set<Role> roleSet = user.getRoles();
         if (CollectionUtils.isNotEmpty(roleSet)) {
             for (Role role : roleSet) {
@@ -76,8 +76,7 @@ public class AuthRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addStringPermissions(permissionList);
         info.addRoles(roleList);
-        log.info("permissionList:{}", permissionList);
-        log.info("roleList:{}", roleList);
+        log.info("user: {} roles: {} permissions: {}", user.getAccount(), roleList, permissionList);
         return info;
     }
 

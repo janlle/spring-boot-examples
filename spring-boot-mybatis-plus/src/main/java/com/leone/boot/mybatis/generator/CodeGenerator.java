@@ -48,7 +48,7 @@ public class CodeGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("cloud");
-        dsc.setUrl("jdbc:mysql://39.108.125.41:3306/boot?useSSL=false");
+        dsc.setUrl("jdbc:mysql://ip:3306/boot?useSSL=false");
         mpg.setDataSource(dsc);
 
         // 策略配置

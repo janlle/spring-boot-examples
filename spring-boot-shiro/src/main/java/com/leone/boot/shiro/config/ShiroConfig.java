@@ -1,6 +1,5 @@
 package com.leone.boot.shiro.config;
 
-import com.leone.boot.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -20,14 +19,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import javax.servlet.Filter;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * <p> shiro 配置
@@ -36,7 +32,7 @@ import java.util.Set;
  * @see org.apache.shiro.web.filter.mgt.DefaultFilter
  * @since 2018-04-21
  **/
-//@Configuration
+@Configuration
 public class ShiroConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
@@ -56,18 +52,29 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperties shiroProperty) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
-
+        shiroFilter.setSecurityManager(securityManager);
         Map<String, String> filterChainMapping = shiroFilter.getFilterChainDefinitionMap();
-        swaggerFilterChain(filterChainMapping);
-        setUrl(filterChainMapping, "anon", shiroProperty.getAnonUrls());
-        setUrl(filterChainMapping, "auth", shiroProperty.getAuthUrls());
+
+        // 不被被拦截的链接 顺序判断
+        if (!ObjectUtils.isEmpty(shiroProperty.getAnonUrls())) {
+            for (String anonUrl : shiroProperty.getAnonUrls()) {
+                filterChainMapping.put(anonUrl, "anon");
+            }
+        }
+
+        // 被被拦截的链接 顺序判断
+        if (!ObjectUtils.isEmpty(shiroProperty.getAuthUrls())) {
+            for (String authcUrl : shiroProperty.getAuthUrls()) {
+                filterChainMapping.put(authcUrl, "authc");
+            }
+        }
+
+        //退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
+        filterChainMapping.put("/logout", "logout");
 
         shiroFilter.setFilterChainDefinitionMap(filterChainMapping);
-        shiroFilter.setSecurityManager(securityManager);
-        Map<String, Filter> filters = new HashMap<>();
-        filters.put("auth", new TokenFilter());
-        shiroFilter.setFilters(filters);
-        shiroFilter.setLoginUrl("/api/login");
+        shiroFilter.setLoginUrl("/login");
+
         logger.info("shiro filter init success");
         return shiroFilter;
     }
@@ -75,18 +82,17 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager(AuthRealm authRealm, CacheManager cacheManager, SessionManager sessionManager, RememberMeManager rememberMeManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-
         // 自定义 realm
         securityManager.setRealm(authRealm);
 
         // 设置自定义缓存实现 使用redis
-        securityManager.setCacheManager(cacheManager);
+        //securityManager.setCacheManager(cacheManager);
 
         // 设置自定义session管理 使用redis
-        securityManager.setSessionManager(sessionManager);
+        //securityManager.setSessionManager(sessionManager);
 
         // 设置自定义记住我管理器
-        securityManager.setRememberMeManager(rememberMeManager);
+        //securityManager.setRememberMeManager(rememberMeManager);
 
         // 注入安全管理器，里面包含了大部分信息，比较重要
         SecurityUtils.setSecurityManager(securityManager);
@@ -100,7 +106,7 @@ public class ShiroConfig {
     @Bean
     public AuthRealm authRealm(CredentialsMatcher credentialMatcher) {
         AuthRealm authRealm = new AuthRealm();
-        authRealm.setCredentialsMatcher(credentialMatcher);
+        // authRealm.setCredentialsMatcher(credentialMatcher);
         return authRealm;
     }
 
@@ -142,35 +148,6 @@ public class ShiroConfig {
 
 
     /**
-     * 设置忽略url路径
-     *
-     * @param mapping
-     * @param filterName
-     * @param urls
-     */
-    private void setUrl(Map<String, String> mapping, String filterName, Set<String> urls) {
-        if (urls != null && urls.size() > 0) {
-            for (String url : urls) {
-                if (!StringUtils.isEmpty(url)) {
-                    mapping.put(url, filterName);
-                }
-            }
-        }
-    }
-
-    /**
-     * 设置swagger忽略url路径
-     *
-     * @param mapping
-     */
-    private void swaggerFilterChain(Map<String, String> mapping) {
-        mapping.put("/v2/api-docs", "anon");
-        mapping.put("/configuration/**", "anon");
-        mapping.put("/webjars/**", "anon");
-        mapping.put("/swagger**", "anon");
-    }
-
-    /**
      * 密码加密匹配管理器
      *
      * @return
@@ -181,7 +158,7 @@ public class ShiroConfig {
         // 使用那种摘要算法
         hashedCredentialsMatcher.setHashAlgorithmName("MD5");
         // 散列的次数，比如散列两次，相当于 md5(md5(""));
-        hashedCredentialsMatcher.setHashIterations(2);
+        hashedCredentialsMatcher.setHashIterations(1);
         return hashedCredentialsMatcher;
     }
 

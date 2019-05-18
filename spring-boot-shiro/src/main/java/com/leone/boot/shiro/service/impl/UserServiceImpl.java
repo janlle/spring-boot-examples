@@ -4,6 +4,8 @@ import com.leone.boot.shiro.entity.User;
 import com.leone.boot.shiro.mapper.UserMapper;
 import com.leone.boot.shiro.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByAccount(String account) {
         User user = userMapper.findByAccount(account);
-        log.info("user:{}", user);
+        log.info("user: {}", user);
         return user;
     }
 
@@ -40,4 +42,5 @@ public class UserServiceImpl implements UserService {
     public void logout(String account) {
 
     }
+
 }
