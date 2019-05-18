@@ -23,7 +23,7 @@ import java.io.PrintWriter;
  * @author leone
  * @since 2018-07-05
  **/
-@Component
+//@Component
 public class TokenFilter extends AuthenticationFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);

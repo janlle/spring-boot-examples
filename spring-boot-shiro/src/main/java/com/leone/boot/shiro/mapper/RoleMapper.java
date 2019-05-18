@@ -1,12 +1,9 @@
 package com.leone.boot.shiro.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import com.leone.boot.shiro.entity.Role;
 
-/**
- * @author leone
- * @since 2018-05-13
- **/
-@Mapper
 public interface RoleMapper {
+    int insert(Role record);
 
+    int insertSelective(Role record);
 }

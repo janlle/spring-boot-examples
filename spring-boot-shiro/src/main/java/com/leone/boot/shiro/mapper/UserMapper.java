@@ -1,14 +1,15 @@
 package com.leone.boot.shiro.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import com.leone.boot.shiro.entity.User;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * @author leone
- * @since 2018-04-21
- **/
-@Mapper
 public interface UserMapper {
+    int insert(User record);
 
-//    User getByAccount(@Param("account") String account);
+    int insertSelective(User record);
+
+    User findByAccount(String account);
+
+    User login(@Param("account") String account, @Param("password") String password);
 
 }

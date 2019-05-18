@@ -21,7 +21,7 @@ import java.io.IOException;
  * @author leone
  * @since 2018-11-08
  **/
-@Component
+//@Component
 public class CsrfFilter extends AbstractFilter {
 
     public CsrfFilter() {

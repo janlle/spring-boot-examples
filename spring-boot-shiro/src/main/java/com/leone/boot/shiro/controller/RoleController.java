@@ -1,4 +1,4 @@
-package com.leone.boot.shiro.web;
+package com.leone.boot.shiro.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;

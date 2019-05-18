@@ -1,7 +1,7 @@
 package com.leone.boot.shiro.common.util;
 
 import com.leone.boot.shiro.config.Token;
-import com.leone.boot.shiro.entity.rbac.User;
+import com.leone.boot.shiro.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

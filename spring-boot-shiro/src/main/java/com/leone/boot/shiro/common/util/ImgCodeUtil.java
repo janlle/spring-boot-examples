@@ -1,24 +1,32 @@
 package com.leone.boot.shiro.common.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
+ * <p>
+ *
  * @author leone
- * @since 2018-04-07
+ * @since 2019-04-26
  **/
-public class ImageCodeUtil {
+@Slf4j
+public class ImgCodeUtil {
 
-    private static int width = 72;
-
-    private static int height = 21;
-
-    public static void generate(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+    /**
+     * 生成验证码
+     *
+     * @param response
+     * @param width
+     * @param height
+     * @return
+     * @throws Exception
+     */
+    public static String generate(HttpServletResponse response, int width, int height) throws Exception {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
         Random random = new Random();
@@ -33,14 +41,13 @@ public class ImageCodeUtil {
             int yl = random.nextInt(12);
             g.drawLine(x, y, x + xl, y + yl);
         }
-        String sRand = "";
+        StringBuilder sRand = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             String rand = String.valueOf(random.nextInt(10));
-            sRand += rand;
+            sRand.append(rand);
             g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
             g.drawString(rand, 13 * i + 6, 16);
         }
-        session.setAttribute("imageCode", sRand);
         g.dispose();
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragma", "no-cache");
@@ -48,6 +55,7 @@ public class ImageCodeUtil {
         response.setContentType("image/jpeg");
         ImageIO.write(image, "JPG", response.getOutputStream());
         response.getOutputStream().close();
+        return sRand.toString();
     }
 
     /**

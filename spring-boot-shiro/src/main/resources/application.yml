@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/boot?useSSL=false
+    url: jdbc:mysql://ip:3306/boot?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
-    username: xxxx
-    password: xxxx
+    username: xxx
+    password: xxx
   thymeleaf:
     cache: false
     prefix: classpath:templates
@@ -15,7 +15,7 @@ spring:
     check-template-location: false
 
 mybatis:
-  type-aliases-package: com.andy.shiro.entity.rbac
+  type-aliases-package: com.leone.shiro.entity
   mapper-locations: classpath:mybatis/mappers/*.xml
 
 module:
