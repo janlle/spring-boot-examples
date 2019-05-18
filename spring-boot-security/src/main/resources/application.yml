@@ -32,6 +32,6 @@ security:
       client-id: andyid
       client-secret: andysecret
   user:
-    name: andy
-    password: andy
-    role: user
+    name: xxx
+    password: xxx
+    role: xxx

@@ -8,6 +8,7 @@ import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -16,6 +17,7 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,31 +42,33 @@ public class ShiroConfig {
     private static Base64.Decoder decoder = Base64.getDecoder();
 
     @Resource
+    private ShiroProperties shiroProperties;
+
+    @Resource
     private RedisProperties redisProperties;
 
     /**
      * shiro 核心 filter
      *
      * @param securityManager
-     * @param shiroProperty
      * @return
      */
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager, ShiroProperties shiroProperty) {
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
         Map<String, String> filterChainMapping = shiroFilter.getFilterChainDefinitionMap();
 
         // 不被被拦截的链接 顺序判断
-        if (!ObjectUtils.isEmpty(shiroProperty.getAnonUrls())) {
-            for (String anonUrl : shiroProperty.getAnonUrls()) {
+        if (!ObjectUtils.isEmpty(shiroProperties.getAnonUrls())) {
+            for (String anonUrl : shiroProperties.getAnonUrls()) {
                 filterChainMapping.put(anonUrl, "anon");
             }
         }
 
         // 被被拦截的链接 顺序判断
-        if (!ObjectUtils.isEmpty(shiroProperty.getAuthUrls())) {
-            for (String authcUrl : shiroProperty.getAuthUrls()) {
+        if (!ObjectUtils.isEmpty(shiroProperties.getAuthUrls())) {
+            for (String authcUrl : shiroProperties.getAuthUrls()) {
                 filterChainMapping.put(authcUrl, "authc");
             }
         }
@@ -73,7 +77,7 @@ public class ShiroConfig {
         filterChainMapping.put("/logout", "logout");
 
         shiroFilter.setFilterChainDefinitionMap(filterChainMapping);
-        shiroFilter.setLoginUrl("/login");
+        shiroFilter.setLoginUrl(shiroProperties.getLoginUrl());
 
         logger.info("shiro filter init success");
         return shiroFilter;
@@ -86,13 +90,13 @@ public class ShiroConfig {
         securityManager.setRealm(authRealm);
 
         // 设置自定义缓存实现 使用redis
-        //securityManager.setCacheManager(cacheManager);
+        securityManager.setCacheManager(cacheManager);
 
         // 设置自定义session管理 使用redis
         //securityManager.setSessionManager(sessionManager);
 
         // 设置自定义记住我管理器
-        //securityManager.setRememberMeManager(rememberMeManager);
+        securityManager.setRememberMeManager(rememberMeManager);
 
         // 注入安全管理器，里面包含了大部分信息，比较重要
         SecurityUtils.setSecurityManager(securityManager);
@@ -104,10 +108,8 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public AuthRealm authRealm(CredentialsMatcher credentialMatcher) {
-        AuthRealm authRealm = new AuthRealm();
-        // authRealm.setCredentialsMatcher(credentialMatcher);
-        return authRealm;
+    public AuthRealm authRealm() {
+        return new AuthRealm();
     }
 
     /**
@@ -129,7 +131,7 @@ public class ShiroConfig {
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位），通过以下代码可以获取
-        byte[] cipherKey = decoder.decode("wGiHplamyXlVB11UXWol8g==");
+        byte[] cipherKey = decoder.decode(shiroProperties.getCipherKey());
         cookieRememberMeManager.setCipherKey(cipherKey);
         cookieRememberMeManager.setCookie(rememberMeCookie());
         return cookieRememberMeManager;
@@ -173,6 +175,7 @@ public class ShiroConfig {
     public RedisCacheManager cacheManager(RedisManager redisManager) {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager);
+        redisCacheManager.setPrincipalIdFieldName("userId");
         return redisCacheManager;
     }
 
@@ -190,6 +193,33 @@ public class ShiroConfig {
         redisManager.setDatabase(redisProperties.getDatabase());
         redisManager.setPassword(redisProperties.getPassword());
         return redisManager;
+    }
+
+
+    /**
+     * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
+     * 配置以下两个bean(DefaultAdvisorAutoProxyCreator和AuthorizationAttributeSourceAdvisor)即可实现此功能
+     *
+     * @return
+     */
+    @Bean
+    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        advisorAutoProxyCreator.setProxyTargetClass(true);
+        return advisorAutoProxyCreator;
+    }
+
+    /**
+     * 开启aop注解支持，解决shiro注解不起作用问题
+     *
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
     }
 
 

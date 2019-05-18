@@ -10,11 +10,9 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,14 +36,14 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String account, @RequestParam String password, HttpSession session) {
+    public String login(@RequestParam String account, @RequestParam String password, HttpSession session, @RequestHeader("Host") String host) {
         password = new Md5Hash("admin").toString();
         User login = userService.login(account, password);
         try {
             if (!ObjectUtils.isEmpty(login)) {
                 session.setAttribute("user", login);
                 Subject subject = SecurityUtils.getSubject();
-                subject.login(new UsernamePasswordToken(account, password));
+                subject.login(new UsernamePasswordToken(account, password, true, host));
                 if (subject.isAuthenticated()) {
                     return "index";
                 }
@@ -60,6 +58,11 @@ public class LoginController {
     public void validCode(HttpServletResponse response, HttpSession session) throws Exception {
         String code = ImgCodeUtil.generate(response, 60, 18);
         log.info("code: {}", code);
+    }
+
+    @RequestMapping("/index")
+    public String index(ModelMap modelMap) {
+        return "index";
     }
 
 }

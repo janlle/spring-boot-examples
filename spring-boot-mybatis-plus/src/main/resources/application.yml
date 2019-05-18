@@ -3,8 +3,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://ip:3306/boot?useSSL=false&characterEncoding=utf8
-    username: root
-    password: cloud
+    username: xxx
+    password: xxx
 
 
 # mybatis-plus 配置

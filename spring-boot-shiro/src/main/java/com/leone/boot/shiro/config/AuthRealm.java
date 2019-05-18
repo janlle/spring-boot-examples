@@ -40,7 +40,7 @@ public class AuthRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        log.info("进入 AuthorizingRealm 认证方法...");
+        log.info("AuthorizingRealm 认证...");
         String name = token.getPrincipal().toString();
         User user = userService.findByAccount(name);
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
@@ -55,7 +55,7 @@ public class AuthRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        log.info("进入AuthorizingRealm授权方法...");
+        log.info("AuthorizingRealm 授权...");
         User user = (User) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
 
         List<String> permissionList = new ArrayList<>();

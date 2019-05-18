@@ -1,9 +1,10 @@
 package com.leone.boot.shiro.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-public class User {
+public class User implements Serializable {
 
     private Long userId;
 

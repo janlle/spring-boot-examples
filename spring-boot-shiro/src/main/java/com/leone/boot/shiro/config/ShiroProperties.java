@@ -23,6 +23,12 @@ public class ShiroProperties {
     // token的前缀
     private String tokenPrefix = "token";
 
+    private String loginUrl = "/login";
+
+    private String logoutUrl = "/logout";
+
+    private String cipherKey = "wGiHplamyXlVB11UXWol8g==";
+
     // 匿名访问的url
     private Set<String> anonUrls = Collections.emptySet();
 
@@ -67,5 +73,29 @@ public class ShiroProperties {
 
     public void setAuthUrls(Set<String> authUrls) {
         this.authUrls = authUrls;
+    }
+
+    public String getLoginUrl() {
+        return loginUrl;
+    }
+
+    public void setLoginUrl(String loginUrl) {
+        this.loginUrl = loginUrl;
+    }
+
+    public String getLogoutUrl() {
+        return logoutUrl;
+    }
+
+    public void setLogoutUrl(String logoutUrl) {
+        this.logoutUrl = logoutUrl;
+    }
+
+    public String getCipherKey() {
+        return cipherKey;
+    }
+
+    public void setCipherKey(String cipherKey) {
+        this.cipherKey = cipherKey;
     }
 }
