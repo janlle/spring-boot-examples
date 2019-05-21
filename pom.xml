@@ -25,7 +25,7 @@
         <module>spring-boot-concurrency</module>
         <module>spring-boot-mail</module>
         <module>spring-boot-data</module>
-        <module>spring-boot-starter</module>
+        <module>spring-boot-starter-custom</module>
         <module>spring-boot-session</module>
         <module>spring-boot-quartz</module>
         <module>spring-boot-swagger</module>

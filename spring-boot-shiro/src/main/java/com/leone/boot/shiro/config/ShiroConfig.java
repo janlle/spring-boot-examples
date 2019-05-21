@@ -93,7 +93,7 @@ public class ShiroConfig {
         securityManager.setCacheManager(cacheManager);
 
         // 设置自定义session管理 使用redis
-        //securityManager.setSessionManager(sessionManager);
+        securityManager.setSessionManager(sessionManager);
 
         // 设置自定义记住我管理器
         securityManager.setRememberMeManager(rememberMeManager);
