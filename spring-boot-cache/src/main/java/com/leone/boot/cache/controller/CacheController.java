@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018-09-08
  **/
 @RestController
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/api/cache")
+public class CacheController {
 
     @GetMapping
     @CacheLock(prefix = "books")
@@ -26,7 +26,7 @@ public class BookController {
 
     @Transactional(propagation = Propagation.SUPPORTS,readOnly = true,isolation = Isolation.DEFAULT)
     @PostMapping
-    @LocalLock(key = "book:arg[0]")
+    @LocalLock(key = "book.save()")
     public String save(@RequestParam String token) {
         return "success - " + token;
     }

@@ -14,7 +14,6 @@ public class EntityFactory {
 
     public static List<Order> orderList = new LinkedList<>();
 
-
     static {
         for (long i = 0; i < 100; i++) {
             Date date = new Date(new Date().getTime() - (random.nextInt(1000000) + 1000000));
