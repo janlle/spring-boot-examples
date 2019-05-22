@@ -3,12 +3,12 @@ spring:
     name: spring-boot-seurity
   datasource:
     url: jdbc:mysql://localhost:3306/db01?useSSL=false
-    username: xxx
+    username: root
     password: xxx
     driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
     cache: false
-    prefix: classpath:/templates
+    prefix: classpath:/templates/
     suffix: .htm
     mode: HTML
     encoding: UTF-8

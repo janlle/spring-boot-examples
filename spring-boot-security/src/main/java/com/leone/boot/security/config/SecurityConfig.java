@@ -31,18 +31,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                // .antMatchers("/api/user/*").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/authentication/form","/login")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
-                .logout().permitAll()
+                .logout()
+                .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user").hasRole("ADMIN")
                 .and()
                 .formLogin()
+                .loginPage("/login")
                 .and()
-                .csrf().disable();
+                .csrf()
+                .disable();
     }
 
     /**
@@ -64,18 +67,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //1.inMemoryAuthentication 从内存中获取
+        // 1.inMemoryAuthentication 从内存中获取
         /*auth.inMemoryAuthentication()
                 .withUser("admin").password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("admin")).roles("ADMIN").and()
                 .withUser("andy").password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("andy")).roles("USER").and();*/
 
-        //2.jdbcAuthentication从数据库中获取，但是默认是以security提供的表结构
-        //usersByUsernameQuery 指定查询用户SQL
-        //authoritiesByUsernameQuery 指定查询权限SQL
-        //auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(query).authoritiesByUsernameQuery(query);
+        // 2.jdbcAuthentication从数据库中获取，但是默认是以security提供的表结构
+        // usersByUsernameQuery 指定查询用户SQL
+        // authoritiesByUsernameQuery 指定查询权限SQL
+        // auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(query).authoritiesByUsernameQuery(query);
         // auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(passwordEncoder);
 
-        //3.注入userDetailsService，需要实现userDetailsService接口
+        // 3.注入userDetailsService，需要实现userDetailsService接口
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
 
     }

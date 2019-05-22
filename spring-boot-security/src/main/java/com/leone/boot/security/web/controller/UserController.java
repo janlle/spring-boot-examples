@@ -1,6 +1,7 @@
 package com.leone.boot.security.web.controller;
 
 import com.leone.boot.security.entity.User;
+import com.leone.boot.security.service.IUserService;
 import com.leone.boot.security.service.UserServiceImpl;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
@@ -22,23 +23,12 @@ import java.util.List;
 public class UserController {
 
     @Resource
-    private UserServiceImpl userService;
-
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
+    private IUserService userService;
 
     @GetMapping("/{account}")
     public User findByAccount(@PathVariable String account) {
         return userService.findByAccount(account);
     }
-
-    @PostMapping("/authentication/form")
-    public String login() {
-        return "login";
-    }
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 //	@PostAuthorize("hasRole('ROLE_ADMIN')")
@@ -63,9 +53,9 @@ public class UserController {
         return idList;
     }
 
-    @GetMapping("/login-test")
-    public boolean login(String account, String password) {
-        return userService.login(account, password);
-    }
+//    @PostMapping("/login")
+//    public List<Integer> login(@RequestParam ) {
+//        return idList;
+//    }
 
 }
