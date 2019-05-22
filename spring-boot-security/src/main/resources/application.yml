@@ -2,36 +2,26 @@ spring:
   application:
     name: seurity
   datasource:
-    url: jdbc:mysql://localhost:3306/boot?useSSL=false
-    username: xxxx
-    password: xxxx
+    url: jdbc:mysql://localhost:3306/db01?useSSL=false
+    username: root
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#      naming:
-#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-#    show-sql: true
-#    open-in-view: true
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
     suffix: .html
-    mode: LEGACYHTML5
+    mode: HTML
     encoding: UTF-8
     servlet:
       content-type: text/html
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-security:
-  oauth2:
-    client:
-      client-id: andyid
-      client-secret: andysecret
-  user:
-    name: xxx
-    password: xxx
-    role: xxx
+    show-sql: true
+    open-in-view: true
+
+  security:
+    user:
+      name: user

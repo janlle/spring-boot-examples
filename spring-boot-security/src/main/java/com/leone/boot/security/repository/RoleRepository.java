@@ -1,6 +1,6 @@
 package com.leone.boot.security.repository;
 
-import com.leone.boot.security.entity.rbac.Role;
+import com.leone.boot.security.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

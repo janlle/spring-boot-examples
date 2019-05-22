@@ -1,6 +1,5 @@
-package com.leone.boot.security.entity.rbac;
+package com.leone.boot.security.entity;
 
-import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -18,7 +17,6 @@ import java.util.Date;
  **/
 @Data
 @Entity
-@ApiModel("权限实体")
 @Table(name = "sys_permission")
 public class Permission implements Serializable {
 

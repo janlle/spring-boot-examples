@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author leone
@@ -16,10 +17,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  **/
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)//允许进入页面方法前检验
-public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailServiceImpl userDetailService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //定义安全策略
     @Override
@@ -38,14 +42,23 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-    //配置哪些资源不需要认证
+    /**
+     * 配置哪些资源不需要认证
+     *
+     * @param web
+     */
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/static/**");
     }
 
 
-    //有以下几种形式，使用第3种
+    /**
+     * 有以下几种形式，使用第3种
+     *
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //1.inMemoryAuthentication 从内存中获取
@@ -59,10 +72,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         //usersByUsernameQuery 指定查询用户SQL
         //authoritiesByUsernameQuery 指定查询权限SQL
         //auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(query).authoritiesByUsernameQuery(query);
-        auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(new AppPasswordEncoder());
+        auth.jdbcAuthentication().usersByUsernameQuery("").authoritiesByUsernameQuery("").passwordEncoder(passwordEncoder);
 
         //3.注入userDetailsService，需要实现userDetailsService接
-        auth.userDetailsService(userDetailService).passwordEncoder(new AppPasswordEncoder());
+        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder);
 
     }
 }

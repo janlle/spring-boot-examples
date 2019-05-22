@@ -1,108 +1,59 @@
 package com.leone.boot.security.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 用户信息
+ *
+ * @author leone
+ * @since 2018-04-19
+ **/
 @Data
 @Entity
-@Table(name = "t_user")
+@Table(name = "sys_user")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '账号'")
     private String account;
 
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
     private String password;
 
-    private String description;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '邮箱'")
+    private String email;
 
-    private Integer age;
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '盐'")
+    private String salt;
 
+    @CreatedDate
+    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private Date createTime;
 
-    private boolean deleted;
+    @LastModifiedDate
+    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'")
+    private Date updateTime;
 
-    public User() {
-    }
+    @Column(columnDefinition = "bit NOT NULL COMMENT '是否可用'")
+    private Boolean disable;
 
-    public User(String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
-        this.account = account;
-        this.password = password;
-        this.description = description;
-        this.age = age;
-        this.createTime = createTime;
-        this.deleted = deleted;
-    }
+    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
+    private Boolean deleted;
 
-    public User(Long userId, String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
-        this.userId = userId;
-        this.account = account;
-        this.password = password;
-        this.description = description;
-        this.age = age;
-        this.createTime = createTime;
-        this.deleted = deleted;
-    }
+//    @ApiModelProperty("角色集合")
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "t_user_role",
+//            joinColumns = {@JoinColumn(name = "uId", referencedColumnName = "userId")},
+//            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
+//    private Set<Role> roles = new HashSet<>();
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
 }
-

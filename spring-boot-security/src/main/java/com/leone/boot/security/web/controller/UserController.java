@@ -2,7 +2,6 @@ package com.leone.boot.security.web.controller;
 
 import com.leone.boot.security.entity.User;
 import com.leone.boot.security.service.UserService;
-import com.leone.boot.security.util.EntityFactory;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,7 +23,7 @@ public class UserController {
 
     @GetMapping("/list")
     public List<User> list() {
-        return EntityFactory.getUsers(10);
+        return null;
     }
 
     @PostMapping("/authentication/form")

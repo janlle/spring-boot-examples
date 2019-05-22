@@ -1,9 +1,9 @@
 package com.leone.boot.security.service;
 
-import com.leone.boot.security.mapper.UserMapper;
+import com.leone.boot.security.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
+import org.springframework.util.ObjectUtils;
 
 /**
  * <p>
@@ -14,12 +14,11 @@ import javax.annotation.Resource;
 @Service
 public class UserService {
 
-    @Resource
-    private UserMapper userMapper;
+    @Autowired
+    private UserRepository userRepository;
 
     public boolean login(String account, String password) {
-        return userMapper.login(account, password).size() > 0;
+        return ObjectUtils.isEmpty(userRepository.login(account, password));
     }
-
 
 }

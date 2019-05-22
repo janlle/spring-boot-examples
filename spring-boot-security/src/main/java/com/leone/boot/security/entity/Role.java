@@ -1,7 +1,5 @@
-package com.leone.boot.security.entity.rbac;
+package com.leone.boot.security.entity;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,7 +15,6 @@ import java.util.Date;
  **/
 @Data
 @Entity
-@ApiModel("角色实体")
 @Table(name = "sys_role")
 public class Role {
 

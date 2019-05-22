@@ -3,11 +3,11 @@ package com.leone.boot.security.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.social.security.SocialUser;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,10 +32,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
         String password = passwordEncoder.encode("andy");
         log.info("登录用户是:{}数据库的密码是:{}", username, password);
 
-        return new SocialUser(username, password, true, true, true, true,
+        return new User(username, password, true, true, true, true,
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
-
 
 
 }
