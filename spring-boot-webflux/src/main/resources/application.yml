@@ -18,5 +18,5 @@ spring:
     open-in-view: true
   data:
     mongodb:
-      uri: mongodb://39.108.125.41:8080/webflux
+      uri: mongodb://ip:8080/webflux
 

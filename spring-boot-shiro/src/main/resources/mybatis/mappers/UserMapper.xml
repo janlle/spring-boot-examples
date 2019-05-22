@@ -1,47 +1,115 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leone.boot.shiro.mapper.UserMapper">
 
-    <resultMap id="userMap" type="com.leone.boot.shiro.entity.rbac.User">
-        <id property="userId" column="user_id"/>
-        <result property="account" column="account"/>
-        <result property="password" column="password"/>
-        <result property="description" column="description"/>
-        <result property="age" column="age"/>
-        <result property="deleted" column="deleted"/>
-        <result property="createTime" column="create_time"/>
+    <resultMap id="BaseResultMap" type="com.leone.boot.shiro.entity.User">
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
 
-        <collection property="roles" ofType="com.leone.boot.shiro.entity.rbac.Role">
-            <id property="roleId" column="role_id"/>
-            <result property="roleName" column="role_name"/>
-            <result property="description" column="description"/>
-            <result property="deleted" column="deleted"/>
-            <result property="createTime" column="create_time"/>
+    <resultMap id="UserRoleMap" type="com.leone.boot.shiro.entity.User">
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
 
-            <collection property="permissions" ofType="com.leone.boot.shiro.entity.rbac.Permission">
-                <id property="permissionId" column="permission_id"/>
-                <result property="permissionName" column="permission_name"/>
-                <result property="url" column="url"/>
-                <result property="parentId" column="parent_id"/>
-                <result property="description" column="description"/>
-                <result property="resourceType" column="resource_type" typeHandler="com.leone.boot.shiro.common.enums.UniversalEnumHandler"/>
-                <result property="deleted" column="deleted"/>
-                <result property="createTime" column="create_time"/>
+        <collection property="roles" ofType="com.leone.boot.shiro.entity.Role">
+            <id column="role_id" jdbcType="BIGINT" property="roleId"/>
+            <result column="description" jdbcType="VARCHAR" property="description"/>
+            <result column="role" jdbcType="VARCHAR" property="role"/>
+            <result column="status" jdbcType="TINYINT" property="status"/>
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+
+            <collection property="permissions" ofType="com.leone.boot.shiro.entity.Permission">
+                <id column="permission_id" jdbcType="BIGINT" property="permissionId"/>
+                <result column="name" jdbcType="VARCHAR" property="name"/>
+                <result column="url" jdbcType="VARCHAR" property="url"/>
+                <result column="status" jdbcType="TINYINT" property="status"/>
+                <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+                <result column="resource_type" jdbcType="VARCHAR" property="resourceType"/>
+                <result column="permission" jdbcType="VARCHAR" property="permission"/>
+                <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
             </collection>
         </collection>
     </resultMap>
 
-    <select id="getByAccount" parameterType="String" resultMap="userMap">
-        SELECT
-            u.*,
-            p.*,
-            r.*
-        FROM sys_user u
-            INNER JOIN sys_user_role ur on u.user_id = ur.u_id
-            INNER JOIN sys_role r on r.role_id = ur.r_id
-            INNER JOIN sys_permission_role pr on pr.r_id = r.role_id
-            INNER JOIN sys_permission p on p.permission_id = pr.p_id
-        WHERE u.account = #{account} limit 1
+    <insert id="insert" parameterType="com.leone.boot.shiro.entity.User">
+        insert into sys_user (user_id, account, nickname,password, salt, status, create_time)
+        values (#{userId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
+                #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
+                #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.leone.boot.shiro.entity.User">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="nickname != null">
+                nickname,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+
+    <select id="findByAccount" parameterType="java.lang.String" resultMap="UserRoleMap">
+        SELECT u.*, p.*, r.* FROM sys_user u
+          LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+          LEFT JOIN sys_role r ON r.role_id = ur.role_id
+          LEFT JOIN sys_permission_role rp ON rp.role_id = r.role_id
+          LEFT JOIN sys_permission p ON p.permission_id = rp.permission_id
+        WHERE account = #{account, jdbcType=VARCHAR} LIMIT 1;
+    </select>
+
+    <select id="login" resultMap="BaseResultMap">
+        select * from sys_user where account = #{account} and password = #{password}
     </select>
 
 </mapper>

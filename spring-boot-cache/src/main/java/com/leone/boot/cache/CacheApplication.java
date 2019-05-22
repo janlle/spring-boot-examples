@@ -25,6 +25,4 @@ public class CacheApplication {
     public CacheKeyGenerator cacheKeyGenerator() {
         return new LockKeyGenerator();
     }
-
-
 }

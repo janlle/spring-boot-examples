@@ -1,7 +1,7 @@
 package com.leone.boot.shiro.exception;
 
-import com.leone.boot.shiro.common.MessageEnum;
-import com.leone.boot.shiro.common.Response;
+import com.leone.boot.shiro.common.ExceptionMessage;
+import com.leone.boot.shiro.common.Result;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
@@ -23,30 +23,30 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidateException.class)
-    public Response handleBaseException(ValidateException e) {
+    public Result handleBaseException(ValidateException e) {
         logger.error("{}", e.getMessage());
-        return Response.build(e.getCode(), e.getMessage());
+        return Result.build(e.getMessage(), e.getCode(), null);
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AuthorizationException.class)
-    public Response handleAuthorizationException(Throwable e) {
+    public Result handleAuthorizationException(Throwable e) {
         logger.error("{}", e.getMessage());
-        return Response.build(MessageEnum.UNAUTHORIZED);
+        return Result.build(ExceptionMessage.UNAUTHORIZED);
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AuthenticationException.class)
-    public Response handleAuthenticationException(Throwable e) {
+    public Result handleAuthenticationException(Throwable e) {
         logger.error("{}", e.getMessage());
-        return Response.build(MessageEnum.UNAUTHORIZED);
+        return Result.build(ExceptionMessage.UNAUTHORIZED);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public Response handleBaseException(IllegalArgumentException e) {
+    public Result handleBaseException(IllegalArgumentException e) {
         logger.error("{}", e.getMessage());
-        return Response.build(MessageEnum.BAD_REQUEST);
+        return Result.build(ExceptionMessage.BAD_REQUEST);
     }
 
 }

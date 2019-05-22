@@ -1,13 +1,9 @@
 package com.leone.boot.shiro.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
+import com.leone.boot.shiro.entity.Permission;
 
-/**
- * @author leone
- * @since 2018-05-13
- **/
-@Mapper
 public interface PermissionMapper {
+    int insert(Permission record);
 
-
+    int insertSelective(Permission record);
 }

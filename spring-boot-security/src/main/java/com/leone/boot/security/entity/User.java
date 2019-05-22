@@ -1,53 +1,48 @@
 package com.leone.boot.security.entity;
 
-import lombok.Data;
+import org.hibernate.annotations.Proxy;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+/**
+ * 用户信息
+ *
+ * @author leone
+ * @since 2018-04-19
+ **/
 @Entity
-@Table(name = "t_user")
+@Table(name = "sys_user")
+@Proxy(lazy = false)
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
 
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '昵称'")
+    private String nickname;
+
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '账号'")
     private String account;
 
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
     private String password;
 
-    private String description;
-
-    private Integer age;
-
+    @CreatedDate
+    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private Date createTime;
 
-    private boolean deleted;
+    @Column(columnDefinition = "bit NOT NULL COMMENT '状态1.正常，2.禁用，3.冻结，4.删除'")
+    private Integer status;
 
-    public User() {
-    }
-
-    public User(String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
-        this.account = account;
-        this.password = password;
-        this.description = description;
-        this.age = age;
-        this.createTime = createTime;
-        this.deleted = deleted;
-    }
-
-    public User(Long userId, String account, String password, String description, Integer age, Date createTime, Boolean deleted) {
-        this.userId = userId;
-        this.account = account;
-        this.password = password;
-        this.description = description;
-        this.age = age;
-        this.createTime = createTime;
-        this.deleted = deleted;
-    }
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinTable(name = "sys_user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
 
     public Long getUserId() {
         return userId;
@@ -55,6 +50,14 @@ public class User implements Serializable {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getAccount() {
@@ -73,22 +76,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -97,12 +84,19 @@ public class User implements Serializable {
         this.createTime = createTime;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
-

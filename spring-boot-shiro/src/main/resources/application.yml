@@ -1,12 +1,12 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/boot?useSSL=false
+    url: jdbc:mysql://ip:3306/boot?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
-    username: xxxx
-    password: xxxx
+    username: xxx
+    password: xxx
   thymeleaf:
     cache: false
-    prefix: classpath:templates
+    prefix: classpath:/templates/
     suffix: .html
     mode: HTML
     encoding: UTF-8
@@ -14,20 +14,45 @@ spring:
       content-type: text/html
     check-template-location: false
 
+
 mybatis:
-  type-aliases-package: com.andy.shiro.entity.rbac
+  configuration:
+    # 全局映射器启用缓存
+    cache-enabled: false
+    # 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载。
+    aggressive-lazy-loading: false
+    # 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载
+    lazy-loading-enabled: false
+    # 对于批量更新操作缓存SQL以提高性能
+    default-executor-type: reuse
+    # 允许返回不同的结果集以达到通用的效果
+    multiple-result-sets-enabled: true
+    # 数据库执行超时时间
+    default-statement-timeout: 25000
+    # 打印sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键，有一些驱动器不兼容不过仍然可以执行。  default:false
+    use-generated-keys: true
+    # 设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型
+    jdbc-type-for-null: null
+    # 使用驼峰命名法转换字段
+    map-underscore-to-camel-case: true
+    # 指定 MyBatis 如何自动映射 数据基表的列 NONE：不隐射　PARTIAL:部分  FULL:全部
+    auto-mapping-behavior: partial
+    # 是否可以使用列的别名 (取决于驱动的兼容性) default:true
+    use-column-label: true
+  type-aliases-package: com.leone.shiro.entity
   mapper-locations: classpath:mybatis/mappers/*.xml
 
-module:
+app:
   shiro:
-    multiLogin: false
-    cacheDays: 7
-    redisPrefix: ${server.port}
-    anonUrls:
-    - /api/user/property
-    - /api/user/login
-    csrfUrls: /**
-    authUrls: /**
+    cacheTime: 4320
+    redisPrefix: shiro:${server.port}
     tokenPrefix: auth.token.
+    anonUrls:
+      - /login
+      - /image
+      - /api/shiro/user/account
+    authUrls: /**
 
 

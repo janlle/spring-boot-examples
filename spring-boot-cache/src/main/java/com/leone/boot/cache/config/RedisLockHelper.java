@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 /**
- * <p> 需要定义成 Bean
+ * <p> redisLock配置
  *
  * @author leone
  * @since 2018-09-08
@@ -47,7 +47,8 @@ public class RedisLockHelper {
      * @return true or false
      */
     public boolean tryLock(final String lockKey, final String value, final long time, final TimeUnit unit) {
-        return stringRedisTemplate.execute((RedisCallback<Boolean>) connection -> connection.set(lockKey.getBytes(), value.getBytes(), Expiration.from(time, unit), RedisStringCommands.SetOption.SET_IF_ABSENT));
+        Boolean execute = stringRedisTemplate.execute((RedisCallback<Boolean>) connection -> connection.set(lockKey.getBytes(), value.getBytes(), Expiration.from(time, unit), RedisStringCommands.SetOption.SET_IF_ABSENT));
+        return execute;
     }
 
 

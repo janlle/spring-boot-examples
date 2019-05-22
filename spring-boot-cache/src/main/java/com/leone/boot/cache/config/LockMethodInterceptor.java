@@ -1,8 +1,8 @@
 package com.leone.boot.cache.config;
 
-import com.leone.boot.cache.anno.LocalLock;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.leone.boot.cache.anno.LocalLock;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
+import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -68,15 +69,17 @@ public class LockMethodInterceptor {
      * @return 生成的key
      */
     private static String getKey(String keyExpress, Object[] args) {
+        StringJoiner joiner = new StringJoiner(",", "(", ")");
         for (int i = 0; i < args.length; i++) {
-            keyExpress = keyExpress.replace("arg[" + i + "]", args[i].toString());
+            joiner.add(args[i].toString());
+            keyExpress = keyExpress.replace("()", joiner.toString());
         }
         return keyExpress;
     }
 
 
     public static void main(String[] args) {
-        String key = getKey("book:arg[0]", new Object[]{"123"});
+        String key = getKey("book.save()", new Object[]{"123,234,hello"});
         System.out.println(key);
     }
 }

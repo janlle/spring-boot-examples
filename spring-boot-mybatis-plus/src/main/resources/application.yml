@@ -2,9 +2,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.108.125.41:3306/boot?useSSL=false&characterEncoding=utf8
-    username: root
-    password: cloud
+    url: jdbc:mysql://ip:3306/boot?useSSL=false&characterEncoding=utf8
+    username: xxx
+    password: xxx
 
 
 # mybatis-plus 配置

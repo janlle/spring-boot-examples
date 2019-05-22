@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+
+<h3>表单登录</h3>
+<table>
+    <form action="/login" method="POST">
+        <tr>
+            <td>账 号:</td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>密 码:</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>记住我</td>
+            <td><input type="checkbox" name="remember-me" value="true"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="登录"></td>
+        </tr>
+    </form>
+</table>
+
+<h3>社交登录</h3>
+<a href="/qqLogin">QQ登录</a>
+
+<a href="/wxLogin">微信登录</a>
+
+<script type="text/javascript">
+    function sendSms() {
+        var mobile = $("#phone").value;
+        alert("进入发送短信方法,手机号:" + mobile)
+        $.ajax({
+            type: "GET",
+            async: true,
+            data: {"mobile": mobile},
+            url: "http://localhost:8088/code/sms",
+            success: function (data) {
+                alert("发送成功")
+            },
+            error: function (data) {
+                alert("发送失败")
+            }
+        });
+    }
+</script>
+</body>
+</html>

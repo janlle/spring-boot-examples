@@ -1,40 +1,37 @@
 package com.leone.boot.security.web.controller;
 
 import com.leone.boot.security.entity.User;
-import com.leone.boot.security.service.UserService;
-import com.leone.boot.security.util.EntityFactory;
+import com.leone.boot.security.service.IUserService;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
+/**
+ * <p>
+ *
+ * @author leone
+ * @since 2018-05-22
+ **/
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Resource
-    private UserService userService;
+    private IUserService userService;
 
-    @GetMapping("/list")
-    public List<User> list() {
-        return EntityFactory.getUsers(10);
+    @GetMapping
+    public User findByAccount(@RequestParam String account) {
+        return userService.findByAccount(account);
     }
-
-    @PostMapping("/authentication/form")
-    public String login() {
-        return "login";
-    }
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-//	@PostAuthorize("hasRole('ROLE_ADMIN')")
 //	@PreFilter("")
 //	@PostFilter("")
     @GetMapping("/roleAuth")
@@ -51,14 +48,40 @@ public class UserController {
 
     @PreFilter("filterObject%2==0")
     @PostFilter("filterObject%4==0")
-    @RequestMapping("/test2")
+    @RequestMapping("/filter")
     public List<Integer> test(List<Integer> idList) {
         return idList;
     }
 
-    @GetMapping("/login-test")
-    public boolean login(String account, String password) {
-        return userService.login(account, password);
+    /**
+     * 拒绝所有请求
+     *
+     * @return
+     */
+    @DenyAll
+    @PostMapping
+    public String user() {
+        return "save";
+    }
+
+    /**
+     * @param userId
+     * @return
+     */
+    @RolesAllowed({"user", "admin"})
+    @GetMapping("/{userId}")
+    public String user(@PathVariable("userId") Long userId) {
+        return "find";
+    }
+
+    @PutMapping
+    public String update() {
+        return "update";
+    }
+
+    @DeleteMapping
+    public String delete() {
+        return "delete";
     }
 
 }

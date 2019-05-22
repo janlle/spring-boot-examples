@@ -9,7 +9,7 @@ spring:
       name: service-provider
     base-package: com.andy.provider.service # dubbo服务发布者所在的包
     registry:
-      address: 39.108.125.41  # zookeeper注册中心的地址
+      address: ip  # zookeeper注册中心的地址
       port: 2181              # zookeeper注册中心的端口
       protocol: zookeeper
       register: true

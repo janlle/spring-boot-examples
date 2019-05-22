@@ -1,5 +1,6 @@
 package com.leone.boot.websocket.controller;
 
+import com.leone.boot.starter.custom.config.CustomService;
 import com.leone.boot.websocket.config.Constant;
 import com.leone.boot.websocket.config.WsMessage;
 import com.leone.boot.websocket.config.WsResponse;
@@ -7,7 +8,10 @@ import com.leone.boot.websocket.service.WebSocketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +33,12 @@ public class WebController {
     @Resource
     private WebSocketService webSocketService;
 
+    @Resource
+    private CustomService customService;
+
     @RequestMapping("/hello")
     public String socket(HttpServletRequest request, HttpServletResponse response) {
-        return "success";
+        return customService.info();
     }
 
     @RequestMapping("/name")
@@ -49,5 +56,6 @@ public class WebController {
         webSocketService.send2Users(users, new WsResponse("admin hello"));
         return new WsResponse("Welcome, " + message.getName() + "!");
     }
+
 
 }
