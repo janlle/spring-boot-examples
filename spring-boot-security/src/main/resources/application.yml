@@ -1,22 +1,22 @@
 spring:
   application:
-    name: seurity
+    name: spring-boot-seurity
   datasource:
     url: jdbc:mysql://localhost:3306/db01?useSSL=false
-    username: root
-    password: root
+    username: xxx
+    password: xxx
     driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
     cache: false
-    prefix: classpath:/templates/
-    suffix: .html
+    prefix: classpath:/templates
+    suffix: .htm
     mode: HTML
     encoding: UTF-8
     servlet:
       content-type: text/html
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       naming:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
     show-sql: true

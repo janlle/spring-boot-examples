@@ -15,4 +15,5 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
     @Query(nativeQuery = true, value = "select * from sys_user where username = ? and password = ?")
     User login(String account, String password);
+
 }

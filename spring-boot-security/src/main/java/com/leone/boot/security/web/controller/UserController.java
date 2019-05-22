@@ -1,29 +1,37 @@
 package com.leone.boot.security.web.controller;
 
 import com.leone.boot.security.entity.User;
-import com.leone.boot.security.service.UserService;
+import com.leone.boot.security.service.UserServiceImpl;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * <p>
+ *
+ * @author leone
+ * @since 2018-05-22
+ **/
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Resource
-    private UserService userService;
+    private UserServiceImpl userService;
 
-    @GetMapping("/list")
-    public List<User> list() {
-        return null;
+    @GetMapping("/index")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/{account}")
+    public User findByAccount(@PathVariable String account) {
+        return userService.findByAccount(account);
     }
 
     @PostMapping("/authentication/form")

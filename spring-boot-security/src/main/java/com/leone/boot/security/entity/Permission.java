@@ -1,12 +1,14 @@
 package com.leone.boot.security.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Proxy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -15,9 +17,9 @@ import java.util.Date;
  * @author leone
  * @since 2018-04-19
  **/
-@Data
 @Entity
 @Table(name = "sys_permission")
+@Proxy(lazy = false)
 public class Permission implements Serializable {
 
     @Id
@@ -25,17 +27,13 @@ public class Permission implements Serializable {
     private Long permissionId;
 
     @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '权限名称'")
-    private String permissionName;
+    private String permission;
 
     @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '资源路径'")
     private String url;
 
     @Column(columnDefinition = "integer NOT NULL COMMENT '父编号'")
     private Long parentId;
-
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "integer NOT NULL COMMENT '资源类型，[menu|button]'")
-    private ResourceType type;
 
     @Column(columnDefinition = "varchar(255) NOT NULL COMMENT '描述'")
     private String description;
@@ -44,25 +42,74 @@ public class Permission implements Serializable {
     @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private Date createTime;
 
-    @LastModifiedDate
-    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'")
-    private Date updateTime;
+    @Column(columnDefinition = "bit NOT NULL COMMENT '状态1.正常，2.禁用，3.冻结，4.删除'")
+    private Integer status;
 
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否可用'")
-    private Boolean disable;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "permissions", fetch=FetchType.EAGER)
+    private Set<Role> roles;
 
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
-    private Boolean deleted;
-
-//    @ApiModelProperty("对应角色")
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "t_permission_role",
-//            joinColumns = {@JoinColumn(name = "pid", referencedColumnName = "permissionId")},
-//            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
-//    private Set<Role> roles = new HashSet<>();
-
-    private enum ResourceType {
-        MENU, BUTTON
+    public Long getPermissionId() {
+        return permissionId;
     }
 
+    public void setPermissionId(Long permissionId) {
+        this.permissionId = permissionId;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

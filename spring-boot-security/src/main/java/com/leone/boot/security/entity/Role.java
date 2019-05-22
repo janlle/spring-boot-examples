@@ -1,11 +1,13 @@
 package com.leone.boot.security.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Proxy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 角色信息
@@ -13,9 +15,9 @@ import java.util.Date;
  * @author leone
  * @since 2018-04-19
  **/
-@Data
 @Entity
 @Table(name = "sys_role")
+@Proxy(lazy = false)
 public class Role {
 
     @Id
@@ -23,7 +25,7 @@ public class Role {
     private Long roleId;
 
     @Column(columnDefinition = "varchar(64) NOT NULL COMMENT '角色名称'")
-    private String roleName;
+    private String role;
 
     @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '角色的详情'")
     private String description;
@@ -32,22 +34,70 @@ public class Role {
     @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private Date createTime;
 
-    @LastModifiedDate
-    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'")
-    private Date updateTime;
+    @Column(columnDefinition = "bit NOT NULL COMMENT '状态1.正常，2.禁用，3.冻结，4.删除'")
+    private Integer status;
 
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否可用'")
-    private Boolean disable;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles", fetch=FetchType.EAGER)
+    private Set<User> users = new HashSet<>();
 
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
-    private Boolean deleted;
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinTable(name = "sys_permission_role", joinColumns = {@JoinColumn(name = "permission_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Permission> permissions;
 
-//    @ApiModelProperty("对应的权限集合")
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<Permission> permissions = new HashSet<>();
+    public Long getRoleId() {
+        return roleId;
+    }
 
-//    @ApiModelProperty("对应的角色集合")
-//    @ManyToMany(mappedBy = "roles")
-//    private Set<User> users = new HashSet<>();
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
 }

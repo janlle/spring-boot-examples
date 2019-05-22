@@ -1,12 +1,13 @@
 package com.leone.boot.security.entity;
 
-import lombok.Data;
+import org.hibernate.annotations.Proxy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 用户信息
@@ -14,14 +15,17 @@ import java.util.Date;
  * @author leone
  * @since 2018-04-19
  **/
-@Data
 @Entity
 @Table(name = "sys_user")
+@Proxy(lazy = false)
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+
+    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '昵称'")
+    private String nickname;
 
     @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '账号'")
     private String account;
@@ -29,31 +33,70 @@ public class User implements Serializable {
     @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '密码'")
     private String password;
 
-    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '邮箱'")
-    private String email;
-
-    @Column(columnDefinition = "varchar(128) NOT NULL COMMENT '盐'")
-    private String salt;
-
     @CreatedDate
     @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'")
     private Date createTime;
 
-    @LastModifiedDate
-    @Column(columnDefinition = "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'")
-    private Date updateTime;
+    @Column(columnDefinition = "bit NOT NULL COMMENT '状态1.正常，2.禁用，3.冻结，4.删除'")
+    private Integer status;
 
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否可用'")
-    private Boolean disable;
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinTable(name = "sys_user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
 
-    @Column(columnDefinition = "bit NOT NULL COMMENT '是否删除'")
-    private Boolean deleted;
+    public Long getUserId() {
+        return userId;
+    }
 
-//    @ApiModelProperty("角色集合")
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "t_user_role",
-//            joinColumns = {@JoinColumn(name = "uId", referencedColumnName = "userId")},
-//            inverseJoinColumns = {@JoinColumn(name = "rId", referencedColumnName = "roleId")})
-//    private Set<Role> roles = new HashSet<>();
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
