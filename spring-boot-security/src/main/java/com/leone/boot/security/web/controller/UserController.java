@@ -2,7 +2,6 @@ package com.leone.boot.security.web.controller;
 
 import com.leone.boot.security.entity.User;
 import com.leone.boot.security.service.IUserService;
-import com.leone.boot.security.service.UserServiceImpl;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +9,8 @@ import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 /**
@@ -25,13 +26,12 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    @GetMapping("/{account}")
-    public User findByAccount(@PathVariable String account) {
+    @GetMapping
+    public User findByAccount(@RequestParam String account) {
         return userService.findByAccount(account);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-//	@PostAuthorize("hasRole('ROLE_ADMIN')")
 //	@PreFilter("")
 //	@PostFilter("")
     @GetMapping("/roleAuth")
@@ -48,14 +48,40 @@ public class UserController {
 
     @PreFilter("filterObject%2==0")
     @PostFilter("filterObject%4==0")
-    @RequestMapping("/test2")
+    @RequestMapping("/filter")
     public List<Integer> test(List<Integer> idList) {
         return idList;
     }
 
-//    @PostMapping("/login")
-//    public List<Integer> login(@RequestParam ) {
-//        return idList;
-//    }
+    /**
+     * 拒绝所有请求
+     *
+     * @return
+     */
+    @DenyAll
+    @PostMapping
+    public String user() {
+        return "save";
+    }
+
+    /**
+     * @param userId
+     * @return
+     */
+    @RolesAllowed({"user", "admin"})
+    @GetMapping("/{userId}")
+    public String user(@PathVariable("userId") Long userId) {
+        return "find";
+    }
+
+    @PutMapping
+    public String update() {
+        return "update";
+    }
+
+    @DeleteMapping
+    public String delete() {
+        return "delete";
+    }
 
 }
