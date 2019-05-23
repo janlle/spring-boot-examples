@@ -1,9 +1,9 @@
 package com.leone.boot.redis.service;
 
 
+import com.leone.boot.common.utils.EntityFactory;
+import com.leone.boot.common.utils.RandomValue;
 import com.leone.boot.redis.config.RedisPrefix;
-import com.leone.boot.redis.util.EntityFactory;
-import com.leone.boot.redis.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.*;
@@ -31,11 +31,12 @@ public class RedisService {
      *
      * @return
      */
-    public long list() {
-        log.info("list:{}", 1);
-        for (int i = 0; i < 10; i++) {
-            String key = RedisPrefix.userCatch("list"), value = RandomUtil.getName();
+    public long list(int count) {
+        log.info("list:{}", count);
+        for (int i = 0; i < count; i++) {
+            String key = RedisPrefix.userCatch("list"), value = RandomValue.randomUUID();
             Long push = redisTemplate.opsForList().leftPush(key, value);
+            // Long push = redisTemplate.opsForList().rightPush(key, value);
             log.info("leftPush key:[{}] -- value:[{}]", key, value);
         }
 
@@ -45,12 +46,11 @@ public class RedisService {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < count; i++) {
             Object result = redisTemplate.opsForList().rightPop(RedisPrefix.userCatch("list"));
             log.info("leftPop key:[{}] -- value:[{}]", i, result);
         }
-
-        return 1;
+        return count;
     }
 
     /**
@@ -60,7 +60,7 @@ public class RedisService {
      */
     public long value() {
         log.info("value:{}", 1);
-        redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUser(), 120, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomValue.randomNum(6)), EntityFactory.getUser(), 120, TimeUnit.SECONDS);
         return 1;
     }
 
@@ -113,7 +113,7 @@ public class RedisService {
 
     public long zSet() {
         log.info("zSet:{}", 1);
-        redisTemplate.opsForZSet().add(RedisPrefix.userCatch(RandomUtil.getNum(6)), EntityFactory.getUser(), 3);
+        redisTemplate.opsForZSet().add(RedisPrefix.userCatch(RandomValue.randomNum(6)), EntityFactory.getUser(), 3);
 
         redisTemplate.opsForZSet().add("zSetValue", "A", 1);
         redisTemplate.opsForZSet().add("zSetValue", "B", 3);

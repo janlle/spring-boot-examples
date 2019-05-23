@@ -37,7 +37,6 @@ public class SpringTool implements ApplicationContextAware {
                 e.printStackTrace();
             }
         }
-
     }
 
     public static ApplicationContext getApplicationContext() {

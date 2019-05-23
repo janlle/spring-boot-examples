@@ -1,6 +1,5 @@
 package com.leone.boot.jpa.entity;
 
-import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -13,7 +12,6 @@ import java.util.Date;
  * @author leone
  * @since 2018-01-24
  **/
-@Data
 @Entity
 @Table(name = "t_user")
 public class User implements Serializable {

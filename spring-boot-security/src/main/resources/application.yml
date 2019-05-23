@@ -3,7 +3,7 @@ spring:
     name: spring-boot-seurity
   datasource:
     url: jdbc:mysql://localhost:3306/db01?useSSL=false
-    username: root
+    username: xxx
     password: xxx
     driver-class-name: com.mysql.jdbc.Driver
   thymeleaf:
