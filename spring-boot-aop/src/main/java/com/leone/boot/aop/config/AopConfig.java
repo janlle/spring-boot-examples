@@ -22,7 +22,7 @@ import java.util.List;
 @Component
 public class AopConfig {
 
-    @Pointcut("execution(* com.leone.aop.service.*.*(..))")
+    @Pointcut("execution(* com.leone.boot.aop.service.*.*(..))")
     public void pointCut() {
     }
 

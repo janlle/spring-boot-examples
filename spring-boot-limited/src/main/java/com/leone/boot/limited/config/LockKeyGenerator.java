@@ -1,7 +1,7 @@
-package com.leone.boot.cache.config;
+package com.leone.boot.limited.config;
 
-import com.leone.boot.cache.anno.CacheLock;
-import com.leone.boot.cache.anno.CacheParam;
+import com.leone.boot.limited.anno.CacheLock;
+import com.leone.boot.limited.anno.CacheParam;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.util.ReflectionUtils;

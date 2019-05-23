@@ -1,4 +1,4 @@
-package com.leone.boot.cache.config;
+package com.leone.boot.limited.config;
 
 import com.leone.boot.cache.anno.LocalLock;
 import org.aspectj.lang.ProceedingJoinPoint;

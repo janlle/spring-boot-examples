@@ -1,4 +1,4 @@
-package com.leone.boot.cache.config;
+package com.leone.boot.limited.config;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

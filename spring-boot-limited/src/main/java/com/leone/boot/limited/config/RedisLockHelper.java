@@ -1,4 +1,4 @@
-package com.leone.boot.cache.config;
+package com.leone.boot.limited.config;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;

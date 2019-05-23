@@ -1,4 +1,4 @@
-package com.leone.boot.cache.config;
+package com.leone.boot.limited.config;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 

@@ -1,4 +1,4 @@
-package com.leone.boot.cache.anno;
+package com.leone.boot.limited.anno;
 
 import java.lang.annotation.*;
 
