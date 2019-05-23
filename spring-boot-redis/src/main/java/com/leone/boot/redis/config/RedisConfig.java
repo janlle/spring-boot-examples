@@ -28,7 +28,6 @@ import java.util.Set;
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 
-
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory factory) {
         // 生成一个默认配置，通过config对象即可对缓存进行自定义配置
@@ -64,10 +63,8 @@ public class RedisConfig extends CachingConfigurerSupport {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-//        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
-
+        // RedisSerializer<String> stringSerializer = new StringRedisSerializer();
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
-
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
@@ -76,14 +73,12 @@ public class RedisConfig extends CachingConfigurerSupport {
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
 
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         redisTemplate.setKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.setHashKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.afterPropertiesSet();
-
         return redisTemplate;
     }
 

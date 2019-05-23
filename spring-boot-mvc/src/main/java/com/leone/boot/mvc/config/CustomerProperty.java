@@ -8,7 +8,6 @@ package com.leone.boot.mvc.config;
  **/
 public class CustomerProperty {
 
-
     private String firstName;
 
     private String lastName;

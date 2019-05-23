@@ -4,6 +4,7 @@ import com.leone.boot.redis.service.RedisCacheService;
 import com.leone.boot.redis.service.RedisService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -23,8 +24,8 @@ public class RedisController {
     private RedisCacheService redisCacheService;
 
     @GetMapping("/list")
-    public String list() {
-        return "list: " + redisService.list() + " !";
+    public String list(@RequestParam int count) {
+        return "list: " + redisService.list(count) + " !";
     }
 
     @GetMapping("/value")
@@ -37,7 +38,6 @@ public class RedisController {
         return "set " + redisService.set() + " !";
     }
 
-
     @GetMapping("/zSet")
     public String zSet() {
         return "zSet " + redisService.zSet() + " !";
@@ -47,7 +47,6 @@ public class RedisController {
     public String hash() {
         return "hash " + redisService.hash() + " !";
     }
-
 
     @GetMapping("/catch")
     public String userCatch() {

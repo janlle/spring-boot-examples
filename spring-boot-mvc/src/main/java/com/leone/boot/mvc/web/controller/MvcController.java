@@ -8,8 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * <p>
+ *
+ * @author leone
+ * @since 2019-05-23
+ **/
 @RestController
-public class HelloController {
+public class MvcController {
 
     private final String TARGET_HOST = "http://localhost:8080";
 
