@@ -3,32 +3,35 @@ package com.leone.boot.limited.controller;
 import com.leone.boot.limited.anno.CacheLock;
 import com.leone.boot.limited.anno.CacheParam;
 import com.leone.boot.limited.anno.LocalLock;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>
+ * <p> @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, isolation = Isolation.DEFAULT)
  *
  * @author leone
- * @since 2019-05-23
+ * @since 2018-05-23
  **/
 @RestController
 @RequestMapping("/api")
 public class FormController {
 
-    @GetMapping
+    @GetMapping("/user")
     @CacheLock(prefix = "books")
-    public String query(@CacheParam(name = "token") @RequestParam String token) {
-        return "success - " + token;
+    @LocalLock(key = "test", expire = 6)
+    public String test(@CacheParam(name = "token") @RequestParam String token) {
+        return "token: " + token;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, isolation = Isolation.DEFAULT)
-    @PostMapping
-    @LocalLock(key = "book.save()")
-    public String save(@RequestParam String token) {
-        return "success - " + token;
+    @LocalLock(key = "book")
+    @PostMapping("/book")
+    public String save(@RequestParam String bookName, @RequestParam Integer bookPrice) {
+        return "bookName: " + bookName + " bookPrice: " + bookPrice;
+    }
+
+    @CacheLock(prefix = "user", expire = 3)
+    @PostMapping("/user")
+    public String save(@RequestParam String username, @RequestParam String email) {
+        return "username: " + username + " email: " + email;
     }
 
 }

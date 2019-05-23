@@ -4,6 +4,8 @@ import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 默认采用redis
+ *
  * @author leone
  * @since 2018-09-08
  **/
@@ -38,8 +40,8 @@ public @interface CacheLock {
 
 
     /**
-     * <p>Key的分隔符（默认 :）</p>
-     * <p>生成的Key：N:SO1008:500</p>
+     * Key的分隔符（默认 :）
+     * 生成的Key：N:SO1008:500
      *
      * @return String
      */

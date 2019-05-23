@@ -1,5 +1,6 @@
 package com.leone.boot.limited.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +8,7 @@ import org.springframework.data.redis.connection.RedisStringCommands;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.concurrent.Executors;
@@ -31,11 +33,8 @@ public class RedisLockHelper {
      */
     private static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newScheduledThreadPool(10);
 
-    private final StringRedisTemplate stringRedisTemplate;
-
-    public RedisLockHelper(StringRedisTemplate stringRedisTemplate) {
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 获取锁（存在死锁风险）
@@ -47,8 +46,7 @@ public class RedisLockHelper {
      * @return true or false
      */
     public boolean tryLock(final String lockKey, final String value, final long time, final TimeUnit unit) {
-        Boolean execute = stringRedisTemplate.execute((RedisCallback<Boolean>) connection -> connection.set(lockKey.getBytes(), value.getBytes(), Expiration.from(time, unit), RedisStringCommands.SetOption.SET_IF_ABSENT));
-        return execute;
+        return stringRedisTemplate.execute((RedisCallback<Boolean>) connection -> connection.set(lockKey.getBytes(), value.getBytes(), Expiration.from(time, unit), RedisStringCommands.SetOption.SET_IF_ABSENT));
     }
 
 
