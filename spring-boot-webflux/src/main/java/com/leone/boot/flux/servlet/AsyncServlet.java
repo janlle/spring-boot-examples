@@ -15,6 +15,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 异步非阻塞servlet
+ *
  * @author leone
  * @since 2018-05-22
  **/
@@ -25,7 +27,6 @@ public class AsyncServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long start = System.currentTimeMillis();
-
         AsyncContext asyncContext = req.startAsync();
 
         CompletableFuture.runAsync(() -> doSomething(asyncContext, asyncContext.getRequest(), asyncContext.getResponse()));
@@ -42,13 +43,12 @@ public class AsyncServlet extends HttpServlet {
 
     private void doSomething(AsyncContext asyncContext, ServletRequest req, ServletResponse resp) {
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         // 业务代码结束
         asyncContext.complete();
-
     }
 
 

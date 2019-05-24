@@ -1,6 +1,6 @@
 package com.leone.test;
 
-import com.leone.boot.flux.entity.User;
+import com.leone.boot.common.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

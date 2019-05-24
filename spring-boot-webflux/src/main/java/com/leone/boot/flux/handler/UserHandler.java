@@ -1,7 +1,6 @@
 package com.leone.boot.flux.handler;
 
-import com.leone.boot.flux.entity.User;
-import com.leone.boot.flux.repository.UserRepository;
+import com.leone.boot.common.entity.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.ReactiveRedisConnection;
@@ -30,9 +29,6 @@ import java.util.Map;
 @Component
 public class UserHandler {
 
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private ReactiveRedisConnection connection;
@@ -110,29 +106,29 @@ public class UserHandler {
     }
 
     // 查找用户
-    public Mono<ServerResponse> getAll(ServerRequest request) {
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8)
-                .body(userRepository.findAll(), User.class);
-    }
+//    public Mono<ServerResponse> getAll(ServerRequest request) {
+//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8)
+//                .body(userRepository.findAll(), User.class);
+//    }
 
     // 创建用户
-    public Mono<ServerResponse> save(ServerRequest request) {
-        Mono<User> user = request.bodyToMono(User.class);
-
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8)
-                .body(userRepository.saveAll(user), User.class);
-    }
+//    public Mono<ServerResponse> save(ServerRequest request) {
+//        Mono<User> user = request.bodyToMono(User.class);
+//
+//        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8)
+//                .body(userRepository.saveAll(user), User.class);
+//    }
 
 
     // 删除用户
-    public Mono<ServerResponse> delete(ServerRequest request) {
-        String id = request.pathVariable("id");
-
-        return this.userRepository.findById(id).flatMap(user ->
-                userRepository.delete(user).then(ServerResponse.ok().build())
-                        .switchIfEmpty(ServerResponse.notFound().build()));
-
-    }
+//    public Mono<ServerResponse> delete(ServerRequest request) {
+//        String id = request.pathVariable("id");
+//
+//        return this.userRepository.findById(id).flatMap(user ->
+//                userRepository.delete(user).then(ServerResponse.ok().build())
+//                        .switchIfEmpty(ServerResponse.notFound().build()));
+//
+//    }
 
 
 }

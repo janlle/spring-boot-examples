@@ -16,12 +16,13 @@ import javax.annotation.PreDestroy;
  */
 @Configuration
 public class RedisConfig {
+
     @Autowired
     private RedisConnectionFactory factory;
 
     @Bean
     public ReactiveRedisTemplate<String, String> reactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
-        return new ReactiveRedisTemplate<String, String>(connectionFactory, RedisSerializationContext.string());
+        return new ReactiveRedisTemplate<>(connectionFactory, RedisSerializationContext.string());
     }
 
     @Bean

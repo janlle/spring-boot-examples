@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 同步servlet
+ *
  * @author leone
  * @since 2018-05-22
  **/
@@ -34,7 +36,6 @@ public class SyncServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
-
 
     private void doSomething() throws InterruptedException {
         TimeUnit.SECONDS.sleep(3);
