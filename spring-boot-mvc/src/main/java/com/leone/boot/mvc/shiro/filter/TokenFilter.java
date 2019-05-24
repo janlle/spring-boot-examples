@@ -1,6 +1,6 @@
 package com.leone.boot.mvc.shiro.filter;
 
-import com.leone.boot.mvc.shiro.base.Token;
+import com.leone.boot.mvc.shiro.Token;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
@@ -9,6 +9,8 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletRequest;
@@ -29,39 +31,50 @@ public class TokenFilter extends AuthenticationFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         String token = getToken(request);
         if (StringUtils.isEmpty(token)) {
-            print("auth.token.empty", WebUtils.toHttp(response));
+            print("auth token empty", WebUtils.toHttp(response));
             return false;
         }
         boolean loginSuccess = login(new Token(token));
         if (!loginSuccess) {
-            print("auth.token.wrong", WebUtils.toHttp(response));
+            print("auth token wrong", WebUtils.toHttp(response));
         }
         return loginSuccess;
     }
 
+    /**
+     * 从request获取token信息
+     *
+     * @param request
+     * @return
+     */
     private String getToken(ServletRequest request) {
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
-        String token = null;
-        if (!StringUtils.isEmpty(authorizationHeader) && authorizationHeader.startsWith("token")) {
-            token = getToken(authorizationHeader);
-        }
-        return token;
+        return ObjectUtils.isEmpty(authorizationHeader) ? null : authorizationHeader;
     }
 
-    private void print(String messageCode, HttpServletResponse response) {
-        String content = String.format("{\"code\":\"%s\",\"message\":\"%s\"}", messageCode, HttpStatus.UNAUTHORIZED.getReasonPhrase());
-        response.setContentType("application/json;charset=UTF-8");
+    /**
+     * 响应异常信息
+     *
+     * @param message
+     * @param response
+     */
+    private void print(String message, HttpServletResponse response) {
+        String content = String.format("{\"code\":\"%s\",\"message\":\"%s\"}", HttpStatus.UNAUTHORIZED.value(), message);
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         response.setContentLength(content.length());
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        try {
-            final PrintWriter writer = response.getWriter();
+        try (PrintWriter writer = response.getWriter()) {
             writer.write(content);
         } catch (IOException e) {
             logger.error("{}", e.getMessage());
         }
     }
 
+    /**
+     * @param token
+     * @return
+     */
     private boolean login(Token token) {
         try {
             Subject subject = SecurityUtils.getSubject();
@@ -71,17 +84,6 @@ public class TokenFilter extends AuthenticationFilter {
             logger.error("{}", e.getMessage());
             return false;
         }
-    }
-
-    private String getToken(String authorizationHeader) {
-        if (authorizationHeader == null) {
-            return null;
-        }
-        String[] authTokens = authorizationHeader.split(" ");
-        if (authTokens.length < 2) {
-            return null;
-        }
-        return authTokens[1];
     }
 
 }

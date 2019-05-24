@@ -1,4 +1,4 @@
-package com.leone.boot.mvc.shiro.base;
+package com.leone.boot.mvc.shiro;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -63,7 +63,7 @@ public class TokenRealm extends AuthorizingRealm {
         if (StringUtils.isEmpty(redisToken)) {
             return null;
         }
-        logger.info("userId: {} -- token: {}", userId, tokenString);
+        logger.info("Authentication userId: {} -- token: {}", userId, tokenString);
         return new SimpleAuthenticationInfo(userId, tokenString, getName());
     }
 
@@ -85,7 +85,7 @@ public class TokenRealm extends AuthorizingRealm {
             } catch (Exception e) {
                 return null;
             }
-            logger.info("userId: {} -- role: {}", userId, userRole);
+            logger.info("Authorization userId: {} -- role: {}", userId, userRole);
             return new SimpleAuthorizationInfo(Collections.singleton(userRole));
         }
         return null;

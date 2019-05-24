@@ -1,14 +1,15 @@
 package com.leone.boot.mvc.shiro.service;
 
-import com.leone.boot.mvc.shiro.base.ShiroProperties;
-import com.leone.boot.mvc.shiro.base.TokenUtil;
+import com.leone.boot.mvc.shiro.ShiroProperties;
+import com.leone.boot.mvc.shiro.TokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 
@@ -55,22 +56,17 @@ public class ShiroTokenService {
      * @return
      */
     private String updateToken(String userId, String role) {
-        String salt = (int) (Math.random() * 100000) + "";
-
+        String salt = UUID.randomUUID().toString().substring(0, 4);
         String tokenPrefix = shiroProperties.getTokenPrefix();
-        int cacheDays = shiroProperties.getCacheTime();
-        if (null == userId || "".equals(userId)) {
-            return null;
-        }
+        int catchTime = shiroProperties.getCacheTime();
         String token;
-        if (null != role && !"".equals(role)) {
+        if (Objects.isNull(role) && "".equals(role)) {
             token = TokenUtil.encode(userId + "." + role + "." + salt, shiroProperties.getTokenSecret());
         } else {
             token = TokenUtil.encode(userId + "." + "-1" + "." + salt, shiroProperties.getTokenSecret());
         }
-        logger.info("setToken userId:{}=token:{}", userId, token);
-        this.stringRedisTemplate.opsForValue().set(tokenPrefix + userId, token, cacheDays, TimeUnit.DAYS);
-        String value = this.stringRedisTemplate.opsForValue().get(tokenPrefix + userId);
+        logger.info("setToken userId: {} -- token: {}", userId, token);
+        this.stringRedisTemplate.opsForValue().set(tokenPrefix + userId, token, catchTime, TimeUnit.MINUTES);
         return token;
     }
 
@@ -79,24 +75,9 @@ public class ShiroTokenService {
      *
      * @param userId
      */
-    public void logout(String userId) {
+    public String logout(String userId) {
         stringRedisTemplate.delete(shiroProperties.getTokenPrefix() + userId);
-    }
-
-    /**
-     * 更新用户角色
-     *
-     * @param userId
-     * @param role
-     */
-    public void updateRole(String userId, String role) {
-        String tokenPrefix = shiroProperties.getTokenPrefix();
-        Integer cacheDays = shiroProperties.getCacheTime();
-        if (!StringUtils.isEmpty(role)) {
-            stringRedisTemplate.delete(tokenPrefix + userId);
-            String token = TokenUtil.encode(userId + "." + role, shiroProperties.getTokenSecret());
-            stringRedisTemplate.opsForValue().set(tokenPrefix + userId, token, cacheDays, TimeUnit.DAYS);
-        }
+        return userId;
     }
 
 }

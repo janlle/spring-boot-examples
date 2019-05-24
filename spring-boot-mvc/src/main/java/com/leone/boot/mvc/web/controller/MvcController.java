@@ -1,11 +1,11 @@
 package com.leone.boot.mvc.web.controller;
 
 import com.leone.boot.mvc.shiro.service.ShiroTokenService;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
+import com.leone.boot.mvc.shiro.service.UserHelper;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
  * @since 2019-05-23
  **/
 @RestController
+@RequestMapping("/api")
 public class MvcController {
 
     private final String TARGET_HOST = "http://localhost:8080";
@@ -25,34 +26,19 @@ public class MvcController {
     @Autowired
     private ShiroTokenService shiroTokenService;
 
-//    public HelloController() {
-//        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-//        connectionManager.setDefaultMaxPerRoute(1000);
-//        connectionManager.setMaxTotal(1000);
-//        this.restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
-//                HttpClientBuilder.create().setConnectionManager(connectionManager).build()
-//        ));
-//    }
-
-
     @GetMapping("/login")
-    public String login() {
-        shiroTokenService.login("12331", "2");
-        return "success";
+    public String login(String userId, String role) {
+        return shiroTokenService.login(userId, role);
     }
 
     @GetMapping("/logout")
-    public String logout() {
-//        shiroTokenService.afterLogout(1234);
-        shiroTokenService.logout("12331");
-        return "logout success";
+    public String logout(String userId) {
+        return shiroTokenService.logout(userId);
     }
 
-    @GetMapping("/api/test")
+    @GetMapping("/test")
     public String test() {
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        System.out.println(session);
+        Subject subject = UserHelper.subject;
         return subject.getPrincipal().toString();
     }
 

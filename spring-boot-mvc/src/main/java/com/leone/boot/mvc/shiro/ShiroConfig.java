@@ -1,4 +1,4 @@
-package com.leone.boot.mvc.shiro.base;
+package com.leone.boot.mvc.shiro;
 
 import com.leone.boot.mvc.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
@@ -29,16 +29,22 @@ public class ShiroConfig {
 
     private final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
+    /**
+     * shiro 核心过滤器
+     *
+     * @return
+     */
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilter(org.apache.shiro.mgt.SecurityManager securityManager, ShiroProperties properties) {
+    public ShiroFilterFactoryBean shiroFilter(ShiroProperties shiroProperties) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         Map<String, String> filterChainDefinitionMapping = shiroFilter.getFilterChainDefinitionMap();
         swaggerFilterChain(filterChainDefinitionMapping);
-        setUrl(filterChainDefinitionMapping, "anon", properties.getAnonUrls());
-        setUrl(filterChainDefinitionMapping, "auth", properties.getAuthUrls());
+        setUrl(filterChainDefinitionMapping, "anon", shiroProperties.getAnonUrls());
+        setUrl(filterChainDefinitionMapping, "auth", shiroProperties.getAuthUrls());
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
-        shiroFilter.setSecurityManager(securityManager);
-        Map<String, Filter> filters = new HashMap<>(2);
+        shiroFilter.setSecurityManager(securityManager());
+
+        Map<String, Filter> filters = new HashMap<>(1);
         filters.put("auth", new TokenFilter());
         shiroFilter.setFilters(filters);
         return shiroFilter;
@@ -74,6 +80,11 @@ public class ShiroConfig {
         filterChainDefinitionMapping.put("/swagger**", "anon");
     }
 
+    /**
+     * 安全管理器
+     *
+     * @return
+     */
     @Bean(name = "securityManager")
     public SecurityManager securityManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
@@ -89,17 +100,9 @@ public class ShiroConfig {
         // 无状态主题工程，禁止创建session
         manager.setSubjectFactory(subjectFactory());
 
-        // manager.setSessionManager(defaultSessionManager());
         SecurityUtils.setSecurityManager(manager);
         return manager;
     }
-
-//    @Bean
-//    public DefaultSessionManager defaultSessionManager() {
-//        DefaultSessionManager manager = new DefaultSessionManager();
-//        manager.setSessionValidationSchedulerEnabled(false);
-//        return manager;
-//    }
 
     @Bean
     public TokenRealm tokenRealm() {

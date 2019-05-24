@@ -1,4 +1,4 @@
-package com.leone.boot.mvc.shiro.base;
+package com.leone.boot.mvc.shiro;
 
 import org.apache.shiro.authc.AuthenticationToken;
 

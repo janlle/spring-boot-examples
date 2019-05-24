@@ -4,15 +4,19 @@ server:
 customer:
   msg: jack
   property:
-  - first-name: wang
-    last-name: lao
-  - first-name: li
+  - first-name: zhang
+    last-name: san
+  - first-name: liu
     last-name: sheng
 
 module:
   shiro:
-    cacheTime: 7
+    cacheTime: 1080
     tokenSecret: J(#_=*!A
-    redisPrefix: shiro.auth.token:${server.port}
-    anonUrls: /test
+    tokenPrefix: "shiro:token:${server.port}:"
+    anonUrls:
+      - /api/login
+      - /api/logout
     authUrls: /**
+
+

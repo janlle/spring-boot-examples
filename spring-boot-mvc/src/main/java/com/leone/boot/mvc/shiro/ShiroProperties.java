@@ -1,4 +1,4 @@
-package com.leone.boot.mvc.shiro.base;
+package com.leone.boot.mvc.shiro;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -15,12 +15,12 @@ import java.util.Set;
 @ConfigurationProperties(prefix = "module.shiro")
 public class ShiroProperties {
 
-    private String tokenPrefix = "shiro.auth.token:";
+    private String tokenPrefix = "shiro.token:";
 
     // 单位分钟
     private Integer cacheTime = 10080;
 
-    private String tokenSecret = "@J(#_=*!A";
+    private String tokenSecret = "*|@^A";
 
     private Set<String> anonUrls = Collections.emptySet();
 
