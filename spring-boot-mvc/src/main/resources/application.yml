@@ -17,6 +17,7 @@ module:
     anonUrls:
       - /api/login
       - /api/logout
+      - /api/sign/test
     authUrls: /**
 
 
