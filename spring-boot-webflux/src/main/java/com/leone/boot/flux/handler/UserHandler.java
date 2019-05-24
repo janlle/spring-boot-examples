@@ -1,6 +1,5 @@
 package com.leone.boot.flux.handler;
 
-import com.leone.boot.common.entity.User;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.ReactiveRedisConnection;
@@ -15,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -29,25 +29,24 @@ import java.util.Map;
 @Component
 public class UserHandler {
 
-
     @Autowired
     private ReactiveRedisConnection connection;
+
+    public Mono<ServerResponse> helloMono(ServerRequest request) {
+        Mono<String> stringMono = request.bodyToMono(String.class);
+        return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
+                .body(BodyInserters.fromObject("hello mono body: " + stringMono));
+    }
 
     public Mono<ServerResponse> getTime(ServerRequest request) {
         return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
                 .body(Mono.just("Now is " + new SimpleDateFormat("HH:mm:ss").format(new Date())), String.class);
     }
 
-    public Mono<ServerResponse> getDate(ServerRequest request) {
-        return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
-                .body(Mono.just("Today is " + new SimpleDateFormat("yyyy-MM-dd").format(new Date())), String.class);
-    }
-
     public Mono<ServerResponse> sendTimePerSec(ServerRequest request) {
         return ServerResponse.ok().contentType(MediaType.TEXT_EVENT_STREAM)
                 .body(Flux.interval(Duration.ofSeconds(1)).map(l -> new SimpleDateFormat("HH:mm:ss").format(new Date())), String.class);
     }
-
 
     public Mono<ServerResponse> register(ServerRequest request) {
         Mono<Map> body = request.bodyToMono(Map.class);
@@ -59,7 +58,6 @@ public class UserHandler {
                     .set(ByteBuffer.wrap(username.getBytes()), ByteBuffer.wrap(hashedPassword.getBytes()));
         }).flatMap(aBoolean -> {
             Map<String, String> result = new HashMap<>();
-            ServerResponse serverResponse = null;
             if (aBoolean) {
                 result.put("message", "successful");
                 return ServerResponse.ok()
@@ -72,7 +70,6 @@ public class UserHandler {
                         .body(BodyInserters.fromObject(request));
             }
         });
-
     }
 
     public Mono<ServerResponse> login(ServerRequest request) {
@@ -83,12 +80,7 @@ public class UserHandler {
             return connection.stringCommands().get(ByteBuffer.wrap(username.getBytes())).flatMap(byteBuffer -> {
                 byte[] bytes = new byte[byteBuffer.remaining()];
                 byteBuffer.get(bytes, 0, bytes.length);
-                String hashedPassword = null;
-                try {
-                    hashedPassword = new String(bytes, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                String hashedPassword = new String(bytes, StandardCharsets.UTF_8);
                 Map<String, String> result = new HashMap<>();
                 if (hashedPassword == null || !BCrypt.checkpw(password, hashedPassword)) {
                     result.put("message", "账号或密码错误");

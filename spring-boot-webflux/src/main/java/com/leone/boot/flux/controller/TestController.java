@@ -1,11 +1,13 @@
 package com.leone.boot.flux.controller;
 
+import com.leone.boot.common.aop.Watch;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.flux.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,45 +17,28 @@ import java.util.stream.IntStream;
 
 @Slf4j
 @RestController
-public class FluxController {
+@RequestMapping("/api")
+public class TestController {
 
     private UserService userService;
 
-    public FluxController(UserService userService) {
+    public TestController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/mvc")
-    public String mvc() {
-        log.info("start:{}", System.currentTimeMillis());
-        job(3000);
-        log.info("end:{}", System.currentTimeMillis());
-        return "Hello-mvc";
-    }
-
+    @Watch
     @GetMapping("/mono")
     public Mono<String> mono() {
-        log.info("start:{}", System.currentTimeMillis());
-        Mono<String> result = Mono.fromSupplier(() -> job(3000));
-        log.info("end:{}", System.currentTimeMillis());
-        return result;
+        return Mono.fromSupplier(() -> "mono " + job(3000));
     }
 
+    @Watch
     @GetMapping(value = "flux", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> flux() {
-        log.info("start:{}", System.currentTimeMillis());
-        Flux<String> result = Flux.fromStream(IntStream.range(1, 5).mapToObj(i -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return "flux data-" + i;
-        }));
-        log.info("end:{}", System.currentTimeMillis());
-        return result;
+        return Flux.fromStream(IntStream.range(1, 5).mapToObj(i -> "flux " + job(1000)));
     }
 
+    @Watch
     @GetMapping("list")
     public Flux<User> userList() {
         return userService.getUsers();
@@ -64,13 +49,19 @@ public class FluxController {
         return userService.getUserById(id);
     }
 
+    /**
+     * 模拟耗时操作的任务
+     *
+     * @param time
+     * @return
+     */
     private String job(long time) {
         try {
-            Thread.sleep(time);
+            TimeUnit.MILLISECONDS.sleep(time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "hello world";
+        return "job process success expenditure " + time + " milliseconds";
     }
 
 }
