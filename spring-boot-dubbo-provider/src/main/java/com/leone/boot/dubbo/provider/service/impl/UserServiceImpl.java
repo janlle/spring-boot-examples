@@ -1,10 +1,9 @@
-package com.leone.boot.provider.service.impl;
+package com.leone.boot.dubbo.provider.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
 import com.leone.boot.dubbo.api.UserService;
-import org.springframework.stereotype.Component;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
@@ -16,8 +15,7 @@ import java.util.stream.Collectors;
  * @author leone
  * @since 2018-06-03
  **/
-@Component
-@Service(version = "1.0.0", timeout = 10000, interfaceClass = UserService.class)
+@Service(version = "1.0.0")
 public class UserServiceImpl implements UserService {
 
     @Override

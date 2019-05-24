@@ -1,12 +1,12 @@
-package com.leone.boot.consumer.service;
+package com.leone.boot.dubbo.consumer.service;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.leone.boot.common.beans.order.OrderVO;
 import com.leone.boot.common.entity.Order;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
 import com.leone.boot.dubbo.api.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Component
 public class OrderService {
 
-    @Reference(version = "1.0.0", check = false)
+    @Reference(version = "1.0.0", url = "dubbo://127.0.0.1:12345")
     private UserService userService;
 
     /**

@@ -1,6 +1,5 @@
-package com.leone.boot.provider;
+package com.leone.boot.dubbo.consumer;
 
-import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,10 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author leone
  * @since 2018-06-03
  **/
-@EnableDubboConfiguration
 @SpringBootApplication
-public class ProviderApplication {
+public class ConsumerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProviderApplication.class, args);
+        SpringApplication.run(ConsumerApplication.class, args);
     }
 }

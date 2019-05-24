@@ -1,7 +1,7 @@
-package com.leone.boot.consumer.controller;
+package com.leone.boot.dubbo.consumer.controller;
 
 import com.leone.boot.common.beans.order.OrderVO;
-import com.leone.boot.consumer.service.OrderService;
+import com.leone.boot.dubbo.consumer.service.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
