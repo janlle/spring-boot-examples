@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2018-05-17
  **/
 @EnableScheduling
-@ServletComponentScan // 扫描servlet filter receive
+@ServletComponentScan
 @SpringBootApplication
 public class MvcApplication {
     public static void main(String[] args) {

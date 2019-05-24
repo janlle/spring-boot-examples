@@ -19,7 +19,7 @@ public class SpringTimeStack {
     private EventPublisher eventPubLisher;
 
     @Async
-    @Scheduled(cron = "0/10 * * * * ? ")
+    @Scheduled(cron = "0/60 * * * * ? ")
     public void doSomething() {
         log.info("定时任务开始执行。。。。");
     }

@@ -1,6 +1,6 @@
 package com.leone.boot.mvc.config;
 
-import com.leone.boot.mvc.annocation.CustomerAnno;
+import com.leone.boot.mvc.anno.CustomerAnnotation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -24,15 +24,14 @@ public class SpringTool implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         log.info("setApplicationContext...");
         context = applicationContext;
-
-        Map<String, Object> beans = applicationContext.getBeansWithAnnotation(CustomerAnno.class);
+        Map<String, Object> beans = applicationContext.getBeansWithAnnotation(CustomerAnnotation.class);
         for (Object object : beans.values()) {
             try {
-                String value = object.getClass().getAnnotation(CustomerAnno.class).value();
-                log.info("values:{}", value);
-                Method method = object.getClass().getMethod("init", new Class[]{String.class});
-                Object invoke = method.invoke(object, "kobe");
-                log.info("result:{}", invoke);
+                String value = object.getClass().getAnnotation(CustomerAnnotation.class).value();
+                log.info("values: {}", value);
+                Method method = object.getClass().getMethod("init");
+                Object invoke = method.invoke(object);
+                log.info("result: {}", invoke);
             } catch (Exception e) {
                 e.printStackTrace();
             }

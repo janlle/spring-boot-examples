@@ -1,5 +1,8 @@
 package com.leone.boot.mvc.shiro.base;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
@@ -10,8 +13,8 @@ import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Base64;
 
 /**
  * @author leone
@@ -22,15 +25,18 @@ public class TokenUtil {
     private TokenUtil() {
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(TokenRealm.class);
+
     private static final HexBinaryAdapter HEX_BINARY_ADAPTER = new HexBinaryAdapter();
 
-    private static String rule = "#*J&@J(#_=*!A";
-
-    private static Base64.Encoder encoder = Base64.getEncoder();
-
-    private static Base64.Decoder decoder = Base64.getDecoder();
-
-    public static String encode(String content) {
+    /**
+     * 加密
+     *
+     * @param content
+     * @param rule
+     * @return
+     */
+    public static String encode(String content, String rule) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
@@ -44,12 +50,19 @@ public class TokenUtil {
             byte[] encodeResult = cipher.doFinal(content.getBytes());
             return new HexBinaryAdapter().marshal(encodeResult);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return null;
     }
 
-    public static String decode(String content) {
+    /**
+     * 解密
+     *
+     * @param content
+     * @param rule
+     * @return
+     */
+    public static String decode(String content, String rule) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
@@ -63,16 +76,21 @@ public class TokenUtil {
             byte[] decodeResult = cipher.doFinal(DatatypeConverter.parseHexBinary(content));
             return new String(decodeResult);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return null;
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println(encode("123456"));
-        System.out.println(encode("he.llo"));
-        System.out.println(decode("6EC910EE9AF9632D2725D83C106E80E8"));
-//        System.out.println("6166.token".split("\\.").length);
+        String rule = "aaa";
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 1000; i++) {
+            String encode = encode("6166.token" + i, rule);
+            System.out.println(encode);
+            System.out.println(decode(encode, rule));
+        }
+        System.out.println("time: " + (System.currentTimeMillis() - start));
+        // System.out.println("6166.token".split("\\.").length);
     }
 
 }

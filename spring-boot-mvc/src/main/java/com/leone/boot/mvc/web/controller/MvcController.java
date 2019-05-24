@@ -1,8 +1,9 @@
 package com.leone.boot.mvc.web.controller;
 
-import com.leone.boot.mvc.service.UserService;
 import com.leone.boot.mvc.shiro.service.ShiroTokenService;
-import com.leone.boot.mvc.shiro.service.UserHelper;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +21,6 @@ public class MvcController {
     private final String TARGET_HOST = "http://localhost:8080";
 
     private RestTemplate restTemplate;
-
-    @Autowired
-    private UserService userService;
-
-
-//    @Autowired
-//    private HelloService helloService;
 
     @Autowired
     private ShiroTokenService shiroTokenService;
@@ -54,10 +48,12 @@ public class MvcController {
         return "logout success";
     }
 
-    @GetMapping("/api/lyon")
-    public String Leone() {
-        Integer userId = UserHelper.getUserId();
-        return userId.toString();
+    @GetMapping("/api/test")
+    public String test() {
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
+        System.out.println(session);
+        return subject.getPrincipal().toString();
     }
 
 }

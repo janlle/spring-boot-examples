@@ -17,32 +17,31 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class AppServletContextAttributeListener implements ServletContextAttributeListener {
 
-    //当程序向application范围新增属性时触发此方法
+    // 当程序向application范围新增属性时触发此方法
     @Override
     public void attributeAdded(ServletContextAttributeEvent event) {
         ServletContext servletContext = event.getServletContext();
         String name = event.getName();
         Object value = event.getValue();
-        log.info(servletContext + "范围内新增了key值为=" + name + "value值=" + value);
+        log.info("servletContext: {} added attribute key: {} value: {}", servletContext, name, value);
     }
 
-    //当程序向application范围移除属性时触发此方法
+    // 当程序向application范围移除属性时触发此方法
     @Override
     public void attributeRemoved(ServletContextAttributeEvent event) {
-        ServletContext application = event.getServletContext();
-        //获取移除的属性名与值
+        ServletContext servletContext = event.getServletContext();
         String name = event.getName();
         Object value = event.getValue();
-        System.out.println(application + "范围内移除了name值为=" + name + "value值=" + value);
+        log.info("servletContext: {} removed attribute key: {} value: {}", servletContext, name, value);
     }
 
-    //当程序向application范围替换属性时触发此方法
+    // 当程序向application范围替换属性时触发此方法
     @Override
     public void attributeReplaced(ServletContextAttributeEvent event) {
-        ServletContext application = event.getServletContext();
-        //获取替换的属性名与值
+        ServletContext servletContext = event.getServletContext();
         String name = event.getName();
         Object value = event.getValue();
-        System.out.println(application + "范围内替换了name值为=" + name + "value值=" + value);
+        log.info("servletContext: {} replaced attribute key: {} value: {}", servletContext, name, value);
+
     }
 }

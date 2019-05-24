@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 customer:
   msg: jack
   property:
@@ -5,14 +8,11 @@ customer:
     last-name: lao
   - first-name: li
     last-name: sheng
+
 module:
   shiro:
-    cacheDays: 7
-    redisPrefix: ${server.port}
-    anonUrls: /**
-    coreUrls:
-    - /api/user/property
-    - /api/user/login
-    authUrls: /hello
-    tokenPrefix: ${server.port}
-    tokenName: auth.token
+    cacheTime: 7
+    tokenSecret: J(#_=*!A
+    redisPrefix: shiro.auth.token:${server.port}
+    anonUrls: /test
+    authUrls: /**

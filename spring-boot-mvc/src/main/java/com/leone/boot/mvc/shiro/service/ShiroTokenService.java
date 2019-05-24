@@ -1,6 +1,6 @@
 package com.leone.boot.mvc.shiro.service;
 
-import com.leone.boot.mvc.shiro.base.ShiroModuleProperties;
+import com.leone.boot.mvc.shiro.base.ShiroProperties;
 import com.leone.boot.mvc.shiro.base.TokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class ShiroTokenService {
     private StringRedisTemplate stringRedisTemplate;
 
     @Resource
-    private ShiroModuleProperties shiroModuleProperties;
+    private ShiroProperties shiroProperties;
 
     /**
      * 登录
@@ -57,21 +57,20 @@ public class ShiroTokenService {
     private String updateToken(String userId, String role) {
         String salt = (int) (Math.random() * 100000) + "";
 
-        String tokenPrefix = this.shiroModuleProperties.getTokenPrefix();
-        String tokenName = this.shiroModuleProperties.getTokenName();
-        int cacheDays = this.shiroModuleProperties.getCacheDays();
+        String tokenPrefix = shiroProperties.getTokenPrefix();
+        int cacheDays = shiroProperties.getCacheTime();
         if (null == userId || "".equals(userId)) {
             return null;
         }
         String token;
         if (null != role && !"".equals(role)) {
-            token = TokenUtil.encode(userId + "." + role + "." + salt);
+            token = TokenUtil.encode(userId + "." + role + "." + salt, shiroProperties.getTokenSecret());
         } else {
-            token = TokenUtil.encode(userId + "." + "-1" + "." + salt);
+            token = TokenUtil.encode(userId + "." + "-1" + "." + salt, shiroProperties.getTokenSecret());
         }
         logger.info("setToken userId:{}=token:{}", userId, token);
-        this.stringRedisTemplate.opsForValue().set(tokenPrefix + tokenName + userId, token, cacheDays, TimeUnit.DAYS);
-        String value = this.stringRedisTemplate.opsForValue().get(tokenPrefix + tokenName + userId);
+        this.stringRedisTemplate.opsForValue().set(tokenPrefix + userId, token, cacheDays, TimeUnit.DAYS);
+        String value = this.stringRedisTemplate.opsForValue().get(tokenPrefix + userId);
         return token;
     }
 
@@ -81,12 +80,7 @@ public class ShiroTokenService {
      * @param userId
      */
     public void logout(String userId) {
-        if (!shiroModuleProperties.isMultiLogin()) {
-            String tokenPrefix = shiroModuleProperties.getTokenPrefix();
-            String tokenName = shiroModuleProperties.getTokenName();
-            String token = stringRedisTemplate.opsForValue().get(tokenPrefix + tokenName + userId);
-            stringRedisTemplate.delete(tokenPrefix + tokenName + userId);
-        }
+        stringRedisTemplate.delete(shiroProperties.getTokenPrefix() + userId);
     }
 
     /**
@@ -96,13 +90,12 @@ public class ShiroTokenService {
      * @param role
      */
     public void updateRole(String userId, String role) {
-        String tokenPrefix = shiroModuleProperties.getTokenPrefix();
-        String tokenName = shiroModuleProperties.getTokenName();
-        Integer cacheDays = shiroModuleProperties.getCacheDays();
+        String tokenPrefix = shiroProperties.getTokenPrefix();
+        Integer cacheDays = shiroProperties.getCacheTime();
         if (!StringUtils.isEmpty(role)) {
-            stringRedisTemplate.delete(tokenPrefix + tokenName + userId);
-            String token = TokenUtil.encode(userId + "." + role);
-            stringRedisTemplate.opsForValue().set(tokenPrefix + tokenName + userId, token, cacheDays, TimeUnit.DAYS);
+            stringRedisTemplate.delete(tokenPrefix + userId);
+            String token = TokenUtil.encode(userId + "." + role, shiroProperties.getTokenSecret());
+            stringRedisTemplate.opsForValue().set(tokenPrefix + userId, token, cacheDays, TimeUnit.DAYS);
         }
     }
 

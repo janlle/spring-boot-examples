@@ -11,29 +11,28 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 
 
 /**
  * @author leone
  **/
-@Component
 public class TokenRealm extends AuthorizingRealm {
 
-    private final Logger logger = LoggerFactory.getLogger(TokenRealm.class);
+    private static final Logger logger = LoggerFactory.getLogger(TokenRealm.class);
 
     @Resource
-    private ShiroModuleProperties shiroModuleProperties;
+    private ShiroProperties shiroProperties;
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public String getName() {
-        return "redisRealm";
+        return "redisTokenRealm";
     }
 
     @Override
@@ -52,8 +51,7 @@ public class TokenRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         Token token = (Token) authenticationToken;
         String tokenString = token.getToken();
-        String userIdTokenRole = TokenUtil.decode(tokenString);
-//        logger.info("tokenString:{}----userIdTokenRole:{}", tokenString, userIdTokenRole);
+        String userIdTokenRole = TokenUtil.decode(tokenString, shiroProperties.getTokenSecret());
         String userId;
         try {
             userId = userIdTokenRole.split("\\.")[0];
@@ -61,16 +59,12 @@ public class TokenRealm extends AuthorizingRealm {
             return null;
         }
 
-        String redisToken = stringRedisTemplate.opsForValue().get(shiroModuleProperties.getTokenPrefix() + shiroModuleProperties.getTokenName() + userId);
+        String redisToken = stringRedisTemplate.opsForValue().get(shiroProperties.getTokenPrefix() + userId);
         if (StringUtils.isEmpty(redisToken)) {
             return null;
         }
-
-        logger.info("userId:{}----token:{}", userId, tokenString);
-        if (!StringUtils.isEmpty(userId)) {
-            return new SimpleAuthenticationInfo(userId, tokenString, getName());
-        }
-        return null;
+        logger.info("userId: {} -- token: {}", userId, tokenString);
+        return new SimpleAuthenticationInfo(userId, tokenString, getName());
     }
 
     /**
@@ -83,20 +77,16 @@ public class TokenRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String userId = (String) principals.getPrimaryPrincipal();
         if (!StringUtils.isEmpty(userId)) {
-            String token = stringRedisTemplate.opsForValue().get(shiroModuleProperties.getTokenPrefix() + shiroModuleProperties.getTokenName() + userId);
+            String tokenString = stringRedisTemplate.opsForValue().get(shiroProperties.getTokenPrefix() + userId);
             String userRole;
             try {
-                String userIdTokenRole = TokenUtil.decode(token);
-                userRole = userIdTokenRole.split("\\.")[1];
+                String token = TokenUtil.decode(tokenString, shiroProperties.getTokenSecret());
+                userRole = token.split("\\.")[1];
             } catch (Exception e) {
                 return null;
             }
-            logger.info("userId:{}----role:{}", userId, userRole);
-            if (!StringUtils.isEmpty(userRole)) {
-                SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-                info.addRole(userRole);
-                return info;
-            }
+            logger.info("userId: {} -- role: {}", userId, userRole);
+            return new SimpleAuthorizationInfo(Collections.singleton(userRole));
         }
         return null;
     }
