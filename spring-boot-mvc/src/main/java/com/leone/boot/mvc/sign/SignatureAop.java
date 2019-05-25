@@ -1,32 +1,33 @@
 package com.leone.boot.mvc.sign;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
-import java.lang.reflect.Method;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
  * <p>{
- * 	"appId":"109098",
- * 	"nonceStr":"nonceStr",
- * 	"timestamp":1558703431,
- * 	"data":{
- * 		"userId":1001,
- * 		"account":"1009",
- * 		"password":"1209098",
- * 		"description":"hello world",
- * 		"age":18,
- * 		"deleted": false
- *        },
- * 	"sign":""
+ * "appId":"109098",
+ * "nonceStr":"nonceStr",
+ * "timestamp":1558703431,
+ * "data":{
+ * "userId":1001,
+ * "account":"1009",
+ * "password":"1209098",
+ * "description":"hello world",
+ * "age":18,
+ * "deleted": false
+ * },
+ * "sign":""
  * }
  *
  * @author leone
@@ -37,7 +38,7 @@ import java.util.Objects;
 @Component
 public class SignatureAop {
 
-    private final ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     public SignatureAop(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
@@ -45,22 +46,21 @@ public class SignatureAop {
 
     @Before("@annotation(com.leone.boot.mvc.sign.Signature)")
     public void before(JoinPoint point) {
-        Signature signature = point.getSignature();
-        MethodSignature methodSignature = (MethodSignature) signature;
-        Method method = methodSignature.getMethod();
         Object[] args = point.getArgs();
-        if (Objects.nonNull(args) && args.length == 1) {
+        if (Objects.nonNull(args) && args.length > 1) {
             try {
-                String paramJson = objectMapper.writeValueAsString(args[0]);
-                SignatureBean signatureBean = (SignatureBean) args[0];
-                boolean check = SignatureUtil.check(paramJson, "");
-                boolean checkTime = SignatureUtil.checkTime(signatureBean.getTimestamp());
-
-                if ((check && checkTime)) {
-                    throw new IllegalArgumentException("params check wrong");
+                if (!(args[0] instanceof SignatureBean)) {
+                    throw new IllegalArgumentException("param type is not signature type");
                 }
-
-            } catch (JsonProcessingException e) {
+                SignatureBean signatureBean = (SignatureBean) args[0];
+                signatureBean.setSecret("abc");
+                String paramJson = objectMapper.writeValueAsString(signatureBean);
+                Assert.notNull(signatureBean.getSign(), "sign missing");
+                String result = Md5Util.MD5(paramJson);
+                boolean checkTime = SignatureUtil.checkTime(signatureBean.getTimestamp());
+                Assert.isTrue(checkTime, "time invalidate");
+                Assert.isTrue(result.equals(signatureBean.getSign()), "sign check wrong");
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

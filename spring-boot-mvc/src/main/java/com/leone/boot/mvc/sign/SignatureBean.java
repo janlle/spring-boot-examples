@@ -1,5 +1,7 @@
 package com.leone.boot.mvc.sign;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -16,7 +18,11 @@ public class SignatureBean<T> implements Serializable {
 
     private String nonceStr;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String sign;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String secret;
 
     private Long timestamp;
 
@@ -26,6 +32,14 @@ public class SignatureBean<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
     public String getAppId() {
