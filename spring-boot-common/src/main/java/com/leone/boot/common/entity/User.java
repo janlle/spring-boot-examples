@@ -1,6 +1,9 @@
 package com.leone.boot.common.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
+import java.lang.annotation.Documented;
 import java.util.Date;
 
 /**

@@ -1,11 +1,9 @@
 package com.leone.boot.aop.config;
 
-import com.leone.boot.aop.anno.SystemLogAnno;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -22,56 +20,83 @@ import java.util.List;
 @Component
 public class AopConfig {
 
+    /**
+     * 1.通配符
+     * [*]  匹配任意字符，但只能匹配一个元素
+     * <p>
+     * [..] 匹配任意字符，可以匹配任意多个元素，表示类时，必须和*联合使用
+     * <p>
+     * [+]  必须跟在类名后面，如Horseman+，表示类本身和继承或扩展指定类的所有类
+     * <p>
+     * 切点表达式分为 修饰符  返回类型  包路径  方法名  参数
+     * <p>
+     * 2.切点表达式
+     * <p>
+     * 3.逻辑运算符
+     * 表达式可由多个切点函数通过逻辑运算组成
+     * ** && 与操作，求交集，也可以写成and
+     * <p>
+     * 例如 execution(* chop(..)) && target(Horseman)  表示Horseman及其子类的chop方法
+     * <p>
+     * ** || 或操作，任一表达式成立即为true，也可以写成 or
+     * <p>
+     * 例如 execution(* chop(..)) || args(String)  表示名称为chop的方法或者有一个String型参数的方法
+     * <p>
+     * ** ! 非操作，表达式为false则结果为true，也可以写成 not
+     * <p>
+     * 例如 execution(* chop(..)) and !args(String)  表示名称为chop的方法但是不能是只有一个String型参数的方法
+     */
     @Pointcut("execution(* com.leone.boot.aop.service.*.*(..))")
     public void pointCut() {
     }
 
     /**
-     * 环绕通知在target开始和结束执行
+     * 环绕通知在 target 开始和结束执行
      *
      * @param point
      * @return
      */
     @Around(value = "pointCut()")
     public Object around(ProceedingJoinPoint point) {
-        Object result = null;
+        long start = System.currentTimeMillis();
         String methodName = point.getSignature().getName();
+        log.info("around method name: {} params: {}", methodName, Arrays.asList(point.getArgs()));
         try {
-            log.info("around start method name:" + methodName + ", params:" + Arrays.asList(point.getArgs()));
-            long start = System.currentTimeMillis();
-            result = point.proceed();
-            long end = System.currentTimeMillis();
-            long time = (end - start);
-            log.info("around end time:{}", time + " ms!");
+            log.info("around end time: {}", (System.currentTimeMillis() - start) + " ms!");
+            return point.proceed();
         } catch (Throwable e) {
-            log.error("message:{}", e.getMessage());
+            log.error("message: {}", e.getMessage());
         }
-        return result;
+        return null;
     }
 
-
     /**
-     * 前置通知在target前执行
+     * 前置通知在 target 前执行
      *
      * @param joinPoint
      */
-    @Before(value = "pointCut()")
+    // @Before("@annotation(com.leone.boot.aop.anno.AopBefore)")
+    // @Before("within(com.leone.boot.aop.controller.*)")
+    // @Before("@within(org.springframework.web.bind.annotation.RestController)")
+    // @Before("target(com.leone.boot.aop.controller.UserController)")
+    @Before("@target(com.leone.boot.aop.anno.ClassAop) && @annotation(com.leone.boot.aop.anno.AopBefore)")
     public void beforeMethod(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         List<Object> args = Arrays.asList(joinPoint.getArgs());
-        log.info("before inform method name :" + methodName + ", param:" + args);
+        log.info("before inform method name: {} param: {}", methodName, args);
     }
+
 
     /**
      * 后置通知在target后执行
      *
      * @param joinPoint
      */
-    @After("pointCut()")
+    @After("@args(org.springframework.stereotype.Component) && execution(* com.leone.boot.aop.controller.*.*(..))")
     public void afterMethod(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         List<Object> args = Arrays.asList(joinPoint.getArgs());
-        log.info("after inform method name :" + methodName + ", param:" + args);
+        log.info("after inform method name : {} param: {}", methodName, args);
     }
 
     /**
@@ -80,10 +105,10 @@ public class AopConfig {
      * @param joinPoint
      * @param result
      */
-    @AfterReturning(value = "pointCut()", returning = "result")
+    @AfterReturning(value = "within(com.leone.boot.aop.controller.*)", returning = "result")
     public void afterReturning(JoinPoint joinPoint, Object result) {
         String methodName = joinPoint.getSignature().getName();
-        log.info("afterReturning inform method name :" + methodName + ", return value:" + result);
+        log.info("afterReturning inform method name: {} return value: {}", methodName, result);
     }
 
     /**
@@ -92,27 +117,10 @@ public class AopConfig {
      * @param joinPoint
      * @param ex
      */
-    @AfterThrowing(value = "pointCut()", throwing = "ex")
+    @AfterThrowing(value = "args(com.leone.boot.common.entity.User) && execution(* com.leone.boot.aop.controller.*.*(..))", throwing = "ex")
     public void afterThrowing(JoinPoint joinPoint, Exception ex) {
         String methodName = joinPoint.getSignature().getName();
-        log.info("afterThrowing inform method name :" + methodName + ", exceptions:" + ex);
-    }
-
-
-    /**
-     * 环绕通知
-     *
-     * @param joinPoint
-     * @return
-     * @throws Throwable
-     */
-    @Around("@annotation(com.leone.boot.aop.anno.SystemLogAnno)")
-    public Object customerAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        SystemLogAnno systemLog = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(SystemLogAnno.class);
-        System.out.println("description" + systemLog.description());
-        System.out.println("name" + systemLog.name());
-        System.out.println("value" + systemLog.value());
-        return null;
+        log.info("afterThrowing inform method name: {} exceptions: {}" + methodName, ex);
     }
 
 

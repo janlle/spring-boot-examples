@@ -19,11 +19,10 @@ import java.util.Random;
 public class UserServiceImpl implements UserService {
 
     @Override
-    @SystemLogAnno(description = "获取用户", value = "value", name = "基于自定义注解的aop")
+    @SystemLogAnno(description = "findOne", value = "value", name = "test")
     public User findOne(Long userId) {
-        log.info("findOne(Long userId)");
         if (new Random().nextBoolean()) {
-            throw new RuntimeException("UserService发生异常");
+            throw new RuntimeException("UserService exception");
         }
         return EntityFactory.getUser(2L);
     }
