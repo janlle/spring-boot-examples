@@ -1,18 +1,19 @@
 package com.leone.boot.spring;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author leone
  * @since 2018-06-29
  **/
+@SpringBootApplication
 public class App {
 
     public static void main(String[] args) {
 
 //        ApplicationContext applicationContext = new FileSystemXmlApplicationContext("D:\\spring.xml");
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
 //        BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
 
 //        System.out.println("getApplicationName:" + applicationContext.getApplicationName());
@@ -26,6 +27,8 @@ public class App {
 //
 //
 //        person1.hello("james");
+
+        SpringApplication.run(App.class, args);
 
     }
 }

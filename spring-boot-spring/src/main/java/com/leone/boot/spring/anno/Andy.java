@@ -13,8 +13,4 @@ public @interface Andy {
 
     String value() default "";
 
-    String name() default "";
-
-    int size() default 0;
-
 }

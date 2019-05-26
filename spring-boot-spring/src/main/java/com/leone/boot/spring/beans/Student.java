@@ -10,10 +10,10 @@ import javax.annotation.Resource;
  **/
 public class Student {
 
-    @Resource(type = Teacher.class)
+    //@Resource(type = Teacher.class)
     private Teacher teacher;
 
-    @Resource(name = "person")
+    //@Resource(name = "person")
     private Person person;
 
     public Student() {

@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="com.leone.quartz.spring.scan,com.leone.quartz.spring.config"/>
+    <context:component-scan base-package="com.leone.boot.spring"/>
 
     <bean id="001" class="com.leone.boot.spring.beans.Person" name="person"/>
 
