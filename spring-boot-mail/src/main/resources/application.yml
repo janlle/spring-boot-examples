@@ -41,4 +41,5 @@ spring:
 #    expose-request-attributes: false
 #    expose-session-attributes: false
 #    expose-spring-macro-helpers: false
-
+server:
+  port: 8081

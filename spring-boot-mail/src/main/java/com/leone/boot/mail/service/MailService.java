@@ -81,7 +81,7 @@ public class MailService {
             log.info("send mail success!");
             return true;
         } catch (Exception e) {
-            log.error("send mail filed:{}", e);
+            log.error("send mail filed: {}", e.getMessage());
             return false;
         }
     }

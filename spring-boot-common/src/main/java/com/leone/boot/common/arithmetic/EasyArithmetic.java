@@ -15,63 +15,60 @@ public class EasyArithmetic {
     }
 
     public static void main(String[] args) {
-        System.out.println(isValid("}{"));
+        System.out.println(isValid("}["));
+    }
+
+
+    /**
+     * 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+     * <p>
+     * 示例：
+     * <p>
+     * 输入：1->2->4, 1->3->4
+     * 输出：1->1->2->3->4->4
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+
+
+        return null;
+    }
+
+    public static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
     }
 
     /**
      * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
-     * <p>
-     * for (int i = 0; i < s.length()-1; i++) {
-     * char c = s.charAt(i);
-     * char c1= s.charAt(i+1);
-     * if (c == '(' || c == '[' || c == '{') {
-     * stack1.push(c);
-     * if (c == '(' && ( stack.peek() == ')' || c1==')' ) ){
-     * stack1.pop();
-     * }
-     * if (c == '[' && (stack.peek() == ']' || c1==']' )){
-     * stack1.pop();
-     * }
-     * if (c == '{' && (stack.peek() == '}'  || c1=='}' )){
-     * stack1.pop();
-     * }
-     * }
-     * }
      *
      * @param s
      * @return
      */
     private static boolean isValid(String s) {
-        Stack<Character> a = new Stack<>();
-        Stack<Character> b = new Stack<>();
+        Stack<Character> stack = new Stack<>();
         if ("".equals(s)) {
             return true;
         }
-        if (s.length() % 2 != 0) {
-            return false;
-        }
-
-        for (int i = 0; i < s.length(); i++) {
-            a.push(s.charAt(i));
-        }
-
-        for (int i = 0; i < s.length() - 1; i++) {
-            char c1 = s.charAt(i);
-            char c2 = s.charAt(i + 1);
-            if (c1 == '(' || c1 == '[' || c1 == '{') {
-                b.push(c1);
-                if (c1 == '(' && (a.peek() == ')' || c2 == ')')) {
-                    b.pop();
-                }
-                if (c1 == '[' && (a.peek() == ']' || c2 == ']')) {
-                    b.pop();
-                }
-                if (c1 == '{' && (a.peek() == '}' || c2 == '}')) {
-                    b.pop();
-                }
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (stack.isEmpty()) {
+                stack.push(chars[i]);
+            } else if ((chars[i] == ')' && stack.peek() == '(') || (chars[i] == ']' && stack.peek() == '[') || (chars[i] == '}' && stack.peek() == '{')) {
+                stack.pop();
+            } else {
+                stack.push(chars[i]);
             }
         }
-        return b.isEmpty();
+        return stack.isEmpty();
     }
 
     /**
