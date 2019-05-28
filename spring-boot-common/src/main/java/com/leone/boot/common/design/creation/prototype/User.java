@@ -7,7 +7,7 @@ import java.util.Date;
  * 原型模式
  *
  * @author leone
- * @cerateBy: 2018-07-29
+ * @since 2018-07-29
  **/
 public class User implements Serializable, Cloneable {
 

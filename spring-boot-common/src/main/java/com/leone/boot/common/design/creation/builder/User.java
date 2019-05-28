@@ -5,7 +5,7 @@ import java.util.Date;
 /**构建者模式
  *
  * @author leone
- * @cerateBy: 2018-07-29
+ * @since 2018-07-29
  **/
 public class User {
 

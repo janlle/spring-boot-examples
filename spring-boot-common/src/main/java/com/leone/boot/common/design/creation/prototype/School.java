@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author leone
- * @cerateBy: 2018-07-29
+ * @since 2018-07-29
  **/
 public class School implements Serializable {
 
