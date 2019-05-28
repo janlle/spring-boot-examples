@@ -1,4 +1,4 @@
-package com.leone.boot.common.design.behavior.templet;
+package com.leone.boot.common.design.behavior.template;
 
 /**
  * @author leone

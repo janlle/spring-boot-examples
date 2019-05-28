@@ -1,5 +1,11 @@
 package com.leone.boot.common.design.behavior.strategy;
 
+/**
+ * <p> 
+ *
+ * @author leone
+ * @since 2019-05-28
+ **/
 public interface MemberStrategy {
     /**
      * 计算图书的价格
