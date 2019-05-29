@@ -16,6 +16,19 @@ public class EasyArithmetic {
 
     public static void main(String[] args) {
         System.out.println(isValid("}["));
+
+    }
+
+    /**
+     * 报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
+     *
+     * @param n
+     * @return
+     */
+    public String countAndSay(int n) {
+
+
+        return null;
     }
 
 
@@ -32,7 +45,6 @@ public class EasyArithmetic {
      * @return
      */
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-
 
 
         return null;

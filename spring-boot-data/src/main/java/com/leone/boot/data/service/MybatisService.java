@@ -1,5 +1,6 @@
 package com.leone.boot.data.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
 import com.leone.boot.data.repository.mybatis.UserMapper;
@@ -23,6 +24,9 @@ public class MybatisService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     /**
      * 批量插入
      *
@@ -44,10 +48,8 @@ public class MybatisService {
             if (a == 0) {
                 return time;
             }
-
             return time + userMapper.insertBatch(EntityFactory.getUsers(a));
         }
-
     }
 
     /**

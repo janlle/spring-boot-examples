@@ -6,7 +6,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 
 /**
- * <p>
+ * <p> java内省机制
  *
  * @author leone
  * @since 2018-09-30
@@ -15,13 +15,10 @@ public class IntrospectionMain {
 
     public static void main(String[] args) throws Exception {
         Point point = new Point(2, 5);
-
         String proName = "x";
-
         System.out.println(point);
 
         getProperty(point, proName);
-
         setProperty(point, proName);
 
 

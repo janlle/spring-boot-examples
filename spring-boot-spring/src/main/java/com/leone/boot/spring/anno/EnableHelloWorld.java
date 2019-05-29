@@ -1,8 +1,5 @@
 package com.leone.boot.spring.anno;
 
-import com.sun.xml.internal.bind.v2.model.core.EnumLeafInfo;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.*;
 
 /**
