@@ -57,8 +57,8 @@ public class OrcUtil {
             ((LongColumnVector) batch.cols[i]).vector[0] = RandomValue.randomLong();
             ((BytesColumnVector) batch.cols[i]).vector[1] = RandomValue.randomUsername().getBytes(StandardCharsets.UTF_8);
             ((LongColumnVector) batch.cols[i]).vector[2] = RandomValue.randomLong();
-            ((BytesColumnVector) batch.cols[i]).vector[3] = (RandomValue.random.nextBoolean() ? "男" : "女").getBytes(StandardCharsets.UTF_8);
-            ((BytesColumnVector) batch.cols[i]).vector[4] = String.valueOf(RandomValue.random.nextBoolean()).getBytes(StandardCharsets.UTF_8);
+            ((BytesColumnVector) batch.cols[i]).vector[3] = (RandomValue.RANDOM.nextBoolean() ? "男" : "女").getBytes(StandardCharsets.UTF_8);
+            ((BytesColumnVector) batch.cols[i]).vector[4] = String.valueOf(RandomValue.RANDOM.nextBoolean()).getBytes(StandardCharsets.UTF_8);
             ((BytesColumnVector) batch.cols[i]).vector[6] = RandomValue.randomTime().getBytes(StandardCharsets.UTF_8);
             if (batch.size == batch.getMaxSize()) {
                 writer.addRowBatch(batch);

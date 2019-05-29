@@ -11,48 +11,44 @@ public class AppUsageLog extends AppBaseLog {
     private static final long serialVersionUID = 1L;
 
     // 单次使用时长(秒数),指一次启动内应用在前台的持续时长
-    private Long singleUseDurationSecs;
+    private Integer singleUseDurationTime;
 
     // 单次使用过程中的上传流量
-    private Long singleUploadTraffic;
+    private Long singleUploadFlow;
 
     // 单次使用过程中的下载流量
-    private Long singleDownloadTraffic;
+    private Long singleDownloadFlow;
 
     public AppUsageLog() {
     }
 
-    public AppUsageLog(Long singleUseDurationSecs, Long singleUploadTraffic, Long singleDownloadTraffic) {
-        this.singleUseDurationSecs = singleUseDurationSecs;
-        this.singleUploadTraffic = singleUploadTraffic;
-        this.singleDownloadTraffic = singleDownloadTraffic;
+    public AppUsageLog(Integer singleUseDurationTime, Long singleUploadFlow, Long singleDownloadFlow) {
+        this.singleUseDurationTime = singleUseDurationTime;
+        this.singleUploadFlow = singleUploadFlow;
+        this.singleDownloadFlow = singleDownloadFlow;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public Integer getSingleUseDurationTime() {
+        return singleUseDurationTime;
     }
 
-    public Long getSingleUseDurationSecs() {
-        return singleUseDurationSecs;
+    public void setSingleUseDurationTime(Integer singleUseDurationTime) {
+        this.singleUseDurationTime = singleUseDurationTime;
     }
 
-    public void setSingleUseDurationSecs(Long singleUseDurationSecs) {
-        this.singleUseDurationSecs = singleUseDurationSecs;
+    public Long getSingleUploadFlow() {
+        return singleUploadFlow;
     }
 
-    public Long getSingleUploadTraffic() {
-        return singleUploadTraffic;
+    public void setSingleUploadFlow(Long singleUploadFlow) {
+        this.singleUploadFlow = singleUploadFlow;
     }
 
-    public void setSingleUploadTraffic(Long singleUploadTraffic) {
-        this.singleUploadTraffic = singleUploadTraffic;
+    public Long getSingleDownloadFlow() {
+        return singleDownloadFlow;
     }
 
-    public Long getSingleDownloadTraffic() {
-        return singleDownloadTraffic;
-    }
-
-    public void setSingleDownloadTraffic(Long singleDownloadTraffic) {
-        this.singleDownloadTraffic = singleDownloadTraffic;
+    public void setSingleDownloadFlow(Long singleDownloadFlow) {
+        this.singleDownloadFlow = singleDownloadFlow;
     }
 }

@@ -23,20 +23,20 @@ public class AppPageLog extends AppBaseLog {
     private String nextPage;
 
     // 当前页面停留时长
-    private Long stayDurationSecs = 0L;
+    private Integer standingTime = 0;
 
     public AppPageLog() {
     }
 
-    public AppPageLog(Integer pageViewCntInSession, String pageId, Integer visitIndex, String nextPage, Long stayDurationSecs) {
+    public AppPageLog(Integer pageViewCntInSession, String pageId, Integer visitIndex, String nextPage, Integer standingTime) {
         this.pageViewCntInSession = pageViewCntInSession;
         this.pageId = pageId;
         this.visitIndex = visitIndex;
         this.nextPage = nextPage;
-        this.stayDurationSecs = stayDurationSecs;
+        this.standingTime = standingTime;
     }
 
-    public int getPageViewCntInSession() {
+    public Integer getPageViewCntInSession() {
         return pageViewCntInSession;
     }
 
@@ -52,7 +52,7 @@ public class AppPageLog extends AppBaseLog {
         this.pageId = pageId;
     }
 
-    public int getVisitIndex() {
+    public Integer getVisitIndex() {
         return visitIndex;
     }
 
@@ -68,11 +68,11 @@ public class AppPageLog extends AppBaseLog {
         this.nextPage = nextPage;
     }
 
-    public Long getStayDurationSecs() {
-        return stayDurationSecs;
+    public Integer getStandingTime() {
+        return standingTime;
     }
 
-    public void setStayDurationSecs(Long stayDurationSecs) {
-        this.stayDurationSecs = stayDurationSecs;
+    public void setStandingTime(Integer standingTime) {
+        this.standingTime = standingTime;
     }
 }

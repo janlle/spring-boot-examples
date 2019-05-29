@@ -1,9 +1,14 @@
 package com.leone.boot.log.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.List;
+
 /**
  * AppLog实体类
  * 内部含有各种日志时间的集合。
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AppLogEntity {
 
     // 应用唯一标识
@@ -31,24 +36,24 @@ public class AppLogEntity {
     private String deviceStyle;
 
     // 启动相关信息的数组
-    private AppStartupLog[] appStartupLogs;
+    private List<AppStartupLog> appStartupLogs;
 
     // 页面跳转相关信息的数组
-    private AppPageLog[] appPageLogs;
+    private List<AppPageLog> appPageLogs;
 
     // 事件相关信息的数组
-    private AppEventLog[] appEventLogs;
+    private List<AppEventLog> appEventLogs;
 
     // app使用情况相关信息的数组
-    private AppUsageLog[] appUsageLogs;
+    private List<AppUsageLog> appUsageLogs;
 
     // 错误相关信息的数组
-    private AppErrorLog[] appErrorLogs;
+    private List<AppErrorLog> appErrorLogs;
 
     public AppLogEntity() {
     }
 
-    public AppLogEntity(String appId, String tenantId, String deviceId, String appVersion, String appChannel, String appPlatform, String osType, String deviceStyle, AppStartupLog[] appStartupLogs, AppPageLog[] appPageLogs, AppEventLog[] appEventLogs, AppUsageLog[] appUsageLogs, AppErrorLog[] appErrorLogs) {
+    public AppLogEntity(String appId, String tenantId, String deviceId, String appVersion, String appChannel, String appPlatform, String osType, String deviceStyle, List<AppStartupLog> appStartupLogs, List<AppPageLog> appPageLogs, List<AppEventLog> appEventLogs, List<AppUsageLog> appUsageLogs, List<AppErrorLog> appErrorLogs) {
         this.appId = appId;
         this.tenantId = tenantId;
         this.deviceId = deviceId;
@@ -128,43 +133,43 @@ public class AppLogEntity {
         this.deviceStyle = deviceStyle;
     }
 
-    public AppStartupLog[] getAppStartupLogs() {
+    public List<AppStartupLog> getAppStartupLogs() {
         return appStartupLogs;
     }
 
-    public void setAppStartupLogs(AppStartupLog[] appStartupLogs) {
+    public void setAppStartupLogs(List<AppStartupLog> appStartupLogs) {
         this.appStartupLogs = appStartupLogs;
     }
 
-    public AppPageLog[] getAppPageLogs() {
+    public List<AppPageLog> getAppPageLogs() {
         return appPageLogs;
     }
 
-    public void setAppPageLogs(AppPageLog[] appPageLogs) {
+    public void setAppPageLogs(List<AppPageLog> appPageLogs) {
         this.appPageLogs = appPageLogs;
     }
 
-    public AppEventLog[] getAppEventLogs() {
+    public List<AppEventLog> getAppEventLogs() {
         return appEventLogs;
     }
 
-    public void setAppEventLogs(AppEventLog[] appEventLogs) {
+    public void setAppEventLogs(List<AppEventLog> appEventLogs) {
         this.appEventLogs = appEventLogs;
     }
 
-    public AppUsageLog[] getAppUsageLogs() {
+    public List<AppUsageLog> getAppUsageLogs() {
         return appUsageLogs;
     }
 
-    public void setAppUsageLogs(AppUsageLog[] appUsageLogs) {
+    public void setAppUsageLogs(List<AppUsageLog> appUsageLogs) {
         this.appUsageLogs = appUsageLogs;
     }
 
-    public AppErrorLog[] getAppErrorLogs() {
+    public List<AppErrorLog> getAppErrorLogs() {
         return appErrorLogs;
     }
 
-    public void setAppErrorLogs(AppErrorLog[] appErrorLogs) {
+    public void setAppErrorLogs(List<AppErrorLog> appErrorLogs) {
         this.appErrorLogs = appErrorLogs;
     }
 }

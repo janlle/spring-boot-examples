@@ -34,8 +34,6 @@ public class LogTask {
 
     private static final Random RANDOM = new Random();
 
-    private static final Date date = new Date();
-
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private static Long offset = 0L;
@@ -50,7 +48,7 @@ public class LogTask {
     // @Scheduled(fixedRate = 10)
     public void csvLog() {
         // CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
-        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomUsername() + "," + RandomValue.random.nextInt(60) + "," + RandomValue.randomTime() + "," + RandomValue.randomUUID().substring(15) + "," + RandomValue.randomMessage() + "," + RANDOM.nextBoolean());
+        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomUsername() + "," + RandomValue.RANDOM.nextInt(60) + "," + RandomValue.randomTime() + "," + RandomValue.randomUUID().substring(15) + "," + RandomValue.randomWords() + "," + RANDOM.nextBoolean());
     }
 
     /**
@@ -70,18 +68,18 @@ public class LogTask {
      */
     @Async
     // @Scheduled(fixedRate = 5)
-    public void randomWord() {
+    public void randomWordsTask() {
         // COMMON_LOG.info(RandomValue.randomMessage() + " " + RandomValue.randomMessage());
-        COMMON_LOG.info(offset + "," + (RandomValue.random.nextInt(100) + 1000) + "," + RandomValue.randomTime() + "," + RandomValue.random.nextInt(1000000000));
+        COMMON_LOG.info(offset + "," + (RandomValue.RANDOM.nextInt(100) + 1000) + "," + RandomValue.randomTime() + "," + RandomValue.RANDOM.nextInt(1000000000));
         offset++;
     }
 
     /**
-     * 用户访问ip产生的日志(每3秒执行一次)
+     * 访问日志
      */
     @Async
     // @Scheduled(fixedRate = 20)
-    public void userVisitLogTask() {
+    public void accessLogTask() {
         COMMON_LOG.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomTel() + "\t" + RandomValue.randomUrl() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
     }
 
@@ -99,7 +97,7 @@ public class LogTask {
      * @Scheduled() 产生 parquet 文件
      */
     @Async
-    @Scheduled(cron = "0/10 * * * * ?")
+    //@Scheduled(cron = "0/10 * * * * ?")
     public void parquetTask() throws IOException {
         String file = "/root/logs/parquet/user-20190410-" + String.format("%03d", offset) + ".parquet";
         ParquetUtil.parquetWriter(100000L, file);

@@ -16,19 +16,18 @@ public class AppEventLog extends AppBaseLog {
     private String eventId;
 
     // 事件持续时长
-    private Long eventDurationSecs;
+    private Integer eventDurationTime;
 
     // 参数名 键值对
-    private Map<String, String> paramKeyValueMap;
-
-
-    public AppEventLog(String eventId, Long eventDurationSecs, Map<String, String> paramKeyValueMap) {
-        this.eventId = eventId;
-        this.eventDurationSecs = eventDurationSecs;
-        this.paramKeyValueMap = paramKeyValueMap;
-    }
+    private Map<String, String> params;
 
     public AppEventLog() {
+    }
+
+    public AppEventLog(String eventId, Integer eventDurationTime, Map<String, String> params) {
+        this.eventId = eventId;
+        this.eventDurationTime = eventDurationTime;
+        this.params = params;
     }
 
     public String getEventId() {
@@ -39,19 +38,19 @@ public class AppEventLog extends AppBaseLog {
         this.eventId = eventId;
     }
 
-    public Long getEventDurationSecs() {
-        return eventDurationSecs;
+    public Integer getEventDurationTime() {
+        return eventDurationTime;
     }
 
-    public void setEventDurationSecs(Long eventDurationSecs) {
-        this.eventDurationSecs = eventDurationSecs;
+    public void setEventDurationTime(Integer eventDurationTime) {
+        this.eventDurationTime = eventDurationTime;
     }
 
-    public Map<String, String> getParamKeyValueMap() {
-        return paramKeyValueMap;
+    public Map<String, String> getParams() {
+        return params;
     }
 
-    public void setParamKeyValueMap(Map<String, String> paramKeyValueMap) {
-        this.paramKeyValueMap = paramKeyValueMap;
+    public void setParams(Map<String, String> params) {
+        this.params = params;
     }
 }

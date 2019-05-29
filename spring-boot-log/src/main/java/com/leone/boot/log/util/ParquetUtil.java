@@ -60,12 +60,12 @@ public class ParquetUtil {
         SimpleGroupFactory groupFactory = new SimpleGroupFactory(schema);
         for (long i = 0; i < count; i++) {
             writer.write(groupFactory.newGroup()
-                    .append("user_id", i + RandomValue.random.nextInt(1000000000))
+                    .append("user_id", i + RandomValue.RANDOM.nextInt(1000000000))
                     .append("account", RandomValue.randomNum(16))
-                    .append("age", (RandomValue.random.nextInt(60) + 12))
-                    .append("sex", RandomValue.random.nextInt(2))
-                    .append("description", RandomValue.randomMessage())
-                    .append("deleted", RandomValue.random.nextBoolean())
+                    .append("age", (RandomValue.RANDOM.nextInt(60) + 12))
+                    .append("sex", RandomValue.RANDOM.nextInt(2))
+                    .append("description", RandomValue.randomWords())
+                    .append("deleted", RandomValue.RANDOM.nextBoolean())
                     .append("create_time", RandomValue.randomTime()));
         }
         writer.close();

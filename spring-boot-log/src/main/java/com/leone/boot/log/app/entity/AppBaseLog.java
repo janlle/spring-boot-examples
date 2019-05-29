@@ -1,10 +1,13 @@
 package com.leone.boot.log.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
 /**
  * AppBaseLog
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AppBaseLog implements Serializable {
 
     // 日志创建时间

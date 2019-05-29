@@ -1,6 +1,6 @@
 package com.leone.boot.log.task;
 
-import com.leone.boot.log.util.RandomAppLog;
+import com.leone.boot.log.app.AppLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -31,7 +31,7 @@ public class AppLogTask {
     @Async
 //    @Scheduled(fixedDelay = 50)
     public void commonLog() {
-        JSON_LOG.info("{}", RandomAppLog.randomAppLog());
+        JSON_LOG.info("{}", AppLog.randomAppLog());
     }
 
 

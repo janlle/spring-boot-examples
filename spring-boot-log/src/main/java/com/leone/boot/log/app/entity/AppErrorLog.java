@@ -41,4 +41,12 @@ public class AppErrorLog extends AppBaseLog {
     public void setErrorDetail(String errorDetail) {
         this.errorDetail = errorDetail;
     }
+
+    @Override
+    public String toString() {
+        return "AppErrorLog{" +
+                "errorBrief='" + errorBrief + '\'' +
+                ", errorDetail='" + errorDetail + '\'' +
+                '}';
+    }
 }
