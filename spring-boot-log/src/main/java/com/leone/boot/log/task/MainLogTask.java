@@ -24,7 +24,7 @@ import java.util.Random;
  * @since 2018-06-12
  **/
 @Component
-public class LogTask {
+public class MainLogTask {
 
     private static final Logger JSON_LOG = LoggerFactory.getLogger("json-log");
 

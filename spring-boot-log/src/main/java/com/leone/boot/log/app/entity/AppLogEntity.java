@@ -172,4 +172,23 @@ public class AppLogEntity {
     public void setAppErrorLogs(List<AppErrorLog> appErrorLogs) {
         this.appErrorLogs = appErrorLogs;
     }
+
+    @Override
+    public String toString() {
+        return "AppLogEntity{" +
+                "appId='" + appId + '\'' +
+                ", tenantId='" + tenantId + '\'' +
+                ", deviceId='" + deviceId + '\'' +
+                ", appVersion='" + appVersion + '\'' +
+                ", appChannel='" + appChannel + '\'' +
+                ", appPlatform='" + appPlatform + '\'' +
+                ", osType='" + osType + '\'' +
+                ", deviceStyle='" + deviceStyle + '\'' +
+                ", appStartupLogs=" + appStartupLogs +
+                ", appPageLogs=" + appPageLogs +
+                ", appEventLogs=" + appEventLogs +
+                ", appUsageLogs=" + appUsageLogs +
+                ", appErrorLogs=" + appErrorLogs +
+                '}';
+    }
 }
