@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class JobFactory extends AdaptableJobFactory {
+
     /**
      * AutowireCapableBeanFactory接口是BeanFactory的子类
      * 可以连接和填充那些生命周期不被Spring管理的已存在的bean实例
