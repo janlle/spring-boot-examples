@@ -1,4 +1,4 @@
-package com.leone.boot.mybatis;
+package com.leone.boot.mybatisplus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

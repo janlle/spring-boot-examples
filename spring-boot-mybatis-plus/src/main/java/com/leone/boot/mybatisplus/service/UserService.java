@@ -1,7 +1,7 @@
-package com.leone.boot.mybatis.service;
+package com.leone.boot.mybatisplus.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.leone.boot.mybatis.entity.User;
+import com.leone.boot.mybatisplus.entity.User;
 
 /**
  * <p>

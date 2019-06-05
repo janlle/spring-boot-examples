@@ -1,9 +1,6 @@
 package com.leone.boot.common.entity;
 
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
-import java.lang.annotation.Documented;
 import java.util.Date;
 
 /**
@@ -31,11 +28,6 @@ public class User implements Serializable {
     private boolean deleted;
 
     public User() {
-    }
-
-    @Override
-    public User clone() throws CloneNotSupportedException {
-        return (User) super.clone();
     }
 
     public User(Long userId, String account, String password, String description, Integer age, Date createTime, Boolean deleted) {

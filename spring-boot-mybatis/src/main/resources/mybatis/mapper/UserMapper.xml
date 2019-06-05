@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="UserMapper">
+<mapper namespace="com.leone.boot.mybatis.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.leone.boot.common.entity.User">
         <id column="user_id" property="userId" jdbcType="BIGINT"/>
@@ -99,7 +99,7 @@
         where user_id = #{userId,jdbcType=BIGINT}
     </update>
 
-    <insert id="insertBatch" parameterType="java.util.List">
+    <insert id="insertBatchTest" parameterType="java.util.List">
         INSERT INTO t_user (account, password, age, description, deleted, create_time) VALUES
         <foreach collection="users" item="user" index="inx" separator=",">
             <trim prefix="(" suffixOverrides="," suffix=")">

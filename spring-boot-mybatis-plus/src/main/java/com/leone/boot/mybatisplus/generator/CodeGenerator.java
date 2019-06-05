@@ -1,4 +1,4 @@
-package com.leone.boot.mybatis.generator;
+package com.leone.boot.mybatisplus.generator;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;

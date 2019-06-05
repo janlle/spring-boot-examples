@@ -15,8 +15,8 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Insert("insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values (#{account},#{password},#{age},#{description},#{deleted},#{createTime})")
-    int insert(User user);
+    //@Insert("insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values (#{account},#{password},#{age},#{description},#{deleted},#{createTime})")
+    int insert(@Param("user") User user);
 
     @Insert({"<script>" +
             "insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values" +

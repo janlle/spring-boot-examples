@@ -1,7 +1,7 @@
-package com.leone.boot.mybatis.mapper;
+package com.leone.boot.mybatisplus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.leone.boot.mybatis.entity.User;
+import com.leone.boot.mybatisplus.entity.User;
 
 /**
  * <p>

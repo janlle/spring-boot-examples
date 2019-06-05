@@ -1,4 +1,4 @@
-package com.leone.boot.mybatis.entity;
+package com.leone.boot.mybatisplus.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 

@@ -1,10 +1,10 @@
-package com.leone.boot.mybatis.controller;
+package com.leone.boot.mybatisplus.controller;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.leone.boot.mybatis.entity.User;
-import com.leone.boot.mybatis.service.UserService;
+import com.leone.boot.mybatisplus.entity.User;
+import com.leone.boot.mybatisplus.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

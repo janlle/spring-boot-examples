@@ -1,4 +1,4 @@
-package com.leone.boot.mybatis.config;
+package com.leone.boot.mybatisplus.config;
 
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
