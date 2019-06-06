@@ -15,8 +15,7 @@ public class EasyArithmetic {
     }
 
     public static void main(String[] args) {
-        System.out.println(isValid("}["));
-
+        System.out.println(removeDuplicates(new int[]{1, 1, 3, 4, 6, 8, 8}));
     }
 
     /**
@@ -27,8 +26,28 @@ public class EasyArithmetic {
      */
     public String countAndSay(int n) {
 
-
         return null;
+    }
+
+
+    /**
+     * 给定数组 nums = [1,1,2],
+     * <p>
+     * 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。
+     * <p>
+     * 你不需要考虑数组中超出新长度后面的元素。
+     */
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int number = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != nums[number]) {
+                nums[++number] = nums[i];
+            }
+        }
+        return ++number;
     }
 
 
@@ -45,9 +64,19 @@ public class EasyArithmetic {
      * @return
      */
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-
-
-        return null;
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+        if (l1.val < l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
+        }
     }
 
     public static class ListNode {
