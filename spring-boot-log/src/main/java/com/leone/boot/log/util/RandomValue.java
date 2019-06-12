@@ -1,7 +1,6 @@
 package com.leone.boot.log.util;
 
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -438,9 +437,29 @@ public abstract class RandomValue {
      *
      * @return
      */
-    public static int randomInt() {
-        return RANDOM.nextInt();
+    public static int randomInt(int i) {
+        return RANDOM.nextInt(i);
     }
+
+
+    /**
+     * 生成随机double
+     *
+     * @return
+     */
+    public static double randomDouble() {
+        return RANDOM.nextDouble();
+    }
+
+    /**
+     * 生成随机float
+     *
+     * @return
+     */
+    public static double randomFloat() {
+        return RANDOM.nextFloat();
+    }
+
 
     /**
      * 获取随机userAgent

@@ -1,18 +1,19 @@
 package com.leone.boot.log.task;
 
-import com.leone.boot.log.util.ParquetUtil;
-import com.leone.boot.log.util.RandomValue;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.leone.boot.log.kafka.KafkaSender;
+import com.leone.boot.log.util.ParquetUtil;
+import com.leone.boot.log.util.RandomValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Random;
 
 /**
@@ -25,6 +26,9 @@ import java.util.Random;
  **/
 @Component
 public class MainLogTask {
+
+    @Autowired
+    private KafkaSender kafkaSender;
 
     private static final Logger JSON_LOG = LoggerFactory.getLogger("json-log");
 
@@ -45,32 +49,41 @@ public class MainLogTask {
      * 打电话日志
      */
     @Async
-    // @Scheduled(fixedRate = 10)
-    public void csvLog() {
-        // CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomTel() + "," + RandomValue.randomTime() + "," + RANDOM.nextInt(1000));
-        CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomUsername() + "," + RandomValue.RANDOM.nextInt(60) + "," + RandomValue.randomTime() + "," + RandomValue.randomUUID().substring(15) + "," + RandomValue.randomWords() + "," + RANDOM.nextBoolean());
+    //@Scheduled(fixedRate = 10)
+    public void csvLogTask() {
+        CSV_LOG.info(offset + "," + RandomValue.randomUsername() + "," + RandomValue.randomTel() + "," + RandomValue.randomInt(70) + "," + RandomValue.randomInt(10000) + "," + RandomValue.randomBirth());
+        offset++;
+        //CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomUsername() + "," + RandomValue.RANDOM.nextInt(60) + "," + RandomValue.randomTime() + "," + RandomValue.randomUUID().substring(15) + "," + RandomValue.randomWords() + "," + RANDOM.nextBoolean());
     }
 
     /**
-     * 用户画像
-     *
-     * @Scheduled(fixedDelay = 50)
+     * 产生json日志任务
      */
     @Async
-    // @Scheduled(fixedDelay = 30)
-    public void commonLog() {
-        COMMON_LOG.info(RandomValue.randomTime() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomUsername() + "\t" + RandomValue.randomIp() + "\t" + RandomValue.randomIDCard() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomUserAgent());
+    //@Scheduled(fixedDelay = 10)
+    public void jsonLogTask() throws JsonProcessingException {
+        JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
     }
 
     /**
-     * @Scheduled(fixedRate = 10)
-     * 产生随机单词
+     * 基本日志task
      */
     @Async
-    // @Scheduled(fixedRate = 5)
-    public void randomWordsTask() {
-        // COMMON_LOG.info(RandomValue.randomMessage() + " " + RandomValue.randomMessage());
-        COMMON_LOG.info(offset + "," + (RandomValue.RANDOM.nextInt(100) + 1000) + "," + RandomValue.randomTime() + "," + RandomValue.RANDOM.nextInt(1000000000));
+    @Scheduled(fixedDelay = 5)
+    public void commonLogTask() {
+        //COMMON_LOG.info(RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
+        COMMON_LOG.info(RandomValue.randomInt(1000000000) + "," + RandomValue.randomUsername() + "," + RandomValue.randomInt(80) + "," + RandomValue.randomDouble());
+    }
+
+    /**
+     * 向kafka发送数据
+     */
+    @Async
+    //@Scheduled(fixedDelay = 500)
+    public void kafkaSenderTask() {
+        //kafkaSender.send("topic-spark-streaming", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
+        //kafkaSender.send("topic-spark-structured", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
+        kafkaSender.send("topic-flink", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
         offset++;
     }
 
@@ -78,23 +91,14 @@ public class MainLogTask {
      * 访问日志
      */
     @Async
-    // @Scheduled(fixedRate = 20)
+    //@Scheduled(fixedRate = 20)
     public void accessLogTask() {
         COMMON_LOG.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomTel() + "\t" + RandomValue.randomUrl() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
     }
 
-    /**
-     * @Scheduled(cron = "0/1 * * * * ?")
-     * 产生json日志任务
-     */
-    @Async
-    // @Scheduled(fixedDelay = 10)
-    public void jsonLogTask() throws JsonProcessingException {
-        JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
-    }
 
     /**
-     * @Scheduled() 产生 parquet 文件
+     * 产生 parquet 文件
      */
     @Async
     //@Scheduled(cron = "0/10 * * * * ?")
@@ -109,7 +113,7 @@ public class MainLogTask {
      * @Scheduled() 产生 orc 文件
      */
     @Async
-    // @Scheduled(cron = "0/10 * * * * ?")
+    //@Scheduled(cron = "0/10 * * * * ?")
     public void orcTask() throws IOException {
         String file = "/root/logs/orc/user-20190129-" + String.format("%03d", offset) + ".orc";
         ParquetUtil.parquetWriter(100000L, file);
