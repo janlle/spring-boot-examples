@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
  * @author leone
  * @since 2018-07-01
  **/
-@Service("teach")
+//@Service("teach")
 public class Teacher {
 
     public Teacher() {

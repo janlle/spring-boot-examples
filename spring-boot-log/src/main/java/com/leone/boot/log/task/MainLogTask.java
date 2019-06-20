@@ -69,21 +69,19 @@ public class MainLogTask {
      * 基本日志task
      */
     @Async
-    @Scheduled(fixedDelay = 5)
+    //@Scheduled(fixedDelay = 5)
     public void commonLogTask() {
         //COMMON_LOG.info(RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
-        COMMON_LOG.info(RandomValue.randomInt(1000000000) + "," + RandomValue.randomUsername() + "," + RandomValue.randomInt(80) + "," + RandomValue.randomDouble());
+        COMMON_LOG.info(RandomValue.randomInt(1000000000) + "," + RandomValue.randomUsername() + "," + RandomValue.randomInt(80) + "," + RandomValue.randomDouble(100));
     }
 
     /**
      * 向kafka发送数据
      */
     @Async
-    //@Scheduled(fixedDelay = 500)
+    @Scheduled(fixedDelay = 500)
     public void kafkaSenderTask() {
-        //kafkaSender.send("topic-spark-streaming", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
-        //kafkaSender.send("topic-spark-structured", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
-        kafkaSender.send("topic-flink", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
+        kafkaSender.send("topic-kafka-streaming", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
         offset++;
     }
 

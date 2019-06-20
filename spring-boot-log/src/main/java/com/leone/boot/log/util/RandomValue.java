@@ -1,6 +1,7 @@
 package com.leone.boot.log.util;
 
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -15,6 +16,8 @@ import java.util.*;
  * @since 2018-06-02
  **/
 public abstract class RandomValue {
+
+    private static DecimalFormat df = new DecimalFormat("#.00");
 
     public static final Random RANDOM = new Random();
 
@@ -447,8 +450,8 @@ public abstract class RandomValue {
      *
      * @return
      */
-    public static double randomDouble() {
-        return RANDOM.nextDouble();
+    public static double randomDouble(double d) {
+        return Double.valueOf(df.format(Math.random() * d));
     }
 
     /**
@@ -473,7 +476,7 @@ public abstract class RandomValue {
 
     public static void main(String[] args) {
         for (int i = 0; i < 10000; i++) {
-            System.out.println(randomDate());
+            System.out.println(randomDouble(100));
         }
     }
 
