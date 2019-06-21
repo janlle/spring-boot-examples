@@ -1,24 +1,24 @@
-package com.leone.boot.spring.scan;
-
-import org.springframework.stereotype.Service;
+package com.leone.boot.spring.life;
 
 /**
  * @author leone
  * @since 2018-07-01
  **/
-//@Service("teach")
-public class Teacher {
+public class StudentBean {
 
-    public Teacher() {
-        System.out.println("constructor-Teacher");
+    //@Resource(name = "person")
+    private PersonBean person;
+
+    public StudentBean() {
+        System.out.println("constructor-StudentBean");
     }
 
     public void init(String name) {
-        System.out.println("init-Teacher");
+        System.out.println("init-StudentBean");
     }
 
     public void destroy(String name) {
-        System.out.println("destroy-Teacher");
+        System.out.println("destroy-StudentBean");
     }
 
     public void hello(String name) {

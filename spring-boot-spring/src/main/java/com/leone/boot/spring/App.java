@@ -1,7 +1,15 @@
 package com.leone.boot.spring;
 
+import com.leone.boot.spring.config.AppConfig;
+import com.leone.boot.spring.life.CustomBean;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * @author leone
@@ -10,25 +18,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-//        ApplicationContext applicationContext = new FileSystemXmlApplicationContext("D:\\spring.xml");
-//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
-//        BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("spring.xml"));
+        //FileSystemXmlApplicationContext applicationContext = new FileSystemXmlApplicationContext("D:\\spring.xml");
+        //ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 
-//        System.out.println("getApplicationName:" + applicationContext.getApplicationName());
-//        System.out.println("getDisplayName:" + applicationContext.getDisplayName());
-//        System.out.println("getId:" + applicationContext.getId());
-//        System.out.println("getStartupDate:" + applicationContext.getStartupDate());
-//
-//        Person person1 = applicationContext.getBean("001", Person.class);
-//        Teacher teacher = applicationContext.getBean("teach", Teacher.class);
-//        Student student1 = (Student) applicationContext.getBean("student");
-//
-//
-//        person1.hello("james");
+        Thread.sleep(5000);
 
-        SpringApplication.run(App.class, args);
+        applicationContext.getBean(CustomBean.class).helloWorld();
+
+        Thread.sleep(2000);
+
+        applicationContext.getBean(CustomBean.class).helloWorld();
+
+        applicationContext.close();
+
+        //SpringApplication.run(App.class, args);
 
     }
 }

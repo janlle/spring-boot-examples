@@ -1,12 +1,12 @@
-package com.leone.boot.spring.beans;
+package com.leone.boot.spring.life;
 
 /**
  * @author leone
  * @since 2018-06-29
  **/
-public class Person {
+public class PersonBean {
 
-    public Person() {
+    public PersonBean() {
         System.out.println("constructor-person");
     }
 

@@ -16,12 +16,6 @@ public class SpringConfig implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
-
-    @Bean(initMethod = "init", destroyMethod = "destroy")
-    public CustomBean customBean() {
-        return new CustomBean();
-    }
-
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
