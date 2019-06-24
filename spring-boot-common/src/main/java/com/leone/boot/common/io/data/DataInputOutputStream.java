@@ -34,5 +34,4 @@ public class DataInputOutputStream {
         dataInputStream.close();
         dataOutputStream.close();
     }
-
 }
