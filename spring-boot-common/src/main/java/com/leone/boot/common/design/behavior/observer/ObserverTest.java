@@ -8,9 +8,8 @@ package com.leone.boot.common.design.behavior.observer;
  **/
 public class ObserverTest {
 
-
     public static void main(String[] args) {
-        WeChatServer server = new WeChatServer();
+        InformationServer server = new InformationServer();
 
         Observer jack = new User("jack");
         Observer andy = new User("andy");
@@ -20,14 +19,9 @@ public class ObserverTest {
         server.registerObserver(andy);
         server.registerObserver(jerry);
 
-        server.setInfomation("PHP是世界上最好用的语言！");
-
+        server.setInformation("PHP 是世界上最好用的语言！");
         System.out.println("------------------------");
         server.removeObserver(jack);
-        server.setInfomation("JAVA是世界上最好用的语言！");
+        server.setInformation("JAVA 是世界上最好用的语言！");
     }
-
-
-
-
 }
