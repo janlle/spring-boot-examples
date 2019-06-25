@@ -12,7 +12,7 @@ public class Juice extends Drinks {
 
     @Override
     public int price() {
-        return 0;
+        return 20;
     }
 
 }

@@ -2,17 +2,12 @@ package com.leone.boot.log.task;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leone.boot.log.kafka.KafkaSender;
-import com.leone.boot.log.util.ParquetUtil;
 import com.leone.boot.log.util.RandomValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -26,9 +21,6 @@ import java.util.Random;
  **/
 @Component
 public class MainLogTask {
-
-    @Autowired
-    private KafkaSender kafkaSender;
 
     private static final Logger JSON_LOG = LoggerFactory.getLogger("json-log");
 
@@ -76,16 +68,6 @@ public class MainLogTask {
     }
 
     /**
-     * 向kafka发送数据
-     */
-    @Async
-    @Scheduled(fixedDelay = 500)
-    public void kafkaSenderTask() {
-        kafkaSender.send("topic-kafka-streaming", RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
-        offset++;
-    }
-
-    /**
      * 访问日志
      */
     @Async
@@ -94,29 +76,5 @@ public class MainLogTask {
         COMMON_LOG.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomTel() + "\t" + RandomValue.randomUrl() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
     }
 
-
-    /**
-     * 产生 parquet 文件
-     */
-    @Async
-    //@Scheduled(cron = "0/10 * * * * ?")
-    public void parquetTask() throws IOException {
-        String file = "/root/logs/parquet/user-20190410-" + String.format("%03d", offset) + ".parquet";
-        ParquetUtil.parquetWriter(100000L, file);
-        offset++;
-        System.out.println("save parquet file " + file + " successful...");
-    }
-
-    /**
-     * @Scheduled() 产生 orc 文件
-     */
-    @Async
-    //@Scheduled(cron = "0/10 * * * * ?")
-    public void orcTask() throws IOException {
-        String file = "/root/logs/orc/user-20190129-" + String.format("%03d", offset) + ".orc";
-        ParquetUtil.parquetWriter(100000L, file);
-        offset++;
-        System.out.println("save orc file " + file + " successful...");
-    }
 
 }

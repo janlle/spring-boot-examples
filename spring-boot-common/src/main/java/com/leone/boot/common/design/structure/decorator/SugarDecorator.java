@@ -21,6 +21,6 @@ public class SugarDecorator extends Decorator {
 
     @Override
     public String getName() {
-        return "加糖的" + super.getName();
+        return "加糖的" + drinks.getName();
     }
 }
