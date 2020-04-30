@@ -1,6 +1,7 @@
 package com.leone.boot.layui.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -13,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WebController {
 
     @RequestMapping("/index")
-    public String index(){
+    public String index() {
         return "index";
+    }
+
+    @GetMapping("/form")
+    public String form() {
+        return "simple_form";
     }
 
 }
