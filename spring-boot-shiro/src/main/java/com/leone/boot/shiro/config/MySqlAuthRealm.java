@@ -26,7 +26,7 @@ import java.util.Set;
  * @since 2018-04-21
  **/
 @Slf4j
-public class AuthRealm extends AuthorizingRealm {
+public class MySqlAuthRealm extends AuthorizingRealm {
 
     @Resource
     private UserService userService;

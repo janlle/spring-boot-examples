@@ -84,10 +84,10 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager(AuthRealm authRealm, CacheManager cacheManager, SessionManager sessionManager, RememberMeManager rememberMeManager) {
+    public SecurityManager securityManager(MySqlAuthRealm mySqlAuthRealm, CacheManager cacheManager, SessionManager sessionManager, RememberMeManager rememberMeManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 自定义 realm
-        securityManager.setRealm(authRealm);
+        securityManager.setRealm(mySqlAuthRealm);
 
         // 设置自定义缓存实现 使用redis
         securityManager.setCacheManager(cacheManager);
@@ -108,8 +108,8 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public AuthRealm authRealm() {
-        return new AuthRealm();
+    public MySqlAuthRealm authRealm() {
+        return new MySqlAuthRealm();
     }
 
     /**
