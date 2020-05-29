@@ -47,8 +47,8 @@ public class CodeGenerator {
         dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("cloud");
-        dsc.setUrl("jdbc:mysql://ip:3306/boot?useSSL=false");
+        dsc.setPassword("");
+        dsc.setUrl("jdbc:mysql://localhost:3306/db01?useSSL=false");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -67,7 +67,7 @@ public class CodeGenerator {
 
         // 包路径配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.leone.user");
+        pc.setParent("com.leone.test");
         pc.setController("controller");
         pc.setService("service");
         pc.setServiceImpl("service.impl");

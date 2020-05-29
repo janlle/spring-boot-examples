@@ -20,7 +20,7 @@ import java.util.List;
  **/
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.leone.mybatis.mapper")
+@MapperScan(basePackages = "com.leone.boot.mybatisplus.mapper")
 public class MybatisPlusConfig {
 
     /**
