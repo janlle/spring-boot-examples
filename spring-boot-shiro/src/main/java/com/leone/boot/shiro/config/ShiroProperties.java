@@ -3,52 +3,78 @@ package com.leone.boot.shiro.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author leone
- * @since 2018-07-16
+ * @author Leone
  **/
 @Configuration
 @ConfigurationProperties(prefix = "app.shiro")
 public class ShiroProperties {
 
-    // token缓存时长单位分钟
-    private Integer cacheTime = 4320;
+    private String tokenName;
 
-    // redis中token存贮的前缀
-    private String redisPrefix = "shiro:token";
+    private String tokenPrefix;
 
-    // token的前缀
-    private String tokenPrefix = "token";
+    private boolean multiLogin = false;
 
-    private String loginUrl = "/login";
+    private int cacheDays = 30;
 
-    private String logoutUrl = "/logout";
+    private String rule = "YWJjYQ==";
 
-    private String cipherKey = "wGiHplamyXlVB11UXWol8g==";
+    private String loginUrl;
 
-    // 匿名访问的url
-    private Set<String> anonUrls = Collections.emptySet();
+    private List<String> anonUrls = new ArrayList<>();
 
-    // 需要人证访问的url
-    private Set<String> authUrls = Collections.emptySet();
+    private List<String> corsUrls = new ArrayList<>();
 
-    public Integer getCacheTime() {
-        return cacheTime;
+    private List<String> authUrls = new ArrayList<>();
+
+    public List<String> getAnonUrls() {
+        if (anonUrls.isEmpty()) {
+            anonUrls.add("/");
+        }
+        return anonUrls;
     }
 
-    public void setCacheTime(Integer cacheTime) {
-        this.cacheTime = cacheTime;
+    public void setAnonUrls(List<String> anonUrls) {
+        this.anonUrls = anonUrls;
     }
 
-    public String getRedisPrefix() {
-        return redisPrefix;
+    public List<String> getCorsUrls() {
+        return corsUrls;
     }
 
-    public void setRedisPrefix(String redisPrefix) {
-        this.redisPrefix = redisPrefix;
+    public void setCorsUrls(List<String> corsUrls) {
+        this.corsUrls = corsUrls;
+    }
+
+    public List<String> getAuthUrls() {
+        if (authUrls.isEmpty()) {
+            authUrls.add("/api/**");
+        }
+        return authUrls;
+    }
+
+    public void setAuthUrls(List<String> authUrls) {
+        this.authUrls = authUrls;
+    }
+
+    public boolean isMultiLogin() {
+        return multiLogin;
+    }
+
+    public void setMultiLogin(boolean multiLogin) {
+        this.multiLogin = multiLogin;
+    }
+
+    public int getCacheDays() {
+        return cacheDays;
+    }
+
+    public void setCacheDays(int cacheDays) {
+        this.cacheDays = cacheDays;
     }
 
     public String getTokenPrefix() {
@@ -56,23 +82,23 @@ public class ShiroProperties {
     }
 
     public void setTokenPrefix(String tokenPrefix) {
-        this.tokenPrefix = tokenPrefix;
+        this.tokenPrefix = tokenPrefix + ":";
     }
 
-    public Set<String> getAnonUrls() {
-        return anonUrls;
+    public String getTokenName() {
+        return tokenName;
     }
 
-    public void setAnonUrls(Set<String> anonUrls) {
-        this.anonUrls = anonUrls;
+    public void setTokenName(String tokenName) {
+        this.tokenName = tokenName;
     }
 
-    public Set<String> getAuthUrls() {
-        return authUrls;
+    public String getRule() {
+        return rule;
     }
 
-    public void setAuthUrls(Set<String> authUrls) {
-        this.authUrls = authUrls;
+    public void setRule(String rule) {
+        this.rule = rule;
     }
 
     public String getLoginUrl() {
@@ -81,21 +107,5 @@ public class ShiroProperties {
 
     public void setLoginUrl(String loginUrl) {
         this.loginUrl = loginUrl;
-    }
-
-    public String getLogoutUrl() {
-        return logoutUrl;
-    }
-
-    public void setLogoutUrl(String logoutUrl) {
-        this.logoutUrl = logoutUrl;
-    }
-
-    public String getCipherKey() {
-        return cipherKey;
-    }
-
-    public void setCipherKey(String cipherKey) {
-        this.cipherKey = cipherKey;
     }
 }

@@ -1,4 +1,4 @@
-package com.leone.boot.shiro.common.util;
+package com.leone.boot.shiro.utils;
 
 import lombok.extern.slf4j.Slf4j;
 

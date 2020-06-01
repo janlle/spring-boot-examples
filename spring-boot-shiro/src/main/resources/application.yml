@@ -48,11 +48,18 @@ app:
   shiro:
     cacheTime: 4320
     redisPrefix: shiro:${server.port}
-    tokenPrefix: auth.token.
+    tokenPrefix: token.
+    loginUrl: /login
+    logoutUrl: /logout
     anonUrls:
-      - /login
+      - /upload
       - /image
       - /api/shiro/user/account
     authUrls: /**
 
-
+  token:
+    headerName: token
+    duration: 720
+    redisPrefix:
+    tokenPrefix:
+    secret:
