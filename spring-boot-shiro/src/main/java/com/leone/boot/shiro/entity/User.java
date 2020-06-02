@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class User implements Serializable {
 
-    private Long userId;
+    private Integer userId;
 
     private String account;
 
@@ -16,25 +16,17 @@ public class User implements Serializable {
 
     private String salt;
 
-    private Byte status;
+    private Integer status;
 
     private Date createTime;
 
     private Set<Role> roles;
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -43,7 +35,7 @@ public class User implements Serializable {
     }
 
     public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
+        this.account = account;
     }
 
     public String getNickname() {
@@ -51,7 +43,7 @@ public class User implements Serializable {
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+        this.nickname = nickname;
     }
 
     public String getPassword() {
@@ -59,7 +51,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getSalt() {
@@ -67,14 +59,14 @@ public class User implements Serializable {
     }
 
     public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+        this.salt = salt;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -84,5 +76,13 @@ public class User implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

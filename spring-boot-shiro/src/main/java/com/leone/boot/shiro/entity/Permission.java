@@ -5,27 +5,43 @@ import java.util.Date;
 
 public class Permission implements Serializable {
 
-    private Long permissionId;
+    private Integer permissionId;
 
     private String name;
 
     private String url;
 
-    private Byte status;
+    private Integer status;
+
+    private Integer permissionType;
+
+    private Integer sort;
 
     private Integer parentId;
 
-    private String resourceType;
-
-    private String permission;
-
     private Date createTime;
 
-    public Long getPermissionId() {
+    public Integer getPermissionType() {
+        return permissionType;
+    }
+
+    public void setPermissionType(Integer permissionType) {
+        this.permissionType = permissionType;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Integer getPermissionId() {
         return permissionId;
     }
 
-    public void setPermissionId(Long permissionId) {
+    public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
     }
 
@@ -34,7 +50,7 @@ public class Permission implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getUrl() {
@@ -42,14 +58,14 @@ public class Permission implements Serializable {
     }
 
     public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+        this.url = url;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -59,22 +75,6 @@ public class Permission implements Serializable {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
-    }
-
-    public String getResourceType() {
-        return resourceType;
-    }
-
-    public void setResourceType(String resourceType) {
-        this.resourceType = resourceType == null ? null : resourceType.trim();
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
-    public void setPermission(String permission) {
-        this.permission = permission == null ? null : permission.trim();
     }
 
     public Date getCreateTime() {

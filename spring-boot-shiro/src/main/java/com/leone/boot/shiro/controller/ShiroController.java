@@ -1,5 +1,7 @@
 package com.leone.boot.shiro.controller;
 
+import com.leone.boot.shiro.common.ExceptionMessage;
+import com.leone.boot.shiro.exception.ValidateException;
 import com.leone.boot.shiro.utils.ImageCodeUtil;
 import com.leone.boot.shiro.utils.UserHelper;
 import com.leone.boot.shiro.entity.User;
@@ -11,6 +13,7 @@ import org.apache.shiro.authz.annotation.*;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +28,9 @@ import javax.servlet.http.HttpSession;
  * @since 2018-05-18
  **/
 @Slf4j
-@RestController
-@RequestMapping("/api/shiro/user")
-public class UserController {
+@Controller
+@RequestMapping("/shiro")
+public class ShiroController {
 
     @Autowired
     private UserService userService;
@@ -38,20 +41,22 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String account, @RequestParam String password, HttpSession session, @RequestHeader("Host") String host) {
-        password = new Md5Hash("admin").toString();
-        User login = userService.login(account, password);
-        try {
-            if (!ObjectUtils.isEmpty(login)) {
-                session.setAttribute("user", login);
+    public String login(@RequestParam String account,
+                        @RequestParam String password,
+                        HttpSession session,
+                        @RequestHeader("Host") String host) {
+        password = new Md5Hash(password).toString();
+
+        User loginUser = userService.findAllPermissionByAccount(account);
+        if (!ObjectUtils.isEmpty(loginUser)) {
+            if (new Md5Hash(password, loginUser.getSalt()).toString().equals(loginUser.getPassword())) {
+                session.setAttribute("user", loginUser);
                 Subject subject = SecurityUtils.getSubject();
                 subject.login(new UsernamePasswordToken(account, password, true, host));
                 if (subject.isAuthenticated()) {
                     return "index";
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return "403";
     }
@@ -67,10 +72,7 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/{account}")
-    public User user(@PathVariable String account) {
-        return userService.findByAccount(account);
-    }
+
 
     /**
      * 查询用户
@@ -128,8 +130,8 @@ public class UserController {
      * 添加用户
      */
     @RequestMapping("/admin/add")//符合admin:view和admin:add权限要求
-    @RequiresRoles(value={"admin","manager"},logical=Logical.AND)
-    public String userInfoAdd(){
+    @RequiresRoles(value = {"admin", "manager"}, logical = Logical.AND)
+    public String userInfoAdd() {
         return "userAdd";
     }
 
@@ -137,8 +139,8 @@ public class UserController {
      * 查询用户
      */
     @RequestMapping("/admin/list")
-    @RequiresRoles(value={"leader","admin","manager"},logical=Logical.OR)
-    public String user(){
+    @RequiresRoles(value = {"leader", "admin", "manager"}, logical = Logical.OR)
+    public String user() {
         return "user";
     }
 
@@ -146,8 +148,8 @@ public class UserController {
      * 删除用户
      */
     @RequestMapping("/admin/delete")
-    @RequiresRoles(value={"admin"})
-    public String userDel(){
+    @RequiresRoles(value = {"admin"})
+    public String userDel() {
         return "userDel";
     }
 
@@ -155,8 +157,8 @@ public class UserController {
      * 修改用户
      */
     @RequestMapping("/admin/update")
-    @RequiresRoles(value={"admin","manager"},logical=Logical.OR)
-    public String userUpdate(){
+    @RequiresRoles(value = {"admin", "manager"}, logical = Logical.OR)
+    public String userUpdate() {
         return "userUpdate";
     }
 

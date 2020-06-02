@@ -3,18 +3,16 @@
 <mapper namespace="com.leone.boot.shiro.mapper.RoleMapper">
 
     <resultMap id="BaseResultMap" type="com.leone.boot.shiro.entity.Role">
-        <id column="role_id" jdbcType="BIGINT" property="roleId"/>
-        <result column="description" jdbcType="VARCHAR" property="description"/>
-        <result column="role" jdbcType="VARCHAR" property="role"/>
-        <result column="status" jdbcType="TINYINT" property="status"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <id column="role_id" property="roleId"/>
+        <result column="description" property="description"/>
+        <result column="role" property="role"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
     <insert id="insert" parameterType="com.leone.boot.shiro.entity.Role">
-        insert into sys_role (role_id, description, role,
-                              status, create_time)
-        values (#{roleId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR},
-                #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+        insert into sys_role (role_id, description, role, status, create_time)
+        values (#{roleId}, #{description}, #{role}, #{status}, #{createTime})
     </insert>
 
     <insert id="insertSelective" parameterType="com.leone.boot.shiro.entity.Role">
@@ -38,20 +36,21 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="roleId != null">
-                #{roleId,jdbcType=BIGINT},
+                #{roleId},
             </if>
             <if test="description != null">
-                #{description,jdbcType=VARCHAR},
+                #{description},
             </if>
             <if test="role != null">
-                #{role,jdbcType=VARCHAR},
+                #{role},
             </if>
             <if test="status != null">
-                #{status,jdbcType=TINYINT},
+                #{status},
             </if>
             <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+                #{createTime},
             </if>
         </trim>
     </insert>
+
 </mapper>

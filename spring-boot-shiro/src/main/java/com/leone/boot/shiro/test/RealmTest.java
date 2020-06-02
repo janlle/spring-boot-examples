@@ -2,6 +2,7 @@ package com.leone.boot.shiro.test;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.SimpleAccountRealm;
 import org.apache.shiro.subject.Subject;
@@ -38,6 +39,13 @@ public class RealmTest {
         subject.checkRoles("admin", "user");
 //        subject.logout();
 //        System.out.println("is login:" + subject.isAuthenticated());
+    }
+
+    @Test
+    public void randomTest(){
+        //5d41402abc4b2a76b9719d911017c592
+        //5d41402abc4b2a76b9719d911017c592
+        System.out.println(new Md5Hash("hello").toString());
     }
 
 

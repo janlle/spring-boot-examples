@@ -7,11 +7,12 @@
 <body>
 <div class="alert alert-success" th:if="${msg}" th:utext="${msg}"></div>
 <form th:action="@{/login}" method="POST">
-    <div><label> 账  号 : <input type="text" name="account" placeholder="用户名"/> </label></div>
-    <div><label> 密  码 : <input type="password" name="password" placeholder="密码"/> </label></div>
+    <div><label> 账 号 : <input type="text" name="account" placeholder="用户名"/> </label></div>
+    <div><label> 密 码 : <input type="password" name="password" placeholder="密码"/> </label></div>
     <div>
-        <label> 验  证 : <input type="text" name="captcha" placeholder="验证码"/> </label>
-        <img style="display: inline;" th:src="@{/image}" title="点击切换" id="imageCode" onclick="this.src='/image?date='+new Date()*1"/>
+        <label> 验 证 : <input type="text" name="captcha" placeholder="验证码"/> </label>
+        <img style="display: inline;" th:src="@{/shiro/image}" title="点击切换" id="imageCode"
+             onclick="this.src='/image?date='+new Date()*1"/>
     </div>
     <div><label style="margin-top: 15px"> <input type="checkbox" name="rememberMe"/>&nbsp;&nbsp;&nbsp;记住我</label></div>
     <div><input type="submit" value="登录"/></div>

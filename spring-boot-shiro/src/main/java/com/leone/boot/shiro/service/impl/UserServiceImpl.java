@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User findByAccount(String account) {
-        User user = userMapper.findByAccount(account);
+    public User findAllPermissionByAccount(String account) {
+        User user = userMapper.findAllPermissionByAccount(account);
         log.info("user: {}", user);
         return user;
     }
@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logout(String account) {
 
+    }
+
+    @Override
+    public User findUserByAccount(String account) {
+        return userMapper.findUserByAccount(account);
     }
 
 }
