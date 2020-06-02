@@ -10,9 +10,14 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.Random;
+import java.util.UUID;
 
 /**
+ * token: userId.role.randomCode
+ *
  * @author leone
  **/
 public class TokenUtil {
@@ -23,6 +28,7 @@ public class TokenUtil {
     private static final HexBinaryAdapter HEX_BINARY_ADAPTER = new HexBinaryAdapter();
     private static final Base64.Encoder encoder = Base64.getEncoder();
     private static final Base64.Decoder decoder = Base64.getDecoder();
+    private static final Random random = new Random();
 
     private static KeyGenerator keyGenerator;
 
@@ -82,13 +88,31 @@ public class TokenUtil {
         if (token == null) {
             return null;
         }
-        return token.split("\\.");
+        String[] arr = token.split("\\.");
+        if (arr.length != 3) {
+            throw new RuntimeException("Ill token");
+        }
+        return arr;
+    }
+
+    public static String[] validateToken(String token, String seed) {
+        return split(decode(token, seed));
+    }
+
+    public static String randomCode() {
+        return UUID.randomUUID().toString().replace("-", "").substring(0, 6);
+    }
+
+    public static String generateToken(String userId, String role, String seed) {
+        return encode(userId + "." + role + "." + randomCode(), seed);
     }
 
     public static void main(String[] args) {
         String seed = "1290";
-        System.out.println(encode("he.llo", seed));
-        System.out.println(decode("6EC910EE9AF9632D2725D83C106E80E8", seed));
+        String token = generateToken("19000", "10", seed);
+        System.out.println(token);
+        System.out.println(decode(token, seed));
+        System.out.println(Arrays.toString(validateToken(token, seed)));
     }
 
 }

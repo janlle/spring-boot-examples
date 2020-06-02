@@ -23,28 +23,28 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidateException.class)
-    public Result handleBaseException(ValidateException e) {
+    public Result<Object> handleBaseException(ValidateException e) {
         logger.error("{}", e.getMessage());
         return Result.build(e.getMessage(), e.getCode(), null);
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AuthorizationException.class)
-    public Result handleAuthorizationException(Throwable e) {
+    public Result<Object> handleAuthorizationException(Throwable e) {
         logger.error("{}", e.getMessage());
         return Result.build(ExceptionMessage.UNAUTHORIZED);
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AuthenticationException.class)
-    public Result handleAuthenticationException(Throwable e) {
+    public Result<Object> handleAuthenticationException(Throwable e) {
         logger.error("{}", e.getMessage());
         return Result.build(ExceptionMessage.UNAUTHORIZED);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public Result handleBaseException(IllegalArgumentException e) {
+    public Result<Object> handleBaseException(IllegalArgumentException e) {
         logger.error("{}", e.getMessage());
         return Result.build(ExceptionMessage.BAD_REQUEST);
     }

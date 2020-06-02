@@ -15,7 +15,7 @@ import java.util.Random;
  * @since 2019-04-26
  **/
 @Slf4j
-public class ImgCodeUtil {
+public class ImageCodeUtil {
 
     /**
      * 生成验证码

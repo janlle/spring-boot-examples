@@ -1,6 +1,6 @@
 package com.leone.boot.shiro.controller;
 
-import com.leone.boot.shiro.utils.ImgCodeUtil;
+import com.leone.boot.shiro.utils.ImageCodeUtil;
 import com.leone.boot.shiro.utils.UserHelper;
 import com.leone.boot.shiro.entity.User;
 import com.leone.boot.shiro.service.UserService;
@@ -58,7 +58,7 @@ public class UserController {
 
     @RequestMapping("/image")
     public void validCode(HttpServletResponse response, HttpSession session) throws Exception {
-        String code = ImgCodeUtil.generate(response, 60, 18);
+        String code = ImageCodeUtil.generate(response, 60, 18);
         log.info("code: {}", code);
     }
 
