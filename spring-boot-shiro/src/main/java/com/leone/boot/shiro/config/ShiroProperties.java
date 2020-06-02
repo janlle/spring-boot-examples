@@ -7,58 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Leone
+ * @author leone
  **/
 @Configuration
 @ConfigurationProperties(prefix = "app.shiro")
 public class ShiroProperties {
 
-    private String tokenName;
-
-    private String tokenPrefix;
-
-    private boolean multiLogin = false;
-
-    private int cacheDays = 30;
-
-    private String rule = "YWJjYQ==";
+    private boolean multiLogin;
 
     private String loginUrl;
 
-    private List<String> anonUrls = new ArrayList<>();
+    private String logoutUrl;
 
-    private List<String> corsUrls = new ArrayList<>();
+    private String secret;
 
-    private List<String> authUrls = new ArrayList<>();
+    private List<String> anonUrls;
 
-    public List<String> getAnonUrls() {
-        if (anonUrls.isEmpty()) {
-            anonUrls.add("/");
-        }
-        return anonUrls;
+    private List<String> authUrls;
+
+    public String getSecret() {
+        return secret;
     }
 
-    public void setAnonUrls(List<String> anonUrls) {
-        this.anonUrls = anonUrls;
-    }
-
-    public List<String> getCorsUrls() {
-        return corsUrls;
-    }
-
-    public void setCorsUrls(List<String> corsUrls) {
-        this.corsUrls = corsUrls;
-    }
-
-    public List<String> getAuthUrls() {
-        if (authUrls.isEmpty()) {
-            authUrls.add("/api/**");
-        }
-        return authUrls;
-    }
-
-    public void setAuthUrls(List<String> authUrls) {
-        this.authUrls = authUrls;
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
     public boolean isMultiLogin() {
@@ -69,43 +41,35 @@ public class ShiroProperties {
         this.multiLogin = multiLogin;
     }
 
-    public int getCacheDays() {
-        return cacheDays;
-    }
-
-    public void setCacheDays(int cacheDays) {
-        this.cacheDays = cacheDays;
-    }
-
-    public String getTokenPrefix() {
-        return tokenPrefix;
-    }
-
-    public void setTokenPrefix(String tokenPrefix) {
-        this.tokenPrefix = tokenPrefix + ":";
-    }
-
-    public String getTokenName() {
-        return tokenName;
-    }
-
-    public void setTokenName(String tokenName) {
-        this.tokenName = tokenName;
-    }
-
-    public String getRule() {
-        return rule;
-    }
-
-    public void setRule(String rule) {
-        this.rule = rule;
-    }
-
     public String getLoginUrl() {
         return loginUrl;
     }
 
     public void setLoginUrl(String loginUrl) {
         this.loginUrl = loginUrl;
+    }
+
+    public String getLogoutUrl() {
+        return logoutUrl;
+    }
+
+    public void setLogoutUrl(String logoutUrl) {
+        this.logoutUrl = logoutUrl;
+    }
+
+    public List<String> getAnonUrls() {
+        return anonUrls;
+    }
+
+    public void setAnonUrls(List<String> anonUrls) {
+        this.anonUrls = anonUrls;
+    }
+
+    public List<String> getAuthUrls() {
+        return authUrls;
+    }
+
+    public void setAuthUrls(List<String> authUrls) {
+        this.authUrls = authUrls;
     }
 }

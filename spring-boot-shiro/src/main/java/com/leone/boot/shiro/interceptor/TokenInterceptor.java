@@ -50,8 +50,9 @@ public class TokenInterceptor implements HandlerInterceptor {
                 throw new ValidateException(40001, "Authentication token is empty.");
             } else {
                 String userId = TokenUtil.validateToken(token, tokenProperties.getSecret())[0];
-                String redisToken = stringRedisTemplate.opsForValue().get(tokenProperties.getRedisPrefix() + tokenProperties.getTokenPrefix() + userId);
+                String redisToken = stringRedisTemplate.opsForValue().get(tokenProperties.getRedisPrefix() + ":" + tokenProperties.getTokenPrefix() + ":" + userId);
                 if (token.equals(redisToken)) {
+                    log.info("token: {}", token);
                     return true;
                 } else {
                     throw new ValidateException(40002, "Authentication failure.");

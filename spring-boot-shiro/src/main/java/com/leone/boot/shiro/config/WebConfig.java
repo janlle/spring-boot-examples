@@ -33,7 +33,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
+//        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 }

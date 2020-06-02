@@ -34,7 +34,7 @@ import java.util.Map;
  * @see org.apache.shiro.web.filter.mgt.DefaultFilter
  * @since 2018-04-21
  **/
-//@Configuration
+@Configuration
 public class ShiroConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
@@ -131,7 +131,7 @@ public class ShiroConfig {
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位），通过以下代码可以获取
-        byte[] cipherKey = decoder.decode(shiroProperties.getRule());
+        byte[] cipherKey = decoder.decode(shiroProperties.getSecret());
         cookieRememberMeManager.setCipherKey(cipherKey);
         cookieRememberMeManager.setCookie(rememberMeCookie());
         return cookieRememberMeManager;

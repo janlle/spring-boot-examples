@@ -75,7 +75,7 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> success(T data) {
-        return new Result<>("", 0, data);
+        return new Result<>("success", 0, data);
     }
 
 
