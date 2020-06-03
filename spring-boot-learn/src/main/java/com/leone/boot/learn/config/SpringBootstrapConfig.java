@@ -1,7 +1,7 @@
 package com.leone.boot.learn.config;
 
-import com.leone.spring.beanlife.UserBean;
-import com.leone.spring.event.EmailListener;
+import com.leone.boot.learn.beanlife.UserBean;
+import com.leone.boot.learn.event.EmailListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;

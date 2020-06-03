@@ -1,6 +1,6 @@
 package com.leone.boot.learn.bootstrap;
 
-import com.leone.spring.condition.ConditionalOnSystemProperties;
+import com.leone.boot.learn.condition.ConditionalOnSystemProperties;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;

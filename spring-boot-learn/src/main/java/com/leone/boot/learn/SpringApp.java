@@ -1,9 +1,9 @@
 package com.leone.boot.learn;
 
-import com.leone.spring.beanlife.UserBean;
-import com.leone.spring.config.SpringBootstrapConfig;
-import com.leone.spring.event.EmailEvent;
-import com.leone.spring.event.EmailSource;
+import com.leone.boot.learn.beanlife.UserBean;
+import com.leone.boot.learn.config.SpringBootstrapConfig;
+import com.leone.boot.learn.event.EmailEvent;
+import com.leone.boot.learn.event.EmailSource;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

@@ -1,6 +1,6 @@
 package com.leone.boot.learn.bootstrap;
 
-import com.leone.spring.service.CalculateService;
+import com.leone.boot.learn.service.CalculateService;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -12,7 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author leone
  * @since 2019-05-26
  **/
-@SpringBootApplication(scanBasePackages = {"com.leone.spring.service"})
+@SpringBootApplication(scanBasePackages = {"com.leone.boot.learn.service"})
 public class CalculateServiceBootstrap {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(CalculateServiceBootstrap.class)
