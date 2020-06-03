@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h2><p th:text="${session.user.nickname} + '你好,欢迎来到index页面!'"></p></h2>
+    <h3><p th:text="'hello: ' + ${session.user.username} + ' welcome to index!'"></p></h3>
     <p>点击 <a th:href="@{/user/list}">查询用户</a></p>
     <p>点击 <a th:href="@{/user/add}">添加用户</a></p>
     <p>点击 <a th:href="@{/user/update}">修改用户</a></p>

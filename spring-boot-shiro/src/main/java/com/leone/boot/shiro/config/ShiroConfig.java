@@ -39,7 +39,7 @@ public class ShiroConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);
 
-    private static Base64.Decoder decoder = Base64.getDecoder();
+    private static final Base64.Decoder decoder = Base64.getDecoder();
 
     @Resource
     private ShiroProperties shiroProperties;
@@ -74,8 +74,7 @@ public class ShiroConfig {
         }
 
         //退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        filterChainMapping.put("/logout", "logout");
-
+        filterChainMapping.put("/shiro/logout", "logout");
         shiroFilter.setFilterChainDefinitionMap(filterChainMapping);
         shiroFilter.setLoginUrl(shiroProperties.getLoginUrl());
 
@@ -90,13 +89,13 @@ public class ShiroConfig {
         securityManager.setRealm(mySqlAuthRealm);
 
         // 设置自定义缓存实现 使用redis
-        securityManager.setCacheManager(cacheManager);
+        //securityManager.setCacheManager(cacheManager);
 
         // 设置自定义session管理 使用redis
-        securityManager.setSessionManager(sessionManager);
+        //securityManager.setSessionManager(sessionManager);
 
         // 设置自定义记住我管理器
-        securityManager.setRememberMeManager(rememberMeManager);
+        //securityManager.setRememberMeManager(rememberMeManager);
 
         // 注入安全管理器，里面包含了大部分信息，比较重要
         SecurityUtils.setSecurityManager(securityManager);
@@ -108,7 +107,7 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public MySqlAuthRealm authRealm() {
+    public MySqlAuthRealm mySqlAuthRealm() {
         return new MySqlAuthRealm();
     }
 
@@ -125,8 +124,11 @@ public class ShiroConfig {
         return shiroSessionManager;
     }
 
-    // --------------------------shiro 记住我管理器-----------------------------------
-
+    /**
+     * shiro 记住我管理器
+     *
+     * @return
+     */
     @Bean
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();

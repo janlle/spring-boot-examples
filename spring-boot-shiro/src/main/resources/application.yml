@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://ip:3306/boot?useSSL=false
+    url: jdbc:mysql://localhost:3306/db01?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     username: xxx
     password: xxx
@@ -13,6 +13,10 @@ spring:
     servlet:
       content-type: text/html
     check-template-location: false
+  redis:
+    database: 0
+    host: ip
+    password: xxx
 
 
 mybatis:
@@ -46,20 +50,20 @@ mybatis:
 
 app:
   shiro:
-    cacheTime: 4320
-    redisPrefix: shiro:${server.port}
-    tokenPrefix: token.
-    loginUrl: /login
-    logoutUrl: /logout
+    secret: NDg2OTQ=
+    multiLogin: true
+    loginUrl: /shiro/login
+    logoutUrl: /shiro/logout
     anonUrls:
-      - /upload
-      - /image
-      - /api/shiro/user/account
+      - /shiro/upload
+      - /shiro/test
+      - /shiro/image
+      - /shiro/login
     authUrls: /**
 
   token:
     headerName: token
     duration: 720
-    redisPrefix:
-    tokenPrefix:
-    secret:
+    redisPrefix: token
+    tokenPrefix: token_cache
+    secret: u81kl*&

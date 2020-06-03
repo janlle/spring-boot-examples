@@ -42,7 +42,7 @@ public class MySqlAuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         log.info("AuthorizingRealm 认证...");
         String name = token.getPrincipal().toString();
-        User user = userService.findByAccount(name);
+        User user = userService.findAllPermissionByAccount(name);
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 
@@ -64,11 +64,11 @@ public class MySqlAuthRealm extends AuthorizingRealm {
         Set<Role> roleSet = user.getRoles();
         if (CollectionUtils.isNotEmpty(roleSet)) {
             for (Role role : roleSet) {
-                roleList.add(role.getRole());
+                roleList.add(role.getName());
                 Set<Permission> permissionSet = role.getPermissions();
                 if (CollectionUtils.isNotEmpty(permissionSet)) {
                     for (Permission permission : permissionSet) {
-                        permissionList.add(permission.getPermission());
+                        permissionList.add(permission.getName());
                     }
                 }
             }

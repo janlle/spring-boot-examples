@@ -23,18 +23,20 @@
                 <result column="name" property="name"/>
                 <result column="url" property="url"/>
                 <result column="status" property="status"/>
-                <result column="parent_id"  property="parentId"/>
+                <result column="permission_type" property="permissionType"/>
+                <result column="sort" property="sort"/>
+                <result column="parent_id" property="parentId"/>
                 <result column="create_time" property="createTime"/>
             </collection>
         </collection>
     </resultMap>
 
-    
+
     <insert id="insert" parameterType="com.leone.boot.shiro.entity.User">
         insert into sys_user (user_id, account, nickname,password, salt, status, create_time)
         values (#{userId}, #{account}, #{nickname}, #{password}, #{salt}, #{status}, #{createTime})
     </insert>
-    
+
     <insert id="insertSelective" parameterType="com.leone.boot.shiro.entity.User">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -85,7 +87,7 @@
         </trim>
     </insert>
 
-    <select id="findByAccount" parameterType="java.lang.String" resultMap="UserPermissionMap">
+    <select id="findAllPermissionByAccount" parameterType="java.lang.String" resultMap="UserPermissionMap">
         SELECT u.*, p.*, r.* FROM sys_user u
         LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
         LEFT JOIN sys_role r ON r.role_id = ur.role_id

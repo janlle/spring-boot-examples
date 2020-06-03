@@ -14,6 +14,7 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -45,14 +46,13 @@ public class ShiroController {
                         @RequestParam String password,
                         HttpSession session,
                         @RequestHeader("Host") String host) {
-        password = new Md5Hash(password).toString();
-
-        User loginUser = userService.findAllPermissionByAccount(account);
+        User loginUser = userService.findUserByAccount(account);
         if (!ObjectUtils.isEmpty(loginUser)) {
-            if (new Md5Hash(password, loginUser.getSalt()).toString().equals(loginUser.getPassword())) {
+//            if (new Md5Hash(password, loginUser.getSalt()).toString().equals(loginUser.getPassword())) {
+            if (new Md5Hash(password).toString().equals(loginUser.getPassword())) {
                 session.setAttribute("user", loginUser);
                 Subject subject = SecurityUtils.getSubject();
-                subject.login(new UsernamePasswordToken(account, password, true, host));
+                subject.login(new UsernamePasswordToken(account, new Md5Hash(password).toString(), true, host));
                 if (subject.isAuthenticated()) {
                     return "index";
                 }
@@ -68,11 +68,10 @@ public class ShiroController {
     }
 
     @RequestMapping("/index")
-    public String index(ModelMap modelMap) {
+    public String index(Model model) {
+        model.addAttribute("user", "index");
         return "index";
     }
-
-
 
     /**
      * 查询用户
@@ -124,43 +123,5 @@ public class ShiroController {
         System.out.println(user);
         return "user";
     }
-
-
-    /**
-     * 添加用户
-     */
-    @RequestMapping("/admin/add")//符合admin:view和admin:add权限要求
-    @RequiresRoles(value = {"admin", "manager"}, logical = Logical.AND)
-    public String userInfoAdd() {
-        return "userAdd";
-    }
-
-    /**
-     * 查询用户
-     */
-    @RequestMapping("/admin/list")
-    @RequiresRoles(value = {"leader", "admin", "manager"}, logical = Logical.OR)
-    public String user() {
-        return "user";
-    }
-
-    /**
-     * 删除用户
-     */
-    @RequestMapping("/admin/delete")
-    @RequiresRoles(value = {"admin"})
-    public String userDel() {
-        return "userDel";
-    }
-
-    /**
-     * 修改用户
-     */
-    @RequestMapping("/admin/update")
-    @RequiresRoles(value = {"admin", "manager"}, logical = Logical.OR)
-    public String userUpdate() {
-        return "userUpdate";
-    }
-
 
 }
