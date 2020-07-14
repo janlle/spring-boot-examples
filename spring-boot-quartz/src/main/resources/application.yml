@@ -15,7 +15,7 @@ spring:
     password: Icss#dev01
   quartz:
     jdbc:
-      initialize-schema: always
+      initialize-schema: never
       schema: classpath:quartz_schema.sql
     job-store-type: jdbc
     properties:

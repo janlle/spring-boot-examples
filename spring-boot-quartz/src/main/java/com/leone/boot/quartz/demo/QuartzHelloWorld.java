@@ -1,4 +1,4 @@
-package com.leone.boot.quartz.test;
+package com.leone.boot.quartz.demo;
 
 import com.leone.boot.quartz.jobs.JobA;
 import org.quartz.*;
@@ -10,7 +10,7 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
  * @author leone
  * @since 2018-05-19
  **/
-public class QuartzTest {
+public class QuartzHelloWorld {
 
     public static void main(String[] args) {
         try {
