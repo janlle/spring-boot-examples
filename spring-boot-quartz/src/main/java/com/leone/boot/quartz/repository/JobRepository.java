@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author leone
  * @since 2018-09-06
  **/
-public interface TaskRepository extends JpaRepository<JobBean, Integer> {
+public interface JobRepository extends JpaRepository<JobBean, Integer> {
 
 }

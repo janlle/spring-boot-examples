@@ -22,11 +22,11 @@ public class SchedulerListener implements ApplicationListener<ContextRefreshedEv
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        try {
-            schedulerConfig.startAllJobs();
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            schedulerConfig.startAllJobs();
+//        } catch (SchedulerException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

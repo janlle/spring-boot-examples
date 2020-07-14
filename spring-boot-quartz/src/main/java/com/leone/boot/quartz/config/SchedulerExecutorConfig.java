@@ -27,8 +27,8 @@ public class SchedulerExecutorConfig {
      */
     public void startAllJobs() throws SchedulerException {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
-        scheduleJob1(scheduler);
-        scheduleJob2(scheduler);
+//        scheduleJob1(scheduler);
+//        scheduleJob2(scheduler);
     }
 
     /**

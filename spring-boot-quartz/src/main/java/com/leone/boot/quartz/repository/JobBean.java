@@ -1,5 +1,9 @@
 package com.leone.boot.quartz.repository;
 
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +18,9 @@ import java.util.Date;
  * @since 2018-09-06
  **/
 @Entity
-public class JobBean implements Serializable {
+public class JobBean implements Serializable, Job {
+
+    private static final long serialVersionUID = -8150693900098628157L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,5 +82,10 @@ public class JobBean implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+
     }
 }
