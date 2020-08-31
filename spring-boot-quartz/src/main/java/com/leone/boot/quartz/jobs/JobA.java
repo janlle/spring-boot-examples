@@ -1,6 +1,7 @@
 package com.leone.boot.quartz.jobs;
 
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -15,6 +16,7 @@ import java.util.Date;
  **/
 @Slf4j
 @Component
+@DisallowConcurrentExecution
 public class JobA implements Job {
 
     @Override

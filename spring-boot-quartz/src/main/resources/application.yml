@@ -9,10 +9,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
     open-in-view: false
   datasource:
-    url: jdbc:mysql://47.107.189.35:3306/ai_quality_check?useSSL=false
+    url: jdbc:mysql://ip:port/db?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
-    username: icss
-    password: Icss#dev01
+    username: xxx
+    password: xxx
   quartz:
     jdbc:
       initialize-schema: never
@@ -38,6 +38,6 @@ spring:
           dataSource:
             myDs:
               driver: com.mysql.jdbc.Driver
-              URL: jdbc:mysql://47.107.189.35:3306/ai_quality_check?useSSL=false
-              user: icss
-              password: Icss#dev01
+              URL: jdbc:mysql://ip:port/db?useSSL=false
+              user: xxx
+              password: xxx

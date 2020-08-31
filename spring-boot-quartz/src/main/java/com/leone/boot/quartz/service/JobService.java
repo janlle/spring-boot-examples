@@ -1,10 +1,11 @@
 package com.leone.boot.quartz.service;
 
-import com.leone.boot.quartz.config.JobConstants;
-import com.leone.boot.quartz.jobs.SimpleJob;
+import lombok.SneakyThrows;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -18,45 +19,84 @@ public class JobService {
     @Autowired
     private Scheduler scheduler;
 
-//    @Autowired
-//    @Qualifier("trigger1")
-//    private CronTrigger cronTrigger1;
+    /**
+     * 添加一个job
+     *
+     * @param clazz
+     * @param jobName
+     * @param jobGroup
+     * @param triggerName
+     * @param triggerGroup
+     * @param cron
+     * @param map
+     * @throws SchedulerException
+     */
+    @SneakyThrows
+    public void addJob(Class<? extends Job> clazz, String jobName, String jobGroup, String triggerName, String triggerGroup, String cron, Map<String, Object> map) {
+        JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(jobName, jobGroup).build();
+        if (map != null && !map.isEmpty()) {
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                jobDetail.getJobDataMap().put(entry.getKey(), entry.getValue());
+            }
+        }
 
-    public void addJob() throws SchedulerException {
-        // 创建JobDetail
-        JobDetail jobDetail = JobBuilder.newJob(SimpleJob.class).withIdentity("j3", JobConstants.JOB_GROUP).build();
-        jobDetail.getJobDataMap().put("hello", "world");
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
 
-        // 基于表达式构建触发器
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/10 * * * * ?");
-//
-//        // TriggerBuilder 用于构建触发器实例
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("t1", JobConstants.TRIGGER_GROUP)
+        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerName, triggerGroup)
                 .withSchedule(cronScheduleBuilder).build();
-
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 
-    public void updateJob() {
-
+    /**
+     * 暂停
+     *
+     * @param jobName
+     * @param jobGroup
+     * @throws SchedulerException
+     */
+    public void pauseJob(String jobName, String jobGroup) {
+        JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
+        try {
+            scheduler.pauseJob(jobKey);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void selectJob() {
-        TriggerKey triggerKey = TriggerKey.triggerKey("job4", "group3");
-
+    /**
+     * 启动job
+     *
+     * @param jobName
+     * @param jobGroup
+     * @throws SchedulerException
+     */
+    public void startJob(String jobName, String jobGroup) {
+        JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
+        try {
+            scheduler.resumeJob(jobKey);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void deleteJob() throws SchedulerException {
-        TriggerKey triggerKey = TriggerKey.triggerKey("j1", JobConstants.JOB_GROUP);
-        scheduler.pauseTrigger(triggerKey);//停止触发器
-        scheduler.unscheduleJob(triggerKey);//移除触发器
-        scheduler.deleteJob(JobKey.jobKey("j1", JobConstants.JOB_GROUP));//删除任务
-    }
-
-    public void pauseJob() throws SchedulerException {
-        JobKey jobKey = JobKey.jobKey("j2", JobConstants.JOB_GROUP);
-        scheduler.pauseJob(jobKey);
-
+    /**
+     * 删除job
+     *
+     * @param jobName
+     * @param jobGroup
+     * @param triggerName
+     * @param triggerGroup
+     * @throws SchedulerException
+     */
+    public void deleteJob(String jobName, String jobGroup, String triggerName, String triggerGroup) {
+        TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroup);
+        try {
+            scheduler.pauseTrigger(triggerKey);
+            scheduler.unscheduleJob(triggerKey);
+            scheduler.deleteJob(JobKey.jobKey(jobName, jobGroup));
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 
 
