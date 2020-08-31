@@ -2,6 +2,8 @@ package com.leone.boot.redis.controller;
 
 import com.leone.boot.redis.service.RedisCacheService;
 import com.leone.boot.redis.service.RedisService;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,9 @@ public class RedisController {
 
     @Resource
     private RedisService redisService;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @Resource
     private RedisCacheService redisCacheService;
@@ -51,6 +56,15 @@ public class RedisController {
     @GetMapping("/catch")
     public String userCatch() {
         return redisCacheService.userCatch();
+    }
+
+
+    @GetMapping("/publish")
+    public String publish() {
+        for (int i = 0; i < 10; i++) {
+            stringRedisTemplate.convertAndSend("my-topic", "这是我发第 " + i + " 条的消息");
+        }
+        return "success";
     }
 
 }
