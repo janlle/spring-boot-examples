@@ -46,6 +46,7 @@
         <module>spring-boot-layui</module>
         <module>spring-boot-learn</module>
         <module>spring-boot-mybatis-plus</module>
+        <module>spring-boot-elk</module>
     </modules>
 
     <build>
