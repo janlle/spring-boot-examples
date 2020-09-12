@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class SpringTask {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     /**
      * fixedRate固定间隔时间执行一次任务，上一个任务就算提前执行完成也要等到规定的时间执行下一个任务，单位时间内执行的任务数基本固定

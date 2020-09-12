@@ -40,5 +40,11 @@ public class JobController {
         return "success";
     }
 
+    @GetMapping("start")
+    public String start() throws SchedulerException {
+        jobService.startJob();
+        return "success";
+    }
+
 
 }
