@@ -12,4 +12,6 @@ public interface JobConstants {
 
     String TRIGGER_GROUP = "T1";
 
+    String JOB_CRON = "0/30 * * * * ?";
+
 }
