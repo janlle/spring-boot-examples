@@ -27,3 +27,4 @@ spring:
         max-idle: 8
         # 最小空闲
         min-idle: 0
+    password: 'xxxx'
