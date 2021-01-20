@@ -66,4 +66,15 @@ public class UserController {
         return userService.updateBatch(users);
     }
 
+
+    @PostMapping("/insert-user")
+    public int insertUser(@RequestBody User user) {
+        return userService.insert(user);
+    }
+
+    @PostMapping("/find-user")
+    public User findUser(@RequestParam String name) {
+        return userService.selectByName(name);
+    }
+
 }

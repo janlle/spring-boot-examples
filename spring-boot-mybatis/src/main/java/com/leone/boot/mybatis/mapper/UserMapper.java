@@ -66,4 +66,7 @@ public interface UserMapper {
             "</script>"})
     int updateBatch(@Param("users") List<User> users);
 
+    @Select("select * from t_user where name like '%${name}%'")
+    User selectByName(String name);
+
 }

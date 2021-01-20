@@ -116,4 +116,9 @@ public class UserService {
     public List<User> list() {
         return userMapper.findAll();
     }
+
+    public User selectByName(String name) {
+        return userMapper.selectByName(name);
+    }
+
 }

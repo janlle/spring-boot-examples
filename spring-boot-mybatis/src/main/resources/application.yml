@@ -1,10 +1,22 @@
 # spring-boot 连接 mysql 配置
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://ip:3306/boot?useSSL=false&characterEncoding=utf8
-    username: xxx
-    password: xxx
+    master:
+      jdbc-url: jdbc:mysql://192.168.244.11:3306/ha
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+    slave1:
+      jdbc-url: jdbc:mysql://192.168.244.11:3306/ha
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+    slave2:
+      jdbc-url: jdbc:mysql://192.168.244.11:3306/ha
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+
 
 # mybatis-springBoot 配置
 mybatis:
