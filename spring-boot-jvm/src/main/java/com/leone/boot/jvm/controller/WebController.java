@@ -19,16 +19,29 @@ public class WebController {
     @Autowired
     private DataService dataService;
 
-    @GetMapping("/bytes")
-    public String add(@RequestParam Integer count) throws Exception {
-        dataService.addObjects(count);
+    @GetMapping("/newObject")
+    public String newObject(@RequestParam Integer count) throws Exception {
+        dataService.newObjects(count);
         return "count:" + count;
     }
 
-    @GetMapping("/stop")
-    public String stop() {
-        dataService.stop();
-        return "stop";
+    @GetMapping("/stopNewObject")
+    public String stopNewObject() {
+        dataService.stopNewObject();
+        return "Stop new object success.";
+    }
+
+    @GetMapping("/newThread")
+    public String newThread(@RequestParam Integer count) throws Exception {
+        dataService.newThread(count);
+        log.info("New thread.");
+        return "count:" + count;
+    }
+
+    @GetMapping("/stopNewThread")
+    public String stopNewThread() {
+        dataService.stopNewThread();
+        return "Stop new thread success.";
     }
 
 
