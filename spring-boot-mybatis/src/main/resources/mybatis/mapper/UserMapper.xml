@@ -3,13 +3,13 @@
 <mapper namespace="com.leone.boot.mybatis.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.leone.boot.common.entity.User">
-        <id column="user_id" property="userId" jdbcType="BIGINT"/>
-        <result column="account" property="account" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="age" property="age" jdbcType="INTEGER"/>
-        <result column="description" property="description" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="deleted" property="deleted" jdbcType="BIT"/>
+        <id column="user_id" property="userId"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="age" property="age"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
 
     <sql id="base_column">
@@ -19,44 +19,44 @@
     <insert id="insert" parameterType="com.leone.boot.common.entity.User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="account != null">
+            <if test="user.account != null">
                 account,
             </if>
-            <if test="password != null">
+            <if test="user.password != null">
                 password,
             </if>
-            <if test="age != null">
+            <if test="user.age != null">
                 age,
             </if>
-            <if test="description != null">
+            <if test="user.description != null">
                 description,
             </if>
-            <if test="deleted != null">
+            <if test="user.deleted != null">
                 deleted,
             </if>
-            <if test="createTime != null">
+            <if test="user.createTime != null">
                 create_time,
             </if>
         </trim>
-        VALUES
+        values
         <trim prefix="(" suffixOverrides="," suffix=")">
-            <if test="account != null">
-                account = #{account,jdbcType=VARCHAR},
+            <if test="user.account != null">
+                #{user.account},
             </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
+            <if test="user.password != null">
+                #{user.password},
             </if>
-            <if test="age != null">
-                age = #{age,jdbcType=INTEGER},
+            <if test="user.age != null">
+                #{user.age},
             </if>
-            <if test="description != null">
-                description = #{description,jdbcType=VARCHAR},
+            <if test="user.description != null">
+                #{user.description},
             </if>
-            <if test="deleted != null">
-                deleted= #{deleted,jdbcType=BIT}
+            <if test="user.deleted != null">
+                #{user.deleted},
             </if>
-            <if test="createTime != null">
-                createTime = #{createTime,jdbcType=TIMESTAMP},
+            <if test="user.createTime != null">
+                #{user.createTime},
             </if>
         </trim>
     </insert>
@@ -64,39 +64,41 @@
 
     <update id="updateByUserId" parameterType="com.leone.boot.common.entity.User">
         update t_user
-        <set>
-            <if test="account != null">
-                account = #{account,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="age != null">
-                age = #{age,jdbcType=INTEGER},
-            </if>
-            <if test="description != null">
-                description = #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="deleted != null">
-                deleted= #{deleted,jdbcType=BIT}
-            </if>
-            <if test="createTime != null">
-                createTime = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where user_id = #{userId,jdbcType=BIGINT}
+        <trim suffixOverrides=",">
+            <set>
+                <if test="account != null">
+                    account = #{account},
+                </if>
+                <if test="password != null">
+                    password = #{password},
+                </if>
+                <if test="age != null">
+                    age = #{age},
+                </if>
+                <if test="description != null">
+                    description = #{description},
+                </if>
+                <if test="deleted != null">
+                    deleted= #{deleted},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime},
+                </if>
+            </set>
+        </trim>
+        where user_id = #{userId}
     </update>
 
 
     <update id="updateById" parameterType="com.leone.boot.common.entity.User">
         update t_user
-        set account     = #{account,jdbcType=VARCHAR},
-            password    = #{password,jdbcType=VARCHAR},
-            age         = #{age,jdbcType=INTEGER},
-            description = #{description,jdbcType=VARCHAR},
-            deleted     = #{deleted,jdbcType=BIT},
-            create_time = #{createTime,jdbcType=TIMESTAMP}
-        where user_id = #{userId,jdbcType=BIGINT}
+        set account = #{user.account},
+        password = #{user.password},
+        age = #{user.age},
+        description = #{user.description},
+        deleted = #{user.deleted},
+        create_time = #{user.createTime}
+        where user_id = #{user.userId}
     </update>
 
     <insert id="insertBatchTest" parameterType="java.util.List">
@@ -105,7 +107,7 @@
             <trim prefix="(" suffixOverrides="," suffix=")">
                 <choose>
                     <when test="user.account != null">
-                        #{user.account,jdbcType=VARCHAR},
+                        #{user.account},
                     </when>
                     <otherwise>
                         'defaultAccount',
@@ -114,7 +116,7 @@
 
                 <choose>
                     <when test="user.password != null">
-                        #{user.password,jdbcType=VARCHAR},
+                        #{user.password},
                     </when>
                     <otherwise>
                         'defPassword',
@@ -123,7 +125,7 @@
 
                 <choose>
                     <when test="user.age != null">
-                        #{user.age,jdbcType=INTEGER},
+                        #{user.age},
                     </when>
                     <otherwise>
                         0,
@@ -132,7 +134,7 @@
 
                 <choose>
                     <when test="user.description != null">
-                        #{user.description,jdbcType=VARCHAR},
+                        #{user.description},
                     </when>
                     <otherwise>
                         '我是杰克！今年32岁，我喜欢的篮球',
@@ -141,7 +143,7 @@
 
                 <choose>
                     <when test="user.deleted != null">
-                        #{user.deleted,jdbcType=BIT},
+                        #{user.deleted},
                     </when>
                     <otherwise>
                         0,
@@ -150,10 +152,10 @@
 
                 <choose>
                     <when test="user.createTime != null">
-                        #{user.createTime,jdbcType=TIMESTAMP},
+                        #{user.createTime}
                     </when>
                     <otherwise>
-                        '2018-6-9',
+                        '2018-6-9'
                     </otherwise>
                 </choose>
             </trim>

@@ -1,6 +1,7 @@
 package com.leone.boot.mybatis.config;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.lang.Nullable;
 
 /**
  * <p>
@@ -10,6 +11,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  **/
 public class RoutingDataSource extends AbstractRoutingDataSource {
 
+    @Nullable
     @Override
     protected Object determineCurrentLookupKey() {
         return DatasourceContextHolder.get();

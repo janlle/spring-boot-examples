@@ -2,19 +2,19 @@
 spring:
   datasource:
     master:
-      jdbc-url: jdbc:mysql://192.168.244.11:3306/ha
+      jdbc-url: jdbc:mysql://192.168.244.11:3306/db1?useSSL=false
       username: root
-      password: 123456
+      password: xxx
       driver-class-name: com.mysql.jdbc.Driver
     slave1:
-      jdbc-url: jdbc:mysql://192.168.244.11:3306/ha
-      username: root
-      password: 123456
+      jdbc-url: jdbc:mysql://192.168.244.12:3306/db1?useSSL=false
+      username: jack
+      password: xxx
       driver-class-name: com.mysql.jdbc.Driver
     slave2:
-      jdbc-url: jdbc:mysql://192.168.244.11:3306/ha
-      username: root
-      password: 123456
+      jdbc-url: jdbc:mysql://192.168.244.13:3306/db1?useSSL=false
+      username: jack
+      password: xxx
       driver-class-name: com.mysql.jdbc.Driver
 
 
@@ -58,3 +58,5 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+

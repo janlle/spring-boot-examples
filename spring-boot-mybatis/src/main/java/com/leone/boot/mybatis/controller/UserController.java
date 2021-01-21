@@ -69,10 +69,11 @@ public class UserController {
 
     @PostMapping("/insert-user")
     public int insertUser(@RequestBody User user) {
+        System.out.println(user);
         return userService.insert(user);
     }
 
-    @PostMapping("/find-user")
+    @GetMapping("/find-user")
     public User findUser(@RequestParam String name) {
         return userService.selectByName(name);
     }

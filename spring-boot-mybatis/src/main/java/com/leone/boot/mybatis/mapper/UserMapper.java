@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    //@Insert("insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values (#{account},#{password},#{age},#{description},#{deleted},#{createTime})")
+//    @Insert("insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values (#{account}, #{password}, #{age}, #{description}, #{deleted}, #{createTime})")
     int insert(@Param("user") User user);
 
     @Insert({"<script>" +
@@ -66,7 +66,7 @@ public interface UserMapper {
             "</script>"})
     int updateBatch(@Param("users") List<User> users);
 
-    @Select("select * from t_user where name like '%${name}%'")
-    User selectByName(String name);
+    @Select("select * from t_user where account like concat('%', #{name}, '%')")
+    User selectByName(@Param("name") String name);
 
 }

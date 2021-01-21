@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author leone
  * @since 2018-03-02
  **/
-@MapperScan(basePackages = "com.leone.boot.mybatis.mapper")
+//@MapperScan(basePackages = "com.leone.boot.mybatis.mapper")
 @SpringBootApplication
 public class MybatisApplication {
     public static void main(String[] args) {
