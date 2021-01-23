@@ -3,9 +3,12 @@ package com.leone.boot.kafka.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leone.boot.common.utils.RandomValue;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
 
 /**
  * <p>
@@ -34,9 +37,10 @@ public class KafkaSender {
             // Message<Map> message = new Message<>(offset, RandomValue.randomUser(), new Date());
             String message = RandomValue.randomMessage();
             offset++;
-            // String content = objectMapper.writeValueAsString(message);
-            kafkaTemplate.send(topic, message);
-            Thread.sleep(500);
+            ListenableFuture<SendResult<String, Object>> send = kafkaTemplate.send(topic, message);
+            Thread.sleep(10);
+            RecordMetadata s = send.get().getRecordMetadata();
+            System.out.println("hasOffset " + s.hasOffset() + " partition " + s.partition() + " offset " + s.offset());
             log.info("send to: {} message: {} ", topic, message);
         }
         return "send to " + topic + " count: " + count;

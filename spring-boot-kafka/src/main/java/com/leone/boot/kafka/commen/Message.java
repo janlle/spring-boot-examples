@@ -11,6 +11,8 @@ import java.util.Date;
  **/
 public class Message<T> implements Serializable {
 
+    private static final long serialVersionUID = 2841284710934987376L;
+
     private Long id;
 
     private T message;

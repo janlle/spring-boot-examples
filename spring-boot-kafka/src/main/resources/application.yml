@@ -2,12 +2,14 @@ spring:
   application:
     name: spring-boot-kafka
   kafka:
-    bootstrap-servers: node-2:9092,node-3:9092,node-4:9092
+    bootstrap-servers: node1:9092,node2:9092,node3:9092
     producer:
-      retries:
+      # 重试次数
+      retries: 1000000
       batch-size: 16384
       buffer-memory: 33554432
       compressionType: snappy
+      # 所有副本都同步完成
       acks: all
     consumer:
       group-id: 0

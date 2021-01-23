@@ -4,17 +4,17 @@ spring:
     master:
       jdbc-url: jdbc:mysql://192.168.244.11:3306/db1?useSSL=false
       username: root
-      password: xxx
+      password: '#G!uP)&&j4'
       driver-class-name: com.mysql.jdbc.Driver
     slave1:
       jdbc-url: jdbc:mysql://192.168.244.12:3306/db1?useSSL=false
       username: jack
-      password: xxx
+      password: 3E0!3@6y^8$5
       driver-class-name: com.mysql.jdbc.Driver
     slave2:
       jdbc-url: jdbc:mysql://192.168.244.13:3306/db1?useSSL=false
       username: jack
-      password: xxx
+      password: 3E0!3@6y^8$5
       driver-class-name: com.mysql.jdbc.Driver
 
 
