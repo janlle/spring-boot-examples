@@ -1,8 +1,5 @@
 package com.leone.boot.redis.service;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class Receiver {
 
     public void receiveMessage(String message) {

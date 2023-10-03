@@ -1,6 +1,5 @@
 package com.leone.boot.common.aop;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -16,11 +15,10 @@ import org.springframework.stereotype.Component;
  * @author leone
  * @since 2019-05-24
  **/
-@Slf4j
 @Aspect
 public class StopWatch {
 
-    private final Logger logger = LoggerFactory.getLogger(StopWatch.class);
+    private final Logger log = LoggerFactory.getLogger(StopWatch.class);
 
     @Around("@annotation(com.leone.boot.common.aop.Watch)")
     public Object around(ProceedingJoinPoint point) {

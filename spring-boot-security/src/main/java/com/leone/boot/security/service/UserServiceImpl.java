@@ -2,7 +2,8 @@ package com.leone.boot.security.service;
 
 import com.leone.boot.security.entity.Role;
 import com.leone.boot.security.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,9 +22,10 @@ import java.util.List;
  * @author leone
  * @since 2018-10-30
  **/
-@Slf4j
 @Service
 public class UserServiceImpl implements IUserService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private PasswordEncoder passwordEncoder;

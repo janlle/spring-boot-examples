@@ -1,15 +1,17 @@
 package com.leone.boot.jvm.service;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
  * @author leone
  * @since 2018-07-14
  **/
-@Slf4j
 @Service
 public class DataService {
+
+    private static final Logger log = LoggerFactory.getLogger(DataService.class);
 
     private Boolean flag = true;
 

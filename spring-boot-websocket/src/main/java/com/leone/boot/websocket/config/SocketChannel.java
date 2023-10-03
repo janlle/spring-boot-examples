@@ -1,6 +1,7 @@
 package com.leone.boot.websocket.config;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -12,10 +13,11 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @author leone
  * @since 2018-07-06
  **/
-@Slf4j
 @Component
 @ServerEndpoint(value = "/ws")
 public class SocketChannel {
+
+    private static final Logger log = LoggerFactory.getLogger(SocketChannel.class);
 
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;

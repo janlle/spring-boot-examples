@@ -4,7 +4,6 @@ package com.leone.boot.redis.service;
 import com.leone.boot.common.utils.EntityFactory;
 import com.leone.boot.common.utils.RandomValue;
 import com.leone.boot.redis.config.RedisPrefix;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.connection.RedisZSetCommands;
@@ -21,7 +20,6 @@ import java.util.concurrent.TimeUnit;
  * @author leone
  * @since 2018-08-11
  **/
-@Slf4j
 @Service
 public class RedisService {
 

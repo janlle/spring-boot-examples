@@ -2,7 +2,6 @@ package com.leone.boot.mongodb.service;
 
 import com.leone.boot.mongodb.entity.User;
 import com.mongodb.client.result.UpdateResult;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,7 +17,6 @@ import java.util.List;
  * @author leone
  * @since 2019-01-10
  **/
-@Slf4j
 @Service
 public class MongoService {
 

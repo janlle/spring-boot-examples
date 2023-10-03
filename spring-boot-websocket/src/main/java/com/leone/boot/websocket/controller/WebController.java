@@ -5,7 +5,8 @@ import com.leone.boot.websocket.config.Constant;
 import com.leone.boot.websocket.config.WsMessage;
 import com.leone.boot.websocket.config.WsResponse;
 import com.leone.boot.websocket.service.WebSocketService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,12 +24,13 @@ import java.util.List;
  * @author leone
  * @since 2018-07-06
  **/
-@Slf4j
 @RestController
 @RequestMapping("/api")
 // 局部跨域
 @CrossOrigin(origins = "http://localhost:63342", maxAge = 3600)
 public class WebController {
+
+    private static final Logger log = LoggerFactory.getLogger(WebController.class);
 
     @Resource
     private WebSocketService webSocketService;

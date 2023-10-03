@@ -2,7 +2,6 @@ package com.leone.boot.websocket.service;
 
 import com.leone.boot.websocket.config.Constant;
 import com.leone.boot.websocket.config.WsResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import java.util.List;
  * @author leone
  * @since 2018-07-06
  **/
-@Slf4j
 @Service
 public class WebSocketService {
 

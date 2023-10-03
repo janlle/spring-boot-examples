@@ -3,7 +3,6 @@ package com.leone.boot.data.service;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.data.repository.jpa.UserRepository;
 import com.leone.boot.data.repository.mybatis.UserMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +22,6 @@ import java.util.List;
  * @author leone
  * @since 2018-07-08
  **/
-@Slf4j
 @Service
 public class UserService {
 

@@ -1,7 +1,6 @@
 package com.leone.boot.data.serialize.java;
 
 import com.leone.boot.common.utils.EntityFactory;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 
@@ -11,7 +10,6 @@ import java.io.*;
  * @author leone
  * @since 2018-05-11
  **/
-@Slf4j
 public class JavaSerializable {
 
     public static void main(String[] args) throws Exception {

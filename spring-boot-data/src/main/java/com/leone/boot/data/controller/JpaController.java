@@ -3,7 +3,6 @@ package com.leone.boot.data.controller;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.data.repository.jpa.UserRepository;
 import com.leone.boot.data.service.JpaService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
  * @author leone
  * @since 2018-05-11
  **/
-@Slf4j
 @RestController
 @RequestMapping("/api/jpa")
 public class JpaController {

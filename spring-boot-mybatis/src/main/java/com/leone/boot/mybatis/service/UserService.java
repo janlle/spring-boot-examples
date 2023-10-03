@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.mybatis.mapper.UserMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,7 +15,6 @@ import java.util.List;
  * @author leone
  * @since 2018-03-02
  **/
-@Slf4j
 @Service
 public class UserService {
 

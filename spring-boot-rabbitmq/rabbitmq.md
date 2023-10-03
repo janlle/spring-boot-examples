@@ -643,7 +643,6 @@ public interface RabbitMqConstant {
 ```java
 package com.leone.boot.rabbitmq.sender;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
@@ -657,7 +656,6 @@ import java.util.Map;
  * @author leone
  * @since 2018-06-05
  **/
-@Slf4j
 @Component
 public class MessageSender {
 
@@ -743,7 +741,6 @@ package com.leone.boot.rabbitmq.receive;
 
 import com.leone.boot.rabbitmq.config.RabbitMqConstant;
 import com.rabbitmq.client.Channel;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -752,7 +749,6 @@ import org.springframework.stereotype.Component;
  * @author leone
  * @since 2018-05-15
  **/
-@Slf4j
 @Component
 public class MessageReceive {
 

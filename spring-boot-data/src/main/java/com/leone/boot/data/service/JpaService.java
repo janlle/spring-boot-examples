@@ -3,7 +3,6 @@ package com.leone.boot.data.service;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
 import com.leone.boot.data.repository.jpa.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,6 @@ import java.util.List;
  * @author leone
  * @since 2018-05-24
  **/
-@Slf4j
 @Service
 public class JpaService {
 

@@ -3,7 +3,6 @@ package com.leone.boot.data.controller;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.data.repository.mybatis.UserMapper;
 import com.leone.boot.data.service.MybatisService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +12,6 @@ import java.util.List;
  * @author leone
  * @since 2018-05-11
  **/
-@Slf4j
 @RestController
 @RequestMapping("/api/mybatis")
 public class MybatisController {

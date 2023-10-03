@@ -1,6 +1,5 @@
 package com.leone.boot.data.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
  * @author leone
  * @since 2018-08-11
  **/
-@Slf4j
 @Service
 public class RedisCacheService {
 

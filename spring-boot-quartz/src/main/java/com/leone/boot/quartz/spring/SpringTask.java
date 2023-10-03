@@ -1,6 +1,7 @@
 package com.leone.boot.quartz.spring;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +16,10 @@ import java.util.concurrent.TimeUnit;
  * @author leone
  * @since 2018-05-27
  **/
-@Slf4j
 @Component
 public class SpringTask {
+
+    private static final Logger log = LoggerFactory.getLogger(SpringTask.class);
 
     private static final Random random = new Random();
 

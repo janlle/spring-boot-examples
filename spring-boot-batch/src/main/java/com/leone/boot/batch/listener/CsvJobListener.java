@@ -1,6 +1,7 @@
 package com.leone.boot.batch.listener;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 
@@ -10,8 +11,9 @@ import org.springframework.batch.core.JobExecutionListener;
  * @author leone
  * @since 2018-10-08
  **/
-@Slf4j
 public class CsvJobListener implements JobExecutionListener {
+
+    private static final Logger log = LoggerFactory.getLogger(CsvJobListener.class);
 
     private long startTime;
 
