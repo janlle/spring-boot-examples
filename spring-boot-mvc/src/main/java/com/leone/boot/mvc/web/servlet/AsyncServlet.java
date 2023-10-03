@@ -1,6 +1,8 @@
 package com.leone.boot.mvc.web.servlet;
 
-import lombok.extern.slf4j.Slf4j;
+import com.leone.boot.mvc.task.SpringTimeStack;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
@@ -20,9 +22,10 @@ import java.util.concurrent.TimeUnit;
  * @author leone
  * @since 2018-05-22
  **/
-@Slf4j
 @WebServlet(name = "asyncServlet", urlPatterns = {"/async"}, asyncSupported = true)
 public class AsyncServlet extends HttpServlet {
+
+    private static final Logger log = LoggerFactory.getLogger(AsyncServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

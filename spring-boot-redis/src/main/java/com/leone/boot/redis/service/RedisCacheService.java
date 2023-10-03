@@ -16,7 +16,7 @@ public class RedisCacheService {
 
     @Cacheable(value = "systemCatch")
     public String userCatch() {
-        log.info("=====no catch====");
+        System.out.println("no cache");
         return "当前系统时间:" + System.currentTimeMillis();
     }
 

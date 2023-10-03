@@ -1,6 +1,9 @@
 package com.leone.boot.mvc.web.listener;
 
-import lombok.extern.slf4j.Slf4j;
+
+import com.leone.boot.mvc.config.SpringTool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextAttributeEvent;
@@ -13,9 +16,10 @@ import javax.servlet.annotation.WebListener;
  * @author leone
  * @since 2018-05-13
  **/
-@Slf4j
 @WebListener
 public class AppServletContextAttributeListener implements ServletContextAttributeListener {
+
+    private static final Logger log = LoggerFactory.getLogger(AppServletContextAttributeListener.class);
 
     // 当程序向application范围新增属性时触发此方法
     @Override

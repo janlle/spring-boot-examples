@@ -1,7 +1,6 @@
 package com.leone.boot.flux.router;
 
 import com.leone.boot.flux.handler.UserHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RequestPredicates;

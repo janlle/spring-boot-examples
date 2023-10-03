@@ -1,6 +1,5 @@
 package com.leone.boot.shiro.utils;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
@@ -11,7 +10,6 @@ import org.apache.shiro.subject.Subject;
  * @author leone
  * @since 2018-06-11
  **/
-@Slf4j
 public class UserHelper {
 
     private static final Subject subject = SecurityUtils.getSubject();

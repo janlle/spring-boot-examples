@@ -5,7 +5,6 @@ import com.leone.boot.shiro.entity.Permission;
 import com.leone.boot.shiro.entity.Role;
 import com.leone.boot.shiro.entity.User;
 import com.leone.boot.shiro.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -15,6 +14,8 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -25,8 +26,9 @@ import java.util.Set;
  * @author leone
  * @since 2018-04-21
  **/
-@Slf4j
 public class MySqlAuthRealm extends AuthorizingRealm {
+
+    private static final Logger log = LoggerFactory.getLogger(MySqlAuthRealm.class);
 
     @Resource
     private UserService userService;

@@ -1,8 +1,8 @@
 package com.leone.boot.kafka.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +14,10 @@ import java.util.Optional;
  * @author leone
  * @since 2018-12-26
  **/
-@Slf4j
 @Component
 public class KafkaReceiver {
+
+    private static final Logger log = LoggerFactory.getLogger(KafkaReceiver.class);
 
     @KafkaListener(topics = {"spring-boot-topic"})
     public void listen(ConsumerRecord<?, ?> record) {

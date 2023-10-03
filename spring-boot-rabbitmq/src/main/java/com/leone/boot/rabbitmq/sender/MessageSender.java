@@ -1,6 +1,7 @@
 package com.leone.boot.rabbitmq.sender;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
@@ -14,9 +15,10 @@ import java.util.Map;
  * @author leone
  * @since 2018-06-05
  **/
-@Slf4j
 @Component
 public class MessageSender {
+
+    private static final Logger log = LoggerFactory.getLogger(MessageSender.class);
 
     @Resource
     private AmqpTemplate template;

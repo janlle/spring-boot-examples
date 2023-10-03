@@ -2,7 +2,8 @@ package com.leone.boot.rabbitmq.receive;
 
 import com.leone.boot.rabbitmq.config.RabbitMqConstant;
 import com.rabbitmq.client.Channel;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Component;
  * @author leone
  * @since 2018-05-15
  **/
-@Slf4j
 @Component
 public class MessageReceive {
 
+    private static final Logger log = LoggerFactory.getLogger(MessageReceive.class);
 
     //-------------------------普通队列模式-------------------------------
     @RabbitListener(queues = RabbitMqConstant.QUEUE_A)

@@ -6,7 +6,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.Maps;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -19,8 +20,9 @@ import java.util.Map;
  * @author leone
  * @since 2018-04-16
  **/
-@Slf4j
 public class JwtTokenUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(JwtTokenUtil.class);
 
     //公用秘钥保存在服务器中，客户端无法知道
     private static final String SECRET = "#ili^0+%98@";

@@ -1,21 +1,19 @@
 package com.leone.boot.shiro.controller;
 
-import com.leone.boot.shiro.common.ExceptionMessage;
-import com.leone.boot.shiro.exception.ValidateException;
 import com.leone.boot.shiro.utils.ImageCodeUtil;
 import com.leone.boot.shiro.utils.UserHelper;
 import com.leone.boot.shiro.entity.User;
 import com.leone.boot.shiro.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.*;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,10 +26,11 @@ import javax.servlet.http.HttpSession;
  * @author leone
  * @since 2018-05-18
  **/
-@Slf4j
 @Controller
 @RequestMapping("/shiro")
 public class ShiroController {
+
+    private static final Logger log = LoggerFactory.getLogger(ShiroController.class);
 
     @Autowired
     private UserService userService;

@@ -5,8 +5,9 @@ import com.leone.boot.common.entity.Order;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
 import com.leone.boot.dubbo.api.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -20,9 +21,10 @@ import java.util.stream.Collectors;
  * @author leone
  * @since 2018-06-03
  **/
-@Slf4j
 @Component
 public class OrderService {
+
+    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     @Reference(version = "1.0.0", url = "dubbo://127.0.0.1:12345")
     private UserService userService;

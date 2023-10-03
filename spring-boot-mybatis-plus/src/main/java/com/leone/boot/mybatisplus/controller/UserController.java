@@ -1,14 +1,11 @@
 package com.leone.boot.mybatisplus.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.additional.query.impl.QueryChainWrapper;
 import com.leone.boot.mybatisplus.entity.User;
 import com.leone.boot.mybatisplus.service.UserService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

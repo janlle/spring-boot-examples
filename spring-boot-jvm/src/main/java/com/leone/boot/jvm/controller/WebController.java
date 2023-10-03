@@ -44,5 +44,9 @@ public class WebController {
         return "Stop new thread success.";
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "success.";
+    }
 
 }

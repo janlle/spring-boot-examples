@@ -2,8 +2,9 @@ package com.leone.boot.kafka.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leone.boot.common.utils.RandomValue;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -16,9 +17,10 @@ import org.springframework.util.concurrent.ListenableFuture;
  * @author leone
  * @since 2018-12-26
  **/
-@Slf4j
 @Component
 public class KafkaSender {
+
+    private static final Logger log = LoggerFactory.getLogger(KafkaSender.class);
 
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;

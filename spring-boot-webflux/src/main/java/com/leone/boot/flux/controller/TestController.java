@@ -3,7 +3,6 @@ package com.leone.boot.flux.controller;
 import com.leone.boot.common.aop.Watch;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.flux.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,6 @@ import reactor.core.publisher.Mono;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-@Slf4j
 @RestController
 @RequestMapping("/api")
 public class TestController {

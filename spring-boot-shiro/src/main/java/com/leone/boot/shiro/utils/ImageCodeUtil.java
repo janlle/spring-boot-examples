@@ -1,7 +1,5 @@
 package com.leone.boot.shiro.utils;
 
-import lombok.extern.slf4j.Slf4j;
-
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
@@ -14,7 +12,6 @@ import java.util.Random;
  * @author leone
  * @since 2019-04-26
  **/
-@Slf4j
 public class ImageCodeUtil {
 
     /**

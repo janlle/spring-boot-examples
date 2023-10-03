@@ -11,7 +11,7 @@ public class Receiver {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        log.info("Received <" + message + ">");
+        System.out.println("Received <" + message + ">");
     }
 
 }

@@ -1,13 +1,11 @@
 package com.leone.boot.flux.controller;
 
 import com.leone.boot.common.entity.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {

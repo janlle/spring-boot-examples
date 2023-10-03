@@ -5,7 +5,8 @@ import com.leone.boot.shiro.common.anno.AuthToken;
 import com.leone.boot.shiro.config.TokenProperties;
 import com.leone.boot.shiro.exception.ValidateException;
 import com.leone.boot.shiro.utils.TokenUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -16,9 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
 
 /**
  * <p>
@@ -26,9 +25,10 @@ import java.nio.charset.StandardCharsets;
  * @author leone
  * @since 2020-05-29
  **/
-@Slf4j
 @Component
 public class TokenInterceptor implements HandlerInterceptor {
+
+    private static final Logger log = LoggerFactory.getLogger(TokenInterceptor.class);
 
     @Resource
     private TokenProperties tokenProperties;

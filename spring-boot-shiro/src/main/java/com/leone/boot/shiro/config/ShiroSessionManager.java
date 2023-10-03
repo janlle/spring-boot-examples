@@ -1,9 +1,10 @@
 package com.leone.boot.shiro.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletRequest;
@@ -16,8 +17,9 @@ import java.io.Serializable;
  * @author leone
  * @since 2018-11-09
  **/
-@Slf4j
 public class ShiroSessionManager extends DefaultWebSessionManager {
+
+    private static final Logger log = LoggerFactory.getLogger(ShiroSessionManager.class);
 
     private static final String AUTHORIZATION = "authToken";
 

@@ -12,7 +12,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <modules>
@@ -48,6 +50,7 @@
         <module>spring-boot-mybatis-plus</module>
         <module>spring-boot-elk</module>
         <module>spring-boot-sharding-jdbc</module>
+        <module>spring-boot-3</module>
     </modules>
 
     <build>

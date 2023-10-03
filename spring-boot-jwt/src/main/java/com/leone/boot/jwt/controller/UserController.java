@@ -5,7 +5,8 @@ import com.leone.boot.common.entity.User;
 import com.leone.boot.jwt.util.JwtTokenUtil;
 import com.leone.boot.jwt.repository.UserRepository;
 import com.google.common.collect.ImmutableMap;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.Assert;
@@ -18,10 +19,11 @@ import java.util.concurrent.TimeUnit;
  * @author leone
  * @since 2018-04-19
  **/
-@Slf4j
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;

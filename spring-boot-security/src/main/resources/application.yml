@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-boot-seurity
+    name: spring-boot-security
   datasource:
     url: jdbc:mysql://localhost:3306/db01?useSSL=false
     username: xxx

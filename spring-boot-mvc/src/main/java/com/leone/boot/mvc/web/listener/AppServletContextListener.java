@@ -1,6 +1,8 @@
 package com.leone.boot.mvc.web.listener;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -13,9 +15,10 @@ import java.sql.SQLException;
  * @author leone
  * @since 2018-05-13
  **/
-@Slf4j
 @WebListener()
 public class AppServletContextListener implements ServletContextListener {
+
+    private static final Logger log = LoggerFactory.getLogger(AppServletContextListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

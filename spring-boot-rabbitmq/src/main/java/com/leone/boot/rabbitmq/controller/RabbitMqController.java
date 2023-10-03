@@ -2,9 +2,7 @@ package com.leone.boot.rabbitmq.controller;
 
 import com.leone.boot.rabbitmq.config.RabbitMqConstant;
 import com.leone.boot.rabbitmq.sender.MessageSender;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -13,7 +11,6 @@ import java.util.Map;
  * @author leone
  * @since 2018-05-15
  **/
-@Slf4j
 @RestController
 @RequestMapping("/api/rabbitmq")
 public class RabbitMqController {

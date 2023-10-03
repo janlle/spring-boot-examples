@@ -4,7 +4,8 @@ import com.leone.boot.shiro.common.Result;
 import com.leone.boot.shiro.common.anno.AuthToken;
 import com.leone.boot.shiro.config.TokenProperties;
 import com.leone.boot.shiro.utils.TokenUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
@@ -19,10 +20,11 @@ import java.util.concurrent.TimeUnit;
  * @author leone
  * @since 2020-05-26
  **/
-@Slf4j
 @RestController
 @RequestMapping("/api/token")
 public class TokenController {
+
+    private static final Logger log = LoggerFactory.getLogger(TokenController.class);
 
     @Autowired
     private TokenProperties tokenProperties;

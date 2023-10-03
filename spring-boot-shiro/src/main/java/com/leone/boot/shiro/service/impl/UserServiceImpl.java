@@ -3,9 +3,8 @@ package com.leone.boot.shiro.service.impl;
 import com.leone.boot.shiro.entity.User;
 import com.leone.boot.shiro.mapper.UserMapper;
 import com.leone.boot.shiro.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authc.credential.CredentialsMatcher;
-import org.apache.shiro.crypto.hash.Md5Hash;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +14,10 @@ import org.springframework.stereotype.Service;
  * @author leone
  * @since 2018-11-09
  **/
-@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;

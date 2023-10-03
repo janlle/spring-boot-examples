@@ -1,8 +1,8 @@
 package com.leone.boot.shiro.exception;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.UnauthorizedException;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author leone
  **/
-@Slf4j
 public class AppExceptionResolver implements HandlerExceptionResolver {
+
+    private static final Logger log = LoggerFactory.getLogger(AppExceptionResolver.class);
 
     private static ModelAndView unAuth = new ModelAndView("403");
 

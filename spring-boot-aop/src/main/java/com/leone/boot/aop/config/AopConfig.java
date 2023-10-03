@@ -1,9 +1,10 @@
 package com.leone.boot.aop.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -15,10 +16,11 @@ import java.util.List;
  * @author leone
  * @since 2018-06-21
  **/
-@Slf4j
 @Aspect
 @Component
 public class AopConfig {
+
+    private static final Logger log = LoggerFactory.getLogger(AopConfig.class);
 
     /**
      * 1.通配符
