@@ -1,6 +1,5 @@
 package com.leone.boot.kafka.client;
 
-import org.junit.Test;
 
 /**
  * <p>
@@ -10,7 +9,6 @@ import org.junit.Test;
  **/
 public class KafkaClientTest {
 
-    @Test
     public void createTopic() {
 
     }

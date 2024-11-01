@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import java.util.List;
  **/
 @Slf4j
 @RestController
-@RequestMapping("/api")
 // 局部跨域
 @CrossOrigin(origins = "http://localhost:63342", maxAge = 3600)
 public class WebController {
@@ -37,7 +35,7 @@ public class WebController {
     private CustomService customService;
 
     @RequestMapping("/hello")
-    public String socket(HttpServletRequest request, HttpServletResponse response) {
+    public String socket() {
         return customService.info();
     }
 

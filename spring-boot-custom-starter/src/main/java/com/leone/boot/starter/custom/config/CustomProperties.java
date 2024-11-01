@@ -1,6 +1,7 @@
 package com.leone.boot.starter.custom.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -8,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author leone
  * @since 2024-11-01
  **/
+@Component
 @ConfigurationProperties(prefix = "custom")
 public class CustomProperties {
 

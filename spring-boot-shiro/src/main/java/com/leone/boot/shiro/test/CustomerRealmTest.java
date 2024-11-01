@@ -5,7 +5,7 @@
 //import org.apache.shiro.authc.UsernamePasswordToken;
 //import org.apache.shiro.mgt.DefaultSecurityManager;
 //import org.apache.shiro.subject.Subject;
-//import org.junit.Test;
+//
 //
 ///**
 // * @author leone
@@ -15,7 +15,7 @@
 //
 //    AuthRealm authRealm = new AuthRealm();
 //
-//    @Test
+//    
 //    public void shiroAuthTest() {
 //        DefaultSecurityManager securityManager = new DefaultSecurityManager();
 //        securityManager.setRealm(authRealm);

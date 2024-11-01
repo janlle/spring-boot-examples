@@ -1,10 +1,10 @@
 package com.leone.boot.mvc.web.listener;
 
+import jakarta.servlet.annotation.WebListener;
+import jakarta.servlet.http.HttpSessionAttributeListener;
+import jakarta.servlet.http.HttpSessionBindingEvent;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionAttributeListener;
-import javax.servlet.http.HttpSessionBindingEvent;
 
 /**
  * @author leone

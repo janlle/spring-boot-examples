@@ -1,7 +1,7 @@
 package com.leone.boot.concurrency.bucket;
 
 import com.google.common.util.concurrent.RateLimiter;
-import org.junit.Test;
+
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
@@ -27,7 +27,7 @@ public class RateLimiterTest {
         System.out.println("当前时间 - " + LocalDateTime.now() + " - " + Thread.currentThread().getName() + " - 阻塞 - " + acquire + " 通过...");
     }
 
-    @Test
+    
     public void testDemo1() throws InterruptedException {
         final ExecutorService service = Executors.newFixedThreadPool(5);
         for (int i = 0; i < 5; i++) {

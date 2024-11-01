@@ -1,6 +1,6 @@
 package com.leone.boot.concurrency.bucket;
 
-import org.junit.Test;
+
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
@@ -45,7 +45,7 @@ public class AtomicLimiterTest {
 
     }
 
-    @Test
+    
     public void testAtomic() throws InterruptedException {
         final ExecutorService service = Executors.newFixedThreadPool(5);
         for (int i = 0; i < 5; i++) {

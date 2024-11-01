@@ -9,8 +9,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 
-import javax.annotation.PreDestroy;
-
 /**
  * webflux redis configuration
  */
@@ -30,8 +28,7 @@ public class RedisConfig {
         return connectionFactory.getReactiveConnection();
     }
 
-    public @PreDestroy
-    void flushDb() {
+    public void flushDb() {
         factory.getConnection().flushDb();
     }
 }

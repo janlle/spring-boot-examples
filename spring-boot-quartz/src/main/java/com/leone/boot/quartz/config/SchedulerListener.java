@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 
 /**

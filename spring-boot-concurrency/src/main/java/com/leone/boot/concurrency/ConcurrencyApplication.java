@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @author leone
@@ -15,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  **/
 @Configuration
 @SpringBootApplication
-public class ConcurrencyApplication extends WebMvcConfigurerAdapter {
+public class ConcurrencyApplication {
     public static void main(String[] args) {
         SpringApplication.run(ConcurrencyApplication.class, args);
     }
@@ -28,7 +27,6 @@ public class ConcurrencyApplication extends WebMvcConfigurerAdapter {
         return registrationBean;
     }
 
-    @Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(new HttpInterceptor()).addPathPatterns("/**");
     }

@@ -1,6 +1,6 @@
 package com.leone.boot.concurrency.bucket;
 
-import org.junit.Test;
+
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
@@ -41,7 +41,7 @@ public class SemaphoreLimiterTest {
         }
     }
 
-    @Test
+    
     public void testSemaphore() throws InterruptedException {
         final ExecutorService service = Executors.newFixedThreadPool(10);
         for (int i = 0; i < 10; i++) {

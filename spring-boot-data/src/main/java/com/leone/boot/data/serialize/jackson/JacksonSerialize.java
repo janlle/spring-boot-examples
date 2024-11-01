@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
-import org.junit.Test;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ public class JacksonSerialize {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @Test
+    
     public void singleSerialize() throws IOException {
         long start = System.currentTimeMillis();
         // simple pojo
@@ -31,7 +31,7 @@ public class JacksonSerialize {
         System.out.println("jackson single deserialize time: " + (end - middle) + " millisecond!");
     }
 
-    @Test
+    
     public void listSerialize() throws IOException {
         long start = System.currentTimeMillis();
         String listJson = mapper.writeValueAsString(EntityFactory.getUsers(1000000));

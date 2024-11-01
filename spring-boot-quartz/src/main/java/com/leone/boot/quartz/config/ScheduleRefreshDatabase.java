@@ -2,7 +2,7 @@ package com.leone.boot.quartz.config;
 
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.sql.DataSource;
 
 

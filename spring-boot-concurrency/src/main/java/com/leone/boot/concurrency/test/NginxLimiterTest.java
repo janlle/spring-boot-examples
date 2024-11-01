@@ -1,6 +1,6 @@
 package com.leone.boot.concurrency.test;
 
-import org.junit.Test;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,7 +29,7 @@ public class NginxLimiterTest {
     }
 
 
-    @Test
+    
     public void test() {
         RestTemplate restTemplate = new RestTemplate();
         for (int i = 0; i    < 6; i++) {

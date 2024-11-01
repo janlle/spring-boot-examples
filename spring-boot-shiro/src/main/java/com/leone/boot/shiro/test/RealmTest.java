@@ -5,8 +5,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.SimpleAccountRealm;
 import org.apache.shiro.subject.Subject;
-import org.junit.Before;
-import org.junit.Test;
+
 
 /**
  * @author leone
@@ -17,12 +16,11 @@ public class RealmTest {
 
     SimpleAccountRealm accountRealm = new SimpleAccountRealm();
 
-    @Before
     public void init() {
         accountRealm.addAccount("james", "admin", "admin", "user");
     }
 
-    @Test
+    
     public void shiroAuthTest() {
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         securityManager.setRealm(accountRealm);

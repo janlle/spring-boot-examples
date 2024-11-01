@@ -2,12 +2,12 @@ package com.leone.boot.mvc.shiro.service;
 
 import com.leone.boot.mvc.shiro.ShiroProperties;
 import com.leone.boot.mvc.shiro.TokenUtil;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;

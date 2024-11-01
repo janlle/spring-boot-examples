@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
-import org.junit.Test;
+
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public class FastJsonSerialize {
 
-    @Test
+    
     public void singleSerialize() {
         long start = System.currentTimeMillis();
 
@@ -32,7 +32,7 @@ public class FastJsonSerialize {
         System.out.println("fastJson deserialize time: " + (end - middle) + " millisecond!");
     }
 
-    @Test
+    
     public void listSerialize() {
 
         long start = System.currentTimeMillis();

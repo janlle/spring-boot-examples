@@ -2,15 +2,15 @@ package com.leone.boot.security.web.controller;
 
 import com.leone.boot.security.entity.User;
 import com.leone.boot.security.service.IUserService;
+import jakarta.annotation.Resource;
+import jakarta.annotation.security.DenyAll;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.annotation.security.DenyAll;
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 /**

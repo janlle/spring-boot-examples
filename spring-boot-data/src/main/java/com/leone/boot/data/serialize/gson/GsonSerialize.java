@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
-import org.junit.Test;
+
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class GsonSerialize {
 
     private Gson gson = new Gson();
 
-    @Test
+    
     public void singleSerialize() {
         long start = System.currentTimeMillis();
 
@@ -32,7 +32,7 @@ public class GsonSerialize {
         System.out.println("gson single deserialize time: " + (end - middle) + " millisecond!");
     }
 
-    @Test
+    
     public void listSerialize() {
         long start = System.currentTimeMillis();
 
