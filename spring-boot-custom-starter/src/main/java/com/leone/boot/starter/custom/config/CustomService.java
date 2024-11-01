@@ -1,8 +1,10 @@
 package com.leone.boot.starter.custom.config;
 
 /**
+ * <p>
+ *
  * @author leone
- * @since 2018-05-12
+ * @since 2024-11-01
  **/
 public class CustomService {
 
@@ -20,6 +22,10 @@ public class CustomService {
 
     public String info() {
         return "name: " + name + " id: " + id;
+    }
+
+    public String say() {
+        return name + " " + id;
     }
 
 }

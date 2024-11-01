@@ -25,13 +25,12 @@
         <module>spring-boot-concurrency</module>
         <module>spring-boot-mail</module>
         <module>spring-boot-data</module>
-        <module>spring-boot-starter-custom</module>
+        <module>spring-boot-custom-starter</module>
         <module>spring-boot-session</module>
         <module>spring-boot-quartz</module>
         <module>spring-boot-swagger</module>
         <module>spring-boot-log</module>
         <module>spring-boot-aop</module>
-        <module>spring-boot-spring</module>
         <module>spring-boot-jvm</module>
         <module>spring-boot-batch</module>
         <module>spring-boot-mybatis</module>

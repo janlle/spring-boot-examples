@@ -12,19 +12,19 @@
 
     <packaging>jar</packaging>
 
-    <artifactId>spring-boot-starter-custom</artifactId>
+    <artifactId>spring-boot-custom-starter</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.0.8.RELEASE</version>
+            <version>3.0.7</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <version>2.0.8.RELEASE</version>
+            <version>3.0.7</version>
         </dependency>
     </dependencies>
 

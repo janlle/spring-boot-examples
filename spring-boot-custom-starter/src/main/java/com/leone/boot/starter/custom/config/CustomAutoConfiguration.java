@@ -1,22 +1,22 @@
 package com.leone.boot.starter.custom.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
+ * <p>
+ *
  * @author leone
- * @since 2018-05-12
+ * @since 2024-11-01
  **/
-@Configuration
-@EnableConfigurationProperties(CustomProperties.class)
+@EnableAutoConfiguration
 @ConditionalOnClass(CustomService.class)
 @ConditionalOnProperty(prefix = "customer", value = "enabled", matchIfMissing = true)
-public class CustomServiceAutoConfiguration {
+public class CustomAutoConfiguration {
 
     @Autowired
     private CustomProperties customProperties;
