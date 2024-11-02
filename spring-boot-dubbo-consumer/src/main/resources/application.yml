@@ -3,3 +3,8 @@ server:
 dubbo:
   application:
     name: dubbo-consumer
+    qosEnable: true
+    qosPort: 33333
+    qosAcceptForeignIp: false
+  registry:
+    address: zookeeper://127.0.0.1:2181
