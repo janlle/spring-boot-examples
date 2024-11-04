@@ -15,7 +15,7 @@ import java.util.Map;
  * @since 2018-06-03
  **/
 @RestController
-@RequestMapping("/api/order")
+@RequestMapping("/order")
 public class OrderController {
 
     @Resource

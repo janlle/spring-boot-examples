@@ -29,12 +29,10 @@ public class OrderService {
      */
     public Map<String, String> findOne(Long orderId) {
         User user = userService.findOne(1L);
-        if (ObjectUtils.isEmpty(user)) {
-            return null;
-        }
         Map<String, String> map = new HashMap<>();
-        map.put("order_id", "1");
+        map.put("order_id", orderId.toString());
         map.put("account", user.getAccount());
+        map.put("date", user.getCreateTime().toString());
         return map;
     }
 

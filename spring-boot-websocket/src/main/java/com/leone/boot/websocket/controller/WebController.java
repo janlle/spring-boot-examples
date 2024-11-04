@@ -34,9 +34,9 @@ public class WebController {
     @Resource
     private CustomService customService;
 
-    @RequestMapping("/hello")
-    public String socket() {
-        return customService.info();
+    @RequestMapping("/say")
+    public String say() {
+        return customService.say();
     }
 
     @RequestMapping("/name")

@@ -20,18 +20,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         System.out.println("update");
-        return null;
+        return user;
     }
 
     @Override
     public User save(User user) {
         System.out.println("save");
-        return null;
+        return user;
     }
 
     @Override
     public User findOne(Long userId) {
-        System.out.println("findOne: " + userId);
+        System.out.println("invoke findOne: " + userId);
         return new User(1L, "james", new Date());
     }
 

@@ -8,24 +8,14 @@ package com.leone.boot.starter.custom.config;
  **/
 public class CustomService {
 
-    private String name;
+    private CustomProperties customProperties;
 
-    private Integer id;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String info() {
-        return "name: " + name + " id: " + id;
+    public void setCustomProperties(CustomProperties customProperties) {
+        this.customProperties = customProperties;
     }
 
     public String say() {
-        return name + " " + id;
+        return customProperties.getId() + " " + customProperties.getName();
     }
 
 }
