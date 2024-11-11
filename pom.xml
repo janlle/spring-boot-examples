@@ -28,7 +28,7 @@
         <module>spring-boot-data</module>
         <module>spring-boot-custom-starter</module>
         <module>spring-boot-session</module>
-        <module>spring-boot-quartz</module>
+        <module>spring-boot-jobs</module>
         <module>spring-boot-swagger</module>
         <module>spring-boot-log</module>
         <module>spring-boot-aop</module>
