@@ -11,12 +11,12 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * @since 2019-05-26
  **/
 public class HelloWorldRunListener implements SpringApplicationRunListener {
-    @Override
+
     public void starting() {
         System.out.println("starting...");
     }
 
-    @Override
+
     public void environmentPrepared(ConfigurableEnvironment environment) {
 
     }
@@ -31,12 +31,12 @@ public class HelloWorldRunListener implements SpringApplicationRunListener {
 
     }
 
-    @Override
+
     public void started(ConfigurableApplicationContext context) {
 
     }
 
-    @Override
+
     public void running(ConfigurableApplicationContext context) {
 
     }

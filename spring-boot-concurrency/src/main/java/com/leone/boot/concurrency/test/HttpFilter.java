@@ -1,6 +1,5 @@
 package com.leone.boot.concurrency.test;
 
-import com.leone.boot.concurrency.threadLocal.RequestHolder;
 import jakarta.servlet.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +20,7 @@ public class HttpFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.info("do filter --- {}", Thread.currentThread().getId());
-        RequestHolder.add(Thread.currentThread().getId());
+        //RequestHolder.add(Thread.currentThread().getId());
         chain.doFilter(request, response);
     }
 

@@ -42,6 +42,7 @@
         <module>spring-boot-common</module>
         <module>spring-boot-websocket</module>
         <module>spring-boot-shiro</module>
+        <module>spring-boot-concurrency</module>
         <module>spring-boot-dubbo-provider</module>
         <module>spring-boot-dubbo-consumer</module>
         <module>spring-boot-dubbo-api</module>

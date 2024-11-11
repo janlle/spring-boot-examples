@@ -1,9 +1,10 @@
 package com.leone.boot.shiro.controller;
 
-import com.leone.boot.shiro.utils.ImageCodeUtil;
 import com.leone.boot.shiro.utils.UserHelper;
 import com.leone.boot.shiro.entity.User;
 import com.leone.boot.shiro.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.*;
@@ -17,8 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * <p> shiro 配置需要两个 /login 接口,一个是get用来获取登陆页面,一个用post用于登录的
@@ -62,8 +61,8 @@ public class ShiroController {
 
     @RequestMapping("/image")
     public void validCode(HttpServletResponse response, HttpSession session) throws Exception {
-        String code = ImageCodeUtil.generate(response, 60, 18);
-        log.info("code: {}", code);
+        //String code = ImageCodeUtil.generate(response, 60, 18);
+        log.info("code: {}", "code");
     }
 
     @RequestMapping("/index")

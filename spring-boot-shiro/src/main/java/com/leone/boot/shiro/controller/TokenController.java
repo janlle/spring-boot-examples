@@ -4,6 +4,7 @@ import com.leone.boot.shiro.common.Result;
 import com.leone.boot.shiro.common.anno.AuthToken;
 import com.leone.boot.shiro.config.TokenProperties;
 import com.leone.boot.shiro.utils.TokenUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 /**
