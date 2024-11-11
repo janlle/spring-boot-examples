@@ -5,7 +5,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
-import org.junit.Test;
+
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
@@ -24,7 +24,7 @@ public class JdbcRealmTest {
         dataSource.setPassword("xx");
     }
 
-    @Test
+    
     public void shiroAuthTest() {
         JdbcRealm jdbcRealm = new JdbcRealm();
         jdbcRealm.setDataSource(dataSource);

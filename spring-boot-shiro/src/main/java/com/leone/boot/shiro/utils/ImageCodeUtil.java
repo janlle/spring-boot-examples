@@ -1,7 +1,9 @@
-package com.leone.boot.shiro.utils;
+package com.leone.boot.shiro.common.util;
+
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -12,7 +14,8 @@ import java.util.Random;
  * @author leone
  * @since 2019-04-26
  **/
-public class ImageCodeUtil {
+@Slf4j
+public class ImgCodeUtil {
 
     /**
      * 生成验证码

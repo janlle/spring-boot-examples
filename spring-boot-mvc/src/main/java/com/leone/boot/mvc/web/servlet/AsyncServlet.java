@@ -1,17 +1,15 @@
 package com.leone.boot.mvc.web.servlet;
 
-import com.leone.boot.mvc.task.SpringTimeStack;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.servlet.AsyncContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.AsyncContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -22,10 +20,9 @@ import java.util.concurrent.TimeUnit;
  * @author leone
  * @since 2018-05-22
  **/
+@Slf4j
 @WebServlet(name = "asyncServlet", urlPatterns = {"/async"}, asyncSupported = true)
 public class AsyncServlet extends HttpServlet {
-
-    private static final Logger log = LoggerFactory.getLogger(AsyncServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

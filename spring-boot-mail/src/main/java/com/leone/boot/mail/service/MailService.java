@@ -1,8 +1,10 @@
 package com.leone.boot.mail.service;
 
 import freemarker.template.Template;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -16,9 +18,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.context.IContext;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -31,9 +30,10 @@ import java.util.Map;
  * @author leone
  * @since 2018-05-09
  **/
+@Slf4j
 @Service
 public class MailService {
-    private static final Logger log = LoggerFactory.getLogger(MailService.class);
+
     @Value("${spring.mail.username}")
     private String from;
 

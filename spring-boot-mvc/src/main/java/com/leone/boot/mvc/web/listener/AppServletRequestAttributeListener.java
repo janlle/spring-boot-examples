@@ -1,20 +1,18 @@
 package com.leone.boot.mvc.web.listener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.servlet.ServletRequestEvent;
+import jakarta.servlet.ServletRequestListener;
+import jakarta.servlet.annotation.WebListener;
+import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.ServletRequestEvent;
-import javax.servlet.ServletRequestListener;
-import javax.servlet.annotation.WebListener;
 
 /**
  * @author leone
  * @since 2018-05-13
  **/
+@Slf4j
 @WebListener
 public class AppServletRequestAttributeListener implements ServletRequestListener {
-
-    private static final Logger log = LoggerFactory.getLogger(AppServletRequestAttributeListener.class);
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {

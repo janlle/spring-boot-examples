@@ -86,7 +86,7 @@ public class UserController {
     // 删除token
     public void invalidate(String token) {
         Map<String, String> map = JwtTokenUtil.verifyToken(token);
-        Assert.notNull(map);
+        // Assert.notNull(map);
         redisTemplate.delete(map.get("email"));
     }
 

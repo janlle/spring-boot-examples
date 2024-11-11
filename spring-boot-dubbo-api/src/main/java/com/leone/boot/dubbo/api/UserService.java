@@ -1,6 +1,6 @@
 package com.leone.boot.dubbo.api;
 
-import com.leone.boot.common.entity.User;
+import com.leone.boot.dubbo.api.bean.User;
 
 import java.util.List;
 
@@ -11,8 +11,6 @@ import java.util.List;
  * @since 2019-01-26
  **/
 public interface UserService {
-
-    Integer delete(Long userId);
 
     User update(User user);
 

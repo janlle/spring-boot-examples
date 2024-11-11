@@ -1,6 +1,5 @@
 package com.leone.boot.mvc.shiro;
 
-import com.leone.boot.mvc.shiro.filter.TokenFilter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -16,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.Filter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,9 +42,9 @@ public class ShiroConfig {
         shiroFilter.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         shiroFilter.setSecurityManager(securityManager());
 
-        Map<String, Filter> filters = new HashMap<>(1);
-        filters.put("auth", new TokenFilter());
-        shiroFilter.setFilters(filters);
+        // Map<String, Filter> filters = new HashMap<>(1);
+        // filters.put("auth", new TokenFilter());
+        // shiroFilter.setFilters(filters);
         return shiroFilter;
     }
 

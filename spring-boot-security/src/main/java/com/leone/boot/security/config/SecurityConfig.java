@@ -2,13 +2,15 @@ package com.leone.boot.security.config;
 
 import com.leone.boot.security.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author leone
@@ -16,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  **/
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
     @Autowired
     private IUserService userService;
@@ -24,41 +26,64 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    /**
-     * 定义安全策略
-     *
-     * @param http
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/authentication/form", "/login")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .authorizeRequests()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .and()
-                .csrf()
-                .disable();
-    }
-
-    /**
-     * 配置哪些资源不需要认证
-     *
-     * @param web
-     */
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/static/**");
-    }
+    // @Bean
+    // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    //     http.authorizeRequests().antMatchers("/login").permitAll()
+    //             .antMatchers("/users/**", "/settings/**").hasAuthority("Admin")
+    //             .hasAnyAuthority("Admin", "Editor", "Salesperson")
+    //             .hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+    //             .anyRequest().authenticated()
+    //             .and().formLogin()
+    //             .loginPage("/login")
+    //             .usernameParameter("email")
+    //             .permitAll()
+    //             .and()
+    //             .rememberMe().key("AbcdEfghIjklmNopQrsTuvXyz_0123456789")
+    //             .and()
+    //             .logout().permitAll();
+    //
+    //     http.headers().frameOptions().sameOrigin();
+    //
+    //     return http.build();
+    // }
+    //
+    // /**
+    //  * 定义安全策略
+    //  *
+    //  * @param http
+    //  * @throws Exception
+    //  */
+    // protected void configure(HttpSecurity http) throws Exception {
+    //     http.authorizeRequests()
+    //             .antMatchers("/authentication/form", "/login")
+    //             .permitAll()
+    //             .anyRequest()
+    //             .authenticated()
+    //             .and()
+    //             .logout()
+    //             .permitAll()
+    //             .and()
+    //             .authorizeRequests()
+    //             .and()
+    //             .formLogin()
+    //             .loginPage("/login")
+    //             .and()
+    //             .csrf()
+    //             .disable();
+    // }
+    //
+    // /**
+    //  * 配置哪些资源不需要认证
+    //  *
+    //  * @param web
+    //  */
+    // public void configure(WebSecurity web) {
+    //     web.ignoring().antMatchers("/static/**");
+    // }
+    // @Bean
+    // public WebSecurityCustomizer webSecurityCustomizer() {
+    //     return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
+    // }
 
 
     /**
@@ -67,7 +92,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @param auth
      * @throws Exception
      */
-    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 1.inMemoryAuthentication 从内存中获取
         /*auth.inMemoryAuthentication()

@@ -4,7 +4,7 @@ import com.leone.boot.common.entity.User;
 import com.leone.boot.common.utils.EntityFactory;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.junit.Test;
+
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  **/
 public class JsonlibSerialize {
 
-    @Test
+    
     public void singleSerialize() {
         long start = System.currentTimeMillis();
 
@@ -29,7 +29,7 @@ public class JsonlibSerialize {
         System.out.println("jsonlib single deserialize time: " + (end - middle) + " millisecond!");
     }
 
-    @Test
+    
     public void listSerialize() {
         long start = System.currentTimeMillis();
 

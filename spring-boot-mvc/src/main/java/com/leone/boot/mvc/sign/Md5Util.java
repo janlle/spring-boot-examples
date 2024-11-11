@@ -1,6 +1,7 @@
 package com.leone.boot.mvc.sign;
 
-import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+import jakarta.xml.bind.annotation.adapters.HexBinaryAdapter;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 

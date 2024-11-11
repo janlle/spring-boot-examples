@@ -4,7 +4,7 @@ import com.leone.boot.mongodb.entity.User;
 import com.leone.boot.mongodb.service.MongoService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.List;
 
 /**

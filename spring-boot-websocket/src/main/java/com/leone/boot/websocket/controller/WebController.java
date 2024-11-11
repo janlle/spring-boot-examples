@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import java.util.List;
  * @since 2018-07-06
  **/
 @RestController
-@RequestMapping("/api")
 // 局部跨域
 @CrossOrigin(origins = "http://localhost:63342", maxAge = 3600)
 public class WebController {
@@ -38,9 +36,9 @@ public class WebController {
     @Resource
     private CustomService customService;
 
-    @RequestMapping("/hello")
-    public String socket(HttpServletRequest request, HttpServletResponse response) {
-        return customService.info();
+    @RequestMapping("/say")
+    public String say() {
+        return customService.say();
     }
 
     @RequestMapping("/name")

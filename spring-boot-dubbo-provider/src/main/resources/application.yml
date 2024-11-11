@@ -1,17 +1,10 @@
 server:
-  port: 8081
-
-spring:
-  application:
-    name: spring-dubbo
-
+  port: 8001
 dubbo:
-  scan:
-    base-packages: com.leone.boot.dubbo.provider.service.impl
+  application:
+    name: provider
   protocol:
     name: dubbo
     port: 12345
   registry:
-    address: N/A
-  application:
-    name: dubbo-provider
+    address: zookeeper://127.0.0.1:2181

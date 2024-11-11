@@ -1,8 +1,8 @@
 package com.leone.boot.jpa.entity;
 
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 

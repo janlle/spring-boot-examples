@@ -1,5 +1,10 @@
 server:
-  port: 8082
+  port: 8002
 dubbo:
   application:
-    name: dubbo-consumer
+    name: consumer
+    qosEnable: true
+    qosPort: 33333
+    qosAcceptForeignIp: false
+  registry:
+    address: zookeeper://127.0.0.1:2181

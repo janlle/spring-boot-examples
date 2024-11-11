@@ -1,13 +1,12 @@
 package com.leone.boot.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import org.hibernate.annotations.Proxy;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 

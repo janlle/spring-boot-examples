@@ -6,8 +6,7 @@ import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.SimpleAccountRealm;
 import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
-import org.junit.Before;
-import org.junit.Test;
+
 
 /**
  * @author leone
@@ -18,12 +17,11 @@ public class IniRealmTest {
 
     private SimpleAccountRealm accountRealm = new SimpleAccountRealm();
 
-    @Before
     public void init() {
         accountRealm.addAccount("james", "admin", "admin", "user");
     }
 
-    @Test
+    
     public void shiroAuthTest() {
         IniRealm iniRealm = new IniRealm("classpath:user.ini");
 

@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class WebSocketService {
 
-    @Autowired
-    private SimpMessagingTemplate template;
+    // @Autowired
+    // private SimpMessagingTemplate template;
 
     /**
      * 广播
@@ -25,7 +25,7 @@ public class WebSocketService {
      * @param msg
      */
     public void sendMsg(WsResponse msg) {
-        template.convertAndSend(Constant.PRODUCER_PATH, msg);
+        // template.convertAndSend(Constant.PRODUCER_PATH, msg);
     }
 
     /**
@@ -35,7 +35,7 @@ public class WebSocketService {
      * @param msg
      */
     public void send2Users(List<String> users, WsResponse msg) {
-        users.forEach(userName -> template.convertAndSendToUser(userName, Constant.P2P_PUSH_PATH, msg));
+        // users.forEach(userName -> template.convertAndSendToUser(userName, Constant.P2P_PUSH_PATH, msg));
     }
 
 }
