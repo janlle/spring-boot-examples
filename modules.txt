@@ -1,0 +1,6 @@
+mvc
+    log
+    mail
+    session
+    event
+    shiro

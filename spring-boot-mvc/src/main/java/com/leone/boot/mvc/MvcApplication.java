@@ -17,6 +17,7 @@ import java.util.List;
  * @author leone
  * @since 2018-05-17
  **/
+//@EnableRedisHttpSession
 @EnableScheduling
 @ServletComponentScan
 @SpringBootApplication

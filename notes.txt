@@ -1,0 +1,10 @@
+随笔
+
+解压缩jar包或war包
+jar -xvf test.jar
+
+打包jar包或war包
+jar -cvf test.war .
+
+查看class内容
+javap test.class
