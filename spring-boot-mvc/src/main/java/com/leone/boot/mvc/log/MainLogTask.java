@@ -1,8 +1,8 @@
-package com.leone.boot.log.task;
+package com.leone.boot.mvc.log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leone.boot.log.util.RandomValue;
+import com.leone.boot.common.utils.RandomValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -43,7 +43,7 @@ public class MainLogTask {
     @Async
     //@Scheduled(fixedRate = 10)
     public void csvLogTask() {
-        CSV_LOG.info(offset + "," + RandomValue.randomUsername() + "," + RandomValue.randomTel() + "," + RandomValue.randomInt(70) + "," + RandomValue.randomInt(10000) + "," + RandomValue.randomBirth());
+        //CSV_LOG.info(offset + "," + RandomValue.randomUsername() + "," + RandomValue.randomTel() + "," + RandomValue.randomInt(70) + "," + RandomValue.randomInt(10000) + "," + RandomValue.randomBirth());
         offset++;
         //CSV_LOG.info(System.currentTimeMillis() + "," + RandomValue.randomUsername() + "," + RandomValue.RANDOM.nextInt(60) + "," + RandomValue.randomTime() + "," + RandomValue.randomUUID().substring(15) + "," + RandomValue.randomWords() + "," + RANDOM.nextBoolean());
     }
@@ -64,7 +64,7 @@ public class MainLogTask {
     //@Scheduled(fixedDelay = 5)
     public void commonLogTask() {
         //COMMON_LOG.info(RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords() + " " + RandomValue.randomWords());
-        COMMON_LOG.info(RandomValue.randomInt(1000000000) + "," + RandomValue.randomUsername() + "," + RandomValue.randomInt(80) + "," + RandomValue.randomDouble(100));
+        //COMMON_LOG.info("," + RandomValue.randomUsername() + "," + RandomValue.randomInt(80) + "," + RandomValue.randomDouble(100));
     }
 
     /**

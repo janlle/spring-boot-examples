@@ -12,9 +12,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <java.version>17</java.version>
     </properties>
 
     <modules>
@@ -24,13 +24,11 @@
         <module>spring-boot-security</module>
         <module>spring-boot-kafka</module>
         <module>spring-boot-jwt</module>
-        <module>spring-boot-mail</module>
         <module>spring-boot-data</module>
         <module>spring-boot-custom-starter</module>
         <module>spring-boot-session</module>
         <module>spring-boot-jobs</module>
         <module>spring-boot-swagger</module>
-        <module>spring-boot-log</module>
         <module>spring-boot-aop</module>
         <module>spring-boot-jvm</module>
         <module>spring-boot-batch</module>
@@ -51,7 +49,6 @@
         <module>spring-boot-mybatis-plus</module>
         <module>spring-boot-elk</module>
         <module>spring-boot-sharding-jdbc</module>
-        <module>spring-boot-3</module>
     </modules>
 
     <build>

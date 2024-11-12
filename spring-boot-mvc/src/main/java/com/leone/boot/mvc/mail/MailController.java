@@ -1,9 +1,11 @@
-package com.leone.boot.mail.service;
+package com.leone.boot.mvc.mail;
+
 
 import freemarker.template.Template;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,8 +13,11 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -31,8 +36,9 @@ import java.util.Map;
  * @since 2018-05-09
  **/
 @Slf4j
-@Service
-public class MailService {
+@Controller
+@RequestMapping("/mail")
+public class MailController {
 
     @Value("${spring.mail.username}")
     private String from;
@@ -43,7 +49,7 @@ public class MailService {
     @Autowired
     private TemplateEngine templateEngine;
 
-    //    @Autowired
+    // @Autowired
     private FreeMarkerConfigurer freeMarkerConfigurer;
 
     private static final Charset CHARSET = StandardCharsets.UTF_8;
@@ -54,6 +60,55 @@ public class MailService {
 
     private static final String filePath = "hello.zip";
 
+
+    private static Map<String, Object> content = new HashMap<>();
+
+    static {
+        content.put("title", "标题");
+        content.put("content", "http://www.baidu.com");
+        content.put("to", "james@gmail.com");
+    }
+
+    @ResponseBody
+    @GetMapping("/send/ftl")
+    public String sendFtlMain(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = sendFreemarkerMail(to, subject, content);
+        return String.valueOf(flag);
+    }
+
+    @ResponseBody
+    @GetMapping("/send/html")
+    public String sendHtmlMain(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = sendThymeleafMail(to, subject, content);
+        return String.valueOf(flag);
+    }
+
+    @ResponseBody
+    @GetMapping("/send/simple")
+    public String sendSimpleMain(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = sendSimpleMail(to, subject, content);
+        return String.valueOf(flag);
+    }
+
+    @ResponseBody
+    @GetMapping("/send/htm")
+    public String sendAttachmentsMail(String to, String subject, String content, HttpServletRequest request) {
+        boolean flag = sendAttachmentsMail(to, subject, content);
+        return String.valueOf(flag);
+    }
+
+
+    @RequestMapping("/html")
+    public String helloHtml(Map<String, Object> map) {
+        map.putAll(content);
+        return "/htmlMail";
+    }
+
+    @RequestMapping("/ftl")
+    public String helloFtl(Map<String, Object> map) {
+        map.putAll(content);
+        return "ftlMail";
+    }
 
     /**
      * 发送freemarker模板mail
@@ -95,7 +150,7 @@ public class MailService {
      * @throws Exception
      */
     public boolean sendThymeleafMail(String to, String subject, String content) {
-//        String token = storage(to);
+        //        String token = storage(to);
         String token = "xxx";
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();

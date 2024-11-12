@@ -10,6 +10,10 @@
 
     <artifactId>spring-boot-mvc</artifactId>
 
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -61,6 +65,7 @@
             <artifactId>spring-boot-common</artifactId>
             <version>2.0.0.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -68,25 +73,37 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <!--生成二维码-->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.0.8.RELEASE</version>
+                <version>3.2.2</version>
                 <configuration>
-                    <!--<mainClass>${start-class}</mainClass>-->
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>

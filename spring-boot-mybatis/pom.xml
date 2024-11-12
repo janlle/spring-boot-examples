@@ -11,6 +11,10 @@
 
     <artifactId>spring-boot-mybatis</artifactId>
 
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -84,21 +88,11 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.0.7.RELEASE</version>
+                <version>2.2.9.RELEASE</version>
                 <configuration>
                     <!--<mainClass>${start-class}</mainClass>-->
                     <layout>ZIP</layout>

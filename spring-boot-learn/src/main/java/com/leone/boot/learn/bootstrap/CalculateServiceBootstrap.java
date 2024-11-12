@@ -12,7 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author leone
  * @since 2019-05-26
  **/
-@SpringBootApplication(scanBasePackages = {"com.leone.boot.learn.service"})
+//@SpringBootApplication(scanBasePackages = {"com.leone.boot.learn.service"})
 public class CalculateServiceBootstrap {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(CalculateServiceBootstrap.class)

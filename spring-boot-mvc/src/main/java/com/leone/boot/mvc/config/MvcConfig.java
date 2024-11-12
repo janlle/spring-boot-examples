@@ -3,9 +3,12 @@ package com.leone.boot.mvc.config;
 import com.leone.boot.mvc.service.ProductService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import java.util.concurrent.Executor;
 
 /**
  * @author leone
@@ -28,4 +31,16 @@ public class MvcConfig extends WebMvcConfigurationSupport {
     protected void addViewControllers(ViewControllerRegistry registry) {
         super.addViewControllers(registry);
     }
+
+    @Bean
+    public Executor taskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(15);
+        executor.setMaxPoolSize(50);
+        executor.setQueueCapacity(10);
+        executor.initialize();
+        return executor;
+    }
+
+
 }
