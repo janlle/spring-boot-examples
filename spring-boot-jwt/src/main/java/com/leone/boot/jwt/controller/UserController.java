@@ -2,6 +2,7 @@ package com.leone.boot.jwt.controller;
 
 import com.leone.boot.common.Result;
 import com.leone.boot.common.entity.User;
+import com.leone.boot.common.exception.ExceptionEnum;
 import com.leone.boot.jwt.util.JwtTokenUtil;
 import com.leone.boot.jwt.repository.UserRepository;
 import com.google.common.collect.ImmutableMap;
@@ -62,7 +63,7 @@ public class UserController {
             user.setPassword(token);
             return Result.success("用户验证成功");
         } else {
-            return Result.error("用户验证失败");
+            return Result.error(ExceptionEnum.AUTH_TOKEN);
         }
     }
 

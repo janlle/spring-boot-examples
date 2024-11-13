@@ -1,12 +1,4 @@
-
 spring:
-  application:
-    name: spring-boot-mail
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-# JavaMailSender 邮件发送的配置 我使用的163邮箱作为发送方
   mail:
     host: smtp.163.com
     username: xxx@163.com
@@ -41,5 +33,3 @@ spring:
 #    expose-request-attributes: false
 #    expose-session-attributes: false
 #    expose-spring-macro-helpers: false
-server:
-  port: 8081

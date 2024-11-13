@@ -27,7 +27,7 @@ public class MvcApplication {
         ApplicationContext applicationContext = SpringApplication.run(MvcApplication.class, args);
         Binder binder = Binder.get(applicationContext.getEnvironment());
         List<CustomerProperty> customerProperties = binder.bind("customer.property", Bindable.listOf(CustomerProperty.class)).orElseThrow(IllegalStateException::new);
-        System.out.println(customerProperties.get(0));
-        System.out.println(customerProperties.get(1));
+        //System.out.println(customerProperties.get(0));
+        //System.out.println(customerProperties.get(1));
     }
 }

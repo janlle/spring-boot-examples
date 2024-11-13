@@ -1,6 +1,5 @@
 server:
-  port: 8081
-
+  port: 8080
 
 spring:
   profiles:
@@ -11,8 +10,8 @@ customer:
   property:
   - first-name: zhang
     last-name: san
-  - first-name: liu
-    last-name: sheng
+  - first-name: li
+    last-name: si
 
 module:
   shiro:
@@ -25,22 +24,8 @@ module:
       - /api/sign/test
     authUrls: /**
 
-
-
-#swagger:
-#  butler:
-#    resources[0]:
-#      name: service-a
-#      url: /service-a/v2/api-docs
-#      swagger-version: 2.0
-#    resources[1]:
-#      name: service-b
-#      url: /service-b/v2/api-docs
-#      swagger-version: 2.0
-#  show: true
-
-springfox:
-  documentation:
-    swagger-ui:
-      enabled: true
-
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html

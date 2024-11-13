@@ -1,13 +1,17 @@
 package com.leone.boot.mvc.config;
 
 import com.leone.boot.mvc.service.ProductService;
+import com.leone.boot.mvc.web.interceptor.AppInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -18,7 +22,19 @@ import java.util.concurrent.ThreadPoolExecutor;
  **/
 @EnableAsync
 @Configuration
-public class MvcConfig extends WebMvcConfigurationSupport {
+public class MvcConfig implements WebMvcConfigurer {
+
+
+    @Autowired
+    private AppInterceptor appInterceptor;
+
+    /**
+     * 注册自己的拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(appInterceptor).addPathPatterns("/**").excludePathPatterns("/hello");
+    }
 
     @Bean
     public RestTemplate restTemplate() {
@@ -28,11 +44,6 @@ public class MvcConfig extends WebMvcConfigurationSupport {
     @Bean(initMethod = "init", destroyMethod = "destroy")
     public ProductService beanWayService() {
         return new ProductService();
-    }
-
-    @Override
-    protected void addViewControllers(ViewControllerRegistry registry) {
-        super.addViewControllers(registry);
     }
 
     @Bean("taskExecutor")
@@ -50,8 +61,6 @@ public class MvcConfig extends WebMvcConfigurationSupport {
 
 
     // swagger 配置
-
-
 
 
 }

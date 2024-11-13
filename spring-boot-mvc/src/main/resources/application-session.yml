@@ -1,15 +1,13 @@
-server:
-  port: 8080
-
 spring:
   session:
     store-type: redis
     # 设置session刷新ON_SAVE（表示在response commit前刷新缓存），IMMEDIATE（表示只要有更新，就刷新缓存）
     redis:
       flush-mode: on_save
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    database: 0
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
 
 
