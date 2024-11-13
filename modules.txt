@@ -4,3 +4,4 @@ mvc
     session
     event
     shiro
+    layui

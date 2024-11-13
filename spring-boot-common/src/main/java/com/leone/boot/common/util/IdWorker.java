@@ -1,4 +1,4 @@
-package com.leone.boot.common.utils;
+package com.leone.boot.common.util;
 
 /**
  * <p>
@@ -9,13 +9,29 @@ package com.leone.boot.common.utils;
 public class IdWorker {
 
     // 这个就是代表了机器id
-    private long workerId;
+    private final long workerId;
 
     // 这个就是代表了机房id
-    private long dataCenterId;
+    private final long dataCenterId;
 
     // 这个就是代表了一毫秒内生成的多个id的最新序号
     private long sequence;
+
+    private long twepoch = 1288834974657L;
+    private long workerIdBits = 5L;
+    private long dataCenterIdBits = 5L;
+
+    // 这个是二进制运算，就是5 bit最多只能有31个数字，也就是说机器id最多只能是32以内
+    private long maxWorkerId = -1L ^ (-1L << workerIdBits);
+    // 这个是一个意思，就是5 bit最多只能有31个数字，机房id最多只能是32以内
+    private long maxDataCenterId = -1L ^ (-1L << dataCenterIdBits);
+    private final long sequenceBits = 12L;
+    private final long workerIdShift = sequenceBits;
+    private final long dataCenterIdShift = sequenceBits + workerIdBits;
+    private final long timestampLeftShift = sequenceBits + workerIdBits + dataCenterIdBits;
+    private final long sequenceMask = -1L ^ (-1L << sequenceBits);
+    private long lastTimestamp = -1L;
+
 
     public IdWorker(long workerId, long dataCenterId, long sequence) {
         // sanity check for workerId
@@ -31,21 +47,6 @@ public class IdWorker {
         this.dataCenterId = dataCenterId;
         this.sequence = sequence;
     }
-
-    private long twepoch = 1288834974657L;
-    private long workerIdBits = 5L;
-    private long dataCenterIdBits = 5L;
-
-    // 这个是二进制运算，就是5 bit最多只能有31个数字，也就是说机器id最多只能是32以内
-    private long maxWorkerId = -1L ^ (-1L << workerIdBits);
-    // 这个是一个意思，就是5 bit最多只能有31个数字，机房id最多只能是32以内
-    private long maxDataCenterId = -1L ^ (-1L << dataCenterIdBits);
-    private long sequenceBits = 12L;
-    private long workerIdShift = sequenceBits;
-    private long dataCenterIdShift = sequenceBits + workerIdBits;
-    private long timestampLeftShift = sequenceBits + workerIdBits + dataCenterIdBits;
-    private long sequenceMask = -1L ^ (-1L << sequenceBits);
-    private long lastTimestamp = -1L;
 
     public long getWorkerId() {
         return workerId;

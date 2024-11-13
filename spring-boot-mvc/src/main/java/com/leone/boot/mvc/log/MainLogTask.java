@@ -2,7 +2,7 @@ package com.leone.boot.mvc.log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leone.boot.common.utils.RandomValue;
+import com.leone.boot.common.util.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
@@ -19,7 +19,7 @@ import java.util.Random;
  * @author leone
  * @since 2018-06-12
  **/
-@Component
+//@Component
 public class MainLogTask {
 
     private static final Logger JSON_LOG = LoggerFactory.getLogger("json-log");
@@ -54,7 +54,7 @@ public class MainLogTask {
     @Async
     //@Scheduled(fixedDelay = 10)
     public void jsonLogTask() throws JsonProcessingException {
-        JSON_LOG.info(objectMapper.writeValueAsString(RandomValue.randomUser()));
+        JSON_LOG.info(objectMapper.writeValueAsString(RandomUtils.randomUser()));
     }
 
     /**
@@ -73,7 +73,7 @@ public class MainLogTask {
     @Async
     //@Scheduled(fixedRate = 20)
     public void accessLogTask() {
-        COMMON_LOG.info(System.currentTimeMillis() + "\t" + RandomValue.randomMac() + "\t" + RandomValue.randomTel() + "\t" + RandomValue.randomUrl() + "\t" + RandomValue.randomDriver() + "\t" + RandomValue.randomIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
+        COMMON_LOG.info(System.currentTimeMillis() + "\t" + RandomUtils.randomMac() + "\t" + RandomUtils.randomTel() + "\t" + RandomUtils.randomUrl() + "\t" + RandomUtils.randomDriver() + "\t" + RandomUtils.randomIp() + "\t" + RANDOM.nextInt(100) + "\t" + RANDOM.nextInt(5000));
     }
 
 

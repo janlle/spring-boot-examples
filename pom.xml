@@ -27,7 +27,6 @@
         <module>spring-boot-data</module>
         <module>spring-boot-custom-starter</module>
         <module>spring-boot-jobs</module>
-        <module>spring-boot-swagger</module>
         <module>spring-boot-aop</module>
         <module>spring-boot-jvm</module>
         <module>spring-boot-batch</module>
@@ -42,7 +41,6 @@
         <module>spring-boot-dubbo-provider</module>
         <module>spring-boot-dubbo-consumer</module>
         <module>spring-boot-dubbo-api</module>
-        <module>spring-boot-layui</module>
         <module>spring-boot-learn</module>
         <module>spring-boot-mybatis-plus</module>
         <module>spring-boot-elk</module>

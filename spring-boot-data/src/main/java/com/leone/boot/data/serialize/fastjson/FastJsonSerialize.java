@@ -3,7 +3,7 @@ package com.leone.boot.data.serialize.fastjson;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.leone.boot.common.entity.User;
-import com.leone.boot.common.utils.EntityFactory;
+import com.leone.boot.common.util.EntityFactory;
 
 
 import java.util.List;

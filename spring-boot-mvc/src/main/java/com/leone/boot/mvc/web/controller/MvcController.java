@@ -42,4 +42,14 @@ public class MvcController {
         return subject.getPrincipal().toString();
     }
 
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/form")
+    public String form() {
+        return "simple_form";
+    }
+
 }

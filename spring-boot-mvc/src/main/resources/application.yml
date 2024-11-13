@@ -1,6 +1,11 @@
 server:
   port: 8081
 
+
+spring:
+  profiles:
+    include: mail,session
+
 customer:
   msg: jack
   property:
@@ -20,4 +25,22 @@ module:
       - /api/sign/test
     authUrls: /**
 
+
+
+#swagger:
+#  butler:
+#    resources[0]:
+#      name: service-a
+#      url: /service-a/v2/api-docs
+#      swagger-version: 2.0
+#    resources[1]:
+#      name: service-b
+#      url: /service-b/v2/api-docs
+#      swagger-version: 2.0
+#  show: true
+
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
 

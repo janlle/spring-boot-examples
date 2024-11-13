@@ -17,9 +17,10 @@ import java.util.List;
  * @author leone
  * @since 2018-05-17
  **/
+//@EnableOpenApi
 //@EnableRedisHttpSession
-@EnableScheduling
-@ServletComponentScan
+//@EnableScheduling
+//@ServletComponentScan
 @SpringBootApplication
 public class MvcApplication {
     public static void main(String[] args) {

@@ -3,7 +3,7 @@ package com.leone.boot.data.serialize.jackson;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leone.boot.common.entity.User;
-import com.leone.boot.common.utils.EntityFactory;
+import com.leone.boot.common.util.EntityFactory;
 
 
 import java.io.IOException;

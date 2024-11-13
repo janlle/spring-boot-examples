@@ -3,7 +3,7 @@ package com.leone.boot.aop.service;
 import com.leone.boot.aop.anno.SystemLogAnno;
 import com.leone.boot.aop.interf.UserService;
 import com.leone.boot.common.entity.User;
-import com.leone.boot.common.utils.EntityFactory;
+import com.leone.boot.common.util.EntityFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

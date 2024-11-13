@@ -1,7 +1,7 @@
 package com.leone.boot.data.serialize.jsonlib;
 
 import com.leone.boot.common.entity.User;
-import com.leone.boot.common.utils.EntityFactory;
+import com.leone.boot.common.util.EntityFactory;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

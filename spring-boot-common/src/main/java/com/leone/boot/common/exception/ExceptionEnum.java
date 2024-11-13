@@ -3,7 +3,7 @@ package com.leone.boot.common.exception;
 /**
  * @author leone
  **/
-public enum ExceptionMessage {
+public enum ExceptionEnum {
 
     PERMISSION_DENIED(40001, "权限不足"),
     AUTH_TOKEN(40010, "auth.token.wrong"),
@@ -27,12 +27,12 @@ public enum ExceptionMessage {
 
     private String message;
 
-    ExceptionMessage(Integer code, String message) {
+    ExceptionEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    ExceptionMessage() {
+    ExceptionEnum() {
     }
 
     public Integer getCode() {

@@ -1,6 +1,6 @@
 package com.leone.boot.data.serialize.java;
 
-import com.leone.boot.common.utils.EntityFactory;
+import com.leone.boot.common.util.EntityFactory;
 
 import java.io.*;
 

@@ -1,7 +1,7 @@
 package com.leone.boot.mq.kafka;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leone.boot.common.utils.RandomValue;
+import com.leone.boot.common.util.RandomUtils;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class KafkaSender {
     public String send(String topic, Integer count) throws Exception {
         for (int i = 0; i < count; i++) {
             // Message<Map> message = new Message<>(offset, RandomValue.randomUser(), new Date());
-            String message = RandomValue.randomMessage();
+            String message = RandomUtils.randomMessage();
             offset++;
             CompletableFuture<SendResult<String, Object>> send = kafkaTemplate.send(topic, message);
             Thread.sleep(10);

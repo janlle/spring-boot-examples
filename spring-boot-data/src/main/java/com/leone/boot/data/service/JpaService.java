@@ -1,7 +1,7 @@
 package com.leone.boot.data.service;
 
 import com.leone.boot.common.entity.User;
-import com.leone.boot.common.utils.EntityFactory;
+import com.leone.boot.common.util.EntityFactory;
 import com.leone.boot.data.repository.jpa.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
