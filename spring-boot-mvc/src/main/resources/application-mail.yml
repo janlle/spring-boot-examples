@@ -11,8 +11,7 @@ spring:
             enabled: true
             required: true
     default-encoding: UTF-8
-
-# thymeleaf 配置
+  # thymeleaf 配置
   thymeleaf:
     cache: false
     prefix: classpath:/templates/thymeleaf
@@ -21,6 +20,7 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
+
 # freemarker配置
 #  freemarker:
 #    template-loader-path: classpath:/templates/freemarker/
