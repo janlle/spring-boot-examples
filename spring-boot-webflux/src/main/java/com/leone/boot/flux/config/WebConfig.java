@@ -1,6 +1,6 @@
 package com.leone.boot.flux.config;
 
-import com.leone.boot.common.aop.StopWatch;
+import com.leone.boot.common.aop.WatchAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -42,8 +42,8 @@ public class WebConfig extends WebFluxConfigurationSupport {
     }
 
     @Bean
-    public StopWatch stopWatch() {
-        return new StopWatch();
+    public WatchAspect stopWatch() {
+        return new WatchAspect();
     }
 
 }

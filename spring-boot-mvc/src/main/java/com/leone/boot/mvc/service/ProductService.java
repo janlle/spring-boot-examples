@@ -1,6 +1,6 @@
 package com.leone.boot.mvc.service;
 
-import com.leone.boot.mvc.anno.CustomerAnnotation;
+import com.leone.boot.mvc.aop.CustomerAnnotation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

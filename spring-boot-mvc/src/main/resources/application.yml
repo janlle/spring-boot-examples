@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    include: mail,session
+    include: mail,session,db,redis
 
 customer:
   msg: jack

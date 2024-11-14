@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * @author leone
  **/
-@Configuration
+//@Configuration
 public class ShiroConfig {
 
     private final Logger logger = LoggerFactory.getLogger(ShiroConfig.class);

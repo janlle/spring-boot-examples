@@ -17,7 +17,7 @@ import java.security.SecureRandom;
 /**
  * @author leone
  **/
-@Component
+//@Component
 public class TokenUtil {
 
     private TokenUtil() {

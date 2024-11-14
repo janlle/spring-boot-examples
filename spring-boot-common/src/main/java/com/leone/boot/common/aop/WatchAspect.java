@@ -7,7 +7,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -16,9 +15,9 @@ import org.springframework.stereotype.Component;
  * @since 2019-05-24
  **/
 @Aspect
-public class StopWatch {
+public class WatchAspect {
 
-    private final Logger log = LoggerFactory.getLogger(StopWatch.class);
+    private final Logger log = LoggerFactory.getLogger(WatchAspect.class);
 
     @Around("@annotation(com.leone.boot.common.aop.Watch)")
     public Object around(ProceedingJoinPoint point) {

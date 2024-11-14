@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author leone
  **/
-@Service
+//@Service
 public class ShiroTokenService {
 
     private final Logger logger = LoggerFactory.getLogger(ShiroTokenService.class);

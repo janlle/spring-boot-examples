@@ -19,11 +19,7 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api")
 public class MvcController {
 
-    private final String TARGET_HOST = "http://localhost:8080";
-
-    private RestTemplate restTemplate;
-
-    @Autowired
+    //@Autowired
     private ShiroTokenService shiroTokenService;
 
     @GetMapping("/login")
