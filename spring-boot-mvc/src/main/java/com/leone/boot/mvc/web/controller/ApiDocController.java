@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/example")
 @Tag(name = "示例接口", description = "提供示例内容展示SpringDoc集成效果")
-public class ExampleController {
+public class ApiDocController {
 
     @GetMapping("/test01")
     @Operation(summary = "无参查询接口", description = "hello")

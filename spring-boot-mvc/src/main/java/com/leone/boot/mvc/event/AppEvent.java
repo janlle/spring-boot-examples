@@ -21,7 +21,6 @@ public class AppEvent extends ApplicationEvent {
         super(source);
     }
 
-    //get set
     public String getMsg() {
         return msg;
     }

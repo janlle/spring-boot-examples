@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Random;
+
 /**
  * <p>
  *
@@ -26,16 +28,15 @@ public class LockController {
     private RedisTemplate<String, Integer> redisTemplate;
 
     private static final String databaseKey = "product.count";
+    private static final Random random = new Random();
 
     @DistributeLock(scene = "goods", keyExpression = "#count", key = "lock")
     @GetMapping("/reduce")
     public String reduce() throws Exception {
         Integer count = redisTemplate.opsForValue().get(databaseKey);
         if (count != null) {
-            if (count > 0) {
-                Thread.sleep(10000);
-                redisTemplate.opsForValue().set(databaseKey, --count);
-            }
+            Thread.sleep(random.nextInt(Math.abs(2)));
+            redisTemplate.opsForValue().set(databaseKey, --count);
         }
         return "success";
     }

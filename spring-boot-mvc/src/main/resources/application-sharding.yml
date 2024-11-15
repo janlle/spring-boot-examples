@@ -11,9 +11,9 @@ spring:
       ds:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        url: ${nft.turbo.mysql.url}
-        username: ${nft.turbo.mysql.username}
-        password: ${nft.turbo.mysql.password}
+        url: jdbc:mysql://localhost:3306/db1?useSSL=false
+        username: root
+        password: 123456
         # Druid连接池配置
         datasource.druid:
           initial-size: 5 # 连接池初始化时创建的连接数。默认值为0。
