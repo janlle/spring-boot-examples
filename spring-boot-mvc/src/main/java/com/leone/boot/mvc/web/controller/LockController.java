@@ -25,7 +25,7 @@ import java.util.Random;
 public class LockController {
 
     @Autowired
-    private RedisTemplate<String, Integer> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     private static final String databaseKey = "product.count";
     private static final Random random = new Random();
@@ -33,8 +33,9 @@ public class LockController {
     @DistributeLock(scene = "goods", keyExpression = "#count", key = "lock")
     @GetMapping("/reduce")
     public String reduce() throws Exception {
-        Integer count = redisTemplate.opsForValue().get(databaseKey);
-        if (count != null) {
+        Object v = redisTemplate.opsForValue().get(databaseKey);
+        if (v != null) {
+            int count = Integer.parseInt(v.toString());
             Thread.sleep(random.nextInt(Math.abs(2)));
             redisTemplate.opsForValue().set(databaseKey, --count);
         }

@@ -7,4 +7,19 @@ dubbo:
     name: dubbo
     port: 12345
   registry:
-    address: zookeeper://127.0.0.1:2181
+    # address: zookeeper://127.0.0.1:2181
+    address: nacos://127.0.0.1:8848
+
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+        username: nacos
+        password: nacos
+      config:
+        server-addr: http://localhost:8848
+        file-extension: properties
+        username: nacos
+        password: nacos

@@ -8,10 +8,11 @@ spring:
       sql-show: true
     datasource:
       names: ds
+      # 支持读写分离模式
       ds:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/db1?useSSL=false
+        url: jdbc:mysql://localhost:3306/nfturbo?useSSL=false
         username: root
         password: 123456
         # Druid连接池配置
@@ -28,6 +29,42 @@ spring:
           test-on-return: false # 是否在归还连接到连接池时检测连接的有效性。如果设置为true，连接在归还到连接池时会进行有效性检测。默认为false。
           pool-prepared-statements: true # 是否开启预处理语句池。预处理语句池可以提高性能，特别是在执行相同SQL语句多次时。默认为true。
           max-pool-prepared-statement-per-connection-size: 20 #每个连接上允许的最大预处理语句数。默认值为20。
+    # 分库分表配置
+    rules:
+      sharding:
+        tables:
+          trade_order:
+            actual-data-nodes: ds.trade_order_000${0..3}
+            keyGenerateStrategy:
+              column: id
+              keyGeneratorName: snowflake
+            table-strategy:
+              complex:
+                shardingColumns: buyer_id,order_id
+                shardingAlgorithmName: trade-order-sharding
+          trade_order_stream:
+            actual-data-nodes: ds.trade_order_stream_000${0..3}
+            keyGenerateStrategy:
+              column: id
+              keyGeneratorName: snowflake
+            table-strategy:
+              complex:
+                shardingColumns: buyer_id,order_id
+                shardingAlgorithmName: trade-order-sharding
+        shardingAlgorithms:
+          trade-order-sharding:
+            type: CLASS_BASED
+            props:
+              algorithmClassName: cn.hollis.nft.turbo.order.infrastructure.sharding.algorithm.TurboKeyShardingAlgorithm
+              strategy: complex
+              tableCount: 4
+              mainColum: buyer_id
+        keyGenerators:
+          snowflake:
+            type: SNOWFLAKE
+        auditors:
+          sharding_key_required_auditor:
+            type: DML_SHARDING_CONDITIONS
 
 
 # MyBatis配置

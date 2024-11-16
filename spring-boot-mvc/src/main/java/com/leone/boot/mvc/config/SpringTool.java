@@ -25,8 +25,19 @@ public class SpringTool implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         log.info("setApplicationContext...");
-        context = applicationContext;
-        Map<String, Object> beans = applicationContext.getBeansWithAnnotation(CustomerAnnotation.class);
+        SpringTool.context = applicationContext;
+    }
+
+    public static Object getBean(String name) {
+        return context.getBean(name);
+    }
+
+    public static <T> T getBean(Class<T> name) {
+        return context.getBean(name);
+    }
+
+    public static void getBeanByAnnotation(Class<?> anno) {
+        Map<String, Object> beans = context.getBeansWithAnnotation(CustomerAnnotation.class);
         for (Object object : beans.values()) {
             try {
                 String value = object.getClass().getAnnotation(CustomerAnnotation.class).value();
@@ -35,13 +46,9 @@ public class SpringTool implements ApplicationContextAware {
                 Object invoke = method.invoke(object);
                 log.info("result: {}", invoke);
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
-    }
-
-    public static ApplicationContext getApplicationContext() {
-        return context;
     }
 
 }

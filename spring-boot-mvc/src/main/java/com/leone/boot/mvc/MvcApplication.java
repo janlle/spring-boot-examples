@@ -20,7 +20,7 @@ import java.util.List;
 //@EnableOpenApi
 //@EnableRedisHttpSession
 //@EnableScheduling
-//@ServletComponentScan
+@ServletComponentScan
 @SpringBootApplication
 public class MvcApplication {
     public static void main(String[] args) {

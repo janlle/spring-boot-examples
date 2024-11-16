@@ -1,19 +1,14 @@
 package com.leone.boot.mvc.web.controller;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.*;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
-import com.leone.boot.common.Result;
-import com.leone.boot.mvc.shiro.service.ShiroTokenService;
-import com.leone.boot.mvc.shiro.service.UserHelper;
-import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
  * <p> Sa token 测试控制器
@@ -21,36 +16,70 @@ import org.springframework.web.client.RestTemplate;
  * @author leone
  * @since 2024-11-13
  **/
-@RestController("/sa")
+@RestController
+@RequestMapping("/sa")
 public class SaTokenController {
+
+    // 此接口加上了 @SaIgnore 可以游客访问
+    @SaIgnore
+    @RequestMapping("/over-view")
+    public SaResult overView() {
+        return SaResult.ok();
+    }
+
+
+    @RequestMapping("/login")
+    public SaResult login(@RequestParam("name") String name, @RequestParam("pwd") String pwd) {
+        if ("james".equals(name) && "123456".equals(pwd)) {
+            StpUtil.login(10001);
+            List<String> list = StpUtil.getPermissionList();
+            list.addAll(StpUtil.getRoleList());
+
+            return SaResult.data(list);
+        }
+        return SaResult.error("登录失败");
+    }
 
     /**
      * 访问 home 页，登录后才能访问
      */
     @SaCheckLogin
     @GetMapping("/home")
-    public Result<Object> test() {
-        return Result.success(null);
-    }
-
-    @RequestMapping("login")
-    public SaResult login(String name, String pwd) {
-        if ("james".equals(name) && "123456".equals(pwd)) {
-            StpUtil.login(10001);
-            return SaResult.ok("登录成功");
-        }
-        return SaResult.error("登录失败");
+    public SaResult home() {
+        return SaResult.error("home 页面");
     }
 
     @GetMapping("/logout")
-    public Result<Object> logout(String userId) {
-        return Result.success(null);
+    public SaResult logout() {
+        StpUtil.logout(10001);
+        return SaResult.ok("登出成功");
     }
 
+    // 通过Basic认证后才可以进入 http://localhost:8080/check-basic
+    @SaCheckHttpBasic(account = "james:123456")
+    @GetMapping("/check-basic")
+    public SaResult checkBasic() {
+        return SaResult.ok();
+    }
+
+    // 在当前会话完成二级认证 http://localhost:8080/open-safe
+    @RequestMapping("/open-safe")
+    public SaResult openSafe() {
+        // 打开二级认证，有效期为200秒
+        StpUtil.openSafe(200);
+        return SaResult.ok();
+    }
+
+    // 通过二级认证后，才可以进入 http://localhost:8081/at/checkSafe
+    @SaCheckSafe
+    @RequestMapping("/check-safe")
+    public SaResult checkSafe() {
+        return SaResult.ok();
+    }
 
     /*
      * 前提1：首先调用登录接口进行登录
-     * http://localhost:8081/doLogin?name=james&pwd=123456
+     * http://localhost:8080/login?name=james&pwd=123456
      *
      * 前提2：项目在配置类中注册拦截器 SaInterceptor ，此拦截器将打开注解鉴权功能
      *
@@ -59,20 +88,18 @@ public class SaTokenController {
      * 然后我们就可以使用以下示例中的代码进行注解鉴权了
      */
 
-    // 权限校验 http://localhost:8081/at-check/checkPermission
-    // 只有具有 user.add 权限的账号才可以进入方法
-    @SaCheckPermission("user.add")
-    @RequestMapping("checkPermission")
-    public SaResult checkPermission() {
-        return SaResult.ok();
+    // 只要具有其中一个权限即可通过校验
+    @RequestMapping("/user-add")
+    @SaCheckPermission(value = {"user.add", "user.del"}, mode = SaMode.OR)
+    public SaResult userAdd() {
+        return SaResult.data("添加成功");
     }
 
-    // 角色校验 http://localhost:8081/at-check/checkRole
-    //只有具有 super-admin 角色的账号才可以进入方法
-    @SaCheckRole("super-admin")
-    @RequestMapping("checkRole")
-    public SaResult checkRole() {
-        return SaResult.ok();
+    // 角色权限双重 or校验：具备指定权限或者指定角色即可通过校验
+    @RequestMapping("/user-del")
+    @SaCheckPermission(value = "user.del", orRole = "admin")
+    public SaResult userDel() {
+        return SaResult.data("删除成功");
     }
 
 
