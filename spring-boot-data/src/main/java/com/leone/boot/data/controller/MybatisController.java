@@ -1,8 +1,10 @@
 package com.leone.boot.data.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.leone.boot.common.entity.User;
-import com.leone.boot.data.repository.mybatis.UserMapper;
+import com.leone.boot.data.mybatis.mapper.UserMapper;
 import com.leone.boot.data.service.UserService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,5 +58,63 @@ public class MybatisController {
         long time = userService.mybatisInsertForeach(count);
         return "foreach insert " + count + " expenditure:" + time + " ms!";
     }
+
+
+    //@PostMapping
+    //public int insert(@RequestBody User user) {
+    //    return userService.insert(user);
+    //}
+    //
+    //@PostMapping("/batch")
+    //public int insertBatch(@RequestBody List<User> user) {
+    //    return userService.insertBatch(user);
+    //}
+    //
+    //@DeleteMapping
+    //public int deleteById(@RequestParam Long userId) {
+    //    return userService.delete(userId);
+    //}
+    //
+    //@DeleteMapping("/batch")
+    //public int deleteByIds(@RequestParam List<Long> userIds) {
+    //    return userService.deleteByIds(userIds);
+    //}
+    //
+    //@GetMapping("/page")
+    //public PageInfo<User> page(@RequestParam Integer page, @RequestParam Integer size) {
+    //    return userService.page(page, size);
+    //}
+    //
+    //@GetMapping("/list")
+    //public List<User> list() {
+    //    return userService.list();
+    //}
+    //
+    //@GetMapping("/{userId}")
+    //public User findOne(@PathVariable("userId") Long userId) {
+    //    return userService.findOne(userId);
+    //}
+    //
+    //@PutMapping
+    //public int update(@RequestBody User user) {
+    //    return userService.update(user);
+    //}
+    //
+    //@PutMapping("/batch")
+    //public int updateBatch(@RequestBody List<User> users) {
+    //    return userService.updateBatch(users);
+    //}
+    //
+    //
+    //@PostMapping("/insert-user")
+    //public int insertUser(@RequestBody User user) {
+    //    System.out.println(user);
+    //    return userService.insert(user);
+    //}
+    //
+    //@GetMapping("/find-user")
+    //public User findUser(@RequestParam String name) {
+    //    return userService.selectByName(name);
+    //}
 
 }

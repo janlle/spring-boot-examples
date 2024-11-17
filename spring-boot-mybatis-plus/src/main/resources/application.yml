@@ -1,7 +1,7 @@
 # spring-boot 连接 mysql 配置
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db01?useSSL=false&characterEncoding=utf8
     username: root
     password:

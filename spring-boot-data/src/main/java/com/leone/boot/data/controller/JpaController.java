@@ -1,7 +1,7 @@
 package com.leone.boot.data.controller;
 
 import com.leone.boot.common.entity.User;
-import com.leone.boot.data.repository.jpa.UserRepository;
+import com.leone.boot.data.repository.UserRepository;
 import com.leone.boot.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

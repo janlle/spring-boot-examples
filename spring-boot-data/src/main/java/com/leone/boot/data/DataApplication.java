@@ -11,7 +11,7 @@ import org.springframework.cache.annotation.EnableCaching;
  **/
 @EnableCaching
 @SpringBootApplication
-@MapperScan("com.andy.data.repository.mybatis")
+@MapperScan("com.leone.boot.data.mybatis.mapper")
 public class DataApplication {
     public static void main(String[] args) {
         SpringApplication.run(DataApplication.class, args);

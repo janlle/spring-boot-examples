@@ -1,9 +1,15 @@
 package com.leone.boot.data.service;
 
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.*;
+import co.elastic.clients.transport.endpoints.BooleanResponse;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.util.EntityFactory;
-import com.leone.boot.data.repository.jpa.UserRepository;
-import com.leone.boot.data.repository.mybatis.UserMapper;
+import com.leone.boot.data.repository.UserRepository;
+import com.leone.boot.data.mybatis.mapper.UserMapper;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -14,11 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,24 +38,26 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ElasticsearchClient elasticsearchClient;
 
     @Autowired
     private UserMapper userMapper;
 
+    private static final String USER_INDEX = "user";
 
-    public List<User> getUsers() {
+
+    // ----------------------------------- jpa --------------------------------------------
+    public List<User> jpaGetUsers() {
         return userRepository.findAll();
     }
 
-    public User getUser(Long userId) {
+    public User jpaGetUser(Long userId) {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public User update(User user) {
-        return userRepository.save(user);
-    }
 
-    public void delete(Long userId) {
+    public void jpaDelete(Long userId) {
         userRepository.deleteById(userId);
     }
 
@@ -99,6 +105,96 @@ public class UserService {
         return 0;
     }
 
+    // --------------------------------------- mybatis ---------------------------------------
+
+    /**
+     * 插入
+     *
+     * @param user 用户实体
+     * @return 改变的条数
+     */
+    public int insert(User user) {
+        return userMapper.insert(user);
+    }
+
+    /**
+     * 批量插入
+     *
+     * @param user 用户实体
+     * @return 改变的条数
+     */
+    public int insertBatch(List<User> user) {
+        return userMapper.insertBatch(user);
+    }
+
+
+    /**
+     * 更新
+     *
+     * @param user 用户实体
+     * @return 改变的条数
+     */
+    public int update(User user) {
+        return userMapper.updateById(user);
+    }
+
+
+    /**
+     * 分页
+     *
+     * @param page 起始页码
+     * @param size 每页大小
+     * @return 分页对象
+     */
+    public PageInfo<User> page(Integer page, Integer size) {
+        PageHelper.startPage(page, size);
+        List<User> userList = userMapper.findAll();
+        return new PageInfo<>(userList);
+    }
+
+
+    /**
+     * 根据主键删除
+     *
+     * @param userId 用户id
+     */
+    public int delete(Long userId) {
+        return userMapper.deleteById(userId);
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param userIds 用户id列表
+     */
+    public int deleteByIds(List<Long> userIds) {
+        return userMapper.deleteByUserIds(userIds);
+    }
+
+
+    /**
+     * 根据用户id查询
+     *
+     * @param userId 用户id
+     * @return 用户实体
+     */
+    public User findOne(Long userId) {
+        return userMapper.findByUserId(userId);
+    }
+
+    /**
+     * 查询所有
+     *
+     * @return 用户list
+     */
+    public List<User> list() {
+        return userMapper.findAll();
+    }
+
+    public User selectByName(String name) {
+        return userMapper.selectByName(name);
+    }
+
 
     public long mybatisInsertBatch(Integer count) {
         if (count < 1000) {
@@ -132,5 +228,109 @@ public class UserService {
         int i = 100 / 0;
         return 0;
     }
+
+    // -------------------------------- es ------------------------------------
+
+    public String esInsert(User user) throws Exception {
+        // 新增
+        CreateResponse createResponse = elasticsearchClient.create(c -> c
+          .index(USER_INDEX)                // 索引名字
+          .id(user.getUserId().toString())  // id
+          .document(user)                   // 实体类
+        );
+        return createResponse.toString();
+    }
+
+    public String esBatchInsert(List<User> list) throws Exception {
+        // 批量插入
+        BulkRequest.Builder br = new BulkRequest.Builder();
+
+        for (User user : list) {
+            br.operations(op -> op
+              .create(c -> c
+                .index(USER_INDEX)
+                .id(user.getUserId().toString())
+                .document(user)
+              )
+            );
+        }
+
+        BulkResponse bulkResponse = elasticsearchClient.bulk(br.build());
+        return bulkResponse.toString();
+    }
+
+
+    public String esUpdate(User user) throws Exception {
+        // 修改
+        UpdateResponse<User> updateResponse = elasticsearchClient.update(u -> u
+            .index(USER_INDEX)
+            .id(user.getUserId().toString())
+            .doc(user),
+          User.class
+        );
+        return updateResponse.toString();
+    }
+
+    public String esDelete(User user) throws Exception {
+        // 删除
+        DeleteResponse deleteResponse = elasticsearchClient
+          .delete(d -> d.index(USER_INDEX)
+            .id(user.getUserId().toString()));
+        return deleteResponse.toString();
+    }
+
+
+    public String selectById(User user) throws Exception {
+        // 定义实体类
+        GetResponse<User> getResponse = elasticsearchClient.get(g -> g.index(USER_INDEX).id("1"), User.class);
+
+        if (getResponse.found()) {
+            // 这就是得到的实体类
+            User source = getResponse.source();
+        }
+
+        // 不定义实体类
+        GetResponse<ObjectNode> getResp = elasticsearchClient.get(g -> g
+            .index(USER_INDEX)
+            .id("1"),
+          ObjectNode.class
+        );
+        if (getResp.found()) {
+            ObjectNode json = getResp.source();
+            String firstname = json.get("account").asText();
+            System.out.println(firstname);
+        }
+        return getResp.toString();
+    }
+
+
+    public long createIndex(Integer count) throws Exception {
+        // 索引是否存在
+        BooleanResponse books = elasticsearchClient.indices().exists(e -> e.index(USER_INDEX));
+        System.out.println("索引是否存在：" + books.value());
+        if (books.value()) {
+            // 删除索引
+            elasticsearchClient.indices().delete(d -> d.index(USER_INDEX));
+        }
+
+        // 创建索引
+        elasticsearchClient.indices().create(c -> c
+          .index(USER_INDEX)
+          .mappings(mappings -> mappings
+            .properties("account", p -> p
+              .text(t -> t
+                // text类型，index=false
+                .index(false)
+              )
+            )
+            .properties("age", p -> p
+              // long类型
+              .long_(t -> t)
+            )
+          )
+        );
+        return count;
+    }
+
 
 }

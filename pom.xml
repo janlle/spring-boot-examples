@@ -34,7 +34,6 @@
         <module>spring-boot-aop</module>
         <module>spring-boot-jvm</module>
         <module>spring-boot-batch</module>
-        <module>spring-boot-mybatis</module>
         <module>spring-boot-cache</module>
         <module>spring-boot-jpa</module>
         <module>spring-boot-common</module>
@@ -46,7 +45,6 @@
         <module>spring-boot-dubbo-api</module>
         <module>spring-boot-learn</module>
         <module>spring-boot-mybatis-plus</module>
-        <module>spring-boot-elk</module>
         <module>spring-boot-sharding-jdbc</module>
     </modules>
 

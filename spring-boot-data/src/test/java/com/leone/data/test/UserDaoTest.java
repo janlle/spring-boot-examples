@@ -2,13 +2,12 @@ package com.leone.data.test;
 
 import com.leone.boot.common.entity.User;
 import com.leone.boot.data.DataApplication;
-import com.leone.boot.data.repository.jpa.UserRepository;
+import com.leone.boot.data.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author leone
