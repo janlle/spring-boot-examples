@@ -2,7 +2,7 @@ package com.leone.boot.data.controller;
 
 import com.leone.boot.common.entity.User;
 import com.leone.boot.data.repository.mybatis.UserMapper;
-import com.leone.boot.data.service.MybatisService;
+import com.leone.boot.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +20,11 @@ public class MybatisController {
     private UserMapper userMapper;
 
     @Autowired
-    private MybatisService myBatisService;
+    private UserService userService;
 
     @PutMapping("/update")
     public String update(@RequestBody User user) {
-        long result = myBatisService.update(user);
+        long result = userService.mybatisUpdate(user);
         return "update one time:" + result + " ms!";
     }
 
@@ -47,13 +47,13 @@ public class MybatisController {
 
     @GetMapping("/batchInsert")
     public String insertList(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = myBatisService.insertBatch(count);
+        long time = userService.mybatisInsertForeach(count);
         return "batch insert " + count + " expenditure:" + time + " ms!";
     }
 
     @GetMapping("/foreachInsert")
     public String insertForeach(@RequestParam(required = false, defaultValue = "1") Integer count) {
-        long time = myBatisService.insertForeach(count);
+        long time = userService.mybatisInsertForeach(count);
         return "foreach insert " + count + " expenditure:" + time + " ms!";
     }
 
