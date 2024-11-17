@@ -3,25 +3,32 @@ server:
 dubbo:
   application:
     name: consumer
-#    qosEnable: true
-#    qosPort: 33333
-#    qosAcceptForeignIp: false
+    qos-enable: true
+    qos-accept-foreign-ip: false
+  consumer:
+    check: false
+    timeout: 3000
+  protocol:
+    name: dubbo
+    port: -1
   registry:
-    # address: zookeeper://127.0.0.1:2181
-    address: nacos://localhost:8848
+    #address: nacos://cloud.rm:8828
+    address: nacos://192.168.1.8:8848
     username: nacos
     password: nacos
+    parameters:
+      namespace: 9213ea6c-a259-4251-9767-b12d1e8fe1a3
+      group: spring-boot
 
-
-spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: http://localhost:8848
-        username: nacos
-        password: nacos
-      config:
-        server-addr: http://localhost:8848
-        file-extension: properties
-        username: nacos
-        password: nacos
+#spring:
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: http://localhost:8848
+#        username: nacos
+#        password: nacos
+#      config:
+#        server-addr: http://localhost:8848
+#        file-extension: properties
+#        username: nacos
+#        password: nacos

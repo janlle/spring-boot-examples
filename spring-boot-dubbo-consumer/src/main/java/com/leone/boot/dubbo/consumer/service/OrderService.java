@@ -20,7 +20,7 @@ import java.util.Map;
 @Component
 public class OrderService {
 
-    @DubboReference(url = "dubbo://127.0.0.1:12345")
+    @DubboReference
     private UserService userService;
 
     /**

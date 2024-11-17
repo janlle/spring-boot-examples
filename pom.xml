@@ -15,6 +15,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <java.version>17</java.version>
+        <spring-boot.version>3.3.5</spring-boot.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.1.2</spring-cloud-alibaba.version>
+        <dubbo.version>3.2.10</dubbo.version>
     </properties>
 
     <modules>
@@ -31,7 +35,7 @@
         <module>spring-boot-jvm</module>
         <module>spring-boot-batch</module>
         <module>spring-boot-mybatis</module>
-        <module>spring-boot-redis</module>
+        <module>spring-boot-cache</module>
         <module>spring-boot-mongodb</module>
         <module>spring-boot-jpa</module>
         <module>spring-boot-common</module>

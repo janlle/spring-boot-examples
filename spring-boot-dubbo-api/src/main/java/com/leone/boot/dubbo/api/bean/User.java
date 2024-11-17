@@ -1,5 +1,6 @@
 package com.leone.boot.dubbo.api.bean;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  **/
 public class User implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -8654229598582165411L;
 
     private Long userId;
