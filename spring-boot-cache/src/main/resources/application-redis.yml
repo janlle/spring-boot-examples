@@ -1,0 +1,21 @@
+spring:
+  data:
+    redis:
+      database: 0
+      host: cloud.rm
+      port: 3690
+      username: default
+      password: "4$-c#7be@d$8G06"
+      ssl:
+        enabled: true
+  redis:
+    redisson:
+      file: classpath:redisson.yml
+
+redisson:
+  # 自定义配置
+  lock:
+    key: lock
+
+redis:
+  prefix: app

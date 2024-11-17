@@ -1,4 +1,4 @@
-package com.leone.boot.redis.service;
+package com.leone.boot.cache.redis;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

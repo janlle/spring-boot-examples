@@ -1,4 +1,4 @@
-package com.leone.boot.redis.service;
+package com.leone.boot.cache.redis;
 
 public class Receiver {
 

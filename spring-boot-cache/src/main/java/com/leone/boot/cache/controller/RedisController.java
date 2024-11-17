@@ -1,15 +1,13 @@
-package com.leone.boot.redis.controller;
+package com.leone.boot.cache.controller;
 
-import com.leone.boot.redis.service.RedisCacheService;
-import com.leone.boot.redis.service.RedisService;
-import org.springframework.data.redis.core.RedisTemplate;
+import com.leone.boot.cache.redis.RedisCacheService;
+import com.leone.boot.cache.redis.RedisService;
+import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.annotation.Resource;
 
 /**
  * @author leone

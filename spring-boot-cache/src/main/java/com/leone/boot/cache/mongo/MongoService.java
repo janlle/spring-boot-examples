@@ -1,14 +1,14 @@
-package com.leone.boot.mongodb.service;
+package com.leone.boot.cache.mongo;
 
-import com.leone.boot.mongodb.entity.User;
+import com.leone.boot.common.entity.User;
 import com.mongodb.client.result.UpdateResult;
+import jakarta.annotation.Resource;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.Resource;
 import java.util.List;
 
 /**

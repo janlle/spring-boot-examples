@@ -1,10 +1,10 @@
-package com.leone.boot.mongodb.controller;
+package com.leone.boot.cache.controller;
 
-import com.leone.boot.mongodb.entity.User;
-import com.leone.boot.mongodb.service.MongoService;
+import com.leone.boot.cache.mongo.MongoService;
+import com.leone.boot.common.entity.User;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.annotation.Resource;
 import java.util.List;
 
 /**

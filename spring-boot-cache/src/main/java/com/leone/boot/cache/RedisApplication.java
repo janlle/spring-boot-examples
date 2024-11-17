@@ -1,4 +1,4 @@
-package com.leone.boot.redis;
+package com.leone.boot.cache;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

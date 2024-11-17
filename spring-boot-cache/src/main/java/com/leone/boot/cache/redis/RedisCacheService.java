@@ -1,4 +1,4 @@
-package com.leone.boot.redis.service;
+package com.leone.boot.cache.redis;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

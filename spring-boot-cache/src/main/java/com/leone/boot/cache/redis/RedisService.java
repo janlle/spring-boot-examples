@@ -1,16 +1,17 @@
-package com.leone.boot.redis.service;
+package com.leone.boot.cache.redis;
 
 
 import com.leone.boot.common.util.EntityFactory;
 import com.leone.boot.common.util.RandomUtils;
-import com.leone.boot.redis.config.RedisPrefix;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Range;
 import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +29,9 @@ public class RedisService {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Value("${redis.prefix}")
+    private String redisPrefix;
+
     /**
      * 相当于队列操作
      *
@@ -36,7 +40,7 @@ public class RedisService {
     public long list(int count) {
         log.info("list:{}", count);
         for (int i = 0; i < count; i++) {
-            String key = RedisPrefix.userCatch("list"), value = RandomUtils.randomUUID();
+            String key = RedisConfig.userCatch("list"), value = RandomUtils.randomUUID();
             Long push = redisTemplate.opsForList().leftPush(key, value);
             // Long push = redisTemplate.opsForList().rightPush(key, value);
             log.info("leftPush key:[{}] -- value:[{}]", key, value);
@@ -49,7 +53,7 @@ public class RedisService {
         }
 
         for (int i = 0; i < count; i++) {
-            Object result = redisTemplate.opsForList().rightPop(RedisPrefix.userCatch("list"));
+            Object result = redisTemplate.opsForList().rightPop(RedisConfig.userCatch("list"));
             log.info("leftPop key:[{}] -- value:[{}]", i, result);
         }
         return count;
@@ -62,7 +66,7 @@ public class RedisService {
      */
     public long value() {
         log.info("value:{}", 1);
-        redisTemplate.opsForValue().set(RedisPrefix.userCatch(RandomUtils.randomNum(6)), EntityFactory.getUser(), 120, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisConfig.userCatch(RandomUtils.randomNum(6)), EntityFactory.getUser(), 120, TimeUnit.SECONDS);
         return 1;
     }
 
@@ -115,7 +119,7 @@ public class RedisService {
 
     public long zSet() {
         log.info("zSet:{}", 1);
-        redisTemplate.opsForZSet().add(RedisPrefix.userCatch(RandomUtils.randomNum(6)), EntityFactory.getUser(), 3);
+        redisTemplate.opsForZSet().add(RedisConfig.userCatch(RandomUtils.randomNum(6)), EntityFactory.getUser(), 3);
 
         redisTemplate.opsForZSet().add("zSetValue", "A", 1);
         redisTemplate.opsForZSet().add("zSetValue", "B", 3);
@@ -131,7 +135,7 @@ public class RedisService {
         RedisZSetCommands.Range range = new RedisZSetCommands.Range();
         // range.gt("A");
         range.lt("D");
-        zSetValue = redisTemplate.opsForZSet().rangeByLex("zSetValue", range);
+        //zSetValue = redisTemplate.opsForZSet().rangeByLex("zSetValue", range);
         log.info("rangeByLex: {}", zSetValue);
 
         // 通过TypedTuple方式新增数据
