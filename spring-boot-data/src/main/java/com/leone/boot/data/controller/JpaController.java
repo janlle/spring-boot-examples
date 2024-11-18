@@ -1,7 +1,7 @@
 package com.leone.boot.data.controller;
 
-import com.leone.boot.common.entity.User;
-import com.leone.boot.data.repository.UserRepository;
+import com.leone.boot.data.jpa.entity.JpaUser;
+import com.leone.boot.data.jpa.repository.UserRepository;
 import com.leone.boot.data.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ public class JpaController {
     }
 
     @PutMapping("/update")
-    public String update(@RequestBody User user) {
+    public String update(@RequestBody JpaUser user) {
         int result = userService.jpaUpdate(user);
         return "update one expenditure:" + result + " ms!";
     }

@@ -2,15 +2,15 @@
 spring:
   datasource:
     master:
-      jdbc-url: jdbc:mysql://192.168.244.11:3306/db1?useSSL=false
+      jdbc-url: jdbc:mysql://cloud.rm:20800/nfturbo?useSSL=false
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: 123
+      password: 123
+    slaver:
+      jdbc-url: jdbc:mysql://ruolin-mac.local:3306/nfturbo?useSSL=false
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
-      password: '123456'
-    slaver:
-      jdbc-url: jdbc:mysql://192.168.244.12:3306/db1?useSSL=false
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: jack
-      password: 3E0!3@6y^8$5
+      password: 123456
 
 
 # mybatis-springBoot 配置

@@ -14,7 +14,6 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.redis.core.*;
 
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -26,10 +25,10 @@ import java.util.Date;
 @Configuration
 public class GlobalConfig {
 
-    @Bean
-    public Converter<String, Date> timestampConvert() {
-        return source -> new Date(Long.parseLong(source));
-    }
+    //@Bean
+    //public Converter<String, Date> timestampConvert() {
+    //    return source -> new Date(Long.parseLong(source));
+    //}
 
     @Bean
     public ElasticsearchClient esClient() {

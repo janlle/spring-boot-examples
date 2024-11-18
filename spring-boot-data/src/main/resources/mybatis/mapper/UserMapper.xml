@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.leone.boot.data.mybatis.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.leone.data.entity.User">
+    <resultMap id="BaseResultMap" type="com.leone.boot.common.entity.User">
         <id column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="account" property="account" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
@@ -16,7 +16,7 @@
         user_id, account, password, age, description, deleted, create_time
     </sql>
 
-    <insert id="insertSelective" parameterType="com.leone.data.entity.User">
+    <insert id="insertSelective" parameterType="com.leone.boot.common.entity.User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="account != null">
@@ -62,7 +62,7 @@
     </insert>
 
 
-    <update id="updateByIdSelective" parameterType="com.leone.data.entity.User">
+    <update id="updateByIdSelective" parameterType="com.leone.boot.common.entity.User">
         update t_user
         <set>
             <if test="account != null">
@@ -88,7 +88,7 @@
     </update>
 
 
-    <update id="updateById" parameterType="com.leone.data.entity.User">
+    <update id="updateById" parameterType="com.leone.boot.common.entity.User">
         update t_user
         set account     = #{account,jdbcType=VARCHAR},
             password    = #{password,jdbcType=VARCHAR},

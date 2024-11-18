@@ -2,7 +2,7 @@ package com.leone.data.test;
 
 import com.leone.boot.common.entity.User;
 import com.leone.boot.data.DataApplication;
-import com.leone.boot.data.repository.UserRepository;
+import com.leone.boot.data.jpa.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
 

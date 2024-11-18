@@ -17,12 +17,12 @@ public interface UserMapper {
 
     int insertSelective(User user);
 
-    @Insert({"<script>" +
-      "insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values" +
-      "<foreach collection=\"users\" item=\"user\" separator=\",\">" +
-      "(#{user.account}, #{user.password}, #{user.age}, #{user.description}, #{user.deleted}, #{user.createTime}) " +
-      "</foreach>" +
-      "</script>"})
+    //@Insert({"<script>" +
+    //  "insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values" +
+    //  "<foreach collection=\"users\" item=\"user\" separator=\",\">" +
+    //  "(#{user.account}, #{user.password}, #{user.age}, #{user.description}, #{user.deleted}, #{user.createTime}) " +
+    //  "</foreach>" +
+    //  "</script>"})
     int insertBatch(@Param("users") List<User> users);
 
     @Delete("delete from t_user where user_id = #{userId}")

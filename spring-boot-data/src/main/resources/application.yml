@@ -2,5 +2,6 @@ spring:
   application:
     name: spring-data
 
-  profile:
-    active: jpa,mybatis
+  profiles:
+    include: mybatis,jpa
+

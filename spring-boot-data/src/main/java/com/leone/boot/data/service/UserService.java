@@ -8,23 +8,23 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.util.EntityFactory;
-import com.leone.boot.data.repository.UserRepository;
+//import com.leone.boot.data.jpa.repository.UserRepository;
+import com.leone.boot.data.jpa.entity.JpaUser;
 import com.leone.boot.data.mybatis.mapper.UserMapper;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+//import jakarta.persistence.criteria.CriteriaBuilder;
+//import jakarta.persistence.criteria.CriteriaQuery;
+//import jakarta.persistence.criteria.Predicate;
+//import jakarta.persistence.criteria.Root;
+import com.leone.boot.data.jpa.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.Pageable;
+//import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,11 +48,11 @@ public class UserService {
 
 
     // ----------------------------------- jpa --------------------------------------------
-    public List<User> jpaGetUsers() {
+    public List<JpaUser> jpaGetUsers() {
         return userRepository.findAll();
     }
 
-    public User jpaGetUser(Long userId) {
+    public JpaUser jpaGetUser(Long userId) {
         return userRepository.findById(userId).orElse(null);
     }
 
@@ -61,44 +61,44 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    public Page<User> page(Pageable pageable, String description, Integer account) {
-        Specification<User> specification = (Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
-            List<Predicate> list = new ArrayList<>();
-
-            list.add(criteriaBuilder.equal(root.get("deleted").as(Integer.class), 0));
-
-            if (!ObjectUtils.isEmpty(description)) {
-                list.add(criteriaBuilder.like(root.get("description"), "%" + description + "%"));
-            }
-
-            if (!ObjectUtils.isEmpty(account)) {
-                list.add(criteriaBuilder.equal(root.get("account").as(String.class), account));
-            }
-
-            Predicate[] predicates = new Predicate[list.size()];
-            criteriaQuery.where(list.toArray(predicates));
-            criteriaQuery.orderBy(criteriaBuilder.asc(root.get("userId")));
-            return criteriaQuery.getRestriction();
-        };
-        return userRepository.findAll(specification, pageable);
-    }
+    //public Page<User> page(Pageable pageable, String description, Integer account) {
+    //    Specification<User> specification = (Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
+    //        List<Predicate> list = new ArrayList<>();
+    //
+    //        list.add(criteriaBuilder.equal(root.get("deleted").as(Integer.class), 0));
+    //
+    //        if (!ObjectUtils.isEmpty(description)) {
+    //            list.add(criteriaBuilder.like(root.get("description"), "%" + description + "%"));
+    //        }
+    //
+    //        if (!ObjectUtils.isEmpty(account)) {
+    //            list.add(criteriaBuilder.equal(root.get("account").as(String.class), account));
+    //        }
+    //
+    //        Predicate[] predicates = new Predicate[list.size()];
+    //        criteriaQuery.where(list.toArray(predicates));
+    //        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("userId")));
+    //        return criteriaQuery.getRestriction();
+    //    };
+    //    return userRepository.findAll(specification, pageable);
+    //}
 
     public long jpaInsertBatch(Integer count) {
-        List<User> list = EntityFactory.getUsers(count);
-        userRepository.saveAll(list);
+        //List<User> list = EntityFactory.getUsers(count);
+        //userRepository.saveAll(list);
         return 0;
     }
 
     public long jpaInsertForeach(Integer count) {
         for (long i = 0; i < count; i++) {
-            userRepository.save(EntityFactory.getUser());
+            //userRepository.save(EntityFactory.getUser());
         }
         return 0;
     }
 
     @Transactional
-    public int jpaUpdate(User user) {
-        User entity = userRepository.findById(user.getUserId()).orElse(null);
+    public int jpaUpdate(JpaUser user) {
+        JpaUser entity = userRepository.findById(user.getUserId()).orElse(null);
         BeanUtils.copyProperties(user, entity);
         userRepository.save(user);
         int i = 100 / 0;
