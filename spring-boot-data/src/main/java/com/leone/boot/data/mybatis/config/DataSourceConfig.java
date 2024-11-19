@@ -120,7 +120,7 @@ public class DataSourceConfig {
      * @param dynamicDataSource datasource
      * @return transactionManager
      */
-    @Bean(name = "dataSourceTx")
+    @Bean(name = "transactionManager")
     public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("dynamicDB") DataSource dynamicDataSource) {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dynamicDataSource);

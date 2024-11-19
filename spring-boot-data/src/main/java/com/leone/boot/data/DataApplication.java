@@ -10,15 +10,13 @@ import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class}
+ *
  * @author leone
  * @since 2018-05-11
  **/
 @EnableCaching
 @SpringBootApplication(
-  //exclude = {DataSourceAutoConfiguration.class
-  //DataSourceTransactionManagerAutoConfiguration.class,
-  //HibernateJpaAutoConfiguration.class
-  // }
+  //exclude = {DataSourceAutoConfiguration.class}
 )
 @MapperScan("com.leone.boot.data.mybatis.mapper")
 public class DataApplication {

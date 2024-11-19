@@ -8,21 +8,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.common.util.EntityFactory;
-//import com.leone.boot.data.jpa.repository.UserRepository;
-import com.leone.boot.data.jpa.entity.JpaUser;
+import com.leone.boot.data.jpa.entity.UserAddress;
 import com.leone.boot.data.mybatis.mapper.UserMapper;
-//import jakarta.persistence.criteria.CriteriaBuilder;
-//import jakarta.persistence.criteria.CriteriaQuery;
-//import jakarta.persistence.criteria.Predicate;
-//import jakarta.persistence.criteria.Root;
-import com.leone.boot.data.jpa.repository.UserRepository;
+import com.leone.boot.data.jpa.repository.UserAddressRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -36,7 +29,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAddressRepository userAddressRepository;
 
     @Autowired
     private ElasticsearchClient elasticsearchClient;
@@ -48,17 +41,17 @@ public class UserService {
 
 
     // ----------------------------------- jpa --------------------------------------------
-    public List<JpaUser> jpaGetUsers() {
-        return userRepository.findAll();
+    public List<UserAddress> jpaGetUsers() {
+        return userAddressRepository.findAll();
     }
 
-    public JpaUser jpaGetUser(Long userId) {
-        return userRepository.findById(userId).orElse(null);
+    public UserAddress jpaGetUser(Long userId) {
+        return userAddressRepository.findById(userId).orElse(null);
     }
 
 
     public void jpaDelete(Long userId) {
-        userRepository.deleteById(userId);
+        userAddressRepository.deleteById(userId);
     }
 
     //public Page<User> page(Pageable pageable, String description, Integer account) {
@@ -89,18 +82,23 @@ public class UserService {
         return 0;
     }
 
-    public long jpaInsertForeach(Integer count) {
+    @Transactional(propagation = Propagation.REQUIRED)
+    public long insertUserAddress(Integer count) {
         for (long i = 0; i < count; i++) {
-            //userRepository.save(EntityFactory.getUser());
+            UserAddress userAddress = new UserAddress();
+            userAddress.setTelephone("13490877876");
+            userAddress.setSpecificsAddress("上海市 浦东新区 康桥镇");
+            UserAddress result = userAddressRepository.save(userAddress);
+            System.out.println(result);
         }
         return 0;
     }
 
     @Transactional
-    public int jpaUpdate(JpaUser user) {
-        JpaUser entity = userRepository.findById(user.getUserId()).orElse(null);
+    public int jpaUpdate(UserAddress user) {
+        UserAddress entity = userAddressRepository.findById(user.getId()).orElse(null);
         BeanUtils.copyProperties(user, entity);
-        userRepository.save(user);
+        userAddressRepository.save(user);
         int i = 100 / 0;
         return 0;
     }

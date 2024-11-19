@@ -1,11 +1,12 @@
 package com.leone.data.test;
 
-import com.leone.boot.common.entity.User;
 import com.leone.boot.data.DataApplication;
-import com.leone.boot.data.jpa.repository.UserRepository;
+import com.leone.boot.data.jpa.entity.UserAddress;
+import com.leone.boot.data.jpa.repository.UserAddressRepository;
 import lombok.extern.slf4j.Slf4j;
 
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -14,21 +15,19 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @since 2018-05-21
  **/
 @Slf4j
-
 @SpringBootTest(classes = DataApplication.class)
 public class UserDaoTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAddressRepository userAddressRepository;
 
-    
-    public void testAdd() {
-        User user = new User();
-        user.setAccount("andy@163.com");
-        user.setPassword("andyPassword");
-        User result = userRepository.save(user);
-        log.info("user:", result);
-
+    @Test
+    public void save() {
+        UserAddress userAddress = new UserAddress();
+        userAddress.setTelephone("andy@163.com");
+        userAddress.setSpecificsAddress("andyPassword");
+        UserAddress result = userAddressRepository.save(userAddress);
+        log.info("save userAddress: {}", result);
     }
 
 
