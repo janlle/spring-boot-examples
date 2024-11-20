@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leone.boot.data.mybatis.mapper.TradeOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.TradeOrder">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_address_id" jdbcType="VARCHAR" property="userAddressId"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="item_count" jdbcType="INTEGER" property="itemCount"/>
+        <result column="paid_amount" jdbcType="DECIMAL" property="paidAmount"/>
+        <result column="pay_channel" jdbcType="INTEGER" property="payChannel"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime"/>
+        <result column="deleted" jdbcType="INTEGER" property="deleted"/>
+        <result column="lock_version" jdbcType="INTEGER" property="lockVersion"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, user_address_id, state, item_count, paid_amount, pay_channel, pay_time,
+        finish_time, deleted, lock_version, gmt_create, gmt_modified
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from trade_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from trade_order
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.TradeOrder">
+        insert into trade_order (id, user_id, user_address_id,
+        state, item_count, paid_amount,
+        pay_channel, pay_time, finish_time,
+        deleted, lock_version, gmt_create,
+        gmt_modified)
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{userAddressId,jdbcType=VARCHAR},
+        #{state,jdbcType=INTEGER}, #{itemCount,jdbcType=INTEGER}, #{paidAmount,jdbcType=DECIMAL},
+        #{payChannel,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP},
+        #{deleted,jdbcType=INTEGER}, #{lockVersion,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.TradeOrder">
+        insert into trade_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userAddressId != null">
+                user_address_id,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="itemCount != null">
+                item_count,
+            </if>
+            <if test="paidAmount != null">
+                paid_amount,
+            </if>
+            <if test="payChannel != null">
+                pay_channel,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="finishTime != null">
+                finish_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="lockVersion != null">
+                lock_version,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddressId != null">
+                #{userAddressId,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="itemCount != null">
+                #{itemCount,jdbcType=INTEGER},
+            </if>
+            <if test="paidAmount != null">
+                #{paidAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payChannel != null">
+                #{payChannel,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="lockVersion != null">
+                #{lockVersion,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.TradeOrder">
+        update trade_order
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddressId != null">
+                user_address_id = #{userAddressId,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="itemCount != null">
+                item_count = #{itemCount,jdbcType=INTEGER},
+            </if>
+            <if test="paidAmount != null">
+                paid_amount = #{paidAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payChannel != null">
+                pay_channel = #{payChannel,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="lockVersion != null">
+                lock_version = #{lockVersion,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.TradeOrder">
+        update trade_order
+        set user_id = #{userId,jdbcType=VARCHAR},
+        user_address_id = #{userAddressId,jdbcType=VARCHAR},
+        state = #{state,jdbcType=INTEGER},
+        item_count = #{itemCount,jdbcType=INTEGER},
+        paid_amount = #{paidAmount,jdbcType=DECIMAL},
+        pay_channel = #{payChannel,jdbcType=INTEGER},
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+        deleted = #{deleted,jdbcType=INTEGER},
+        lock_version = #{lockVersion,jdbcType=INTEGER},
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

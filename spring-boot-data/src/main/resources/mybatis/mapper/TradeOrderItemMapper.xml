@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leone.boot.data.mybatis.mapper.TradeOrderItemMapper">
+
+
+    <resultMap id="BaseResultMap" type="com.TradeOrderItem">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="goods_id" jdbcType="VARCHAR" property="goodsId"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="goods_type" jdbcType="INTEGER" property="goodsType"/>
+        <result column="order_state" jdbcType="INTEGER" property="orderState"/>
+        <result column="goods_pic" jdbcType="VARCHAR" property="goodsPic"/>
+        <result column="item_price" jdbcType="DECIMAL" property="itemPrice"/>
+        <result column="item_count" jdbcType="INTEGER" property="itemCount"/>
+        <result column="deleted" jdbcType="INTEGER" property="deleted"/>
+        <result column="lock_version" jdbcType="INTEGER" property="lockVersion"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, order_id, user_id, goods_id, goods_name, goods_type, order_state, goods_pic,
+        item_price, item_count, deleted, lock_version, gmt_create, gmt_modified
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from trade_order_item
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from trade_order_item
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.TradeOrderItem">
+        insert into trade_order_item (id, order_id, user_id,
+        goods_id, goods_name, goods_type,
+        order_state, goods_pic, item_price,
+        item_count, deleted, lock_version,
+        gmt_create, gmt_modified)
+        values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{goodsId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{goodsType,jdbcType=INTEGER},
+        #{orderState,jdbcType=INTEGER}, #{goodsPic,jdbcType=VARCHAR}, #{itemPrice,jdbcType=DECIMAL},
+        #{itemCount,jdbcType=INTEGER}, #{deleted,jdbcType=INTEGER}, #{lockVersion,jdbcType=INTEGER},
+        #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.TradeOrderItem">
+        insert into trade_order_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsType != null">
+                goods_type,
+            </if>
+            <if test="orderState != null">
+                order_state,
+            </if>
+            <if test="goodsPic != null">
+                goods_pic,
+            </if>
+            <if test="itemPrice != null">
+                item_price,
+            </if>
+            <if test="itemCount != null">
+                item_count,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="lockVersion != null">
+                lock_version,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null">
+                #{goodsType,jdbcType=INTEGER},
+            </if>
+            <if test="orderState != null">
+                #{orderState,jdbcType=INTEGER},
+            </if>
+            <if test="goodsPic != null">
+                #{goodsPic,jdbcType=VARCHAR},
+            </if>
+            <if test="itemPrice != null">
+                #{itemPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="itemCount != null">
+                #{itemCount,jdbcType=INTEGER},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="lockVersion != null">
+                #{lockVersion,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.TradeOrderItem">
+        update trade_order_item
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null">
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null">
+                goods_type = #{goodsType,jdbcType=INTEGER},
+            </if>
+            <if test="orderState != null">
+                order_state = #{orderState,jdbcType=INTEGER},
+            </if>
+            <if test="goodsPic != null">
+                goods_pic = #{goodsPic,jdbcType=VARCHAR},
+            </if>
+            <if test="itemPrice != null">
+                item_price = #{itemPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="itemCount != null">
+                item_count = #{itemCount,jdbcType=INTEGER},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="lockVersion != null">
+                lock_version = #{lockVersion,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.TradeOrderItem">
+        update trade_order_item
+        set order_id = #{orderId,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=VARCHAR},
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+        goods_type = #{goodsType,jdbcType=INTEGER},
+        order_state = #{orderState,jdbcType=INTEGER},
+        goods_pic = #{goodsPic,jdbcType=VARCHAR},
+        item_price = #{itemPrice,jdbcType=DECIMAL},
+        item_count = #{itemCount,jdbcType=INTEGER},
+        deleted = #{deleted,jdbcType=INTEGER},
+        lock_version = #{lockVersion,jdbcType=INTEGER},
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

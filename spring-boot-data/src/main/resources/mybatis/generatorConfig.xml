@@ -4,7 +4,7 @@
 <generatorConfiguration>
     <!-- 数据库驱动包位置 -->
     <!-- 1 -->
-    <classPathEntry location="D:\maven_repository\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+    <classPathEntry location="/Users/leone/.m2/repository/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
 
@@ -15,9 +15,9 @@
         <!-- 2 -->
         <!-- 数据库链接URL、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://ip:3306/boot?useSSL=false"
+                        connectionURL="jdbc:mysql://localhost:3306/boot?useSSL=false"
                         userId="root"
-                        password="cloud">
+                        password="123456">
         </jdbcConnection>
 
         <!-- 默认为false，把JDBC DECIMAL 和NUMERIC 类型解析为 Integer，为 true 时把 JDBC DECIMAL 和NUMERIC类型解析为java.math.BigDecimal -->
@@ -26,23 +26,23 @@
         </javaTypeResolver>
 
         <!-- 生成实体路径 --> <!-- 3 -->
-        <javaModelGenerator targetPackage="com.leone.test.module" targetProject="./src">
+        <javaModelGenerator targetPackage="com" targetProject="./src">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- 生成 xml 映射文件的路径 --> <!-- 4 -->
-        <sqlMapGenerator targetPackage="com.leone.test.xml" targetProject="./src">
+        <sqlMapGenerator targetPackage="com" targetProject="./src">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- 生成 mapper 接口的路径 --> <!-- 5 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.leone.test.mapper" targetProject="./src">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com" targetProject="./src">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!-- 要生成那些表(更改tableName 和 domainObjectName就可以) --> <!-- 6 -->
-        <table tableName="t_user" domainObjectName="User" enableCountByExample="false"
+        <table tableName="trade_order_item" domainObjectName="TradeOrderItem" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
