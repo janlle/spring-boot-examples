@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leone.boot.data.mybatis.mapper.TradeOrderMapper">
 
-    <resultMap id="BaseResultMap" type="com.TradeOrder">
+    <resultMap id="BaseResultMap" type="com.leone.boot.data.mybatis.entity.TradeOrder">
         <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="trade_order_id" jdbcType="VARCHAR" property="tradeOrderId"/>
         <result column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="user_address_id" jdbcType="VARCHAR" property="userAddressId"/>
         <result column="state" jdbcType="INTEGER" property="state"/>
@@ -18,8 +19,36 @@
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
 
+    <resultMap id="selectOrderMap" type="com.leone.boot.data.mybatis.response.OrderDetailResp">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="trade_order_id" jdbcType="VARCHAR" property="tradeOrderId"/>
+        <result column="user_address_id" jdbcType="VARCHAR" property="userAddressId"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="item_count" jdbcType="INTEGER" property="itemCount"/>
+        <result column="paid_amount" jdbcType="DECIMAL" property="paidAmount"/>
+        <result column="pay_channel" jdbcType="INTEGER" property="payChannel"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime"/>
+        <result column="deleted" jdbcType="INTEGER" property="deleted"/>
+        <result column="lock_version" jdbcType="INTEGER" property="lockVersion"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+
+        <!-- column 属性指定的是上面结果集的字段，LAZY EAGER fetchType="eager" 局部配置 -->
+        <collection property="itemList" column="trade_order_id" fetchType="lazy"
+                    ofType="com.leone.boot.data.mybatis.entity.TradeOrderItem"
+                    select="com.leone.boot.data.mybatis.mapper.TradeOrderItemMapper.selectByOrderId">
+        </collection>
+
+    </resultMap>
+
+    <select id="selectOrderDetail" resultMap="selectOrderMap">
+        select * from trade_order
+    </select>
+
     <sql id="Base_Column_List">
-        id, user_id, user_address_id, state, item_count, paid_amount, pay_channel, pay_time,
+        id, user_id, trade_order_id, user_address_id, state, item_count, paid_amount, pay_channel, pay_time,
         finish_time, deleted, lock_version, gmt_create, gmt_modified
     </sql>
 
@@ -35,20 +64,21 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <insert id="insert" parameterType="com.TradeOrder">
-        insert into trade_order (id, user_id, user_address_id,
+    <insert id="insert" parameterType="com.leone.boot.data.mybatis.entity.TradeOrder">
+        insert into trade_order (id, user_id, trade_order_id, user_address_id,
         state, item_count, paid_amount,
         pay_channel, pay_time, finish_time,
         deleted, lock_version, gmt_create,
         gmt_modified)
-        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{userAddressId,jdbcType=VARCHAR},
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{tradeOrderId,jdbcType=VARCHAR},
+        #{userAddressId,jdbcType=VARCHAR},
         #{state,jdbcType=INTEGER}, #{itemCount,jdbcType=INTEGER}, #{paidAmount,jdbcType=DECIMAL},
         #{payChannel,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP},
         #{deleted,jdbcType=INTEGER}, #{lockVersion,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP},
         #{gmtModified,jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.TradeOrder">
+    <insert id="insertSelective" parameterType="com.leone.boot.data.mybatis.entity.TradeOrder">
         insert into trade_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -59,6 +89,9 @@
             </if>
             <if test="userAddressId != null">
                 user_address_id,
+            </if>
+            <if test="tradeOrderId != null">
+                trade_order_id,
             </if>
             <if test="state != null">
                 state,
@@ -101,6 +134,9 @@
             <if test="userAddressId != null">
                 #{userAddressId,jdbcType=VARCHAR},
             </if>
+            <if test="tradeOrderId != null">
+                #{tradeOrderId,jdbcType=VARCHAR},
+            </if>
             <if test="state != null">
                 #{state,jdbcType=INTEGER},
             </if>
@@ -134,7 +170,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.TradeOrder">
+    <update id="updateByPrimaryKeySelective" parameterType="com.leone.boot.data.mybatis.entity.TradeOrder">
         update trade_order
         <set>
             <if test="userId != null">
@@ -142,6 +178,9 @@
             </if>
             <if test="userAddressId != null">
                 user_address_id = #{userAddressId,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeOrderId != null">
+                trade_order_id = #{tradeOrderId,jdbcType=VARCHAR},
             </if>
             <if test="state != null">
                 state = #{state,jdbcType=INTEGER},
@@ -177,10 +216,11 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.TradeOrder">
+    <update id="updateByPrimaryKey" parameterType="com.leone.boot.data.mybatis.entity.TradeOrder">
         update trade_order
         set user_id = #{userId,jdbcType=VARCHAR},
         user_address_id = #{userAddressId,jdbcType=VARCHAR},
+        trade_order_id = #{tradeOrderId,jdbcType=VARCHAR},
         state = #{state,jdbcType=INTEGER},
         item_count = #{itemCount,jdbcType=INTEGER},
         paid_amount = #{paidAmount,jdbcType=DECIMAL},
@@ -193,5 +233,24 @@
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <!-- pageHelp 分页 -->
+    <select id="selectList" resultMap="BaseResultMap">
+        select * from trade_order
+    </select>
+
+    <!-- 原生limit分页 -->
+    <select id="selectByLimit" resultMap="BaseResultMap">
+        select * from trade_order limit #{start}, #{size}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(1) from trade_order
+    </select>
+
+    <!-- rowBound 分页 -->
+    <select id="selectByRowBound" resultMap="BaseResultMap">
+        select * from trade_order where id > 10
+    </select>
 
 </mapper>

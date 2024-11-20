@@ -34,8 +34,9 @@ CREATE TABLE trade_order_item (
 DROP TABLE IF EXISTS trade_order;
 CREATE TABLE trade_order (
     id              bigint not null auto_increment,
-    user_id         varchar(255) default null,
+    trade_order_id  varchar(255) default null,
     user_address_id varchar(255) default null,
+    user_id         varchar(255) default null,
     state           int,
     item_count      int,
     paid_amount     decimal(18, 6),

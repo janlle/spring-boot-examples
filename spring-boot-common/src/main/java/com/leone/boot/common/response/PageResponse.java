@@ -3,6 +3,7 @@ package com.leone.boot.common.response;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 public class PageResponse<T> extends MultiResponse<T> {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

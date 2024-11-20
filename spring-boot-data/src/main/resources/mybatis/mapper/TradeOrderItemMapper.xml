@@ -3,7 +3,7 @@
 <mapper namespace="com.leone.boot.data.mybatis.mapper.TradeOrderItemMapper">
 
 
-    <resultMap id="BaseResultMap" type="com.TradeOrderItem">
+    <resultMap id="BaseResultMap" type="com.leone.boot.data.mybatis.entity.TradeOrderItem">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
         <result column="user_id" jdbcType="VARCHAR" property="userId"/>
@@ -37,7 +37,7 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <insert id="insert" parameterType="com.TradeOrderItem">
+    <insert id="insert" parameterType="com.leone.boot.data.mybatis.entity.TradeOrderItem">
         insert into trade_order_item (id, order_id, user_id,
         goods_id, goods_name, goods_type,
         order_state, goods_pic, item_price,
@@ -50,7 +50,7 @@
         #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.TradeOrderItem">
+    <insert id="insertSelective" parameterType="com.leone.boot.data.mybatis.entity.TradeOrderItem">
         insert into trade_order_item
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -142,7 +142,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.TradeOrderItem">
+    <update id="updateByPrimaryKeySelective" parameterType="com.leone.boot.data.mybatis.entity.TradeOrderItem">
         update trade_order_item
         <set>
             <if test="orderId != null">
@@ -188,7 +188,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.TradeOrderItem">
+    <update id="updateByPrimaryKey" parameterType="com.leone.boot.data.mybatis.entity.TradeOrderItem">
         update trade_order_item
         set order_id = #{orderId,jdbcType=VARCHAR},
         user_id = #{userId,jdbcType=VARCHAR},
