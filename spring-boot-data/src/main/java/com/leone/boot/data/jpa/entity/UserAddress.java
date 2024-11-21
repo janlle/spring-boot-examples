@@ -15,7 +15,7 @@ import java.util.Date;
  * @since 2024-11-19
  **/
 @Entity
-@Table(name = "t_user_address")
+@Table(name = "user_address")
 public class UserAddress implements Serializable {
 
     @Serial

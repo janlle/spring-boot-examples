@@ -54,7 +54,7 @@ public class MainLogTask {
     @Async
     //@Scheduled(fixedDelay = 10)
     public void jsonLogTask() throws JsonProcessingException {
-        JSON_LOG.info(objectMapper.writeValueAsString(RandomUtils.randomUser()));
+        //JSON_LOG.info(objectMapper.writeValueAsString(RandomUtils.randomUser()));
     }
 
     /**

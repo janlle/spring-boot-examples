@@ -1,6 +1,7 @@
 package com.leone.boot.cache.redis;
 
 
+import cn.hutool.core.util.IdUtil;
 import com.leone.boot.common.util.EntityFactory;
 import com.leone.boot.common.util.RandomUtils;
 import jakarta.annotation.Resource;
@@ -40,7 +41,7 @@ public class RedisService {
     public long list(int count) {
         log.info("list:{}", count);
         for (int i = 0; i < count; i++) {
-            String key = RedisConfig.userCatch("list"), value = RandomUtils.randomUUID();
+            String key = RedisConfig.userCatch("list"), value = IdUtil.fastSimpleUUID();
             Long push = redisTemplate.opsForList().leftPush(key, value);
             // Long push = redisTemplate.opsForList().rightPush(key, value);
             log.info("leftPush key:[{}] -- value:[{}]", key, value);
@@ -66,7 +67,7 @@ public class RedisService {
      */
     public long value() {
         log.info("value:{}", 1);
-        redisTemplate.opsForValue().set(RedisConfig.userCatch(RandomUtils.randomNum(6)), EntityFactory.getUser(), 120, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisConfig.userCatch(IdUtil.nanoId()), EntityFactory.getUser(), 120, TimeUnit.SECONDS);
         return 1;
     }
 
@@ -119,7 +120,7 @@ public class RedisService {
 
     public long zSet() {
         log.info("zSet:{}", 1);
-        redisTemplate.opsForZSet().add(RedisConfig.userCatch(RandomUtils.randomNum(6)), EntityFactory.getUser(), 3);
+        redisTemplate.opsForZSet().add(RedisConfig.userCatch(IdUtil.nanoId(9)), EntityFactory.getUser(), 3);
 
         redisTemplate.opsForZSet().add("zSetValue", "A", 1);
         redisTemplate.opsForZSet().add("zSetValue", "B", 3);

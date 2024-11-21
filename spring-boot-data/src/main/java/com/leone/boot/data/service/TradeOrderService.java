@@ -4,11 +4,13 @@ package com.leone.boot.data.service;
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leone.boot.common.response.PageResponse;
+import com.leone.boot.common.util.RandomUtils;
 import com.leone.boot.data.mybatis.entity.TradeOrder;
+import com.leone.boot.data.mybatis.entity.TradeOrderItem;
+import com.leone.boot.data.mybatis.mapper.TradeOrderItemMapper;
 import com.leone.boot.data.mybatis.mapper.TradeOrderMapper;
 import com.leone.boot.data.mybatis.response.OrderDetailResp;
 import jakarta.annotation.PostConstruct;
@@ -19,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,27 +38,57 @@ public class TradeOrderService {
         long count = tradeOrderMapper.count();
         if (count < 100) {
             for (int i = 0; i < 100; i++) {
+                String orderId = IdUtil.getSnowflakeNextIdStr();
+                String userId = IdUtil.getSnowflakeNextIdStr();
                 TradeOrder order = new TradeOrder();
-                order.setUserId(IdUtil.nanoId(8));
-                order.setTradeOrderId(IdUtil.nanoId(8));
-                order.setUserAddressId(IdUtil.nanoId(8));
+                order.setUserId(userId);
+                order.setTradeOrderId(orderId);
+                order.setUserAddressId(IdUtil.getSnowflakeNextIdStr());
                 order.setItemCount(RandomUtil.randomInt(1, 9));
                 order.setPayTime(RandomUtil.randomDate(null, DateField.HOUR, 1, 9999));
                 order.setFinishTime(RandomUtil.randomDate(null, DateField.HOUR, 1, 9999));
                 order.setPaidAmount(RandomUtil.randomBigDecimal(new BigDecimal("10000")));
-                order.setState(1);
-                order.setPayChannel(2);
-                order.setDeleted(0);
-                order.setLockVersion(0);
-                order.setGmtCreate(new Date());
-                order.setGmtModified(new Date());
+                order.setState(RandomUtil.randomInt(3));
+                order.setPayChannel(RandomUtil.randomInt(3));
+                order.setDeleted(RandomUtil.randomInt(2));
+                order.setLockVersion(RandomUtil.randomInt(3));
+                order.setGmtCreate(RandomUtil.randomDay(1, 99));
+                order.setGmtModified(RandomUtil.randomDay(1, 99));
                 tradeOrderMapper.insert(order);
+
+                for (int j = 0; j < RandomUtil.randomInt(5) + 1; j++) {
+                    TradeOrderItem item = new TradeOrderItem();
+                    item.setGoodsId(IdUtil.getSnowflakeNextIdStr());
+                    item.setGoodsName(RandomUtils.randomGoods());
+                    item.setGoodsPic(RandomUtils.randomUrl());
+                    item.setGoodsType(RandomUtil.randomInt(2));
+                    item.setItemCount(RandomUtil.randomInt(8) + 1);
+                    item.setItemPrice(RandomUtil.randomBigDecimal());
+                    item.setOrderId(orderId);
+                    item.setUserId(userId);
+                    item.setDeleted(RandomUtil.randomInt(2));
+                    item.setOrderState(RandomUtil.randomInt(2));
+                    item.setGmtModified(RandomUtil.randomDay(1, 99));
+                    item.setGmtCreate(RandomUtil.randomDay(1, 99));
+                    item.setLockVersion(RandomUtil.randomInt(2));
+                    tradeOrderItemMapper.insert(item);
+                }
             }
+        }
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 999; i++) {
+            //System.out.println(RandomUtil.randomInt(3) + 1);
+            System.out.println(IdUtil.nanoId(8));
         }
     }
 
     @Autowired
     private TradeOrderMapper tradeOrderMapper;
+
+    @Autowired
+    private TradeOrderItemMapper tradeOrderItemMapper;
 
     @Autowired
     private SqlSession sqlSession;

@@ -39,7 +39,7 @@ public class PageController {
 
     @GetMapping("/lazy-load")
     public List<OrderDetailResp> lazyLoad() {
-        tradeOrderService.lazyLoad();
+        List<OrderDetailResp> resp = tradeOrderService.lazyLoad();
         return null;
     }
 
