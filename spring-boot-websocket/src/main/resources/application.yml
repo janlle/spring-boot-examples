@@ -12,3 +12,6 @@ server:
 custom:
   id: 12
   name: kobe
+
+  logging:
+    level: DEBUG

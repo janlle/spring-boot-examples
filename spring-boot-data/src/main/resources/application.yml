@@ -5,3 +5,5 @@ spring:
   profiles:
     include: mybatis,jpa
 
+  logging:
+    level: debug

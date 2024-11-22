@@ -13,6 +13,11 @@ customer:
   - first-name: li
     last-name: si
 
+zookeeper:
+  enabled: true
+  host: localhost
+  port: 2181
+
 module:
   shiro:
     cacheTime: 1080
