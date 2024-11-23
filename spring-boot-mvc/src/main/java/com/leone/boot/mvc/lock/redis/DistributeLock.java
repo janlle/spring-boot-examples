@@ -1,4 +1,4 @@
-package com.leone.boot.mvc.lock.zk;
+package com.leone.boot.mvc.lock.redis;
 
 import com.leone.boot.mvc.lock.DistributeLockConstant;
 
@@ -8,29 +8,32 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <p> zk分布式锁
+ * 分布式锁注解
  *
  * @author leone
- * @since 2024-11-22
- **/
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ZkLock {
-
-    /**
-     * 是否可重入
-     */
-    boolean reentrant() default false;
+public @interface DistributeLock {
 
     /**
      * 锁的场景
      */
-    String keyPrefix() default DistributeLockConstant.LOCK_PREFIX;
+    String scene();
 
     /**
-     * 加锁的key
+     * 加锁的key，优先取key()，如果没有，则取keyExpression()
      */
     String key() default DistributeLockConstant.DEFAULT_LOCK_KEY;
+
+    /**
+     * SPEL表达式:
+     * <pre>
+     *     #id
+     *     #insertResult.id
+     * </pre>
+     */
+    String keyExpression() default DistributeLockConstant.DEFAULT_LOCK_KEY;
 
     /**
      * 超时时间，毫秒
@@ -43,5 +46,4 @@ public @interface ZkLock {
      * 默认情况下不设置等待时长，不做等待
      */
     int waitTime() default DistributeLockConstant.DEFAULT_WAIT_TIME;
-
 }

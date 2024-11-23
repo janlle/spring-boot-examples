@@ -1,5 +1,7 @@
-package com.leone.boot.mvc.lock;
+package com.leone.boot.mvc.lock.redis;
 
+import com.leone.boot.mvc.lock.DistributeLockConstant;
+import com.leone.boot.mvc.lock.DistributeLockException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -27,23 +29,23 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class DistributeLockAspect {
 
+    private static final Logger LOG = LoggerFactory.getLogger(DistributeLockAspect.class);
+
     private final RedissonClient redissonClient;
 
     public DistributeLockAspect(RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(DistributeLockAspect.class);
-
-    @Around("@annotation(com.leone.boot.mvc.lock.DistributeLock)")
+    @Around("@annotation(com.leone.boot.mvc.lock.redis.DistributeLock)")
     public Object process(ProceedingJoinPoint pjp) throws Exception {
         Object response;
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
         DistributeLock distributeLock = method.getAnnotation(DistributeLock.class);
 
         String key = distributeLock.key();
-        if (DistributeLockConstant.NONE_KEY.equals(key)) {
-            if (DistributeLockConstant.NONE_KEY.equals(distributeLock.keyExpression())) {
+        if (DistributeLockConstant.DEFAULT_LOCK_KEY.equals(key)) {
+            if (DistributeLockConstant.DEFAULT_LOCK_KEY.equals(distributeLock.keyExpression())) {
                 throw new DistributeLockException("no lock key found...");
             }
             SpelExpressionParser parser = new SpelExpressionParser();

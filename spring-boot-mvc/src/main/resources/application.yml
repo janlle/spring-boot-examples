@@ -14,9 +14,12 @@ customer:
     last-name: si
 
 zookeeper:
-  enabled: true
+  enabled: false
   host: localhost
   port: 2181
+
+mysql:
+  enable: true
 
 module:
   shiro:

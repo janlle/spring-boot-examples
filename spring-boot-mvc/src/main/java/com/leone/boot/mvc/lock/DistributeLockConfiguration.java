@@ -1,6 +1,9 @@
 package com.leone.boot.mvc.lock;
 
+import com.leone.boot.mvc.lock.mysql.DatabaseLockAspect;
+import com.leone.boot.mvc.lock.redis.DistributeLockAspect;
 import com.leone.boot.mvc.lock.zk.ZkLockAspect;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.curator.framework.CuratorFramework;
 import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,5 +27,12 @@ public class DistributeLockConfiguration {
     public ZkLockAspect zkLockAspect(CuratorFramework client) {
         return new ZkLockAspect(client);
     }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DatabaseLockAspect databaseLockAspect(HikariDataSource dataSource) {
+        return new DatabaseLockAspect(dataSource);
+    }
+
 
 }

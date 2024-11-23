@@ -37,7 +37,7 @@ public class HttpUtils {
 
     public static String randomUrl() {
         return random.nextBoolean() ?
-          "http://localhost:8080/lock/reduce" : "http://localhost:8081/lock/reduce";
+          "http://localhost:8080/lock/database" : "http://localhost:8081/lock/database";
     }
 
 

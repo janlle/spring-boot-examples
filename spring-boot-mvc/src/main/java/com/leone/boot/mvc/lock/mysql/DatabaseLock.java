@@ -1,4 +1,7 @@
-package com.leone.boot.mvc.lock;
+package com.leone.boot.mvc.lock.mysql;
+
+
+import com.leone.boot.mvc.lock.DistributeLockConstant;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,32 +9,29 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 分布式锁注解
+ * <p>
  *
  * @author leone
- */
+ * @since 2024-11-22
+ **/
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DistributeLock {
+public @interface DatabaseLock {
+
+    /**
+     * 是否可重入
+     */
+    boolean reentrant() default false;
 
     /**
      * 锁的场景
      */
-    String scene();
+    String keyPrefix() default DistributeLockConstant.LOCK_PREFIX;
 
     /**
-     * 加锁的key，优先取key()，如果没有，则取keyExpression()
+     * 加锁的key
      */
-    String key() default DistributeLockConstant.NONE_KEY;
-
-    /**
-     * SPEL表达式:
-     * <pre>
-     *     #id
-     *     #insertResult.id
-     * </pre>
-     */
-    String keyExpression() default DistributeLockConstant.NONE_KEY;
+    String key() default DistributeLockConstant.DEFAULT_LOCK_KEY;
 
     /**
      * 超时时间，毫秒
@@ -44,4 +44,7 @@ public @interface DistributeLock {
      * 默认情况下不设置等待时长，不做等待
      */
     int waitTime() default DistributeLockConstant.DEFAULT_WAIT_TIME;
+
+
+
 }

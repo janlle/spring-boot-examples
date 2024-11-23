@@ -7,7 +7,7 @@ package com.leone.boot.mvc.lock;
  */
 public class DistributeLockConstant {
 
-    public static final String NONE_KEY = "NONE";
+    public static final String DEFAULT_LOCK_KEY = "NONE";
 
     public static final String DEFAULT_OWNER = "DEFAULT";
 
@@ -15,6 +15,6 @@ public class DistributeLockConstant {
 
     public static final int DEFAULT_WAIT_TIME = -1;
 
-    public static final String LOCK_PREFIX = "/zklock/";
+    public static final String LOCK_PREFIX = "lock";
 
 }

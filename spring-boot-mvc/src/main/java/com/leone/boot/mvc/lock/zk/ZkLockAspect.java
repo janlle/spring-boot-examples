@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Aspect
 @Component
+@ConditionalOnBean(CuratorFramework.class)
 public class ZkLockAspect {
 
     private static final Logger log = LoggerFactory.getLogger(ZkLockAspect.class);
@@ -65,7 +67,6 @@ public class ZkLockAspect {
         try {
             proceed = jointPoint.proceed();
         } catch (Throwable e) {
-            e.printStackTrace();
             log.error(e.getMessage());
         } finally {
             lock.release();
