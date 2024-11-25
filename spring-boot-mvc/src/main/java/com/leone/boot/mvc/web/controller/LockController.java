@@ -1,7 +1,7 @@
 package com.leone.boot.mvc.web.controller;
 
 import com.leone.boot.mvc.lock.mysql.DatabaseLock;
-import com.leone.boot.mvc.lock.redis.DistributeLock;
+import com.leone.boot.mvc.lock.redis.RedisLock;
 import com.leone.boot.mvc.lock.zk.ZkLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,7 +27,7 @@ public class LockController {
     private static final String databaseKey = "goods:count";
     private static final Random random = new Random();
 
-    @DistributeLock(scene = "goods", keyExpression = "#count", key = "lock")
+    @RedisLock(scene = "goods", keyExpression = "#count", key = "lock")
     @GetMapping("/redis")
     public String redis() throws Exception {
         Object v = redisTemplate.opsForValue().get(databaseKey);

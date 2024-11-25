@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
  * @author leone
  * @since 2024-11-14
  **/
-public class HttpUtils {
+public class HttpBenchmark {
 
     private static final HttpClient client = HttpClient.newBuilder()
       .version(HttpClient.Version.HTTP_1_1)
@@ -47,7 +47,6 @@ public class HttpUtils {
           .timeout(Duration.ofSeconds(60))
           .GET()
           .build();
-
         CompletableFuture<Void> voidCompletableFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
           .thenApply(HttpResponse::body)
           .exceptionally(err -> "error: " + err.getMessage())

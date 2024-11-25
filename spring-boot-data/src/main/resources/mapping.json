@@ -1,0 +1,59 @@
+{
+  "properties": {
+    "productId": {
+      "type": "long",
+      "index": true,
+      "store": true
+    },
+    "category": {
+      "type": "keyword"
+    },
+    "categoryId": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "text",
+      "store": false,
+      "term_vector": "no",
+      "norms": false,
+      "index_options": "docs",
+      "analyzer": "whitespace",
+      "search_analyzer": "whitespace",
+      "fielddata": true
+    },
+    "name": {
+      "type": "text",
+      "store": false,
+      "term_vector": "no",
+      "norms": false,
+      "index_options": "docs",
+      "analyzer": "whitespace",
+      "search_analyzer": "whitespace",
+      "fielddata": true
+    },
+    "price": {
+      "type": "keyword"
+    },
+    "keywords": {
+      "type": "text",
+      "store": false,
+      "term_vector": "no",
+      "norms": false,
+      "index_options": "docs",
+      "analyzer": "whitespace",
+      "search_analyzer": "whitespace",
+      "fielddata": true
+    },
+    "saleNum": {
+      "type": "long",
+      "index": true,
+      "store": true
+    },
+    "createTime": {
+      "type": "keyword"
+    },
+    "location": {
+      "type": "geo_point"
+    }
+  }
+}

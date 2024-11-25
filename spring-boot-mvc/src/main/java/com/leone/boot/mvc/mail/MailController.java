@@ -61,7 +61,7 @@ public class MailController {
     private static final String filePath = "hello.zip";
 
 
-    private static Map<String, Object> content = new HashMap<>();
+    private static final Map<String, Object> content = new HashMap<>();
 
     static {
         content.put("title", "标题");
@@ -115,8 +115,6 @@ public class MailController {
      *
      * @param to
      * @param subject
-     * @return
-     * @throws Exception
      */
     public boolean sendFreemarkerMail(String to, String subject, String content) {
         try {
@@ -146,8 +144,6 @@ public class MailController {
      *
      * @param to
      * @param subject
-     * @return
-     * @throws Exception
      */
     public boolean sendThymeleafMail(String to, String subject, String content) {
         //        String token = storage(to);
@@ -170,7 +166,7 @@ public class MailController {
             log.info("send mail success!");
             return true;
         } catch (Exception e) {
-            log.error("send mail filed:{}", e);
+            log.error("send mail filed:{}", e.getMessage());
             e.printStackTrace();
             return false;
         }

@@ -6,7 +6,6 @@ import com.leone.boot.common.util.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -20,7 +19,7 @@ import java.util.Random;
  * @since 2018-06-12
  **/
 //@Component
-public class MainLogTask {
+public class LoggingGenerator {
 
     private static final Logger JSON_LOG = LoggerFactory.getLogger("json-log");
 

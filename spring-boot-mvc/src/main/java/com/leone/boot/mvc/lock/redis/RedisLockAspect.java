@@ -27,29 +27,29 @@ import java.util.concurrent.TimeUnit;
  */
 @Aspect
 @Component
-public class DistributeLockAspect {
+public class RedisLockAspect {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DistributeLockAspect.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RedisLockAspect.class);
 
     private final RedissonClient redissonClient;
 
-    public DistributeLockAspect(RedissonClient redissonClient) {
+    public RedisLockAspect(RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
     }
 
-    @Around("@annotation(com.leone.boot.mvc.lock.redis.DistributeLock)")
+    @Around("@annotation(com.leone.boot.mvc.lock.redis.RedisLock)")
     public Object process(ProceedingJoinPoint pjp) throws Exception {
         Object response;
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
-        DistributeLock distributeLock = method.getAnnotation(DistributeLock.class);
+        RedisLock redisLock = method.getAnnotation(RedisLock.class);
 
-        String key = distributeLock.key();
+        String key = redisLock.key();
         if (DistributeLockConstant.DEFAULT_LOCK_KEY.equals(key)) {
-            if (DistributeLockConstant.DEFAULT_LOCK_KEY.equals(distributeLock.keyExpression())) {
+            if (DistributeLockConstant.DEFAULT_LOCK_KEY.equals(redisLock.keyExpression())) {
                 throw new DistributeLockException("no lock key found...");
             }
             SpelExpressionParser parser = new SpelExpressionParser();
-            Expression expression = parser.parseExpression(distributeLock.keyExpression());
+            Expression expression = parser.parseExpression(redisLock.keyExpression());
 
             EvaluationContext context = new StandardEvaluationContext();
             // 获取参数值
@@ -70,11 +70,11 @@ public class DistributeLockAspect {
             key = String.valueOf(expression.getValue(context));
         }
 
-        String scene = distributeLock.scene();
+        String scene = redisLock.scene();
         String lockKey = scene + "#" + key;
 
-        int expireTime = distributeLock.expireTime();
-        int waitTime = distributeLock.waitTime();
+        int expireTime = redisLock.expireTime();
+        int waitTime = redisLock.waitTime();
         RLock rLock = redissonClient.getLock(lockKey);
         boolean lockResult = false;
         if (waitTime == DistributeLockConstant.DEFAULT_WAIT_TIME) {

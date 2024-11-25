@@ -1,6 +1,5 @@
 package com.leone.boot.mvc.web.controller;
 
-import com.leone.boot.mvc.pojo.UserDTO;
 //import io.swagger.annotations.Api;
 //import io.swagger.annotations.ApiOperation;
 //import io.swagger.annotations.ApiParam;
