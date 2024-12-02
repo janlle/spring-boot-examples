@@ -1,6 +1,6 @@
 package com.leone.boot.data.redis.jedis;
 
-import org.junit.Test;
+import redis.clients.jedis.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +53,6 @@ public class JedisDemo {
     /**
      * set and get string
      */
-    @Test
     public void stringTest() {
         Jedis jedis = jedisPool.getResource();
         // set:返回操作结果
@@ -106,7 +105,6 @@ public class JedisDemo {
     /**
      * redis中hash类型常用操作
      */
-    @Test
     public void hashTest() {
         Jedis jedis = jedisPool.getResource();
         // hset:返回值为key为新返回1，为旧覆盖旧值返回0
@@ -149,7 +147,6 @@ public class JedisDemo {
     /**
      * redis中 list 类型常用操作
      */
-    @Test
     public void listTest() {
         Jedis jedis = jedisPool.getResource();
 
@@ -197,7 +194,6 @@ public class JedisDemo {
     /**
      * redis中 set 类型常用操作
      */
-    @Test
     public void setTest() {
         Jedis jedis = jedisPool.getResource();
 
@@ -246,7 +242,6 @@ public class JedisDemo {
     /**
      * redis中 SortedSet 类型常用操作
      */
-    @Test
     public void sortedSetTest() {
         Jedis jedis = jedisPool.getResource();
 
