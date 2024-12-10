@@ -2,9 +2,9 @@ spring:
   autoconfigure:
     exclude: org.apache.shardingsphere.spring.boot.ShardingSphereAutoConfiguration
   datasource:
-    url: jdbc:mysql://localhost:3306/boot?useSSL=false
-    username: root
-    password: 123456
+    url: jdbc:mysql://${mysql_host}/boot?useSSL=false
+    username: ${mysql_username}
+    password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     # Druid连接池配置

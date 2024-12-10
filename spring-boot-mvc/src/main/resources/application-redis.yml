@@ -1,9 +1,9 @@
 spring:
   data:
     redis:
-      host: 127.0.0.1
-      port: 6379
-      password: 123456
+      host: ${redis_host}
+      port: ${redis_port}
+      password: ${redis_password}
       ssl:
         enabled: true
   redis:

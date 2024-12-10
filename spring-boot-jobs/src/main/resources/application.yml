@@ -27,9 +27,9 @@ spring:
           dataSource:
             myDs:
               driver: com.mysql.cj.jdbc.Driver
-              URL: jdbc:mysql://localhost:3306/quartz?useSSL=false
-              user: root
-              password: 123456
+              URL: jdbc:mysql://${mysql_host}/quartz?useSSL=false
+              user: ${mysql_username}
+              password: ${mysql_password}
 
 xxl:
   job:

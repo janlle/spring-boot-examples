@@ -2,15 +2,15 @@
 spring:
   datasource:
     master:
-      jdbc-url: jdbc:mysql://ruolin-mac.local:3306/boot?useSSL=false
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
+      jdbc-url: jdbc:mysql://${mysql_host}/boot?useSSL=false
+      driver-class-name: ${mysql_driver}
+      username: ${mysql_username}
+      password: ${mysql_password}
     slaver:
-      jdbc-url: jdbc:mysql://ruolin-mac.local:3306/boot?useSSL=false
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
+      jdbc-url: jdbc:mysql://${mysql_host}/boot?useSSL=false
+      driver-class-name: ${mysql_driver}
+      username: ${mysql_username}
+      password: ${mysql_password}
 
 logging:
   level:

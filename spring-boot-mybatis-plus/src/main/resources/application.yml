@@ -1,18 +1,16 @@
-# spring-boot 连接 mysql 配置
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db01?useSSL=false&characterEncoding=utf8
-    username: root
-    password:
+    driver-class-name: ${mysql_driver}
+    url: ${mysql_host}
+    username: ${mysql_username}
+    password: ${mysql_password}
 
 
 # mybatis-plus 配置
-
 mybatis-plus:
   mapper-locations: classpath:mybatis/mappers/*.xml
   # 实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.leone.mybatisplus.entity
+  typeAliasesPackage: com.leone.boot.mybatisplus.entity
   global-config:
     db-config:
       # 主键类型
@@ -24,8 +22,6 @@ mybatis-plus:
       logic-not-delete-value: 0
       # 是否开启大写命名，默认不开启
       capital-mode: false
-      # 表前缀
-      table-prefix: t_
       # 表名、是否使用下划线命名，默认数据库表使用下划线命名
       table-underline: false
   configuration:

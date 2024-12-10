@@ -2,9 +2,9 @@ spring:
   application:
     name: spring-boot-security
   datasource:
-    url: jdbc:mysql://localhost:3306/db01?useSSL=false
-    username: xxx
-    password: xxx
+    url: jdbc:mysql://${mysql_host}/boot?useSSL=false
+    username: ${mysql_username}
+    password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false

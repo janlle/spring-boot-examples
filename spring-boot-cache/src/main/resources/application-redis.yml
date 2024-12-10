@@ -2,10 +2,10 @@ spring:
   data:
     redis:
       database: 0
-      host: cloud.rm
-      port: 3690
+      host: ${redis_host}
+      port: ${redis_port}
       username: default
-      password: "4$-c#7be@d$8G06"
+      password: ${redis_password}
       ssl:
         enabled: true
   redis:

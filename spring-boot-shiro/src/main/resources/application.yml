@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/db01?useSSL=false
+    url: jdbc:mysql://${mysql_host}/db01?useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: xxx
-    password: xxx
+    username: ${mysql_username}
+    password: ${mysql_password}
   thymeleaf:
     cache: false
     prefix: classpath:/templates/
@@ -15,8 +15,9 @@ spring:
     check-template-location: false
   redis:
     database: 0
-    host: ip
-    password: xxx
+    host: ${redis_host}
+    port: ${redis_port}
+    password: ${redis_password}
 
 
 mybatis:

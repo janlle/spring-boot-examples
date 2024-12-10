@@ -6,8 +6,8 @@ singleServerConfig:
   retryInterval: 1500
   subscriptionsPerConnection: 5
   database: 0
-  address: "redis://cloud.rm:3690"
-  password: "4$-c#7be@d$8G06"
+  address: "redis://${redis_host}:${redis_port}"
+  password: ${redis_password}
   subscriptionConnectionMinimumIdleSize: 1
   subscriptionConnectionPoolSize: 50
   connectionMinimumIdleSize: 24

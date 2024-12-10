@@ -3,19 +3,16 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- 数据库驱动包位置 -->
-    <!-- 1 -->
-    <classPathEntry location="/Users/leone/.m2/repository/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar"/>
-
+    <classPathEntry
+            location="/Users/leone/.m2/repository/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar"/>
     <context id="DB2Tables" targetRuntime="MyBatis3">
-
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
-        <!-- 2 -->
         <!-- 数据库链接URL、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/boot?useSSL=false"
+                        connectionURL="jdbc:mysql://localhost:3306/nomsdb?useSSL=false"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -25,27 +22,36 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <!-- 生成实体路径 --> <!-- 3 -->
-        <javaModelGenerator targetPackage="com" targetProject="./src">
+        <!-- 生成实体路径 -->
+        <javaModelGenerator targetPackage="com" targetProject="/Users/leone/Downloads">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!-- 生成 xml 映射文件的路径 --> <!-- 4 -->
-        <sqlMapGenerator targetPackage="com" targetProject="./src">
+        <!-- 生成 xml 映射文件的路径 -->
+        <sqlMapGenerator targetPackage="com" targetProject="/Users/leone/Downloads">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <!-- 生成 mapper 接口的路径 --> <!-- 5 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com" targetProject="./src">
+        <!-- 生成 mapper 接口的路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com" targetProject="/Users/leone/Downloads">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!-- 要生成那些表(更改tableName 和 domainObjectName就可以) --> <!-- 6 -->
-        <table tableName="trade_order_item" domainObjectName="TradeOrderItem" enableCountByExample="false"
+        <!-- 要生成那些表(更改tableName 和 domainObjectName就可以) -->
+        <!--        <table tableName="kafka_channel_playlist" domainObjectName="KafkaChannelPlaylist" enableCountByExample="false"-->
+        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--               selectByExampleQueryId="false"/>-->
+
+        <table tableName="miguvideo_channel_playlist" domainObjectName="miguvideoChannelPlaylist"
+               enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+
+        <table tableName="miguvideo_playlist_program" domainObjectName="miguvideoPlaylistProgram"
+               enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
     </context>
-
 </generatorConfiguration>

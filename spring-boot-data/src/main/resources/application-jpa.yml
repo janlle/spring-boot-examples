@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/nfturbo?useSSL=false
-    username: root
-    password: 123456
+    url: jdbc:mysql://${mysql_host}/nfturbo?useSSL=false
+    username: ${mysql_username}
+    password: ${mysql_password}
   jpa:
     database: mysql
     hibernate:

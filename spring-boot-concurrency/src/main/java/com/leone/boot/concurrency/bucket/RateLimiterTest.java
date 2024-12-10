@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2018-09-09
  **/
 public class RateLimiterTest {
+
     /**
      * 令牌桶算法
      * 每秒生成 2 個令牌

@@ -4,9 +4,9 @@ singleServerConfig:
   timeout: 3000
   retryAttempts: 3
   retryInterval: 1500
-  password: 123456
+  password: ${redis_password}
   subscriptionsPerConnection: 5
-  address: "redis://127.0.0.1:6379"
+  address: "redis://${redis_host}:${redis_port}"
   database: 0
   subscriptionConnectionMinimumIdleSize: 1
   subscriptionConnectionPoolSize: 50

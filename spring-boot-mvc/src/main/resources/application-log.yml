@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: node-2:9092,node-3:9092,node-4:9092
+    bootstrap-servers: hw:9092
     producer:
       retries:
       batch-size: 16384
