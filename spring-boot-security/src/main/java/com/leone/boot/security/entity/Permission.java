@@ -18,7 +18,6 @@ import java.util.Set;
  **/
 @Entity
 @Table(name = "sys_permission")
-@Proxy(lazy = false)
 public class Permission implements Serializable {
 
     @Id

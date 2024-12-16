@@ -33,20 +33,10 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
-    /**
-     * @param account
-     * @param password
-     * @return
-     */
     public boolean login(String account, String password) {
         return ObjectUtils.isEmpty(userRepository.login(account, password));
     }
 
-    /**
-     * @param username
-     * @return
-     * @throws UsernameNotFoundException
-     */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.leone.boot.security.entity.User user = userRepository.findFirstByAccount(username);
 
@@ -60,12 +50,8 @@ public class UserServiceImpl implements IUserService {
         return new User(username, password, true, true, true, true, authorities);
     }
 
-
-    /**
-     * @param account
-     * @return
-     */
     public com.leone.boot.security.entity.User findByAccount(String account) {
+        log.info("登录账号: {} ", account);
         return userRepository.findFirstByAccount(account);
     }
 

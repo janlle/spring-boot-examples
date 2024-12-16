@@ -16,7 +16,6 @@ import java.util.Set;
  **/
 @Entity
 @Table(name = "sys_user")
-@Proxy(lazy = false)
 public class User implements Serializable {
 
     @Id

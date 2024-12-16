@@ -16,10 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {

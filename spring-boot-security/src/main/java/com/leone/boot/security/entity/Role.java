@@ -17,7 +17,6 @@ import java.util.Set;
  **/
 @Entity
 @Table(name = "sys_role")
-@Proxy(lazy = false)
 public class Role {
 
     @Id

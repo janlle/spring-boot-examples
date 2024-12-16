@@ -1,8 +1,13 @@
 spring:
   application:
     name: spring-boot-security
+  security:
+    user:
+      name: user
+      password: user
+      roles: ADMIN
   datasource:
-    url: jdbc:mysql://${mysql_host}/boot?useSSL=false
+    url: jdbc:mysql://${mysql_host}/boot?useSSL=false&allowPublicKeyRetrieval=true
     username: ${mysql_username}
     password: ${mysql_password}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,6 +27,4 @@ spring:
     show-sql: true
     open-in-view: true
 
-  security:
-    user:
-      name: user
+

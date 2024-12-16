@@ -20,10 +20,10 @@ import java.util.List;
  * @since 2018-05-22
  **/
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
 
-    @Resource
+    //@Resource
     private IUserService userService;
 
     @GetMapping
@@ -53,33 +53,27 @@ public class UserController {
         return idList;
     }
 
-    /**
+    /*
      * 拒绝所有请求
-     *
-     * @return
      */
     @DenyAll
-    @PostMapping
-    public String user() {
+    @GetMapping("/save")
+    public String save() {
         return "save";
     }
 
-    /**
-     * @param userId
-     * @return
-     */
     @RolesAllowed({"user", "admin"})
     @GetMapping("/{userId}")
     public String user(@PathVariable("userId") Long userId) {
         return "find";
     }
 
-    @PutMapping
+    @GetMapping("/update")
     public String update() {
         return "update";
     }
 
-    @DeleteMapping
+    @GetMapping("/delete")
     public String delete() {
         return "delete";
     }
