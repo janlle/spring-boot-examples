@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: ${mysql_driver}
+    url: ${mysql_host}
+    username: ${mysql_username}
+    password: ${mysql_password}
+
+  security:
+    user:
+      name: user
+      password: user
+      roles: ADMIN

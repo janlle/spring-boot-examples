@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,10 +33,10 @@ public class LettuceFactory {
 
     public static RedisCommands<String, String> newSingle(String host, int port, int db, String password) {
         RedisURI.Builder builder = RedisURI.builder()
-                .withHost(host)
-                .withPort(port)
-                .withDatabase(db)
-                .withTimeout(Duration.of(60, ChronoUnit.SECONDS));
+          .withHost(host)
+          .withPort(port)
+          .withDatabase(db)
+          .withTimeout(Duration.of(60, ChronoUnit.SECONDS));
         if (password != null) {
             builder.withPassword(password.toCharArray());
         }
@@ -44,23 +45,9 @@ public class LettuceFactory {
         return connection.sync();
     }
 
-    public static RedisAdvancedClusterCommands<String, String> newCluster(String host, int port, String password) {
-        RedisURI.Builder builder = RedisURI.builder()
-                .withHost(host)
-                .withPort(port)
-                .withTimeout(Duration.of(60, ChronoUnit.SECONDS));
-
-        if (password != null) {
-            builder.withPassword(password.toCharArray());
-        }
-        RedisClusterClient cluster = RedisClusterClient.create(builder.build());
-        StatefulRedisClusterConnection<String, String> connection = cluster.connect();
-        return connection.sync();
-    }
-
     public static RedisAdvancedClusterCommands<String, String> newCluster(List<String> hosts, String password) {
         RedisURI.Builder builder = RedisURI.builder()
-                .withTimeout(Duration.of(60, ChronoUnit.SECONDS));
+          .withTimeout(Duration.of(60, ChronoUnit.SECONDS));
 
         for (String host : hosts) {
             String[] split = host.split(":");
@@ -83,10 +70,11 @@ public class LettuceFactory {
     public static synchronized GenericObjectPool<StatefulRedisConnection<String, String>> newSingleConnPool(String host, int port, String password) {
         if (pool == null) {
             RedisURI redisUri = RedisURI.builder()
-                    .withHost(host)
-                    .withPort(port)
-                    .withTimeout(Duration.of(10, ChronoUnit.SECONDS))
-                    .build();
+              .withHost(host)
+              .withPort(port)
+              .withPassword(password.toCharArray())
+              .withTimeout(Duration.of(10, ChronoUnit.SECONDS))
+              .build();
 
             RedisClient redisClient = RedisClient.create(redisUri);
 
@@ -100,14 +88,17 @@ public class LettuceFactory {
     }
 
     public static void main(String[] args) throws Exception {
-        GenericObjectPool<StatefulRedisConnection<String, String>> pool = LettuceFactory.newSingleConnPool("localhost", 6379, null);
-        StatefulRedisConnection<String, String> conn = pool.borrowObject();
+        //GenericObjectPool<StatefulRedisConnection<String, String>> pool = LettuceFactory.newSingleConnPool("cloud.rm", 3690, "4$-c#7be@d$8G06");
+        //StatefulRedisConnection<String, String> conn = pool.borrowObject();
+        //RedisCommands<String, String> command = conn.sync();
+        //command.set("a", "ab", SetArgs.Builder.ex(100));
+        //System.out.println(command.get("a"));
+        //pool.returnObject(conn);
 
-        RedisCommands<String, String> command = conn.sync();
-        command.set("a", "ab", SetArgs.Builder.ex(100));
+        RedisAdvancedClusterCommands<String, String> command = newCluster(List.of("hw:3001"), "A-7p1)2^3i1");
+        command.set("a", "aa");
         System.out.println(command.get("a"));
 
-        pool.returnObject(conn);
     }
 
 }

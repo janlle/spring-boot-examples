@@ -14,12 +14,12 @@ import java.lang.annotation.Target;
  **/
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SystemLogAnno {
+public @interface LogAop {
 
     String description() default "";
 
     String value() default "";
 
-    String name() default "";
+    String name() default "def name";
 
 }

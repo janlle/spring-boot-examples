@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.nio.file.Paths;
+import java.util.Map;
 
 /**
  * <p> 执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
@@ -15,31 +16,35 @@ import java.nio.file.Paths;
 public class CodeGenerator {
 
     public static void main(String[] args) {
-        String outputPath = Paths.get(System.getProperty("user.home")) + "/Downloads/java";
+        String outputPath = Paths.get(System.getProperty("user.home")) + "/Downloads";
+        System.out.println("Generate code path: " + outputPath);
 
-        FastAutoGenerator.create("jdbc:mysql://localhost:3306/boot?useSSL=false", "root", "123456")
+        FastAutoGenerator.create("jdbc:mysql://" + System.getenv("mysql_host") + "/boot?useSSL=false",
+            System.getenv("mysql_username"),
+            System.getenv("mysql_password"))
           .globalConfig(builder -> builder
-            .author("leone")
+            .author(System.getenv("USER"))
             .commentDate("yyyy-MM-dd")
             .outputDir(outputPath)
           )
           .packageConfig(builder -> builder
-              .parent("com.leone.boot.mybatisplus")
-              .entity("entity")
-              .mapper("mapper")
-              .xml("mapper.xml")
-            //.service("service")
-            //.serviceImpl("service.impl")
+            .parent("com.leone.xxx")
+            .entity("entity")
+            .mapper("mapper")
+            .xml("mapper.xml")
+            .service("service")
+            .serviceImpl("service.impl")
           )
           .strategyConfig(builder -> builder
-            // 表名
-            .addInclude(
-              "goods"
-            )
+              // 表名
+              .addInclude(
+                "goods"
+              )
+            //.addTablePrefix("t_")
           )
           .templateEngine(new FreemarkerTemplateEngine())
           .execute();
-        System.out.println("GenerateCode: " + outputPath);
+        System.out.println("Code generate finished...");
     }
 
 }

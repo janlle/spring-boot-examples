@@ -46,6 +46,7 @@
         <module>spring-boot-learn</module>
         <module>spring-boot-mybatis-plus</module>
         <module>spring-boot-sharding-jdbc</module>
+        <module>spring-boot-empty</module>
     </modules>
 
     <build>
