@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leone.boot.shiro.mapper.SysUserMapper">
+
+    <resultMap id="UserPermissionMap" type="com.leone.boot.shiro.entity.SysUser">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="user_status" property="userStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+        <result column="deleted" property="deleted"/>
+
+        <collection property="roles" ofType="com.leone.boot.shiro.entity.SysRole">
+            <id column="id" property="id"/>
+            <result column="role_id" property="roleId"/>
+            <result column="role_desc" property="roleDesc"/>
+            <result column="role_name" property="roleName"/>
+            <result column="role_status" property="roleStatus"/>
+            <result column="create_time" property="createTime"/>
+            <result column="modify_time" property="modifyTime"/>
+            <result column="deleted" property="deleted"/>
+
+            <collection property="permissions" ofType="com.leone.boot.shiro.entity.SysPermission">
+                <id column="id" property="id"/>
+                <result column="permission_id" property="permissionId"/>
+                <result column="permission_name" property="permissionName"/>
+                <result column="permission_type" property="permissionType"/>
+                <result column="permission_status" property="permissionStatus"/>
+                <result column="url" property="url"/>
+                <result column="parent_id" property="parentId"/>
+                <result column="sort" property="sort"/>
+                <result column="create_time" property="createTime"/>
+                <result column="modify_time" property="modifyTime"/>
+                <result column="deleted" property="deleted"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findAllPermissionByAccount" parameterType="java.lang.String" resultMap="UserPermissionMap">
+        SELECT u.*, p.*, r.* FROM sys_user u
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        LEFT JOIN sys_role r ON r.role_id = ur.role_id
+        LEFT JOIN sys_permission_role rp ON rp.role_id = r.role_id
+        LEFT JOIN sys_permission p ON p.permission_id = rp.permission_id
+        WHERE u.user_id = #{userId}
+    </select>
+
+</mapper>

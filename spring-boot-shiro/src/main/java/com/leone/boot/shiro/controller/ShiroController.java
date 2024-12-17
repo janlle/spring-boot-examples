@@ -1,20 +1,21 @@
 package com.leone.boot.shiro.controller;
 
-import com.leone.boot.shiro.utils.UserHelper;
-import com.leone.boot.shiro.entity.User;
+import cn.hutool.crypto.digest.DigestUtil;
+import com.leone.boot.shiro.util.UserHelper;
+import com.leone.boot.shiro.entity.SysUser;
 import com.leone.boot.shiro.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.*;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,13 +45,13 @@ public class ShiroController {
                         @RequestParam String password,
                         HttpSession session,
                         @RequestHeader("Host") String host) {
-        User loginUser = userService.findUserByAccount(account);
+        SysUser loginUser = userService.findUserByAccount(account);
         if (!ObjectUtils.isEmpty(loginUser)) {
 //            if (new Md5Hash(password, loginUser.getSalt()).toString().equals(loginUser.getPassword())) {
-            if (new Md5Hash(password).toString().equals(loginUser.getPassword())) {
+            if (DigestUtil.md5Hex(password).equals(loginUser.getPassword())) {
                 session.setAttribute("user", loginUser);
                 Subject subject = SecurityUtils.getSubject();
-                subject.login(new UsernamePasswordToken(account, new Md5Hash(password).toString(), true, host));
+                subject.login(new UsernamePasswordToken(account, DigestUtil.md5Hex(password), true, host));
                 if (subject.isAuthenticated()) {
                     return "index";
                 }
@@ -103,7 +104,7 @@ public class ShiroController {
 
     @PutMapping
     @RequiresPermissions("user:update")
-    public String update(@RequestBody User user) {
+    public String update(@RequestBody SysUser user) {
         return "userUpdate";
     }
 

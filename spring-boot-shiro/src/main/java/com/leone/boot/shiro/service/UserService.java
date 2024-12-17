@@ -1,16 +1,16 @@
 package com.leone.boot.shiro.service;
 
 
-import com.leone.boot.shiro.entity.User;
+import com.leone.boot.shiro.entity.SysUser;
 
 public interface UserService {
 
-    User findAllPermissionByAccount(String account);
+    SysUser findAllPermissionByAccount(String account);
 
-    User login(String account, String password);
+    SysUser login(String account, String password);
 
     void logout(String account);
 
-    User findUserByAccount(String account);
+    SysUser findUserByAccount(String account);
 
 }

@@ -1,12 +1,11 @@
 package com.leone.boot.shiro;
 
-import com.leone.boot.shiro.entity.User;
-import com.leone.boot.shiro.mapper.UserMapper;
+import com.leone.boot.shiro.entity.SysUser;
+import com.leone.boot.shiro.mapper.SysUserMapper;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * <p>
@@ -19,11 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserMapperTest {
 
     @Autowired
-    private UserMapper userMapper;
+    private SysUserMapper userMapper;
 
     
     public void login() {
-        User user = userMapper.login("jack", "jack");
+        SysUser user = userMapper.login("jack", "jack");
         System.out.println(user);
     }
 

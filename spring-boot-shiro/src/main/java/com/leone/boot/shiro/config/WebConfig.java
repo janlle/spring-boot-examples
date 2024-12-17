@@ -16,8 +16,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
 
-    private final TokenInterceptor tokenInterceptor;
+    private TokenInterceptor tokenInterceptor;
 
+    @Autowired
     public WebConfig(TokenInterceptor tokenInterceptor) {
         this.tokenInterceptor = tokenInterceptor;
     }
@@ -25,15 +26,15 @@ public class WebConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH")
-                .allowCredentials(true)
-                .maxAge(3600);
+          .allowedOriginPatterns("*")
+          .allowedMethods("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH")
+          .allowCredentials(true)
+          .maxAge(3600);
     }
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
+        // registry.addInterceptor(tokenInterceptor).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 }

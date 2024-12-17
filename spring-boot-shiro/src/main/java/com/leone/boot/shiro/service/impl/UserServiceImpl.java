@@ -1,7 +1,7 @@
 package com.leone.boot.shiro.service.impl;
 
-import com.leone.boot.shiro.entity.User;
-import com.leone.boot.shiro.mapper.UserMapper;
+import com.leone.boot.shiro.entity.SysUser;
+import com.leone.boot.shiro.mapper.SysUserMapper;
 import com.leone.boot.shiro.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,31 +20,29 @@ public class UserServiceImpl implements UserService {
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private UserMapper userMapper;
+    private SysUserMapper userMapper;
 
-    /**
-     * @param account
-     * @return
-     */
     @Override
-    public User findAllPermissionByAccount(String account) {
-        User user = userMapper.findAllPermissionByAccount(account);
-        log.info("user: {}", user);
+    public SysUser findAllPermissionByAccount(String account) {
+        SysUser user = userMapper.findAllPermissionByAccount(account);
+        log.info("findAllPermissionByAccount: {}", user);
         return user;
     }
 
     @Override
-    public User login(String account, String password) {
+    public SysUser login(String account, String password) {
+        log.info("login: {}", account);
         return userMapper.login(account, password);
     }
 
     @Override
     public void logout(String account) {
-
+        log.info("logout: {}", account);
     }
 
     @Override
-    public User findUserByAccount(String account) {
+    public SysUser findUserByAccount(String account) {
+        log.info("findUserByAccount: {}", account);
         return userMapper.findUserByAccount(account);
     }
 

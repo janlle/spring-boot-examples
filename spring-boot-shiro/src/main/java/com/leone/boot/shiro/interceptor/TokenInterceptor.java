@@ -1,10 +1,9 @@
 package com.leone.boot.shiro.interceptor;
 
-import com.leone.boot.shiro.common.Result;
 import com.leone.boot.shiro.common.anno.AuthToken;
 import com.leone.boot.shiro.config.TokenProperties;
 import com.leone.boot.shiro.exception.ValidateException;
-import com.leone.boot.shiro.utils.TokenUtil;
+import com.leone.boot.shiro.util.TokenUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,7 +45,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         if (method.getAnnotation(AuthToken.class) != null || methodHandle.getBeanType().getAnnotation(AuthToken.class) != null) {
             String token = request.getHeader(tokenProperties.getHeaderName());
-            if (StringUtils.isEmpty(token)) {
+            if (ObjectUtils.isEmpty(token)) {
                 throw new ValidateException(40001, "Authentication token is empty.");
             } else {
                 String userId = TokenUtil.validateToken(token, tokenProperties.getSecret())[0];

@@ -1,4 +1,4 @@
-package com.leone.boot.data.mybatis.generator;
+package com.leone.boot.common.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,45 +6,41 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * <p>
+ * <p> 根据实体生成sql建表语句，打印到控制台
  *
  * @author leone
  * @since 2024-11-20
  **/
-public class SqlGenerator {
+public class SqlGeneratorUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(SqlGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(SqlGeneratorUtil.class);
     public static Map<String, String> map = new HashMap<>();
+    private static final String NEWLINE_AND_TAB = "\n\t";
 
     static {
-        map.put("class java.lang.String", "varchar(255)");
-        map.put("class java.lang.Integer", "int");
-        map.put("class java.lang.Long", "bigint");
-        map.put("class java.lang.byte[]", "blob");
-        map.put("class java.lang.Boolean", "bit");
-        map.put("class java.math.BigInteger", "bigint");
-        map.put("class java.lang.Float", "float");
-        map.put("class java.lang.Double", "double");
-        map.put("class java.sql.Date", "datetime");
-        map.put("class java.sql.Time", "time");
-        map.put("class java.sql.Timestamp", "datetime");
-        map.put("class java.util.Date", "datetime");
-        map.put("class java.time.LocalDateTime", "datetime");
-        map.put("class java.time.LocalDate", "date");
-        map.put("class java.time.LocalTime", "time");
-        map.put("class java.lang.Byte", "tinyint");
-        map.put("class java.math.BigDecimal", "decimal(18, 6)");
+        map.put("java.lang.String", "varchar(255)");
+        map.put("java.lang.Integer", "int");
+        map.put("java.lang.Long", "bigint");
+        map.put("java.lang.Boolean", "bit");
+        map.put("java.math.BigInteger", "bigint");
+        map.put("java.lang.Float", "float");
+        map.put("java.lang.Double", "double");
+        map.put("java.util.Date", "datetime");
+        map.put("java.time.LocalDate", "date");
+        map.put("java.time.LocalTime", "time");
+        map.put("java.time.LocalDateTime", "datetime");
+        map.put("java.math.BigDecimal", "decimal(18, 6)");
     }
 
     public static void main(String[] args) {
-        //表命名前缀
-        String tablePrefix = "";
-        //实体类所在的package在磁盘上的绝对路径
-        String packageName = "/Users/leone/Documents/Workspaces/Java/spring-boot-examples/spring-boot-data/src/main/java/com/leone/boot/data/mybatis/entity";
+        // 实体类所在的package在磁盘上的绝对路径
+        String packageName = "/Users/leone/Documents/Workspaces/Java/spring-boot-examples/spring-boot-mybatis-plus/src/main/java/com/leone/boot/mybatisplus/entity";
         String prefix = packageName.substring(packageName.indexOf("java") + 5).replace("/", ".") + ".";
-        sqlConstruction(packageName, prefix, tablePrefix);
+        logger.info("packageName: {}", prefix);
+        sqlConstruction(packageName, prefix, "");
     }
 
     public static Field[] getAllFields(Class<?> clazz) {
@@ -93,22 +89,26 @@ public class SqlGenerator {
                 if (f.getName().equalsIgnoreCase("serialVersionUID")) {
                     continue;
                 }
-                if ("class java.lang.String".equals(f.getType().toString())) {
-                    column.append("\n\t").append(getStandardFields(f.getName())).append(" ").append(map.get(f.getType().toString())).append(varchar);
+                if ("java.lang.String".equals(f.getType().getName())) {
+                    column.append(NEWLINE_AND_TAB).append(getStandardFields(f.getName())).append(" ").append(map.get(f.getType().getName())).append(varchar);
                 } else if (f.getName().equalsIgnoreCase("id")) {
-                    column.append("\n\t").append(getStandardFields(f.getName())).append(" ").append("bigint not null auto_increment,");
+                    column.append(NEWLINE_AND_TAB).append(getStandardFields(f.getName())).append(" ").append("bigint primary key auto_increment,");
                 } else {
-                    column.append("\n\t").append(getStandardFields(f.getName())).append(" ").append(map.get(f.getType().toString())).append(",");
+                    column.append(NEWLINE_AND_TAB).append(getStandardFields(f.getName())).append(" ").append(map.get(f.getType().getName())).append(",");
                 }
             }
-            //已单独指定id列的生成语句，去掉多余id的拼接
-            String columnSql = column.substring(column.indexOf(",") + 1);
             StringBuilder sql = new StringBuilder();
-            sql.append("\nDROP TABLE IF EXISTS ").append(className).append(";")
-              .append("\nCREATE TABLE ").append(className).append(" (")
-              .append(columnSql)
-              .append("\n\tPRIMARY KEY (id)")
-              .append("\n) ENGINE=InnoDB DEFAULT CHARSET=UTF8;");
+            sql.append("\n")
+              .append("DROP TABLE IF EXISTS ")
+              .append(className)
+              .append(";")
+              .append("\n")
+              .append("CREATE TABLE ")
+              .append(className)
+              .append(" (")
+              .append(column.deleteCharAt(column.toString().lastIndexOf(",")))
+              .append("\n")
+              .append(") ENGINE=InnoDB DEFAULT CHARSET=UTF8;");
             return sql.toString();
         } catch (ClassNotFoundException e) {
             logger.error("该类未找到！");
@@ -126,7 +126,6 @@ public class SqlGenerator {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
-            //非首字母，在大写字母A到Z之间
             if (i != 0 && (c >= 'A' && c <= 'Z')) {
                 sb.append("_");
             }
@@ -141,19 +140,11 @@ public class SqlGenerator {
      * @param packageName 全类名
      */
     public static List<String> getAllClasses(String packageName) {
-        List<String> classList = new ArrayList<>();
-        String className = "";
         File f = new File(packageName);
         if (f.exists() && f.isDirectory()) {
-            File[] files = f.listFiles();
-            // 遍历实体类下面等所有.java文件 获取其类名
-            for (File file : Objects.requireNonNull(files)) {
-                className = file.getName();
-                classList.add(className);
-            }
-            return classList;
+            return Arrays.stream(Objects.requireNonNull(f.listFiles())).toList().stream().map(File::getName).collect(Collectors.toList());
         } else {
-            logger.debug("包路径未找到！");
+            logger.error("包路径未找到！");
             return null;
         }
     }

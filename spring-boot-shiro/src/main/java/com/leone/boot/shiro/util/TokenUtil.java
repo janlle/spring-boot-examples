@@ -1,4 +1,4 @@
-package com.leone.boot.shiro.utils;
+package com.leone.boot.shiro.util;
 
 import jakarta.xml.bind.DatatypeConverter;
 import jakarta.xml.bind.annotation.adapters.HexBinaryAdapter;

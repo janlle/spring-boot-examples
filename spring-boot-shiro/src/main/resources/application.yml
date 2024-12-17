@@ -20,6 +20,10 @@ spring:
     password: ${redis_password}
 
 
+mybatis-plus:
+  global-config:
+    banner: false
+
 mybatis:
   configuration:
     # 全局映射器启用缓存

@@ -1,9 +1,9 @@
 package com.leone.boot.shiro.config;
 
 
-import com.leone.boot.shiro.entity.Permission;
-import com.leone.boot.shiro.entity.Role;
-import com.leone.boot.shiro.entity.User;
+import com.leone.boot.shiro.entity.SysPermission;
+import com.leone.boot.shiro.entity.SysRole;
+import com.leone.boot.shiro.entity.SysUser;
 import com.leone.boot.shiro.service.UserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +28,7 @@ import java.util.Set;
  * @author leone
  * @since 2018-04-21
  **/
+@Component
 public class MySqlAuthRealm extends AuthorizingRealm {
 
     private static final Logger log = LoggerFactory.getLogger(MySqlAuthRealm.class);
@@ -44,7 +47,7 @@ public class MySqlAuthRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         log.info("AuthorizingRealm 认证...");
         String name = token.getPrincipal().toString();
-        User user = userService.findAllPermissionByAccount(name);
+        SysUser user = userService.findAllPermissionByAccount(name);
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 
@@ -58,19 +61,19 @@ public class MySqlAuthRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         log.info("AuthorizingRealm 授权...");
-        User user = (User) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
+        SysUser user = (SysUser) principalCollection.fromRealm(this.getClass().getName()).iterator().next();
 
         List<String> permissionList = new ArrayList<>();
         List<String> roleList = new ArrayList<>();
 
-        Set<Role> roleSet = user.getRoles();
+        Set<SysRole> roleSet = user.getRoles();
         if (CollectionUtils.isNotEmpty(roleSet)) {
-            for (Role role : roleSet) {
-                roleList.add(role.getName());
-                Set<Permission> permissionSet = role.getPermissions();
+            for (SysRole role : roleSet) {
+                roleList.add(role.getRoleName());
+                Set<SysPermission> permissionSet = role.getPermissions();
                 if (CollectionUtils.isNotEmpty(permissionSet)) {
-                    for (Permission permission : permissionSet) {
-                        permissionList.add(permission.getName());
+                    for (SysPermission permission : permissionSet) {
+                        permissionList.add(permission.getPermissionName());
                     }
                 }
             }
@@ -78,7 +81,7 @@ public class MySqlAuthRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addStringPermissions(permissionList);
         info.addRoles(roleList);
-        log.info("user: {} roles: {} permissions: {}", user.getAccount(), roleList, permissionList);
+        log.info("user: {} roles: {} permissions: {}", user.getUserId(), roleList, permissionList);
         return info;
     }
 

@@ -47,16 +47,16 @@ public class ShiroConfig {
     @Resource
     private RedisProperties redisProperties;
 
+    @Resource
+    private MySqlAuthRealm mySqlAuthRealm;
+
     /**
      * shiro 核心 filter
-     *
-     * @param securityManager
-     * @return
      */
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilter() {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
-        shiroFilter.setSecurityManager(securityManager);
+        shiroFilter.setSecurityManager(securityManager());
         Map<String, String> filterChainMapping = shiroFilter.getFilterChainDefinitionMap();
 
         // 不被被拦截的链接 顺序判断
@@ -83,7 +83,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager(MySqlAuthRealm mySqlAuthRealm, CacheManager cacheManager, SessionManager sessionManager, RememberMeManager rememberMeManager) {
+    public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 自定义 realm
         securityManager.setRealm(mySqlAuthRealm);
@@ -103,20 +103,13 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    /**
-     * @return
-     */
-    @Bean
-    public MySqlAuthRealm mySqlAuthRealm() {
-        return new MySqlAuthRealm();
-    }
 
     /**
      * shiro session 管理器
      *
      * @return
      */
-    @Bean
+    //@Bean
     public SessionManager sessionManager() {
         ShiroSessionManager shiroSessionManager = new ShiroSessionManager();
         //这里可以不设置 Shiro 有默认的 session 管理。如果缓存为 Redis 则需改用Redis的管理

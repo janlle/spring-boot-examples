@@ -1,4 +1,4 @@
-package com.leone.boot.shiro.utils;
+package com.leone.boot.shiro.util;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

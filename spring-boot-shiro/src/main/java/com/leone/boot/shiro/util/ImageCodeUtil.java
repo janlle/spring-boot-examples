@@ -1,4 +1,4 @@
-package com.leone.boot.shiro.utils;
+package com.leone.boot.shiro.util;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +19,6 @@ public class ImageCodeUtil {
 
     /**
      * 生成验证码
-     *
-     * @param response
-     * @param width
-     * @param height
-     * @return
-     * @throws Exception
      */
     public static String generate(HttpServletResponse response, int width, int height) throws Exception {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);

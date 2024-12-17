@@ -3,7 +3,7 @@ package com.leone.boot.shiro.controller;
 import com.leone.boot.shiro.common.Result;
 import com.leone.boot.shiro.common.anno.AuthToken;
 import com.leone.boot.shiro.config.TokenProperties;
-import com.leone.boot.shiro.utils.TokenUtil;
+import com.leone.boot.shiro.util.TokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,13 +1,15 @@
 package com.leone.boot.shiro.controller;
 
-import com.leone.boot.shiro.entity.User;
+import cn.hutool.crypto.digest.DigestUtil;
+import cn.hutool.crypto.digest.MD5;
+import com.leone.boot.shiro.entity.SysUser;
 import com.leone.boot.shiro.service.UserService;
-import com.leone.boot.shiro.utils.ImageCodeUtil;
+import com.leone.boot.shiro.util.ImageCodeUtil;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @GetMapping("/login")
@@ -37,8 +39,8 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@RequestParam String account, @RequestParam String password, HttpSession session, @RequestHeader("Host") String host) {
-        password = new Md5Hash("admin").toString();
-        User login = userService.login(account, password);
+        password = DigestUtil.md5Hex("admin");
+        SysUser login = userService.login(account, password);
         try {
             if (!ObjectUtils.isEmpty(login)) {
                 session.setAttribute("user", login);
@@ -63,6 +65,12 @@ public class LoginController {
     @RequestMapping("/index")
     public String index(ModelMap modelMap) {
         return "index";
+    }
+
+    @ResponseBody
+    @RequestMapping("/home")
+    public String home() {
+        return "home";
     }
 
 }

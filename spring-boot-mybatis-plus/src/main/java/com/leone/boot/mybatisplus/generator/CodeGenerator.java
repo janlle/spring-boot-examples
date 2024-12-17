@@ -38,7 +38,9 @@ public class CodeGenerator {
           .strategyConfig(builder -> builder
               // 表名
               .addInclude(
-                "goods"
+                "sys_user",
+                "sys_role",
+                "sys_permission"
               )
             //.addTablePrefix("t_")
           )
