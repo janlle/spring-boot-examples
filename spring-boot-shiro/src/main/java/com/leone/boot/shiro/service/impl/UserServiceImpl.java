@@ -23,27 +23,27 @@ public class UserServiceImpl implements UserService {
     private SysUserMapper userMapper;
 
     @Override
-    public SysUser findAllPermissionByAccount(String account) {
-        SysUser user = userMapper.findAllPermissionByAccount(account);
+    public SysUser findAllPermissionByAccount(String userId) {
+        SysUser user = userMapper.findAllPermissionByAccount(userId);
         log.info("findAllPermissionByAccount: {}", user);
         return user;
     }
 
     @Override
-    public SysUser login(String account, String password) {
-        log.info("login: {}", account);
-        return userMapper.login(account, password);
+    public SysUser login(String userId, String password) {
+        log.info("login: {}", userId);
+        return userMapper.login(userId, password);
     }
 
     @Override
-    public void logout(String account) {
-        log.info("logout: {}", account);
+    public void logout(String userId) {
+        log.info("logout: {}", userId);
     }
 
     @Override
-    public SysUser findUserByAccount(String account) {
-        log.info("findUserByAccount: {}", account);
-        return userMapper.findUserByAccount(account);
+    public SysUser findUserByAccount(String userId) {
+        log.info("findUserByAccount: {}", userId);
+        return userMapper.findUserByAccount(userId);
     }
 
 }

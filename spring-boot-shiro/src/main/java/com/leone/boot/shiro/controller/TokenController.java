@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +36,8 @@ public class TokenController {
     private String userId = "120040";
 
     @PostMapping("/login")
-    public Result login(@RequestParam(required = false, defaultValue = "398122") String account,
-                        @RequestParam(required = false, defaultValue = "459656") String password) {
+    public Result<Object> login(@RequestParam(required = false, defaultValue = "398122") String account,
+                                @RequestParam(required = false, defaultValue = "459656") String password) {
         log.info("account: {} password: {}", account, password);
         String token = TokenUtil.generateToken(userId, "1", tokenProperties.getSecret());
         stringRedisTemplate.opsForValue().set(tokenProperties.getRedisPrefix() + ":" + tokenProperties.getTokenPrefix() + ":" + userId, token, tokenProperties.getDuration(), TimeUnit.SECONDS);
@@ -46,7 +47,7 @@ public class TokenController {
     @PostMapping("/logout")
     public Result<Object> logout(HttpServletRequest request) {
         String token = request.getHeader(tokenProperties.getHeaderName());
-        if (!StringUtils.isEmpty(token)) {
+        if (!ObjectUtils.isEmpty(token)) {
             String[] tokenArr = TokenUtil.validateToken(token, tokenProperties.getSecret());
             String userId = tokenArr[0];
             // 验证db用户

@@ -1,6 +1,6 @@
 package com.leone.boot.shiro.test;
 
-import com.leone.boot.shiro.config.MySqlAuthRealm;
+import com.leone.boot.shiro.config.DatabaseRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
@@ -14,7 +14,7 @@ import org.apache.shiro.subject.Subject;
 public class CustomRealmTest {
 
     public static void main(String[] args) {
-        MySqlAuthRealm authRealm = new MySqlAuthRealm();
+        DatabaseRealm authRealm = new DatabaseRealm();
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         securityManager.setRealm(authRealm);
 

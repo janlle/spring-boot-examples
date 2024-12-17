@@ -3,8 +3,6 @@ package com.leone.boot.shiro.config;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -48,7 +46,7 @@ public class ShiroConfig {
     private RedisProperties redisProperties;
 
     @Resource
-    private MySqlAuthRealm mySqlAuthRealm;
+    private DatabaseRealm mySqlAuthRealm;
 
     /**
      * shiro 核心 filter
@@ -106,8 +104,6 @@ public class ShiroConfig {
 
     /**
      * shiro session 管理器
-     *
-     * @return
      */
     //@Bean
     public SessionManager sessionManager() {
@@ -119,8 +115,6 @@ public class ShiroConfig {
 
     /**
      * shiro 记住我管理器
-     *
-     * @return
      */
     @Bean
     public CookieRememberMeManager rememberMeManager() {
@@ -146,8 +140,6 @@ public class ShiroConfig {
 
     /**
      * 密码加密匹配管理器
-     *
-     * @return
      */
     @Bean
     public CredentialsMatcher credentialMatcher() {
@@ -162,9 +154,6 @@ public class ShiroConfig {
 
     /**
      * cacheManager 缓存 redis 实现,使用的是 shiro-redis 开源插件
-     *
-     * @param redisManager
-     * @return
      */
     @Bean
     public RedisCacheManager cacheManager(RedisManager redisManager) {
@@ -177,8 +166,6 @@ public class ShiroConfig {
 
     /**
      * 配置 shiro redisManager 使用的是 shiro-redis 开源插件
-     *
-     * @return
      */
     @Bean
     public RedisManager redisManager() {
@@ -194,8 +181,6 @@ public class ShiroConfig {
     /**
      * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
      * 配置以下两个bean(DefaultAdvisorAutoProxyCreator和AuthorizationAttributeSourceAdvisor)即可实现此功能
-     *
-     * @return
      */
     @Bean
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
@@ -206,9 +191,6 @@ public class ShiroConfig {
 
     /**
      * 开启aop注解支持，解决shiro注解不起作用问题
-     *
-     * @param securityManager
-     * @return
      */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {

@@ -29,19 +29,15 @@ import java.util.Set;
  * @since 2018-04-21
  **/
 @Component
-public class MySqlAuthRealm extends AuthorizingRealm {
+public class DatabaseRealm extends AuthorizingRealm {
 
-    private static final Logger log = LoggerFactory.getLogger(MySqlAuthRealm.class);
+    private static final Logger log = LoggerFactory.getLogger(DatabaseRealm.class);
 
     @Resource
     private UserService userService;
 
     /**
      * 认证
-     *
-     * @param token
-     * @return
-     * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
@@ -54,9 +50,6 @@ public class MySqlAuthRealm extends AuthorizingRealm {
 
     /**
      * 授权
-     *
-     * @param principalCollection
-     * @return
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {

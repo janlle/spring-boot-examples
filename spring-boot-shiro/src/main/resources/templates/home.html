@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>home</title>
+</head>
+<body>
+<h3><p th:text="'hello: ' + ${session.user.username}"></p></h3>
+<p><a th:href="@{/user/list}">user查询用户</a></p>
+<p><a th:href="@{/user/add}">user添加用户</a></p>
+<p><a th:href="@{/user/update}">user修改用户</a></p>
+
+<p><a th:href="@{/admin/list}">admin查询用户</a></p>
+<p><a th:href="@{/admin/add}">admin添加用户</a></p>
+<p><a th:href="@{/admin/update}">admin修改用户</a></p>
+<p><a th:href="@{/logout}">退出登录</a></p>
+</body>
+</html>
+
+
+
+
+
+

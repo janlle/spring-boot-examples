@@ -17,20 +17,17 @@ public class UserHelper {
     private UserHelper() {
     }
 
-    public static Integer userId() {
+    public static String userId() {
         final Object userId = subject.getPrincipal();
         if (userId == null) {
             throw new AuthenticationException();
         }
-        return Integer.parseInt(userId.toString());
+        return userId.toString();
     }
 
     public static boolean isLogin() {
         final Object userId = subject.getPrincipal();
-        if (userId == null) {
-            return false;
-        }
-        return true;
+        return userId != null;
     }
 
 }
