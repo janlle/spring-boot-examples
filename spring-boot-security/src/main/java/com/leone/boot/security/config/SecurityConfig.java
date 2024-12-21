@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -48,6 +49,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        log.info("new passwordEncoder");
         return new BCryptPasswordEncoder();
     }
 
@@ -58,7 +60,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("filterChain");
         http.authorizeHttpRequests((auth) -> auth
-            .requestMatchers("/")
+            .requestMatchers("/", "/js/**", "/css/**")
             .permitAll()
             .anyRequest()
             .authenticated()
@@ -75,21 +77,31 @@ public class SecurityConfig {
         UserDetails user = User.builder()
           .username("leone")
           .password(passwordEncoder().encode("leone"))
-          .roles("USER")
+          .roles("user")
           .build();
         return new InMemoryUserDetailsManager(user);
     }
 
-
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return new WebSecurityCustomizer() {
-            @Override
-            public void customize(WebSecurity web) {
-                web.ignoring().requestMatchers("/js/**", "/css/**", "/static/**");
-            }
-        };
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        // 设置userDetailService
+        authenticationProvider.setUserDetailsService(memoryUserDetailsService());
+        // 设置密码编辑器
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(authenticationProvider);
     }
+
+
+    //@Bean
+    //public WebSecurityCustomizer webSecurityCustomizer() {
+    //    return new WebSecurityCustomizer() {
+    //        @Override
+    //        public void customize(WebSecurity web) {
+    //            web.ignoring().requestMatchers("/js/**", "/css/**");
+    //        }
+    //    };
+    //}
 
     // 旧的安全配置
     // protected void configure(HttpSecurity http) throws Exception {
@@ -119,7 +131,6 @@ public class SecurityConfig {
     //      .withUser("admin").password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("admin")).roles("ADMIN").and()
     //      .withUser("leone").password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("leone")).roles("USER").and();
     //
-    //
     //    // 2.jdbcAuthentication从数据库中获取，但是默认是以security提供的表结构
     //    // usersByUsernameQuery 指定查询用户SQL
     //    // authoritiesByUsernameQuery 指定查询权限SQL
@@ -132,20 +143,8 @@ public class SecurityConfig {
     //    return auth.build();
     //}
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        // DaoAuthenticationProvider 从自定义的 userDetailsService.loadUserByUsername 方法获取UserDetails
-        authProvider.setUserDetailsService(memoryUserDetailsService());
-        // 设置密码编辑器
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
 
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
+
 
 }

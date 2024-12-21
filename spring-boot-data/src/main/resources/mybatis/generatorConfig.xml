@@ -43,10 +43,17 @@
         <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--               selectByExampleQueryId="false"/>-->
 
-        <table tableName="miguvideo_simplified_version_log" domainObjectName="MiguvideoSimplifiedVersionLog"
-               enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
+        <table tableName="miguvideo_user" domainObjectName="MiguvideoUser"
+               enableCountByExample="false" selectByExampleQueryId="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"/>
+
+        <table tableName="miguvideo_menu" domainObjectName="MiguvideoMenu"
+               enableCountByExample="false" selectByExampleQueryId="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"/>
+
+        <table tableName="miguvideo_role" domainObjectName="MiguvideoRole"
+               enableCountByExample="false" selectByExampleQueryId="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"/>
 
 
     </context>

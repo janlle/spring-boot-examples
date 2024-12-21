@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
@@ -21,6 +22,13 @@ public class WebConfig extends WebMvcConfigurationSupport {
     @Autowired
     public WebConfig(TokenInterceptor tokenInterceptor) {
         this.tokenInterceptor = tokenInterceptor;
+    }
+
+    @Override
+    protected void addViewControllers(ViewControllerRegistry registry) {
+        //registry.addViewController("/").setViewName("index");
+        //registry.addViewController("/login").setViewName("login");
+        //registry.addViewController("/logout").setViewName("logout");
     }
 
     @Override

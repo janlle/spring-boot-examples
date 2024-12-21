@@ -9,8 +9,6 @@ import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.cluster.RedisClusterClient;
 import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.cluster.api.sync.RedisAdvancedClusterCommands;
-import org.junit.Before;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,7 +70,6 @@ public class LettuceDemo {
         return connection.sync();
     }
 
-    @Before
     public void init() {
         command = newSingle("localhost", 6379, 0, null);
     }
@@ -92,7 +89,6 @@ public class LettuceDemo {
         }
     }
 
-    @Test
     public void keys() {
         List<String> keys = command.keys("FLINK:USAGE:M:2021_11*");
         System.out.println(keys.size());
