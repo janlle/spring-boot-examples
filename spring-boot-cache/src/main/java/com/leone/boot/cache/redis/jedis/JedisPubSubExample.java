@@ -15,10 +15,10 @@ import java.io.InputStreamReader;
  * @author leone
  * @since 2019-01-29
  **/
-public class RedisPubSubExample {
+public class JedisPubSubExample {
 
     public static void main(String[] args) {
-        JedisPool jedisPool = new JedisPool(new JedisPoolConfig(), System.getenv("redis_host"), 3690, 3000, System.getenv("redis_password"), 0);
+        JedisPool jedisPool = new JedisPool(new JedisPoolConfig(), System.getenv("redis_host"), Integer.parseInt(System.getenv("redis_host")), 3000, System.getenv("redis_password"), 0);
         System.out.printf("redis init %s%n", jedisPool.getResource().ping());
         String channel = "redis-channel";
 
@@ -37,7 +37,6 @@ public class RedisPubSubExample {
         private final RedisListener listener = new RedisListener();
 
         public Subscribe(JedisPool jedisPool, String channel) {
-            super("sub");
             this.channel = channel;
             this.jedisPool = jedisPool;
         }
@@ -60,7 +59,6 @@ public class RedisPubSubExample {
         private final String channel;
 
         public Publisher(JedisPool jedisPool, String channel) {
-            super("pub");
             this.jedisPool = jedisPool;
             this.channel = channel;
         }

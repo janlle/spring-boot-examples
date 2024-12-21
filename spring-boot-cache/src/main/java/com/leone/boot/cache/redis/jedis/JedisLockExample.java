@@ -22,64 +22,55 @@ import java.util.concurrent.Executors;
  **/
 public class JedisLockExample {
 
-    private final static Logger log = LoggerFactory.getLogger(JedisLockExample.class);
+    private static final Logger log = LoggerFactory.getLogger(JedisLockExample.class);
 
-    private static final JedisPool jedisPool = new JedisPool(new JedisPoolConfig(), "localhost", 6379, 3000);
+    private static final JedisPool POOL = new JedisPool(new JedisPoolConfig(), System.getenv("redis_host"), Integer.parseInt(System.getenv("redis_port")), 3000, System.getenv("redis_password"), 0);
 
-    private static final Jedis jedis = jedisPool.getResource();
-
-    private final CountDownLatch countDownLatch = new CountDownLatch(200);
-
-    private static final String lockKey = "redisLock";
+    private static final CountDownLatch countDownLatch = new CountDownLatch(100);
 
     private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
-    private static final JedisLockExample lock = new JedisLockExample();
+    private static int count;
 
-    private static int index;
+    private static final String lockKey = "redisLock";
 
-    public static void main(String[] args) {
-        lock.safe();
-        //lock.unsafe();
+    public static void main(String[] args) throws Exception {
+        System.out.println(tryLock());
+        System.out.println(unlock());
+
+        //safe();
+        //unsafe();
+
     }
 
-
-    public void unsafe() {
-        for (int i = 0; i < 200; i++) {
+    public static void unsafe() throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
             executorService.execute(() -> {
                 executor();
                 countDownLatch.countDown();
             });
         }
-        executorService.shutdown();
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(index);
+        countDownLatch.await();
+        System.out.println(count);
     }
 
-    public void safe() {
-        for (int i = 0; i < 200; i++) {
+    public static void safe() throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
             executorService.execute(() -> {
-                if (lock.tryLock()) {
+                if (tryLock()) {
                     try {
                         executor();
                         countDownLatch.countDown();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     } finally {
-                        lock.unlock();
+                        unlock();
                     }
                 }
             });
         }
-        executorService.shutdown();
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(index);
+        countDownLatch.await();
+        System.out.println(count);
     }
 
 
@@ -87,32 +78,36 @@ public class JedisLockExample {
      * 业务方法
      */
     public static void executor() {
-        for (int i = 0; i < 100; i++) {
-            index++;
+        for (int i = 0; i < 10; i++) {
+            count = count + 1;
         }
+        //try {
+        //    Thread.sleep(1);
+        //} catch (InterruptedException e) {
+        //    throw new RuntimeException(e);
+        //}
     }
 
     /**
      * 加锁
      */
-    public boolean tryLock() {
+    public static boolean tryLock() {
         long now = System.currentTimeMillis();
         // 锁过期时间
         int expire = 30000;
-        boolean flag = jedis.setnx(lockKey, String.valueOf(now + expire)) == 1;
-
+        boolean flag = POOL.getResource().setnx(lockKey, String.valueOf(now + expire)) == 1;
         if (!flag) {
-            String timestamp = jedis.get(lockKey);
+            String timestamp = POOL.getResource().get(lockKey);
             if (Long.parseLong(timestamp) < now) {
-                String oldTimestamp = jedis.setGet(lockKey, String.valueOf(now + expire));
+                String oldTimestamp = POOL.getResource().setGet(lockKey, String.valueOf(now + expire));
                 if (oldTimestamp.equals(timestamp)) {
-                    jedis.expire(lockKey, expire);
+                    POOL.getResource().expire(lockKey, 1000 * 3);
                     return true;
                 }
             }
         }
         if (flag) {
-            jedis.expire(lockKey, expire);
+            POOL.getResource().expire(lockKey, expire);
         }
         return flag;
     }
@@ -120,8 +115,8 @@ public class JedisLockExample {
     /**
      * 解锁
      */
-    public boolean unlock() {
-        return jedis.del(lockKey) == 1;
+    public static boolean unlock() {
+        return POOL.getResource().del(lockKey) == 1;
     }
 
 }

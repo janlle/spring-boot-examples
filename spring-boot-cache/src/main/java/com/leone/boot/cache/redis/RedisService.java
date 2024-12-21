@@ -46,20 +46,20 @@ public class RedisService {
     public long list(int count) {
         log.info("list:{}", count);
         for (int i = 0; i < count; i++) {
-            String key = RedisConfig.userCatch("list"), value = IdUtil.fastSimpleUUID();
+            String key = "list-key", value = IdUtil.fastSimpleUUID() + i;
             Long push = redisTemplate.opsForList().leftPush(key, value);
             // Long push = redisTemplate.opsForList().rightPush(key, value);
             log.info("leftPush key:[{}] -- value:[{}]", key, value);
         }
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         for (int i = 0; i < count; i++) {
-            Object result = redisTemplate.opsForList().rightPop(RedisConfig.userCatch("list"));
+            Object result = redisTemplate.opsForList().rightPop("list-key");
             log.info("leftPop key:[{}] -- value:[{}]", i, result);
         }
         return count;
@@ -70,7 +70,7 @@ public class RedisService {
      */
     public long value() {
         log.info("value:{}", 1);
-        redisTemplate.opsForValue().set(RedisConfig.userCatch(IdUtil.nanoId()), EntityFactory.getUser(), 120, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set("set-key", EntityFactory.getUser(), 60, TimeUnit.SECONDS);
         return 1;
     }
 
@@ -129,7 +129,7 @@ public class RedisService {
         redisTemplate.opsForZSet().add("zSetValue", "D", 5);
 
         // 获取指定区间的元素
-        Set zSetValue = redisTemplate.opsForZSet().range("zSetValue", 0, -1);
+        Set<Object> zSetValue = redisTemplate.opsForZSet().range("zSetValue", 0, -1);
         log.info("range: {}", zSetValue);
 
 
@@ -153,7 +153,7 @@ public class RedisService {
         zSetValue = redisTemplate.opsForZSet().range("typedTupleSet", 0, -1);
         log.info("添加元素:{}", zSetValue);
 
-        long count = redisTemplate.opsForZSet().count("zSetValue", 1, 5);
+        Long count = redisTemplate.opsForZSet().count("zSetValue", 1, 5);
         log.info("获取区间值的个数:{}", count);
 
         return 1;

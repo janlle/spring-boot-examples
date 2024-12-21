@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
  * @author leone
  * @since 2021-03-30
  **/
-public class RedissonDemo {
+public class RedissonClientExample {
 
-    private static final Logger log = LoggerFactory.getLogger(RedissonDemo.class);
+    private static final Logger log = LoggerFactory.getLogger(RedissonClientExample.class);
 
     private static final RedissonClient redisson;
 
