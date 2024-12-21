@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Range;
 import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.*;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedisService {
 
-    private static Logger log = LoggerFactory.getLogger(RedisService.class);
+    private static final Logger log = LoggerFactory.getLogger(RedisService.class);
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
@@ -33,10 +34,14 @@ public class RedisService {
     @Value("${redis.prefix}")
     private String redisPrefix;
 
+    @Cacheable(value = "userCache")
+    public String userCache() {
+        System.out.println("no cache");
+        return "当前系统时间:" + System.currentTimeMillis();
+    }
+
     /**
      * 相当于队列操作
-     *
-     * @return
      */
     public long list(int count) {
         log.info("list:{}", count);
@@ -62,8 +67,6 @@ public class RedisService {
 
     /**
      * set 普通 字符串或对象 类型数据
-     *
-     * @return
      */
     public long value() {
         log.info("value:{}", 1);
@@ -74,8 +77,6 @@ public class RedisService {
 
     /**
      * set 操作
-     *
-     * @return
      */
     public long set() {
         log.info("set:{}", 1);
@@ -159,7 +160,7 @@ public class RedisService {
     }
 
     /**
-     * @return
+     * hash 操作
      */
     public long hash() {
         log.info("hash:{}", 1);

@@ -1,4 +1,4 @@
-package com.leone.boot.cache.redis.jedis.lock;
+package com.leone.boot.cache.redis.jedis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,32 +20,27 @@ import java.util.concurrent.Executors;
  * @author leone
  * @since 2019-07-19
  **/
-public class RedisLock {
+public class JedisLockExample {
 
-    private final static Logger log = LoggerFactory.getLogger(RedisLock.class);
+    private final static Logger log = LoggerFactory.getLogger(JedisLockExample.class);
 
-    private static JedisPool jedisPool = new JedisPool(new JedisPoolConfig(), "localhost", 6379, 3000);
+    private static final JedisPool jedisPool = new JedisPool(new JedisPoolConfig(), "localhost", 6379, 3000);
 
-    private static Jedis jedis = jedisPool.getResource();
+    private static final Jedis jedis = jedisPool.getResource();
 
-    private CountDownLatch countDownLatch = new CountDownLatch(200);
+    private final CountDownLatch countDownLatch = new CountDownLatch(200);
 
-    // 锁的key
-    private static String lockKey = "redisLock";
+    private static final String lockKey = "redisLock";
 
-    // 锁过期时间
-    private static int expire = 30000;
+    private static final ExecutorService executorService = Executors.newCachedThreadPool();
 
-
-    private static ExecutorService executorService = Executors.newCachedThreadPool();
-
-    private static RedisLock lock = new RedisLock();
+    private static final JedisLockExample lock = new JedisLockExample();
 
     private static int index;
 
     public static void main(String[] args) {
         lock.safe();
-//        lock.unsafe();
+        //lock.unsafe();
     }
 
 
@@ -92,26 +87,24 @@ public class RedisLock {
      * 业务方法
      */
     public static void executor() {
-//        log.info("begin executor " + LocalDateTime.now());
         for (int i = 0; i < 100; i++) {
             index++;
         }
-//        log.info("end executor " + LocalDateTime.now());
     }
 
     /**
      * 加锁
-     *
-     * @return
      */
     public boolean tryLock() {
         long now = System.currentTimeMillis();
+        // 锁过期时间
+        int expire = 30000;
         boolean flag = jedis.setnx(lockKey, String.valueOf(now + expire)) == 1;
 
         if (!flag) {
             String timestamp = jedis.get(lockKey);
             if (Long.parseLong(timestamp) < now) {
-                String oldTimestamp = jedis.getSet(lockKey, String.valueOf(now + expire));
+                String oldTimestamp = jedis.setGet(lockKey, String.valueOf(now + expire));
                 if (oldTimestamp.equals(timestamp)) {
                     jedis.expire(lockKey, expire);
                     return true;
@@ -126,8 +119,6 @@ public class RedisLock {
 
     /**
      * 解锁
-     *
-     * @return
      */
     public boolean unlock() {
         return jedis.del(lockKey) == 1;

@@ -1,11 +1,12 @@
 package com.leone.boot.cache.redis.jedis;
 
 
-import org.junit.jupiter.api.Test;
 import redis.clients.jedis.*;
+import redis.clients.jedis.args.ListPosition;
+import redis.clients.jedis.params.ZParams;
+import redis.clients.jedis.util.JedisClusterCRC16;
 
 import java.time.Duration;
-import java.time.temporal.TemporalUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,15 +16,15 @@ import java.util.Map;
  * @author leone
  * @since 2018-12-19
  **/
-public class JedisDemo {
+public class JedisClientExample {
 
     // Jedis 连接池实例
-    private JedisPool jedisPool;
+    private static JedisPool jedisPool;
 
     /**
      * 初始化，设置参数
      */
-    public void init() {
+    public static void init() {
         JedisPoolConfig config = new JedisPoolConfig();
         // 最大连接数
         config.setMaxTotal(32);
@@ -32,11 +33,11 @@ public class JedisDemo {
         // 闲置最小连接数
         config.setMinIdle(0);
         // 到达最大连接数后，调用者阻塞时间
-        config.setMaxWaitMillis(15000);
+        config.setMaxWait(Duration.ofMillis(15000));
         // 连接空闲的最小时间，可能被移除
-        config.setMinEvictableIdleTimeMillis(300000);
+        config.setMinEvictableIdleDuration(Duration.ofMillis(300000));
         // 连接空闲的最小时间，多余最小闲置连接的将被移除
-        config.setSoftMinEvictableIdleTimeMillis(-1);
+        config.setSoftMinEvictableIdleDuration(Duration.ofMillis(1000));
         // 设置每次检查闲置的个数
         config.setNumTestsPerEvictionRun(3);
         // 申请连接时，是否检查连接有效
@@ -46,28 +47,33 @@ public class JedisDemo {
         // 空闲超时,是否执行检查有效
         config.setTestWhileIdle(false);
         // 空闲检查时间
-        config.setTimeBetweenEvictionRunsMillis(60000);
+        config.setTimeBetweenEvictionRuns(Duration.ofMillis(60000));
         // 当连接数耗尽，是否阻塞
         config.setBlockWhenExhausted(true);
         // 连接池配置对象 (config, host + port + timeout + password + db)
-        jedisPool = new JedisPool(config, "localhost", 6379, 10000, null, 0);
+        jedisPool = new JedisPool(config, "hw", 3690, 3000, System.getenv("redis_password"), 0);
+        System.out.println("PING: " + jedisPool.getResource().ping());
     }
 
+    public static void main(String[] args) {
+        //init();
+        //stringTest();
+        System.out.println(JedisClusterCRC16.getSlot("a"));
+    }
 
     /**
      * set and get string
      */
-    @Test
-    public void stringTest() {
+    public static void stringTest() {
         Jedis jedis = jedisPool.getResource();
         // set:返回操作结果
-        System.out.println("name=>wsy:" + jedis.set("name", "wsy"));
+        System.out.println("set name leone " + jedis.set("name", "name"));
 
         // get:value
-        System.out.println("name:" + jedis.get("name"));
+        System.out.println("get name " + jedis.get("name"));
 
         // append:字符串长度
-        System.out.println("append:" + jedis.append("name", "_ss"));
+        System.out.println("append:" + jedis.append("name", " hello"));
 
         // strLength:字符串长度
         System.out.println("strLength:" + jedis.strlen("name"));
@@ -110,7 +116,6 @@ public class JedisDemo {
     /**
      * redis中hash类型常用操作
      */
-    @Test
     public void hashTest() {
         Jedis jedis = jedisPool.getResource();
         // hset:返回值为key为新返回1，为旧覆盖旧值返回0
@@ -153,7 +158,6 @@ public class JedisDemo {
     /**
      * redis中 list 类型常用操作
      */
-    @Test
     public void listTest() {
         Jedis jedis = jedisPool.getResource();
 
@@ -201,7 +205,6 @@ public class JedisDemo {
     /**
      * redis中 set 类型常用操作
      */
-    @Test
     public void setTest() {
         Jedis jedis = jedisPool.getResource();
 
@@ -250,7 +253,6 @@ public class JedisDemo {
     /**
      * redis中 SortedSet 类型常用操作
      */
-    @Test
     public void sortedSetTest() {
         Jedis jedis = jedisPool.getResource();
 

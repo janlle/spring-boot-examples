@@ -1,4 +1,4 @@
-package com.leone.boot.data.redis.lettuce;
+package com.leone.boot.cache.redis.lettuce;
 
 import io.lettuce.core.KeyScanCursor;
 import io.lettuce.core.RedisClient;
@@ -24,9 +24,9 @@ import java.util.Map;
  * @author leone
  * @since 2021-03-30
  **/
-public class LettuceDemo {
+public class LettuceClientExample {
 
-    private static final Logger log = LoggerFactory.getLogger(LettuceDemo.class);
+    private static final Logger log = LoggerFactory.getLogger(LettuceClientExample.class);
 
     private RedisCommands<String, String> command;
 
@@ -74,12 +74,13 @@ public class LettuceDemo {
         command = newSingle("localhost", 6379, 0, null);
     }
 
-    // @Test
+
+
     public void delKey() {
         command.del("FLINK:OA:HOUR:010");
     }
 
-    // @Test
+
     public void scanKey() {
         KeyScanCursor<String> scan = command.scan(ScanArgs.Builder.matches("FLINK:D:*").limit(100000));
         List<String> keys = scan.getKeys();

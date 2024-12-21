@@ -1,6 +1,5 @@
 package com.leone.boot.cache.controller;
 
-import com.leone.boot.cache.redis.RedisCacheService;
 import com.leone.boot.cache.redis.RedisService;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -22,9 +21,6 @@ public class RedisController {
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
-
-    @Resource
-    private RedisCacheService redisCacheService;
 
     @GetMapping("/list")
     public String list(@RequestParam int count) {
@@ -53,7 +49,7 @@ public class RedisController {
 
     @GetMapping("/catch")
     public String userCatch() {
-        return redisCacheService.userCatch();
+        return redisService.userCache();
     }
 
 

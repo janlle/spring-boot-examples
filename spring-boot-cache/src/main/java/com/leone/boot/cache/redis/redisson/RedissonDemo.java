@@ -1,4 +1,4 @@
-package com.leone.boot.cache.redis;
+package com.leone.boot.cache.redis.redisson;
 
 import org.redisson.Redisson;
 import org.redisson.api.RMap;
