@@ -3,7 +3,6 @@ package com.leone.boot.cache.redis;
 
 import cn.hutool.core.util.IdUtil;
 import com.leone.boot.common.util.EntityFactory;
-import com.leone.boot.common.util.RandomUtils;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,9 +65,9 @@ public class RedisService {
     }
 
     /**
-     * set 普通 字符串或对象 类型数据
+     * string 普通字符串或对象
      */
-    public long value() {
+    public long string() {
         log.info("value:{}", 1);
         redisTemplate.opsForValue().set("set-key", EntityFactory.getUser(), 60, TimeUnit.SECONDS);
         return 1;
@@ -121,7 +120,7 @@ public class RedisService {
 
     public long zSet() {
         log.info("zSet:{}", 1);
-        redisTemplate.opsForZSet().add(RedisConfig.userCatch(IdUtil.nanoId(9)), EntityFactory.getUser(), 3);
+        redisTemplate.opsForZSet().add(SpringRedisConfig.userCatch(IdUtil.nanoId(9)), EntityFactory.getUser(), 3);
 
         redisTemplate.opsForZSet().add("zSetValue", "A", 1);
         redisTemplate.opsForZSet().add("zSetValue", "B", 3);
@@ -206,8 +205,8 @@ public class RedisService {
             Map.Entry<Object, Object> entry = scan.next();
             log.info("key:{} -- value:{}", entry.getKey(), entry.getValue());
         }
-
         return 1;
     }
+
 
 }

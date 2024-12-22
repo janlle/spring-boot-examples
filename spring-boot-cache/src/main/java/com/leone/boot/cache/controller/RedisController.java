@@ -27,9 +27,9 @@ public class RedisController {
         return "list: " + redisService.list(count) + " !";
     }
 
-    @GetMapping("/value")
+    @GetMapping("/string")
     public String value() {
-        return "value: " + redisService.value() + " !";
+        return "value: " + redisService.string() + " !";
     }
 
     @GetMapping("/set")
@@ -51,7 +51,6 @@ public class RedisController {
     public String userCatch() {
         return redisService.userCache();
     }
-
 
     @GetMapping("/publish")
     public String publish() {

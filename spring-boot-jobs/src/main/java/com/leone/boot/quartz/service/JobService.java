@@ -2,9 +2,15 @@ package com.leone.boot.quartz.service;
 
 import com.leone.boot.quartz.config.JobConstants;
 import com.leone.boot.quartz.jobs.SimpleJob;
+import com.leone.boot.quartz.repository.JobInfo;
 import org.quartz.*;
+import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -15,23 +21,58 @@ import org.springframework.stereotype.Service;
 @Service
 public class JobService {
 
-    //@Autowired
+    @Autowired
     private Scheduler scheduler;
 
     /**
      * 添加一个job
      */
-    public void addJob() throws SchedulerException {
+    public void addJob(String jobName, String jobGroup, String jobClassName, Map<String, Object> param, String cron, String jobDesc) throws SchedulerException {
+        JobInfo job = new JobInfo();
+        job.setJobName(jobName);
+        job.setJobGroup(jobGroup);
+        job.setGmtCreate(new Date());
+        job.setJobCron("");
+        job.setJobStatus(1);
+
+        JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
+
+        if (scheduler.checkExists(jobKey)) {
+            throw new RuntimeException("该定时任务不存在：" + jobKey.getName());
+        }
+
+        Class<? extends Job> jobClass;
+        try {
+            Class<?> clazz = Class.forName(jobClassName);
+            if (clazz.isAssignableFrom(Job.class)) {
+                throw new RuntimeException("类型不匹配：" + jobClassName);
+            }
+            jobClass = (Class<? extends Job>) clazz;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("找不到任务类：" + jobClassName);
+        }
+
+        JobDataMap jobDataMap = new JobDataMap();
+        if (param != null) {
+            jobDataMap.putAll(param);
+        }
+
         // 创建JobDetail
-        JobDetail jobDetail = JobBuilder.newJob(SimpleJob.class).withIdentity("j4", JobConstants.JOB_GROUP).build();
-        jobDetail.getJobDataMap().put("hello", "world");
+        JobDetail jobDetail = JobBuilder.newJob(jobClass)
+          .withIdentity(jobName, jobGroup)
+          .usingJobData(jobDataMap)
+          .build();
 
         // 基于表达式构建触发器
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0/10 * * * * ?");
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
 
-//        // TriggerBuilder 用于构建触发器实例
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("t4", JobConstants.TRIGGER_GROUP)
-                .withSchedule(cronScheduleBuilder).build();
+        // TriggerBuilder 用于构建触发器实例
+        CronTrigger cronTrigger = TriggerBuilder
+          .newTrigger()
+          .withIdentity("t4", JobConstants.TRIGGER_GROUP)
+          .withSchedule(cronScheduleBuilder)
+          .withDescription(jobDesc)
+          .build();
 
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
@@ -60,6 +101,10 @@ public class JobService {
         }
     }
 
+    public void listJob() {
+
+    }
+
     public void selectJob() {
         TriggerKey triggerKey = TriggerKey.triggerKey("job4", "group3");
 
@@ -77,8 +122,6 @@ public class JobService {
 
     /**
      * 暂停某个job
-     *
-     * @throws SchedulerException
      */
     public void pauseJob() throws SchedulerException {
         JobKey jobKey = JobKey.jobKey("j3", JobConstants.JOB_GROUP);

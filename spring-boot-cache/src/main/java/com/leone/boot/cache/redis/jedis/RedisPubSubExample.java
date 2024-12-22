@@ -15,18 +15,22 @@ import java.io.InputStreamReader;
  * @author leone
  * @since 2019-01-29
  **/
-public class JedisPubSubExample {
+public class RedisPubSubExample {
 
     public static void main(String[] args) {
-        JedisPool jedisPool = new JedisPool(new JedisPoolConfig(), System.getenv("redis_host"), Integer.parseInt(System.getenv("redis_host")), 3000, System.getenv("redis_password"), 0);
+        JedisPool jedisPool = new JedisPool(new JedisPoolConfig(), System.getenv("redis_host"), Integer.parseInt(System.getenv("redis_port")), 3000, System.getenv("redis_password"), 0);
         System.out.printf("redis init %s%n", jedisPool.getResource().ping());
         String channel = "redis-channel";
 
-        // 订阅者
-        new Subscribe(jedisPool, channel).start();
-
         // 发布者
         new Publisher(jedisPool, channel).start();
+
+        // 订阅者1
+        new Subscribe(jedisPool, channel).start();
+
+        // 订阅者2
+        new Subscribe(jedisPool, channel).start();
+
     }
 
 
@@ -66,13 +70,12 @@ public class JedisPubSubExample {
         @Override
         public void run() {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            Jedis jedis = jedisPool.getResource();
             while (true) {
                 String line;
                 try {
                     line = reader.readLine();
                     if (!"quit".equals(line)) {
-                        jedis.publish(channel, line);
+                        jedisPool.getResource().publish(channel, line);
                     } else {
                         break;
                     }
@@ -96,21 +99,23 @@ public class JedisPubSubExample {
          */
         @Override
         public void onMessage(String channel, String message) {
-            System.out.printf("receive %s message: %s%n", channel, message);
+            System.out.printf(Thread.currentThread().getName() + " %s message: %s%n", channel, message);
         }
+
         /**
          * 订阅了会调用
          */
         @Override
         public void onSubscribe(String channel, int subscribedChannels) {
-            System.out.printf("subscribe %s, subscribedChannels: %d%n", channel, subscribedChannels);
+            System.out.printf(Thread.currentThread().getName() + " subscribe %s, subscribedChannels: %d%n", channel, subscribedChannels);
         }
+
         /**
          * 取消订阅会调用
          */
         @Override
         public void onUnsubscribe(String channel, int subscribedChannels) {
-            System.out.printf("unsubscribe %s, subscribedChannels: %d%n", channel, subscribedChannels);
+            System.out.printf(Thread.currentThread().getName() + " unsubscribe %s, subscribedChannels: %d%n", channel, subscribedChannels);
 
         }
     }

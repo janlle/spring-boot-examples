@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2018-05-27
  **/
 //@EnableScheduling
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+
+})
 public class JobsApplication {
     public static void main(String[] args) {
         SpringApplication.run(JobsApplication.class, args);

@@ -1,4 +1,4 @@
-mvc
+spring-boot-mvc
     log
     mail
     session
@@ -7,3 +7,15 @@ mvc
     layui
     sa-token
     jwt-token
+
+spring-boot-cache
+    redis
+        jedis
+        lettuce
+        redisson
+    mongo
+
+
+spring-boot-shiro
+    shiro
+    mybatis-plus
