@@ -1,10 +1,7 @@
 package com.leone.boot.learn.beanlife;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanClassLoaderAware;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.*;
 import org.springframework.context.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
@@ -13,16 +10,16 @@ import org.springframework.core.io.ResourceLoader;
  * <p> BeanNameAware, ApplicationContextAware, InitializingBean, DisposableBean
  * <p>
  * Spring 容器初始化 bean 和 bean 销毁前所做的操作定义方式有三种：
- * 1.通过 @PostConstruct 和 @PreDestroy 注解实现初始化后和 bean销毁之前的操作
- * 2.在 xml 中指定 init-method 和  destroy-method
- * 3.通过bean实现 InitializingBean 和 DisposableBean 接口
+ * 1.通过bean实现 InitializingBean 和 DisposableBean 接口
+ * 2.通过 @PostConstruct 和 @PreDestroy 注解实现初始化后和 bean销毁之前的操作
+ * 3.在 xml 中指定 init-method 和  destroy-method 或 JavaConfig 指定initMethod和destroyMethod
  *
  * @author leone
  * @since 2019-06-20
  **/
 public class UserBean implements ApplicationContextAware,
-        ApplicationEventPublisherAware, BeanClassLoaderAware, BeanFactoryAware,
-        BeanNameAware, EnvironmentAware, ResourceLoaderAware/*, InitializingBean, DisposableBean*/ {// 初始化方式、三
+  ApplicationEventPublisherAware, BeanClassLoaderAware, BeanFactoryAware,
+  BeanNameAware, EnvironmentAware, ResourceLoaderAware, InitializingBean, DisposableBean {
 
     private String name;
 
@@ -37,16 +34,14 @@ public class UserBean implements ApplicationContextAware,
      * instantiate bean 对象实例化
      */
     public UserBean() {
-        System.err.println("01 - bean constructor....");
+        System.err.println("01 - 构造方法....");
     }
 
     /**
      * 设置对象属性
-     *
-     * @param name
      */
     public void setName(String name) {
-        System.err.println("02 - setName...");
+        System.err.println("02 - 设置属性setter方法...");
         this.name = name;
     }
 
@@ -107,51 +102,62 @@ public class UserBean implements ApplicationContextAware,
     }
 
 
+    // ---------------------------------- 初始化方法 -------------------------------
+
     /**
-     * 设置属性后执行
+     * 初始化方式一 设置属性后执行
+     * 实现接口，InitializingBean 重写afterPropertiesSet 方法
      */
-    //@Override
     public void afterPropertiesSet() throws Exception {
-        System.err.println("10 - afterPropertiesSet...");
+        System.err.println("10 - 自定义初始化方法1...");
     }
 
     /**
-     * 初始化方式、一
+     * 初始化方式二
+     * 注解方式
      */
     //@PostConstruct
     public void postConstruct() {
-        System.err.println("10 - postConstruct");
+        System.err.println("10 - 自定义初始化方法2...");
     }
 
 
     /**
-     * 调用自定义初始化方法
+     * 初始化方式三 手动指定方法名称
      */
     public void initMethod() {
-        System.err.println("10 - initMethod...");
+        System.err.println("10 - 自定义初始化方法3...");
     }
 
-    /**
-     * 销毁方式、一
-     */
-    //@PreDestroy
-    public void preDestroy() {
-        System.err.println("11 - preDestroy");
-    }
+
+    // ---------------------------------- 销毁方法 -------------------------------
 
     /**
-     * 调用 DisposableBean 的 destroy 的方法
+     * 销毁方式一
+     * 实现接口，重写 DisposableBean 的 destroy 的方法
      */
     //@Override
     public void destroy() throws Exception {
-        System.err.println("11 - destroy...");
+        System.err.println("11 - 自定义销毁方法1...");
     }
 
+
     /**
-     * 调用自定义销毁方法
+     * 销毁方式二
+     * 注解方式
+     */
+    //@PreDestroy
+    public void preDestroy() {
+        System.err.println("11 - 自定义销毁方法2");
+    }
+
+
+    /**
+     * 销毁方式三
+     * 手动指定方法名称
      */
     public void destroyMethod() {
-        System.err.println("11 - destroyMethod...");
+        System.err.println("11 - 自定义销毁方法3...");
     }
 
 

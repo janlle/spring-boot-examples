@@ -1,6 +1,7 @@
 package com.leone.boot.data.mybatis.mapper;
 
 import com.leone.boot.common.entity.User;
+import com.leone.boot.data.mybatis.entity.UserInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -12,10 +13,8 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Insert("insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values(#{account},#{password},#{age},#{description},#{deleted},#{createTime})")
-    int insert(User user);
-
-    int insertSelective(User user);
+    @Insert("insert into user_info(`user_id`, `username`, `password`, `age`, `deleted`) values(#{userId}, #{username},#{password},#{age},#{deleted})")
+    int insert(UserInfo user);
 
     //@Insert({"<script>" +
     //  "insert into t_user(`account`, `password`, `age`, `description`, `deleted`, `create_time`) values" +
@@ -25,37 +24,23 @@ public interface UserMapper {
     //  "</script>"})
     int insertBatch(@Param("users") List<User> users);
 
-    @Delete("delete from t_user where user_id = #{userId}")
-    int deleteById(@Param("userId") Long userId);
-
     @Delete("<script>" +
-      "delete from t_user where user_id in " +
+      "delete from user_info where user_id in " +
       "<foreach item='item' index='index' collection='userIds' open='(' separator=',' close=')'>" +
       "#{item}" +
       "</foreach>" +
       "</script>")
     int deleteByUserIds(@Param("userIds") List<Long> userIds);
 
-    //@Update({"update t_user set account=#{user.account}, password=#{user.password}, age=#{user.age}, description=#{user.description}, create_time=#{user.createTime, jdbcType=TIMESTAMP}, deleted=#{user.deleted} where user_id = #{user.userId}"})
     int updateByIdSelective(User user);
 
-    int updateById(User user);
+    @Select("select * from user_info where user_id = #{userId}")
+    User findByUserId(@Param("userId") String userId);
 
+    @Select("select * from user_info")
+    List<User> selectAll();
 
-    @Select("select * from t_user where user_id = #{userId}")
-    User findByUserId(@Param("userId") Long userId);
-
-    @Select("select * from t_user")
-    List<User> findAll();
-
-    @Select("select * from t_user limit ${start}, ${size}")
-    List<User> page(@Param("start") int start, @Param("size") int size);
-
-    @Select("select * from t_user where account like concat('%', #{name}, '%')")
-    User selectByName(@Param("name") String name);
-
-
-    @Update({"create table ${tableName}( " +
+    @Update({"create table user_info ( " +
       " user_id int primary key not null auto_increment," +
       " account varchar(20) NOT NULL," +
       " password varchar(200) DEFAULT NULL," +
@@ -63,12 +48,11 @@ public interface UserMapper {
       " description int(1) DEFAULT 0," +
       " deleted date DEFAULT null," +
       " create_time currentTimestamp)" +
-      " engine=innodb default charset=utf8"})
-    void createUserTable(@Param("tableName") String tableName);
+      " engine=innodb default charset=utf8 "})
+    void createTable();
 
-    @Update({"drop table if exists ${tableName}"})
-    void dropTable(@Param("tableName") String tableName);
-
+    @Update({"drop table if exists user_info"})
+    void dropTable();
 
 
 }

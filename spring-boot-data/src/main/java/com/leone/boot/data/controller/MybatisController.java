@@ -1,10 +1,8 @@
 package com.leone.boot.data.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.leone.boot.common.entity.User;
 import com.leone.boot.data.mybatis.mapper.UserMapper;
 import com.leone.boot.data.service.UserService;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,21 +28,11 @@ public class MybatisController {
         return "update one time:" + result + " ms!";
     }
 
-    @GetMapping("/delete")
-    public String deleteById(Long id) {
-        int result = userMapper.deleteById(id);
-        return "delete one line time:" + result;
-    }
 
     @GetMapping("/list")
     public String selectList() {
-        List<User> result = userMapper.findAll();
+        List<User> result = userMapper.selectAll();
         return "select all result size:" + result.size() + "expenditure:" + result + " ms!";
-    }
-
-    @GetMapping("/user")
-    public User selectById(Long id) {
-        return userMapper.findByUserId(id);
     }
 
     @GetMapping("/batchInsert")

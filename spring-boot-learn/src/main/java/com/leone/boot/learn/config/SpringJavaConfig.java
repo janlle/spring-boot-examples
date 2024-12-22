@@ -2,6 +2,7 @@ package com.leone.boot.learn.config;
 
 import com.leone.boot.learn.beanlife.UserBean;
 import com.leone.boot.learn.event.EmailListener;
+import com.leone.boot.learn.factory.BullFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -12,11 +13,11 @@ import org.springframework.context.annotation.Scope;
  * @author leone
  * @since 2019-06-21
  **/
-public class SpringBootstrapConfig {
+public class SpringJavaConfig {
 
     @Lazy
     @Scope("prototype")
-    @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
+    @Bean(/* initMethod = "initMethod", destroyMethod = "destroyMethod" */)
     public UserBean userBean() {
         return new UserBean();
     }
@@ -26,6 +27,11 @@ public class SpringBootstrapConfig {
     @Bean
     public EmailListener emailListener() {
         return new EmailListener();
+    }
+
+    @Bean
+    public BullFactoryBean bullFactoryBean() {
+        return new BullFactoryBean();
     }
 
 }
