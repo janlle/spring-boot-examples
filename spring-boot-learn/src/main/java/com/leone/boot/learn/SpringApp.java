@@ -3,7 +3,7 @@ package com.leone.boot.learn;
 import com.leone.boot.learn.beanlife.UserBean;
 import com.leone.boot.learn.config.SpringJavaConfig;
 import com.leone.boot.learn.event.EmailEvent;
-import com.leone.boot.learn.event.EmailSource;
+import com.leone.boot.learn.event.EmailInfo;
 import com.leone.boot.learn.factory.BullFactoryBean;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -35,14 +35,17 @@ public class SpringApp {
         //SpringApplication.run(App.class, args);
     }
 
+    /**
+     * 当作用域为（PROTOTYPE）时在每次获取对象的时候才创建对象，IOC容器只负责创建Bean但不会管理Bean，所以IOC容器不会调用销毁方法。
+     */
     public static void testBeanLife(ApplicationContext context) throws InterruptedException {
-        context.getBean(UserBean.class).sayHello("world");
+        context.getBean(UserBean.class).say("hello");
         Thread.sleep(500);
-        context.getBean(UserBean.class).sayHello("leone");
+        //context.getBean(UserBean.class).say("fuck");
     }
 
     public static void testEvent(ApplicationContext context) {
-        context.publishEvent(new EmailEvent(new EmailSource("hello@gmail.com", "hello world")));
+        context.publishEvent(new EmailEvent(new EmailInfo("hello@gmail.com", "hello world")));
     }
 
     public static void testFactoryBean(ApplicationContext context) {

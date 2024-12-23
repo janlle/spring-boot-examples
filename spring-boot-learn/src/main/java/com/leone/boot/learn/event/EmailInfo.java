@@ -6,16 +6,16 @@ package com.leone.boot.learn.event;
  * @author leone
  * @since 2019-07-04
  **/
-public class EmailSource {
+public class EmailInfo {
 
     private String address;
 
     private String text;
 
-    public EmailSource() {
+    public EmailInfo() {
     }
 
-    public EmailSource(String address, String text) {
+    public EmailInfo(String address, String text) {
         this.address = address;
         this.text = text;
     }

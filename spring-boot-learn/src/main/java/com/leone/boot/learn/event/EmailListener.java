@@ -12,8 +12,8 @@ public class EmailListener implements ApplicationListener<EmailEvent> {
 
     @Override
     public void onApplicationEvent(EmailEvent event) {
-        EmailSource source = (EmailSource) event.getSource();
-        System.out.println("email address: " + source.getAddress() + " email text: " + source.getText());
+        EmailInfo source = (EmailInfo) event.getSource();
+        System.out.printf("email: %s content: %s%n", source.getAddress(), source.getText());
     }
 
 }
