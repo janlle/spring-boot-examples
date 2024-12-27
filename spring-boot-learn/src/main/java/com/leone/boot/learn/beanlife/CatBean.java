@@ -1,5 +1,7 @@
 package com.leone.boot.learn.beanlife;
 
+import jakarta.annotation.Resource;
+
 /**
  * @author leone
  * @since 2018-07-01
@@ -8,17 +10,12 @@ public class CatBean {
 
     private String name;
 
+    @Resource
+    private DogBean dogBean;
+
     public CatBean() {
-        this.name = "tom";
+        this.name = "Tom";
         System.out.println("构造方法-CatBean");
-    }
-
-    public void init(String name) {
-        System.out.println("init-CatBean");
-    }
-
-    public void destroy(String name) {
-        System.out.println("destroy-CatBean");
     }
 
     public void say(String name) {

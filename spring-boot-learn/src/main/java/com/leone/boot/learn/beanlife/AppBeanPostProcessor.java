@@ -17,13 +17,13 @@ public class AppBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.err.printf("05 - 前置处理器 postProcessBeforeInitialization %s%n", beanName);
+        System.err.printf("04 - 前置处理器 postProcessBeforeInitialization %s%n", beanName);
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.err.printf("07 - 后置处理器 postProcessAfterInitialization %s%n", beanName);
+        System.err.printf("06 - 后置处理器 postProcessAfterInitialization %s%n", beanName);
         return bean;
     }
 
