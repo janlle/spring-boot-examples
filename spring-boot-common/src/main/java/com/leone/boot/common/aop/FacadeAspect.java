@@ -69,12 +69,6 @@ public class FacadeAspect {
 
     /**
      * 日志打印
-     *
-     * @param stopWatch
-     * @param method
-     * @param args
-     * @param action
-     * @param response
      */
     private void printLog(StopWatch stopWatch, Method method, Object[] args, String action, Object response,
                           Throwable throwable) {
@@ -106,7 +100,7 @@ public class FacadeAspect {
         stringBuilder.append(" ,method = ");
         stringBuilder.append(method.getName());
         stringBuilder.append(" ,cost = ");
-        stringBuilder.append(stopWatch.getTime()).append(" ms");
+        stringBuilder.append(stopWatch.getDuration().toMillis()).append(" ms");
         if (response instanceof BaseResponse) {
             stringBuilder.append(" ,success = ");
             stringBuilder.append(((BaseResponse) response).getSuccess());
@@ -128,8 +122,7 @@ public class FacadeAspect {
             stringBuilder.append(exception.getMessage());
         }
 
-        if (response instanceof BaseResponse) {
-            BaseResponse baseResponse = (BaseResponse) response;
+        if (response instanceof BaseResponse baseResponse) {
             if (!baseResponse.getSuccess()) {
                 stringBuilder.append(" , execute_failed");
             }
@@ -160,12 +153,11 @@ public class FacadeAspect {
     /**
      * 定义并返回一个通用的失败响应
      */
-    private Object getFailedResponse(Class returnType, Throwable throwable)
+    private Object getFailedResponse(Class<?> returnType, Throwable throwable)
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
 
         //如果返回值的类型为BaseResponse 的子类，则创建一个通用的失败响应
-        if (returnType.getDeclaredConstructor().newInstance() instanceof BaseResponse) {
-            BaseResponse response = (BaseResponse) returnType.getDeclaredConstructor().newInstance();
+        if (returnType.getDeclaredConstructor().newInstance() instanceof BaseResponse response) {
             response.setSuccess(false);
             if (throwable instanceof BizException bizException) {
                 response.setResponseMessage(bizException.getErrorCode().getMessage());
