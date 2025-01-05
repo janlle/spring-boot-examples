@@ -16,8 +16,8 @@ public class Java7CalculateService implements CalculateService {
     public int calculate(Integer... values) {
         System.out.println("java7 calculate");
         int result = 0;
-        for (int i = 0; i < values.length; i++) {
-            result += values[i];
+        for (Integer value : values) {
+            result += value;
         }
         return result;
     }

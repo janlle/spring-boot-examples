@@ -29,8 +29,9 @@ public class LoginServlet implements Servlet {
     }
 
     @Override
-    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+    public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         log.info("login servlet service.");
+        response.getWriter().write("LoginServlet");
     }
 
     @Override

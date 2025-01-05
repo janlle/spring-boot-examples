@@ -23,9 +23,9 @@ public class ConditionalOnSystemPropertiesBootstrap {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context =
-                new SpringApplicationBuilder(ConditionalOnSystemPropertiesBootstrap.class)
-                        .web(WebApplicationType.NONE)
-                        .run(args);
+          new SpringApplicationBuilder(ConditionalOnSystemPropertiesBootstrap.class)
+            .web(WebApplicationType.NONE)
+            .run(args);
 
         String name = context.getBean("helloWorld", String.class);
         System.out.println(name);

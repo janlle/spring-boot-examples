@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class Java8CalculateService implements CalculateService {
     @Override
     public int calculate(Integer... values) {
-        System.out.println("java8 calculate");
-        return Stream.of(values).reduce(Integer::sum).get();
+        System.out.println("java8+ calculate");
+        return Stream.of(values).reduce(Integer::sum).orElse(0);
     }
 }

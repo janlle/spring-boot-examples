@@ -1,5 +1,9 @@
 package com.leone.boot.learn.tomcat;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
@@ -9,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import java.io.IOException;
 
 /**
  * <p>
@@ -21,7 +27,23 @@ public class TomcatApp {
     private static final Logger log = LoggerFactory.getLogger(TomcatApp.class);
 
     public static void main(String[] args) throws LifecycleException {
-        springMvcWeb(9000);
+        helloTomcat(9000);
+    }
+
+    public static void helloTomcat(int port) throws LifecycleException {
+        Tomcat tomcat = new Tomcat();
+        Context context = tomcat.addContext("/", null);
+        tomcat.setPort(port);
+
+        tomcat.addServlet("/", "index", new HttpServlet() {
+            @Override
+            protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                resp.getWriter().write("hello");
+            }
+        });
+        context.addServletMappingDecoded("/", "index");
+        tomcat.init();
+        tomcat.start();
     }
 
     public static void servletWeb(int port) throws LifecycleException {
