@@ -20,7 +20,6 @@ public class SimpleJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         JobDetail jobDetail = context.getJobDetail();
         log.info("SimpleJob {} {}", jobDetail.getKey().getName(), jobDetail.getJobDataMap());
-
     }
 
 }

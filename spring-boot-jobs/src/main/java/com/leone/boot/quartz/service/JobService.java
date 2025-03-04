@@ -21,6 +21,7 @@ import java.util.Map;
 @Service
 public class JobService {
 
+    // 调度器实例
     @Autowired
     private Scheduler scheduler;
 
@@ -57,23 +58,21 @@ public class JobService {
             jobDataMap.putAll(param);
         }
 
-        // 创建JobDetail
+        // 1.创建JobDetail
         JobDetail jobDetail = JobBuilder.newJob(jobClass)
           .withIdentity(jobName, jobGroup)
           .usingJobData(jobDataMap)
           .build();
 
-        // 基于表达式构建触发器
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
-
-        // TriggerBuilder 用于构建触发器实例
+        // 2.TriggerBuilder 用于构建触发器实例
         CronTrigger cronTrigger = TriggerBuilder
           .newTrigger()
           .withIdentity("t4", JobConstants.TRIGGER_GROUP)
-          .withSchedule(cronScheduleBuilder)
+          .withSchedule(CronScheduleBuilder.cronSchedule(cron)) // 基于表达式构建触发器
           .withDescription(jobDesc)
           .build();
 
+        // 3.调度任务
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 

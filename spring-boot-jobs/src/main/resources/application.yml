@@ -33,7 +33,7 @@ spring:
 
 xxl:
   job:
-    enable: false
+    enable: true
     executor:
       #执行器app的名称，和控制台保持一致
       appname: xxl-job-executor-sample

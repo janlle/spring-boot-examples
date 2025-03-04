@@ -1,10 +1,8 @@
 package com.leone.boot.quartz.demo;
 
-import com.leone.boot.quartz.jobs.SimpleJob;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 
 /**
  * @author leone
@@ -14,36 +12,36 @@ public class QuartzDemo {
 
     public static void main(String[] args) {
         try {
-            //定义一个Trigger
+            // 1.定义一个Trigger
             Trigger trigger = TriggerBuilder.newTrigger()
               // 定义name/group
-              .withIdentity("trigger1", "group1")
+              .withIdentity("t01", "g01")
               // 一旦加入scheduler，立即生效
               .startNow()
               // 使用SimpleTrigger
-              .withSchedule(simpleSchedule()
+              .withSchedule(SimpleScheduleBuilder.simpleSchedule()
                 // 每隔一秒执行一次
                 .withIntervalInSeconds(1)
-                // 上帝之手一直执行
+                // 一直执行
                 .repeatForever())
               .build();
 
-            //定义一个JobDetail
-            JobDetail job = JobBuilder.newJob(SimpleJob.class)
+            //2.定义一个JobDetail
+            JobDetail job = JobBuilder.newJob(DemoJob.class)
               //定义Job类为HelloQuartz类，这是真正的执行逻辑所在定义name/group
-              .withIdentity("job1", "group1")
+              .withIdentity("j01", "g02")
               //定义属性
-              .usingJobData("name", "quartz")
+              .usingJobData("name", "kobe")
               .build();
 
-            //创建scheduler
+            //3.创建scheduler
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             //加入这个调度
             scheduler.scheduleJob(job, trigger);
             //启动之
             scheduler.start();
             //运行一段时间后关闭
-            Thread.sleep(3000);
+            Thread.sleep(10000);
             scheduler.shutdown(true);
         } catch (Exception e) {
             e.printStackTrace();
