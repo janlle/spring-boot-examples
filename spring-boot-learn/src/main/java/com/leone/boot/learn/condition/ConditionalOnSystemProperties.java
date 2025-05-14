@@ -18,15 +18,11 @@ public @interface ConditionalOnSystemProperties {
 
     /**
      * 系统属性名称
-     *
-     * @return
      */
     String name();
 
     /**
      * 系统属性值
-     *
-     * @return
      */
     String value();
 

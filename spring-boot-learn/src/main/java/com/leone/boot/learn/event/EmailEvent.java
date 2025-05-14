@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationEvent;
  **/
 public class EmailEvent extends ApplicationEvent {
 
-    public EmailEvent(EmailSource source) {
+    public EmailEvent(EmailInfo source) {
         super(source);
     }
 

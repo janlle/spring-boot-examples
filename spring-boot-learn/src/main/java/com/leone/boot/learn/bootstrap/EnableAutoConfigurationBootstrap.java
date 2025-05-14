@@ -16,12 +16,8 @@ public class EnableAutoConfigurationBootstrap {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(EnableAutoConfigurationBootstrap.class)
-                .web(WebApplicationType.NONE)
-                .run(args);
-
-
-
+          .web(WebApplicationType.NONE)
+          .run(args);
         context.close();
-
     }
 }

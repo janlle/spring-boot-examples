@@ -23,10 +23,9 @@ public class WatchAspect {
     public Object around(ProceedingJoinPoint point) {
         long start = System.currentTimeMillis();
         Signature signature = point.getSignature();
-        if (!(signature instanceof MethodSignature)) {
+        if (!(signature instanceof MethodSignature methodSignature)) {
             throw new IllegalArgumentException("target is not method");
         }
-        MethodSignature methodSignature = (MethodSignature) signature;
         Watch annotation = methodSignature.getMethod().getAnnotation(Watch.class);
         String name = annotation.name();
         try {

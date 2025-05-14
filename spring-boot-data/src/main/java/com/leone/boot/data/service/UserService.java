@@ -112,7 +112,8 @@ public class UserService {
      * @return 改变的条数
      */
     public int insert(User user) {
-        return userMapper.insert(user);
+        //return userMapper.insert(user);
+        return 1;
     }
 
     /**
@@ -127,17 +128,6 @@ public class UserService {
 
 
     /**
-     * 更新
-     *
-     * @param user 用户实体
-     * @return 改变的条数
-     */
-    public int update(User user) {
-        return userMapper.updateById(user);
-    }
-
-
-    /**
      * 分页
      *
      * @param page 起始页码
@@ -146,19 +136,10 @@ public class UserService {
      */
     public PageInfo<User> page(Integer page, Integer size) {
         PageHelper.startPage(page, size);
-        List<User> userList = userMapper.findAll();
+        List<User> userList = userMapper.selectAll();
         return new PageInfo<>(userList);
     }
 
-
-    /**
-     * 根据主键删除
-     *
-     * @param userId 用户id
-     */
-    public int delete(Long userId) {
-        return userMapper.deleteById(userId);
-    }
 
     /**
      * 批量删除
@@ -176,7 +157,7 @@ public class UserService {
      * @param userId 用户id
      * @return 用户实体
      */
-    public User findOne(Long userId) {
+    public User findOne(String userId) {
         return userMapper.findByUserId(userId);
     }
 
@@ -186,11 +167,7 @@ public class UserService {
      * @return 用户list
      */
     public List<User> list() {
-        return userMapper.findAll();
-    }
-
-    public User selectByName(String name) {
-        return userMapper.selectByName(name);
+        return userMapper.selectAll();
     }
 
 
@@ -215,14 +192,13 @@ public class UserService {
 
     public long mybatisInsertForeach(Integer count) {
         for (long i = 0; i < count; i++) {
-            userMapper.insert(EntityFactory.getUser());
+            //userMapper.insert(EntityFactory.getUser());
         }
         return count;
     }
 
     @Transactional
     public long mybatisUpdate(User user) {
-        Integer result = userMapper.updateById(user);
         int i = 100 / 0;
         return 0;
     }

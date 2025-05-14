@@ -31,7 +31,7 @@ import java.util.Set;
  * @since 2018-07-19
  **/
 @Configuration
-public class RedisConfig implements CachingConfigurer {
+public class SpringRedisConfig implements CachingConfigurer {
 
     //@Bean
     public CacheManager cacheManager(RedisConnectionFactory factory) {

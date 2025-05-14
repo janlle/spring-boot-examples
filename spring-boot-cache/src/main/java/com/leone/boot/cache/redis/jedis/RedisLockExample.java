@@ -2,7 +2,6 @@ package com.leone.boot.cache.redis.jedis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -20,9 +19,9 @@ import java.util.concurrent.Executors;
  * @author leone
  * @since 2019-07-19
  **/
-public class JedisLockExample {
+public class RedisLockExample {
 
-    private static final Logger log = LoggerFactory.getLogger(JedisLockExample.class);
+    private static final Logger log = LoggerFactory.getLogger(RedisLockExample.class);
 
     private static final JedisPool POOL = new JedisPool(new JedisPoolConfig(), System.getenv("redis_host"), Integer.parseInt(System.getenv("redis_port")), 3000, System.getenv("redis_password"), 0);
 

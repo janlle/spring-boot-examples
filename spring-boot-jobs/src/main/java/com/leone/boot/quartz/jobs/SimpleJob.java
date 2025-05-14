@@ -1,9 +1,8 @@
 package com.leone.boot.quartz.jobs;
 
 import org.quartz.*;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>
@@ -15,12 +14,12 @@ import java.time.LocalDateTime;
 //@Component
 public class SimpleJob implements Job {
 
+    private static final Logger log = LoggerFactory.getLogger(SimpleJob.class);
+
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         JobDetail jobDetail = context.getJobDetail();
-        Object hello = jobDetail.getJobDataMap().get("hello");
-        System.out.println("this is simple job " + jobDetail.getKey().getName() + " " + LocalDateTime.now() + " " + hello.toString());
-
+        log.info("SimpleJob {} {}", jobDetail.getKey().getName(), jobDetail.getJobDataMap());
     }
 
 }
