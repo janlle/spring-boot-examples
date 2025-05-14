@@ -56,9 +56,11 @@ public class JedisClientExample {
     }
 
     public static void main(String[] args) {
-        //init();
+        init();
         //stringTest();
-        System.out.println(JedisClusterCRC16.getSlot("a"));
+        //System.out.println(JedisClusterCRC16.getSlot("a"));
+        Long memory = jedisPool.getResource().memoryUsage("Channel_Release_Page_102800000000007_5b07441ee79b48eca3a16af16a593c21");
+        System.err.println(memory/1024);
     }
 
     /**

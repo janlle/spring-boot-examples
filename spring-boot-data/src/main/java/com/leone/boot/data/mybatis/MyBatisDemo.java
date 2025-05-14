@@ -18,7 +18,7 @@ import java.io.IOException;
 public class MyBatisDemo {
 
     public static void main(String[] args) throws IOException {
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("classpath:mybatis/mybatisConfig.xml"));
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("classpath:mybatis/mybatis-config.xml"));
         // 获取session对象
         SqlSession session = sqlSessionFactory.openSession();
         // 创建实体对象
@@ -34,7 +34,6 @@ public class MyBatisDemo {
         // 查询
         UserMapper mapper = session.getMapper(UserMapper.class);
         User u = mapper.findByUserId(1470805L);
-
 
         // 提交事务,这个是必须要的,否则即使sql发了也保存不到数据库中
         session.commit();

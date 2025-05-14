@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package protocol;
+
+ //生成的包名，填你自己的包路径即可
+option java_package = "com.leone.boot.data.serialize.protobuf";
+
+//生成的实体名
+option java_outer_classname="UserProto";
+
+message User {
+  string username = 1;
+  int32 age = 2;
+}
+
+message UserList {
+    // 复杂的对象List
+    repeated User users = 3;
+}
