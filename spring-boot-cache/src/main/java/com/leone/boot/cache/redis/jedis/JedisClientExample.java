@@ -1,6 +1,7 @@
 package com.leone.boot.cache.redis.jedis;
 
 
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.*;
 import redis.clients.jedis.args.ListPosition;
 import redis.clients.jedis.params.ZParams;
@@ -8,7 +9,9 @@ import redis.clients.jedis.util.JedisClusterCRC16;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>
@@ -20,6 +23,8 @@ public class JedisClientExample {
 
     // Jedis 连接池实例
     private static JedisPool jedisPool;
+
+    private static JedisCluster cluster = null;
 
     /**
      * 初始化，设置参数
@@ -51,17 +56,65 @@ public class JedisClientExample {
         // 当连接数耗尽，是否阻塞
         config.setBlockWhenExhausted(true);
         // 连接池配置对象 (config, host + port + timeout + password + db)
-        jedisPool = new JedisPool(config, "hw", 3690, 3000, System.getenv("redis_password"), 0);
+        jedisPool = new JedisPool(config, "localhost", 6379, 9000, System.getenv("redis_password"), 0);
         System.out.println("PING: " + jedisPool.getResource().ping());
     }
 
-    public static void main(String[] args) {
-        init();
-        //stringTest();
-        //System.out.println(JedisClusterCRC16.getSlot("a"));
-        Long memory = jedisPool.getResource().memoryUsage("Channel_Release_Page_102800000000007_5b07441ee79b48eca3a16af16a593c21");
-        System.err.println(memory/1024);
+    /**
+     * 初始化，设置参数
+     */
+    public static void initCluster() {
+        GenericObjectPoolConfig<Connection> config = new GenericObjectPoolConfig<>();
+        Set<HostAndPort> node = new HashSet<>();
+        node.add(new HostAndPort("hw", 3000));
+        node.add(new HostAndPort("hw", 3001));
+        node.add(new HostAndPort("hw", 3002));
+        cluster = new JedisCluster(node, 8000, 8000, 5, System.getenv("redis_password"), config);
     }
+
+    public static void hello() {
+        initCluster();
+        //init();
+        System.out.println(cluster.set("abc", "abc"));
+        System.out.println(cluster.get("abc"));
+        //System.out.println(JedisClusterCRC16.getSlot("a"));
+    }
+
+    public static void main(String[] args) {
+        //Long memory = jedisPool.getResource().memoryUsage("Channel_Release_Page_102800000000007_5b07441ee79b48eca3a16af16a593c21");
+        init();
+        test1();
+    }
+
+    public static void test1() {
+        StringBuilder value = new StringBuilder();
+        for (int i = 0; i < 10000; i++) {
+            value.append(i);
+        }
+
+        HashMap<String, String> map1 = new HashMap<>();
+        for (int i = 0; i < 500; i++) {
+            map1.put(String.valueOf(i), value.toString());
+        }
+
+        HashMap<String, String> map2 = new HashMap<>();
+        for (int i = 0; i < 1000; i++) {
+            map2.put(String.valueOf(i), value.toString());
+        }
+
+        jedisPool.getResource().hset("map1", map1);
+        jedisPool.getResource().hset("map2", map2);
+    }
+
+    public static void keyValueLengthTest() {
+        StringBuilder value = new StringBuilder();
+        for (int i = 0; i < 10000; i++) {
+            value.append(i);
+        }
+        jedisPool.getResource().set("key", value.toString());
+        jedisPool.getResource().set("key" + value, value.toString());
+    }
+
 
     /**
      * set and get string
