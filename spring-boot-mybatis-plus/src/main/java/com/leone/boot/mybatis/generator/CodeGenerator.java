@@ -1,11 +1,10 @@
-package com.leone.boot.mybatisplus.generator;
+package com.leone.boot.mybatis.generator;
 
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.nio.file.Paths;
-import java.util.Map;
 
 /**
  * <p> 执行 main 方法控制台输入模块表名回车自动生成对应项目目录中

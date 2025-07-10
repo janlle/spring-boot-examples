@@ -1,6 +1,6 @@
-package com.leone.boot.mybatisplus.mapper;
+package com.leone.boot.mybatis.mapper;
 
-import com.leone.boot.mybatisplus.entity.Goods;
+import com.leone.boot.mybatis.entity.User1;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-12-02
  */
 @Mapper
-public interface GoodsMapper extends BaseMapper<Goods> {
+public interface User1Mapper extends BaseMapper<User1> {
 
 }
