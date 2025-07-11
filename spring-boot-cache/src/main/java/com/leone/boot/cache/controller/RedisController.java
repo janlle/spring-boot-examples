@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author leone
  * @since 2018-07-08
  **/
-@RestController
+//@RestController
 @RequestMapping("/api/redis")
 public class RedisController {
 

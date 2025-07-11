@@ -17,7 +17,7 @@ import java.util.List;
  * @author leone
  * @since 2019-01-10
  **/
-@Service
+//@Service
 public class MongoService {
 
     @Resource

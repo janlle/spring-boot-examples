@@ -3,15 +3,19 @@ package com.leone.boot.mybatis.runner;
 import com.leone.boot.mybatis.entity.User2;
 import com.leone.boot.mybatis.mapper.User2Mapper;
 import com.mybatisflex.core.MybatisFlexBootstrap;
+import com.mybatisflex.core.query.QueryCondition;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.util.List;
+
 public class FlexHelloWorld {
+
     public static void main(String... args) {
 
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/flex");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setJdbcUrl("jdbc:mysql://hw:xx/boot");
+        dataSource.setUsername("xx");
+        dataSource.setPassword("xx");
 
         MybatisFlexBootstrap.getInstance()
           .setDataSource(dataSource)
@@ -21,9 +25,9 @@ public class FlexHelloWorld {
         User2Mapper mapper = MybatisFlexBootstrap.getInstance()
           .getMapper(User2Mapper.class);
 
-
-        // id = 100
-        User2 account = mapper.selectOneById(100);
+        long l = System.currentTimeMillis();
+        List<User2> account = mapper.selectAll();
+        System.out.println(System.currentTimeMillis() - l);
     }
 
 

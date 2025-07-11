@@ -13,7 +13,7 @@ import java.util.List;
  * @author leone
  * @since 2019-01-10
  **/
-@RestController
+//@RestController
 @RequestMapping("/api/mongo")
 public class MongoController {
 
